@@ -136,7 +136,7 @@ function Store:new(world, hash, storage_name, name)
       ,  name:get_content() )
    if bindings_store
    then
-      self:bindings_store_factory(bindings_store)
+      return self:bindings_store_factory(bindings_store)
    end
 end
 
