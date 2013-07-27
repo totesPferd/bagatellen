@@ -45,6 +45,7 @@ build = {
          ,  ['redland.BlankNode']   =  "lua/redland/BlankNode.lua"
          ,  ['redland.LiteralNode'] =  "lua/redland/LiteralNode.lua"
          ,  ['redland.Node']        =  "lua/redland/Node.lua"
+         ,  ['redland.Stmt']        =  "lua/redland/Stmt.lua"
          ,  ['redland.Uri']         =  "lua/redland/Uri.lua"
          ,  ['redland.UriNode']     =  "lua/redland/UriNode.lua"
          ,  ['redland.World']       =  "lua/redland/World.lua" }}
