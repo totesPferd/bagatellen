@@ -41,4 +41,6 @@ build = {
                         "rdf" }
                ,  incdirs = {
                         "/usr/include/rasqal"
-                     ,  "/usr/include/raptor2" }}}}
+                     ,  "/usr/include/raptor2" }}
+            ['redland.uri']   =  "lua/redland/uri.lua"
+         ,  ['redland.world'] =  "lua/redland/world.lua" }}
