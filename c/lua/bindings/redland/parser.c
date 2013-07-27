@@ -301,6 +301,7 @@ lua_bindings_redland_parser_wrap(lua_State *L, librdf_parser *p_parser) {
    
       return 1;
    } else {
+      lua_pop(L, 1);
       return 0;
    }
 }

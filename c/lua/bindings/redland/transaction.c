@@ -42,6 +42,7 @@ lua_bindings_redland_transaction_wrap(lua_State *L, void *p_transaction) {
    
       return 1;
    } else {
+      lua_pop(L, 1);
       return 0;
    }
 }

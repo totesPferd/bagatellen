@@ -376,6 +376,7 @@ lua_bindings_redland_results_wrap(lua_State *L, librdf_query_results *p_results)
    
       return 1;
    } else {
+      lua_pop(L, 1);
       return 0;
    }
 }

@@ -44,6 +44,7 @@ lua_bindings_redland_formatter_wrap(lua_State *L, librdf_query_results_formatter
    
       return 1;
    } else {
+      lua_pop(L, 1);
       return 0;
    }
 }

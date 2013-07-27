@@ -229,6 +229,7 @@ lua_bindings_redland_hash_wrap(lua_State *L, librdf_hash *p_hash) {
    
       return 1;
    } else {
+      lua_pop(L, 1);
       return 0;
    }
 }

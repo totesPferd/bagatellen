@@ -526,6 +526,7 @@ lua_bindings_redland_store_wrap(lua_State *L, librdf_storage *p_store) {
    
       return 1;
    } else {
+      lua_pop(L, 1);
       return 0;
    }
 }

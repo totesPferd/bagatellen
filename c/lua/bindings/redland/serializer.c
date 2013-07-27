@@ -265,6 +265,7 @@ lua_bindings_redland_serializer_wrap(lua_State *L, librdf_serializer *p_serializ
    
       return 1;
    } else {
+      lua_pop(L, 1);
       return 0;
    }
 }

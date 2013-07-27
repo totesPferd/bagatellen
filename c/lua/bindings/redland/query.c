@@ -194,6 +194,7 @@ lua_bindings_redland_query_wrap(lua_State *L, librdf_query *p_query) {
    
       return 1;
    } else {
+      lua_pop(L, 1);
       return 0;
    }
 }
