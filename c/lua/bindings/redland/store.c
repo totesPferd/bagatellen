@@ -1,5 +1,6 @@
 #include "store.h"
 #include "defs.h"
+#include "node.h"
 #include "transaction.h"
 #include "world.h"
 #include <lauxlib.h>

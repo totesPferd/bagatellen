@@ -51,6 +51,7 @@ lua_bindings_redland_world_wrap(lua_State *L, librdf_world *p_world) {
    
       return 1;
    } else {
+      lua_pop(L, 1);
       return 0;
    }
 }

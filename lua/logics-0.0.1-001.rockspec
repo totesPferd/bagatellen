@@ -20,7 +20,7 @@ dependencies = { 'lua >= 5.1' }
 build = {
       type = 'builtin'
    ,  modules = {
-            ['bindings.redland.node'] =  {
+            ['bindings.redland'] =  {
                   sources = {
                         "c/lua/bindings/redland/defs.c"
                      ,  "c/lua/bindings/redland/formatter.c"
