@@ -42,5 +42,5 @@ build = {
                ,  incdirs = {
                         "/usr/include/rasqal"
                      ,  "/usr/include/raptor2" }}
-            ['redland.Uri']   =  "lua/redland/uri.lua"
-         ,  ['redland.World'] =  "lua/redland/world.lua" }}
+            ['redland.Uri']   =  "lua/redland/Uri.lua"
+         ,  ['redland.World'] =  "lua/redland/World.lua" }}

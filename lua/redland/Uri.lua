@@ -63,8 +63,16 @@ function Uri:get_bindings_uri()
    return self.val
 end
 
+function Uri:__clone()
+   return bindings_redland_module.uri.__clone(self:get_bindings_uri())
+end
+
+function Uri:get_filename()
+   return bindings_redland_module.uri.get_filename(self:get_bindings_uri())
+end
+
 function Uri:__tostring()
-   return tostring(self.val)
+   return tostring(self:get_bindings_uri())
 end
 
 function Uri:__diagnose_single_line(indentation)
