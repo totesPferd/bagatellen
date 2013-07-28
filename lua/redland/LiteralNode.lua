@@ -6,6 +6,7 @@ local LiteralNode =  Node:__new()
 package.loaded["redland.LiteralNode"] =  LiteralNode
 local Indentation =  require "base.Indentation"
 local String =  require "base.type.String"
+local Uri =  require "redland.Uri"
 
 
 function LiteralNode:bindings_node_factory(bindings_node, literal_data)
@@ -15,26 +16,12 @@ function LiteralNode:bindings_node_factory(bindings_node, literal_data)
    return retval
 end
 
-function LiteralNode:new(world, value_string, type_uri, language_string, is_wf_xml_bool)
-   local literal_data =  {}
-   if value
-   then
-      literal_data.value =  value
-   end
-   if type
-   then
-      literal_data.type =  type:get_bindings_node()
-   end
-   if language
-   then
-      literal_data.language =  language
-   end
-   if is_wf_xml ~= nil
-   then
-      literal_data.is_wf_xml =  is_wf_xml
-   end
-   local bindings_node =  redland_module.node.new_literal(literal_data)
-   literal_data =  redland_module.node.get_literal(bindings_node)
+function LiteralNode:new(world, literal_data)
+   local bindings_node =  bindings_redland_module.node.new_literal(
+         world:get_bindings_world()
+      ,  literal_data )
+   self.literal_data
+      =  bindings_redland_module.node.get_literal(bindings_node)
    return self:bindings_node_factory(bindings_node, literal_data)
 end
 
@@ -47,7 +34,7 @@ function LiteralNode:get_value()
 end
 
 function LiteralNode:get_type()
-   return redland.Uri.bindings_uri_factory(self.literal_data.type)
+   return Uri:bindings_uri_factory(self.literal_data.type)
 end
 
 function LiteralNode:get_language()
@@ -74,10 +61,10 @@ function LiteralNode:__tostring()
       retval =  retval .. ", language = " .. self:get_language()
    end
 
-   local is_ther_wf_xml =  self:is_wv_xml() ~= nil
+   local is_there_wf_xml =  self:is_wf_xml() ~= nil
    if is_there_wf_xml
    then
-      retval =  retval .. ", is_wf_xml = " .. self:is_wf_xml()
+      retval =  retval .. ", is_wf_xml = " .. tostring(self:is_wf_xml())
    end
 
    return retval

@@ -6,6 +6,7 @@ local UriNode =  Node:__new()
 package.loaded["redland.UriNode"] =  UriNode
 local Indentation =  require "base.Indentation"
 local String =  require "base.type.String"
+local Uri =  require "redland.Uri"
 
 
 function UriNode:bindings_node_factory(bindings_node, uri_data)
@@ -17,8 +18,10 @@ end
 
 function UriNode:new(world, uri)
    local bindings_uri =  uri:get_bindings_uri()
-   local bindings_node =  redland_module.node.new_resource(world, bindings_uri)
-   uri =  redland_module.node.get_resource(bindings_node)
+   local bindings_node =  bindings_redland_module.node.new_resource(
+         world:get_bindings_world()
+      ,  bindings_uri )
+   uri =  bindings_redland_module.node.get_resource(bindings_node)
    return self:bindings_node_factory(bindings_node, bindings_uri)
 end
 
@@ -27,7 +30,7 @@ function UriNode:get_uri_node()
 end
 
 function UriNode:get_uri()
-   return self.uri_data:get_bindings_uri()
+   return Uri:bindings_uri_factory(self.uri_data)
 end
 
 function UriNode:__diagnose_single_line(indentation)

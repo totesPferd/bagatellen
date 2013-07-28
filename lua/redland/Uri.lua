@@ -33,7 +33,7 @@ end
 
 function Uri:normalized_to_base_factory(from_uri, to_uri, rel_string)
    local bindings_uri_from =  from_uri:get_bindings_uri()
-   local bindings_uri_to   =  to_uri:get_bindings_uri_from()
+   local bindings_uri_to   =  to_uri:get_bindings_uri()
    local bindings_uri_res
       =  bindings_redland_module.uri.new_normalized_to_base(
             bindings_uri_from
@@ -64,7 +64,8 @@ function Uri:get_bindings_uri()
 end
 
 function Uri:__clone()
-   return bindings_redland_module.uri.__clone(self:get_bindings_uri())
+   return Uri:bindings_uri_factory(
+         bindings_redland_module.uri.__clone(self:get_bindings_uri()) )
 end
 
 function Uri:get_filename()
@@ -80,7 +81,7 @@ function Uri:__le(other)
 end
 
 function Uri:__lt(other)
-   return self:get_bindings_uri() < otherget_bindings_uri()
+   return self:get_bindings_uri() < other:get_bindings_uri()
 end
 
 function Uri:__tostring()

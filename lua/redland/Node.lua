@@ -45,7 +45,8 @@ function Node:get_uri_node()
 end
 
 function Node:__clone()
-   return bindings_redland_module.node.__clone(self:get_bindings_node())
+   return bindings_node_factory(
+         bindings_redland_module.node.__clone(self:get_bindings_node()) )
 end
 
 return Node

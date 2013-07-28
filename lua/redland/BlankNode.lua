@@ -21,8 +21,11 @@ function BlankNode:new(world, id_string)
    then
       blank_data.id =  id_string
    end
-   local bindings_node =  redland_module.node.new_blank(world, blank_data)
-   blank_data =  redland_module.node.get_blank(bindings_node)
+   local bindings_node =  bindings_redland_module.node.new_blank(
+         world:get_bindings_world()
+      ,  blank_data )
+   self.blank_data =  {}
+   blank_data.id =  bindings_redland_module.node.get_blank(bindings_node)
    return self:bindings_node_factory(bindings_node, blank_data)
 end
 
