@@ -204,7 +204,7 @@ function Model:new(world, store, hash)
       ,  hash:get_bindings_hash() )
    if bindings_model
    then
-      self:bindings_model_factory(bindings_model)
+      return self:bindings_model_factory(bindings_model)
    end
 end
 
