@@ -34,7 +34,10 @@ function LiteralNode:get_value()
 end
 
 function LiteralNode:get_type()
-   return Uri:bindings_uri_factory(self.literal_data.type)
+   if self.literal_data.type
+   then
+      return Uri:bindings_uri_factory(self.literal_data.type)
+   end
 end
 
 function LiteralNode:get_language()
