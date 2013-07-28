@@ -73,7 +73,7 @@ function Spec:equate(qualid_a, qualid_b)
    do local qualifier =  elem:get_qualifier()
       if qualifier:is_in(qualid_b)
       then
-         self.elems:set_qualifier(common_q):__clone()
+         elem:set_qualifier(common_q:__clone())
       end
    end
 end
