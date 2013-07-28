@@ -42,5 +42,9 @@ build = {
                ,  incdirs = {
                         "/usr/include/rasqal"
                      ,  "/usr/include/raptor2" }}
-            ['redland.Uri']   =  "lua/redland/Uri.lua"
-         ,  ['redland.World'] =  "lua/redland/World.lua" }}
+         ,  ['redland.BlankNode']   =  "lua/redland/BlankNode.lua"
+         ,  ['redland.LiteralNode'] =  "lua/redland/LiteralNode.lua"
+         ,  ['redland.Node']        =  "lua/redland/Node.lua"
+         ,  ['redland.Uri']         =  "lua/redland/Uri.lua"
+         ,  ['redland.UriNode']     =  "lua/redland/UriNode.lua"
+         ,  ['redland.World']       =  "lua/redland/World.lua" }}

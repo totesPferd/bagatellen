@@ -1,4 +1,4 @@
-bindings_redland_module =  require "bindings.redland"
+local bindings_redland_module =  require "bindings.redland"
 local Type =  require "base.type.aux.Type"
 
 local World =  Type:__new()

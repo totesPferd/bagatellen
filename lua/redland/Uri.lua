@@ -1,4 +1,4 @@
-bindings_redland_module =  require "bindings.redland"
+local bindings_redland_module =  require "bindings.redland"
 local Type =  require "base.type.aux.Type"
 
 local Uri =  Type:__new()
@@ -69,6 +69,18 @@ end
 
 function Uri:get_filename()
    return bindings_redland_module.uri.get_filename(self:get_bindings_uri())
+end
+
+function Uri:__eq(other)
+   return self:get_bindings_uri() == other:get_bindings_uri()
+end
+
+function Uri:__le(other)
+   return self:get_bindings_uri() <= other:get_bindings_uri()
+end
+
+function Uri:__lt(other)
+   return self:get_bindings_uri() < otherget_bindings_uri()
 end
 
 function Uri:__tostring()
