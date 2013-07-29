@@ -250,7 +250,7 @@ function Model:to_string(base_uri, params)
    local bindings_type_uri
    if params.type
    then
-      bindings_type_uri =  params.type.get_bindings_uri()
+      bindings_type_uri =  params.type:get_bindings_uri()
    end
 
    local raw_result_string =  bindings_redland_module.model.to_string(

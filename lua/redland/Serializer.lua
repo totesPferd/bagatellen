@@ -46,7 +46,7 @@ function Serializer:new(world, params)
    end
 
    local type_uri
-   if param.type_uri
+   if params.type_uri
    then
       type_uri =  params.type_uri:get_bindings_uri()
    end
