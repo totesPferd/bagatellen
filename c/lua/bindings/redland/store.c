@@ -144,14 +144,12 @@ lua_bindings_redland_store_context_del(lua_State *L) {
 
    lua_pop(L, 3);
 
-   if (librdf_storage_context_remove_statement(
+   lua_pushboolean(L, librdf_storage_context_remove_statement(
          *pp_store
       ,  *pp_context
-      ,  *pp_stmt )) {
-      luaL_error(L, "error: could not delete statement");
-   }
+      ,  *pp_stmt ));
 
-   return 0;
+   return 1;
 }
 
 int
@@ -167,11 +165,29 @@ lua_bindings_redland_store_del(lua_State *L) {
 
    lua_pop(L, 2);
 
-   if (librdf_storage_remove_statement(*pp_store, *pp_stmt)) {
-      luaL_error(L, "error: could not delete statement");
-   }
+   lua_pushboolean(L, librdf_storage_remove_statement(*pp_store, *pp_stmt));
 
-   return 0;
+   return 1;
+}
+
+int
+lua_bindings_redland_store_del_context(lua_State *L) {
+   librdf_storage **pp_store =  (librdf_storage **) luaL_checkudata(
+         L
+      ,  -2
+      ,  store_userdata_type );
+   librdf_node **pp_context =  (librdf_node **) luaL_checkudata(
+         L
+      ,  -1
+      ,  node_userdata_type );
+
+   lua_pop(L, 2);
+
+   lua_pushboolean(L, librdf_storage_remove_statements(
+         *pp_store
+      ,  *pp_context ));
+
+   return 1;
 }
 
 int
@@ -682,6 +698,9 @@ luaopen_bindings_redland_store(lua_State *L) {
 
    lua_pushcfunction(L, &lua_bindings_redland_store_del);
    lua_setfield(L, -2, "del");
+
+   lua_pushcfunction(L, &lua_bindings_redland_store_del_context);
+   lua_setfield(L, -2, "del_context");
 
    lua_pushcfunction(L, &lua_bindings_redland_store_find);
    lua_setfield(L, -2, "find");

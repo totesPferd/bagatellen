@@ -25,6 +25,9 @@ int
 lua_bindings_redland_model_del(lua_State *);
 
 int
+lua_bindings_redland_model_del_context(lua_State *);
+
+int
 lua_bindings_redland_model_find(lua_State *);
 
 int

@@ -153,11 +153,29 @@ lua_bindings_redland_model_del(lua_State *L) {
 
    lua_pop(L, 2);
 
-   if (librdf_model_remove_statement(*pp_model, *pp_stmt)) {
-      luaL_error(L, "error: could not delete statement");
-   }
+   lua_pushboolean(L, librdf_model_remove_statement(*pp_model, *pp_stmt));
 
-   return 0;
+   return 1;
+}
+
+int
+lua_bindings_redland_model_del_context(lua_State *L) {
+   librdf_model **pp_model =  (librdf_model **) luaL_checkudata(
+         L
+      ,  -2
+      ,  model_userdata_type );
+   librdf_node **pp_context =  (librdf_node **) luaL_checkudata(
+         L
+      ,  -1
+      ,  node_userdata_type );
+
+   lua_pop(L, 2);
+
+   lua_pusboolean(L, librdf_model_context_remove_statements(
+         *pp_model
+      ,  *pp_context ));
+
+   return 1;
 }
 
 int
@@ -862,6 +880,9 @@ luaopen_bindings_redland_model(lua_State *L) {
 
    lua_pushcfunction(L, &lua_bindings_redland_model_del);
    lua_setfield(L, -2, "del");
+
+   lua_pushcfunction(L, &lua_bindings_redland_model_del_context);
+   lua_setfield(L, -2, "del_context");
 
    lua_pushcfunction(L, &lua_bindings_redland_model_find);
    lua_setfield(L, -2, "find");
