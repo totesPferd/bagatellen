@@ -55,6 +55,7 @@ build = {
          ,  ['redland.Serializer']  =  "lua/redland/Serializer.lua"
          ,  ['redland.Stmt']        =  "lua/redland/Stmt.lua"
          ,  ['redland.Store']       =  "lua/redland/Store.lua"
+         ,  ['redland.Stream']      =  "lua/redland/Stream.lua"
          ,  ['redland.Transaction'] =  "lua/redland/Transaction.lua"
          ,  ['redland.Uri']         =  "lua/redland/Uri.lua"
          ,  ['redland.UriNode']     =  "lua/redland/UriNode.lua"

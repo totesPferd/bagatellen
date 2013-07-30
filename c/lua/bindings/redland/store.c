@@ -126,31 +126,6 @@ lua_bindings_redland_store_context_add_stream(lua_State *L) {
 }
 
 int
-lua_bindings_redland_store_context_del(lua_State *L) {
-   librdf_storage **pp_store =  (librdf_storage **) luaL_checkudata(
-         L
-      ,  -3
-      ,  store_userdata_type );
-   librdf_node **pp_context =  (librdf_node **) luaL_checkudata(
-         L
-      ,  -2
-      ,  node_userdata_type );
-   librdf_statement **pp_stmt =  (librdf_statement **) luaL_checkudata(
-         L
-      ,  -1
-      ,  stmt_userdata_type );
-
-   lua_pop(L, 3);
-
-   lua_pushboolean(L, librdf_storage_context_remove_statement(
-         *pp_store
-      ,  *pp_context
-      ,  *pp_stmt ));
-
-   return 1;
-}
-
-int
 lua_bindings_redland_store_context_serialize(lua_State *L) {
    librdf_storage **pp_store =  (librdf_storage **) luaL_checkudata(
          L
@@ -175,16 +150,23 @@ int
 lua_bindings_redland_store_del(lua_State *L) {
    librdf_storage **pp_store =  (librdf_storage **) luaL_checkudata(
          L
-      ,  -2
+      ,  -3
       ,  store_userdata_type );
+   librdf_node **pp_context =  (librdf_node **) luaL_checkudata(
+         L
+      ,  -2
+      ,  node_userdata_type );
    librdf_statement **pp_stmt =  (librdf_statement **) luaL_checkudata(
          L
       ,  -1
       ,  stmt_userdata_type );
 
-   lua_pop(L, 2);
+   lua_pop(L, 3);
 
-   lua_pushboolean(L, librdf_storage_remove_statement(*pp_store, *pp_stmt));
+   lua_pushboolean(L, librdf_storage_context_remove_statement(
+         *pp_store
+      ,  *pp_context
+      ,  *pp_stmt ));
 
    return 1;
 }
@@ -202,7 +184,7 @@ lua_bindings_redland_store_del_context(lua_State *L) {
 
    lua_pop(L, 2);
 
-   lua_pushboolean(L, librdf_storage_remove_statements(
+   lua_pushboolean(L, librdf_storage_context_remove_statements(
          *pp_store
       ,  *pp_context ));
 
@@ -210,7 +192,7 @@ lua_bindings_redland_store_del_context(lua_State *L) {
 }
 
 int
-lua_bindings_store_find(lua_State *L) {
+lua_bindings_redland_store_find(lua_State *L) {
    librdf_storage **pp_store =  (librdf_storage **) luaL_checkudata(
          L
       ,  -3
@@ -242,7 +224,7 @@ lua_bindings_store_find(lua_State *L) {
 }
 
 int
-lua_bindings_store_find_with_options(lua_State *L) {
+lua_bindings_redland_store_find_with_options(lua_State *L) {
    librdf_storage **pp_store =  (librdf_storage **) luaL_checkudata(
          L
       ,  -3
@@ -512,7 +494,7 @@ lua_bindings_redland_store_open(lua_State *L) {
 }
 
 int
-lua_bindings_store_serialize(lua_State *L) {
+lua_bindings_redland_store_serialize(lua_State *L) {
    librdf_storage **pp_store =  (librdf_storage **) luaL_checkudata(
          L
       ,  -1
@@ -713,9 +695,6 @@ luaopen_bindings_redland_store(lua_State *L) {
 
    lua_pushcfunction(L, &lua_bindings_redland_store_context_add_stream);
    lua_setfield(L, -2, "context_add_stream");
-
-   lua_pushcfunction(L, &lua_bindings_redland_store_context_del);
-   lua_setfield(L, -2, "context_del");
 
    lua_pushcfunction(L, &lua_bindings_redland_store_context_serialize);
    lua_setfield(L, -2, "context_serialize");
