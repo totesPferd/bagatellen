@@ -46,6 +46,9 @@ int
 lua_bindings_redland_results_to_file(lua_State *);
 
 int
+lua_bindings_redland_results_to_stream(lua_State *);
+
+int
 lua_bindings_redland_results_to_string(lua_State *);
 
 int

@@ -292,6 +292,21 @@ lua_bindings_redland_results_to_file(lua_State *L) {
 }
 
 int
+lua_bindings_redland_results_to_stream(lua_State *L) {
+   librdf_query_results **pp_results
+      =  (librdf_query_results **) luaL_checkudata(
+            L
+         ,  -1
+         ,  res_userdata_type );
+
+   lua_pop(L, 1);
+
+   librdf_stream *p_result =  librdf_query_results_as_stream(*pp_results);
+   lua_bindings_redland_stream_new_mt(L);
+   return lua_bindings_redland_stream_wrap(L, p_result);
+}
+
+int
 lua_bindings_redland_results_to_string(lua_State *L) {
    librdf_query_results **pp_results
       =  (librdf_query_results **) luaL_checkudata(
@@ -418,6 +433,9 @@ luaopen_bindings_redland_results(lua_State *L) {
 
    lua_pushcfunction(L, &lua_bindings_redland_results_to_file);
    lua_setfield(L, -2, "to_file");
+
+   lua_pushcfunction(L, &lua_bindings_redland_results_to_stream);
+   lua_setfield(L, -2, "to_stream");
 
    lua_pushcfunction(L, &lua_bindings_redland_results_to_string);
    lua_setfield(L, -2, "to_string");
