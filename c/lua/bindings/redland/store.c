@@ -215,18 +215,30 @@ int
 lua_bindings_store_find(lua_State *L) {
    librdf_storage **pp_store =  (librdf_storage **) luaL_checkudata(
          L
-      ,  -2
+      ,  -3
       ,  store_userdata_type );
    librdf_statement **pp_stmt =  (librdf_statement **) luaL_checkudata(
          L
-      ,  -1
+      ,  -2
       ,  stmt_userdata_type );
 
-   lua_pop(L, 2);
+   librdf_node *p_context =  NULL;
+   lua_getfield(L, -1, "context");
+   if (!lua_isnil(L, -1)) {
+      librdf_node **pp_context =  (librdf_node **) luaL_checkudata(
+            L
+         ,  -1
+         ,  node_userdata_type );
+      p_context =  *pp_context;
+   }
+   lua_pop(L, 1);
 
-   librdf_stream *p_stream =  librdf_storage_find_statements(
+   lua_pop(L, 3);
+
+   librdf_stream *p_stream =  librdf_storage_find_statements_in_context(
          *pp_store
-      ,  *pp_stmt );
+      ,  *pp_stmt
+      ,  p_context );
    lua_bindings_redland_stream_new_mt(L);
    return lua_bindings_redland_stream_wrap(L, p_stream);
 }
