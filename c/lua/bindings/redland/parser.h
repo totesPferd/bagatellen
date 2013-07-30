@@ -31,10 +31,13 @@ int
 lua_bindings_redland_parser_new_mt(lua_State *);
 
 int
-lua_bindings_redland_parser_parser(lua_State *);
+lua_bindings_redland_parser_parse(lua_State *);
 
 int
-lua_bindings_redland_parser_parser_string(lua_State *);
+lua_bindings_redland_parser_parse_string(lua_State *);
+
+int
+lua_bindings_redland_parser_parse_string_into_stream(lua_State *);
 
 int
 lua_bindings_redland_parser_set_feature(lua_State *);

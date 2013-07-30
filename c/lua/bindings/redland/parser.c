@@ -250,6 +250,37 @@ lua_bindings_redland_parser_parse_string(lua_State *L) {
 }
 
 int
+lua_bindings_redland_parser_parse_string_into_stream(lua_State *L) {
+   librdf_parser **pp_parser
+      =  (librdf_parser **) luaL_checkudata(
+            L
+         ,  -3
+         ,  parser_userdata_type );
+   const char *content =  luaL_checkstring(L, -2);
+
+   librdf_uri *p_base_uri =  NULL;
+   lua_getfield(L, -1, "base_uri");
+   if (!lua_isnil(L, -1)) {
+      librdf_uri **pp_base_uri
+         =  (librdf_uri **) luaL_checkudata(
+               L
+            ,  -1
+            ,  uri_userdata_type );
+      p_base_uri =  *pp_base_uri;
+   }
+   lua_pop(L, 1);
+
+   lua_pop(L, 3);
+
+   librdf_stream *p_result =  librdf_parser_parse_string_as_stream(
+         *pp_parser
+      ,  content
+      ,  p_base_uri );
+   lua_bindings_redland_stream_new_mt(L);
+   return lua_bindings_redland_stream_wrap(L, p_result);
+}
+
+int
 lua_bindings_redland_parser_set_feature(lua_State *L) {
    librdf_parser **pp_parser
       =  (librdf_parser **) luaL_checkudata(
@@ -337,6 +368,9 @@ luaopen_bindings_redland_parser(lua_State *L) {
 
    lua_pushcfunction(L, &lua_bindings_redland_parser_parse_string);
    lua_setfield(L, -2, "parse_string");
+
+   lua_pushcfunction(L, &lua_bindings_redland_parser_parse_string_into_stream);
+   lua_setfield(L, -2, "parse_string_into_stream");
 
    lua_pushcfunction(L, &lua_bindings_redland_parser_set_feature);
    lua_setfield(L, -2, "set_feature");
