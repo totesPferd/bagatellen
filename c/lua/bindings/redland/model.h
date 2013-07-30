@@ -22,6 +22,9 @@ int
 lua_bindings_redland_model_context_del(lua_State *);
 
 int
+lua_bindings_redland_model_context_serialize(lua_State *);
+
+int
 lua_bindings_redland_model_del(lua_State *);
 
 int

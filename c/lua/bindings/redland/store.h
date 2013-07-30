@@ -25,6 +25,9 @@ int
 lua_bindings_redland_store_context_del(lua_State *);
 
 int
+lua_bindings_redland_store_context_serialize(lua_State *);
+
+int
 lua_bindings_redland_store_del(lua_State *);
 
 int

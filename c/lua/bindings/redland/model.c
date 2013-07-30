@@ -141,6 +141,27 @@ lua_bindings_redland_model_context_del(lua_State *L) {
 }
 
 int
+lua_bindings_redland_model_context_serialize(lua_State *L) {
+   librdf_model **pp_model =  (librdf_model **) luaL_checkudata(
+         L
+      ,  -2
+      ,  model_userdata_type );
+   librdf_node **pp_context =  (librdf_node **) luaL_checkudata(
+         L
+      ,  -1
+      ,  node_userdata_type );
+
+   lua_pop(L, 2);
+
+   librdf_stream *p_stream =  librdf_model_context_as_stream(
+         *pp_model
+      ,  *pp_context );
+
+   lua_bindings_redland_stream_new_mt(L);
+   return lua_bindings_redland_stream_wrap(L, p_stream);
+}
+
+int
 lua_bindings_redland_model_del(lua_State *L) {
    librdf_model **pp_model =  (librdf_model **) luaL_checkudata(
          L
@@ -877,6 +898,9 @@ luaopen_bindings_redland_model(lua_State *L) {
 
    lua_pushcfunction(L, &lua_bindings_redland_model_context_del);
    lua_setfield(L, -2, "context_del");
+
+   lua_pushcfunction(L, &lua_bindings_redland_model_context_serialize);
+   lua_setfield(L, -2, "context_serialize");
 
    lua_pushcfunction(L, &lua_bindings_redland_model_del);
    lua_setfield(L, -2, "del");
