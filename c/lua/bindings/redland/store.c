@@ -68,11 +68,9 @@ lua_bindings_redland_store_close(lua_State *L) {
 
    lua_pop(L, 1);
 
-   if (librdf_storage_close(*pp_store)) {
-      luaL_error(L, "error: could not close storage");
-   }
+   lua_pushboolean(L, librdf_storage_close(*pp_store));
 
-   return 0;
+   return 1;
 }
 
 int
@@ -508,11 +506,9 @@ lua_bindings_redland_store_open(lua_State *L) {
 
    lua_pop(L, 2);
 
-   if (librdf_storage_open(*pp_store, *pp_model)) {
-      luaL_error(L, "error: could not open storage");
-   }
+   lua_pushboolean(L, librdf_storage_open(*pp_store, *pp_model));
 
-   return 0;
+   return 1;
 }
 
 int
@@ -578,11 +574,9 @@ lua_bindings_redland_store_sync(lua_State *L) {
 
    lua_pop(L, 1);
 
-   if (librdf_storage_sync(*pp_store)) {
-      luaL_error(L, "error: sync");
-   }
+   lua_pushboolean(L, librdf_storage_sync(*pp_store));
 
-   return 0;
+   return 1;
 }
 
 int
@@ -594,11 +588,9 @@ lua_bindings_redland_store_transaction_commit(lua_State *L) {
 
    lua_pop(L, 1);
 
-   if (librdf_storage_transaction_commit(*pp_store)) {
-      luaL_error(L, "error: transaction commit");
-   }
+   lua_pushboolean(L, librdf_storage_transaction_commit(*pp_store));
 
-   return 0;
+   return 1;
 }
 
 int
@@ -630,11 +622,9 @@ lua_bindings_redland_store_transaction_rollback(lua_State *L) {
 
    lua_pop(L, 1);
 
-   if (librdf_storage_transaction_rollback(*pp_store)) {
-      luaL_error(L, "error: transaction rollback");
-   }
+   lua_pushboolean(L, librdf_storage_transaction_rollback(*pp_store));
 
-   return 0;
+   return 1;
 }
 
 int
@@ -646,11 +636,9 @@ lua_bindings_redland_store_transaction_start(lua_State *L) {
 
    lua_pop(L, 1);
 
-   if (librdf_storage_transaction_start(*pp_store)) {
-      luaL_error(L, "error: transaction start");
-   }
+   lua_pushboolean(L, librdf_storage_transaction_start(*pp_store));
 
-   return 0;
+   return 1;
 }
 
 int
@@ -666,11 +654,11 @@ lua_bindings_redland_store_transaction_start_with_handle(lua_State *L) {
 
    lua_pop(L, 2);
 
-   if (librdf_storage_transaction_start_with_handle(*pp_store, *pp_th)) {
-      luaL_error(L, "error: transaction start with handle");
-   }
+   lua_pushboolean(
+         L
+      ,  librdf_storage_transaction_start_with_handle(*pp_store, *pp_th) );
 
-   return 0;
+   return 1;
 }
 
 
