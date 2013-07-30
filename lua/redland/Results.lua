@@ -99,6 +99,15 @@ function Results:to_file(name, params)
       ,  {  base =  base_bindings_uri, mime_type =  mime_type, format =  format_bindings_uri } )
 end
 
+function Results:to_stream()
+   local raw_stream =  bindings_redland_module.results.to_stream(
+         self:get_bindings_results() )
+   if raw_stream
+   then
+      return Stream:bindings_stream_factory(raw_stream)
+   end
+end
+
 function Results:to_string(name, params)
    local base_bindings_uri
    if params.base
