@@ -102,6 +102,82 @@ lua_bindings_redland_serializer_new(lua_State *L) {
 }
 
 int
+lua_bindings_redland_serializer_serialize_stream_to_file(lua_State *L) {
+   librdf_serializer **pp_serializer
+      =  (librdf_serializer **) luaL_checkudata(
+            L
+         ,  -4
+         ,  serializer_userdata_type );
+   librdf_stream **pp_stream
+      =  (librdf_stream **) luaL_checkudata(
+            L
+         ,  -3
+         ,  stream_userdata_type );
+   const char *filename =  luaL_checkstring(L, -1);
+
+   librdf_uri *p_uri =  NULL;
+   lua_getfield(L, -1, "base_uri");
+   if (!lua_isnil(L, -1)) {
+      librdf_uri **pp_uri
+         =  (librdf_uri **) luaL_checkudata(
+               L
+            ,  -1
+            ,  uri_userdata_type );
+      p_uri =  *pp_uri;
+   }
+   lua_pop(L, 1);
+
+   lua_pop(L, 4);
+
+   int result =  librdf_serializer_serialize_stream_to_file(
+         *pp_serializer
+      ,  filename
+      ,  p_uri
+      ,  *pp_stream);
+   lua_pushboolean(L, result);
+   return 1;
+}
+
+int
+lua_bindings_redland_serializer_serialize_stream_to_string(lua_State *L) {
+   librdf_serializer **pp_serializer
+      =  (librdf_serializer **) luaL_checkudata(
+            L
+         ,  -4
+         ,  serializer_userdata_type );
+   librdf_stream **pp_stream
+      =  (librdf_stream **) luaL_checkudata(
+            L
+         ,  -3
+         ,  stream_userdata_type );
+
+   librdf_uri *p_uri =  NULL;
+   lua_getfield(L, -1, "base_uri");
+   if (!lua_isnil(L, -1)) {
+      librdf_uri **pp_uri
+         =  (librdf_uri **) luaL_checkudata(
+               L
+            ,  -1
+            ,  uri_userdata_type );
+      p_uri =  *pp_uri;
+   }
+   lua_pop(L, 1);
+
+   lua_pop(L, 3);
+
+   unsigned char *result =  librdf_serializer_serialize_stream_to_string(
+         *pp_serializer
+      ,  p_uri
+      ,  *pp_stream);
+   if (result) {
+      lua_pushstring(L, result);
+      return 1;
+   } else {
+      return 0;
+   }
+}
+
+int
 lua_bindings_redland_serializer_serialize_to_file(lua_State *L) {
    librdf_serializer **pp_serializer
       =  (librdf_serializer **) luaL_checkudata(
@@ -283,6 +359,12 @@ luaopen_bindings_redland_serializer(lua_State *L) {
 
    lua_pushcfunction(L, &lua_bindings_redland_serializer_new);
    lua_setfield(L, -2, "new");
+
+   lua_pushcfunction(L, &lua_bindings_redland_serializer_serialize_stream_to_file);
+   lua_setfield(L, -2, "serialize_stream_to_file");
+
+   lua_pushcfunction(L, &lua_bindings_redland_serializer_serialize_stream_to_string);
+   lua_setfield(L, -2, "serialize_stream_to_string");
 
    lua_pushcfunction(L, &lua_bindings_redland_serializer_serialize_to_file);
    lua_setfield(L, -2, "serialize_to_file");
