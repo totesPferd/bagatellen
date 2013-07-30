@@ -8,6 +8,7 @@ const char *res_userdata_type        =  "redland.results";
 const char *serializer_userdata_type =  "redland.serializer";
 const char *stmt_userdata_type       =  "redland.stmt";
 const char *store_userdata_type      =  "redland.store";
+const char *stream_userdata_type     =  "redland.stream";
 const char *th_userdata_type         =  "redland.thandle";
 const char *uri_userdata_type        =  "redland.uri";
 const char *world_userdata_type      =  "redland.world";

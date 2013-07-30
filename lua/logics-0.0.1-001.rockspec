@@ -34,6 +34,7 @@ build = {
                      ,  "c/lua/bindings/redland/serializer.c"
                      ,  "c/lua/bindings/redland/stmt.c"
                      ,  "c/lua/bindings/redland/store.c"
+                     ,  "c/lua/bindings/redland/stream.c"
                      ,  "c/lua/bindings/redland/transaction.c"
                      ,  "c/lua/bindings/redland/uri.c"
                      ,  "c/lua/bindings/redland/world.c" }

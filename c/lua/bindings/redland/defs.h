@@ -11,6 +11,7 @@ extern const char *res_userdata_type;
 extern const char *stmt_userdata_type;
 extern const char *serializer_userdata_type;
 extern const char *store_userdata_type;
+extern const char *stream_userdata_type;
 extern const char *th_userdata_type;
 extern const char *uri_userdata_type;
 extern const char *world_userdata_type;
