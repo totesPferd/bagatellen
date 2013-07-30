@@ -57,6 +57,33 @@ function Serializer:new(world, params)
       ,  { name = name, mime_type = mime_type, type_uri = type_uri } ))
 end
 
+function Serializer:serialize_stream_to_file(stream, filename, params)
+   local base_uri
+   if params.base_uri
+   then
+      base_uri =  params.base_uri:get_bindings_uri()
+   end
+
+   return bindings_redland_module.serializer.serialize_stream_to_file(
+         self:get_bindings_serializer()
+      ,  stream:get_bindings_stream()
+      ,  filename:get_content()
+      ,  { base_uri = base_uri } )
+end
+
+function Serializer:serialize_stream_to_string(stream, params)
+   local base_uri
+   if params.base_uri
+   then
+      base_uri =  params.base_uri:get_bindings_uri()
+   end
+
+   return bindings_redland_module.serializer.parse_string(
+         self:get_bindings_serializer()
+      ,  stream:get_bindings_stream()
+      ,  { base_uri = base_uri } )
+end
+
 function Serializer:serialize_to_file(model, filename, params)
    local base_uri
    if params.base_uri
