@@ -110,6 +110,19 @@ function Parser:parse_string(model, content, params)
       ,  { base_uri = base_uri } )
 end
 
+function Parser:parse_string_into_stream(content, params)
+   local base_uri
+   if params.base_uri
+   then
+      base_uri =  params.base_uri:get_bindings_uri()
+   end
+
+   return bindings_redland_module.parser.parse_string_into_stream(
+         self:get_bindings_parser()
+      ,  content:get_content()
+      ,  { base_uri = base_uri } )
+end
+
 function Parser:set_feature(uri, node)
    return bindings_redland_module.parser.set_feature(
          self:get_bindings_parser()
