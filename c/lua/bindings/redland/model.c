@@ -130,14 +130,12 @@ lua_bindings_redland_model_context_del(lua_State *L) {
 
    lua_pop(L, 3);
 
-   if (librdf_model_context_remove_statement(
+   lua_pushboolean(L, librdf_model_context_remove_statement(
          *pp_model
       ,  *pp_context
-      ,  *pp_stmt )) {
-      luaL_error(L, "error: could not delete statement");
-   }
+      ,  *pp_stmt ));
 
-   return 0;
+   return 1;
 }
 
 int
@@ -703,11 +701,9 @@ lua_bindings_redland_model_sync(lua_State *L) {
 
    lua_pop(L, 1);
 
-   if (librdf_model_sync(*pp_model)) {
-      luaL_error(L, "error: sync");
-   }
+   lua_pushboolean(L, librdf_model_sync(*pp_model));
 
-   return 0;
+   return 1;
 }
 
 int
@@ -779,11 +775,9 @@ lua_bindings_redland_model_transaction_commit(lua_State *L) {
 
    lua_pop(L, 1);
 
-   if (librdf_model_transaction_commit(*pp_model)) {
-      luaL_error(L, "error: transaction commit");
-   }
+   lua_pushboolean(L, librdf_model_transaction_commit(*pp_model));
 
-   return 0;
+   return 1;
 }
 
 int
@@ -815,11 +809,9 @@ lua_bindings_redland_model_transaction_rollback(lua_State *L) {
 
    lua_pop(L, 1);
 
-   if (librdf_model_transaction_rollback(*pp_model)) {
-      luaL_error(L, "error: transaction rollback");
-   }
+   lua_pushboolean(L, librdf_model_transaction_rollback(*pp_model));
 
-   return 0;
+   return 1;
 }
 
 int
@@ -831,11 +823,9 @@ lua_bindings_redland_model_transaction_start(lua_State *L) {
 
    lua_pop(L, 1);
 
-   if (librdf_model_transaction_start(*pp_model)) {
-      luaL_error(L, "error: transaction start");
-   }
+   lua_pushboolean(L, librdf_model_transaction_start(*pp_model));
 
-   return 0;
+   return 1;
 }
 
 int
@@ -851,11 +841,11 @@ lua_bindings_redland_model_transaction_start_with_handle(lua_State *L) {
 
    lua_pop(L, 2);
 
-   if (librdf_model_transaction_start_with_handle(*pp_model, *pp_th)) {
-      luaL_error(L, "error: transaction start with handle");
-   }
+   lua_pushboolean(
+         L
+      ,  librdf_model_transaction_start_with_handle(*pp_model, *pp_th) );
 
-   return 0;
+   return 1;
 }
 
 
