@@ -38,6 +38,20 @@ function Model:add(stmt, context)
    end
 end
 
+function Model:add_stream(stream, context)
+   if context
+   then
+      return bindings_redland_module.model.context_add_stream(
+            self:get_bindings_model()
+         ,  context:get_bindings_node()
+         ,  stream:get_bindings_stream() )
+   else
+      return bindings_redland_module.model.add_stream(
+            self:get_bindings_model()
+         ,  stream:get_bindings_stream() )
+   end
+end
+
 function Model:close()
    return bindings_redland_module.model.close(
          self:get_bindings_model() )
@@ -53,6 +67,47 @@ function Model:del(stmt, context)
          self:get_bindings_model()
       ,  stmt:get_bindings_model()
       ,  { context = bindings_context_node } )
+end
+
+function Model:del_context(stmt, context)
+   local bindings_context_node
+   if context
+   then
+      bindings_context_node =  context:get_bindings_node()
+   end
+   return bindings_redland_module.model.del_context(
+         self:get_bindings_model()
+      ,  context:get_bindings_node()
+      ,  stmt:get_bindings_model() )
+end
+
+function Model:find(stmt, context)
+   local bindings_context_node
+   if context
+   then
+      bindings_context_node =  context:get_bindings_node()
+   end
+   return bindings_redland_module.model.find(
+         self:get_bindings_model()
+      ,  stmt:get_bindings_stmt()
+      ,  { context = bindings_context_node } )
+end
+
+function Model:find_with_options(stmt, params)
+   local bindings_context_node
+   if params.context
+   then
+      bindings_context_node =  params.context:get_bindings_node()
+   end
+   local bindings_hash
+   if params.hash
+   then
+      bindings_hash =  params.hash:get_bindings_hash()
+   end
+   return bindings_redland_module.model.find_with_options(
+         self:get_bindings_model()
+      ,  stmt:get_bindings_stmt()
+      ,  { context = bindings_context_node, hash = bindings_hash } )
 end
 
 function Model:get_feature(feature)
@@ -220,6 +275,18 @@ function Model:query(query)
    if bindings_results
    then
       return Results:bindings_results_factory(bindings_results)
+   end
+end
+
+function Model:serialize(context)
+   if context
+   then
+      return bindings_redland_module.model.context_serialize(
+            self:get_bindings_model()
+         ,  context:get_bindings_node() )
+   else
+      return bindings_redland_module.model.serialize(
+            self:get_bindings_model() )
    end
 end
 

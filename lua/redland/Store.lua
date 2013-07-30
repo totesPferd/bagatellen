@@ -36,6 +36,20 @@ function Store:add(stmt, context)
    end
 end
 
+function Store:add_stream(stream, context)
+   if context
+   then
+      return bindings_redland_module.store.context_add_stream(
+            self:get_bindings_store()
+         ,  context:get_bindings_node()
+         ,  stream:get_bindings_stream() )
+   else
+      return bindings_redland_module.store.add_stream(
+            self:get_bindings_store()
+         ,  stream:get_bindings_stream() )
+   end
+end
+
 function Store:close()
    return bindings_redland_module.store.close(
          self:get_bindings_store() )
@@ -51,6 +65,47 @@ function Store:del(stmt, context)
          self:get_bindings_store()
       ,  stmt:get_bindings_store()
       ,  { context = bindings_context_node } )
+end
+
+function Store:del_context(stmt, context)
+   local bindings_context_node
+   if context
+   then
+      bindings_context_node =  context:get_bindings_node()
+   end
+   return bindings_redland_module.store.del_context(
+         self:get_bindings_store()
+      ,  context:get_bindings_node()
+      ,  stmt:get_bindings_store() )
+end
+
+function Store:find(stmt, context)
+   local bindings_context_node
+   if context
+   then
+      bindings_context_node =  context:get_bindings_node()
+   end
+   return bindings_redland_module.store.find(
+         self:get_bindings_store()
+      ,  stmt:get_bindings_stmt()
+      ,  { context = bindings_context_node } )
+end
+
+function Store:find_with_options(stmt, params)
+   local bindings_context_node
+   if params.context
+   then
+      bindings_context_node =  params.context:get_bindings_node()
+   end
+   local bindings_hash
+   if params.hash
+   then
+      bindings_hash =  params.hash:get_bindings_hash()
+   end
+   return bindings_redland_module.store.find_with_options(
+         self:get_bindings_store()
+      ,  stmt:get_bindings_stmt()
+      ,  { context = bindings_context_node, hash = bindings_hash } )
 end
 
 function Store:get_feature(feature)
@@ -143,6 +198,18 @@ function Store:open(model)
    return bindings_redland_module.store.open(
          self:get_bindings_store()
       ,  model:get_bindings_model() )
+end
+
+function Store:serialize(context)
+   if context
+   then
+      return bindings_redland_module.store.context_serialize(
+            self:get_bindings_store()
+         ,  context:get_bindings_node() )
+   else
+      return bindings_redland_module.store.serialize(
+            self:get_bindings_store() )
+   end
 end
 
 function Store:set_feature(feature, value)
