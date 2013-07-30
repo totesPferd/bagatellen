@@ -6,6 +6,7 @@ local Results =  Type:__new()
 
 package.loaded["redland.Results"] =  Results
 local Indentation =  require "base.Indentation"
+local Stream =  require "redland.Stream"
 local String =  require "base.type.String"
 
 function Results:bindings_results_factory(bindings_results)

@@ -7,6 +7,7 @@ local Store =  Type:__new()
 package.loaded["redland.Store"] =  Store
 local Indentation =  require "base.Indentation"
 local Node =  require "redland.Node"
+local Stream =  require "redland.Stream"
 local String =  require "base.type.String"
 local Transaction =  require "redland.Transaction"
 local World =  require "redland.World"
@@ -41,17 +42,15 @@ function Store:close()
 end
 
 function Store:del(stmt, context)
+   local bindings_context_node
    if context
    then
-      return bindings_redland_module.store.context_del(
-            self:get_bindings_store()
-         ,  context:get_bindings_node()
-         ,  stmt:get_bindings_stmt() )
-   else
-      return bindings_redland_module.store.del(
-            self:get_bindings_store()
-         ,  stmt:get_bindings_store() )
+      bindings_context_node =  context:get_bindings_node()
    end
+   return bindings_redland_module.store.del(
+         self:get_bindings_store()
+      ,  stmt:get_bindings_store()
+      ,  { context = bindings_context_node } )
 end
 
 function Store:get_feature(feature)

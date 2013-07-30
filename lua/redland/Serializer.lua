@@ -7,6 +7,7 @@ local Serializer =  Type:__new()
 package.loaded["redland.Serializer"] =  Serializer
 local Indentation =  require "base.Indentation"
 local Node =  require "redland.Node"
+local Stream =  require "redland.Stream"
 local String =  require "base.type.String"
 local Uri =  require "redland.Uri"
 

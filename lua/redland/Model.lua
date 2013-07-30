@@ -9,6 +9,7 @@ local Indentation =  require "base.Indentation"
 local Node =  require "redland.Node"
 local Results =  require "redland.Results"
 local Store =  require "redland.Store"
+local Stream =  require "redland.Stream"
 local String =  require "base.type.String"
 local Transaction =  require "redland.Transaction"
 local World =  require "redland.World"
@@ -43,17 +44,15 @@ function Model:close()
 end
 
 function Model:del(stmt, context)
+   local bindings_context_node
    if context
    then
-      return bindings_redland_module.model.context_del(
-            self:get_bindings_model()
-         ,  context:get_bindings_node()
-         ,  stmt:get_bindings_stmt() )
-   else
-      return bindings_redland_module.model.del(
-            self:get_bindings_model()
-         ,  stmt:get_bindings_model() )
+      bindings_context_node =  context:get_bindings_node()
    end
+   return bindings_redland_module.model.del(
+         self:get_bindings_model()
+      ,  stmt:get_bindings_model()
+      ,  { context = bindings_context_node } )
 end
 
 function Model:get_feature(feature)

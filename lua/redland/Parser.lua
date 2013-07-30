@@ -7,6 +7,7 @@ local Parser =  Type:__new()
 package.loaded["redland.Parser"] =  Parser
 local Indentation =  require "base.Indentation"
 local Node =  require "redland.Node"
+local Stream =  require "redland.Stream"
 local String =  require "base.type.String"
 local Uri =  require "redland.Uri"
 

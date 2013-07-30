@@ -119,20 +119,27 @@ lua_bindings_redland_model_context_del(lua_State *L) {
          L
       ,  -3
       ,  model_userdata_type );
-   librdf_node **pp_context =  (librdf_node **) luaL_checkudata(
-         L
-      ,  -2
-      ,  node_userdata_type );
    librdf_statement **pp_stmt =  (librdf_statement **) luaL_checkudata(
          L
-      ,  -1
+      ,  -2
       ,  stmt_userdata_type );
+
+   librdf_node *p_context =  NULL;
+   lua_getfield(L, -1, "context");
+   if (!lua_isnil(L, -1)) {
+      librdf_node **pp_context =  (librdf_node **) luaL_checkudata(
+            L
+         ,  -2
+         ,  node_userdata_type );
+      p_context =  *pp_context;
+   }
+   lua_pop(L, 1);
 
    lua_pop(L, 3);
 
    lua_pushboolean(L, librdf_model_context_remove_statement(
          *pp_model
-      ,  *pp_context
+      ,  p_context
       ,  *pp_stmt ));
 
    return 1;
