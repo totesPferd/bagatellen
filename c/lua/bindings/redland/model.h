@@ -25,6 +25,9 @@ int
 lua_bindings_redland_model_find(lua_State *);
 
 int
+lua_bindings_redland_model_find_with_options(lua_State *);
+
+int
 lua_bindings_redland_model_gc(lua_State *);
 
 int

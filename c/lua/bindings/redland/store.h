@@ -28,6 +28,9 @@ int
 lua_bindings_redland_store_find(lua_State *);
 
 int
+lua_bindings_redland_store_find_with_options(lua_State *);
+
+int
 lua_bindings_redland_store_gc(lua_State *);
 
 int

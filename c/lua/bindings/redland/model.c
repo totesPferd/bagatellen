@@ -155,6 +155,50 @@ lua_bindings_model_find(lua_State *L) {
 }
 
 int
+lua_bindings_model_find_with_options(lua_State *L) {
+   librdf_model **pp_model =  (librdf_model **) luaL_checkudata(
+         L
+      ,  -3
+      ,  model_userdata_type );
+   librdf_statement **pp_stmt =  (librdf_statement **) luaL_checkudata(
+         L
+      ,  -2
+      ,  stmt_userdata_type );
+
+   librdf_node *p_context =  NULL;
+   lua_getfield(L, -1, "context");
+   if (!lua_isnil(L, -1)) {
+      librdf_node **pp_context =  (librdf_node **) luaL_checkudata(
+            L
+         ,  -1
+         ,  node_userdata_type );
+      p_context =  *pp_context;
+   }
+   lua_pop(L, 1);
+
+   librdf_hash *p_options =  NULL;
+   lua_getfield(L, -1, "options");
+   if (!lua_isnil(L, -1)) {
+      librdf_hash **pp_options =  (librdf_hash **) luaL_checkudata(
+            L
+         ,  -1
+         ,  hash_userdata_type );
+      p_options =  *pp_options;
+   }
+   lua_pop(L, 1);
+
+   lua_pop(L, 3);
+
+   librdf_stream *p_stream =  librdf_model_find_statements_with_options(
+         *pp_model
+      ,  *pp_stmt
+      ,  p_context
+      ,  p_options );
+   lua_bindings_redland_stream_new_mt(L);
+   return lua_bindings_redland_stream_wrap(L, p_stream);
+}
+
+int
 lua_bindings_redland_model_get_feature(lua_State *L) {
    librdf_model **pp_model =  (librdf_model **) luaL_checkudata(
          L
@@ -792,6 +836,9 @@ luaopen_bindings_redland_model(lua_State *L) {
 
    lua_pushcfunction(L, &lua_bindings_redland_model_find);
    lua_setfield(L, -2, "find");
+
+   lua_pushcfunction(L, &lua_bindings_redland_model_find_with_options);
+   lua_setfield(L, -2, "find_with_options");
 
    lua_pushcfunction(L, &lua_bindings_redland_model_get_feature);
    lua_setfield(L, -2, "get_feature");
