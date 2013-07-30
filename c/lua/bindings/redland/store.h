@@ -19,6 +19,9 @@ int
 lua_bindings_redland_store_context_add(lua_State *);
 
 int
+lua_bindings_redland_store_context_add_stream(lua_State *);
+
+int
 lua_bindings_redland_store_context_del(lua_State *);
 
 int
