@@ -7,6 +7,9 @@ int
 lua_bindings_redland_store_add(lua_State *);
 
 int
+lua_bindings_redland_store_add_stream(lua_State *);
+
+int
 lua_bindings_redland_store_clone(lua_State *);
 
 int
@@ -20,6 +23,9 @@ lua_bindings_redland_store_context_del(lua_State *);
 
 int
 lua_bindings_redland_store_del(lua_State *);
+
+int
+lua_bindings_redland_store_find(lua_State *);
 
 int
 lua_bindings_redland_store_gc(lua_State *);
@@ -56,6 +62,9 @@ lua_bindings_redland_store_new_mt(lua_State *);
 
 int
 lua_bindings_redland_store_open(lua_State *);
+
+int
+lua_bindings_redland_store_serialize(lua_State *);
 
 int
 lua_bindings_redland_store_set_feature(lua_State *);

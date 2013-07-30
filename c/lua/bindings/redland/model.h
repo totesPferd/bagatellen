@@ -7,6 +7,9 @@ int
 lua_bindings_redland_model_add(lua_State *);
 
 int
+lua_bindings_redland_model_add_stream(lua_State *);
+
+int
 lua_bindings_redland_model_clone(lua_State *);
 
 int
@@ -17,6 +20,9 @@ lua_bindings_redland_model_context_del(lua_State *);
 
 int
 lua_bindings_redland_model_del(lua_State *);
+
+int
+lua_bindings_redland_model_find(lua_State *);
 
 int
 lua_bindings_redland_model_gc(lua_State *);
@@ -65,6 +71,9 @@ lua_bindings_redland_model_new_mt(lua_State *);
 
 int
 lua_bindings_redland_model_query(lua_State *);
+
+int
+lua_bindings_redland_model_serialize(lua_State *);
 
 int
 lua_bindings_redland_model_set_feature(lua_State *);

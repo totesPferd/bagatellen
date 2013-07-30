@@ -1,6 +1,7 @@
 #include "parser.h"
 #include "defs.h"
 #include "node.h"
+#include "stream.h"
 #include "uri.h"
 #include <lauxlib.h>
 

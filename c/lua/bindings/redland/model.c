@@ -3,6 +3,7 @@
 #include "node.h"
 #include "results.h"
 #include "store.h"
+#include "stream.h"
 #include "transaction.h"
 #include "world.h"
 #include <lauxlib.h>
@@ -21,6 +22,25 @@ lua_bindings_redland_model_add(lua_State *L) {
    lua_pop(L, 2);
 
    int result =  librdf_model_add_statement(*pp_model, *pp_stmt);
+   lua_pushnumber(L, result);
+
+   return 1;
+}
+
+int
+lua_bindings_redland_model_add_stream(lua_State *L) {
+   librdf_model **pp_model =  (librdf_model **) luaL_checkudata(
+         L
+      ,  -2
+      ,  model_userdata_type );
+   librdf_stream **pp_stream =  (librdf_stream **) luaL_checkudata(
+         L
+      ,  -1
+      ,  stream_userdata_type );
+
+   lua_pop(L, 2);
+
+   int result =  librdf_model_add_statements(*pp_model, *pp_stream);
    lua_pushnumber(L, result);
 
    return 1;
@@ -112,6 +132,26 @@ lua_bindings_redland_model_del(lua_State *L) {
    }
 
    return 0;
+}
+
+int
+lua_bindings_model_find(lua_State *L) {
+   librdf_storage **pp_model =  (librdf_storage **) luaL_checkudata(
+         L
+      ,  -2
+      ,  model_userdata_type );
+   librdf_statement **pp_stmt =  (librdf_statement **) luaL_checkudata(
+         L
+      ,  -1
+      ,  stmt_userdata_type );
+
+   lua_pop(L, 2);
+
+   librdf_stream *p_stream =  librdf_storage_find_statements(
+         *pp_model
+      ,  *pp_stmt );
+   lua_bindings_redland_stream_new_mt(L);
+   return lua_bindings_redland_stream_wrap(L, p_stream);
 }
 
 int
@@ -480,6 +520,20 @@ lua_bindings_redland_model_query(lua_State *L) {
 }
 
 int
+lua_bindings_model_serialize(lua_State *L) {
+   librdf_model **pp_model =  (librdf_model **) luaL_checkudata(
+         L
+      ,  -1
+      ,  model_userdata_type );
+
+   lua_pop(L, 1);
+
+   librdf_stream *p_stream =  librdf_model_as_stream(*pp_model);
+   lua_bindings_redland_stream_new_mt(L);
+   return lua_bindings_redland_stream_wrap(L, p_stream);
+}
+
+int
 lua_bindings_redland_model_set_feature(lua_State *L) {
    librdf_model **pp_model =  (librdf_model **) luaL_checkudata(
          L
@@ -721,6 +775,9 @@ luaopen_bindings_redland_model(lua_State *L) {
    lua_pushcfunction(L, &lua_bindings_redland_model_add);
    lua_setfield(L, -2, "add");
 
+   lua_pushcfunction(L, &lua_bindings_redland_model_add_stream);
+   lua_setfield(L, -2, "add_stream");
+
    lua_pushcfunction(L, &lua_bindings_redland_model_clone);
    lua_setfield(L, -2, "__clone");
 
@@ -732,6 +789,9 @@ luaopen_bindings_redland_model(lua_State *L) {
 
    lua_pushcfunction(L, &lua_bindings_redland_model_del);
    lua_setfield(L, -2, "del");
+
+   lua_pushcfunction(L, &lua_bindings_redland_model_find);
+   lua_setfield(L, -2, "find");
 
    lua_pushcfunction(L, &lua_bindings_redland_model_get_feature);
    lua_setfield(L, -2, "get_feature");
@@ -771,6 +831,9 @@ luaopen_bindings_redland_model(lua_State *L) {
 
    lua_pushcfunction(L, &lua_bindings_redland_model_query);
    lua_setfield(L, -2, "query");
+
+   lua_pushcfunction(L, &lua_bindings_redland_model_serialize);
+   lua_setfield(L, -2, "serialize");
 
    lua_pushcfunction(L, &lua_bindings_redland_model_set_feature);
    lua_setfield(L, -2, "set_feature");

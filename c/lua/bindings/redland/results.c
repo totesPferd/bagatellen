@@ -1,6 +1,7 @@
 #include "results.h"
 #include "defs.h"
 #include "formatter.h"
+#include "stream.h"
 #include <lauxlib.h>
 
 int
