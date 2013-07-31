@@ -1,5 +1,6 @@
 #include "main.h"
 #include "formatter.h"
+#include "hash.h"
 #include "model.h"
 #include "node.h"
 #include "parser.h"
@@ -19,6 +20,9 @@ luaopen_bindings_redland(lua_State *L) {
 
    luaopen_bindings_redland_formatter(L);
    lua_setfield(L, -2, "formatter");
+
+   luaopen_bindings_redland_hash(L);
+   lua_setfield(L, -2, "hash");
 
    luaopen_bindings_redland_model(L);
    lua_setfield(L, -2, "model");

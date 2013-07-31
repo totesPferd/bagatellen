@@ -43,9 +43,11 @@ build = {
                         "/usr/include/rasqal"
                      ,  "/usr/include/raptor2" }}
          ,  ['redland.BlankNode']   =  "lua/redland/BlankNode.lua"
+         ,  ['redland.Formatter']   =  "lua/redland/Formatter.lua"
          ,  ['redland.Hash']        =  "lua/redland/Hash.lua"
          ,  ['redland.LiteralNode'] =  "lua/redland/LiteralNode.lua"
          ,  ['redland.Node']        =  "lua/redland/Node.lua"
+         ,  ['redland.Results']     =  "lua/redland/Results.lua"
          ,  ['redland.Stmt']        =  "lua/redland/Stmt.lua"
          ,  ['redland.Uri']         =  "lua/redland/Uri.lua"
          ,  ['redland.UriNode']     =  "lua/redland/UriNode.lua"
