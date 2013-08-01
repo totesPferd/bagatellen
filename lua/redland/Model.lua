@@ -281,12 +281,14 @@ end
 function Model:serialize(context)
    if context
    then
-      return bindings_redland_module.model.context_serialize(
-            self:get_bindings_model()
-         ,  context:get_bindings_node() )
+      return Stream_bindings_stream_factory(
+            bindings_redland_module.model.context_serialize(
+                  self:get_bindings_model()
+               ,  context:get_bindings_node() ))
    else
-      return bindings_redland_module.model.serialize(
-            self:get_bindings_model() )
+      return Stream:bindings_stream_factory(
+            bindings_redland_module.model.serialize(
+                  self:get_bindings_model() ))
    end
 end
 
@@ -321,8 +323,11 @@ function Model:to_string(base_uri, params)
 
    local raw_result_string =  bindings_redland_module.model.to_string(
          self:get_bindings_model()
-      ,  base_uri:get_bindings_uri()
-      ,  { name =  name_str, mime_type =  mime_type_str, type =  bindings_type_uri } )
+      ,  {
+               base      =  base_uri:get_bindings_uri()
+            ,  name      =  name_str
+            ,  mime_type =  mime_type_str
+            ,  type      =  bindings_type_uri  })
    if raw_result_string
    then
       return String:string_factory(raw_result_string)

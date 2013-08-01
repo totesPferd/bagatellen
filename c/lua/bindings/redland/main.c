@@ -40,6 +40,9 @@ luaopen_bindings_redland(lua_State *L) {
    luaopen_bindings_redland_results(L);
    lua_setfield(L, -2, "results");
 
+   luaopen_bindings_redland_serializer(L);
+   lua_setfield(L, -2, "serializer");
+
    luaopen_bindings_redland_stmt(L);
    lua_setfield(L, -2, "stmt");
 
