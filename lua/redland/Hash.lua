@@ -75,14 +75,14 @@ end
 function Hash:new(world, name)
    return Hash:bindings_hash_factory(redland_module.hash.new(
          world:get_bindings_world()
-      ,  name:get_contents() ))
+      ,  name:get_content() ))
 end
 
 function Hash:new_from_string(work, name, options)
    return Hash:bindings_hash_factory(redland_module.hash.new_from_string(
          world:get_bindings_world()
-      ,  name:get_contents()
-      ,  options:get_contents() ))
+      ,  name:get_content()
+      ,  options:get_content() ))
 end
 
 function Hash:__clone()
