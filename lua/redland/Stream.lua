@@ -40,7 +40,7 @@ end
 function Stream:get_stmt()
    local raw_stmt =  bindings_redland_module.stream.get_stmt(
          self:get_bindings_stream() )
-   if raw_context
+   if raw_stmt
    then
       return Stmt:bindings_stmt_factory(raw_stmt)
    end

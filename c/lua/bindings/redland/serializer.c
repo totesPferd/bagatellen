@@ -189,7 +189,7 @@ lua_bindings_redland_serializer_serialize_to_file(lua_State *L) {
             L
          ,  -3
          ,  model_userdata_type );
-   const char *filename =  luaL_checkstring(L, -1);
+   const char *filename =  luaL_checkstring(L, -2);
 
    librdf_uri *p_uri =  NULL;
    lua_getfield(L, -1, "base_uri");

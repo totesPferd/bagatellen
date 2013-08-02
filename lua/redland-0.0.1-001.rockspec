@@ -1,4 +1,4 @@
-package = 'logics'
+package = 'redland'
 version = '0.0.1-001'
 
 description = {
