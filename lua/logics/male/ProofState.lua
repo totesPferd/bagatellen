@@ -3,7 +3,7 @@ local Type =  require "base.type.aux.Type"
 local ProofState =  Type:__new()
 
 
-package.loaded["base.type.ProofState"] =  ProofState
+package.loaded["logics.male.ProofState"] =  ProofState
 local Indentation =  require "base.Indentation"
 local Set =  require "base.type.Set"
 local String =  require "base.type.String"
@@ -29,11 +29,20 @@ function ProofState:get_conclusions()
    return self.conclusions
 end
 
+function ProofState:applicable(goal)
+   retval =  self.get_conclusions():is_in(goal)
+   if retval
+   then
+      self.conclusions():drop(goal)
+   end
+   return retval
+end
+
 function ProofState:assume(goal)
    local retval =  self.get_premises():is_in(goal)
    if retval
    then
-      self.get_conclusions():drop(goal)
+      retval =  self:applicable(goal)
    end
    return retval
 end
@@ -41,10 +50,11 @@ end
 function ProofState:resolve(key, substitution, goal)
    local axiom =  self.get_prs():deref(key):__clone()
    axiom:apply_substitution(substitution)
-   local retval =  axiom:get_conclusion():__eq(goal)
+   local retval =
+         axiom:get_conclusion():__eq(goal)
+     and self:applicable(goal)
    if retval
    then
-      self.get_conclusions():drop(goal)
       self.get_conclusions():add_set(axiom:get_premises())
    end
    return retval

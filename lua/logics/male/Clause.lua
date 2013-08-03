@@ -3,7 +3,7 @@ local Type =  require "base.type.aux.Type"
 local Clause =  Type:__new()
 
 
-package.loaded["base.type.Clause"] =  Clause
+package.loaded["logics.male.Clause"] =  Clause
 local Indentation =  require "base.Indentation"
 local String =  require "base.type.String"
 
