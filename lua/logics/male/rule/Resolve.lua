@@ -11,8 +11,8 @@ function Resolve:get_resolve()
    return self
 end
 
-function Resolve:new(key, substitution, goal)
-   local retval =  Rule.new(Resolve, goal)
+function Resolve:new(key, substitution)
+   local retval =  Rule.new(Resolve)
    retval.key =  key
    retval.substitution =  substitution
    return retval
@@ -26,11 +26,11 @@ function Resolve:get_substitution()
    return self.substitution
 end
 
-function Resolve:apply(proof_state)
+function Resolve:apply(proof_state, goal)
    return proof_state:resolve(
          self:get_key()
       ,  self:get_substitution()
-      ,  self:get_goal() )
+      ,  goal )
 end
 
 function Resolve:__eq(other)
@@ -51,8 +51,6 @@ function Resolve:__diagnose_single_line(indentation)
    self:get_key():__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(" "))
    self:get_substitution():__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory(" "))
-   self:get_goal():__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(")"))
 end
 
@@ -67,9 +65,6 @@ function Resolve:__diagnose_multiple_line(indentation)
    deeper_indentation:insert_newline()
    is_last_elem_multiple_line =
       self:get_substitution():__diagnose_complex(deeper_indentation)
-   deeper_indentation:insert_newline()
-   is_last_elem_multiple_line =
-      self:get_goal():__diagnose_complex(deeper_indentation)
    deeper_indentation:save()
    indentation:insert(String:parenthesis_off_depending_factory(is_last_elem_multiple_line))
 end

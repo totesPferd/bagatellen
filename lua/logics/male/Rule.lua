@@ -7,14 +7,9 @@ package.loaded["logics.male.Rule"] =  Rule
 local Indentation =  require "base.Indentation"
 local String =  require "base.type.String"
 
-function Rule:new(goal)
+function Rule:new()
    local retval =  Rule:__new()
-   retval.goal =  goal
    return retval
-end
-
-function Rule:get_goal()
-   return self.goal
 end
 
 function Rule:get_assume()
@@ -23,29 +18,19 @@ end
 function Rule:get_resolve()
 end
 
-function Rule:apply(proof_state)
+function Rule:apply(proof_state, goal)
 end
 
 function Rule:__eq(other)
-   return self:get_goal():__eq(other:get_goal())
+   return true
 end
 
 function Rule:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(logics.male.Rule "))
-   self:get_goal():__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory(")"))
+   indentation:insert(String:string_factory("(logics.male.Rule)"))
 end
 
 function Rule:__diagnose_multiple_line(indentation)
-   indentation:insert(String:string_factory("(logics.male.Rule"))
-   local is_last_elem_multiple_line =  true
-   indentation:insert_newline()
-   local deeper_indentation =
-      indentation:get_deeper_indentation_factory {}
-   is_last_elem_multiple_line =
-      self:get_goal():__diagnose_complex(deeper_indentation)
-   deeper_indentation:save()
-   indentation:insert(String:parenthesis_off_depending_factory(is_last_elem_multiple_line))
+   return self:__diagnose_single_line(indentation)
 end
 
 return Rule
