@@ -15,7 +15,7 @@ function Stmt:bindings_stmt_factory(bindings_stmt)
 end
 
 function Stmt:clear()
-   redland_module.stmt.clear(self:get_bindings_stmt())
+   bindings_redland_module.stmt.clear(self:get_bindings_stmt())
 end
 
 function Stmt:get_bindings_stmt()

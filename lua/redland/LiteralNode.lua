@@ -93,13 +93,13 @@ function LiteralNode:__tostring()
    local value =  self:get_value()
    if value
    then
-      retval =  retval .. "value = " .. value:get_content()
+      retval =  retval .. "value = " .. value
    end
 
    local type =  self:get_type()
    if type
    then
-      retval =  retval .. ", type = " .. self:get_type():__tostring()
+      retval =  retval .. ", type = " .. type:__tostring()
    end
 
    local language =  self:get_language()
@@ -108,7 +108,7 @@ function LiteralNode:__tostring()
       retval =
             retval
          .. ", language = "
-         .. self:get_language():get_content()
+         .. language:get_content()
    end
 
    local is_there_wf_xml =  self:is_wf_xml() ~= nil
