@@ -31,6 +31,10 @@ end
 
 function Resolve:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory("(logics.male.Resolve "))
+   self:get_key():__diagnose_single_line(indentation)
+   indentation:insert(String:string_factory(" "))
+   self:get_substitution():__diagnose_single_line(indentation)
+   indentation:insert(String:string_factory(" "))
    self:get_goal():__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(")"))
 end
@@ -41,6 +45,12 @@ function Resolve:__diagnose_multiple_line(indentation)
    indentation:insert_newline()
    local deeper_indentation =
       indentation:get_deeper_indentation_factory {}
+   is_last_elem_multiple_line =
+      self:get_key():__diagnose_complex(deeper_indentation)
+   deeper_indentation:insert_newline()
+   is_last_elem_multiple_line =
+      self:get_substitution():__diagnose_complex(deeper_indentation)
+   deeper_indentation:insert_newline()
    is_last_elem_multiple_line =
       self:get_goal():__diagnose_complex(deeper_indentation)
    deeper_indentation:save()
