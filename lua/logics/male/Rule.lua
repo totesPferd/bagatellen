@@ -17,7 +17,17 @@ function Rule:get_goal()
    return self.goal
 end
 
+function Rule:get_assume()
+end
+
+function Rule:get_resolve()
+end
+
 function Rule:apply(proof_state)
+end
+
+function Rule:__eq(other)
+   return self:get_goal():__eq(other:get_goal())
 end
 
 function Rule:__diagnose_single_line(indentation)

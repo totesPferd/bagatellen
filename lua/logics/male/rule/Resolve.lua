@@ -7,6 +7,10 @@ package.loaded["logics.male.rule.Resolve"] =  Resolve
 local Indentation =  require "base.Indentation"
 local String =  require "base.type.String"
 
+function Resolve:get_resolve()
+   return self
+end
+
 function Resolve:new(key, substitution, goal)
    local retval =  Rule.new(Resolve, goal)
    retval.key =  key
@@ -27,6 +31,19 @@ function Resolve:apply(proof_state)
          self:get_key()
       ,  self:get_substitution()
       ,  self:get_goal() )
+end
+
+function Resolve:__eq(other)
+   local retval =  false
+   local other_resolve =  other:get_resolve()
+   if other_resolve
+   then
+      retval =
+            self:get_key():__eq(other_resolve:get_key())
+        and self:get_substitution():__eq(other_resolve:get_subsitution())
+        and Rule.__eq(self, other)
+   end
+   return retval
 end
 
 function Resolve:__diagnose_single_line(indentation)

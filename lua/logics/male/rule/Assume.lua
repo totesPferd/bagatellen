@@ -7,8 +7,22 @@ package.loaded["logics.male.rule.Assume"] =  Assume
 local Indentation =  require "base.Indentation"
 local String =  require "base.type.String"
 
+function Assume:get_assume()
+   return self
+end
+
 function Assume:apply(proof_state)
    return proof_state:assume(self:get_goal())
+end
+
+function Assume:__eq(other)
+   local retval =  false
+   local other_assume =  other.get_assume()
+   if other_assume
+   then
+      retval =  Rule.__eq(self, other_assume)
+   end
+   return retval
 end
 
 function Assume:__diagnose_single_line(indentation)
