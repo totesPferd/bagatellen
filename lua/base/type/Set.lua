@@ -41,6 +41,20 @@ function Set:add(elem)
    end
 end
 
+--- Dropping an element from a set.
+--  @param elem to be dropped
+function Set:drop(elem)
+   local index =  1
+   while self.val[index]
+   do if self.val[index] == elem
+      then
+         table.remove(self.val, index)
+         return
+      end
+      index =  index + 1
+   end
+end
+
 --- Adding all elements of another set.
 --  @param other other set whose elements should be added
 function Set:add_set(other)
