@@ -65,7 +65,8 @@ function ProofState:resolve(key, substitution, goal, rec_stop)
       if rec_stop
       then
          local keys =  self:get_proof_history():get_history():keys()
-         premises =  premises:__clone():diff_set(keys)
+         local diff =  premises:__clone():cut_set(keys)
+         retval =  diff:is_empty()
       end
       self.get_conclusions():add_set(premises)
    end
@@ -77,6 +78,25 @@ function ProofState:apply_rule(rule, goal, rec_stop)
    if retval
    then
       self:get_proof_history():add(goal, rule)
+   end
+   return retval
+end
+
+function ProofState:apply_proof_history(proof_history)
+   local retval =  true
+   local history =  proof_history:get_history()
+   local is_progress =  true
+   while is_progress
+   do is_progress =  false
+      for goal in self:get_conclusions()
+      do local rule =  history:deref(goal)
+         if rule
+         then
+            local success =  self:apply_rule(rule, goal, true)
+            is_progress =  success or is_progress
+            retval =  retval and success
+         end
+      end
    end
    return retval
 end
