@@ -40,10 +40,10 @@ function ProofState:is_proven()
 end
 
 function ProofState:applicable(goal)
-   retval =  self.get_conclusions():is_in(goal)
+   retval =  self:get_conclusions():is_in(goal)
    if retval
    then
-      self.conclusions():drop(goal)
+      self:get_conclusions():drop(goal)
    end
    return retval
 end
@@ -61,6 +61,7 @@ function ProofState:assume(goal)
    if retval
    then
       retval =  self:applicable(goal)
+      self:get_history():mark_as_proven(goal)
    end
    return retval
 end
@@ -73,7 +74,18 @@ function ProofState:resolve(key, substitution, goal)
      and self:applicable(goal)
    if retval
    then
-      self.get_conclusions():add_set(axiom:get_premises())
+      local is_empty =  true
+      for premise in axiom:get_premises()
+      do if self:get_history():is_proven(premise)
+         then
+            is_empty =  false
+            self:get_conclusions():add(premise)
+         end
+      end
+      if is_empty
+      then
+         self:get_history():mark_as_proven(goal)
+      end
    end
    return retval
 end
