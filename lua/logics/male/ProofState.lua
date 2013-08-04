@@ -39,10 +39,10 @@ function ProofState:is_proven()
    return self:get_conclusions():is_empty()
 end
 
-function ProofState:tell_proven_goals(proof_history)
-   if self:is_proven()
+function ProofState:tell_proven_goals(other)
+   if self:is_proven() and self:get_premises():__eq(other:get_premises())
    then
-      self:get_history():tell_proven_goals(proof_history)
+      self:get_history():tell_proven_goals(other:get_proof_history())
    end
 end
 
@@ -59,8 +59,11 @@ function ProofState:derive_clause(goal)
    return Clause:new(self:get_premises(), goal)
 end
 
-function ProofState:derive_proof_state(goal)
-   return ProofState:new(self:get_prs(), self:derive_clause(goal))
+function ProofState:derive_proof_state(proof_history, goal)
+   return ProofState:new(
+         proof_history
+      ,  self:get_prs()
+      ,  self:derive_clause(goal) )
 end
 
 function ProofState:assume(goal)
