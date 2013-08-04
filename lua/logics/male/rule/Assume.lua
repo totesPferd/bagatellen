@@ -11,7 +11,7 @@ function Assume:get_assume()
    return self
 end
 
-function Assume:apply(proof_state, goal)
+function Assume:apply(proof_state, goal, rec_stop)
    return proof_state:assume(goal)
 end
 

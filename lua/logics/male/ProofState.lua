@@ -5,16 +5,22 @@ local ProofState =  Type:__new()
 
 package.loaded["logics.male.ProofState"] =  ProofState
 local Indentation =  require "base.Indentation"
+local ProofHistory =  require "logics.male.ProofHistory"
 local Set =  require "base.type.Set"
 local String =  require "base.type.String"
 
 function ProofState:new(prs, clause)
    local retval =  ProofState:__new()
+   retval.proof_history =  ProofHistory:new()
    retval.prs =  prs
    retval.premises =  clause:get_premises()
    retval.conclusions =  Set:empty_set_factory()
    retval.conclusions:add(clause:get_conclusion())
    return retval
+end
+
+function ProofState:get_proof_history()
+   return self.proof_history
 end
 
 function ProofState:get_prs()
@@ -47,7 +53,7 @@ function ProofState:assume(goal)
    return retval
 end
 
-function ProofState:resolve(key, substitution, goal)
+function ProofState:resolve(key, substitution, goal, rec_stop)
    local axiom =  self.get_prs():deref(key):__clone()
    axiom:apply_substitution(substitution)
    local retval =
@@ -55,7 +61,22 @@ function ProofState:resolve(key, substitution, goal)
      and self:applicable(goal)
    if retval
    then
-      self.get_conclusions():add_set(axiom:get_premises())
+      local premises =  axiom:get_premises()
+      if rec_stop
+      then
+         local keys =  self:get_proof_history():get_history():keys()
+         premises =  premises:__clone():diff_set(keys)
+      end
+      self.get_conclusions():add_set(premises)
+   end
+   return retval
+end
+
+function ProofState:apply_rule(rule, goal, rec_stop)
+   local retval =  rule:apply(self, goal, rec_stop)
+   if retval
+   then
+      self:get_proof_history():add(goal, rule)
    end
    return retval
 end

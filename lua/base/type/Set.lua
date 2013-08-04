@@ -104,8 +104,8 @@ function Set:elems()
    return f, {}
 end
 
---- Is other set subset?
---  @param other set to be proven whether it is subset
+--- Is set subset of other?
+--  @param other set to be proven whether it is superset
 --  @return boolean
 function Set:is_subeq(other)
    local retval =  true

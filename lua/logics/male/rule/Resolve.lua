@@ -26,11 +26,12 @@ function Resolve:get_substitution()
    return self.substitution
 end
 
-function Resolve:apply(proof_state, goal)
+function Resolve:apply(proof_state, goal, rec_stop)
    return proof_state:resolve(
          self:get_key()
       ,  self:get_substitution()
-      ,  goal )
+      ,  goal
+      ,  rec_stop )
 end
 
 function Resolve:__eq(other)
