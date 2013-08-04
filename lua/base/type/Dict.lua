@@ -78,6 +78,18 @@ function Dict:add(key, val)
    end
 end
 
+--- Dropping a key-value pair
+--  @param key
+function Dict:drop(key)
+   for i, v in ipairs(self.val)
+   do if v.key == key
+      then
+         table.remove(self.val, i)
+         break
+      end
+   end
+end
+
 --- Assigning all key-val-pairs of other dictionary.
 --  @param other other dictionary
 function Dict:add_dict(other)

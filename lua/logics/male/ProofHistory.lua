@@ -32,6 +32,14 @@ function ProofHistory:mark_as_proven(goal)
    return self.proven_goals:add(goal)
 end
 
+function ProofHistory:drop_all_assumes()
+   for goal in self.history:keys()
+   do local rule =  self.history:deref(goal)
+      self.history:drop(goal)
+      self.proven_goals:drop(goal)
+   end
+end
+
 function ProofHistory:mark_all_as_unproven()
    self.proven_goals =  Set:empty_set_factory()
 end
