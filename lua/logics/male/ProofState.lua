@@ -40,7 +40,7 @@ function ProofState:is_proven()
 end
 
 function ProofState:tell_proven_goals(other)
-   if self:is_proven() and self:get_premises():__eq(other:get_premises())
+   if self:is_proven() and self:get_premises():is_subeq(other:get_premises())
    then
       self:get_history():tell_proven_goals(other:get_proof_history())
    end
