@@ -18,8 +18,12 @@ function ProofHistory:get_history()
    return self.history
 end
 
+function ProofHistory:deref(goal)
+   return self:get_history():deref(goal)
+end
+
 function ProofHistory:add(goal, rule)
-   self:get_history().add(goal, rule)
+   self:get_history():add(goal, rule)
 end
 
 

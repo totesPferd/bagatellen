@@ -6,14 +6,13 @@ local ProofState =  Type:__new()
 package.loaded["logics.male.ProofState"] =  ProofState
 local Clause =  require "logics.male.Clause"
 local Indentation =  require "base.Indentation"
-local ProofHistory =  require "logics.male.ProofHistory"
 local Set =  require "base.type.Set"
 local String =  require "base.type.String"
 
-function ProofState:new(prs, clause)
+function ProofState:new(proof_history, prs, clause)
    local retval =  ProofState:__new()
-   retval.proof_history =  ProofHistory:new()
    retval.prs =  prs
+   retval.proof_history =  proof_history
    retval.premises =  clause:get_premises()
    retval.conclusions =  Set:empty_set_factory()
    retval.conclusions:add(clause:get_conclusion())
