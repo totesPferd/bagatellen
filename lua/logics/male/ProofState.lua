@@ -39,6 +39,13 @@ function ProofState:is_proven()
    return self:get_conclusions():is_empty()
 end
 
+function ProofState:tell_proven_goals(proof_history)
+   if self:is_proven()
+   then
+      self:get_history():tell_proven_goals(proof_history)
+   end
+end
+
 function ProofState:applicable(goal)
    retval =  self:get_conclusions():is_in(goal)
    if retval

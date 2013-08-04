@@ -32,6 +32,12 @@ function ProofHistory:mark_as_proven(goal)
    return self.proven_goals:add(goal)
 end
 
+function ProofHistory:tell_proven_goals(other)
+   for goal in self.history:get_keys()
+   do other:mark_as_proven(goal)
+   end
+end
+
 function ProofHistory:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory("(logics.male.ProofHistory "))
    self.history:__diagnose_single_line(indentation)
