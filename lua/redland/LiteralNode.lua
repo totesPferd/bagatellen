@@ -43,28 +43,8 @@ function LiteralNode:new(world, literal_data)
          ,  type =  bindings_type_uri
          ,  value = value_str } )
 
-   local raw_literal_data =  bindings_redland_module.node.get_literal(
+   local re_literal_data =  bindings_redland_module.node.get_literal(
          bindings_node )
-   local re_literal_data =  {}
-   if raw_literal_data.is_wf_xml
-   then
-      re_literal_data.is_wf_xml =  raw_literal_data.is_wf_xml
-   end
-   if raw_literal_data.language
-   then
-      re_literal_data.language =  String:string_factory(
-            raw_literal_data.language )
-   end
-   if raw_literal_data.type
-   then
-      re_literal_data.type =   Uri:bindings_uri_factory(
-         raw_literal.type )
-   end
-   if raw_literal_data.value
-   then
-      re_literal_data.value =  String:string_factory(
-            raw_literal_data.value )
-   end
    return self:bindings_node_factory(bindings_node, re_literal_data)
 end
 
@@ -99,7 +79,7 @@ function LiteralNode:__tostring()
    local type =  self:get_type()
    if type
    then
-      retval =  retval .. ", type = " .. type:__tostring()
+      retval =  retval .. ", type = " .. tostring(type)
    end
 
    local language =  self:get_language()
@@ -108,7 +88,7 @@ function LiteralNode:__tostring()
       retval =
             retval
          .. ", language = "
-         .. language:get_content()
+         .. language
    end
 
    local is_there_wf_xml =  self:is_wf_xml() ~= nil

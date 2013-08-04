@@ -27,7 +27,8 @@ lua_bindings_redland_stream_get_context(lua_State *L) {
 
    lua_pop(L, 1);
 
-   librdf_node *p_context =  librdf_stream_get_context2(*pp_stream);
+   librdf_node *p_context =  librdf_new_node_from_node(
+         librdf_stream_get_context2(*pp_stream) );
    if (p_context) {
       lua_bindings_redland_node_new_mt(L);
       return lua_bindings_redland_node_wrap(L, p_context);
@@ -45,7 +46,8 @@ lua_bindings_redland_stream_get_stmt(lua_State *L) {
 
    lua_pop(L, 1);
 
-   librdf_statement *p_stmt =  librdf_stream_get_object(*pp_stream);
+   librdf_statement *p_stmt =  librdf_new_statement_from_statement(
+         librdf_stream_get_object(*pp_stream) );
    if (p_stmt) {
       lua_bindings_redland_stmt_new_mt(L);
       return lua_bindings_redland_stmt_wrap(L, p_stmt);
