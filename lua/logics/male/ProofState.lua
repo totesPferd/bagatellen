@@ -62,7 +62,7 @@ function ProofState:assume(goal)
    return retval
 end
 
-function ProofState:resolve(key, substitution, goal, rec_stop)
+function ProofState:resolve(key, substitution, goal)
    local axiom =  self:get_prs():deref(key):__clone()
    axiom:apply_substitution(substitution)
    local retval =
@@ -70,23 +70,13 @@ function ProofState:resolve(key, substitution, goal, rec_stop)
      and self:applicable(goal)
    if retval
    then
-      local premises =  axiom:get_premises()
-      if rec_stop
-      then
-         local keys =  self:get_proof_history():get_history():keys()
-         local diff =  premises:__clone():cut_set(keys)
-         retval =  diff:is_empty()
-      end
-      if retval
-      then
-         self.get_conclusions():add_set(premises)
-      end
+      self.get_conclusions():add_set(axiom:get_premises())
    end
    return retval
 end
 
-function ProofState:apply_rule(rule, goal, rec_stop)
-   local retval =  rule:apply(self, goal, rec_stop)
+function ProofState:apply_rule(rule, goal)
+   local retval =  rule:apply(self, goal)
    if retval
    then
       self:get_proof_history():add(goal, rule)
@@ -97,16 +87,22 @@ end
 function ProofState:apply_proof_history(proof_history)
    local retval =  true
    local history =  proof_history:get_history()
+   local new_history =  self:get_proof_history():get_history()
    local is_progress =  true
    while is_progress
    do is_progress =  false
       for goal in self:get_conclusions()
-      do local rule =  history:deref(goal)
-         if rule
+      do if new_history:get_keys():is_in(goal)
          then
-            local success =  self:apply_rule(rule, goal, true)
-            is_progress =  success or is_progress
-            retval =  retval and success
+            retval =  false
+         else
+            local rule =  history:deref(goal)
+            if rule
+            then
+               local success =  self:apply_rule(rule, goal)
+               is_progress =  success or is_progress
+               retval =  retval and success
+            end
          end
       end
    end

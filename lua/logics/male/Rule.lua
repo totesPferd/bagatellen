@@ -18,7 +18,7 @@ end
 function Rule:get_resolve()
 end
 
-function Rule:apply(proof_state, goal, rec_stop)
+function Rule:apply(proof_state, goal)
 end
 
 function Rule:__eq(other)
