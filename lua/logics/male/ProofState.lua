@@ -76,7 +76,7 @@ function ProofState:resolve(key, substitution, goal)
    then
       local is_empty =  true
       for premise in axiom:get_premises()
-      do if self:get_history():is_proven(premise)
+      do if not self:get_history():is_proven(premise)
          then
             is_empty =  false
             self:get_conclusions():add(premise)
