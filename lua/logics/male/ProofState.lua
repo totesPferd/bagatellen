@@ -36,6 +36,10 @@ function ProofState:get_conclusions()
    return self.conclusions
 end
 
+function ProofState:is_proven()
+   return self:get_conclusions():is_empty()
+end
+
 function ProofState:applicable(goal)
    retval =  self.get_conclusions():is_in(goal)
    if retval
