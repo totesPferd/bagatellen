@@ -84,31 +84,6 @@ function ProofState:apply_rule(rule, goal)
    return retval
 end
 
-function ProofState:apply_proof_history(proof_history)
-   local retval =  true
-   local history =  proof_history:get_history()
-   local new_history =  self:get_proof_history():get_history()
-   local is_progress =  true
-   while is_progress
-   do is_progress =  false
-      for goal in self:get_conclusions()
-      do if new_history:get_keys():is_in(goal)
-         then
-            retval =  false
-         else
-            local rule =  history:deref(goal)
-            if rule
-            then
-               local success =  self:apply_rule(rule, goal)
-               is_progress =  success or is_progress
-               retval =  retval and success
-            end
-         end
-      end
-   end
-   return retval
-end
-
 function ProofState:__clone()
    local retval =  ProofState:__new()
    retval.premises =  self:get_premises()
