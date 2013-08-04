@@ -113,18 +113,24 @@ function ProofState:apply_rule(rule, goal)
 end
 
 -- attention!  could run non-terminating!
-function ProofState:check_proof()
+function ProofState:check_proof_history(proof_history)
+   local this_proof_history =  proof_history or self:get_proof_history()
+
+   local retval =  true
    local is_progress =  true
    while is_progress
    do is_progress =  false
       for goal in self:get_conclusions()
-      do local rule =  self.get_history():deref(goal)
+      do local rule =  this_proof_history:deref(goal)
          if rule
          then
-            is_progress =  self:apply_rule(goal, rule) or is_progress
+            local is_success =  self:apply_rule(goal, rule)
+            is_progress =  is_success or is_progress
+            retval =  is_success and retval
          end
       end
    end
+   return retval
 end
 
 function ProofState:__clone()
