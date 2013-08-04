@@ -16,6 +16,9 @@ function ProofState:new(proof_history, prs, clause)
    retval.premises =  clause:get_premises()
    retval.conclusions =  Set:empty_set_factory()
    retval.conclusions:add(clause:get_conclusion())
+   for goal in retval.premises
+   do retval:assume(goal)
+   end
    return retval
 end
 
