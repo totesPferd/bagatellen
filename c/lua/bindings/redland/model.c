@@ -327,7 +327,9 @@ lua_bindings_redland_model_get_object(lua_State *L) {
       ,  *pp_predicate );
    if (result) {
       lua_bindings_redland_node_new_mt(L);
-      return lua_bindings_redland_node_wrap(L, result);
+      return lua_bindings_redland_node_wrap(
+            L
+         ,  librdf_new_node_from_node(result) );
    } else {
       return 0;
    }
@@ -356,7 +358,9 @@ lua_bindings_redland_model_get_predicate(lua_State *L) {
       ,  *pp_object );
    if (result) {
       lua_bindings_redland_node_new_mt(L);
-      return lua_bindings_redland_node_wrap(L, result);
+      return lua_bindings_redland_node_wrap(
+            L
+         ,  librdf_new_node_from_node(result) );
    } else {
       return 0;
    }
@@ -404,7 +408,9 @@ lua_bindings_redland_model_get_subject(lua_State *L) {
       ,  *pp_object );
    if (result) {
       lua_bindings_redland_node_new_mt(L);
-      return lua_bindings_redland_node_wrap(L, result);
+      return lua_bindings_redland_node_wrap(
+            L
+         ,  librdf_new_node_from_node(result) );
    } else {
       return 0;
    }
