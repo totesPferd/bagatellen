@@ -128,17 +128,12 @@ function Store.lookup(world, idx)
    end
 end
 
-function Store:new(world, storage_name, name, params)
-   local bindings_hash
-   if params.hash
-   then
-      bindings_hash =  params.hash:get_bindings_hash()
-   end
+function Store:new(world, hash, storage_name, name)
    local bindings_store =  bindings_redland_module.store.new(
          world:get_bindings_world()
+      ,  hash:get_bindings_hash()
       ,  storage_name:get_content()
-      ,  name:get_content()
-      ,  { hash =  bindings_hash })
+      ,  name:get_content() )
    if bindings_store
    then
       self:bindings_store_factory(bindings_store)

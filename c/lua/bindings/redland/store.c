@@ -314,19 +314,12 @@ lua_bindings_redland_store_new(lua_State *L) {
          L
       ,  -4
       ,  world_userdata_type );
-   const char *storage_name =  luaL_checkstring(L, -3);
-   const char *name =  luaL_checkstring(L, -2);
-
-   librdf_hash *p_hash =  NULL;
-   lua_getfield(L, -1, "hash");
-   if (!lua_isnil(L, -1)) {
-      librdf_hash **pp_hash =  (librdf_hash **) luaL_checkudata(
-            L
-         ,  -3
-         ,  hash_userdata_type );
-      p_hash =  *pp_hash;
-   }
-   lua_pop(L, 1);
+   librdf_hash **pp_hash =  (librdf_hash **) luaL_checkudata(
+         L
+      ,  -3
+      ,  hash_userdata_type );
+   const char *storage_name =  luaL_checkstring(L, -2);
+   const char *name =  luaL_checkstring(L, -1);
 
    lua_pop(L, 4);
 
@@ -334,7 +327,7 @@ lua_bindings_redland_store_new(lua_State *L) {
          *pp_world
       ,  storage_name
       ,  name
-      ,  p_hash );
+      ,  *pp_hash );
    if (p_store) {
       lua_bindings_redland_store_new_mt(L);
       return lua_bindings_redland_store_wrap(L, p_store);
