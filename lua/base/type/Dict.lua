@@ -69,7 +69,7 @@ function Dict:add(key, val)
    do if v.key == key
       then
          v.val = val
-         is_in_ley_val =  true
+         is_in_key_val =  true
       end
    end
    if not(is_in_key_val)
@@ -101,24 +101,22 @@ end
 --- Dropping all key-val-pairs which is not contained in other dictionary.
 --  @param other other dictionary
 function Dict:cut_dict(other)
-   local index =  1
-   while self.val[index]
-   do while self.val[index] and not other:is_in_key_set(self.val[index].key)
-      do table.remove(self.val, index)
+   for key in self:keys():elems()
+   do if not other:is_in_key_set(key)
+      then
+         self:drop(key)
       end
-      index =  index + 1
    end
 end
 
 --- Dropping all key-val-pairs which is contained in other dictionary.
 --  @param other other dictionary
 function Dict:diff_dict(other)
-   local index =  1
-   while self.val[index]
-   do while self.val[index] and other:is_in_key_set(self.val[index].key)
-      do table.remove(self.val, index)
+   for key in self:keys():elems()
+   do if other:is_in_key_set(key)
+      then
+         self:drop(key)
       end
-      index =  index + 1
    end
 end
 
