@@ -5,6 +5,7 @@ local StringKey =  Dict:__new()
 
 package.loaded["base.type.dict.StringKey"] =  StringKey
 local String =  require "base.type.String"
+local StringSet =  require "base.type.set.StringSet"
 
 
 function StringKey:empty_dict_factory()
@@ -27,6 +28,14 @@ end
 
 function StringKey:drop(key)
    self.val[key:get_content()] =  nil
+end
+
+function StringKey:keys()
+   local retval =  StringSet:empty_set_factory()
+   for key, val in self:elems()
+   do retval:add(key)
+   end
+   return retval
 end
 
 function StringKey:elems()

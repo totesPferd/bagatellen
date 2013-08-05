@@ -44,14 +44,12 @@ end
 --- Dropping an element from a set.
 --  @param elem to be dropped
 function Set:drop(elem)
-   local index =  1
-   while self.val[index]
-   do if self.val[index] == elem
+   for i, v in ipairs(self.val)
+   do if v == elem
       then
-         table.remove(self.val, index)
-         return
+         table.remove(self.val, i)
+         break
       end
-      index =  index + 1
    end
 end
 
@@ -66,24 +64,22 @@ end
 --- Dropping all elements which are not contained in other set.
 --  @param other other set
 function Set:cut_set(other)
-   local index =  1
-   while self.val[index]
-   do while self.val[index] and not other:is_in(self.val[index])
-      do table.remove(self.val, index)
+   for key in self:__clone():elems()
+   do if not other:is_in(key)
+      then
+         self:drop(key)
       end
-      index =  index + 1
    end
 end
 
 --- Dropping all elements which is contained in other set.
 --  @param other other set
 function Set:diff_set(other)
-   local index =  1
-   while self.val[index]
-   do while self.val[index] and other:is_in(self.val[index])
-      do table.remove(self.val, index)
+   for key in self:__clone():elems()
+   do if other:is_in(key)
+      then
+         self:drop(key)
       end
-      index =  index + 1
    end
 end
 
@@ -131,7 +127,7 @@ function Set:get_sorted_list()
 end
 
 function Set:__clone()
-   local retval =  self:empty_set_factory()
+   local retval =  Set:empty_set_factory()
    for elem in self:elems()
    do retval:add(elem)
    end

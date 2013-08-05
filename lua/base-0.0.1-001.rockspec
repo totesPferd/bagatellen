@@ -27,8 +27,10 @@ build = {
       ['base.type.aux.Type_implementation']
          =  "lua/base/type/aux/Type_implementation.lua",
       ['base.type.Char']   =  "lua/base/type/Char.lua",
+      ['base.type.dict.StringKey'] =  "lua/base/type/dict/StringKey.lua",
       ['base.type.Dict']   =  "lua/base/type/Dict.lua",
       ['base.type.List']   =  "lua/base/type/List.lua",
+      ['base.type.set.StringSet'] =  "lua/base/type/set/StringSet.lua",
       ['base.type.Set']    =  "lua/base/type/Set.lua",
       ['base.type.String'] =  "lua/base/type/String.lua"
    }
