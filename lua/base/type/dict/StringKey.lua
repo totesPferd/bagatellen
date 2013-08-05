@@ -3,7 +3,7 @@ local Dict =  require "base.type.Dict"
 local StringKey =  Dict:__new()
 
 
-package.loaded["base.type.dict.string_key"] =  StringKey
+package.loaded["base.type.dict.StringKey"] =  StringKey
 local String =  require "base.type.String"
 
 
@@ -29,7 +29,7 @@ function StringKey:drop(key)
    self.val[key:get_content()] =  nil
 end
 
-function Dict:elems()
+function StringKey:elems()
    function f(s, index)
       local g =  s[1]
       local t =  s[2]
@@ -48,6 +48,18 @@ function Dict:elems()
       return ks, v
    end
    return f, { pairs(self.val) }
+end
+
+function StringKey:__len()
+   return #self.val
+end
+
+function StringKey:__clone()
+   local retval =  StringKey:empty_dict_factory()
+   for key, val in self:elems()
+   do retval:add(key, val)
+   end
+   return retval
 end
 
 function StringKey:__diagnose_single_line(indentation)

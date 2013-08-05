@@ -178,7 +178,7 @@ function Dict:is_subeq(other)
 end
 
 function Dict:__clone()
-   local retval =  self:empty_dict_factory()
+   local retval =  Dict:empty_dict_factory()
    for key, val in self:elems()
    do retval:add(key, val)
    end
