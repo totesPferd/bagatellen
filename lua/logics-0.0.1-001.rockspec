@@ -12,8 +12,7 @@ Moreover it contains some data types.
 supported_platforms = { 'unix' }
 
 source = {
---      url = 'git://github.com/totesPferd/bagatellen.git'
-      url = 'file:///home/jfischer/repos/totesPferd/bagatellen'
+      url = 'git://github.com/totesPferd/bagatellen.git'
 }
 
 dependencies = { 'lua >= 5.1' }
