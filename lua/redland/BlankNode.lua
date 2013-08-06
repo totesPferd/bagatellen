@@ -15,6 +15,10 @@ function BlankNode:bindings_node_factory(bindings_node, blank_data)
    return retval
 end
 
+function BlankNode:apply_substitution(substitution)
+   return substitution:deref(self:get_id())
+end
+
 function BlankNode:new(world, id_string)
    local blank_data =  {}
    if id_string

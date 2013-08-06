@@ -14,6 +14,20 @@ function Stmt:bindings_stmt_factory(bindings_stmt)
    return retval
 end
 
+function Stmt:apply_substitution(substitution)
+   local subject =  self:get_subject()
+   local object =  self:get_object()
+   if subject
+   then
+      self:set_subject(subject:apply_substitution(substitution))
+   end
+   if object
+   then
+      self:set_object(object:apply_substitution(substitution))
+   end
+   return
+end
+
 function Stmt:clear()
    bindings_redland_module.stmt.clear(self:get_bindings_stmt())
 end

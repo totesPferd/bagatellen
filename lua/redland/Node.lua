@@ -49,4 +49,8 @@ function Node:__clone()
          bindings_redland_module.node.__clone(self:get_bindings_node()) )
 end
 
+function Node:apply_subsitution(subsitution)
+   return self
+end
+
 return Node
