@@ -43,7 +43,7 @@ lua_bindings_redland_world_wrap(lua_State *L, librdf_world *p_world) {
    luaL_newmetatable(L, userdata_type);
 
    lua_pushcfunction(L, &lua_bindings_redland_world_gc);
-   lua_setfield(L, -2);
+   lua_setfield(L, -2, "__gc");
 
    lua_setmetatable(L, -2);
 
