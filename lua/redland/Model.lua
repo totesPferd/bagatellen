@@ -50,6 +50,11 @@ function Model:add(stmt)
    end
 end
 
+function Model:add_model(other)
+   local stream =  other:serialize()
+   return self:add_stream(stream)
+end
+
 function Model:add_stream(stream)
    local context =  self:get_context()
    if context
@@ -94,6 +99,13 @@ function Model:del_context(stmt, context)
          self:get_bindings_model()
       ,  context:get_bindings_node()
       ,  stmt:get_bindings_model() )
+end
+
+function Model:del_model(other)
+   local stream =  other:serialize()
+   for stmt in stream:elems()
+   do self:del(stmt)
+   end
 end
 
 function Model:find(stmt)
