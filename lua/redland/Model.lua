@@ -103,8 +103,9 @@ end
 
 function Model:del_model(other)
    local stream =  other:serialize()
-   for stmt in stream:elems()
-   do self:del(stmt)
+   for stmt, ctxt in stream:elems()
+   do local r_model =  self:re_context(ctxt)
+      r_model:del(stmt)
    end
 end
 
