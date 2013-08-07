@@ -16,7 +16,7 @@ function BlankNode:bindings_node_factory(bindings_node, blank_data)
 end
 
 function BlankNode:apply_substitution(substitution)
-   return substitution:deref(self:get_id())
+   return substitution:deref(String:string_factory(self:get_id()))
 end
 
 function BlankNode:new(world, id_string)
