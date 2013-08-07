@@ -14,8 +14,9 @@ local String =  require "base.type.String"
 local Transaction =  require "redland.Transaction"
 local World =  require "redland.World"
 
-function Model:bindings_model_factory(bindings_model)
+function Model:bindings_model_factory(bindings_model, context)
    local retval =  Model:__new()
+   retval.context =  context
    retval.val =  bindings_model
    return retval
 end
@@ -24,7 +25,18 @@ function Model:get_bindings_model()
    return self.val
 end
 
-function Model:add(stmt, context)
+function Model:get_context()
+   return self.context
+end
+
+function Model:re_context(context)
+   return Model:bindings_model_factory(
+         self:get_bindings_model()
+      ,  context )
+end
+
+function Model:add(stmt)
+   local context =  self:get_context()
    if context
    then
       return bindings_redland_module.model.context_add(
@@ -38,7 +50,8 @@ function Model:add(stmt, context)
    end
 end
 
-function Model:add_stream(stream, context)
+function Model:add_stream(stream)
+   local context =  self:get_context()
    if context
    then
       return bindings_redland_module.model.context_add_stream(
@@ -57,7 +70,9 @@ function Model:close()
          self:get_bindings_model() )
 end
 
-function Model:del(stmt, context)
+function Model:del(stmt)
+   local context =  self:get_context()
+
    local bindings_context_node
    if context
    then
@@ -81,7 +96,9 @@ function Model:del_context(stmt, context)
       ,  stmt:get_bindings_model() )
 end
 
-function Model:find(stmt, context)
+function Model:find(stmt)
+   local context =  self:get_context()
+
    local bindings_context_node
    if context
    then
@@ -278,7 +295,9 @@ function Model:query(query)
    end
 end
 
-function Model:serialize(context)
+function Model:serialize()
+   local context =  self:get_context()
+
    if context
    then
       return Stream_bindings_stream_factory(
