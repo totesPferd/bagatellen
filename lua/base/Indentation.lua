@@ -9,9 +9,10 @@ local config =  require "base.config"
 function Indentation:new_factory(params)
    local retval =  self:__new()
    retval.content =  String:empty_string_factory()
-   retval.indent =  (params.indent or config.std_indent)
+   retval.indent =  params.indent or 0
    retval.width =  0
    retval.is_first_line =  true
+   retval.is_reset_line =  true
    retval.first_line_symbol =  params.first_line_symbol
    retval.recent_line =
          params.recent_line
@@ -38,11 +39,28 @@ function Indentation:get_deeper_indentation_factory(params)
    local retval =  self:new_factory {
          first_line_symbol =  params.first_line_symbol
       ,  indent =  (params.indent or config.std_indent) + self.indent
+      ,  is_reset_line =  self.is_reset_line
       ,  recent_line = self.recent_line:__clone()
       ,  recommended_width =  self.recommended_width }
    retval.upper_indentation = self
    return retval
 end
+
+function Indentation:__reset_recent_line()
+   self.content:append_newline()
+   self.recent_line =  String:empty_string_factory()
+   self.is_reset_line =  true
+end
+
+function Indentation:__append_string(text)
+   if self.is_reset_line and not text:is_empty()
+   then
+      self.recent_line:append_spaces(self.indent)
+      self.is_reset_line =  false
+   end
+   self.recent_line:append_string(text)
+end
+      
 
 function Indentation:insert(text)
    local is_first_line = true
@@ -55,8 +73,7 @@ function Indentation:insert(text)
          is_first_line =  false
       else
          self.content:append_string(self.recent_line)
-         self.content:append_newline()
-         self.recent_line =  String:empty_string_factory()
+         self:__reset_recent_line()
          if self.first_line_symbol and self.is_first_line
          then
             self.recent_line:append_spaces(
@@ -64,11 +81,10 @@ function Indentation:insert(text)
                -  self.first_line_symbol:__len() )
             self.recent_line:append(first_line_symbol)
             self.is_first_line =  false
-         else
-            self.recent_line:append_spaces(self.indent)
+            self.is_reset_line =  false
          end
       end
-      self.recent_line:append_string(line)
+      self:__append_string(line)
       self.width =  math.max(self.width, self.recent_line:__len())
    end
 end
