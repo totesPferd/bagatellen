@@ -47,6 +47,7 @@ function Indentation:get_deeper_indentation_factory(params)
 end
 
 function Indentation:__reset_recent_line()
+   self.content:append_string(self.recent_line)
    self.content:append_newline()
    self.recent_line =  String:empty_string_factory()
    self.is_reset_line =  true
@@ -72,7 +73,6 @@ function Indentation:insert(text)
       then
          is_first_line =  false
       else
-         self.content:append_string(self.recent_line)
          self:__reset_recent_line()
          if self.first_line_symbol and self.is_first_line
          then
