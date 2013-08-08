@@ -12,7 +12,16 @@ function Indentation:new_factory(params)
    retval.indent =  params.indent or 0
    retval.width =  0
    retval.is_first_line =  true
+
    retval.is_reset_line =  true
+   for k, v in pairs(params)
+   do if k == "is_reset_line"
+      then
+         retval.is_reset_line =  v
+         break
+      end
+   end
+
    retval.first_line_symbol =  params.first_line_symbol
    retval.recent_line =
          params.recent_line
