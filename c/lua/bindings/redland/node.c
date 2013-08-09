@@ -96,7 +96,7 @@ lua_bindings_redland_node_get_blank(lua_State *L) {
 
    lua_pop(L, -1);
 
-   if (librdf_node_get_is_blank(*pp_node)) {
+   if (librdf_node_is_blank(*pp_node)) {
       unsigned char *result =  librdf_node_get_blank_identifier(*pp_node);
       if (result) {
          lua_pushstring(L, result);
@@ -118,7 +118,7 @@ lua_bindings_redland_node_get_li_number(lua_State *L) {
 
    lua_pop(L, -1);
 
-   lua_pushnumber(L, librdf_get_li_ordinal(*pp_node));
+   lua_pushnumber(L, librdf_node_get_li_ordinal(*pp_node));
 
    return 1;
 }
@@ -180,9 +180,11 @@ lua_bindings_redland_node_get_resource(lua_State *L) {
 
    lua_pop(L, -1);
 
-   if (librdf_node_get_is_resource(*pp_node)) {
+   if (librdf_node_is_resource(*pp_node)) {
       librdf_uri *p_uri =  librdf_node_get_uri(*pp_node);
       return lua_bindings_redland_uri_wrap(L, p_uri);
+   } else {
+      return 0;
    }
 }
 
@@ -225,8 +227,8 @@ lua_bindings_redland_node_new_literal(lua_State *L) {
    const char *language =  luaL_checkstring(L, -1);
    lua_pop(L, 1);
 
-   lua_get_field(L, -1, "is_wf_xml");
-   int is_wf_xml =  luaL_checkboolean(L, -1);
+   lua_getfield(L, -1, "is_wf_xml");
+   lua_Integer is_wf_xml =  luaL_checkinteger(L, -1);
    lua_pop(L, 1);
 
    lua_pop(L, 2);
