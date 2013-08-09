@@ -1,5 +1,6 @@
 #include "world.h"
 #include <lauxlib.h>
+#include <librdf.h>
 
 const char *userdata_type =  "redland.world";
 
@@ -9,6 +10,8 @@ lua_bindings_redland_world_gc(lua_State *);
 static int
 lua_bindings_redland_world_new(lua_State *);
 
+static int
+lua_bindings_redland_world_wrap(lua_State *, librdf_world*);
 
 /* ------------------------------------------------------------ */
 

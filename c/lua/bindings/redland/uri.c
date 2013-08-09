@@ -1,8 +1,16 @@
 #include "uri.h"
 #include <lauxlib.h>
+#include <librdf.h>
 
+const char *node_userdata_type =  "redland.node";
 const char *uri_userdata_type =  "redland.uri";
 const char *world_userdata_type =  "redland.world";
+
+static int
+lua_bindings_redland_node_get_resource(lua_State *);
+
+static int
+lua_bindings_redland_node_get_datatype(lua_State *);
 
 static int
 lua_bindings_redland_uri_clone(lua_State *);
@@ -40,8 +48,42 @@ lua_bindings_redland_uri_new_relative_to_base(lua_State *);
 static int
 lua_bindings_redland_uri_tostring(lua_State *);
 
+static int
+lua_bindings_redland_uri_wrap(lua_State *, librdf_uri *);
 
 /* ------------------------------------------------------------ */
+
+static int
+lua_bindings_redland_node_get_resource(lua_State *L) {
+   librdf_node **pp_node =  (librdf_node **) luaL_checkudata(
+         L
+      ,  -1
+      ,  node_userdata_type );
+
+   lua_pop(L, 1);
+
+   if (librdf_node_is_resource(*pp_node)) {
+      librdf_uri *p_uri =  librdf_node_get_uri(*pp_node);
+      return lua_bindings_redland_uri_wrap(L, p_uri);
+   } else {
+      return 0;
+   }
+}
+
+static int
+lua_bindings_redland_node_get_datatype(lua_State *L) {
+   librdf_node **pp_node =  (librdf_node **) luaL_checkudata(
+         L
+      ,  -1
+      ,  node_userdata_type );
+
+   lua_pop(L, 1);
+
+   librdf_uri *p_uri =  librdf_node_get_literal_value_datatype_uri(
+        *pp_node );
+   return lua_bindings_redland_uri_wrap(L, p_uri);
+}
+
 
 static int
 lua_bindings_redland_uri_clone(lua_State *L) {
@@ -80,7 +122,7 @@ lua_bindings_redland_uri_gc(lua_State *L) {
       ,  -1
       ,  uri_userdata_type );
 
-   lua_pop(L, -1);
+   lua_pop(L, 1);
 
    librdf_free_uri(*pp_uri);
 
@@ -94,7 +136,7 @@ lua_bindings_redland_uri_get_filename(lua_State *L) {
       ,  -1
       ,  uri_userdata_type );
 
-   lua_pop(L, -1);
+   lua_pop(L, 1);
 
    if (librdf_uri_is_file_uri(*pp_uri)) {
       const char *filename =  librdf_uri_to_filename(*pp_uri);
@@ -290,6 +332,12 @@ lua_bindings_redland_uri_wrap(lua_State *L, librdf_uri *p_uri) {
 int
 luaopen_bindings_redland_uri(lua_State *L) {
    lua_newtable(L);
+
+   lua_pushcfunction(L, &lua_bindings_redland_node_get_resource);
+   lua_setfield(L, -2, "new_from_node");
+
+   lua_pushcfunction(L, &lua_bindings_redland_node_get_datatype);
+   lua_setfield(L, -2, "new_form_node_datatype");
 
    lua_pushcfunction(L, &lua_bindings_redland_uri_clone);
    lua_setfield(L, -2, "__clone");
