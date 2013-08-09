@@ -247,7 +247,7 @@ lua_bindings_redland_node_new_resource(lua_State *L) {
       ,  -1
       ,  uri_userdata_type );
 
-   lua_pop(L, 1);
+   lua_pop(L, 2);
 
    {
       librdf_node *p_node =  librdf_new_node_from_uri(*pp_arg_1, *pp_arg_2);
