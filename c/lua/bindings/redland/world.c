@@ -26,6 +26,7 @@ lua_bindings_redland_world_gc(lua_State *L) {
 static int
 lua_bindings_redland_world_new(lua_State *L) {
    librdf_world *p_world =  librdf_new_world();
+   librdf_world_open(p_world);
    return lua_bindings_redland_world_wrap(L, p_world);
 }
 

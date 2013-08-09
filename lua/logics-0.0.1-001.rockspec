@@ -20,7 +20,15 @@ dependencies = { 'lua >= 5.1' }
 build = {
       type = 'builtin'
    ,  modules = {
-            ['bindings.redland.uri'] =  {
+            ['bindings.redland.node'] =  {
+                  sources = {
+                        "c/lua/bindings/redland/node.c" }
+               ,  libraries = {
+                        "rdf" }
+               ,  incdirs = {
+                        "/usr/include/rasqal"
+                     ,  "/usr/include/raptor2" }}
+         ,  ['bindings.redland.uri'] =  {
                   sources = {
                         "c/lua/bindings/redland/uri.c" }
                ,  libraries = {
