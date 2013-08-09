@@ -189,27 +189,36 @@ lua_bindings_redland_node_new_literal(lua_State *L) {
    const unsigned char *val =  luaL_checkstring(L, -1);
    lua_pop(L, 1);
 
+   librdf_uri **pp_type =  NULL;
    lua_getfield(L, -1, "type");
-   librdf_uri **pp_type =   (librdf_uri **) luaL_checkudata(
-         L
-      ,  -2
-      ,  uri_userdata_type );
+   if (!lua_isnil(L, -1)) {
+      pp_type =   (librdf_uri **) luaL_checkudata(
+            L
+         ,  -1
+         ,  uri_userdata_type );
+   }
    lua_pop(L, 1);
 
+   const char *language =  NULL;
    lua_getfield(L, -1, "language");
-   const char *language =  luaL_checkstring(L, -1);
+   if (!lua_isnil(L, -1)) {
+      language =  luaL_checkstring(L, -1);
+   }
    lua_pop(L, 1);
 
+   lua_Integer is_wf_xml =  0;
    lua_getfield(L, -1, "is_wf_xml");
-   lua_Integer is_wf_xml =  luaL_checkinteger(L, -1);
+   if (!lua_isnil(L, -1)) {
+      is_wf_xml =  luaL_checkinteger(L, -1);
+   }
    lua_pop(L, 1);
 
    lua_pop(L, 2);
 
    {
-      librdf_node *p_node;
+      librdf_node *p_node =  NULL;
 
-      if (*pp_type) {
+      if (pp_type && *pp_type) {
          p_node =  librdf_new_node_from_typed_literal(
                *pp_arg_1
             ,  val

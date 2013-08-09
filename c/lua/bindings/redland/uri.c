@@ -337,7 +337,7 @@ luaopen_bindings_redland_uri(lua_State *L) {
    lua_setfield(L, -2, "new_from_node");
 
    lua_pushcfunction(L, &lua_bindings_redland_node_get_datatype);
-   lua_setfield(L, -2, "new_form_node_datatype");
+   lua_setfield(L, -2, "new_from_node_datatype");
 
    lua_pushcfunction(L, &lua_bindings_redland_uri_clone);
    lua_setfield(L, -2, "__clone");
