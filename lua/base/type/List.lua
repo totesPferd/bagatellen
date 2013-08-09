@@ -52,6 +52,28 @@ function List:elems()
    return f, {}
 end
 
+--- Get first element
+--  @return first element
+function List:get_head()
+   return self.val[1]
+end
+
+--- Drop first element
+function List:cut_head()
+   table.remove(self.val, 1)
+end
+
+--- Get last element
+--  @return last element
+function List:get_tail()
+   return self.val[#self.val]
+end
+
+--- Drop last element
+function List:cut_tail()
+   table.remove(self.val, #self.val)
+end
+
 --- Lower or equal according to lexicographical ordering.
 --  @param other list to be compared
 --  @return boolean
