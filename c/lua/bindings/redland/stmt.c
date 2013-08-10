@@ -74,10 +74,14 @@ lua_bindings_redland_stmt_get_object(lua_State *L) {
    lua_pop(L, 1);
 
    {
-      librdf_node *p_node =  librdf_new_node_from_node(
-            librdf_statement_get_object(*pp_arg_1) );
-      lua_bindings_redland_node_new_mt(L);
-      return lua_bindings_redland_node_wrap(L, p_node);
+      librdf_node *p_node =  librdf_statement_get_object(*pp_arg_1);
+      if (p_node) {
+         p_node =  librdf_new_node_from_node(p_node);
+         lua_bindings_redland_node_new_mt(L);
+         return lua_bindings_redland_node_wrap(L, p_node);
+      } else {
+         return 0;
+      }
    }
 }
 
@@ -91,10 +95,14 @@ lua_bindings_redland_stmt_get_predicate(lua_State *L) {
    lua_pop(L, 1);
 
    {
-      librdf_node *p_node =   librdf_new_node_from_node(
-            librdf_statement_get_predicate(*pp_arg_1) );
-      lua_bindings_redland_node_new_mt(L);
-      return lua_bindings_redland_node_wrap(L, p_node);
+      librdf_node *p_node =  librdf_statement_get_predicate(*pp_arg_1);
+      if (p_node) {
+         p_node =   librdf_new_node_from_node(p_node);
+         lua_bindings_redland_node_new_mt(L);
+         return lua_bindings_redland_node_wrap(L, p_node);
+      } else {
+         return 0;
+      }
    }
 }
 
@@ -108,12 +116,17 @@ lua_bindings_redland_stmt_get_subject(lua_State *L) {
    lua_pop(L, 1);
 
    {
-      librdf_node *p_node =  librdf_new_node_from_node(
-            librdf_statement_get_subject(*pp_arg_1) );
-      lua_bindings_redland_node_new_mt(L);
-      return lua_bindings_redland_node_wrap(L, p_node);
+      librdf_node *p_node =  librdf_statement_get_subject(*pp_arg_1);
+      if (p_node) {
+         p_node =  librdf_new_node_from_node(p_node);
+         lua_bindings_redland_node_new_mt(L);
+         return lua_bindings_redland_node_wrap(L, p_node);
+      } else {
+         return 0;
+      }
    }
 }
+
 int
 lua_bindings_redland_stmt_is_complete(lua_State *L) {
    librdf_statement **pp_stmt =  (librdf_statement **) luaL_checkudata(
