@@ -122,8 +122,11 @@ lua_bindings_redland_node_get_literal(lua_State *L) {
             lua_bindings_redland_uri_new_mt(L);
             if (lua_bindings_redland_uri_wrap(L, p_uri)) {
                lua_setfield(L, -2, "datatype");
+            } else {
+               lua_pop(L, 1);
             }
          }
+         return 1;
 
       } else {
          return 0;
