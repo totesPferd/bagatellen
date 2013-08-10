@@ -1,6 +1,7 @@
 #include "main.h"
 #include "node.h"
 #include "stmt.h"
+#include "store.h"
 #include "uri.h"
 #include "world.h"
 #include <lauxlib.h>
@@ -14,6 +15,9 @@ luaopen_bindings_redland(lua_State *L) {
 
    luaopen_bindings_redland_stmt(L);
    lua_setfield(L, -2, "stmt");
+
+   luaopen_bindings_redland_store(L);
+   lua_setfield(L, -2, "store");
 
    luaopen_bindings_redland_uri(L);
    lua_setfield(L, -2, "uri");
