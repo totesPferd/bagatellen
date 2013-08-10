@@ -3,6 +3,7 @@
 #include <librdf.h>
 
 const char *node_userdata_type =  "redland.node";
+const char *stmt_userdata_type =  "redland.stmt";
 const char *uri_userdata_type =  "redland.uri";
 const char *world_userdata_type =  "redland.world";
 
@@ -38,6 +39,15 @@ lua_bindings_redland_node_renew_blank(lua_State *);
 
 static int
 lua_bindings_redland_node_wrap(lua_State *, librdf_node *);
+
+static int
+lua_bindings_redland_stmt_get_object(lua_State *);
+
+static int
+lua_bindings_redland_stmt_get_predicate(lua_State *);
+
+static int
+lua_bindings_redland_stmt_get_subject(lua_State *);
 
 
 /* ------------------------------------------------------------ */
@@ -223,7 +233,7 @@ lua_bindings_redland_node_new_literal(lua_State *L) {
                *pp_arg_1
             ,  val
             ,  language
-            ,  *pp_type );
+            ,  librdf_new_uri_from_uri(*pp_type) );
       } else {
          p_node =  librdf_new_node_from_literal(
                *pp_arg_1
@@ -271,6 +281,51 @@ lua_bindings_redland_node_renew_blank(lua_State *L) {
       librdf_node *p_node =  librdf_new_node_from_blank_identifier(
             *pp_arg_1
          ,  arg_2 );
+      return lua_bindings_redland_node_wrap(L, p_node);
+   }
+}
+
+static int
+lua_bindings_redland_stmt_get_object(lua_State *L) {
+   librdf_statement **pp_arg_1 =  (librdf_statement **) luaL_checkudata(
+         L
+      ,  -1
+      ,  stmt_userdata_type );
+
+   lua_pop(L, 1);
+
+   {
+      librdf_node *p_node =  librdf_statement_get_object(*pp_arg_1);
+      return lua_bindings_redland_node_wrap(L, p_node);
+   }
+}
+
+static int
+lua_bindings_redland_stmt_get_predicate(lua_State *L) {
+   librdf_statement **pp_arg_1 =  (librdf_statement **) luaL_checkudata(
+         L
+      ,  -1
+      ,  stmt_userdata_type );
+
+   lua_pop(L, 1);
+
+   {
+      librdf_node *p_node =  librdf_statement_get_predicate(*pp_arg_1);
+      return lua_bindings_redland_node_wrap(L, p_node);
+   }
+}
+
+static int
+lua_bindings_redland_stmt_get_subject(lua_State *L) {
+   librdf_statement **pp_arg_1 =  (librdf_statement **) luaL_checkudata(
+         L
+      ,  -1
+      ,  stmt_userdata_type );
+
+   lua_pop(L, 1);
+
+   {
+      librdf_node *p_node =  librdf_statement_get_subject(*pp_arg_1);
       return lua_bindings_redland_node_wrap(L, p_node);
    }
 }
@@ -329,6 +384,15 @@ luaopen_bindings_redland_node(lua_State *L) {
 
    lua_pushcfunction(L, &lua_bindings_redland_node_renew_blank);
    lua_setfield(L, -2, "renew_blank");
+
+   lua_pushcfunction(L, &lua_bindings_redland_stmt_get_object);
+   lua_setfield(L, -2, "get_object");
+
+   lua_pushcfunction(L, &lua_bindings_redland_stmt_get_predicate);
+   lua_setfield(L, -2, "get_predicate");
+
+   lua_pushcfunction(L, &lua_bindings_redland_stmt_get_subject);
+   lua_setfield(L, -2, "get_subject");
 
    return 1;
 }

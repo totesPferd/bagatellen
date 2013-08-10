@@ -28,6 +28,14 @@ build = {
                ,  incdirs = {
                         "/usr/include/rasqal"
                      ,  "/usr/include/raptor2" }}
+         ,  ['bindings.redland.stmt'] =  {
+                  sources = {
+                        "c/lua/bindings/redland/stmt.c" }
+               ,  libraries = {
+                        "rdf" }
+               ,  incdirs = {
+                        "/usr/include/rasqal"
+                     ,  "/usr/include/raptor2" }}
          ,  ['bindings.redland.uri'] =  {
                   sources = {
                         "c/lua/bindings/redland/uri.c" }
