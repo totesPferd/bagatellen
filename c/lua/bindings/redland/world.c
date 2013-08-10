@@ -2,15 +2,15 @@
 #include "defs.h"
 #include <lauxlib.h>
 
-static int
+int
 lua_bindings_redland_world_gc(lua_State *);
 
-static int
+int
 lua_bindings_redland_world_new(lua_State *);
 
 /* ------------------------------------------------------------ */
 
-static int
+int
 lua_bindings_redland_world_gc(lua_State *L) {
    librdf_world **pp_world =  (librdf_world **) luaL_checkudata(
          L
@@ -24,7 +24,7 @@ lua_bindings_redland_world_gc(lua_State *L) {
    return 0;
 }
 
-static int
+int
 lua_bindings_redland_world_new(lua_State *L) {
    librdf_world *p_world =  librdf_new_world();
    librdf_world_open(p_world);

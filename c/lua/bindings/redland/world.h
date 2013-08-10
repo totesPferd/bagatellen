@@ -4,7 +4,13 @@
 #include <lua.h>
 
 int
-lua_bindings_redland_new_mt(lua_State *);
+lua_bindings_redland_world_gc(lua_State *);
+
+int
+lua_bindings_redland_world_new(lua_State *);
+
+int
+lua_bindings_redland_world_new_mt(lua_State *);
 
 int
 lua_bindings_redland_world_wrap(lua_State *, librdf_world *);
