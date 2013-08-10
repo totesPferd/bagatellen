@@ -22,31 +22,12 @@ build = {
    ,  modules = {
             ['bindings.redland.node'] =  {
                   sources = {
-                        "c/lua/bindings/redland/node.c" }
-               ,  libraries = {
-                        "rdf" }
-               ,  incdirs = {
-                        "/usr/include/rasqal"
-                     ,  "/usr/include/raptor2" }}
-         ,  ['bindings.redland.stmt'] =  {
-                  sources = {
-                        "c/lua/bindings/redland/stmt.c" }
-               ,  libraries = {
-                        "rdf" }
-               ,  incdirs = {
-                        "/usr/include/rasqal"
-                     ,  "/usr/include/raptor2" }}
-         ,  ['bindings.redland.uri'] =  {
-                  sources = {
-                        "c/lua/bindings/redland/uri.c" }
-               ,  libraries = {
-                        "rdf" }
-               ,  incdirs = {
-                        "/usr/include/rasqal"
-                     ,  "/usr/include/raptor2" }}
-         ,  ['bindings.redland.world'] =  {
-                  sources = {
-                        "c/lua/bindings/redland/world.c" }
+                        "c/lua/bindings/redland/defs.c"
+                     ,  "c/lua/bindings/redland/main.c"
+                     ,  "c/lua/bindings/redland/node.c"
+                     ,  "c/lua/bindings/redland/stmt.c"
+                     ,  "c/lua/bindings/redland/uri.c"
+                     ,  "c/lua/bindings/redland/world.c" }
                ,  libraries = {
                         "rdf" }
                ,  incdirs = {
