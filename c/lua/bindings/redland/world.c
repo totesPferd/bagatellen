@@ -3,14 +3,6 @@
 #include <lauxlib.h>
 
 int
-lua_bindings_redland_world_gc(lua_State *);
-
-int
-lua_bindings_redland_world_new(lua_State *);
-
-/* ------------------------------------------------------------ */
-
-int
 lua_bindings_redland_world_gc(lua_State *L) {
    librdf_world **pp_world =  (librdf_world **) luaL_checkudata(
          L
