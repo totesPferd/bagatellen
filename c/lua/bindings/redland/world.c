@@ -46,10 +46,12 @@ lua_bindings_redland_world_wrap(lua_State *L, librdf_world *p_world) {
          ,  sizeof(librdf_world *) );
       *pp_world =  p_world;
 
-      lua_bindings_redland_world_new_mt(L);
+      lua_insert(L, -2);
       lua_setmetatable(L, -2);
    
       return 1;
+   } else {
+      return 0;
    }
 }
 

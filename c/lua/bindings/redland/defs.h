@@ -3,6 +3,7 @@
 
 extern const char *node_userdata_type;
 extern const char *stmt_userdata_type;
+extern const char *store_userdata_type;
 extern char *uri_userdata_type;
 extern char *world_userdata_type;
 
