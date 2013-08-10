@@ -21,8 +21,11 @@ lua_bindings_redland_world_gc(lua_State *L) {
          L
       ,  -1
       ,  userdata_type );
+
+   lua_pop(L, 1);
+
    librdf_free_world(*pp_world);
-   lua_pop(L, -1);
+
    return 0;
 }
 
