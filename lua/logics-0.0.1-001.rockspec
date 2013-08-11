@@ -31,6 +31,7 @@ build = {
                      ,  "c/lua/bindings/redland/parser.c"
                      ,  "c/lua/bindings/redland/query.c"
                      ,  "c/lua/bindings/redland/results.c"
+                     ,  "c/lua/bindings/redland/serializer.c"
                      ,  "c/lua/bindings/redland/stmt.c"
                      ,  "c/lua/bindings/redland/store.c"
                      ,  "c/lua/bindings/redland/transaction.c"

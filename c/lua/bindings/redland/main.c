@@ -5,6 +5,7 @@
 #include "parser.h"
 #include "query.h"
 #include "results.h"
+#include "serializer.h"
 #include "stmt.h"
 #include "store.h"
 #include "transaction.h"
