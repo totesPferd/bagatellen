@@ -7,10 +7,28 @@ int
 lua_bindings_redland_results_gc(lua_State *);
 
 int
+lua_bindings_redland_results_get_bind(lua_State *);
+
+int
+lua_bindings_redland_results_is_finished(lua_State *);
+
+int
 lua_bindings_redland_results_new(lua_State *);
 
 int
 lua_bindings_redland_results_new_mt(lua_State *);
+
+int
+lua_bindings_redland_results_next(lua_State *);
+
+int
+lua_bindings_redland_results_size(lua_State *);
+
+int
+lua_bindings_redland_results_to_file(lua_State *);
+
+int
+lua_bindings_redland_results_to_string(lua_State *);
 
 int
 lua_bindings_redland_results_wrap(lua_State *, librdf_query_results *);

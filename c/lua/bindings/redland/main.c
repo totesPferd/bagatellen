@@ -2,6 +2,7 @@
 #include "formatter.h"
 #include "model.h"
 #include "node.h"
+#include "results.h"
 #include "stmt.h"
 #include "store.h"
 #include "transaction.h"
@@ -21,6 +22,9 @@ luaopen_bindings_redland(lua_State *L) {
 
    luaopen_bindings_redland_node(L);
    lua_setfield(L, -2, "node");
+
+   luaopen_bindings_redland_results(L);
+   lua_setfield(L, -2, "results");
 
    luaopen_bindings_redland_stmt(L);
    lua_setfield(L, -2, "stmt");
