@@ -23,6 +23,7 @@ build = {
             ['bindings.redland.node'] =  {
                   sources = {
                         "c/lua/bindings/redland/defs.c"
+                     ,  "c/lua/bindings/redland/formatter.c"
                      ,  "c/lua/bindings/redland/hash.c"
                      ,  "c/lua/bindings/redland/main.c"
                      ,  "c/lua/bindings/redland/node.c"

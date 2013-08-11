@@ -1,6 +1,7 @@
 const char *hash_userdata_type  =  "redland.hash";
 const char *model_userdata_type =  "redland.model";
 const char *node_userdata_type  =  "redland.node";
+const char *qfmt_userdata_type  =  "redland.formatter";
 const char *query_userdata_type =  "redland.query";
 const char *res_userdata_type   =  "redland.results";
 const char *stmt_userdata_type  =  "redland.stmt";
