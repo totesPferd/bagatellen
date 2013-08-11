@@ -1,5 +1,8 @@
 #include "model.h"
 #include "defs.h"
+#include "node.h"
+#include "results.h"
+#include "store.h"
 #include "transaction.h"
 #include "world.h"
 #include <lauxlib.h>
@@ -136,25 +139,144 @@ lua_bindings_redland_model_get_feature(lua_State *L) {
 }
 
 int
-lua_bindings_redland_model_is_containing(lua_State *L) {
+lua_bindings_redland_model_get_object(lua_State *L) {
+   librdf_model **pp_model =  (librdf_model **) luaL_checkudata(
+         L
+      ,  -3
+      ,  model_userdata_type );
+   librdf_node **pp_subject =  (librdf_node **) luaL_checkudata(
+         L
+      ,  -2
+      ,  node_userdata_type );
+   librdf_node **pp_predicate =  (librdf_node **) luaL_checkudata(
+         L
+      ,  -1
+      ,  node_userdata_type );
+
+   lua_pop(L, 3);
+
+   librdf_node *result =  librdf_model_get_target(
+         *pp_model
+      ,  *pp_subject
+      ,  *pp_predicate );
+   if (result) {
+      lua_bindings_redland_node_new_mt(L);
+      return lua_bindings_redland_node_wrap(L, result);
+   } else {
+      return 0;
+   }
+}
+
+int
+lua_bindings_redland_model_get_predicate(lua_State *L) {
+   librdf_model **pp_model =  (librdf_model **) luaL_checkudata(
+         L
+      ,  -3
+      ,  model_userdata_type );
+   librdf_node **pp_subject =  (librdf_node **) luaL_checkudata(
+         L
+      ,  -2
+      ,  node_userdata_type );
+   librdf_node **pp_object =  (librdf_node **) luaL_checkudata(
+         L
+      ,  -1
+      ,  node_userdata_type );
+
+   lua_pop(L, 3);
+
+   librdf_node *result =  librdf_model_get_arc(
+         *pp_model
+      ,  *pp_subject
+      ,  *pp_object );
+   if (result) {
+      lua_bindings_redland_node_new_mt(L);
+      return lua_bindings_redland_node_wrap(L, result);
+   } else {
+      return 0;
+   }
+}
+
+int
+lua_bindings_redland_model_get_store(lua_State *L) {
+   librdf_model **pp_model =  (librdf_model **) luaL_checkudata(
+         L
+      ,  -1
+      ,  model_userdata_type );
+
+   lua_pop(L, 1);
+
+   librdf_storage *result =  librdf_model_get_storage(
+         *pp_model );
+   if (result) {
+      lua_bindings_redland_store_new_mt(L);
+      return lua_bindings_redland_store_wrap(L, result);
+   } else {
+      return 0;
+   }
+}
+
+int
+lua_bindings_redland_model_get_subject(lua_State *L) {
+   librdf_model **pp_model =  (librdf_model **) luaL_checkudata(
+         L
+      ,  -3
+      ,  model_userdata_type );
+   librdf_node **pp_predicate =  (librdf_node **) luaL_checkudata(
+         L
+      ,  -2
+      ,  node_userdata_type );
+   librdf_node **pp_object =  (librdf_node **) luaL_checkudata(
+         L
+      ,  -1
+      ,  node_userdata_type );
+
+   lua_pop(L, 3);
+
+   librdf_node *result =  librdf_model_get_source(
+         *pp_model
+      ,  *pp_predicate
+      ,  *pp_object );
+   if (result) {
+      lua_bindings_redland_node_new_mt(L);
+      return lua_bindings_redland_node_wrap(L, result);
+   } else {
+      return 0;
+   }
+}
+
+int
+lua_bindings_redland_model_is_containing_context(lua_State *L) {
    librdf_model **pp_model =  (librdf_model **) luaL_checkudata(
          L
       ,  -2
       ,  model_userdata_type );
-   librdf_statement **pp_stmt =  (librdf_statement **) luaL_checkudata(
+   librdf_node **pp_context =  (librdf_node **) luaL_checkudata(
          L
       ,  -1
-      ,  stmt_userdata_type );
+      ,  node_userdata_type );
 
    lua_pop(L, 2);
 
-   int result =  librdf_model_contains_statement(*pp_model, *pp_stmt);
-   if (result > 0) {
-      luaL_error(L, "error: illegal statement");
-   } else {
-      lua_pushboolean(L, result);
-      return 1;
-   }
+   int result =  librdf_model_contains_context(
+         *pp_model
+      ,  *pp_context );
+   lua_pushboolean(L, result);
+   return 1;
+}
+
+int
+lua_bindings_redland_model_is_supporting_contexts(lua_State *L) {
+   librdf_model **pp_model =  (librdf_model **) luaL_checkudata(
+         L
+      ,  -1
+      ,  model_userdata_type );
+
+   lua_pop(L, 1);
+
+   int result =  librdf_model_supports_contexts(
+         *pp_model );
+   lua_pushboolean(L, result);
+   return 1;
 }
 
 int
@@ -222,6 +344,55 @@ lua_bindings_redland_model_gc(lua_State *L) {
 }
 
 int
+lua_bindings_redland_model_load(lua_State *L) {
+   librdf_model **pp_model =  (librdf_model **) luaL_checkudata(
+         L
+      ,  -3
+      ,  model_userdata_type );
+   librdf_uri **pp_uri =  (librdf_uri **) luaL_checkudata(
+         L
+      ,  -2
+      ,  uri_userdata_type );
+
+   lua_getfield(L, -1, "name");
+   const char *name =  NULL;
+   if (!lua_isnil(L, -1)) {
+      name =  luaL_checkstring(L, -1);
+   }
+   lua_pop(L, 1);
+
+   lua_getfield(L, -1, "mime_type");
+   const char *mime_type =  NULL;
+   if (!lua_isnil(L, -1)) {
+      mime_type =  luaL_checkstring(L, -1);
+   }
+   lua_pop(L, 1);
+
+   lua_getfield(L, -1, "type");
+   librdf_uri *p_type_uri = NULL;
+   if (!lua_isnil(L, -1)) {
+      librdf_uri **pp_type_uri =  (librdf_uri **) luaL_checkudata(
+            L
+         ,  -1
+         ,  uri_userdata_type );
+      p_type_uri =  *pp_type_uri;
+   }
+   lua_pop(L, 1);
+
+   lua_pop(L, 3);
+
+   int result =  librdf_model_load(
+         *pp_model
+      ,  *pp_uri
+      ,  name
+      ,  mime_type
+      ,  p_type_uri );
+
+   lua_pushboolean(L, result);
+   return 1;
+}
+
+int
 lua_bindings_redland_model_lookup(lua_State *L) {
    librdf_world **pp_world =  (librdf_world **) luaL_checkudata(
          L
@@ -285,6 +456,30 @@ lua_bindings_redland_model_new(lua_State *L) {
 }
 
 int
+lua_bindings_redland_model_query(lua_State *L) {
+   librdf_model **pp_model =  (librdf_model **) luaL_checkudata(
+         L
+      ,  -2
+      ,  model_userdata_type );
+   librdf_query **pp_query =  (librdf_query **) luaL_checkudata(
+         L
+      ,  -1
+      ,  query_userdata_type );
+
+   lua_pop(L, 2);
+
+   librdf_query_results *p_qr =  librdf_model_query_execute(
+         *pp_model
+      ,  *pp_query );
+   if (p_qr) {
+      lua_bindings_redland_results_new_mt(L);
+      return lua_bindings_redland_results_wrap(L, p_qr);
+   } else {
+      return 0;
+   }
+}
+
+int
 lua_bindings_redland_model_set_feature(lua_State *L) {
    librdf_model **pp_model =  (librdf_model **) luaL_checkudata(
          L
@@ -338,6 +533,66 @@ lua_bindings_redland_model_sync(lua_State *L) {
    }
 
    return 0;
+}
+
+int
+lua_bindings_redland_model_to_string(lua_State *L) {
+   librdf_model **pp_model =  (librdf_model **) luaL_checkudata(
+         L
+      ,  -2
+      ,  model_userdata_type );
+
+   lua_getfield(L, -1, "base");
+   librdf_uri *p_base_uri = NULL;
+   if (!lua_isnil(L, -1)) {
+      librdf_uri **pp_base_uri =  (librdf_uri **) luaL_checkudata(
+            L
+         ,  -1
+         ,  uri_userdata_type );
+      p_base_uri =  *pp_base_uri;
+   }
+   lua_pop(L, 1);
+
+   lua_getfield(L, -1, "name");
+   const char *name =  NULL;
+   if (!lua_isnil(L, -1)) {
+      name =  luaL_checkstring(L, -1);
+   }
+   lua_pop(L, 1);
+
+   lua_getfield(L, -1, "mime_type");
+   const char *mime_type =  NULL;
+   if (!lua_isnil(L, -1)) {
+      mime_type =  luaL_checkstring(L, -1);
+   }
+   lua_pop(L, 1);
+
+   lua_getfield(L, -1, "type");
+   librdf_uri *p_type_uri = NULL;
+   if (!lua_isnil(L, -1)) {
+      librdf_uri **pp_type_uri =  (librdf_uri **) luaL_checkudata(
+            L
+         ,  -1
+         ,  uri_userdata_type );
+      p_type_uri =  *pp_type_uri;
+   }
+   lua_pop(L, 1);
+
+   lua_pop(L, 2);
+
+   unsigned char *result =  librdf_model_to_string(
+         *pp_model
+      ,  p_base_uri
+      ,  name
+      ,  mime_type
+      ,  p_type_uri );
+
+   if (result) {
+      lua_pushstring(L, result);
+      return 1;
+   } else {
+      return 0;
+   }
 }
 
 int
@@ -480,8 +735,23 @@ luaopen_bindings_redland_model(lua_State *L) {
    lua_pushcfunction(L, &lua_bindings_redland_model_get_feature);
    lua_setfield(L, -2, "get_feature");
 
-   lua_pushcfunction(L, &lua_bindings_redland_model_is_containing);
-   lua_setfield(L, -2, "is_containing");
+   lua_pushcfunction(L, &lua_bindings_redland_model_get_object);
+   lua_setfield(L, -2, "get_object");
+
+   lua_pushcfunction(L, &lua_bindings_redland_model_get_predicate);
+   lua_setfield(L, -2, "get_predicate");
+
+   lua_pushcfunction(L, &lua_bindings_redland_model_get_store);
+   lua_setfield(L, -2, "get_store");
+
+   lua_pushcfunction(L, &lua_bindings_redland_model_get_subject);
+   lua_setfield(L, -2, "get_subject");
+
+   lua_pushcfunction(L, &lua_bindings_redland_model_is_containing_context);
+   lua_setfield(L, -2, "is_containing_context");
+
+   lua_pushcfunction(L, &lua_bindings_redland_model_is_supporting_contexts);
+   lua_setfield(L, -2, "is_supporting_contexts");
 
    lua_pushcfunction(L, &lua_bindings_redland_model_is_there_object);
    lua_setfield(L, -2, "is_there_object");
@@ -489,11 +759,17 @@ luaopen_bindings_redland_model(lua_State *L) {
    lua_pushcfunction(L, &lua_bindings_redland_model_is_there_subject);
    lua_setfield(L, -2, "is_there_subject");
 
+   lua_pushcfunction(L, &lua_bindings_redland_model_load);
+   lua_setfield(L, -2, "load");
+
    lua_pushcfunction(L, &lua_bindings_redland_model_lookup);
    lua_setfield(L, -2, "lookup");
 
    lua_pushcfunction(L, &lua_bindings_redland_model_new);
    lua_setfield(L, -2, "new");
+
+   lua_pushcfunction(L, &lua_bindings_redland_model_query);
+   lua_setfield(L, -2, "query");
 
    lua_pushcfunction(L, &lua_bindings_redland_model_set_feature);
    lua_setfield(L, -2, "set_feature");
@@ -503,6 +779,9 @@ luaopen_bindings_redland_model(lua_State *L) {
 
    lua_pushcfunction(L, &lua_bindings_redland_model_sync);
    lua_setfield(L, -2, "sync");
+
+   lua_pushcfunction(L, &lua_bindings_redland_model_to_string);
+   lua_setfield(L, -2, "to_string");
 
    lua_pushcfunction(L, &lua_bindings_redland_model_transaction_commit);
    lua_setfield(L, -2, "transaction_commit");

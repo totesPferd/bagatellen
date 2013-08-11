@@ -25,13 +25,31 @@ int
 lua_bindings_redland_model_get_feature(lua_State *);
 
 int
-lua_bindings_redland_model_is_containing(lua_State *);
+lua_bindings_redland_model_get_object(lua_State *);
+
+int
+lua_bindings_redland_model_get_predicate(lua_State *);
+
+int
+lua_bindings_redland_model_get_store(lua_State *);
+
+int
+lua_bindings_redland_model_get_subject(lua_State *);
+
+int
+lua_bindings_redland_model_is_containing_context(lua_State *);
+
+int
+lua_bindings_redland_model_is_supporting_contexts(lua_State *);
 
 int
 lua_bindings_redland_model_is_there_object(lua_State *);
 
 int
 lua_bindings_redland_model_is_there_subject(lua_State *);
+
+int
+lua_bindings_redland_model_load(lua_State *);
 
 int
 lua_bindings_redland_model_lookup(lua_State *);
@@ -46,6 +64,9 @@ int
 lua_bindings_redland_model_new_mt(lua_State *);
 
 int
+lua_bindings_redland_model_query(lua_State *);
+
+int
 lua_bindings_redland_model_set_feature(lua_State *);
 
 int
@@ -53,6 +74,9 @@ lua_bindings_redland_model_size(lua_State *);
 
 int
 lua_bindings_redland_model_sync(lua_State *);
+
+int
+lua_bindings_redland_model_to_string(lua_State *);
 
 int
 lua_bindings_redland_model_transaction_commit(lua_State *);
