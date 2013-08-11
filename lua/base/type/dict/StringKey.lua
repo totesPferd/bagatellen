@@ -8,10 +8,14 @@ local String =  require "base.type.String"
 local StringSet =  require "base.type.set.StringSet"
 
 
-function StringKey:empty_dict_factory()
+function StringKey:lua_dict_factory(lua_dict)
    local retval =  StringKey:__new()
-   retval.val =  {}
+   retval.val =  lua_dict or {}
    return retval
+end
+
+function StringKey:empty_dict_factory()
+   return StringKey:lua_dict_factory()
 end
 
 function StringKey:is_in_key_set(elem)
