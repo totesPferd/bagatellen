@@ -26,6 +26,7 @@ build = {
                      ,  "c/lua/bindings/redland/formatter.c"
                      ,  "c/lua/bindings/redland/hash.c"
                      ,  "c/lua/bindings/redland/main.c"
+                     ,  "c/lua/bindings/redland/model.c"
                      ,  "c/lua/bindings/redland/node.c"
                      ,  "c/lua/bindings/redland/results.c"
                      ,  "c/lua/bindings/redland/stmt.c"
