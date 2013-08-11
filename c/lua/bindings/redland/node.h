@@ -34,9 +34,6 @@ int
 lua_bindings_redland_node_new_resource(lua_State *);
 
 int
-lua_bindings_redland_node_renew_blank(lua_State *);
-
-int
 lua_bindings_redland_node_wrap(lua_State *, librdf_node *);
 
 int
