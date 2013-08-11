@@ -36,7 +36,7 @@ lua_bindings_redland_formatter_wrap(lua_State *L, librdf_query_results_formatter
       librdf_query_results_formatter **pp_formatter
          =  (librdf_query_results_formatter **) lua_newuserdata(
                L
-            ,  sizeof(void *) );
+            ,  sizeof(librdf_query_results_formatter *) );
       *pp_formatter =  p_formatter;
 
       lua_insert(L, -2);

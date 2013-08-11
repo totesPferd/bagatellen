@@ -27,6 +27,7 @@ build = {
                      ,  "c/lua/bindings/redland/hash.c"
                      ,  "c/lua/bindings/redland/main.c"
                      ,  "c/lua/bindings/redland/node.c"
+                     ,  "c/lua/bindings/redland/results.c"
                      ,  "c/lua/bindings/redland/stmt.c"
                      ,  "c/lua/bindings/redland/store.c"
                      ,  "c/lua/bindings/redland/transaction.c"
