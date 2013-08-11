@@ -201,7 +201,7 @@ lua_bindings_redland_node_new_literal(lua_State *L) {
             L
          ,  -1
          ,  uri_userdata_type );
-      lua_setfield(L, -4, "type");
+      lua_setfield(L, -4, "sharing_uri");
       p_type =  *pp_type;
    } else {
       lua_pop(L, 1);
