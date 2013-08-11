@@ -1,5 +1,6 @@
 #include "store.h"
 #include "defs.h"
+#include "transaction.h"
 #include "world.h"
 #include <lauxlib.h>
 
@@ -427,6 +428,26 @@ lua_bindings_redland_store_transaction_commit(lua_State *L) {
 }
 
 int
+lua_bindings_redland_store_transaction_get_handle(lua_State *L) {
+   librdf_storage **pp_store =  (librdf_storage **) luaL_checkudata(
+         L
+      ,  -1
+      ,  store_userdata_type );
+
+   lua_pop(L, 1);
+
+   {
+      void *p_th =  librdf_storage_transaction_get_handle(*pp_store);
+      if (p_th) {
+         lua_bindings_redland_transaction_new_mt(L);
+         return lua_bindings_redland_transaction_wrap(L, p_th);
+      } else {
+         return 0;
+      }
+   }
+}
+
+int
 lua_bindings_redland_store_transaction_rollback(lua_State *L) {
    librdf_storage **pp_store =  (librdf_storage **) luaL_checkudata(
          L
@@ -453,6 +474,26 @@ lua_bindings_redland_store_transaction_start(lua_State *L) {
 
    if (librdf_storage_transaction_start(*pp_store)) {
       luaL_error(L, "error: transaction start");
+   }
+
+   return 0;
+}
+
+int
+lua_bindings_redland_store_transaction_start_with_handle(lua_State *L) {
+   librdf_storage **pp_store =  (librdf_storage **) luaL_checkudata(
+         L
+      ,  -2
+      ,  store_userdata_type );
+   void **pp_th =  luaL_checkudata(
+         L
+      ,  -1
+      ,  th_userdata_type );
+
+   lua_pop(L, 2);
+
+   if (librdf_storage_transaction_start_with_handle(*pp_store, *pp_th)) {
+      luaL_error(L, "error: transaction start with handle");
    }
 
    return 0;
@@ -549,11 +590,19 @@ luaopen_bindings_redland_store(lua_State *L) {
    lua_pushcfunction(L, &lua_bindings_redland_store_transaction_commit);
    lua_setfield(L, -2, "transaction_commit");
 
+   lua_pushcfunction(L, &lua_bindings_redland_store_transaction_get_handle);
+   lua_setfield(L, -2, "transaction_get_handle");
+
    lua_pushcfunction(L, &lua_bindings_redland_store_transaction_rollback);
    lua_setfield(L, -2, "transaction_rollback");
 
    lua_pushcfunction(L, &lua_bindings_redland_store_transaction_start);
    lua_setfield(L, -2, "transaction_start");
+
+   lua_pushcfunction(
+         L
+      ,  &lua_bindings_redland_store_transaction_start_with_handle );
+   lua_setfield(L, -2, "transaction_start_with_handle");
 
    return 1;
 }

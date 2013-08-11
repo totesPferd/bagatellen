@@ -28,6 +28,7 @@ build = {
                      ,  "c/lua/bindings/redland/node.c"
                      ,  "c/lua/bindings/redland/stmt.c"
                      ,  "c/lua/bindings/redland/store.c"
+                     ,  "c/lua/bindings/redland/transaction.c"
                      ,  "c/lua/bindings/redland/uri.c"
                      ,  "c/lua/bindings/redland/world.c" }
                ,  libraries = {
