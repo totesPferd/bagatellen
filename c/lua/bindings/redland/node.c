@@ -91,6 +91,8 @@ lua_bindings_redland_node_get_literal(lua_State *L) {
       ,  -1
       ,  node_userdata_type );
 
+   lua_pop(L, 1);
+
    if (librdf_node_is_literal(*pp_node)) {
       lua_newtable(L);
       {
@@ -120,17 +122,12 @@ lua_bindings_redland_node_get_literal(lua_State *L) {
       librdf_uri *p_uri =  librdf_node_get_literal_value_datatype_uri(
          *pp_node );
       lua_bindings_redland_uri_new_mt(L);
-      lua_insert(L, -3);
-      lua_insert(L, -2);
-      lua_setfield(L, -3, "sharing_with_node");
-      lua_insert(L, -2);
       if (lua_bindings_redland_uri_wrap(L, p_uri)) {
          lua_setfield(L, -2, "type");
       }
 
       return 1;
    } else {
-      lua_pop(L, 1);
       return 0;
    }
 }
@@ -186,9 +183,6 @@ lua_bindings_redland_node_new_literal(lua_State *L) {
       ,  -2
       ,  world_userdata_type );
 
-   lua_bindings_redland_node_new_mt(L);
-   lua_insert(L, -3);
-
    lua_getfield(L, -1, "value");
    const unsigned char *val =  luaL_checkstring(L, -1);
    lua_pop(L, 1);
@@ -196,13 +190,11 @@ lua_bindings_redland_node_new_literal(lua_State *L) {
    librdf_uri *p_type =  NULL;
    lua_getfield(L, -1, "type");
    if (!lua_isnil(L, -1)) {
-      lua_bindings_redland_uri_clone(L);
       librdf_uri **pp_type =   (librdf_uri **) luaL_checkudata(
             L
          ,  -1
          ,  uri_userdata_type );
-      lua_setfield(L, -4, "sharing_uri");
-      p_type =  *pp_type;
+      p_type =  librdf_new_uri_from_uri(*pp_type);
    } else {
       lua_pop(L, 1);
    }
@@ -221,8 +213,7 @@ lua_bindings_redland_node_new_literal(lua_State *L) {
    }
    lua_pop(L, 1);
 
-   lua_pop(L, 1);
-   lua_setfield(L, -2, "world");
+   lua_pop(L, 2);
 
    librdf_node *p_node =  NULL;
 
@@ -240,6 +231,7 @@ lua_bindings_redland_node_new_literal(lua_State *L) {
          ,  is_wf_xml );
    }
 
+   lua_bindings_redland_node_new_mt(L);
    return lua_bindings_redland_node_wrap(L, p_node);
 }
 
@@ -249,24 +241,18 @@ lua_bindings_redland_node_new_resource(lua_State *L) {
          L
       ,  -2
       ,  world_userdata_type );
-   lua_bindings_redland_uri_clone(L);
    librdf_uri **pp_arg_2 =  (librdf_uri **) luaL_checkudata(
          L
       ,  -1
       ,  uri_userdata_type );
 
+   lua_pop(L, 2);
+
    {
       librdf_node *p_node =  librdf_new_node_from_uri(
             *pp_arg_1
-         ,  *pp_arg_2 );
+         ,  librdf_new_uri_from_uri(*pp_arg_2) );
       lua_bindings_redland_node_new_mt(L);
-
-      lua_insert(L, -2);
-      lua_setfield(L, -2, "sharing_with_uri");
-
-      lua_insert(L, -2);
-      lua_setfield(L, -2, "sharing_with_world");
-
       return lua_bindings_redland_node_wrap(L, p_node);
    }
 }
