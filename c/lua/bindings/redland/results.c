@@ -1,5 +1,6 @@
 #include "results.h"
 #include "defs.h"
+#include "formatter.h"
 #include <lauxlib.h>
 
 int
@@ -18,6 +19,57 @@ lua_bindings_redland_results_gc(lua_State *L) {
 }
 
 int
+lua_bindings_redland_results_get_boolean(lua_State *L) {
+   librdf_query_results **pp_results
+      =  (librdf_query_results **) luaL_checkudata(
+            L
+         ,  -1
+         ,  res_userdata_type );
+
+   lua_pop(L, 1);
+
+   int result =  librdf_query_results_is_boolean(*pp_results);
+   if (result < 0) {
+      luaL_error(L, "error: getting boolean query result");
+   } else {
+      lua_pushboolean(L, result);
+      return 1;
+   }
+}
+
+int
+lua_bindings_redland_results_is_binding(lua_State *L) {
+   librdf_query_results **pp_results
+      =  (librdf_query_results **) luaL_checkudata(
+            L
+         ,  -1
+         ,  res_userdata_type );
+
+   lua_pop(L, 1);
+
+   int result =  librdf_query_results_is_bindings(*pp_results);
+   lua_pushboolean(L, result);
+
+   return 1;
+}
+
+int
+lua_bindings_redland_results_is_boolean(lua_State *L) {
+   librdf_query_results **pp_results
+      =  (librdf_query_results **) luaL_checkudata(
+            L
+         ,  -1
+         ,  res_userdata_type );
+
+   lua_pop(L, 1);
+
+   int result =  librdf_query_results_is_boolean(*pp_results);
+   lua_pushboolean(L, result);
+
+   return 1;
+}
+
+int
 lua_bindings_redland_results_is_finished(lua_State *L) {
    librdf_query_results **pp_results
       =  (librdf_query_results **) luaL_checkudata(
@@ -31,6 +83,125 @@ lua_bindings_redland_results_is_finished(lua_State *L) {
    lua_pushboolean(L, result);
 
    return 1;
+}
+
+int
+lua_bindings_redland_results_is_graph(lua_State *L) {
+   librdf_query_results **pp_results
+      =  (librdf_query_results **) luaL_checkudata(
+            L
+         ,  -1
+         ,  res_userdata_type );
+
+   lua_pop(L, 1);
+
+   int result =  librdf_query_results_is_graph(*pp_results);
+   lua_pushboolean(L, result);
+
+   return 1;
+}
+
+int
+lua_bindings_redland_results_is_syntax(lua_State *L) {
+   librdf_query_results **pp_results
+      =  (librdf_query_results **) luaL_checkudata(
+            L
+         ,  -1
+         ,  res_userdata_type );
+
+   lua_pop(L, 1);
+
+   int result =  librdf_query_results_is_syntax(*pp_results);
+   lua_pushboolean(L, result);
+
+   return 1;
+}
+
+int
+lua_bindings_redland_results_is_there_formatter(lua_State *L) {
+   librdf_world **pp_world
+      =  (librdf_world **) luaL_checkudata(
+            L
+         ,  -3
+         ,  world_userdata_type );
+
+   const char *mime_type =  luaL_checkstring(L, -2);
+
+   const char *name =  NULL;
+   lua_getfield(L, -1, "name");
+   if (!lua_isnil(L, -1)) {
+      name =  luaL_checkstring(L, -1);
+   }
+   lua_pop(L, 1);
+
+   librdf_uri *p_uri =  NULL;
+   lua_getfield(L, -1, "uri");
+   if (!lua_isnil(L, -1)) {
+      librdf_uri **pp_uri
+         =  (librdf_uri **) luaL_checkudata(
+               L
+            ,  -1
+            ,  uri_userdata_type );
+      p_uri =  *pp_uri;
+   }
+   lua_pop(L, 1);
+
+   lua_pop(L, 3);
+
+   int result
+      =  librdf_query_results_formats_check(
+            *pp_world
+         ,  name
+         ,  p_uri
+         ,  mime_type );
+   lua_pushboolean(L, result);
+   return 1;
+}
+
+int
+lua_bindings_redland_results_new_formatter(lua_State *L) {
+   librdf_query_results **pp_results
+      =  (librdf_query_results **) luaL_checkudata(
+            L
+         ,  -2
+         ,  res_userdata_type );
+
+   const char *name =  NULL;
+   lua_getfield(L, -1, "name");
+   if (!lua_isnil(L, -1)) {
+      name =  luaL_checkstring(L, -1);
+   }
+   lua_pop(L, 1);
+
+   const char *mime_type =  NULL;
+   lua_getfield(L, -1, "mime_type");
+   if (!lua_isnil(L, -1)) {
+      mime_type =  luaL_checkstring(L, -1);
+   }
+   lua_pop(L, 1);
+
+   librdf_uri *p_uri =  NULL;
+   lua_getfield(L, -1, "uri");
+   if (!lua_isnil(L, -1)) {
+      librdf_uri **pp_uri
+         =  (librdf_uri **) luaL_checkudata(
+               L
+            ,  -1
+            ,  uri_userdata_type );
+      p_uri =  *pp_uri;
+   }
+   lua_pop(L, 1);
+
+   lua_pop(L, 2);
+
+   librdf_query_results_formatter *result
+      =  librdf_new_query_results_formatter2(
+            *pp_results
+         ,  name
+         ,  mime_type
+         ,  p_uri );
+   lua_bindings_redland_formatter_new_mt(L);
+   return lua_bindings_redland_formatter_wrap(L, result);
 }
 
 int
@@ -213,11 +384,32 @@ int
 luaopen_bindings_redland_results(lua_State *L) {
    lua_newtable(L);
 
+   lua_pushcfunction(L, &lua_bindings_redland_results_get_boolean);
+   lua_setfield(L, -2, "get_boolean");
+
+   lua_pushcfunction(L, &lua_bindings_redland_results_is_boolean);
+   lua_setfield(L, -2, "is_binding");
+
+   lua_pushcfunction(L, &lua_bindings_redland_results_is_boolean);
+   lua_setfield(L, -2, "is_boolean");
+
    lua_pushcfunction(L, &lua_bindings_redland_results_is_finished);
    lua_setfield(L, -2, "is_finished");
 
+   lua_pushcfunction(L, &lua_bindings_redland_results_is_graph);
+   lua_setfield(L, -2, "is_graph");
+
+   lua_pushcfunction(L, &lua_bindings_redland_results_is_syntax);
+   lua_setfield(L, -2, "is_syntax");
+
+   lua_pushcfunction(L, &lua_bindings_redland_results_is_there_formatter);
+   lua_setfield(L, -2, "is_there_formatter");
+
    lua_pushcfunction(L, &lua_bindings_redland_results_next);
    lua_setfield(L, -2, "next");
+
+   lua_pushcfunction(L, &lua_bindings_redland_results_new_formatter);
+   lua_setfield(L, -2, "new_formatter");
 
    lua_pushcfunction(L, &lua_bindings_redland_results_size);
    lua_setfield(L, -2, "size");

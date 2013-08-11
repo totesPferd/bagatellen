@@ -7,13 +7,31 @@ int
 lua_bindings_redland_results_gc(lua_State *);
 
 int
-lua_bindings_redland_results_get_bind(lua_State *);
+lua_bindings_redland_results_get_boolean(lua_State *);
+
+int
+lua_bindings_redland_results_is_binding(lua_State *);
+
+int
+lua_bindings_redland_results_is_boolean(lua_State *);
 
 int
 lua_bindings_redland_results_is_finished(lua_State *);
 
 int
+lua_bindings_redland_results_is_graph(lua_State *);
+
+int
+lua_bindings_redland_results_is_syntax(lua_State *);
+
+int
+lua_bindings_redland_results_is_there_formatter(lua_State *);
+
+int
 lua_bindings_redland_results_new(lua_State *);
+
+int
+lua_bindings_redland_results_new_formatter(lua_State *);
 
 int
 lua_bindings_redland_results_new_mt(lua_State *);
