@@ -344,3 +344,6 @@ do local capMode =  false
    end
    print(outputLine)
 end
+
+os.exit(0)
+

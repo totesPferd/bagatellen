@@ -19,6 +19,6 @@ dependencies = { 'lua >= 5.1' }
 build = {
    type = 'builtin',
    modules = {
-      [ 'getCyrillic' ] =  "bagatellen/lua/getCyrillic/bin/getCyrillic.lua"
+      [ 'getCyrillic' ] =  "lua/getCyrillic/bin/getCyrillic.lua"
    },
 }
