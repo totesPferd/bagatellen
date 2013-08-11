@@ -34,6 +34,9 @@ int
 lua_bindings_redland_store_is_containing(lua_State *);
 
 int
+lua_bindings_redland_store_is_supporting_query(lua_State *);
+
+int
 lua_bindings_redland_store_is_there_object(lua_State *);
 
 int
@@ -62,6 +65,15 @@ lua_bindings_redland_store_size(lua_State *);
 
 int
 lua_bindings_redland_store_sync(lua_State *);
+
+int
+lua_bindings_redland_store_transaction_commit(lua_State *);
+
+int
+lua_bindings_redland_store_transaction_rollback(lua_State *);
+
+int
+lua_bindings_redland_store_transaction_start(lua_State *);
 
 int
 lua_bindings_redland_store_wrap(lua_State *, librdf_storage *);

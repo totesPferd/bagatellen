@@ -1,5 +1,6 @@
 #include "store.h"
 #include "defs.h"
+#include "world.h"
 #include <lauxlib.h>
 
 int
@@ -188,6 +189,23 @@ lua_bindings_redland_store_is_containing(lua_State *L) {
       lua_pushboolean(L, result);
       return 1;
    }
+}
+
+int
+lua_bindings_redland_store_is_supporting_query(lua_State *L) {
+   librdf_storage **pp_store =  (librdf_storage **) luaL_checkudata(
+         L
+      ,  -2
+      ,  store_userdata_type );
+   librdf_query **pp_query =  (librdf_query **) luaL_checkudata(
+         L
+      ,  -1
+      ,  query_userdata_type );
+
+   lua_pop(L, 2);
+
+   lua_pushboolean(L, librdf_storage_supports_query(*pp_store, *pp_query));
+   return 1;
 }
 
 int
@@ -392,6 +410,54 @@ lua_bindings_redland_store_sync(lua_State *L) {
    return 0;
 }
 
+int
+lua_bindings_redland_store_transaction_commit(lua_State *L) {
+   librdf_storage **pp_store =  (librdf_storage **) luaL_checkudata(
+         L
+      ,  -1
+      ,  store_userdata_type );
+
+   lua_pop(L, 1);
+
+   if (librdf_storage_transaction_commit(*pp_store)) {
+      luaL_error(L, "error: transaction commit");
+   }
+
+   return 0;
+}
+
+int
+lua_bindings_redland_store_transaction_rollback(lua_State *L) {
+   librdf_storage **pp_store =  (librdf_storage **) luaL_checkudata(
+         L
+      ,  -1
+      ,  store_userdata_type );
+
+   lua_pop(L, 1);
+
+   if (librdf_storage_transaction_rollback(*pp_store)) {
+      luaL_error(L, "error: transaction rollback");
+   }
+
+   return 0;
+}
+
+int
+lua_bindings_redland_store_transaction_start(lua_State *L) {
+   librdf_storage **pp_store =  (librdf_storage **) luaL_checkudata(
+         L
+      ,  -1
+      ,  store_userdata_type );
+
+   lua_pop(L, 1);
+
+   if (librdf_storage_transaction_start(*pp_store)) {
+      luaL_error(L, "error: transaction start");
+   }
+
+   return 0;
+}
+
 
 /* ------------------------------------------------------------ */
 
@@ -453,6 +519,9 @@ luaopen_bindings_redland_store(lua_State *L) {
    lua_pushcfunction(L, &lua_bindings_redland_store_is_containing);
    lua_setfield(L, -2, "is_containing");
 
+   lua_pushcfunction(L, &lua_bindings_redland_store_is_supporting_query);
+   lua_setfield(L, -2, "is_supporting_query");
+
    lua_pushcfunction(L, &lua_bindings_redland_store_is_there_object);
    lua_setfield(L, -2, "is_there_object");
 
@@ -476,6 +545,15 @@ luaopen_bindings_redland_store(lua_State *L) {
 
    lua_pushcfunction(L, &lua_bindings_redland_store_sync);
    lua_setfield(L, -2, "sync");
+
+   lua_pushcfunction(L, &lua_bindings_redland_store_transaction_commit);
+   lua_setfield(L, -2, "transaction_commit");
+
+   lua_pushcfunction(L, &lua_bindings_redland_store_transaction_rollback);
+   lua_setfield(L, -2, "transaction_rollback");
+
+   lua_pushcfunction(L, &lua_bindings_redland_store_transaction_start);
+   lua_setfield(L, -2, "transaction_start");
 
    return 1;
 }
