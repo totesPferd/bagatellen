@@ -26,7 +26,7 @@ lua_bindings_redland_query_execute(lua_State *L) {
          ,  -2
          ,  query_userdata_type );
    librdf_model **pp_model
-      =  (librdf_query **) luaL_checkudata(
+      =  (librdf_model **) luaL_checkudata(
             L
          ,  -1
          ,  model_userdata_type );

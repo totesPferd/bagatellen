@@ -1,5 +1,5 @@
-#ifndef LUA_BINDINGS_REDLAND_FORMATTER_H
-#define LUA_BINDINGS_REDLAND_FORMATTER_H
+#ifndef LUA_BINDINGS_REDLAND_QUERY_H
+#define LUA_BINDINGS_REDLAND_QUERY_H
 #include <librdf.h>
 #include <lua.h>
 

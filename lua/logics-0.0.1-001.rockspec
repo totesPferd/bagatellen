@@ -28,6 +28,7 @@ build = {
                      ,  "c/lua/bindings/redland/main.c"
                      ,  "c/lua/bindings/redland/model.c"
                      ,  "c/lua/bindings/redland/node.c"
+                     ,  "c/lua/bindings/redland/parser.c"
                      ,  "c/lua/bindings/redland/query.c"
                      ,  "c/lua/bindings/redland/results.c"
                      ,  "c/lua/bindings/redland/stmt.c"

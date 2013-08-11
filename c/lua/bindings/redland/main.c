@@ -2,6 +2,7 @@
 #include "formatter.h"
 #include "model.h"
 #include "node.h"
+#include "parser.h"
 #include "query.h"
 #include "results.h"
 #include "stmt.h"
@@ -23,6 +24,9 @@ luaopen_bindings_redland(lua_State *L) {
 
    luaopen_bindings_redland_node(L);
    lua_setfield(L, -2, "node");
+
+   luaopen_bindings_redland_parser(L);
+   lua_setfield(L, -2, "parser");
 
    luaopen_bindings_redland_query(L);
    lua_setfield(L, -2, "query");
