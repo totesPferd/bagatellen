@@ -1,5 +1,6 @@
 #include "main.h"
 #include "formatter.h"
+#include "model.h"
 #include "node.h"
 #include "stmt.h"
 #include "store.h"
@@ -14,6 +15,9 @@ luaopen_bindings_redland(lua_State *L) {
 
    luaopen_bindings_redland_formatter(L);
    lua_setfield(L, -2, "formatter");
+
+   luaopen_bindings_redland_model(L);
+   lua_setfield(L, -2, "model");
 
    luaopen_bindings_redland_node(L);
    lua_setfield(L, -2, "node");
