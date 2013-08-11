@@ -7,9 +7,6 @@ int
 lua_bindings_redland_formatter_gc(lua_State *);
 
 int
-lua_bindings_redland_formatter_new(lua_State *);
-
-int
 lua_bindings_redland_formatter_new_mt(lua_State *);
 
 int
