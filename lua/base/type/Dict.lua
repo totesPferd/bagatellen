@@ -162,6 +162,20 @@ function Dict:elems()
    return f, {}
 end
 
+--- does v_s == v_o hold
+--     for all k with (k, v_s) in self and (k, v_o) in other?
+--  @param other dictionary
+--  @return boolean: if false then self will not be affected
+function Dict:is_consistent(other)
+   for key, val in self:elems()
+   do local other_val =  other:deref(key)
+      if other_val and other_val ~= val
+      then return false
+      end
+   end
+   return true
+end
+
 --- Is other dictionary contains my dictionary?
 --  @param other dictionary
 --  @return boolean
