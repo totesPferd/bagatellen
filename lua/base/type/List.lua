@@ -157,7 +157,7 @@ end
 --  @return base.type.List Which elements must be added at the right-hand
 --     side to get other?
 function List:exchange(other)
-   local nrDiff =  0
+   local nrDiff =  #self.val
    local idxOldList =  1
    local oldList =  self.val
    local diff =  List:empty_list_factory()
@@ -174,8 +174,9 @@ function List:exchange(other)
       end
       if state == "working"
       then
-         nrDiff =  nrDiff + 1
          diff:append(elem)
+      else
+         nrDiff =  nrDiff - 1
       end
       val[idxOldList] =  elem
       idxOldList =  idxOldList + 1
