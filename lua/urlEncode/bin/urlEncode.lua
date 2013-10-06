@@ -19,3 +19,5 @@ do if
       io.stdout:write(string.format("%%%02x", c))
    end
 end
+
+os.exit(0)
