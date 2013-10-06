@@ -1,4 +1,4 @@
-package = 'url-encode'
+package = 'url_encode'
 version = '0.0.1-001'
 
 description = {
