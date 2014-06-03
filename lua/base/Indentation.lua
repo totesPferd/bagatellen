@@ -17,7 +17,7 @@ function Indentation:new_factory(params)
          params.recent_line
       or String:empty_string_factory()
    retval.recommended_width =
-         params.recommended_with
+         params.recommended_width
       or config.std_page_width
    return retval
 end
