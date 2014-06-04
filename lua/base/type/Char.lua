@@ -93,9 +93,8 @@ end
 
 function Char:__diagnose_single_line(indentation)
    local line =  String:string_factory(
-         "(base.type.Char "
-      .. self.val )
-   line:append_parenthesis_off_same_line()
+         string.format("(base.type.Char 0x%02X", self.val:byte()) )
+   line:append_string(String:string_factory(")"))
    indentation:insert(line)
 end
 
@@ -106,8 +105,9 @@ function Char:__diagnose_multiple_line(indentation)
    end
    do
       local deeper_indentation =  indentation:get_deeper_indentation()
-      local line =  String:string_factory(self.val)
-      line:append_parenthesis_off_other_line()
+      local line
+         =  String:string_factory(string.format("0x%02X", self.val:byte()))
+      line:append_string(String:string_factory(" )"))
       deeper_indentation:insert(line)
       deeper_indentation:save()
    end

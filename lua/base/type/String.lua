@@ -78,13 +78,13 @@ function String:chars()
    function f(s, var)
       if not var
       then
-         s.content =  self
+         s.content =  self:__clone()
       end
       if s.content:is_empty()
       then
          return
       end
-      local retval =  s.content:head()
+      local retval =  s.content:get_head()
       s.content:cut_head()
       return retval
    end
@@ -100,7 +100,7 @@ function String:lines()
    function f(s, var)
       if not var
       then
-         s.content =  self
+         s.content =  self:__clone()
       end
       if s.content:is_empty()
       then
