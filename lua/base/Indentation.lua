@@ -108,6 +108,7 @@ function Indentation:save()
    then
       self.upper_indentation.content:append_string(self:get_content())
       self.upper_indentation.recent_line =  self.recent_line
+      self.upper_indentation.is_reset_line =  self.is_reset_line
       self.upper_indentation.width =  math.max(
             self.upper_indentation.width
          ,  self.width )
