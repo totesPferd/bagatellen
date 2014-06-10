@@ -188,7 +188,7 @@ end
 function List:__clone()
    local retval =  self:empty_list_factory()
    for elem in self:elems()
-   do retval:add(elem)
+   do retval:append(elem)
    end
    return retval
 end
