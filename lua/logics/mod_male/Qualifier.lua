@@ -30,6 +30,10 @@ function Qualifier:get_qualids()
    return self.qualids
 end
 
+function Qualifier:add_qualid(qualid)
+   self:get_qualids():add(qualid)
+end
+
 function Qualifier:append_qualid(qualid)
    local is_empty =  true
    for x in self:get_qualids():elems()
@@ -38,12 +42,16 @@ function Qualifier:append_qualid(qualid)
    end
    if is_empty
    then
-      self:get_qualids():add(qualid)
+      self:add_qualid(qualid)
    end
 end
 
 function Qualifier:equate(other)
    self:get_qualids():add_set(other:get_qualids())
+end
+
+function Qualifier:is_in(qualid)
+   return self:get_qualids():is_in(qualid)
 end
 
 function Qualifier:subeq(other)

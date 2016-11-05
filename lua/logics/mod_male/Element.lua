@@ -15,10 +15,21 @@ function Element:get_qualifier()
    return self.qualifier
 end
 
+function Element:set_qualifier(qualifier)
+   self.qualifier =  qualifier
+end
+
 function Element:append_qualid(qualid)
    self:get_qualifier():append_qualid(qualid)
 end
 
+function Element:__clone()
+   local retval =  Element:__new()
+   retval.key =  self:get_key()
+   retval.qualifier =  self:get_qualifier():__clone()
+   return retval
+end
+   
 function Element:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory("(logics.mod_male.Element key: "))
    self:get_key():__diagnose_single_line(indentation)
