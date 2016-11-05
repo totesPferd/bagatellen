@@ -21,6 +21,9 @@ end
 function Rule:apply(proof_state, goal)
 end
 
+function Rule:apply_substitution(substitution)
+end
+
 function Rule:__eq(other)
    return true
 end

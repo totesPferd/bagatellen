@@ -15,6 +15,10 @@ function Assume:apply(proof_state, goal)
    return proof_state:assume(goal)
 end
 
+function Assume:apply_substitution(substitution)
+   return self
+end
+
 function Assume:__eq(other)
    local retval =  false
    local other_assume =  other.get_assume()

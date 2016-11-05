@@ -33,6 +33,12 @@ function Resolve:apply(proof_state, goal)
       ,  goal )
 end
 
+function Resolve:apply_substitution(substitution)
+   return Rule:new(
+         self.get_key()
+      ,  self.get_substitution():apply_substitution(substitution) )
+end
+
 function Resolve:__eq(other)
    local retval =  false
    local other_resolve =  other:get_resolve()
