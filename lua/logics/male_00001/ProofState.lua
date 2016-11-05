@@ -9,9 +9,10 @@ local Indentation =  require "base.Indentation"
 local Set =  require "base.type.Set"
 local String =  require "base.type.String"
 
-function ProofState:new(prs, clause)
+function ProofState:new(proof_history, prs, clause)
    local retval =  ProofState:__new()
    retval.prs =  prs
+   retval.proof_history =  proof_history
    retval.premises =  clause:get_premises()
    retval.conclusions =  Set:empty_set_factory()
    retval.conclusions:add(clause:get_conclusion())
@@ -19,6 +20,10 @@ function ProofState:new(prs, clause)
    do retval:assume(goal)
    end
    return retval
+end
+
+function ProofState:get_proof_history()
+   return self.proof_history
 end
 
 function ProofState:get_prs()
@@ -37,6 +42,13 @@ function ProofState:is_proven()
    return self:get_conclusions():is_empty()
 end
 
+function ProofState:tell_proven_goals(other)
+   if self:is_proven() and self:get_premises():is_subeq(other:get_premises())
+   then
+      self:get_history():tell_proven_goals(other:get_proof_history())
+   end
+end
+
 function ProofState:applicable(goal)
    retval =  self:get_conclusions():is_in(goal)
    if retval
@@ -50,9 +62,10 @@ function ProofState:derive_clause(goal)
    return Clause:new(self:get_premises(), goal)
 end
 
-function ProofState:derive_proof_state(goal)
+function ProofState:derive_proof_state(proof_history, goal)
    return ProofState:new(
-         self:get_prs()
+         proof_history
+      ,  self:get_prs()
       ,  self:derive_clause(goal) )
 end
 
@@ -61,6 +74,7 @@ function ProofState:assume(goal)
    if retval
    then
       retval =  self:applicable(goal)
+      self:get_history():mark_as_proven(goal)
    end
    return retval
 end
@@ -73,8 +87,17 @@ function ProofState:resolve(key, substitution, goal)
      and self:applicable(goal)
    if retval
    then
+      local is_empty =  true
       for premise in axiom:get_premises()
-      do self:get_conclusions():add(premise)
+      do if not self:get_history():is_proven(premise)
+         then
+            is_empty =  false
+            self:get_conclusions():add(premise)
+         end
+      end
+      if is_empty
+      then
+         self:get_history():mark_as_proven(goal)
       end
    end
    return retval
@@ -82,6 +105,31 @@ end
 
 function ProofState:apply_rule(rule, goal)
    local retval =  rule:apply(self, goal)
+   if retval
+   then
+      self:get_proof_history():add(goal, rule)
+   end
+   return retval
+end
+
+-- attention!  could run non-terminating!
+function ProofState:check_proof_history(proof_history)
+   local this_proof_history =  proof_history or self:get_proof_history()
+
+   local retval =  true
+   local is_progress =  true
+   while is_progress
+   do is_progress =  false
+      for goal in self:get_conclusions()
+      do local rule =  this_proof_history:deref(goal)
+         if rule
+         then
+            local is_success =  self:apply_rule(goal, rule)
+            is_progress =  is_success or is_progress
+            retval =  is_success and retval
+         end
+      end
+   end
    return retval
 end
 
