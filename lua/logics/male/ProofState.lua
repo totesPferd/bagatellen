@@ -85,6 +85,21 @@ function ProofState:apply_rule(rule, goal)
    return retval
 end
 
+function ProofState:apply_proof(proof)
+   local rep =  true
+   while rep
+   do rep =  false
+      local conclusions =  self:get_conclusions():__clone()
+      for conclusion in conclusions:elems()
+      do local rule =  proof:deref(conclusion)
+         if self:apply(rule, conclusion)
+         then
+            rep =  true
+         end
+      end
+   end
+end
+
 function ProofState:__clone()
    local retval =  ProofState:__new()
    retval.premises =  self:get_premises()

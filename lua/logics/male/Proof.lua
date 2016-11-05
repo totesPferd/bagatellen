@@ -14,6 +14,7 @@ function Proof:new()
    return retval
 end
 
+-- can be used as abstract method
 function Proof:deref(goal)
    return self.action:deref(goal)
 end
