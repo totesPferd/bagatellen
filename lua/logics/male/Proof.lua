@@ -19,6 +19,16 @@ function Proof:deref(goal)
    return self.action:deref(goal)
 end
 
+function Proof:is_containing(goals)
+   for goal in goals:elems()
+   do if not(self:deref(goal))
+      then
+         return false
+      end
+   end
+   return true
+end
+
 function Proof:keys()
    return self.action:keys()
 end
@@ -33,6 +43,22 @@ function Proof:drop_all_assumes()
       self.action:drop(goal)
    end
 end
+
+function Proof:drop_all_blinds(prs)
+   local is_active =  true
+   while is_active
+   do local a_c =  self.action:__clone()
+      is_active =  false
+      for goal, rule in a_c:elems()
+      do if rule:is_blind(prs, self)
+         then
+            self.action:drop(goal)
+            is_active =  true
+         end
+      end
+   end
+end
+      
 
 function Proof:tell_proven_goals(other)
    for goal in self.action:get_keys()

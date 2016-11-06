@@ -39,6 +39,12 @@ function Resolve:apply_substitution(substitution)
       ,  self.get_substitution():apply_substitution(substitution) )
 end
 
+function Resolve:is_blind(prs, proof)
+   local axiom =  self:get_prs():deref(self:get_key()):__clone()
+   axiom:apply_substitution(substitution)
+   return proof:is_containing(axiom:get_premises())
+end
+
 function Resolve:__eq(other)
    local retval =  false
    local other_resolve =  other:get_resolve()

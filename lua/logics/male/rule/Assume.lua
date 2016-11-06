@@ -19,6 +19,10 @@ function Assume:apply_substitution(substitution)
    return self
 end
 
+function Assume:is_blind(prs, proof)
+   return false
+end
+
 function Assume:__eq(other)
    local retval =  false
    local other_assume =  other.get_assume()
