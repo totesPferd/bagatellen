@@ -15,10 +15,6 @@ function Assume:apply(proof_state, goal)
    return proof_state:assume(goal)
 end
 
-function Assume:apply_substitution(substitution)
-   return self
-end
-
 function Assume:is_blind(prs, proof)
    return false
 end

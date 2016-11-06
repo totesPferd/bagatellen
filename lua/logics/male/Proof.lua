@@ -59,7 +59,6 @@ function Proof:drop_all_blinds(prs)
    end
 end
       
-
 function Proof:tell_proven_goals(other)
    for goal in self.action:get_keys()
    do local rule =  self.action:deref(goal)

@@ -34,14 +34,12 @@ function Resolve:apply(proof_state, goal)
 end
 
 function Resolve:apply_substitution(substitution)
-   return Rule:new(
-         self.get_key()
-      ,  self.get_substitution():apply_substitution(substitution) )
+   self.get_substitution():apply_substitution(substitution) )
 end
 
 function Resolve:is_blind(prs, proof)
    local axiom =  self:get_prs():deref(self:get_key()):__clone()
-   axiom:apply_substitution(substitution)
+   axiom:apply_substitution(self:get_substitution())
    return proof:is_containing(axiom:get_premises())
 end
 
