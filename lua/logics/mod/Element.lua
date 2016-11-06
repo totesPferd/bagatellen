@@ -3,9 +3,16 @@ local Type =  require "base.type.aux.Type"
 local Element =  Type:__new()
 
 
-package.loaded["logics.mod_male.Element"] =  Element
+package.loaded["logics.mod.Element"] =  Element
 local Indentation =  require "base.Indentation"
 local String =  require "base.type.String"
+
+function Element:new(key, qualifier)
+   local retval =  Element:__new()
+   retval.key =  key
+   retval.qualifier =  qualifier
+   return retval
+end
 
 function Element:get_key()
    return self.key
@@ -29,17 +36,23 @@ function Element:__clone()
    retval.qualifier =  self:get_qualifier():__clone()
    return retval
 end
+
+function Element:__eq(other)
+   return
+          self:get_key() == other:get_key()
+      and self:get_qualifier() == other:get_qualifier()
+end
    
 function Element:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(logics.mod_male.Element key: "))
+   indentation:insert(String:string_factory("(logics.mod.Element key: "))
    self:get_key():__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(" qualifier: "))
-   self:get_qualfier():__diagnose_single_line(indentation)
+   self:get_qualifier():__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(")"))
 end
 
 function Element:__diagnose_multiple_line(indentation)
-   indentation:insert(String:string_factory("(logics.mod_male.Element "))
+   indentation:insert(String:string_factory("(logics.mod.Element "))
    local is_last_elem_multiple_line =  true
 
    indentation:insert_newline()

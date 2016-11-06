@@ -3,10 +3,11 @@ local Type =  require "base.type.aux.Type"
 local Spec =  Type:__new()
 
 
-package.loaded["logics.mod_male.Spec"] =  Spec
+package.loaded["logics.mod.Spec"] =  Spec
 local Dict =  require "base.type.Dict"
+local Element =  require "logics.mod.Element"
 local Indentation =  require "base.Indentation"
-local Qualifier =  require "logics.mod_male.Qualifier"
+local Qualifier =  require "logics.mod.Qualifier"
 local Set =  require "base.type.Set"
 local String =  require "base.type.String"
 
@@ -18,6 +19,12 @@ end
 
 function Spec:get_elems()
    return self.elems
+end
+
+function Spec:add_elem(key)
+   local qualifier =  Qualifier:id_factory()
+   local elem =  Element:new(key, qualifier)
+   self.elems:add(elem)
 end
 
 function Spec:append_qualid(qualid)
@@ -57,7 +64,7 @@ function Spec:equate(qualid_a, qualid_b)
    do local qualifier =  elem:get_qualifier()
       if qualifier:is_in(qualid_a)
       then
-         self.elems:drop(elem)
+         self:get_elems():drop(elem)
       end
    end
 
@@ -85,12 +92,16 @@ function Spec:__clone()
    return retval
 end
 
+function Spec:__eq(other)
+   return self:get_elems() == other:get_elems()
+end
+
 function Spec:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory("(base.type.Spec"))
-   for key, val in self:elems()
+   for elem in self:get_elems():elems()
    do
       indentation:insert(String:string_factory(" "))
-      val:__diagnose_single_line(indentation)
+      elem:__diagnose_single_line(indentation)
    end
    indentation:insert(String:string_factory(")"))
 end
@@ -98,13 +109,13 @@ end
 function Spec:__diagnose_multiple_line(indentation)
    indentation:insert(String:string_factory("(base.type.Spec"))
    local is_last_elem_multiple_line =  true
-   for key, val in self:get_elems():elems()
+   for elem in self:get_elems():elems()
    do
       indentation:insert_newline()
       local deeper_indentation =
          indentation:get_deeper_indentation_factory {}
       is_last_elem_multiple_line =
-         val:__diagnose_complex(deeper_indentation)
+         elem:__diagnose_complex(deeper_indentation)
       deeper_indentation:save()
    end
    indentation:insert(String:parenthesis_off_depending_factory(is_last_elem_multiple_line))

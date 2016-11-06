@@ -3,8 +3,9 @@ local Type =  require "base.type.aux.Type"
 local Qualifier =  Type:__new()
 
 
-package.loaded["logics.mod_male.Qualifier"] =  Qualifier
+package.loaded["logics.mod.Qualifier"] =  Qualifier
 local Indentation =  require "base.Indentation"
+local List =  require "base.type.List"
 local String =  require "base.type.String"
 local Set =  require "base.type.Set"
 
@@ -15,15 +16,14 @@ function Qualifier:set_factory(set)
 end
 
 function Qualifier:id_factory()
-   local retval =  Qualifier:__new()
-   retval.qualids =  Set:empty_set_factory()
-   return retval
+   local id_qualid =  List:empty_list_factory()
+   return self:qualid_factory(id_qualid)
 end
 
 function Qualifier:qualid_factory(qualid)
-   local retval =  self:id_factory()
-   retval.qualids:add(qualid)
-   return
+   local qualids =  Set:empty_set_factory()
+   qualids:add(qualid)
+   return self:set_factory(qualids)
 end
 
 function Qualifier:get_qualids()
@@ -35,14 +35,8 @@ function Qualifier:add_qualid(qualid)
 end
 
 function Qualifier:append_qualid(qualid)
-   local is_empty =  true
    for x in self:get_qualids():elems()
-   do x:append(qualid)
-      is_empty =  false
-   end
-   if is_empty
-   then
-      self:add_qualid(qualid)
+   do x:append_list(qualid)
    end
 end
 
@@ -54,12 +48,17 @@ function Qualifier:is_in(qualid)
    return self:get_qualids():is_in(qualid)
 end
 
-function Qualifier:subeq(other)
-   return self:get_qualids():subeq(other:get_qualids())
+function Qualifier:is_subeq(other)
+   return self:get_qualids():is_subeq(other:get_qualids())
 end
 
 function Qualifier:__clone()
-   return Qualifier:set_factory(self:get_qualids():__clone())
+   local new_qualids =  Set:empty_set_factory()
+   local old_qualids =  self:get_qualids()
+   for qualid in old_qualids:elems()
+   do new_qualids:add(qualid:__clone())
+   end
+   return Qualifier:set_factory(new_qualids)
 end
 
 function Qualifier:__eq(other)
@@ -67,13 +66,13 @@ function Qualifier:__eq(other)
 end
 
 function Qualifier:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(logics.mod_male.Qualifier "))
+   indentation:insert(String:string_factory("(logics.mod.Qualifier "))
    self:get_qualids():__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(")"))
 end
 
 function Qualifier:__diagnose_multiple_line(indentation)
-   indentation:insert(String:string_factory("(logics.mod_male.Qualifier "))
+   indentation:insert(String:string_factory("(logics.mod.Qualifier "))
    local is_last_elem_multiple_line =  true
 
    indentation:insert_newline()
