@@ -15,10 +15,39 @@ function List:empty_list_factory()
    return retval
 end
 
+--- Factory method factoring list containing elems von lua list l
+--  @param l
+--  @return
+function List:list_factory(l)
+   local retval =  List:empty_list_factory()
+   for k, v in pairs(l)
+   do retval:append(v)
+   end
+   return retval
+end
+
 --- Is my list empty?
 --  @return boolean
 function List:is_empty()
    return #self.val == 0
+end
+
+--- Does list end list with other?
+--  @return boolean
+function List:is_final_seq(other)
+   local diff_len =  #self.val - #other.val
+   if diff_len >= 0
+   then
+      local i
+      for i = 1, #other.val
+      do if self.val[i + diff_len] ~= other.val[i]
+         then
+            return false
+         end
+      end
+      return true
+   end
+   return false
 end
 
 --- Appending an element at the right-hand side of a list.
