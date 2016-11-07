@@ -27,14 +27,14 @@ function Spec:add_elem(key)
    self.elems:add(elem)
 end
 
-function Spec:append_qualid(qualid)
+function Spec:append_qualword(qualword)
    for elem in self:get_elems():elems()
-   do elem:append_qualid(qualid)
+   do elem:append_qualword(qualword)
    end
 end
 
-function Spec:equate(qualid_a, qualid_b)
-   if qualid_a == qualid_b
+function Spec:equate(qualword_a, qualword_b)
+   if qualword_a == qualword_b
    then
       return
    end
@@ -43,44 +43,44 @@ function Spec:equate(qualid_a, qualid_b)
    local eq_c =  Dict:empty_dict_factory()
    for elem in self:get_elems():elems()
    do local qualifier =  elem:get_qualifier()
-      for qualid in qualifier:get_qualids():elems()
-      do eq_c:add(qualid, qualifier)
+      for qualword in qualifier:get_qualwords():elems()
+      do eq_c:add(qualword, qualifier)
       end
    end
 
 -- Äquivalenzklassen erweitern
-   local common_q =  eq_c:deref(qualid_a)
-   common_q:equate(eq_c:deref(qualid_b))
-   for qualid in eq_c:keys():elems()
-   do if qualid == qualid_a or qualid == qualid_b
+   local common_q =  eq_c:deref(qualword_a)
+   common_q:equate(eq_c:deref(qualword_b))
+   for qualword in eq_c:keys():elems()
+   do if qualword == qualword_a or qualword == qualword_b
       then
-         eq_c:add(qualid, common_q)
+         eq_c:add(qualword, common_q)
       end
    end
 
--- Drop all elems where qualid_a occurs within
+-- Drop all elems where qualword_a occurs within
    local s_c =  self:get_elems():__clone()
    for elem in s_c:elems()
    do local qualifier =  elem:get_qualifier()
-      if qualifier:is_in(qualid_a)
+      if qualifier:is_in(qualword_a)
       then
          self:get_elems():drop(elem)
       end
    end
 
--- Replace all qualifier where qualid_b within
+-- Replace all qualifier where qualword_b within
    for elem in self:get_elems():elems()
    do local qualifier =  elem:get_qualifier()
-      if qualifier:is_in(qualid_b)
+      if qualifier:is_in(qualword_b)
       then
          elem:set_qualifier(common_q:__clone())
       end
    end
 end
 
-function Spec:insert(other, qualid)
+function Spec:insert(other, qualword)
    local subspec =  other:__clone()
-   subspec:append_qualid(qualid)
+   subspec:append_qualword(qualword)
    self:get_elems():add_set(subspec:get_elems())
 end
 

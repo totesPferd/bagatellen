@@ -26,8 +26,8 @@ function Element:set_qualifier(qualifier)
    self.qualifier =  qualifier
 end
 
-function Element:append_qualid(qualid)
-   self:get_qualifier():append_qualid(qualid)
+function Element:append_qualword(qualword)
+   self:get_qualifier():append_qualword(qualword)
 end
 
 function Element:__clone()
