@@ -60,6 +60,18 @@ function Qualifier:is_in(qualword)
    return false
 end
 
+function Qualifier:is_subeq(other)
+   local retval =  true
+   for elem in self:elems()
+   do if not other:is_in(elem)
+      then
+         retval =  false
+         break
+      end
+   end
+   return retval
+end
+
 function Qualifier:__clone()
    local new_qualwords =  Set:empty_set_factory()
    local old_qualwords =  self:get_qualwords()
