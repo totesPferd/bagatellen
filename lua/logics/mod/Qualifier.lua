@@ -51,11 +51,13 @@ function Qualifier:equate(other)
 end
 
 function Qualifier:is_in(qualword)
-   return self:get_qualwords():is_in(qualword)
-end
-
-function Qualifier:is_subeq(other)
-   return self:get_qualwords():is_subeq(other:get_qualwords())
+   for q in self:get_qualwords():elems()
+   do if q:is_final_seq(qualword)
+      then
+         return true
+      end
+   end
+   return false
 end
 
 function Qualifier:__clone()

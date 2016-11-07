@@ -50,6 +50,23 @@ function List:is_final_seq(other)
    return false
 end
 
+--- if other is final seq then drop it
+--  @param List
+--  @return boolean
+function List:drop_final_seq(other)
+   local retval =  self:is_final_seq(other)
+   if retval
+   then
+      local diff_len =  #self.val - #other.val
+      local i
+      local e =  #self.val
+      for i =  diff_len + 1, e
+      do table.remove(self.val)
+      end
+   end
+   return retval
+end
+
 --- Appending an element at the right-hand side of a list.
 --  @param elem element
 function List:append(elem)

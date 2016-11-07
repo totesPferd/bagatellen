@@ -52,7 +52,8 @@ function Spec:equate(qualword_a, qualword_b)
    local common_q =  eq_c:deref(qualword_a)
    common_q:equate(eq_c:deref(qualword_b))
    for qualword in eq_c:keys():elems()
-   do if qualword == qualword_a or qualword == qualword_b
+   do    if qualword:is_final_seq(qualword_a)
+      or qualword:is_final_seq(qualword_b)
       then
          eq_c:add(qualword, common_q)
       end
