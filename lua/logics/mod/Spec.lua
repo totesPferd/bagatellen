@@ -79,6 +79,16 @@ function Spec:equate(qualword_a, qualword_b)
    end
 end
 
+function Spec:follow(qualword)
+   local qualwords =  self:get_qualwords():__clone()
+   for q in qualwords:elems()
+   do if not(q:drop_final_seq(qualword))
+      then
+         self:get_qualwords():drop(q)
+      end
+   end
+end
+
 function Spec:insert(other, qualword)
    local subspec =  other:__clone()
    subspec:append_qualword(qualword)
