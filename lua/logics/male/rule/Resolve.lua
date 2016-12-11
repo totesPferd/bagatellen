@@ -40,7 +40,7 @@ end
 function Resolve:is_blind(prs, proof)
    local axiom =  self:get_prs():deref(self:get_key()):__clone()
    axiom:apply_substitution(self:get_substitution())
-   return proof:is_containing(axiom:get_premises())
+   return not proof:is_containing(axiom:get_premises())
 end
 
 function Resolve:__eq(other)

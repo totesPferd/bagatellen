@@ -40,7 +40,11 @@ end
 function Proof:drop_all_assumes()
    for goal in self:keys()
    do local rule =  self.action:deref(goal)
-      self.action:drop(goal)
+      local assume =  rule:get_assume()
+      if assume
+      then
+         self.action:drop(goal)
+      end
    end
 end
 
