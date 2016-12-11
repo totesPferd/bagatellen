@@ -37,6 +37,15 @@ function Proof:add(goal, rule)
    self.action:add(goal, rule)
 end
 
+function Proof:get_blind_goal_set(prs)
+   local retval =  Set:empty_set_factory()
+   for goal in self:keys()
+   do local rule =  self.action:deref(goal)
+      retval:add_set(rule:get_blind_goal_set(prs, self))
+   end
+   return retval
+end
+
 function Proof:drop_all_assumes()
    for goal in self:keys()
    do local rule =  self.action:deref(goal)

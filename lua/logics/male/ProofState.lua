@@ -21,6 +21,17 @@ function ProofState:new(prs, clause)
    return retval
 end
 
+function ProofState:blind_goal_set_factory(prs, premises, proof)
+   local retval =  ProofState:__new()
+   retval.prs =  prs
+   retval.premises =  premises
+   retval.conclusions =  proof:get_blind_goal_set(prs)
+   for goal in retval.premises
+   do retval:assume(goal)
+   end
+   return retval
+end
+
 function ProofState:get_prs()
    return self.prs
 end

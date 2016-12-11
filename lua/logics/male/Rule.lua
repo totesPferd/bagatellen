@@ -27,6 +27,9 @@ end
 function Rule:is_blind(prs, proof)
 end
 
+function Rule:get_blind_goal_set(prs, proof)
+end
+
 function Rule:__eq(other)
    return true
 end

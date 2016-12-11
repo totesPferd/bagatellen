@@ -5,6 +5,7 @@ local Assume =  Rule:__new()
 
 package.loaded["logics.male.rule.Assume"] =  Assume
 local Indentation =  require "base.Indentation"
+local Set =  require "base.type.Set"
 local String =  require "base.type.String"
 
 function Assume:get_assume()
@@ -17,6 +18,10 @@ end
 
 function Assume:is_blind(prs, proof)
    return false
+end
+
+function Assume:get_blind_goal_set(prs, proof)
+   return Set:empty_set_factory()
 end
 
 function Assume:__eq(other)
