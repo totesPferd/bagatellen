@@ -18,7 +18,7 @@ function URITemplate:_direct_output(ctxt, s)
 end
 
 function URITemplate:_quoted_output(ctxt, s)
-   for _, v in pairs { s:byte(1, -1) }
+   for _, v in pairs { tostring(s):byte(1, -1) }
    do local c =  string.char(v)
       if (v >= 0x30 and v <= 0x39) or (v >= 0x41 and v <= 0x5A) or (v >= 0x61 and v<= 0x7A) or c == '_' or c == '.' or c == '-'
       then
