@@ -6,17 +6,17 @@ class Entity:
       self.bozo =  bozo
       self.feeds =  set()
 
-   def self:get_url(self):
+   def get_url(self):
       return self.url
 
-   def self:get_etag(self):
+   def get_etag(self):
       return self.etag
 
-   def self:get_bozo(self):
+   def get_bozo(self):
       return self.bozo
 
-   def self.add_feed(self, protocol, url):
-      self.feeds.add((protocol, url))
+   def add_feed(self, protocol, entity):
+      self.feeds.add((protocol, entity))
 
    def get_feeds(self):
       return self.feeds

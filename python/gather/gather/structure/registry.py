@@ -4,8 +4,9 @@ class Registry:
       self.dict =  {}
 
    def get_entity(self, url):
-      return dict[url]
+      if url in self.dict.keys():
+         return self.dict[url]
 
    def store_entity(self, entity):
-      local url =  entity.get_url()
+      url =  entity.get_url()
       self.dict[url] =  entity
