@@ -22,6 +22,6 @@ def get(registry, url):
                if link.type == "application/atom+xml":
                   entity.add_feed("Atom", href)
                elif link.type == "application/rss+xml":
-                  entity.add_feed("RDF", href)
+                  entity.add_feed("RSS", href)
    return retval
    
