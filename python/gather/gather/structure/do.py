@@ -13,7 +13,7 @@ def get(registry, url):
          line =  d.bozo_exception.getLineNumber()
          msg =  d.bozo_exception.getMessage()
          bozo =  gather.structure.bozo.Bozo(col, line, msg)
-      retval =  gather.structure.entity.Entity(url, d.etag, bozo)
+      retval =  gather.structure.entity.Entity(url, bozo)
       registry.store_entity(retval)
       if d.feed.links:
          for link in d.feed.links:
@@ -23,5 +23,7 @@ def get(registry, url):
                   retval.add_feed("Atom", href)
                elif link.type == "application/rss+xml":
                   retval.add_feed("RSS", href)
+               elif link.type == "text/xml":
+                  retval.add_feed("RDF", href)
    return retval
    

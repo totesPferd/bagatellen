@@ -1,16 +1,12 @@
 class Entity:
 
-   def __init__(self, url, etag = None, bozo = None):
+   def __init__(self, url, bozo = None):
       self.url =  url
-      self.etag =  etag
       self.bozo =  bozo
       self.feeds =  set()
 
    def get_url(self):
       return self.url
-
-   def get_etag(self):
-      return self.etag
 
    def get_bozo(self):
       return self.bozo
