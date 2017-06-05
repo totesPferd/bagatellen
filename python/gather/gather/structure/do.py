@@ -1,5 +1,5 @@
 import feedparser
-import gather.structure.bozo
+import gather.data.bozo
 import gather.structure.entity
 
 def get(registry, url):
@@ -7,7 +7,7 @@ def get(registry, url):
    if not(retval):
       d =  feedparser.parse(url)
       entity =  None
-      bozo =  gather.structure.bozo.from_feed_object(d)
+      bozo =  gather.data.bozo.from_feed_object(d)
       retval =  gather.structure.entity.Entity(url, bozo)
       registry.store_entity(retval)
       if d.feed.links:

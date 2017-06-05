@@ -1,9 +1,9 @@
-import gather.structure.author
+import gather.data.author
 
-class SimpleAuthor(gather.structure.author.Author):
+class SimpleAuthor(gather.data.author.Author):
 
    def __init__(self, name):
-      gather.structure.author.Author.__init__(self)
+      gather.data.author.Author.__init__(self)
       self.name =  name
 
    def get_name(self):

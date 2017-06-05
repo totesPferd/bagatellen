@@ -1,9 +1,9 @@
-import gather.structure.author
+import gather.data.author
 
-class WordpressAuthor(gather.structure.author.Author):
+class WordpressAuthor(gather.data.author.Author):
 
    def __init__(self, id):
-      gather.structure.author.Author.__init__(self, name)
+      gather.data.author.Author.__init__(self, name)
       self.id =  id
 
    def get_id(self):

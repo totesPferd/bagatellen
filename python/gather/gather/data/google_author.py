@@ -1,9 +1,9 @@
-import gather.structure.author
+import gather.data.author
 
-class GoogleAuthor(gather.structure.author.Author):
+class GoogleAuthor(gather.data.author.Author):
 
    def __init__(self, profile, email, name):
-      gather.structure.author.Author.__init__(self)
+      gather.data.author.Author.__init__(self)
       self.profile =  profile
       self.email =  email
       self.name =  name
