@@ -6,13 +6,8 @@ def get(registry, url):
    retval =  registry.get_entity(url)
    if not(retval):
       d =  feedparser.parse(url)
-      bozo =  None
       entity =  None
-      if d.bozo != 0:
-         col =  d.bozo_exception.getColumnNumber()
-         line =  d.bozo_exception.getLineNumber()
-         msg =  d.bozo_exception.getMessage()
-         bozo =  gather.structure.bozo.Bozo(col, line, msg)
+      bozo =  gather.structure.bozo.from_feed_object(d)
       retval =  gather.structure.entity.Entity(url, bozo)
       registry.store_entity(retval)
       if d.feed.links:
