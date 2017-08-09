@@ -1,3 +1,9 @@
+-- * `Proof`-Objekte enthalten derzeit ein dict (`actions`)
+--   In Zukunft sollten `Proof`-Objekte Mengen von `Rule`s enthalten.
+-- * `Proof.deref` sollte als abstrakte Methode aufgefaßt werden.
+--   In Logiken, in denen die Montanari-Unifikation mgus bestimmt,
+--   kann die Klasse so angepaßt werden, daß sie genau eine solche
+--   Unifikation vornimmt.
 local Type =  require "base.type.aux.Type"
 
 local Proof =  Type:__new()
