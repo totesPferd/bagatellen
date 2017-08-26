@@ -24,9 +24,13 @@ function Proof:get_prs()
 end
 
 -- can be used as abstract method
+function Proof:subsumes(goal, conclusion)
+   return goal == conclusion
+end
+
 function Proof:deref(goal)
    for resolve in self.action:elems()
-   do if resolve:get_conclusion(self:get_prs()) == goal
+   do if self:subsumes(goal, resolve:get_conclusion(self:get_prs()))
       then
          return resolve
       end
@@ -55,29 +59,6 @@ function Proof:add(resolve)
    self.action:add(resolve)
 end
 
-function Proof:get_blind_goal_set()
-   local retval =  Set:empty_set_factory()
-   for resolve in self.action:elems()
-   do retval:add_set(resolve:get_blind_goal_set(self))
-   end
-   return retval
-end
-
-function Proof:drop_all_blinds()
-   local is_active =  true
-   while is_active
-   do local a_c =  self.action:__clone()
-      is_active =  false
-      for resolve in a_c:elems()
-      do if resolve:is_blind(self)
-         then
-            self.action:drop(resolve)
-            is_active =  true
-         end
-      end
-   end
-end
-      
 function Proof:tell_proven_goals(other)
    for resolve in self.action:elems()
    do other:add(resolve)

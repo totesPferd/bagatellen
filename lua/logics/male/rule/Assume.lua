@@ -16,14 +16,6 @@ function Assume:apply(proof_state, goal)
    return proof_state:assume(goal)
 end
 
-function Assume:is_blind(prs, proof)
-   return false
-end
-
-function Assume:get_blind_goal_set(prs, proof)
-   return Set:empty_set_factory()
-end
-
 function Assume:__eq(other)
    local retval =  false
    local other_assume =  other.get_assume()

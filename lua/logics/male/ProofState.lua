@@ -21,17 +21,6 @@ function ProofState:new(prs, clause)
    return retval
 end
 
-function ProofState:blind_goal_set_factory(prs, premises, proof)
-   local retval =  ProofState:__new()
-   retval.prs =  prs
-   retval.premises =  premises
-   retval.conclusions =  proof:get_blind_goal_set(prs)
-   for goal in retval.premises
-   do retval:assume(goal)
-   end
-   return retval
-end
-
 function ProofState:get_prs()
    return self.prs
 end
@@ -102,8 +91,8 @@ function ProofState:apply_proof(proof)
    do rep =  false
       local conclusions =  self:get_conclusions():__clone()
       for conclusion in conclusions:elems()
-      do local rule =  proof:deref(conclusion)
-         if self:apply(rule, conclusion)
+      do local resolve =  proof:deref(conclusion)
+         if self:apply(resolve, conclusion)
          then
             rep =  true
          end

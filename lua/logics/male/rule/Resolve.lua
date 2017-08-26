@@ -50,23 +50,6 @@ function Resolve:get_conclusion(prs)
    return conclusion
 end
 
-function Resolve:is_blind(proof)
-   local axiom =  self:get_axiom(proof:get_prs())
-   return not proof:is_containing(axiom:get_premises())
-end
-
-function Resolve:get_blind_goal_set(proof)
-   local retval =  Set:empty_set_factory()
-   local axiom =  self:get_axiom(proof:get_prs())
-   for premise in axiom:get_premises():elems()
-   do if not proof:deref(premise)
-      then
-         retval:add(premise)
-      end
-   end
-   return retval
-end
-
 function Resolve:__eq(other)
    local retval =  false
    local other_resolve =  other:get_resolve()
