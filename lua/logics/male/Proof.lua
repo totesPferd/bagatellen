@@ -1,5 +1,3 @@
--- * `Proof`-Objekte enthalten derzeit ein dict (`actions`)
---   In Zukunft sollten `Proof`-Objekte Mengen von `Rule`s enthalten.
 -- * `Proof.deref` sollte als abstrakte Methode aufgefaßt werden.
 --   In Logiken, in denen die Montanari-Unifikation mgus bestimmt,
 --   kann die Klasse so angepaßt werden, daß sie genau eine solche
@@ -10,19 +8,29 @@ local Proof =  Type:__new()
 
 
 package.loaded["logics.male.Proof"] =  Proof
-local Dict =  require "base.type.Dict"
+local Set =  require "base.type.Set"
 local Indentation =  require "base.Indentation"
 local String =  require "base.type.String"
 
-function Proof:new()
+function Proof:new(prs)
    local retval =  Proof:__new()
-   retval.action =  Dict:empty_dict_factory()
+   retval.action =  Set:empty_set_factory()
+   retval.prs =  prs
    return retval
+end
+
+function Proof:get_prs()
+   return self.prs
 end
 
 -- can be used as abstract method
 function Proof:deref(goal)
-   return self.action:deref(goal)
+   for resolve in self.action:elems()
+   do if resolve:get_conclusion(self:get_prs()) == goal
+      then
+         return resolve
+      end
+   end
 end
 
 function Proof:is_containing(goals)
@@ -36,42 +44,34 @@ function Proof:is_containing(goals)
 end
 
 function Proof:keys()
-   return self.action:keys()
-end
-
-function Proof:add(goal, rule)
-   self.action:add(goal, rule)
-end
-
-function Proof:get_blind_goal_set(prs)
-   local retval =  Set:empty_set_factory()
-   for goal in self:keys()
-   do local rule =  self.action:deref(goal)
-      retval:add_set(rule:get_blind_goal_set(prs, self))
+   retval =  Set:empty_set_factory()
+   for resolve in self.action:elems()
+   do retval:add(resolve:get_conclusion(self:get_prs()))
    end
    return retval
 end
 
-function Proof:drop_all_assumes()
-   for goal in self:keys()
-   do local rule =  self.action:deref(goal)
-      local assume =  rule:get_assume()
-      if assume
-      then
-         self.action:drop(goal)
-      end
-   end
+function Proof:add(resolve)
+   self.action:add(resolve)
 end
 
-function Proof:drop_all_blinds(prs)
+function Proof:get_blind_goal_set()
+   local retval =  Set:empty_set_factory()
+   for resolve in self.action:elems()
+   do retval:add_set(resolve:get_blind_goal_set(self))
+   end
+   return retval
+end
+
+function Proof:drop_all_blinds()
    local is_active =  true
    while is_active
    do local a_c =  self.action:__clone()
       is_active =  false
-      for goal, rule in a_c:elems()
-      do if rule:is_blind(prs, self)
+      for resolve in a_c:elems()
+      do if resolve:is_blind(self)
          then
-            self.action:drop(goal)
+            self.action:drop(resolve)
             is_active =  true
          end
       end
@@ -79,9 +79,8 @@ function Proof:drop_all_blinds(prs)
 end
       
 function Proof:tell_proven_goals(other)
-   for goal in self.action:get_keys()
-   do local rule =  self.action:deref(goal)
-      other:add(goal, rule)
+   for resolve in self.action:elems()
+   do other:add(resolve)
    end
 end
 

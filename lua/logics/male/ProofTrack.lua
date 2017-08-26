@@ -4,13 +4,11 @@ local ProofTrack =  ProofState:__new()
 
 
 package.loaded["logics.male.ProofTrack"] =  ProofTrack
-local Clause =  require "logics.male.Clause"
 local Indentation =  require "base.Indentation"
-local Set =  require "base.type.Set"
 local String =  require "base.type.String"
 
-function ProofTrack:new(proof, prs, clause)
-   local retval =  ProofState:new(prs, clause)
+function ProofTrack:new(proof, clause)
+   local retval =  ProofState:new(proof:get_prs(), clause)
    retval.proof =  proof
    return retval
 end
@@ -23,7 +21,7 @@ function ProofTrack:apply_rule(rule, goal)
    local retval =  ProofState.apply_rule(self, rule, goal)
    if retval
    then
-      self:get_proof():add(goal, rule)
+      self:get_proof():add(rule)
    end
    return retval
 end

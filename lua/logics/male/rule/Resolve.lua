@@ -38,16 +38,26 @@ function Resolve:apply_substitution(substitution)
    self.get_substitution():apply_substitution(substitution)
 end
 
-function Resolve:is_blind(prs, proof)
+function Resolve:get_axiom(prs)
    local axiom =  prs:deref(self:get_key()):__clone()
    axiom:apply_substitution(self:get_substitution())
+   return axiom
+end
+
+function Resolve:get_conclusion(prs)
+   local conclusion =  prs:deref(self:get_key()):get_conclusion():__clone()
+   conclusion:apply_substitution(self:get_substitution())
+   return conclusion
+end
+
+function Resolve:is_blind(proof)
+   local axiom =  self:get_axiom(proof:get_prs())
    return not proof:is_containing(axiom:get_premises())
 end
 
-function Resolve:get_blind_goal_set(prs, proof)
+function Resolve:get_blind_goal_set(proof)
    local retval =  Set:empty_set_factory()
-   local axiom =  prs:deref(self:get_key()):__clone()
-   axiom:apply_substitution(self:get_substitution())
+   local axiom =  self:get_axiom(proof:get_prs())
    for premise in axiom:get_premises():elems()
    do if not proof:deref(premise)
       then
