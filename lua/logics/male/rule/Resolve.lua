@@ -39,14 +39,14 @@ function Resolve:apply_substitution(substitution)
 end
 
 function Resolve:is_blind(prs, proof)
-   local axiom =  self:get_prs():deref(self:get_key()):__clone()
+   local axiom =  prs:deref(self:get_key()):__clone()
    axiom:apply_substitution(self:get_substitution())
    return not proof:is_containing(axiom:get_premises())
 end
 
 function Resolve:get_blind_goal_set(prs, proof)
    local retval =  Set:empty_set_factory()
-   local axiom =  self:get_prs():deref(self:get_key()):__clone()
+   local axiom =  prs:deref(self:get_key()):__clone()
    axiom:apply_substitution(self:get_substitution())
    for premise in axiom:get_premises():elems()
    do if not proof:deref(premise)
