@@ -24,13 +24,9 @@ function Proof:get_prs()
 end
 
 -- can be used as abstract method
-function Proof:subsumes(goal, axiom)
-   return goal == axiom
-end
-
 function Proof:deref(goal)
    for resolve in self.action:elems()
-   do if self:subsumes(goal, resolve:get_conclusion(self:get_prs()))
+   do if goal == resolve:get_conclusion(self:get_prs())
       then
          return resolve
       end
