@@ -121,10 +121,8 @@ function Proof:add(resolve)
    self.action:add(resolve)
 end
 
-function Proof:tell_proven_goals(other)
-   for resolve in self.action:elems()
-   do other:add(resolve)
-   end
+function Proof:add_proof(other)
+   self.action:add_set(other.action)
 end
 
 function Proof:__diagnose_single_line(indentation)
