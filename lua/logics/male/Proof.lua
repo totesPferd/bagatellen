@@ -38,7 +38,17 @@ function Proof:deref(goal)
 end
 
 -- Graph theoretic functions.
-function Proof:is_containing_node(goal)
+function Proof:is_containing_sink(premis)
+   local goals =  self:get_all_sources(premis)
+   if goals:is_empty()
+   then
+      return false
+   else
+      return true
+   end
+end
+   
+function Proof:is_containing_source(goal)
    local resolve =  self:deref(goal)
    if resolve
    then
@@ -46,6 +56,11 @@ function Proof:is_containing_node(goal)
    else
       return false
    end
+end
+
+function Proof:is_containing_node(clause)
+   return self:is_containing_source(clause)
+      or  self:is_containing_sink(clause)
 end
 
 function Proof:is_containing_edge(goal, premis)
@@ -76,6 +91,15 @@ function Proof:get_all_sources(premis)
       end
    end
    return retval
+end
+
+function Proof:get_all_nodes()
+   local retval =  Set:empty_set_factory()
+   for resolve in self.action:elems()
+   do local axiom =  resolve:get_axiom(self:get_prs())
+      retval:add(axiom:get_conclusion())
+      retval:add_set(axiom:get_premises())
+   end
 end
 --- end of graph theoretic functions.
 
