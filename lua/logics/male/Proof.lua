@@ -24,8 +24,8 @@ function Proof:get_prs()
 end
 
 -- can be used as abstract method
-function Proof:subsumes(goal, conclusion)
-   return goal == conclusion
+function Proof:subsumes(goal, axiom)
+   return goal == axiom
 end
 
 function Proof:deref(goal)
@@ -36,6 +36,48 @@ function Proof:deref(goal)
       end
    end
 end
+
+-- Graph theoretic functions.
+function Proof:is_containing_node(goal)
+   local resolve =  self:deref(goal)
+   if resolve
+   then
+      return true
+   else
+      return false
+   end
+end
+
+function Proof:is_containing_edge(goal, premis)
+   local resolve =  self:deref(goal)
+   if resolve
+   then
+      return self:get_all_sinks(goal):is_in(premis)
+   else
+      return false
+   end
+end
+
+function Proof:get_all_sinks(goal)
+   local resolve =  self:deref(goal)
+   if resolve
+   then
+      local axiom =  resolve:get_axiom(self:get_prs())
+      return axiom:get_premises()
+   end
+end
+
+function Proof:get_all_sources(premis)
+   local retval =  Set:empty_set_factory()
+   for goal in self.action:elems()
+   do if self:is_containing_edge(goal, premis)
+      then
+         retval:add(goal)
+      end
+   end
+   return retval
+end
+--- end of graph theoretic functions.
 
 function Proof:is_containing(goals)
    for goal in goals:elems()
