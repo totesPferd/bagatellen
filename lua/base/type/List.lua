@@ -32,7 +32,7 @@ function List:is_empty()
    return #self.val == 0
 end
 
---- Does list end list with other?
+--- Does list end with other?
 --  @return boolean
 function List:is_final_seq(other)
    local diff_len =  #self.val - #other.val
@@ -41,6 +41,24 @@ function List:is_final_seq(other)
       local i
       for i = 1, #other.val
       do if self.val[i + diff_len] ~= other.val[i]
+         then
+            return false
+         end
+      end
+      return true
+   end
+   return false
+end
+
+--- Does list starts with other?
+--  @return boolean
+function List:is_initial_seq(other)
+   local diff_len =  #self.val - #other.val
+   if diff_len >= 0
+   then
+      local i
+      for i = 1, #other.val
+      do if self.val[i] ~= other.val[i]
          then
             return false
          end
@@ -62,6 +80,23 @@ function List:drop_final_seq(other)
       local e =  #self.val
       for i =  diff_len + 1, e
       do table.remove(self.val)
+      end
+   end
+   return retval
+end
+
+--- if other is initial seq then drop it
+--  @param List
+--  @return boolean
+function List:drop_initial_seq(other)
+   local retval =  self:is_initial_seq(other)
+   if retval
+   then
+      local diff_len =  #self.val - #other.val
+      local i
+      local e =  #self.val
+      for i =  diff_len + 1, e
+      do table.remove(self.val, 1)
       end
    end
    return retval
