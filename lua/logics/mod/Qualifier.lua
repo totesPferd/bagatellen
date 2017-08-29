@@ -2,106 +2,75 @@ local Type =  require "base.type.aux.Type"
 
 local Qualifier =  Type:__new()
 
-
 package.loaded["logics.mod.Qualifier"] =  Qualifier
 local Indentation =  require "base.Indentation"
 local List =  require "base.type.List"
 local String =  require "base.type.String"
-local Set =  require "base.type.Set"
 
-function Qualifier:set_factory(set)
+function Qualifier:id_factory()
    local retval =  Qualifier:__new()
-   retval.qualwords =  set
+   retval.qualword =  List:empty_list_factory()
    return retval
 end
 
-function Qualifier:id_factory()
-   local id_qualword =  List:empty_list_factory()
-   return self:qualword_factory(id_qualword)
+function Qualifier:append_terminal_symbol(symbol)
+   self.qualword:append(symbol)
 end
 
-function Qualifier:qualword_factory(qualword)
-   local qualwords =  Set:empty_set_factory()
-   qualwords:add(qualword)
-   return self:set_factory(qualwords)
+function Qualifier:append_qualifier(other)
+   self.qualword:append_list(other.qualword)
 end
 
-function Qualifier:get_qualwords()
-   return self.qualwords
-end
-
-function Qualifier:add_qualword(qualword)
-   self:get_qualwords():add(qualword)
-end
-
-function Qualifier:append_qualid(qualid)
-   for x in self:get_qualid():elems()
-   do x:append(qualid)
+function Qualifier:get_chopped_copy(qualifier)
+   local retval =  self:__clone()
+   if retval.qualword:drop_initial_seq(qualifier.qualword)
+   then
+      return retval
    end
 end
 
-function Qualifier:append_qualword(qualword)
-   for x in self:get_qualwords():elems()
-   do x:append_list(qualword)
-   end
-end
-
-function Qualifier:equate(other)
-   self:get_qualwords():add_set(other:get_qualwords())
-end
-
-function Qualifier:is_in(qualword)
-   for q in self:get_qualwords():elems()
-   do if q:is_final_seq(qualword)
+function Qualifier:get_name()
+   local first_time =  true
+   local retval =  String:empty_string_factory()
+   local delimiter =  String:string_factory(".")
+   for terminal in self.qualword:elems()
+   do if first_time
       then
-         return true
+         first_time =  false
+      else
+         retval:append_string(delimiter)
       end
-   end
-   return false
-end
-
-function Qualifier:is_subeq(other)
-   local retval =  true
-   for elem in self:elems()
-   do if not other:is_in(elem)
-      then
-         retval =  false
-         break
-      end
+      retval:append_string(terminal)
    end
    return retval
 end
 
 function Qualifier:__clone()
-   local new_qualwords =  Set:empty_set_factory()
-   local old_qualwords =  self:get_qualwords()
-   for qualword in old_qualwords:elems()
-   do new_qualwords:add(qualword:__clone())
-   end
-   return Qualifier:set_factory(new_qualwords)
+   local retval =  Qualifier:__new()
+   retval.qualword =  self.qualword:__clone()
+   return retval
 end
 
 function Qualifier:__eq(other)
-   return self:get_qualwords() == other:get_qualwords()
+   return self.qualword == other.qualword
 end
 
 function Qualifier:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory("(logics.mod.Qualifier "))
-   self:get_qualwords():__diagnose_single_line(indentation)
+   indentation:insert(self:get_name())
    indentation:insert(String:string_factory(")"))
 end
 
 function Qualifier:__diagnose_multiple_line(indentation)
-   indentation:insert(String:string_factory("(logics.mod.Qualifier "))
-   local is_last_elem_multiple_line =  true
-
+   indentation:insert(String:string_factory("(logics.mod.Qualifier"))
    indentation:insert_newline()
-   local deeper_indentation =
-      indentation:get_deeper_indentation_factory {}
-   is_last_elem_multiple_line =
-      self:get_qualwords():__diagnose_complex(deeper_indentation)
-
-   deeper_indentation:save()
+   local is_last_elem_multiple_line =  true
+   do
+      local deeper_indentation =
+         indentation:get_deeper_indentation_factory {}
+      is_last_elem_multiple_line =  deeper_indentation:insert(self:get_name())
+      deeper_indentation:save()
+   end
    indentation:insert(String:parenthesis_off_depending_factory(is_last_elem_multiple_line))
 end
 

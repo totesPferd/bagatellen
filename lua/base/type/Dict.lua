@@ -245,8 +245,8 @@ function Dict:__diagnose_multiple_line(indentation)
          indentation:get_deeper_indentation_factory {}
       is_last_elem_multiple_line =
          key:__diagnose_complex(deeper_indentation)
-         deeper_indentation:insert(String:string_factory(": "))
-         val:__diagnose_complex(deeper_indentation)
+      deeper_indentation:insert(String:string_factory(": "))
+      val:__diagnose_complex(deeper_indentation)
       deeper_indentation:save()
    end
    indentation:insert(String:parenthesis_off_depending_factory(is_last_elem_multiple_line))
