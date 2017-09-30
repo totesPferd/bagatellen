@@ -54,6 +54,12 @@ function Position:get_report(msg)
       .. tostring(msg) )
 end
 
+function Position:get_included_from_line()
+   return String:string_factory(
+         "included from "
+      .. self:__tostring() )
+end
+
 function Position:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(
          "(file.Position "
