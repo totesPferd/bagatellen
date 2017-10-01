@@ -43,7 +43,7 @@ function Clause:__eq(other)
 end
 
 function Clause:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(logics.male.Clause "))
+   indentation:insert(String:string_factory("(logics::male::Clause "))
    self:get_premises():__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(" "))
    self:get_conclusion():__diagnose_single_line(indentation)
@@ -51,7 +51,7 @@ function Clause:__diagnose_single_line(indentation)
 end
 
 function Clause:__diagnose_multiple_line(indentation)
-   indentation:insert(String:string_factory("(logics.male.Clause"))
+   indentation:insert(String:string_factory("(logics::male::Clause"))
    local is_last_elem_multiple_line =  true
 
    indentation:insert_newline()

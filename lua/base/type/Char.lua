@@ -93,14 +93,14 @@ end
 
 function Char:__diagnose_single_line(indentation)
    local line =  String:string_factory(
-         string.format("(base.type.Char 0x%02X", self.val:byte()) )
+         string.format("(base::type::Char 0x%02X", self.val:byte()) )
    line:append_string(String:string_factory(")"))
    indentation:insert(line)
 end
 
 function Char:__diagnose_multiple_line(indentation)
    do
-      local line =  String:string_factory("(base.type.Char\n\n")
+      local line =  String:string_factory("(base::type::Char\n\n")
       line:insert(line)
    end
    do

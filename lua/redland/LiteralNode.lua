@@ -102,13 +102,13 @@ end
 
 function LiteralNode:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(
-         "(redland.LiteralNode "
+         "(redland::LiteralNode "
       .. self:__tostring()
       .. ")" ))
 end
 
 function LiteralNode:__diagnose_multiple_line(indentation)
-   indentation:insert(String:string_factory("(redland.LiteralNode"))
+   indentation:insert(String:string_factory("(redland::LiteralNode"))
    indentation:insert_newline()
    do
       local deeper_indentation =

@@ -33,7 +33,7 @@ function ProofTrack:__clone()
 end
 
 function ProofTrack:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(logics.male.ProofTrack "))
+   indentation:insert(String:string_factory("(logics::male::ProofTrack "))
    self:get_premises():__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(" "))
    self:get_conclusions():__diagnose_single_line(indentation)
@@ -41,7 +41,7 @@ function ProofTrack:__diagnose_single_line(indentation)
 end
 
 function ProofTrack:__diagnose_multiple_line(indentation)
-   indentation:insert(String:string_factory("(logics.male.ProofTrack"))
+   indentation:insert(String:string_factory("(logics::male::ProofTrack"))
    local is_last_elem_multiple_line =  true
 
    indentation:insert_newline()

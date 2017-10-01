@@ -43,13 +43,13 @@ end
 
 function BlankNode:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(
-         "(redland.BlankNode "
+         "(redland::BlankNode "
       .. self:get_id()
       .. ")" ))
 end
 
 function BlankNode:__diagnose_multiple_line(indentation)
-   indentation:insert(String:string_factory("(redland.BlankNode"))
+   indentation:insert(String:string_factory("(redland::BlankNode"))
    indentation:insert_newline()
    do
       local deeper_indentation =

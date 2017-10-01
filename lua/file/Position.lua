@@ -62,13 +62,13 @@ end
 
 function Position:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(
-         "(file.Position "
+         "(file::Position "
       .. self:__tostring()
       .. ")" ))
 end
 
 function Position:__diagnose_multiple_line(indentation)
-   indentation:insert(String:string_factory("(file.Position"))
+   indentation:insert(String:string_factory("(file::Position"))
    indentation:insert_newline()
    do
       local deeper_indentation =

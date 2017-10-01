@@ -59,7 +59,7 @@ function StringSet:__clone()
 end
 
 function StringSet:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(base.type.set.StringSet"))
+   indentation:insert(String:string_factory("(base::type::set::StringSet"))
    for key in self:elems()
    do
       indentation:insert(String:string_factory(" "))
@@ -69,7 +69,7 @@ function StringSet:__diagnose_single_line(indentation)
 end
 
 function StringSet:__diagnose_multiple_line(indentation)
-   indentation:insert(String:string_factory("(base.type.set.StringSet"))
+   indentation:insert(String:string_factory("(base::type::set::StringSet"))
    local is_last_elem_multiple_line =  true
    for key in self:elems()
    do

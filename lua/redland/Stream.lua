@@ -69,7 +69,7 @@ end
 
 function Stream:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(
-         "(redland.Stream)" ))
+         "(redland::Stream)" ))
 end
 
 function Stream:__diagnose_multiple_line(indentation)

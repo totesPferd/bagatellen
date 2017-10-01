@@ -95,7 +95,7 @@ function Hash:drop(key)
 end
 
 function Hash:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(redland.Hash)"))
+   indentation:insert(String:string_factory("(redland::Hash)"))
 end
 
 function Hash:__diagnose_multiple_line(indentation)

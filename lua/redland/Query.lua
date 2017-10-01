@@ -62,7 +62,7 @@ end
 
 function Query:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(
-         "(redland.Query)" ))
+         "(redland::Query)" ))
 end
 
 function Query:__diagnose_multiple_line(indentation)

@@ -108,7 +108,7 @@ function Stmt:__eq(other)
 end
 
 function Stmt:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(redland.Stmt "))
+   indentation:insert(String:string_factory("(redland::Stmt "))
    self:get_subject():__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(" "))
    self:get_predicate():__diagnose_single_line(indentation)
@@ -118,7 +118,7 @@ function Stmt:__diagnose_single_line(indentation)
 end
 
 function Stmt:__diagnose_multiple_line(indentation)
-   indentation:insert(String:string_factory("(redland.Stmt"))
+   indentation:insert(String:string_factory("(redland::Stmt"))
    indentation:insert_newline()
    local is_last_elem_multiple_line =  true
    do

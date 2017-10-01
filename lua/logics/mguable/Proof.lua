@@ -23,13 +23,13 @@ function Proof:deref(goal)
 end
 
 function Proof:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(logics.mguable.Proof "))
+   indentation:insert(String:string_factory("(logics::mguable::Proof "))
    self.action:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(")"))
 end
 
 function Proof:__diagnose_multiple_line(indentation)
-   indentation:insert(String:string_factory("(logics.mguable.Proof"))
+   indentation:insert(String:string_factory("(logics::mguable::Proof"))
    local is_last_elem_multiple_line =  true
 
    indentation:insert_newline()

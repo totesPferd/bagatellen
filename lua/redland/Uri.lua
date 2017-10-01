@@ -91,13 +91,13 @@ end
 
 function Uri:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(
-         "(redland.Uri "
+         "(redland::Uri "
       .. self:__tostring()
       .. ")" ))
 end
 
 function Uri:__diagnose_multiple_line(indentation)
-   indentation:insert(String:string_factory("(redland.Uri"))
+   indentation:insert(String:string_factory("(redland::Uri"))
    indentation:insert_newline()
    do
       local deeper_indentation =

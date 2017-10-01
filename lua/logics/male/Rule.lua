@@ -29,7 +29,7 @@ function Rule:__eq(other)
 end
 
 function Rule:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(logics.male.Rule)"))
+   indentation:insert(String:string_factory("(logics::male::Rule)"))
 end
 
 function Rule:__diagnose_multiple_line(indentation)

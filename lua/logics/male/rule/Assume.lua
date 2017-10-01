@@ -27,7 +27,7 @@ function Assume:__eq(other)
 end
 
 function Assume:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(logics.male.Assume)"))
+   indentation:insert(String:string_factory("(logics::male::rule::Assume)"))
 end
 
 return Assume

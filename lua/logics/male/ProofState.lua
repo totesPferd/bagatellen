@@ -109,7 +109,7 @@ function ProofState:__clone()
 end
 
 function ProofState:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(logics.male.ProofState "))
+   indentation:insert(String:string_factory("(logics::male::ProofState "))
    self:get_premises():__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(" "))
    self:get_conclusions():__diagnose_single_line(indentation)
@@ -117,7 +117,7 @@ function ProofState:__diagnose_single_line(indentation)
 end
 
 function ProofState:__diagnose_multiple_line(indentation)
-   indentation:insert(String:string_factory("(logics.male.ProofState"))
+   indentation:insert(String:string_factory("(logics::male::ProofState"))
    local is_last_elem_multiple_line =  true
 
    indentation:insert_newline()

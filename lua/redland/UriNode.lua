@@ -35,13 +35,13 @@ end
 
 function UriNode:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(
-         "(redland.UriNode "
+         "(redland::UriNode "
       .. self:get_uri():__tostring()
       .. ")" ))
 end
 
 function UriNode:__diagnose_multiple_line(indentation)
-   indentation:insert(String:string_factory("(redland.UriNode"))
+   indentation:insert(String:string_factory("(redland::UriNode"))
    indentation:insert_newline()
    do
       local deeper_indentation =

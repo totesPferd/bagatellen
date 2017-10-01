@@ -76,7 +76,7 @@ function StringKey:__clone()
 end
 
 function StringKey:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(base.type.dict.StringKey"))
+   indentation:insert(String:string_factory("(base::type::dict::StringKey"))
    for key, val in self:elems()
    do
       indentation:insert(String:string_factory(" "))
@@ -88,7 +88,7 @@ function StringKey:__diagnose_single_line(indentation)
 end
 
 function StringKey:__diagnose_multiple_line(indentation)
-   indentation:insert(String:string_factory("(base.type.dict.StringKey"))
+   indentation:insert(String:string_factory("(base::type::dict::StringKey"))
    local is_last_elem_multiple_line =  true
    for key, val in self:elems()
    do

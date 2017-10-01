@@ -64,7 +64,7 @@ function Resolve:__eq(other)
 end
 
 function Resolve:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(logics.male.Resolve "))
+   indentation:insert(String:string_factory("(logics::male::rule::Resolve "))
    self:get_key():__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(" "))
    self:get_substitution():__diagnose_single_line(indentation)
@@ -72,7 +72,7 @@ function Resolve:__diagnose_single_line(indentation)
 end
 
 function Resolve:__diagnose_multiple_line(indentation)
-   indentation:insert(String:string_factory("(logics.male.Resolve"))
+   indentation:insert(String:string_factory("(logics::male::rule::Resolve"))
    local is_last_elem_multiple_line =  true
    indentation:insert_newline()
    local deeper_indentation =

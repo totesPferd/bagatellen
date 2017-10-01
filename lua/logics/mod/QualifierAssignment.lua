@@ -34,7 +34,7 @@ function QualifierAssignment:__clone()
 end
 
 function QualifierAssignment:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(logics.mod.QualifierAssignment "))
+   indentation:insert(String:string_factory("(logics::mod::QualifierAssignment "))
    self:get_qualifier():__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(": "))
    self:get_module_instance():__diagnose_single_line(indentation)
@@ -42,7 +42,7 @@ function QualifierAssignment:__diagnose_single_line(indentation)
 end
 
 function QualifierAssignment:__diagnose_multiple_line(indentation)
-   indentation:insert(String:string_factory("(logics.mod.QualifierAssignment"))
+   indentation:insert(String:string_factory("(logics::mod::QualifierAssignment"))
    indentation:insert_newline()
    local is_last_elem_multiple_line =  true
    do

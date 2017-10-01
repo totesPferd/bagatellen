@@ -19,7 +19,7 @@ end
 
 function Transaction:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(
-         "(redland.Transaction)" ))
+         "(redland::Transaction)" ))
 end
 
 function Transaction:__diagnose_multiple_line(indentation)

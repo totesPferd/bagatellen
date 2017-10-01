@@ -25,7 +25,7 @@ end
 
 function World:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(
-         "(redland.World)" ))
+         "(redland::World)" ))
 end
 
 function World:__diagnose_multiple_line(indentation)

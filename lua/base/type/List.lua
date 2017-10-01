@@ -276,7 +276,7 @@ function List:__clone()
 end
 
 function List:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(base.type.List"))
+   indentation:insert(String:string_factory("(base::type::List"))
    for elem in self:elems()
    do
       indentation:insert(String:string_factory(" "))
@@ -286,7 +286,7 @@ function List:__diagnose_single_line(indentation)
 end
 
 function List:__diagnose_multiple_line(indentation)
-   indentation:insert(String:string_factory("(base.type.List"))
+   indentation:insert(String:string_factory("(base::type::List"))
    local is_last_elem_multiple_line =  true
    for elem in self:elems()
    do

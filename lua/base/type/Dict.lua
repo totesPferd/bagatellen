@@ -224,7 +224,7 @@ function Dict:__tostring()
 end
 
 function Dict:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(base.type.Dict"))
+   indentation:insert(String:string_factory("(base::type::Dict"))
    for key, val in self:elems()
    do
       indentation:insert(String:string_factory(" "))
@@ -236,7 +236,7 @@ function Dict:__diagnose_single_line(indentation)
 end
 
 function Dict:__diagnose_multiple_line(indentation)
-   indentation:insert(String:string_factory("(base.type.Dict"))
+   indentation:insert(String:string_factory("(base::type::Dict"))
    local is_last_elem_multiple_line =  true
    for key, val in self:elems()
    do

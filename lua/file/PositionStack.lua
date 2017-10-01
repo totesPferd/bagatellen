@@ -62,7 +62,7 @@ function PositionStack:get_report(msg)
 end
 
 function PositionStack:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(file.PositionStack"))
+   indentation:insert(String:string_factory("(file::PositionStack"))
    for elem in self.stack:elems()
    do
       indentation:insert(String:string_factory(" "))
@@ -72,7 +72,7 @@ function PositionStack:__diagnose_single_line(indentation)
 end
 
 function PositionStack:__diagnose_multiple_line(indentation)
-   indentation:insert(String:string_factory("(file.PositionStack"))
+   indentation:insert(String:string_factory("(file::PositionStack"))
    local is_last_elem_multiple_line =  true
    for elem in self.stack:elems()
    do

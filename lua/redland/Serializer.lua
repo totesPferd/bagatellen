@@ -142,7 +142,7 @@ end
 
 function Serializer:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(
-         "(redland.Serializer)" ))
+         "(redland::Serializer)" ))
 end
 
 function Serializer:__diagnose_multiple_line(indentation)

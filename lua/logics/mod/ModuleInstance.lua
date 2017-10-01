@@ -37,13 +37,13 @@ function ModuleInstance:__clone()
 end
 
 function ModuleInstance:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(logics.mod.ModuleInstance "))
+   indentation:insert(String:string_factory("(logics::mod::ModuleInstance "))
    self.set_of_qual_assgnm:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(")"))
 end
 
 function ModuleInstance:__diagnose_multiple_line(indentation)
-   indentation:insert(String:string_factory("(logics.mod.ModuleInstance"))
+   indentation:insert(String:string_factory("(logics::mod::ModuleInstance"))
    indentation:insert_newline()
    local is_last_elem_multiple_line =  true
    do

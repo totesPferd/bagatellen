@@ -159,7 +159,7 @@ function Set:__tostring()
 end
 
 function Set:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(base.type.Set"))
+   indentation:insert(String:string_factory("(base::type::Set"))
    for elem in self:elems()
    do
       indentation:insert(String:string_factory(" "))
@@ -169,7 +169,7 @@ function Set:__diagnose_single_line(indentation)
 end
 
 function Set:__diagnose_multiple_line(indentation)
-   indentation:insert(String:string_factory("(base.type.Set"))
+   indentation:insert(String:string_factory("(base::type::Set"))
    local is_last_elem_multiple_line =  true
    for elem in self:elems()
    do

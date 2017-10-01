@@ -133,7 +133,7 @@ end
 
 function Results:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(
-         "(redland.Results)" ))
+         "(redland::Results)" ))
 end
 
 function Results:__diagnose_multiple_line(indentation)

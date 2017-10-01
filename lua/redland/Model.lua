@@ -400,7 +400,7 @@ end
 
 function Model:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(
-         "(redland.Model)" ))
+         "(redland::Model)" ))
 end
 
 function Model:__diagnose_multiple_line(indentation)

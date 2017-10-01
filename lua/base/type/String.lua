@@ -202,13 +202,13 @@ end
 
 function String:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(
-         "(base.type.String "
+         "(base::type::String "
       .. self.val
       .. ")" ))
 end
 
 function String:__diagnose_multiple_line(indentation)
-   indentation:insert(String:string_factory("(base.type.String"))
+   indentation:insert(String:string_factory("(base::type::String"))
    indentation:insert_newline()
    do
       local deeper_indentation =

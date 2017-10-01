@@ -258,7 +258,7 @@ end
 
 function Store:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(
-         "(redland.Store)" ))
+         "(redland::Store)" ))
 end
 
 function Store:__diagnose_multiple_line(indentation)
