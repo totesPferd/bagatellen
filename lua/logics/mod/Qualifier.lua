@@ -8,7 +8,7 @@ local List =  require "base.type.List"
 local String =  require "base.type.String"
 
 function Qualifier:id_factory()
-   local retval =  Qualifier:__new()
+   local retval =  self:__new()
    retval.qualword =  List:empty_list_factory()
    return retval
 end

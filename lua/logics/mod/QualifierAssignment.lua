@@ -7,7 +7,7 @@ local Indentation =  require "base.Indentation"
 local String =  require "base.type.String"
 
 function QualifierAssignment:new(qualifier, module_instance)
-   local retval =  QualifierAssignment:__new()
+   local retval =  self:__new()
    retval.qualifier =  qualifier
    retval.module_instance =  module_instance
    return retval

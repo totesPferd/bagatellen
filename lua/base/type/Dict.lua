@@ -12,7 +12,7 @@ local String =  require "base.type.String"
 --- Factory method factoring empty dictionary.
 --  @return empty dict object
 function Dict:empty_dict_factory()
-   local retval =  Dict:__new()
+   local retval =  self:__new()
    retval.val =  {}
    return retval
 end

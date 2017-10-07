@@ -5,7 +5,7 @@ local Sort =  Type:__new()
 package.loaded["logics.pel.Sort"] =  Sort
 
 function Sort:new(module_instance, name)
-   local retval =  Sort:__new()
+   local retval =  self:__new()
    retval.module_instance =  module_instance
    retval.name =  name
    return retval

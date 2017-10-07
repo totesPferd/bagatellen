@@ -7,7 +7,7 @@ local Dict =  require "base.type.Dict"
 local Skolem =  require "logics.pel.term.Skolem"
 
 function Substitution:new(d0, d1)
-   local retval =  Substitution:__new()
+   local retval =  self:__new()
    retval.d0 =  d0
    retval.d1 =  d1
    retval.s =  Dict:empty_dict_factory()

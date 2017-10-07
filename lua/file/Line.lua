@@ -5,7 +5,7 @@ local Line =  Type:__new()
 package.loaded["file.Line"] =  Line
 
 function Line:new(line, position)
-   local retval =  Line:__new()
+   local retval =  self:__new()
    retval.line =  line
    retval.position =  position
    return retval

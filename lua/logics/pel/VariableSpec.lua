@@ -8,7 +8,7 @@ local String =  require "base.type.String"
 local StringSet =  require "base.type.set.StringSet"
 
 function VariableSpec:new()
-   local retval =  VariableSpec:__new()
+   local retval =  self:__new()
    retval.variables =  List:empty_list_factory()
    return retval
 end

@@ -5,8 +5,7 @@ local Skolem =  Term:__new()
 package.loaded["logics.pel.term.Skolem"] =  Skolem
 
 function Skolem:new(variable_spec, sort)
-   local retval =  Skolem:__new()
-   retval.variable_spec =  variable_spec
+   local retval =  Term.new(self, variable_spec)
    retval.sort =  sort
    return retval
 end

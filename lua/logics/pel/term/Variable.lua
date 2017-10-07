@@ -5,8 +5,7 @@ local VariableTerm =  Term:__new()
 package.loaded["logics.pel.term.Variable"] =  VariableTerm
 
 function VariableTerm:new(variable_spec, variable)
-   local retval =  VariableTerm:__new()
-   retval.variable_spec =  variable_spec
+   local retval =  Term.new(self, variable_spec)
    retval.variable =  variable
    return retval
 end

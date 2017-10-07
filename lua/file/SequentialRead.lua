@@ -7,7 +7,7 @@ local Line =  require "file.Line"
 local String =  require "base.type.String"
 
 function SequentialRead:new(position)
-   local retval =  SequentialRead:__new()
+   local retval =  self:__new()
    retval.position =  position
    retval.fd =  nil
    return retval

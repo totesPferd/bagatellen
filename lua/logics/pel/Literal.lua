@@ -6,7 +6,7 @@ package.loaded["logics.pel.Literal"] =  Literal
 local List =  require "base.type.List"
 
 function Literal:new(variable_spec, pred, term_list)
-   local retval =  Term.new(Literal, variable_spec)
+   local retval =  Term.new(self, variable_spec)
    retval.pred =  pred
    retval.term_list =  term_list
    return retval

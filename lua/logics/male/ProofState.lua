@@ -10,7 +10,7 @@ local Set =  require "base.type.Set"
 local String =  require "base.type.String"
 
 function ProofState:new(prs, clause)
-   local retval =  ProofState:__new()
+   local retval =  self:__new()
    retval.prs =  prs
    retval.premises =  clause:get_premises()
    retval.conclusions =  Set:empty_set_factory()

@@ -13,7 +13,7 @@ function Resolve:get_resolve()
 end
 
 function Resolve:new(key, substitution)
-   local retval =  Rule.new(Resolve)
+   local retval =  Rule.new(self)
    retval.key =  key
    retval.substitution =  substitution
    return retval

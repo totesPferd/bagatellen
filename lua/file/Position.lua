@@ -8,7 +8,7 @@ local Indentation =  require "base.Indentation"
 local String =  require "base.type.String"
 
 function Position:new(filename)
-   local retval =  Position:__new()
+   local retval =  self:__new()
    retval.lineno =  1
    retval.colno =  1
    retval.filename =  filename

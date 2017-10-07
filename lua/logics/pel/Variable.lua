@@ -5,7 +5,7 @@ local Variable =  Type:__new()
 package.loaded["logics.pel.Variable"] =  Variable
 
 function Variable:new(sort)
-   local retval =  Variable:__new()
+   local retval =  self:__new()
    retval.sort =  sort
    return retval
 end

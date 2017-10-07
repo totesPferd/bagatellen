@@ -8,7 +8,7 @@ local Indentation =  require "base.Indentation"
 local String =  require "base.type.String"
 
 function Clause:new(premises, conclusion)
-   local retval =  Clause:__new()
+   local retval =  self:__new()
    retval.premises =  premises
    retval.conclusion =  conclusion
    return retval

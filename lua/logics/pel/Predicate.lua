@@ -5,7 +5,7 @@ local Predicate =  Type:__new()
 package.loaded["logics.pel.Predicate"] =  Predicate
 
 function Predicate:new(module_instance, name)
-   local retval =  Predicate:__new()
+   local retval =  self:__new()
    retval.module_instance =  module_instance
    retval.name =  name
    return retval

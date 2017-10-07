@@ -15,7 +15,7 @@ function ModuleInstance:new(set_of_qual_assgnm)
       end
    end
 
-   local retval =  ModuleInstance:__new()
+   local retval =  self:__new()
    retval.set_of_qual_assgnm =  set_of_qual_assgnm
    return retval
 end

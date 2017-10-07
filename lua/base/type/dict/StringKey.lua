@@ -9,7 +9,7 @@ local StringSet =  require "base.type.set.StringSet"
 
 
 function StringKey:lua_dict_factory(lua_dict)
-   local retval =  StringKey:__new()
+   local retval =  self:__new()
    retval.val =  lua_dict or {}
    return retval
 end

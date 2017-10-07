@@ -5,7 +5,7 @@ local Function =  Type:__new()
 package.loaded["logics.pel.Function"] =  Function
 
 function Function:new(module_instance, sort, name)
-   local retval =  Function:__new()
+   local retval =  self:__new()
    retval.module_instance =  module_instance
    retval.name =  name
    retval.sort =  sort

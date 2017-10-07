@@ -6,7 +6,7 @@ package.loaded["logics.pel.Term"] =  Term
 local Substitution =  require "logics.pel.Substitution"
 
 function Term:new(variable_spec)
-   local retval =  Term:__new()
+   local retval =  self:__new()
    retval.variable_spec =  variable_spec
    return retval
 end

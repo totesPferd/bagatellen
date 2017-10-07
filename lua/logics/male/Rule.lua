@@ -8,7 +8,7 @@ local Indentation =  require "base.Indentation"
 local String =  require "base.type.String"
 
 function Rule:new()
-   local retval =  Rule:__new()
+   local retval =  self:__new()
    return retval
 end
 

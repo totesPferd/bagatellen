@@ -6,8 +6,7 @@ package.loaded["logics.pel.term.Compound"] =  Compound
 local List =  require "base.type.List"
 
 function Compound:new(variable_spec, fun, term_list)
-   local retval =  Compound:__new()
-   retval.variable_spec =  variable_spec
+   local retval =  Term.new(self, variable_spec)
    retval.fun =  fun
    retval.term_list =  term_list
    return retval

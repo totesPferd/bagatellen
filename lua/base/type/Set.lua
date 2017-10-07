@@ -12,7 +12,7 @@ local String =  require "base.type.String"
 --- Factory method producing empty set.
 --  @return empty set object
 function Set:empty_set_factory()
-   local retval =  Set:__new()
+   local retval =  self:__new()
    retval.val =  {}
    return retval
 end

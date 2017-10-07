@@ -9,7 +9,7 @@ local List =  require "base.type.List"
 local String =  require "base.type.String"
 
 function PositionStack:new(filename)
-   local retval =  PositionStack:__new()
+   local retval =  self:__new()
    retval.stack =  List:list_factory { Position:new(filename) }
    return retval
 end

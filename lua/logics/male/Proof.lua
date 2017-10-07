@@ -13,7 +13,7 @@ local Indentation =  require "base.Indentation"
 local String =  require "base.type.String"
 
 function Proof:new(prs)
-   local retval =  Proof:__new()
+   local retval =  self:__new()
    retval.action =  Set:empty_set_factory()
    retval.prs =  prs
    return retval

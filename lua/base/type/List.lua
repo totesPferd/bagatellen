@@ -10,7 +10,7 @@ local String =  require "base.type.String"
 --- Factory method factoring empty list.
 --  @return empty list object
 function List:empty_list_factory()
-   local retval =  List:__new()
+   local retval =  self:__new()
    retval.val =  {}
    return retval
 end

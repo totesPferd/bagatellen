@@ -8,7 +8,7 @@ local String =  require "base.type.String"
 
 
 function StringSet:empty_set_factory()
-   local retval =  StringSet:__new()
+   local retval =  self:__new()
    retval.val =  {}
    return retval
 end
