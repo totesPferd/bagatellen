@@ -16,7 +16,7 @@ function Skolem:get_sort()
 end
 
 function Skolem:get_base_term()
-   return self.val
+   return self.val:get_base_term()
 end
 
 function Skolem:set_base_term(term)

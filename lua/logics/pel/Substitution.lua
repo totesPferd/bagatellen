@@ -54,4 +54,40 @@ function Substitution:assign(variable, term)
    self.s:add(variable, term)
 end
 
+function Substitution:assign_once(variable, term)
+   if self:is_assigned(variable)
+   then
+      local other_base_term =  term:get_base_term()
+      local other_term_skolem =  term:get_skolem()
+      local this_term =  self:deref(variable)
+      local this_base_term =  this_term:get_base_term()
+      local this_term_skolem =  this_term:get_skolem()
+      if
+                other_base_term
+        and     this_base_term
+      then
+         return other_base_term == this_base_term
+      elseif
+                other_base_term
+        and not this_base_term
+        and     this_term_skolem
+      then
+         this_term_skolem:set_base_term(other_base_term)
+         return true
+      elseif
+            not other_base_term
+        and     other_term_skolem
+        and     this_base_term
+      then
+         other_term_skolem:set_base_term(this_base_term)
+         return true
+      else
+         return false
+      end
+   else
+      self:assign(variable, term)
+      return true
+   end
+end
+
 return Substitution

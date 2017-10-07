@@ -24,29 +24,7 @@ function VariableTerm:get_substituted(substitution)
 end
 
 function VariableTerm:_aux_unif(substitution, term)
-   if substitution:is_assigned(self)
-   then
-      if substitution:deref(self) == term
-      then
-         return true
-      else
-         local my_skolem =  term:get_skolem()
-         if my_skolem
-         then
-            if my_skolem:get_base_term() == other:get_base_term()
-            then
-               substitution:assign(self, term)
-            else
-               return false
-            end
-         else
-            return self:get_base_term() == other:get_base_term()
-         end
-      end
-   else
-      substitution:assign(self, term)
-      return true
-   end
+   return substitution:assign_once(self.variable, term)
 end
 
 function VariableTerm:__eq(other)
