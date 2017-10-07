@@ -35,16 +35,22 @@ function Compound:get_substituted(substitution)
 end
 
 function Compound:_aux_unif(substitution, term)
-   local other_term =  term:get_base_term()
-   if other_term
+   local other_skolem =  term:get_skolem()
+   local other_base_term =  term:get_base_term()
+   if
+             other_skolem
+     and not other_base_term
    then
-      local other_compound =  other_term:get_compound()
-      if other_compound
+      other_skolem:set_base_term(self)
+      return true
+   else
+      local other_base_compound =  other_base_term:get_compound()
+      if other_base_compound
       then
-         if self:get_fun() == other_compound:get_fun()
+         if self:get_fun() == other_base_compound:get_fun()
          then
             local retval =  true
-            local other_term_list =  other_compound.term_list:__clone()
+            local other_term_list =  other_base_compound.term_list:__clone()
             for sub_term in self.term_list:elems()
             do retval =  sub_term:_aux_unif(
                   substitution
@@ -56,20 +62,10 @@ function Compound:_aux_unif(substitution, term)
                   return false
                end
             end
+            return true
          else
             return false
          end
-      else
-         return false
-      end
-   else
-      local skolem =  term:get_skolem()
-      if skolem
-      then
-         substitution:complete()
-         local new_base_term =  self:get_substituted(substitution)
-         skolem:set_base_term(new_base_term)
-         return true
       else
          return false
       end
