@@ -36,6 +36,8 @@ end
 
 function ModuleInstance:_create_new_sub_part(qualifier)
    local retval =  qualifier:get_d1():__clone()
+   retval.set_of_qual_assignm:add_set(
+      self:_get_new_set_of_qual-assignm(qualifier) )
    local new_qual_assgnm =  QualifierAssignment:new(
          retval
       ,  qualifier )
