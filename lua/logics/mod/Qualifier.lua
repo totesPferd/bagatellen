@@ -7,18 +7,34 @@ local Indentation =  require "base.Indentation"
 local List =  require "base.type.List"
 local String =  require "base.type.String"
 
-function Qualifier:id_factory()
+function Qualifier:id_factory(module_instance)
    local retval =  self:__new()
    retval.qualword =  List:empty_list_factory()
+   retval.d0 =  module_instance
+   retval.d1 =  module_instance
    return retval
 end
 
-function Qualifier:append_terminal_symbol(symbol)
+function Qualifier:is_id()
+   return self.qualword:is_empty()
+end
+
+function Qualifier:get_d0()
+   return self.d0
+end
+
+function Qualifier:get_d1()
+   return self.d1
+end
+
+function Qualifier:append_terminal_symbol(symbol, d1)
    self.qualword:append(symbol)
+   self.d1 =  d1
 end
 
 function Qualifier:append_qualifier(other)
    self.qualword:append_list(other.qualword)
+   self.d1 =  other:get_d1()
 end
 
 function Qualifier:get_chopped_copy(qualifier)
