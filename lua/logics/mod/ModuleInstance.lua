@@ -14,6 +14,10 @@ function ModuleInstance:new()
 end
 
 function ModuleInstance:walk_to(qualifier)
+   return self:_walk_to(qualifier) or self:_create_new_subpart(qualifier)
+end
+
+function ModuleInstance:_walk_to(qualifier)
    if qualifier:is_id()
    then
       return self
@@ -28,6 +32,23 @@ function ModuleInstance:walk_to(qualifier)
          end
       end
    end
+end
+
+function ModuleInstance:_create_new_sub_part(qualifier)
+   local retval =  qualifier:get_d1():__clone()
+   local new_qual_assgnm =  QualifierAssignment:new(
+         retval
+      ,  qualifier )
+
+   for qual_assgnm in self.set_of_qual_assgnm:elems()
+   do local part_qual_assgnm =  new_qual_assgnm:get_chopped_copy(
+            qual_assgnm:get_qualifier() )
+      qual_assgnm:get_module_instance().set_of_qual_assgnm:add(
+            part_qual_assgnm )
+   end
+
+   self.set_of_qual_assgnm:add(new_qual_assgnm)
+   return retval
 end
 
 function ModuleInstance:_get_new_set_of_qual_assgnm(qualifier)
