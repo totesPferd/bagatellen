@@ -20,7 +20,7 @@ function ModuleInstance:new(set_of_qual_assgnm)
    return retval
 end
 
-function ModuleInstance:get_part(qualifier)
+function ModuleInstance:_get_new_set_of_qual_assgnm(qualifier)
    local new_set_of_qual_assgnm =  Set:empty_set_factory()
    for qual_assgnm in self.set_of_qual_assgnm:elems()
    do local new_qual_assgnm =  qual_assgnm:get_chopped_copy(qualifier)
@@ -29,7 +29,7 @@ function ModuleInstance:get_part(qualifier)
          new_set_of_qual_assgnm:add(new_qual_assgnm)
       end
    end
-   return ModuleInstance:new(new_set_of_qual_assgnm)
+   return new_set_of_qual_assgnm
 end
 
 function ModuleInstance:__clone()
