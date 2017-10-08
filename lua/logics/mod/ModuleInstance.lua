@@ -7,16 +7,9 @@ local Indentation =  require "base.Indentation"
 local Set =  require "base.type.Set"
 local String =  require "base.type.String"
 
-function ModuleInstance:new(set_of_qual_assgnm)
-   for qual_assgnm in set_of_qual_assgnm:elems()
-   do if qual_assgnm:get_qualifier().qualword:is_empty()
-      then
-          return qual_assgnm:get_module_instance()
-      end
-   end
-
+function ModuleInstance:new()
    local retval =  self:__new()
-   retval.set_of_qual_assgnm =  set_of_qual_assgnm
+   retval.set_of_qual_assgnm =  Set:empty_set_factory()
    return retval
 end
 
@@ -30,10 +23,6 @@ function ModuleInstance:_get_new_set_of_qual_assgnm(qualifier)
       end
    end
    return new_set_of_qual_assgnm
-end
-
-function ModuleInstance:__clone()
-   return self:new(self.set_of_qual_assgnm:__clone())
 end
 
 function ModuleInstance:__diagnose_single_line(indentation)
