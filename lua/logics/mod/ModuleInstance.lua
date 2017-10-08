@@ -13,6 +13,23 @@ function ModuleInstance:new()
    return retval
 end
 
+function ModuleInstance:walk_to(qualifier)
+   if qualifier:is_id()
+   then
+      return self
+   else
+      for qual_assgnm in self.set_of_qual_assgnm:elems()
+      do local new_qual =  qualifier:get_chopped_copy(
+               qual_assgnm:get_qualifier() )
+         if new_qual
+         then
+            local new_mod_instance =  qual_assgnm:get_module_instance()
+            return new_mod_instance:walk_to(new_qual)
+         end
+      end
+   end
+end
+
 function ModuleInstance:_get_new_set_of_qual_assgnm(qualifier)
    local new_set_of_qual_assgnm =  Set:empty_set_factory()
    for qual_assgnm in self.set_of_qual_assgnm:elems()
