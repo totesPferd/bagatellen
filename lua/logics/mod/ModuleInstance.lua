@@ -45,7 +45,12 @@ function ModuleInstance:_create_new_sub_part(qualifier)
    for qual_assgnm in self.set_of_qual_assgnm:elems()
    do local part_qual_assgnm =  new_qual_assgnm:get_chopped_copy(
             qual_assgnm:get_qualifier() )
-      qual_assgnm:get_module_instance().set_of_qual_assgnm:add(
+      local part_module_instance =  qual_assgnm:get_module_instance()
+      local part_qualifier =  part_qual_assgnm:get_qualifier()
+      retval.set_of_qual_assgnm:add_set(
+         part_module_instance:_get_new_set_of_qual_assignm( 
+            part_qualifier ))
+      part_module_instance.set_of_qual_assgnm:add(
             part_qual_assgnm )
    end
 
