@@ -5,6 +5,7 @@ local Substitution =  Type:__new()
 package.loaded["logics.pel.Substitution"] =  Substitution
 local Dict =  require "base.type.Dict"
 local Skolem =  require "logics.pel.term.Skolem"
+local String =  require "base.type.String"
 
 function Substitution:new(d0, d1)
    local retval =  self:__new()
@@ -88,6 +89,43 @@ function Substitution:assign_once(variable, term)
       self:assign(variable, term)
       return true
    end
+end
+
+function Substitution:__diagnose_single_line(indentation)
+   indentation:insert(String:string_factory("(logics::pel::Substitution"))
+   for variable, val in self.s:elems()
+   do indentation:insert(String:string_factory(" "))
+      indentation:insert(variable:get_non_nil_name())
+      if val
+      then
+         indentation:insert(String:string_factory(":= "))
+         val:__diagnose_single_line(indentation)
+      end
+      indentation:insert(String:string_factory(": "))
+      indentation:insert(variable:get_sort():get_name())
+   end
+   indentation:insert(String:string_factory(")"))
+end
+
+function Substitution:__diagnose_multiple_line(indentation)
+   indentation:insert(String:string_factory("(logics::pel::Substitution"))
+   local is_last_elem_multiple_line =  true
+   local deeper_indentation =
+      indentation:get_deeper_indentation_factory {}
+   for variable, val in self.s:elems()
+   do deeper_indentation:insert_newline()
+      deeper_indentation:insert(variable:get_non_nil_name())
+      if val
+      then
+         deeper_indentation:insert(String:string_factory(":= "))
+         is_last_elem_multiple_line =
+            val:__diagnose_complex(deeper_indentation)
+      end
+      deeper_indentation:insert(String:string_factory(": "))
+      deeper_indentation:insert(variable:get_sort():get_name())
+   end
+   deeper_indentation:save()
+   indentation:insert(String:parenthesis_off_depending_factory(is_last_elem_multiple_line))
 end
 
 return Substitution
