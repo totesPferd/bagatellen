@@ -49,4 +49,12 @@ function Term:_aux_unif(substitution, term)
    return false
 end
 
+function Term:__diagnose_single_line(indentation)
+   indentation:insert(String:string_factory("(logics::pel::Term"))
+end
+
+function Term:__diagnose_multiple_line(indentation)
+   indentation:insert(String:string_factory("(logics::pel::Term"))
+end
+
 return Term
