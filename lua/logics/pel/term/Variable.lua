@@ -3,6 +3,7 @@ local Term =  require "logics.pel.Term"
 local VariableTerm =  Term:__new()
 
 package.loaded["logics.pel.term.Variable"] =  VariableTerm
+local String =  require "base.type.String"
 
 function VariableTerm:new(variable_spec, variable)
    local retval =  Term.new(self, variable_spec)
