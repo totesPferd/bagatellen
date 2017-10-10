@@ -37,4 +37,29 @@ function VariableSpec:uniquize()
    end
 end
 
+function VariableSpec:__diagnose_single_line(indentation)
+   indentation:insert(String:string_factory("(logics::pel::VariableSpec"))
+   for variable in self:get_variable_list():elems()
+   do indentation:insert(String:string_factory(" "))
+      indentation:insert(variable:get_non_nil_name())
+      indentation:insert(String:string_factory(": "))
+      indentation:insert(variable:get_sort():get_name())
+   end
+   indentation:insert(String:string_factory(")"))
+end
+
+function VariableSpec:__diagnose_multiple_line(indentation)
+   indentation:insert(String:string_factory("(logics::pel::VariableSpec"))
+   local deeper_indentation =
+      indentation:get_deeper_indentation_factory {}
+   for variable in self:get_variable_list():elems()
+   do deeper_indentation:insert_newline()
+      deeper_indentation:insert(variable:get_non_nil_name())
+      deeper_indentation:insert(String:string_factory(": "))
+      deeper_indentation:insert(variable:get_sort():get_name())
+   end
+   deeper_indentation:save()
+   indentation:insert(String:string_factory(" )"))
+end
+
 return VariableSpec
