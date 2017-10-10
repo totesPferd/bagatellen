@@ -37,4 +37,24 @@ function VariableTerm:__eq(other)
    end
 end
 
+function VariableTerm:__diagnose_single_line(indentation)
+   indentation:insert(String:string_factory("(logics::pel::term::Variable "))
+   indentation:insert(self.variable:get_non_nil_name())
+   indentation:insert(String:string_factory(": "))
+   indentation:insert(self.variable:get_sort():get_name())
+   indentation:insert(String:string_factory(")"))
+end
+
+function VariableTerm:__diagnose_multiple_line(indentation)
+   indentation:insert(String:string_factory("(logics::pel::term::Variable"))
+   indentation:insert_newline()
+   local deeper_indentation =
+      indentation:get_deeper_indentation_factory {}
+   deeper_indentation:insert(self.variable:get_non_nil_name())
+   deeper_indentation:insert(String:string_factory(": "))
+   deeper_indentation:insert(self.variable:get_sort():get_name())
+   deeper_indentation:save()
+   indentation:insert(String:string_factory(" )"))
+end
+
 return VariableTerm
