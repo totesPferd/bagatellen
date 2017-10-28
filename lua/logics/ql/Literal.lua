@@ -1,8 +1,8 @@
-local Term =  require "logics.pel.Term"
+local Term =  require "logics.ql.Term"
 
 local Literal =  Term:__new()
 
-package.loaded["logics.pel.Literal"] =  Literal
+package.loaded["logics.ql.Literal"] =  Literal
 local List =  require "base.type.List"
 local String =  require "base.type.String"
 
@@ -53,7 +53,7 @@ end
 
 function Literal:__diagnose_single_line(indentation)
    local p_name =  self:get_pred():get_name()
-   indentation:insert(String:string_factory("(logics::pel::Literal "))
+   indentation:insert(String:string_factory("(logics::ql::Literal "))
    indentation:insert(p_name)
    for term in self.term_list:elems()
    do indentation:insert(String:string_factory(" "))
@@ -64,7 +64,7 @@ end
 
 function Literal:__diagnose_multiple_line(indentation)
    local p_name =  self:get_pred():get_name()
-   indentation:insert(String:string_factory("(logics::pel::Literal "))
+   indentation:insert(String:string_factory("(logics::ql::Literal "))
    indentation:insert(p_name)
    local is_last_elem_multiple_line =  true
    local deeper_indentation =
