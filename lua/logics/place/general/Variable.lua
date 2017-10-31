@@ -12,6 +12,13 @@ function Variable:get_variable()
    return self
 end
 
+function Variable:is_system(system)
+   if system == "general"
+   then
+      return self
+   end
+end
+
 function Variable:get_val()
    return self.val
 end
