@@ -6,8 +6,8 @@ package.loaded["logics.ql.term.BaseConcept"] =  BaseConcept
 local Qualifier =  require "logics.ql.Qualifier"
 local String =  require "base.type.String"
 
-function BaseConcept:new(variable_spec, sort, name)
-   local retval =  Term.new(self, variable_spec)
+function BaseConcept:new(variable_context, sort, name)
+   local retval =  Term.new(self, variable_context)
    retval.sort =  sort
    retval.name =  name
    return retval
@@ -49,7 +49,7 @@ function BaseConcept:__eq(other)
                other_name
            and this_name == other_name
            and self:get_sort() == other:get_sort()
-           and self:get_variable_spec() == other:get_variable_spec()
+           and self:get_variable_context() == other:get_variable_context()
       else
          return false
       end

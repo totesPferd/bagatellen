@@ -7,14 +7,14 @@ local Compound =  require "logics.ql.term.Compound"
 local String =  require "base.type.String"
 local Substitution =  require "logics.ql.Substitution"
 
-function Term:new(variable_spec)
+function Term:new(variable_context)
    local retval =  self:__new()
-   retval.variable_spec =  variable_spec
+   retval.variable_context =  variable_context
    return retval
 end
 
-function Term:get_variable_spec()
-   return self.variable_spec
+function Term:get_variable_context()
+   return self.variable_context
 end
 
 function Term:get_sort()

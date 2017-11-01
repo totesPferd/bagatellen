@@ -6,8 +6,8 @@ package.loaded["logics.ql.Literal"] =  Literal
 local List =  require "base.type.List"
 local String =  require "base.type.String"
 
-function Literal:new(variable_spec, pred, term_list)
-   local retval =  Term.new(self, variable_spec)
+function Literal:new(variable_context, pred, term_list)
+   local retval =  Term.new(self, variable_context)
    retval.pred =  pred
    retval.term_list =  term_list
    return retval

@@ -6,8 +6,8 @@ package.loaded["logics.ql.term.Variable"] =  VariableTerm
 local Qualifier =  require "logics.ql.Qualifier"
 local String =  require "base.type.String"
 
-function VariableTerm:new(variable_spec, variable)
-   local retval =  Term.new(self, variable_spec)
+function VariableTerm:new(variable_context, variable)
+   local retval =  Term.new(self, variable_context)
    retval.variable =  variable
    return retval
 end
@@ -33,7 +33,7 @@ function VariableTerm:__eq(other)
    if other_variable_term
    then
       return self.variable == other.variable
-        and  self:get_variable_spec() == other:get_variable_spec()
+        and  self:get_variable_context() == other:get_variable_context()
    else
       return false
    end

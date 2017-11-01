@@ -6,7 +6,7 @@ package.loaded["logics.ql.term.Compound"] =  Compound
 local String =  require "base.type.String"
 
 function Compound:new(base_spec, qualifier)
-   local retval =  Term.new(self, base_spec:get_variable_spec())
+   local retval =  Term.new(self, base_spec:get_variable_context())
    retval.base_spec =  base_spec
    retval.qualifier =  qualifier
    return retval
