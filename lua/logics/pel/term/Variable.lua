@@ -19,14 +19,6 @@ function VariableTerm:get_variable()
    return self
 end
 
-function VariableTerm:get_substituted(substitution)
-   return substitution:deref(self.variable)
-end
-
-function VariableTerm:_aux_unif(substitution, term)
-   return substitution:assign_once(self.variable, term)
-end
-
 function VariableTerm:__eq(other)
    local other_variable_term =  other:get_variable()
    if other_variable_term

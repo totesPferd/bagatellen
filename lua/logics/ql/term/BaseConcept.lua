@@ -37,25 +37,6 @@ function BaseConcept:get_base_concept()
    return self
 end
 
-function BaseConcept:get_substituted(substitution)
-   return self
-end
-
-function BaseConcept:_aux_unif(substitution, term)
-   local other_skolem =  term:get_skolem()
-   local other_base_term =  term:get_base_term()
-   if
-             other_skolem
-     and not other_base_term
-   then
-      other_skolem:set_base_term(self)
-      return true
-   else
-      return self == other_base_term
-   end
-   return false
-end
-
 function BaseConcept:__eq(other)
    local this_name =  self:get_name()
    if this_name

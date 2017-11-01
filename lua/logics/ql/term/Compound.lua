@@ -30,10 +30,6 @@ function Compound:get_qualified(qualifier)
   return Compound:new(self:get_base_spec(), new_qual)
 end
 
-function Compound:get_substituted(substitution)
-   return self:get_base_spec():get_substituted(substitution):get_qualified(self:get_qualifier())
-end
-
 function Compound:__eq(other)
    local other_compound =  other:get_compound()
    if other_compound
