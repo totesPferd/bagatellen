@@ -1,13 +1,12 @@
-local Term =  require "logics.ql.Term"
+local QualifiedBaseConcept =  require "logics.place.qualified.BaseConcept"
 
-local BaseConcept =  Term:__new()
+local BaseConcept =  QualifiedBaseConcept:__new()
 
 package.loaded["logics.ql.term.BaseConcept"] =  BaseConcept
-local Qualifier =  require "logics.ql.Qualifier"
 local String =  require "base.type.String"
 
-function BaseConcept:new(variable_context, sort, name)
-   local retval =  Term.new(self, variable_context)
+function BaseConcept:new(sort, name)
+   local retval =  QualifiedBaseConcept.new(self)
    retval.sort =  sort
    retval.name =  name
    return retval
@@ -25,18 +24,6 @@ function BaseConcept:get_sort()
    return self.sort
 end
 
-function BaseConcept:get_base_spec()
-   return self
-end
-
-function BaseConcept:get_qualifier()
-   return Qualifier:id_factory(self:get_sort())
-end
-   
-function BaseConcept:get_base_concept()
-   return self
-end
-
 function BaseConcept:__eq(other)
    local this_name =  self:get_name()
    if this_name
@@ -49,7 +36,6 @@ function BaseConcept:__eq(other)
                other_name
            and this_name == other_name
            and self:get_sort() == other:get_sort()
-           and self:get_variable_context() == other:get_variable_context()
       else
          return false
       end

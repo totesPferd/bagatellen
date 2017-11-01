@@ -1,53 +1,60 @@
-local Term =  require "logics.pel.Term"
+local SimpleVariable =  require "logics.place.general.Variable"
 
-local VariableTerm =  Term:__new()
+local Variable =  SimpleVariable:__new()
 
-package.loaded["logics.pel.term.Variable"] =  VariableTerm
+package.loaded["logics.pel.term.Variable"] =  Variable
 local String =  require "base.type.String"
 
-function VariableTerm:new(variable_context, variable)
-   local retval =  Term.new(self, variable_context)
-   retval.variable =  variable
+function Variable:new(sort)
+   local retval =  SimpleVariable.new(self)
+   retval.sort =  sort
    return retval
 end
 
-function VariableTerm:get_sort()
-   return self.variable:get_sort()
-end
-   
-function VariableTerm:get_variable()
-   return self
-end
-
-function VariableTerm:__eq(other)
-   local other_variable_term =  other:get_variable()
-   if other_variable_term
+function Variable:is_system(system)
+   if system == "pel"
    then
-      return self.variable == other.variable
-        and  self:get_variable_context() == other:get_variable_context()
-   else
-      return false
+      return self
    end
 end
 
-function VariableTerm:__diagnose_single_line(indentation)
+function Variable:get_sort()
+   return self.sort
+end
+
+function Variable:get_compound()
+end
+   
+function Variable:get_name()
+   return self.name
+end
+
+function Variable:set_name(name)
+   self.name =  name
+end
+
+function Variable:get_non_nil_name()
+   return self.name or String:string_factory("?")
+end
+
+function Variable:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory("(logics::pel::term::Variable "))
-   indentation:insert(self.variable:get_non_nil_name())
+   indentation:insert(self:get_non_nil_name())
    indentation:insert(String:string_factory(": "))
-   indentation:insert(self.variable:get_sort():get_name())
+   indentation:insert(self:get_sort():get_name())
    indentation:insert(String:string_factory(")"))
 end
 
-function VariableTerm:__diagnose_multiple_line(indentation)
+function Variable:__diagnose_multiple_line(indentation)
    indentation:insert(String:string_factory("(logics::pel::term::Variable"))
    indentation:insert_newline()
    local deeper_indentation =
       indentation:get_deeper_indentation_factory {}
-   deeper_indentation:insert(self.variable:get_non_nil_name())
+   deeper_indentation:insert(self:get_non_nil_name())
    deeper_indentation:insert(String:string_factory(": "))
-   deeper_indentation:insert(self.variable:get_sort():get_name())
+   deeper_indentation:insert(self:get_sort():get_name())
    deeper_indentation:save()
    indentation:insert(String:string_factory(" )"))
 end
 
-return VariableTerm
+return Variable

@@ -1,27 +1,13 @@
-local Term =  require "logics.ql.Term"
+local QualifiedCompound =  require "logics.place.qualified.Compound"
 
-local Compound =  Term:__new()
+local Compound =  QualifiedCompound:__new()
 
 package.loaded["logics.ql.term.Compound"] =  Compound
 local String =  require "base.type.String"
 
-function Compound:new(base_spec, qualifier)
-   local retval =  Term.new(self, base_spec:get_variable_context())
-   retval.base_spec =  base_spec
-   retval.qualifier =  qualifier
+function Compound:new(base, qualifier)
+   return QualifiedCompound.new(self, base, qualifier)
    return retval
-end
-
-function Compound:get_base_spec()
-   return self.base_spec
-end
-
-function Compound:get_qualifier()
-   return self.qualifier
-end
-
-function Compound:get_compound()
-   return self
 end
 
 function Compound:get_qualified(qualifier)
@@ -35,7 +21,7 @@ function Compound:__eq(other)
    if other_compound
    then
       return
-            self:get_base_spec() == other:get_base_spec()
+            self:get_base() == other:get_base()
         and self:get_qualifier() == other:get_qualifier()
    else
       return false

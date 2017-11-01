@@ -1,45 +1,24 @@
-local Term =  require "logics.ql.Term"
+local SimpleVariable =  require "logics.pel.term.Variable"
 
-local VariableTerm =  Term:__new()
+local Variable =  SimpleVariable:__new()
 
-package.loaded["logics.ql.term.Variable"] =  VariableTerm
+package.loaded["logics.ql.term.Variable"] =  Variable
 local Qualifier =  require "logics.ql.Qualifier"
 local String =  require "base.type.String"
 
-function VariableTerm:new(variable_context, variable)
-   local retval =  Term.new(self, variable_context)
-   retval.variable =  variable
-   return retval
+function Variable:new(sort)
+   return SimpleVariable.new(self, sort)
 end
 
-function VariableTerm:get_sort()
-   return self.variable:get_sort()
-end
-
-function VariableTerm:get_base_spec()
+function Variable:get_base_spec()
    return self
 end
 
-function VariableTerm:get_qualifier()
+function Variable:get_qualifier()
    return Qualifier:id_factory(self:get_sort())
 end
    
-function VariableTerm:get_variable()
-   return self
-end
-
-function VariableTerm:__eq(other)
-   local other_variable_term =  other:get_variable()
-   if other_variable_term
-   then
-      return self.variable == other.variable
-        and  self:get_variable_context() == other:get_variable_context()
-   else
-      return false
-   end
-end
-
-function VariableTerm:__diagnose_single_line(indentation)
+function Variable:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory("(logics::ql::term::Variable "))
    indentation:insert(self.variable:get_non_nil_name())
    indentation:insert(String:string_factory(": "))
@@ -47,7 +26,7 @@ function VariableTerm:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(")"))
 end
 
-function VariableTerm:__diagnose_multiple_line(indentation)
+function Variable:__diagnose_multiple_line(indentation)
    indentation:insert(String:string_factory("(logics::ql::term::Variable"))
    indentation:insert_newline()
    local deeper_indentation =
@@ -59,4 +38,4 @@ function VariableTerm:__diagnose_multiple_line(indentation)
    indentation:insert(String:string_factory(" )"))
 end
 
-return VariableTerm
+return Variable
