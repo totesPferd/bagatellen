@@ -3,6 +3,7 @@ local Type =  require "base.type.aux.Type"
 local Variable =  Type:__new()
 
 package.loaded["logics.place.general.Variable"] =  Variable
+local Qualifier =  require "logics.place.qualified.Qualifier"
 
 function Variable:new()
    return Variable:__new()
@@ -47,6 +48,29 @@ function Variable:equate(val)
       self.val =  val
       return true
    end
+end
+
+
+-- interface: logics.place.simple.Interface:
+
+function Variable:get_term()
+end
+
+
+-- interface: logics.place.qualified.Interface:
+
+function Variable:get_base_concept()
+end
+
+function Variable:get_compound()
+end
+
+function Variable:get_base()
+   return self
+end
+
+function Variable:get_qualifier()
+   return Qualifier:id_factory()
 end
 
 return Variable
