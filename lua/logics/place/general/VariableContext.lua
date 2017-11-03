@@ -7,7 +7,7 @@ local List =  require "base.type.List"
 
 function VariableContext:new()
    local retval =  self:__new()
-   retval.variables =  List:empty_factory()
+   retval.variables =  List:empty_list_factory()
    return retval
 end
 

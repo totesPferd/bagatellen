@@ -1,4 +1,4 @@
-local GeneralVariableContext =  require "logics.general.VariableContext"
+local GeneralVariableContext =  require "logics.place.general.VariableContext"
 
 local VariableContext =  GeneralVariableContext:__new()
 

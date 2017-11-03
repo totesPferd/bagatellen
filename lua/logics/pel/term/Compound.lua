@@ -1,4 +1,4 @@
-local Term =  require "logics.pel.Term"
+local Term =  require "logics.place.simple.Term"
 
 local Compound =  Term:__new()
 
@@ -6,15 +6,13 @@ package.loaded["logics.pel.term.Compound"] =  Compound
 local List =  require "base.type.List"
 local String =  require "base.type.String"
 
-function Compound:new(variable_context, fun, term_list)
-   local retval =  Term.new(self, variable_context)
-   retval.fun =  fun
-   retval.term_list =  term_list
+function Compound:new(fun, term_list)
+   local retval =  Term.new(self, fun, term_list)
    return retval
 end
 
 function Compound:get_fun()
-   return self.fun
+   return self:get_symbol()
 end
 
 function Compound:get_sort()
@@ -31,7 +29,7 @@ function Compound:__eq(other)
    then
      return
          self:get_fun() == other:get_fun()
-     and self:get_term_list() == other:get_term_list()
+     and self:get_args() == other:get_args()
    else
       return false
    end
@@ -41,7 +39,7 @@ function Compound:__diagnose_single_line(indentation)
    local f_name =  self:get_fun():get_name()
    indentation:insert(String:string_factory("(logics::pel::term::Compound "))
    indentation:insert(f_name)
-   for term in self.term_list:elems()
+   for term in self:get_args():elems()
    do indentation:insert(String:string_factory(" "))
       term:__diagnose_single_line(indentation)
    end
@@ -55,7 +53,7 @@ function Compound:__diagnose_multiple_line(indentation)
    local is_last_elem_multiple_line =  true
    local deeper_indentation =
       indentation:get_deeper_indentation_factory {}
-   for term in self.term_list:elems()
+   for term in self:get_args():elems()
    do deeper_indentation:insert_newline()
       is_last_elem_multiple_line =
          term:__diagnose_complex(deeper_indentation)

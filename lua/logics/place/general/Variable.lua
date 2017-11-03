@@ -6,7 +6,7 @@ package.loaded["logics.place.general.Variable"] =  Variable
 local Qualifier =  require "logics.place.qualified.Qualifier"
 
 function Variable:new()
-   return Variable:__new()
+   return self:__new()
 end
 
 function Variable:get_variable()

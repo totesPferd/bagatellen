@@ -35,7 +35,7 @@ end
 
 function Compound:equate(val)
    local new_qual
-      =  val:get_qualifier():get_rhs_chopped_copy(self:get_qualfier())
+      =  val:get_qualifier():get_rhs_chopped_copy(self:get_qualifier())
    if new_qual
    then
       return self:get_base():equate(Compound:new(val:get_base(), new_qual))

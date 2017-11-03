@@ -26,6 +26,10 @@ function Term:get_symbol()
    return self.symbol
 end
 
+function Term:get_args()
+   return self.args
+end
+
 function Term:backup()
    for sub_term in self.args:elems()
    do sub_term:backup()
@@ -52,7 +56,7 @@ function Term:equate(val)
             local equatable =  true
 
 -- im folgenden zip verwenden sobald verfügbar!
-            local other_sub_terms =  other_term.args:clone()
+            local other_sub_terms =  other_term.args:__clone()
             for sub_term in self.args:elems()
             do local other_sub_term =  other_sub_terms:get_head()
                other_sub_terms:cut_head()
