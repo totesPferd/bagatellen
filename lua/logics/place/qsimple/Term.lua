@@ -11,6 +11,34 @@ function Term:new(symbol, args)
    return SimpleTerm.new(self, symbol, args)
 end
 
+function Term:clone()
+   local new_symbol =  self:get_symbol():clone()
+   local new_args =  List:empty_list_factory()
+   for arg in self:get_args():elems()
+   do new_args:append(arg:clone())
+   end
+   return self:new(new_symbol, new_args)
+end
+
+function Term:apply_qualifier(qualifier)
+   self:get_symbol():apply_qualifier(qualifier)
+   for arg in self:get_args():elems()
+   do arg:apply_qualifier(qualifier)
+   end
+end
+
+function Term:__eq(other)
+   local other_term =  other:get_term():is_system("qsimple")
+   if other_term
+   then
+      return
+            self:get_symbol() == other:get_symbol()
+        and self:get_args() == other:get_args()
+   else
+      return false
+   end
+end
+
 function Term:is_system(system)
    if system == "qsimple"
    then
@@ -43,10 +71,10 @@ function Term:get_base()
       then
          return self
       else
-         local qsymbol =  self:get_symbol():is_symbol("qsimple")
+         local qsymbol =  self:get_symbol():is_system("qsimple")
          if qsymbol
          then
-            local new_symbol =  qsymbol:get_chopped_qualifier_factory(
+            local new_symbol =  qsymbol:get_chopped_qualifier_copy(
                   qualifier )
 -- good for map:
             local new_args =  List:empty_list_factory()
@@ -54,13 +82,13 @@ function Term:get_base()
             do local qarg =  arg:is_system("qsimple")
                if qarg
                then
-                  new_args:append(qarg:get_chopped_qualifier_factory(
+                  new_args:append(qarg:get_chopped_qualifier_copy(
                         qualifier ))
                else
                   return
                end
             end
-            return Term:new(new_symbol, new_args)
+            return self:new(new_symbol, new_args)
          end
       end
    end

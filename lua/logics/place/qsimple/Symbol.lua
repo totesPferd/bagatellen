@@ -13,7 +13,7 @@ end
 
 function Symbol:clone()
    local qual_clone =  self.qualifier:__clone()
-   return Symbol:qualifying_factory(base, qual_clone)
+   return self:qualifying_factory(base, qual_clone)
 end
 
 function Symbol:apply_qualifier(qualifier)
@@ -28,7 +28,7 @@ end
 
 function Symbol:get_chopped_qualifier_copy(qualifier)
    local new_qual =  self:get_qualifier():get_rhs_chopped_copy(qualifier)
-   return Symbol:qualifying_factory(self:get_base(), new_qual)
+   return self:qualifying_factory(self:get_base(), new_qual)
 end
 
 function Symbol:is_system(system)

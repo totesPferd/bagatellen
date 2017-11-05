@@ -12,7 +12,7 @@ function Sort:new(module_instance, name)
 end
 
 function Sort:is_system(system)
-   if system == "qsimple"
+   if system == "simple"
    then
       return self
    end
