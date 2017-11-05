@@ -30,6 +30,13 @@ function Term:get_args()
    return self.args
 end
 
+function Term:is_system(system)
+   if system == "simple"
+   then
+      return self
+   end
+end
+
 function Term:backup()
    for sub_term in self.args:elems()
    do sub_term:backup()
