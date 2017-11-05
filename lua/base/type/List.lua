@@ -108,6 +108,12 @@ function List:append(elem)
    table.insert(self.val, elem)
 end
 
+--- Prepending an element at the left-hand side of a list.
+--  @param elem element
+function List:prepend(elem)
+   table.insert(self.val, 1, elem)
+end
+
 --- Appending another list at the right-hand side of a list.
 --  @param other the list to be appended
 function List:append_list(other)
