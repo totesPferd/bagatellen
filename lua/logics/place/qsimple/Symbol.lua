@@ -11,6 +11,21 @@ function Symbol:qualifying_factory(base, qualifier)
    return retval
 end
 
+function Symbol:clone()
+   local qual_clone =  self.qualifier:__clone()
+   return Symbol:qualifying_factory(base, qual_clone)
+end
+
+function Symbol:apply_qualifier(qualifier)
+   self.qualifier:append_qualifier(qualifier)
+end
+
+function Symbol:__eq(other)
+   return
+         self.base == other.base
+     and self.qualifier == other.qualifier
+end
+
 function Symbol:get_chopped_qualifier_copy(qualifier)
    local new_qual =  self:get_qualifier():get_rhs_chopped_copy(qualifier)
    return Symbol:qualifying_factory(self:get_base(), new_qual)
