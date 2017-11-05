@@ -45,9 +45,13 @@ function Variable:restore()
 end
 
 function Variable:equate(val)
-   if self:get_val()
+   local this_val =  self:get_val()
+   if this_val
    then
-      return self:get_val():equate(val)
+      return this_val:equate(val)
+   elseif self == val
+   then
+      return true
    else
       self:set_val(val)
       return true
