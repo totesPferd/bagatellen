@@ -1,3 +1,6 @@
+-- Methoden backup und restore sicherlich entbehrlich.
+-- Beim equaten sollte man Terme zunächst kopieren und wegschmeißen,
+-- soweit sie sich nicht equaten lassen.
 local Type =  require "base.type.aux.Type"
 
 local Variable =  Type:__new()
