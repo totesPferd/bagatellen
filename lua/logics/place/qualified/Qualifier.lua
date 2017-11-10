@@ -14,15 +14,19 @@ function Qualifier:id_factory()
 end
 
 function Qualifier:is_id()
-   return self.qualword:is_empty()
+   return self:get_qualword():is_empty()
+end
+
+function Qualifier:get_qualword()
+   return self.qualword
 end
 
 function Qualifier:append_terminal_symbol(symbol)
-   self.qualword:append(symbol)
+   self:get_qualword():append(symbol)
 end
 
 function Qualifier:append_qualifier(other)
-   self.qualword:append_list(other.qualword)
+   self:get_qualword():append_list(other.qualword)
 end
 
 function Qualifier:get_lhs_chopped_copy(qualifier)
@@ -45,7 +49,7 @@ function Qualifier:get_name()
    local first_time =  true
    local retval =  String:empty_string_factory()
    local delimiter =  String:string_factory(".")
-   for terminal in self.qualword:elems()
+   for terminal in self:get_qualword():elems()
    do if first_time
       then
          first_time =  false
@@ -57,14 +61,43 @@ function Qualifier:get_name()
    return retval
 end
 
+function Qualifier:get_longest_common_tail(other)
+   local this_copy_list =  self:get_qualword():__clone()
+   local other_copy_list =  other:get_qualword():__clone()
+   local retval =  Qualifier:id_factory()
+   local looping =  true
+   while looping
+   do
+      if this_copy_list:is_empty()
+      then
+         looping =  false
+      elseif other_copy_list:is_empty()
+      then
+         looping =  false
+      else
+         local this_tail_symbol =  this_copy_list:get_tail()
+         local other_tail_symbol =  other_copy_list:get_tail()
+         if this_tail_symbol == other_tail_symbol
+         then
+            this_copy_list:cut_tail()
+            other_copy_list:cut_tail()
+            retval:get_qualword():prepend(this_tail_symbol)
+         else
+            looping =  false
+         end
+      end
+   end
+   return retval
+end
+
 function Qualifier:__clone()
    local retval =  Qualifier:__new()
-   retval.qualword =  self.qualword:__clone()
+   retval.qualword =  self:get_qualword():__clone()
    return retval
 end
 
 function Qualifier:__eq(other)
-   return self.qualword == other.qualword
+   return self:get_qualword() == other:get_qualword()
 end
 
 function Qualifier:__diagnose_single_line(indentation)

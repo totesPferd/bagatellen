@@ -36,7 +36,7 @@ function VariableContext:__diagnose_single_line(indentation)
          indentation:insert(String:string_factory(": "))
          indentation:insert(pel_variable:get_sort():get_name())
       else
-         indentation:insert(String:string_factory("<unnamed>"))
+         indentation:insert(String:string_factory(" <unnamed>"))
       end
    end
    indentation:insert(String:string_factory(")"))
@@ -55,7 +55,7 @@ function VariableContext:__diagnose_multiple_line(indentation)
          deeper_indentation:insert(String:string_factory(": "))
          deeper_indentation:insert(pel_variable:get_sort():get_name())
       else
-         deeper_indentation:insert(String:string_factory("<unnamed>"))
+         deeper_indentation:insert(String:string_factory(" <unnamed>"))
       end
    end
    deeper_indentation:save()

@@ -11,6 +11,13 @@ function Sort:new(module_instance, name)
    return retval
 end
 
+function Sort:is_system(system)
+   if system == "simple"
+   then
+      return self
+   end
+end
+
 function Sort:get_module_instance()
    return self.module_instance
 end

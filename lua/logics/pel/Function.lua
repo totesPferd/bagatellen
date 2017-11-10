@@ -1,11 +1,11 @@
-local Type =  require "base.type.aux.Type"
+local Symbol =  require "logics.place.simple.Symbol"
 
-local Function =  Type:__new()
+local Function =  Symbol:__new()
 
 package.loaded["logics.pel.Function"] =  Function
 
 function Function:new(module_instance, sort, name)
-   local retval =  self:__new()
+   local retval =  Symbol.new(self)
    retval.module_instance =  module_instance
    retval.name =  name
    retval.sort =  sort

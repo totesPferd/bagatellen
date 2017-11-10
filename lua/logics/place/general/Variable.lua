@@ -1,3 +1,6 @@
+-- Methoden backup und restore sicherlich entbehrlich.
+-- Beim equaten sollte man Terme zunächst kopieren und wegschmeißen,
+-- soweit sie sich nicht equaten lassen.
 local Type =  require "base.type.aux.Type"
 
 local Variable =  Type:__new()
@@ -24,28 +27,36 @@ function Variable:get_val()
    return self.val
 end
 
+function Variable:set_val(val)
+   self.val =  val
+end
+
 function Variable:backup()
-   self.backup_store =  self.val
-   if self.val
+   self.backup_store =  self:get_val()
+   if self:get_val()
    then
-      self.val:backup()
+      self:get_val():backup()
    end
 end
 
 function Variable:restore()
-   self.val =  self.backup_store
-   if self.val
+   self:set_val(self.backup_store)
+   if self:get_val()
    then
-      self.val:restore()
+      self:get_val():restore()
    end
 end
 
 function Variable:equate(val)
-   if self.val
+   local this_val =  self:get_val()
+   if this_val
    then
-      return self.val:equate(val)
+      return this_val:equate(val)
+   elseif self == val
+   then
+      return true
    else
-      self.val =  val
+      self:set_val(val)
       return true
    end
 end

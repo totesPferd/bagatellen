@@ -34,7 +34,7 @@ function Variable:set_name(name)
 end
 
 function Variable:get_non_nil_name()
-   return self.name or String:string_factory("?")
+   return self:get_name() or String:string_factory("?")
 end
 
 function Variable:__diagnose_single_line(indentation)

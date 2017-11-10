@@ -1,11 +1,11 @@
-local Type =  require "base.type.aux.Type"
+local Symbol =  require "logics.place.simple.Symbol"
 
-local Predicate =  Type:__new()
+local Predicate =  Symbol:__new()
 
 package.loaded["logics.pel.Predicate"] =  Predicate
 
 function Predicate:new(module_instance, name)
-   local retval =  self:__new()
+   local retval =  Symbol.new(self)
    retval.module_instance =  module_instance
    retval.name =  name
    return retval
