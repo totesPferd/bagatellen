@@ -58,11 +58,12 @@ function ProofState:apply_rule(rule, goal)
    return retval
 end
 
+
 function ProofState:apply_proof(proof)
    local rep =  true
    while rep
    do rep =  false
-      local conclusions =  self:get_conclusions():__clone()
+      local conclusions =  self:get_devared_conclusions()
       for conclusion in conclusions:elems()
       do local clause =  proof:search(conclusion)
          if clause
@@ -77,11 +78,26 @@ function ProofState:apply_proof(proof)
    end
 end
 
-function ProofState:__clone()
-   local retval =  ProofState:__new()
-   retval.premises =  self:get_premises()
-   retval.conclusions =  self:get_conclusions():__clone()
-   retval.prs =  self:get_prs()
+function ProofState:get_devared_premises()
+   local retval =  Set:empty_set_factory()
+   for premis in self:get_premises()
+   do retval:add(premis:devar())
+   end
+   return retval
+end
+
+function ProofState:get_devared_conclusions()
+   local retval =  Set:empty_set_factory()
+   for conclusion in self:get_conclusions()
+   do retval:add(conclusion:devar())
+   end
+   return retval
+end
+
+function ProofState:devar()
+   local retval =  self:__new()
+   retval.premises =  self:get_devared_premises()
+   retval.conclusions =  self:get_devared_conclusions()
    return retval
 end
 

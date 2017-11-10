@@ -5,6 +5,7 @@ local Clause =  Type:__new()
 
 package.loaded["logics.male.Clause"] =  Clause
 local Indentation =  require "base.Indentation"
+local Set =  require "base.type.Set"
 local String =  require "base.type.String"
 
 function Clause:new(premises, conclusion)
@@ -26,11 +27,16 @@ function Clause:equate(goal)
    return self:get_conclusion():equate(goal)
 end
 
-function Clause:__clone()
-   local premises =  self.get_premises():__clone()
-   local conclusion =  self.get_conclusion():__clone()
-   local retval =  Clause:new(premises, conclusion)
-   return retval
+-- Kopie von sich ohne Variablen-Bindungen.
+-- (so eine Art __clone)
+function Clause:devar()
+-- gut fuer map-function
+   local new_premises =  Set:empty_set_factory()
+   for premis in self:get_premises():elems()
+   do new_premises:add(premis:devar())
+   end
+   local new_conclusion =  self:get_conclusion():devar()
+   return self:new(new_premises, new_conclusion)
 end
 
 function Clause:__diagnose_single_line(indentation)

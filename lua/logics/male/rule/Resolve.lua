@@ -32,8 +32,8 @@ function Resolve:equate(goal)
    return self:get_clause():equate(goal)
 end
 
-function Resolve:__clone()
-   return self:new(self:get_clause():__clone())
+function Resolve:devar()
+   return self:new(self:get_clause():devar())
 end
 
 function Resolve:__diagnose_single_line(indentation)

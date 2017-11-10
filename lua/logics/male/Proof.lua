@@ -28,7 +28,7 @@ end
 
 function Proof:search(goal)
    for clause in self.action:elems()
-   do local clause_copy =  clause:__clone()
+   do local clause_copy =  clause:devar()
       if clause_copy:equate(goal)
       then
          return clause_copy
