@@ -28,9 +28,14 @@ function Clause:equate(goal)
    return self:get_conclusion():equate(goal)
 end
 
+function Clause:new_var_assgnm()
+   return VarAssgnm:new()
+end
+
 -- Kopie von sich ohne Variablen-Bindungen.
 -- (so eine Art __clone)
 function Clause:devar()
+   local var_assgnm =  self:new_var_assgnm()
 -- gut fuer map-function
    local new_premises =  Set:empty_set_factory()
    for premis in self:get_premises():elems()

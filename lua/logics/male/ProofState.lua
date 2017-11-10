@@ -8,6 +8,7 @@ local Clause =  require "logics.male.Clause"
 local Indentation =  require "base.Indentation"
 local Set =  require "base.type.Set"
 local String =  require "base.type.String"
+local VarAssgnm =  require "logics.male.VarAssgnm"
 
 function ProofState:new(clause)
    local retval =  self:__new()
@@ -18,6 +19,10 @@ function ProofState:new(clause)
    do retval:assume(goal)
    end
    return retval
+end
+
+function ProofState:new_var_assgnm()
+   return VarAssgnm:new()
 end
 
 function ProofState:get_premises()
@@ -95,6 +100,7 @@ function ProofState:get_devared_conclusions(var_assgnm)
 end
 
 function ProofState:devar()
+   local var_assgnm =  self:new_var_assgnm()
    local retval =  self:__new()
    retval.premises =  self:get_devared_premises(var_assgnm)
    retval.conclusions =  self:get_devared_conclusions(var_assgnm)
