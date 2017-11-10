@@ -7,6 +7,7 @@ package.loaded["logics.male.Clause"] =  Clause
 local Indentation =  require "base.Indentation"
 local Set =  require "base.type.Set"
 local String =  require "base.type.String"
+local VarAssgnm =  require "logics.male.VarAssgnm"
 
 function Clause:new(premises, conclusion)
    local retval =  self:__new()
@@ -33,9 +34,9 @@ function Clause:devar()
 -- gut fuer map-function
    local new_premises =  Set:empty_set_factory()
    for premis in self:get_premises():elems()
-   do new_premises:add(premis:devar())
+   do new_premises:add(premis:devar(var_assgnm))
    end
-   local new_conclusion =  self:get_conclusion():devar()
+   local new_conclusion =  self:get_conclusion():devar(var_assgnm)
    return self:new(new_premises, new_conclusion)
 end
 

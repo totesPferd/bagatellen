@@ -78,26 +78,26 @@ function ProofState:apply_proof(proof)
    end
 end
 
-function ProofState:get_devared_premises()
+function ProofState:get_devared_premises(var_assgnm)
    local retval =  Set:empty_set_factory()
    for premis in self:get_premises()
-   do retval:add(premis:devar())
+   do retval:add(premis:devar(var_assgnm))
    end
    return retval
 end
 
-function ProofState:get_devared_conclusions()
+function ProofState:get_devared_conclusions(var_assgnm)
    local retval =  Set:empty_set_factory()
    for conclusion in self:get_conclusions()
-   do retval:add(conclusion:devar())
+   do retval:add(conclusion:devar(var_assgnm))
    end
    return retval
 end
 
 function ProofState:devar()
    local retval =  self:__new()
-   retval.premises =  self:get_devared_premises()
-   retval.conclusions =  self:get_devared_conclusions()
+   retval.premises =  self:get_devared_premises(var_assgnm)
+   retval.conclusions =  self:get_devared_conclusions(var_assgnm)
    return retval
 end
 
