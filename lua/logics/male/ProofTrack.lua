@@ -8,7 +8,7 @@ local Indentation =  require "base.Indentation"
 local String =  require "base.type.String"
 
 function ProofTrack:new(proof, clause)
-   local retval =  ProofState:new(proof:get_prs(), clause)
+   local retval =  ProofState:new(clause)
    retval.proof =  proof
    return retval
 end
@@ -17,8 +17,8 @@ function ProofTrack:get_proof()
    return self.proof
 end
 
-function ProofTrack:apply_rule(rule, goal)
-   local retval =  ProofState.apply_rule(self, rule, goal)
+function ProofTrack:resolve(axiom, goal)
+   local retval =  ProofState.resolve(self, axiom, goal)
    if retval
    then
       self:get_proof():add(rule)

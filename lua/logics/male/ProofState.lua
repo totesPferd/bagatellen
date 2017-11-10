@@ -9,9 +9,8 @@ local Indentation =  require "base.Indentation"
 local Set =  require "base.type.Set"
 local String =  require "base.type.String"
 
-function ProofState:new(prs, clause)
+function ProofState:new(clause)
    local retval =  self:__new()
-   retval.prs =  prs
    retval.premises =  clause:get_premises()
    retval.conclusions =  Set:empty_set_factory()
    retval.conclusions:add(clause:get_conclusion())
@@ -19,10 +18,6 @@ function ProofState:new(prs, clause)
    do retval:assume(goal)
    end
    return retval
-end
-
-function ProofState:get_prs()
-   return self.prs
 end
 
 function ProofState:get_premises()
@@ -37,8 +32,8 @@ function ProofState:is_proven()
    return self:get_conclusions():is_empty()
 end
 
-function ProofState:applicable(goal)
-   retval =  self:get_conclusions():is_in(goal)
+function ProofState:assume(goal)
+   local retval =  self:get_premises():is_in(goal)
    if retval
    then
       self:get_conclusions():drop(goal)
@@ -46,33 +41,11 @@ function ProofState:applicable(goal)
    return retval
 end
 
-function ProofState:derive_clause(goal)
-   return Clause:new(self:get_premises(), goal)
-end
-
-function ProofState:derive_proof_state(goal)
-   return ProofState:new(
-         self:get_prs()
-      ,  self:derive_clause(goal) )
-end
-
-function ProofState:assume(goal)
-   local retval =  self:get_premises():is_in(goal)
+function ProofState:resolve(axiom, goal)
+   local retval =  axiom:equate(goal)
    if retval
    then
-      retval =  self:applicable(goal)
-   end
-   return retval
-end
-
-function ProofState:resolve(key, substitution, goal)
-   local axiom =  self:get_prs():deref(key):__clone()
-   axiom:apply_substitution(substitution)
-   local retval =
-         axiom:get_conclusion():__eq(goal)
-     and self:applicable(goal)
-   if retval
-   then
+      self:get_conclusions():drop(goal)
       for premise in axiom:get_premises()
       do self:get_conclusions():add(premise)
       end
@@ -91,10 +64,14 @@ function ProofState:apply_proof(proof)
    do rep =  false
       local conclusions =  self:get_conclusions():__clone()
       for conclusion in conclusions:elems()
-      do local resolve =  proof:deref(conclusion)
-         if self:apply(resolve, conclusion)
+      do local clause =  proof:search(conclusion)
+         if clause
          then
             rep =  true
+            self:get_conclusions():drop(goal)
+            for premise in axiom:get_premises()
+            do self:get_conclusions():add(premise)
+            end
          end
       end
    end

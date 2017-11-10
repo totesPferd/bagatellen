@@ -22,11 +22,8 @@ function Clause:get_conclusion()
    return self.conclusion
 end
 
-function Clause:apply_substitution(substitution)
-  self.get_conclusion():apply_substitution(substitution)
-  for premise in self.get_premises():elems()
-  do premise:apply_substitution(substitution)
-  end
+function Clause:equate(goal)
+   return self:get_conclusion():equate(goal)
 end
 
 function Clause:__clone()
@@ -34,12 +31,6 @@ function Clause:__clone()
    local conclusion =  self.get_conclusion():__clone()
    local retval =  Clause:new(premises, conclusion)
    return retval
-end
-
-function Clause:__eq(other)
-   return
-         self.get_premises():__eq(other.get_premises())
-     and self.get_conclusion():__eq(other.get_conclusion())
 end
 
 function Clause:__diagnose_single_line(indentation)

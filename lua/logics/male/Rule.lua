@@ -21,11 +21,7 @@ end
 function Rule:apply(proof_state, goal)
 end
 
-function Rule:apply_substitution(substitution)
-end
-
-function Rule:__eq(other)
-   return true
+function Rule:clone()
 end
 
 function Rule:__diagnose_single_line(indentation)

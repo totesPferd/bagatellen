@@ -12,117 +12,28 @@ local Set =  require "base.type.Set"
 local Indentation =  require "base.Indentation"
 local String =  require "base.type.String"
 
-function Proof:new(prs)
+function Proof:new()
    local retval =  self:__new()
    retval.action =  Set:empty_set_factory()
-   retval.prs =  prs
    return retval
 end
 
-function Proof:get_prs()
-   return self.prs
-end
-
--- can be used as abstract method
-function Proof:deref(goal)
-   for resolve in self.action:elems()
-   do if goal == resolve:get_conclusion(self:get_prs())
-      then
-         return resolve
-      end
-   end
-end
-
--- Graph theoretic functions.
-function Proof:is_containing_sink(premis)
-   local goals =  self:get_all_sources(premis)
-   if goals:is_empty()
-   then
-      return false
-   else
-      return true
-   end
-end
-   
-function Proof:is_containing_source(goal)
-   local resolve =  self:deref(goal)
-   if resolve
-   then
-      return true
-   else
-      return false
-   end
-end
-
-function Proof:is_containing_node(clause)
-   return self:is_containing_source(clause)
-      or  self:is_containing_sink(clause)
-end
-
-function Proof:is_containing_edge(goal, premis)
-   local resolve =  self:deref(goal)
-   if resolve
-   then
-      return self:get_all_sinks(goal):is_in(premis)
-   else
-      return false
-   end
-end
-
-function Proof:get_all_sinks(goal)
-   local resolve =  self:deref(goal)
-   if resolve
-   then
-      local axiom =  resolve:get_axiom(self:get_prs())
-      return axiom:get_premises()
-   end
-end
-
-function Proof:get_all_sources(premis)
-   local retval =  Set:empty_set_factory()
-   for goal in self.action:elems()
-   do if self:is_containing_edge(goal, premis)
-      then
-         retval:add(goal)
-      end
-   end
-   return retval
-end
-
-function Proof:get_all_nodes()
-   local retval =  Set:empty_set_factory()
-   for resolve in self.action:elems()
-   do local axiom =  resolve:get_axiom(self:get_prs())
-      retval:add(axiom:get_conclusion())
-      retval:add_set(axiom:get_premises())
-   end
-end
---- end of graph theoretic functions.
-
-function Proof:is_containing(goals)
-   for goal in goals:elems()
-   do if not(self:deref(goal))
-      then
-         return false
-      end
-   end
-   return true
-end
-
-function Proof:keys()
-   retval =  Set:empty_set_factory()
-   for resolve in self.action:elems()
-   do retval:add(resolve:get_conclusion(self:get_prs()))
-   end
-   return retval
-end
-
-function Proof:add(resolve)
-   self.action:add(resolve)
+function Proof:add(clause)
+   self.action:add(clause)
 end
 
 function Proof:add_proof(other)
    self.action:add_set(other.action)
+end
+
+function Proof:search(goal)
+   for clause in self.action:elems()
+   do local clause_copy =  clause:__clone()
+      if clause_copy:equate(goal)
+      then
+         return clause_copy
+      end
+   end
 end
 
 function Proof:__diagnose_single_line(indentation)
