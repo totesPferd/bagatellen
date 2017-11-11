@@ -19,6 +19,9 @@ function CompoundExpression:new(symbol, sub_term_list)
    retval.pel =  PELCompoundExpression:new(
          symbol:get_pel()
       ,  pel_sub_term_list )
+
+   retval.ql =  QLBase:new(self)
+
    return retval
 end
 
