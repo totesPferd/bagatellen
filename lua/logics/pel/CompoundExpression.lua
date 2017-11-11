@@ -6,7 +6,7 @@ package.loaded["logics.pel.CompoundExpression"] =  CompoundExpression
 local List =  require "base.type.List"
 
 function CompoundExpression:new(symbol, sub_term_list)
-   local retval =  CompoundExpression:__new()
+   local retval =  self:__new()
    retval.symbol =  symbol
    retval.sub_term_list =  sub_term_list
    return retval
@@ -83,6 +83,20 @@ function CompoundExpression:__eq(other)
       end
    end
    return retval
+end
+
+-- tut mir leid, geht nicht besser zu machen!
+-- ...gehört eigentlich nach logics.qpel
+function CompoundExpression:get_chopped_qualifier_copy(var_assgnm, qualifier)
+   local new_symbol
+      =  self:get_symbol():get_chopped_qualifier_copy(qualifier)
+-- map/reduce et al.!!!
+   local new_sub_term_list =  List:empty_list_factory()
+   for sub_term in self:get_sub_term_list():elems()
+   do new_sub_term_list:append(
+      sub_term:get_chopped_qualifier_copy(var_assgnm, qualifier) )
+   end
+   return self:new(new_symbol, new_sub_term_list)
 end
 
 return CompoundExpression

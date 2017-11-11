@@ -25,8 +25,9 @@ function Symbol:get_ql()
 end
 
 function Symbol:get_chopped_qualifier_copy(qualifier)
+   local this_base, this_qualifier =  self:get_base_qualifier()
    local new_qual
-      =  self:get_qualifier():get_rhs_chopped_copy(qualifier)
+      =  this_qualifier:get_rhs_chopped_copy(qualifier)
    return self:new(self:get_pel_symbol(), new_qual)
 end
 

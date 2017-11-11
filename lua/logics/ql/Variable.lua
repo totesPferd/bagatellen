@@ -2,7 +2,7 @@ local MALEVariable =  require "logics.male.Variable"
 
 local Variable =  MALEVariable:__new()
 
-package.loaded["logics.pel.Variable"] =  Variable
+package.loaded["logics.ql.Variable"] =  Variable
 local Qualifier =  require "logics.ql.Qualifier"
 
 function Variable:new()

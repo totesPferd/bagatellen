@@ -1,14 +1,18 @@
-local Type =  require "base.type.aux.Type"
+local QLCompoundExpression =  require "logics.ql.CompoundExpression"
 
-local QLBase =  Type:__new()
+local QLBase =  QLCompoundExpression:__new()
 
 package.loaded["logics.qpel.qlBase.CompoundExpression"] =  QLBase
 local Expression =  require "logics.qpel.Expression"
 local List =  require "base.type.List"
 local PELCompoundExpression =  require "logics.pel.CompoundExpression"
+local VarAssgnm =  require "logics.male.VarAssgnm"
+
+function QLBase:new(base, qualifier)
+end
 
 function QLBase:new(compound_expression)
-   local retval =  self:__new()
+   local retval =  QLCompoundExpression.__new(self)
    retval.compound_expression =  compound_expression
    return retval
 end
@@ -29,13 +33,13 @@ function QLBase:get_compound_expression()
 end
 
 function QLBase:get_base_qualifier()
-   local ret_base
    local pel_compound_expression =  self:get_base_compound_expression()
    local pel_compound_expression_symbol
       =  pel_compound_expression:get_symbol()
-   local ret_qualifier =  pel_compound_expression_symbol:get_qualifier()
+   local ret_base, ret_qualifier
+      =  pel_compound_expression_symbol:get_base_qualifier()
 
-   for sub_term in self:get_sub_term_list():elems()
+   for sub_term in pel_compound_expression:get_sub_term_list():elems()
    do local qpel_sub_term =  Expression:new(sub_term)
       local ql_sub_term =  qpel_sub_term:get_ql()
       local sub_term_base, sub_term_qualifier
@@ -49,21 +53,15 @@ function QLBase:get_base_qualifier()
       end
    end
 
-   if ret_qualifier.is_id()
+   if ret_qualifier:is_id()
    then
       ret_base =  self
    else
-      local new_symbol
-         =  pel_compound_expression_symbol:get_chopped_qualifier_copy(
-               ret_qualifier )
--- good for map/reduce et al.
-      local new_sub_term_list =  List:empty_list_factory()
-      for sub_term in self:get_sub_term_list():elems()
-      do new_sub_term_list:append(
-               sub_term:get_chopped_qualifier_copy(ret_qualifier) )
-      end
-      ret_base =  self:new(
-            self:new_pel_compound_expression(new_symbol, new_sub_term_list) )
+      local var_assgnm =  VarAssgnm:new()
+      ret_base
+         =  pel_compound_expression:get_chopped_qualifier_copy(
+               var_assgnm
+            ,  ret_qualifier )
    end
 
    return ret_base, ret_qualifier

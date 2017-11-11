@@ -11,4 +11,28 @@ end
 function Variable:get_compound_expression()
 end
 
+
+-- tut mir leid, geht nicht besser zu machen!
+-- ...gehört eigentlich nach logics.qpel
+function Variable:get_chopped_qualifier_copy(var_assgnm, qualifier)
+   local retval
+   local assgnm_val =  var_assgnm:deref(self)
+   if assgnm_val
+   then
+      retval =  assgnm_val
+   else
+      retval =  self:new()
+      var_assgnm:add(var, new_var)
+
+      local val =  self:get_val()
+      if val
+      then
+         retval:set_val(
+               val:get_chopped_qualifier_copy(var_assgnm, qualifier) )
+      end
+
+   end
+   return retval
+end
+
 return Variable
