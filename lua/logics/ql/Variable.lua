@@ -12,7 +12,7 @@ end
 function Variable:get_compound_expression()
 end
 
-function Variable:get_base_qualifier()
+function Variable:get_base_qualifier(ctxt)
    return self, Qualifier:id_factory()
 end
 

@@ -6,7 +6,6 @@ package.loaded["logics.qpel.qlBase.CompoundExpression"] =  QLBase
 local Expression =  require "logics.qpel.Expression"
 local List =  require "base.type.List"
 local PELCompoundExpression =  require "logics.pel.CompoundExpression"
-local VarAssgnm =  require "logics.male.VarAssgnm"
 
 function QLBase:new(base, qualifier)
 end
@@ -32,7 +31,7 @@ function QLBase:get_compound_expression()
    return self
 end
 
-function QLBase:get_base_qualifier()
+function QLBase:get_base_qualifier(var_assgnm)
    local pel_compound_expression =  self:get_base_compound_expression()
    local pel_compound_expression_symbol
       =  pel_compound_expression:get_symbol()
@@ -57,7 +56,6 @@ function QLBase:get_base_qualifier()
    then
       ret_base =  self
    else
-      local var_assgnm =  VarAssgnm:new()
       ret_base
          =  pel_compound_expression:get_chopped_qualifier_copy(
                var_assgnm

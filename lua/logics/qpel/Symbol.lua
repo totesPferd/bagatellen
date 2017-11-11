@@ -31,4 +31,10 @@ function Symbol:get_chopped_qualifier_copy(qualifier)
    return self:new(self:get_pel_symbol(), new_qual)
 end
 
+function Symbol:__eq(other)
+   return
+         self:get_pel_symbol() == other:get_pel_symbol()
+     and self:get_qualifier() == other:get_qualifier()
+end
+
 return Symbol

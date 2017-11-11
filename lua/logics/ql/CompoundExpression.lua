@@ -11,7 +11,7 @@ function CompoundExpression:new(base, qualifier)
    return retval
 end
 
-function CompoundExpression:get_base_qualifier()
+function CompoundExpression:get_base_qualifier(ctxt)
    return self.base, self.qualifier
 end
 
