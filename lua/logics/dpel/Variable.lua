@@ -1,12 +1,12 @@
-local QPELVariable =  require "logics.qpel.Variable"
+local PELVariable =  require "logics.pel.Variable"
 
-local Variable =  QPELVariable:__new()
+local Variable =  PELVariable:__new()
 
-package.loaded["logics.dqpel.Variable"] =  Variable
+package.loaded["logics.dpel.Variable"] =  Variable
 local String =  require "base.type.String"
 
 function Variable:new()
-   return QPELVariable.new(self)
+   return PELVariable.new(self)
 end
 
 function Variable:get_name()
@@ -22,9 +22,9 @@ function Variable:get_non_nil_name()
 end
 
 function Variable:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(logics::dqpel::Variable "))
+   indentation:insert(String:string_factory("(logics::dpel::Variable "))
    indentation:insert(self:get_non_nil_name())
-   local val =  self:get_pel():get_val()
+   local val =  self:get_val()
    if val
    then
       indentation:insert(String:string_factory(" "))
@@ -36,12 +36,12 @@ end
 function Variable:__diagnose_multiple_line(indentation)
    local is_last_elem_multiple_line =  true
 
-   indentation:insert(String:string_factory("(logics::dqpel::term::Variable"))
+   indentation:insert(String:string_factory("(logics::dpel::term::Variable"))
    indentation:insert_newline()
    local deeper_indentation =
       indentation:get_deeper_indentation_factory {}
    deeper_indentation:insert(self:get_non_nil_name())
-   local val =  self:get_pel():get_val()
+   local val =  self:get_val()
    if val
    then
       deeper_indentation:insert_newline()
