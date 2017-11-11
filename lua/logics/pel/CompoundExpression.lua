@@ -35,7 +35,8 @@ function CompoundExpression:equate(other)
    then
       equatable =  true
    -- im folgenden zip verwenden sobald verfügbar!
-      local other_sub_terms =  other_term:get_sub_term_list():__clone()
+      local other_sub_terms
+         =  other_compound_expression:get_sub_term_list():__clone()
       for sub_term in self:get_sub_term_list():elems()
       do local other_sub_term =  other_sub_terms:get_head()
          other_sub_terms:cut_head()

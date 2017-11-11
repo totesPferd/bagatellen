@@ -13,11 +13,11 @@ function Symbol:new(pel_symbol, qualifier)
 end
 
 function Symbol:get_pel_symbol()
-   return self.pel_symobl
+   return self.pel_symbol
 end
 
-function Symbol:get_qualifier()
-   return self:get_ql():get_qualifier()
+function Symbol:get_base_qualifier()
+   return self:get_ql():get_base_qualifier()
 end
 
 function Symbol:get_ql()
