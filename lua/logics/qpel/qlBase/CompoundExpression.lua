@@ -60,7 +60,8 @@ function QLBase:get_base_qualifier()
       do new_sub_term_list:append(
                sub_term:get_chopped_qualifier_copy(ret_qualifier) )
       end
-      ret_base =  self:new_compound_expression(new_symbol, new_sub_term_list)
+      ret_base =  self:new(
+            self:new_compound_expression(new_symbol, new_sub_term_list) )
    end
 
    return ret_base, ret_qualifier
