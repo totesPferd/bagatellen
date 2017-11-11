@@ -6,7 +6,7 @@ package.loaded["logics.pel.Variable"] =  Variable
 local Qualifier =  require "logics.ql.Qualifier"
 
 function Variable:new()
-   return MALEVarible.new(self)
+   return MALEVariable.new(self)
 end
 
 function Variable:get_compound_expression()
