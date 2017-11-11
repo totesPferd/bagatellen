@@ -11,12 +11,8 @@ function CompoundExpression:new(base, qualifier)
    return retval
 end
 
-function CompoundExpression:get_base()
-   return self.base
-end
-
-function CompoundExpression:get_qualifier()
-   return self.qualifier
+function CompoundExpression:get_base_qualifier()
+   return self.base, self.qualifier
 end
 
 function CompoundExpression:get_variable()
@@ -33,20 +29,25 @@ function CompoundExpression:equate(other)
       =  other:get_qualifier():get_rhs_chopped_copy(self:get_qualifier())
    if new_qual
    then
-      retval =  self:get_base():equate(self:new(other:get_base(), new_qual))
+      local this_base, this_qualifier =  self:get_base_qualifier()
+      local other_base, other_qualifier =  other:get_base_qualifier()
+      retval =  this_base:equate(self:new(other_base, new_qual))
    end
    return retval
 end
 
 function CompoundExpression:devar(var_assgnm)
-   local new_base =  self:get_base():devar(var_assgnm)
-   return self:new(new_base, self:get_qualifier())
+   local this_base, this_qualifier =  self:get_base_qualifier()
+   local new_base =  this_base:devar(var_assgnm)
+   return self:new(new_base, this_qualifier)
 end
 
 function CompoundExpression:__eq(other)
+   local this_base, this_qualifier =  self:get_base_qualifier()
+   local other_base, other_qualifier =  other:get_base_qualifier()
    return
-         self:get_base() == other:get_base()
-     and self:get_qualifier() == other:get_qualifier()
+         this_base == other_base
+     and this_qualifier == other_qualifier
 end
 
 return CompoundExpression

@@ -75,6 +75,7 @@ function Qualifier:get_longest_common_tail(other)
       then
          looping =  false
       else
+-- map/reduce et al.
          local this_tail_symbol =  this_copy_list:get_tail()
          local other_tail_symbol =  other_copy_list:get_tail()
          if this_tail_symbol == other_tail_symbol

@@ -12,12 +12,8 @@ end
 function Variable:get_compound_expression()
 end
 
-function Variable:get_base()
-   return self
-end
-
-function Variable:get_qualifier()
-   return Qualifier:id_factory()
+function Variable:get_base_qualifier()
+   return self, Qualifier:id_factory()
 end
 
 return Variable
