@@ -46,8 +46,8 @@ function ProofState:assume(goal)
    return retval
 end
 
-function ProofState:resolve(axiom, goal)
-   local retval =  axiom:equate(goal)
+function ProofState:resolve(dimension, axiom, goal)
+   local retval =  axiom:equate(dimension, goal)
    if retval
    then
       self:get_conclusions():drop(goal)
@@ -64,13 +64,13 @@ function ProofState:apply_rule(rule, goal)
 end
 
 
-function ProofState:apply_proof(proof)
+function ProofState:apply_proof(dimension, proof)
    local rep =  true
    while rep
    do rep =  false
-      local conclusions =  self:get_devared_conclusions()
+      local conclusions =  self:get_devared_conclusions(dimension)
       for conclusion in conclusions:elems()
-      do local clause =  proof:search(conclusion)
+      do local clause =  proof:search(dimension, conclusion)
          if clause
          then
             rep =  true
@@ -83,27 +83,27 @@ function ProofState:apply_proof(proof)
    end
 end
 
-function ProofState:get_devared_premises(var_assgnm)
+function ProofState:get_devared_premises(dimension, var_assgnm)
    local retval =  Set:empty_set_factory()
    for premis in self:get_premises()
-   do retval:add(premis:devar(var_assgnm))
+   do retval:add(premis:devar(dimension, var_assgnm))
    end
    return retval
 end
 
-function ProofState:get_devared_conclusions(var_assgnm)
+function ProofState:get_devared_conclusions(dimension, var_assgnm)
    local retval =  Set:empty_set_factory()
    for conclusion in self:get_conclusions()
-   do retval:add(conclusion:devar(var_assgnm))
+   do retval:add(conclusion:devar(dimension, var_assgnm))
    end
    return retval
 end
 
-function ProofState:devar()
+function ProofState:devar(dimension)
    local var_assgnm =  self:new_var_assgnm()
    local retval =  self:__new()
-   retval.premises =  self:get_devared_premises(var_assgnm)
-   retval.conclusions =  self:get_devared_conclusions(var_assgnm)
+   retval.premises =  self:get_devared_premises(dimension, var_assgnm)
+   retval.conclusions =  self:get_devared_conclusions(dimension, var_assgnm)
    return retval
 end
 

@@ -24,8 +24,8 @@ function Clause:get_conclusion()
    return self.conclusion
 end
 
-function Clause:equate(goal)
-   return self:get_conclusion():equate(goal)
+function Clause:equate(dimension, goal)
+   return self:get_conclusion():equate(dimension, goal)
 end
 
 function Clause:new_var_assgnm()
@@ -34,14 +34,14 @@ end
 
 -- Kopie von sich ohne Variablen-Bindungen.
 -- (so eine Art __clone)
-function Clause:devar()
+function Clause:devar(dimension)
    local var_assgnm =  self:new_var_assgnm()
 -- gut fuer map-function
    local new_premises =  Set:empty_set_factory()
    for premis in self:get_premises():elems()
-   do new_premises:add(premis:devar(var_assgnm))
+   do new_premises:add(premis:devar(dimension, var_assgnm))
    end
-   local new_conclusion =  self:get_conclusion():devar(var_assgnm)
+   local new_conclusion =  self:get_conclusion():devar(dimension, var_assgnm)
    return self:new(new_premises, new_conclusion)
 end
 

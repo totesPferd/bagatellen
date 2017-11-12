@@ -28,7 +28,7 @@ function CompoundExpression:get_compound_expression()
 end
 
 -- do destroy this object after this method returns false!!!
-function CompoundExpression:equate(other)
+function CompoundExpression:equate(dimension, other)
    local equatable =  false
    local other_compound_expression =  other:get_compound_expression()
    if other_compound_expression
@@ -40,7 +40,7 @@ function CompoundExpression:equate(other)
       for sub_term in self:get_sub_term_list():elems()
       do local other_sub_term =  other_sub_terms:get_head()
          other_sub_terms:cut_head()
-         equatable =  sub_term:equate(other_sub_term)
+         equatable =  sub_term:equate(dimension, other_sub_term)
          if not equatable
          then break
          end
@@ -49,11 +49,11 @@ function CompoundExpression:equate(other)
    return equatable
 end
 
-function CompoundExpression:devar(var_assgnm)
+function CompoundExpression:devar(dimension, var_assgnm)
 -- matter for using map, zip, reduce et al.
    local new_sub_term_list =  List:empty_list_factory()
    for sub_term in self:get_sub_term_list():elems()
-   do new_sub_term_list:append(sub_term:devar(var_assgnm))
+   do new_sub_term_list:append(sub_term:devar(dimension, var_assgnm))
    end
 
    return self:new(self:get_symbol(), new_sub_term_list)

@@ -18,7 +18,7 @@ end
 function Rule:get_resolve()
 end
 
-function Rule:apply(proof_state, goal)
+function Rule:apply(dimension, proof_state, goal)
 end
 
 function Rule:clone()

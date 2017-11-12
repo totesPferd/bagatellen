@@ -8,6 +8,8 @@ local MALEVarAssgnm =  require "logics.male.VarAssgnm"
 local String =  require "base.type.String"
 local StringSet =  require "base.type.set.StringSet"
 
+local pel_dimension =  String:string_factory("pel")
+
 function VariableContext:new()
    local retval =  self:__new()
    retval.variables =  List:empty_list_factory()
@@ -30,7 +32,7 @@ function VariableContext:equate(other)
    for variable in self.variables:elems()
    do local other_variable =  other_variables:get_head()
       other_variables:cut_head()
-      equatable =  variable:equate(other_variable)
+      equatable =  variable:equate(pel_dimension, other_variable)
       if not equatable
       then break
       end
@@ -44,7 +46,7 @@ function VariableContext:devar()
 
 -- map/reduce et al.!!!
    for var in self.variables:elems()
-   do retval.variables:append(var:devar(var_assgnm))
+   do retval.variables:append(var:devar(pel_dimension, var_assgnm))
    end
 
    return retval

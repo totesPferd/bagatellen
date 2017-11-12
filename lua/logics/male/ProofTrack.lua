@@ -17,8 +17,8 @@ function ProofTrack:get_proof()
    return self.proof
 end
 
-function ProofTrack:resolve(axiom, goal)
-   local retval =  ProofState.resolve(self, axiom, goal)
+function ProofTrack:resolve(dimension, axiom, goal)
+   local retval =  ProofState.resolve(self, dimension, axiom, goal)
    if retval
    then
       self:get_proof():add(rule)
@@ -26,8 +26,8 @@ function ProofTrack:resolve(axiom, goal)
    return retval
 end
 
-function ProofTrack:devar()
-   local retval =  ProofState.devar(self)
+function ProofTrack:devar(dimension)
+   local retval =  ProofState.devar(self, dimension)
    retval.proof =  self:get_proof()
    return retval
 end

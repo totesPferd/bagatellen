@@ -5,6 +5,8 @@ local Variable =  PELVariable:__new()
 package.loaded["logics.dpel.Variable"] =  Variable
 local String =  require "base.type.String"
 
+local pel_dimension =  String:string_factory("pel")
+
 function Variable:new()
    return PELVariable.new(self)
 end
@@ -24,7 +26,7 @@ end
 function Variable:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory("(logics::dpel::Variable "))
    indentation:insert(self:get_non_nil_name())
-   local val =  self:get_val()
+   local val =  self:get_val(pel_dimension)
    if val
    then
       indentation:insert(String:string_factory(" "))
@@ -41,7 +43,7 @@ function Variable:__diagnose_multiple_line(indentation)
    local deeper_indentation =
       indentation:get_deeper_indentation_factory {}
    deeper_indentation:insert(self:get_non_nil_name())
-   local val =  self:get_val()
+   local val =  self:get_val(pel_dimension)
    if val
    then
       deeper_indentation:insert_newline()
