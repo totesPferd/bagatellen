@@ -24,13 +24,13 @@ end
 
 -- do destroy this object after this method returns false!!!
 function CompoundExpression:equate(dimension, other)
+   local this_base, this_qualifier =  self:get_base_qualifier()
+   local other_base, other_qualifier =  other:get_base_qualifier()
    local retval =  false
    local new_qual
-      =  other:get_qualifier():get_rhs_chopped_copy(self:get_qualifier())
+      =  other_qualifier:get_rhs_chopped_copy(this_qualifier)
    if new_qual
    then
-      local this_base, this_qualifier =  self:get_base_qualifier()
-      local other_base, other_qualifier =  other:get_base_qualifier()
       retval =  this_base:equate(dimension, self:new(other_base, new_qual))
    end
    return retval
