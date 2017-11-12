@@ -2,7 +2,7 @@ local Type =  require "base.type.aux.Type"
 
 local VariableContext =  Type:__new()
 
-package.loaded["logics.dpel.VariableContext"] =  VariableContext
+package.loaded["logics.d.VariableContext"] =  VariableContext
 local List =  require "base.type.List"
 local MALEVarAssgnm =  require "logics.male.VarAssgnm"
 local String =  require "base.type.String"
@@ -63,7 +63,7 @@ function VariableContext:uniquize()
 end
 
 function VariableContext:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(logics::dqpel::VariableContext"))
+   indentation:insert(String:string_factory("(logics::d::VariableContext"))
    for variable in self.variables:elems()
    do
       variable:__diagnose_single_line(indentation)
@@ -73,7 +73,7 @@ end
 
 function VariableContext:__diagnose_multiple_line(indentation)
    local is_last_elem_multiple_line =  false
-   indentation:insert(String:string_factory("(logics::dpel::VariableContext"))
+   indentation:insert(String:string_factory("(logics::d::VariableContext"))
    local deeper_indentation =
       indentation:get_deeper_indentation_factory {}
    for variable in self.variables:elems()
