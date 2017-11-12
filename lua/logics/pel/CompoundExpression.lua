@@ -87,14 +87,14 @@ end
 
 -- tut mir leid, geht nicht besser zu machen!
 -- ...gehört eigentlich nach logics.qpel
-function CompoundExpression:get_chopped_qualifier_copy(var_assgnm, qualifier)
+function CompoundExpression:get_chopped_qualifier_copy(qualifier)
    local new_symbol
       =  self:get_symbol():get_chopped_qualifier_copy(qualifier)
 -- map/reduce et al.!!!
    local new_sub_term_list =  List:empty_list_factory()
    for sub_term in self:get_sub_term_list():elems()
    do new_sub_term_list:append(
-      sub_term:get_chopped_qualifier_copy(var_assgnm, qualifier) )
+      sub_term:get_chopped_qualifier_copy(qualifier) )
    end
    return self:new(new_symbol, new_sub_term_list)
 end
