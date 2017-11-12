@@ -5,7 +5,7 @@ local CompoundExpression =  Type:__new()
 package.loaded["logics.ql.CompoundExpression"] =  CompoundExpression
 
 function CompoundExpression:new(base, qualifier)
-   local retval =  CompoundExpression:__new()
+   local retval =  self:__new()
    retval.base =  base
    retval.qualifier =  qualifier
    return retval
