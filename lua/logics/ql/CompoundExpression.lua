@@ -23,7 +23,7 @@ function CompoundExpression:get_compound_expression()
 end
 
 -- do destroy this object after this method returns false!!!
-function CompoundExpression:equate(dimension, other)
+function CompoundExpression:equate(other)
    local this_base, this_qualifier =  self:get_base_qualifier()
    local other_base, other_qualifier =  other:get_base_qualifier()
    local retval =  false
@@ -31,14 +31,14 @@ function CompoundExpression:equate(dimension, other)
       =  other_qualifier:get_rhs_chopped_copy(this_qualifier)
    if new_qual
    then
-      retval =  this_base:equate(dimension, self:new(other_base, new_qual))
+      retval =  this_base:equate(self:new(other_base, new_qual))
    end
    return retval
 end
 
-function CompoundExpression:devar(dimension, var_assgnm)
+function CompoundExpression:devar(var_assgnm)
    local this_base, this_qualifier =  self:get_base_qualifier()
-   local new_base =  this_base:devar(dimension, var_assgnm)
+   local new_base =  this_base:devar(var_assgnm)
    return self:new(new_base, this_qualifier)
 end
 

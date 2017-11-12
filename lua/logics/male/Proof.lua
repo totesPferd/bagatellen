@@ -26,10 +26,10 @@ function Proof:add_proof(other)
    self.action:add_set(other.action)
 end
 
-function Proof:search(dimension, goal)
+function Proof:search(goal)
    for clause in self.action:elems()
-   do local clause_copy =  clause:devar(dimension)
-      if clause_copy:equate(dimension, goal)
+   do local clause_copy =  clause:devar()
+      if clause_copy:equate(goal)
       then
          return clause_copy
       end

@@ -22,19 +22,18 @@ function Resolve:get_clause()
    return self.clause
 end
 
-function Resolve:apply(dimension, proof_state, goal)
+function Resolve:apply(proof_state, goal)
    return proof_state:resolve(
-         dimension
-      ,  self:get_clause()
+         self:get_clause()
       ,  goal )
 end
 
-function Resolve:equate(dimension, goal)
-   return self:get_clause():equate(dimension, goal)
+function Resolve:equate(goal)
+   return self:get_clause():equate(goal)
 end
 
-function Resolve:devar(dimension)
-   return self:new(self:get_clause():devar(dimension))
+function Resolve:devar()
+   return self:new(self:get_clause():devar())
 end
 
 function Resolve:__diagnose_single_line(indentation)
