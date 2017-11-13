@@ -116,12 +116,12 @@ function Set:is_subeq(other)
 end
 
 --- Get sorted list of all elements contained in my set.
+--  Attention!  result list share all the elements of this set!
+--  Operations on the result list affect this set!
 --  @return base.type.List list off all elements, sorted
 function Set:get_sorted_list()
-   local retval =  List:empty_list_factory()
-   for x in self:elems()
-   do retval:append(x)
-   end
+   local retval =  List:__new()
+   retval.val =  self.val
    retval:sort()
    return retval
 end
@@ -133,6 +133,17 @@ function Set:choose_randomly()
    then
       return self.val[math.ceil(math.random() * #self.val)]
    end
+end
+
+--- transforms this set to a list whose elements are ordered randomly
+--  Attention!  result list share all the elements of this set!
+--  Operations on the result list affect this set!
+--  @return list
+function Set:get_randomly_sorted_list()
+   local retval =  List:__new()
+   retval.val =  self.val
+   retval:shuffle()
+   return retval
 end
 
 function Set:__clone()
