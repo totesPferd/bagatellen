@@ -196,6 +196,17 @@ function List:choose_randomly()
    end
 end
 
+--- reorder elements, randomly
+function List:shuffle()
+   for i = 1, #self.val
+   do local accu =  self.val[i]
+      local choosen_index
+         =  math.floor(math.random() * (#self.val - i + 1)) + i
+      self.val[i] =  self.val[choosen_index]
+      self.val[choosen_index] =  accu
+   end
+end
+
 function List:__len()
    return #self.val
 end
