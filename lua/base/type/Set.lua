@@ -115,13 +115,20 @@ function Set:is_subeq(other)
    return retval
 end
 
+--- Makes a list from the elements of my set
+--  @return base.type.List
+function Set:get_list()
+   local retval =  List:empty_list_factory()
+   for x in self:elems()
+   do retval:append(x)
+   end
+   return retval
+end
+
 --- Get sorted list of all elements contained in my set.
---  Attention!  result list share all the elements of this set!
---  Operations on the result list affect this set!
 --  @return base.type.List list off all elements, sorted
 function Set:get_sorted_list()
-   local retval =  List:__new()
-   retval.val =  self.val
+   local retval =  self:get_list()
    retval:sort()
    return retval
 end
@@ -136,12 +143,9 @@ function Set:choose_randomly()
 end
 
 --- transforms this set to a list whose elements are ordered randomly
---  Attention!  result list share all the elements of this set!
---  Operations on the result list affect this set!
 --  @return list
 function Set:get_randomly_sorted_list()
-   local retval =  List:__new()
-   retval.val =  self.val
+   local retval =  self:get_list()
    retval:shuffle()
    return retval
 end
