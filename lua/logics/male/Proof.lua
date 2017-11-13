@@ -27,7 +27,8 @@ function Proof:add_proof(other)
 end
 
 function Proof:search(goal)
-   for clause in self.action:elems()
+   local action_list =  self.action:get_randomly_sorted_list()
+   for clause in action_list:elems()
    do local clause_copy =  clause:devar()
       if clause_copy:equate(goal)
       then

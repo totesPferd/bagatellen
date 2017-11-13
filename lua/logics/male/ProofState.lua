@@ -69,8 +69,7 @@ function ProofState:apply_proof(proof)
    while rep
    do rep =  false
       local conclusions =  self:get_devared_conclusions()
-      local conclusions_list =  conclusions:get_randomly_ordered_list()
-      for conclusion in conclusions_list:elems()
+      for conclusion in conclusions:elems()
       do local clause =  proof:search(conclusion)
          if clause
          then
