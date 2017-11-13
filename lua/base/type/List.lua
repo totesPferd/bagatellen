@@ -187,6 +187,15 @@ function List:lexicographically_le(other)
    return retval
 end
 
+--- choose an element, randomly 
+--  @return
+function List:choose_randomly()
+   if #self.val > 0
+   then
+      return self.val[math.ceil(math.random() * #self.val)]
+   end
+end
+
 function List:__len()
    return #self.val
 end

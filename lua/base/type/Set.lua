@@ -126,6 +126,15 @@ function Set:get_sorted_list()
    return retval
 end
 
+--- choose an element, randomly 
+--  @return
+function Set:choose_randomly()
+   if #self.val > 0
+   then
+      return self.val[math.ceil(math.random() * #self.val)]
+   end
+end
+
 function Set:__clone()
    local retval =  Set:empty_set_factory()
    for elem in self:elems()
