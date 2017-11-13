@@ -68,16 +68,16 @@ function ProofState:apply_proof(proof)
    local rep =  true
    while rep
    do rep =  false
-      local conclusions =  self:get_devared_conclusions()
+      local conclusions =  self:get_conclusions()
       local conclusions_list =  conclusions:get_randomly_sorted_list()
       for conclusion in conclusions_list:elems()
       do local clause =  proof:search(conclusion)
          if clause
          then
             rep =  true
-            self:get_conclusions():drop(goal)
+            conclusions:drop(goal)
             for premise in axiom:get_premises()
-            do self:get_conclusions():add(premise)
+            do conclusions:add(premise)
             end
          end
       end
