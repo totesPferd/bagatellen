@@ -14,7 +14,10 @@ function Variable:get_variable()
 end
 
 function Variable:get_val()
-   return self.val
+   if self.val
+   then
+      return self.val:get_val()
+   end
 end
 
 function Variable:set_val(val)

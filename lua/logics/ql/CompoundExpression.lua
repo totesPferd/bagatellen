@@ -22,6 +22,10 @@ function CompoundExpression:get_compound_expression()
    return self
 end
 
+function CompoundExpression:get_val()
+   return self
+end
+
 -- do destroy this object after this method returns false!!!
 function CompoundExpression:equate(other)
    local this_base, this_qualifier =  self:get_base_qualifier()
