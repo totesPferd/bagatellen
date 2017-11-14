@@ -21,7 +21,17 @@ function Variable:get_val()
 end
 
 function Variable:set_val(val)
-   self.val =  val
+   local this_val =  self:get_val()
+   if this_val
+   then
+      local variable =  this_val:get_variable()
+      if variable
+      then
+         variable:set_val(val)
+      end
+   else
+      self.val =  val
+   end
 end
 
 function Variable:equate(val)
