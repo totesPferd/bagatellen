@@ -20,7 +20,8 @@ function MetaVariable:destruct_compound_expression(symbol, arity)
       for i = 1,arity
       do retval:append(self:new())
       end
-      return retval
+      self:set_val(retval)
+      return retval:__clone()
    end
 end
 
