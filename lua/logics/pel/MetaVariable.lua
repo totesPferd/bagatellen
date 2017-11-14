@@ -13,7 +13,7 @@ function MetaVariable:destruct_compound_expression(symbol, arity)
    local this_val =  self:get_val()
    if this_val
    then
-      return this_val_destruct_compound_expression(symbol, arity)
+      return this_val:destruct_compound_expression(symbol, arity)
    else
 -- map/reduce et al.!!!
       local retval =  List:empty_list_factory()

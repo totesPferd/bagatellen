@@ -9,11 +9,14 @@ function Variable:new()
    return MALEVariable.new(self)
 end
 
-function Variable:get_compound_expression()
+function Variable:get_concept()
 end
 
 function Variable:get_base_qualifier()
    return self, Qualifier:id_factory()
+end
+
+function Variable:be_a_concept(concept)
 end
 
 return Variable
