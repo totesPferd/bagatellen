@@ -37,25 +37,32 @@ function CompoundExpression:get_val()
    return self
 end
 
+function CompoundExpression:destruct_compound_expression(symbol, arity)
+   if symbol == self:get_symbol()
+   then
+      return self:get_sub_term_list():__clone()
+   end
+end
+
 -- do destroy this object after this method returns false!!!
 function CompoundExpression:equate(other)
    local equatable =  false
-   local other_compound_expression =  other:get_compound_expression()
-   if other_compound_expression
+   local other_sub_term_list =  other:destruct_compound_expression(
+         self:get_symbol()
+      ,  #self:get_sub_term_list() )
+   if other_sub_term_list
    then
       equatable =  true
-   -- im folgenden zip verwenden sobald verfügbar!
-      local other_sub_terms
-         =  other_compound_expression:get_sub_term_list():__clone()
       for sub_term in self:get_sub_term_list():elems()
-      do local other_sub_term =  other_sub_terms:get_head()
-         other_sub_terms:cut_head()
+      do local other_sub_term =  other_sub_term_list:get_head()
+         other_sub_term_list:cut_head()
          equatable =  sub_term:equate(other_sub_term)
          if not equatable
          then break
          end
       end
    end
+
    return equatable
 end
 

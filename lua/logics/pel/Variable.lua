@@ -37,4 +37,7 @@ function Variable:get_chopped_qualifier_copy(qualifier)
    return retval
 end
 
+function Variable:destruct_compound_expression(symbol, aritiy)
+end
+
 return Variable
