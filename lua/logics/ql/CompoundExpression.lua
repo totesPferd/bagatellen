@@ -15,11 +15,17 @@ function CompoundExpression:get_base_qualifier()
    return self.base, self.qualifier
 end
 
+function CompoundExpression:get_meta_variable()
+end
+
 function CompoundExpression:get_variable()
 end
 
 function CompoundExpression:get_compound_expression()
    return self
+end
+
+function CompoundExpression:be_a_variable()
 end
 
 function CompoundExpression:get_val()

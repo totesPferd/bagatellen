@@ -9,8 +9,14 @@ function Variable:new()
    return retval
 end
 
+function Variable:get_meta_variable()
+end
+
 function Variable:get_variable()
    return self
+end
+
+function Variable:be_a_variable(variable)
 end
 
 function Variable:get_val()
@@ -35,6 +41,7 @@ function Variable:set_val(val)
 end
 
 function Variable:equate(val)
+   val:be_a_variable(val)
    local this_val =  self:get_val()
    if this_val
    then

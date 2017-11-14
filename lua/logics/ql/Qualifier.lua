@@ -102,13 +102,13 @@ function Qualifier:__eq(other)
 end
 
 function Qualifier:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(logics::place::qualified::Qualifier "))
+   indentation:insert(String:string_factory("(logics::ql::Qualifier "))
    indentation:insert(self:get_name())
    indentation:insert(String:string_factory(")"))
 end
 
 function Qualifier:__diagnose_multiple_line(indentation)
-   indentation:insert(String:string_factory("(logics::place::qualified::Qualifier"))
+   indentation:insert(String:string_factory("(logics::ql::Qualifier"))
    indentation:insert_newline()
    local is_last_elem_multiple_line =  true
    do
