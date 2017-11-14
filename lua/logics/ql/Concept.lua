@@ -23,7 +23,7 @@ function Concept:get_concept()
    return self
 end
 
-function Concept:be_a_concept(concept)
+function Concept:destruct_concept(concept)
    if self == concept
    then
       return self
@@ -31,13 +31,17 @@ function Concept:be_a_concept(concept)
 end
 
 function Concept:equate(val)
-   local other_concept =  val:be_a_concept(self)
+   local other_concept =  val:destruct_concept(self)
    if other_concept
    then
       return true
    else
       return false
    end
+end
+
+function Concept:devar(var_assgnm)
+   return self
 end
 
 function Concept:__eq(other)

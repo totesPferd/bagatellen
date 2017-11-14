@@ -16,7 +16,7 @@ function Variable:get_base_qualifier()
    return self, Qualifier:id_factory()
 end
 
-function Variable:be_a_concept(concept)
+function Variable:destruct_concept(concept)
 end
 
 return Variable

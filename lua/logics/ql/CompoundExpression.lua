@@ -28,6 +28,11 @@ end
 function CompoundExpression:be_a_variable()
 end
 
+function CompoundExpression:destruct_concept(concept)
+   local this_base, this_qualifier =  this:get_base_qualifier()
+   return this_base:destruct_concept(concept)
+end
+
 function CompoundExpression:get_val()
    return self
 end
