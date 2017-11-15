@@ -3,9 +3,10 @@ local Type =  require "base.type.aux.Type"
 local Symbol =  Type:__new()
 
 package.loaded["logics.d.Symbol"] =  Symbol
+local String =  require "base.type.String"
 
 function Symbol:new(name)
-   local retval =  set:__new()
+   local retval =  self:__new()
    retval.name =  name
    return retval
 end
