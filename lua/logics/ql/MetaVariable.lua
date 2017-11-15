@@ -12,6 +12,7 @@ end
 function MetaVariable:be_a_concept(concept)
    local this_val =  self:get_val()
    if not this_val
+   then
       self:set_val(concept)
       return concept
    end
