@@ -51,7 +51,7 @@ function ProofState:resolve(axiom, goal)
    if retval
    then
       self:get_conclusions():drop(goal)
-      for premise in axiom:get_premises()
+      for premise in axiom:get_premises():elems()
       do self:get_conclusions():add(premise)
       end
    end
@@ -76,7 +76,7 @@ function ProofState:apply_proof(proof)
          then
             rep =  true
             conclusions:drop(goal)
-            for premise in axiom:get_premises()
+            for premise in axiom:get_premises():elems()
             do conclusions:add(premise)
             end
          end
@@ -86,7 +86,7 @@ end
 
 function ProofState:get_devared_premises(var_assgnm)
    local retval =  Set:empty_set_factory()
-   for premis in self:get_premises()
+   for premis in self:get_premises():elems()
    do retval:add(premis:devar(var_assgnm))
    end
    return retval
@@ -94,7 +94,7 @@ end
 
 function ProofState:get_devared_conclusions(var_assgnm)
    local retval =  Set:empty_set_factory()
-   for conclusion in self:get_conclusions()
+   for conclusion in self:get_conclusions():elems()
    do retval:add(conclusion:devar(var_assgnm))
    end
    return retval

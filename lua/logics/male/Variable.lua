@@ -22,7 +22,13 @@ end
 function Variable:get_val()
    if self.val
    then
-      return self.val:get_val()
+      local var =  self.val:get_variable()
+      if var
+      then
+         return var:get_val()
+      else
+         return self.val
+      end
    end
 end
 

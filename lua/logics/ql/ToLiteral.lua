@@ -28,13 +28,13 @@ end
 
 function ToLiteral:equate(other)
    local retval =  false
-   local other_eq_literal =  other:get_eq_literal()
-   if other_eq_literal
+   local other_to_literal =  other:get_to_literal()
+   if other_to_literal
    then
-      retval =  self:get_lhs_term():equate(other_eq_literal:get_lhs_term())
+      retval =  self:get_lhs_term():equate(other_to_literal:get_lhs_term())
       if retval
       then
-         retval =  self:get_rhs_term():equate(other_eq_literal:get_rhs_term())
+         retval =  self:get_rhs_term():equate(other_to_literal:get_rhs_term())
       end
    end
    return retval

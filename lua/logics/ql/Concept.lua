@@ -19,8 +19,14 @@ function Concept:get_base_qualifier()
    return self:get_symbol(), Qualifier:id_factory()
 end
 
+function Concept:get_variable()
+end
+
 function Concept:get_concept()
    return self
+end
+
+function Concept:be_a_variable(variable)
 end
 
 function Concept:destruct_concept(concept)
