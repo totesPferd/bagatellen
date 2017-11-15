@@ -15,7 +15,7 @@ function ProofState:new(clause)
    retval.premises =  clause:get_premises()
    retval.conclusions =  Set:empty_set_factory()
    retval.conclusions:add(clause:get_conclusion())
-   for goal in retval.premises
+   for goal in retval.premises:elems()
    do retval:assume(goal)
    end
    return retval
