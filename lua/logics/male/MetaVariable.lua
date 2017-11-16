@@ -43,16 +43,20 @@ function MetaVariable:get_val()
 end
 
 function MetaVariable:set_val(val)
-   local this_val =  self:get_val()
-   if this_val
+   local other_var =  val:get_meta_variable()
+   if not (other_var and other_var == self)
    then
-      local variable =  this_val:get_variable()
-      if variable
+      local this_val =  self.val
+      if this_val
       then
-         variable:set_val(val)
+         local variable =  this_val:get_meta_variable()
+         if variable
+         then
+            variable:set_val(val)
+         end
+      else
+         self.val =  val
       end
-   else
-      self.val =  val
    end
 end
 

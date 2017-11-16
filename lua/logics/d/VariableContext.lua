@@ -14,6 +14,10 @@ function VariableContext:new()
    return retval
 end
 
+function VariableContext:new_instance()
+   return VariableContext:new()
+end
+
 function VariableContext:add_variable(variable)
    self.variables:append(variable)
 end
@@ -40,7 +44,7 @@ end
 
 function VariableContext:devar()
    local var_assgnm =  VarAssgnm:new()
-   local retval =  self:new()
+   local retval =  self:new_instance()
 
 -- map/reduce et al.!!!
    for var in self.variables:elems()

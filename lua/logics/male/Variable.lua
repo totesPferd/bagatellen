@@ -9,6 +9,10 @@ function Variable:new()
    return retval
 end
 
+function Variable:new_instance()
+   return Variable:new()
+end
+
 function Variable:get_meta_variable()
 end
 
@@ -33,16 +37,20 @@ function Variable:get_val()
 end
 
 function Variable:set_val(val)
-   local this_val =  self:get_val()
-   if this_val
+   local other_var =  val:get_variable()
+   if not (other_var and other_var == self)
    then
-      local variable =  this_val:get_variable()
-      if variable
+      local this_val =  self.val
+      if this_val
       then
-         variable:set_val(val)
+         local variable =  this_val:get_variable()
+         if variable
+         then
+            variable:set_val(val)
+         end
+      else
+         self.val =  val
       end
-   else
-      self.val =  val
    end
 end
 
@@ -73,7 +81,7 @@ function Variable:devar(var_assgnm)
       then
          local new_var =  val:devar(var_assgnm)
       else
-         local new_var =  self:new()
+         local new_var =  self:new_instance()
       end
       var_assgnm:add(self, new_var)
       return new_var

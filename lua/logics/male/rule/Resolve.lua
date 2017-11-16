@@ -18,6 +18,10 @@ function Resolve:new(clause)
    return retval
 end
 
+function Resolve:new_instance(clause)
+   return Resolve:new(clause)
+end
+
 function Resolve:get_clause()
    return self.clause
 end
@@ -33,7 +37,7 @@ function Resolve:equate(goal)
 end
 
 function Resolve:devar()
-   return self:new(self:get_clause():devar())
+   return self:new_instance(self:get_clause():devar())
 end
 
 function Resolve:__diagnose_single_line(indentation)

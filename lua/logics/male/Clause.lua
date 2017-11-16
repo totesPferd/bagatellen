@@ -16,6 +16,10 @@ function Clause:new(premises, conclusion)
    return retval
 end
 
+function Clause:new_instance(premises, conclusions)
+   return Clause:new(premises, conclusions)
+end
+
 function Clause:get_premises()
    return self.premises
 end
@@ -42,7 +46,7 @@ function Clause:devar()
    do new_premises:add(premis:devar(var_assgnm))
    end
    local new_conclusion =  self:get_conclusion():devar(var_assgnm)
-   return self:new(new_premises, new_conclusion)
+   return self:new_instance(new_premises, new_conclusion)
 end
 
 function Clause:__diagnose_single_line(indentation)

@@ -12,6 +12,10 @@ function CompoundExpression:new(symbol, sub_term_list)
    return retval
 end
 
+function CompoundExpression:new_instance(symbol, sub_term_list)
+   return CompoundExpression:new(symbol, sub_term_list)
+end
+
 function CompoundExpression:get_symbol()
    return self.symbol
 end
@@ -73,7 +77,7 @@ function CompoundExpression:devar(var_assgnm)
    do new_sub_term_list:append(sub_term:devar(var_assgnm))
    end
 
-   return self:new(self:get_symbol(), new_sub_term_list)
+   return self:new_instance(self:get_symbol(), new_sub_term_list)
 end
 
 function CompoundExpression:__eq(other)
@@ -113,7 +117,7 @@ function CompoundExpression:get_chopped_qualifier_copy(qualifier)
    do new_sub_term_list:append(
       sub_term:get_chopped_qualifier_copy(qualifier) )
    end
-   return self:new(new_symbol, new_sub_term_list)
+   return self:new_instance(new_symbol, new_sub_term_list)
 end
 
 return CompoundExpression

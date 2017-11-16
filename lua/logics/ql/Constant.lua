@@ -3,11 +3,11 @@ local Type =  require "base.type.aux.Type"
 local Constant =  Type:__new()
 
 package.loaded["logics.ql.Constant"] =  Constant
-local Qualifier =  require "logics.ql.Qualifier"
 
-function Constant:new(symbol)
+function Constant:new(symbol, qualifier)
    local retval =  self:__new()
    retval.symbol =  symbol
+   retval.qualifier =  qualifier
    return retval
 end
 
@@ -15,8 +15,8 @@ function Constant:get_symbol()
    return self.symbol
 end
 
-function Constant:get_base_qualifier()
-   return self:get_symbol(), Qualifier:id_factory()
+function Constant:get_qualifier()
+   return self.qualifier
 end
 
 function Constant:get_variable()
@@ -24,6 +24,10 @@ end
 
 function Constant:get_constant()
    return self
+end
+
+function Constant:append_qualifier(qualifier)
+   self.qualifier:append_qualifier(qualifier)
 end
 
 function Constant:be_a_variable(variable)
@@ -36,8 +40,8 @@ function Constant:destruct_constant(constant)
    end
 end
 
-function Constant:equate(val)
-   local other_constant =  val:destruct_constant(self)
+function Constant:equate(other)
+   local other_constant =  other:destruct_constant(self)
    if other_constant
    then
       return true
@@ -57,6 +61,7 @@ function Constant:__eq(other)
    then
       retval =
             self:get_symbol() == other:get_symbol()
+        and self:get_qualifier() == other:get_qualifier()
    end
    return retval
 end

@@ -11,6 +11,10 @@ function EqLiteral:new(lhs_term, rhs_term)
    return retval
 end
 
+function EqLiteral:new_instance(lhs_term, rhs_term)
+   return EqLiteral:new(lhs_term, rhs_term)
+end
+
 function EqLiteral:get_lhs_term()
    return self.lhs_term
 end
@@ -43,7 +47,7 @@ end
 function EqLiteral:devar(var_assgnm)
    local new_lhs_term =  self:get_lhs_term():devar(var_assgnm)
    local new_rhs_term =  self:get_rhs_term():devar(var_assgnm)
-   return self:new(new_lhs_term, new_rhs_term)
+   return self:new_instance(new_lhs_term, new_rhs_term)
 end
 
 return EqLiteral

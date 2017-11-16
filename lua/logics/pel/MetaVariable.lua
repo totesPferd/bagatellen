@@ -9,6 +9,10 @@ function MetaVariable:new()
    return MALEMetaVariable.new(self)
 end
 
+function MetaVariable:new_instance()
+   return MetaVariable:new()
+end
+
 function MetaVariable:destruct_compound_expression(symbol, arity)
    local this_val =  self:get_val()
    if this_val
@@ -18,7 +22,7 @@ function MetaVariable:destruct_compound_expression(symbol, arity)
 -- map/reduce et al.!!!
       local retval =  List:empty_list_factory()
       for i = 1,arity
-      do retval:append(self:new())
+      do retval:append(self:new_instance())
       end
       self:set_val(retval)
       return retval:__clone()

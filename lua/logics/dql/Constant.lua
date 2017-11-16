@@ -5,12 +5,13 @@ local Constant =  QLConstant:__new()
 package.loaded["logics.dql.Constant"] =  Constant
 local String =  require "base.type.String"
 
-function Constant:new(symbol)
-   return QLConstant.new(self, symbol)
+function Constant:new(symbol, qualifier)
+   return QLConstant.new(self, symbol, qualifier)
 end
 
 function Constant:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory("(logics::dql::Constant "))
+   indentation:insert(self:get_qualifier():get_name())
    do indentation:insert(String:string_factory(" "))
       self:get_symbol():__diagnose_single_line(indentation)
    end
@@ -19,6 +20,7 @@ end
 
 function Constant:__diagnose_multiple_line(indentation)
    indentation:insert(String:string_factory("(logics::dql::Constant "))
+   indentation:insert(self:get_qualifier():get_name())
    local is_last_elem_multiple_line =  true
    local deeper_indentation =
       indentation:get_deeper_indentation_factory {}

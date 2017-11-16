@@ -10,23 +10,20 @@ local Set =  require "base.type.Set"
 local String =  require "base.type.String"
 local VarAssgnm =  require "logics.male.VarAssgnm"
 
-function ProofState:new(clause)
+function ProofState:new(conclusions)
    local retval =  self:__new()
-   retval.premises =  clause:get_premises()
-   retval.conclusions =  Set:empty_set_factory()
-   retval.conclusions:add(clause:get_conclusion())
-   for goal in retval.premises:elems()
-   do retval:assume(goal)
-   end
+   retval.conclusions =  conclusions
+   return retval
+end
+
+function ProofState:new_instance(conclusions)
+   local retval =  ProofState:__new()
+   retval.conclusiosn =  conclusions
    return retval
 end
 
 function ProofState:new_var_assgnm()
    return VarAssgnm:new()
-end
-
-function ProofState:get_premises()
-   return self.premises
 end
 
 function ProofState:get_conclusions()
@@ -35,15 +32,6 @@ end
 
 function ProofState:is_proven()
    return self:get_conclusions():is_empty()
-end
-
-function ProofState:assume(goal)
-   local retval =  self:get_premises():is_in(goal)
-   if retval
-   then
-      self:get_conclusions():drop(goal)
-   end
-   return retval
 end
 
 function ProofState:resolve(axiom, goal)
@@ -84,14 +72,6 @@ function ProofState:apply_proof(proof)
    end
 end
 
-function ProofState:get_devared_premises(var_assgnm)
-   local retval =  Set:empty_set_factory()
-   for premis in self:get_premises():elems()
-   do retval:add(premis:devar(var_assgnm))
-   end
-   return retval
-end
-
 function ProofState:get_devared_conclusions(var_assgnm)
    local retval =  Set:empty_set_factory()
    for conclusion in self:get_conclusions():elems()
@@ -102,16 +82,12 @@ end
 
 function ProofState:devar()
    local var_assgnm =  self:new_var_assgnm()
-   local retval =  self:__new()
-   retval.premises =  self:get_devared_premises(var_assgnm)
-   retval.conclusions =  self:get_devared_conclusions(var_assgnm)
-   return retval
+   local new_conclusions =  self:get_devared_conclusions(var_assgnm)
+   return self:new_instance(new_conclusions)
 end
 
 function ProofState:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory("(logics::male::ProofState "))
-   self:get_premises():__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory(" "))
    self:get_conclusions():__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(")"))
 end
@@ -123,10 +99,7 @@ function ProofState:__diagnose_multiple_line(indentation)
    indentation:insert_newline()
    local deeper_indentation =
       indentation:get_deeper_indentation_factory {}
-   is_last_elem_multiple_line =
-      self:get_premises():__diagnose_complex(deeper_indentation)
 
-   deeper_indentation:insert_newline()
    is_last_elem_multiple_line =
       self:get_conclusions():__diagnose_complex(deeper_indentation)
 
