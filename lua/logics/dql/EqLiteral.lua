@@ -9,6 +9,10 @@ function EqLiteral:new(lhs_term, rhs_term)
    return QLEqLiteral.new(self, lhs_term, rhs_term)
 end
 
+function EqLiteral:new_instance(lhs_term, rhs_term)
+   return EqLiteral:new(lhs_term, rhs_term)
+end
+
 function EqLiteral:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory("(logics::dql::EqLiteral "))
    do indentation:insert(String:string_factory(" "))

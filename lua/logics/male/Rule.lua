@@ -12,9 +12,6 @@ function Rule:new()
    return retval
 end
 
-function Rule:get_assume()
-end
-
 function Rule:get_resolve()
 end
 

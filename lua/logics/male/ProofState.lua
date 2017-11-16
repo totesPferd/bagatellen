@@ -17,9 +17,7 @@ function ProofState:new(conclusions)
 end
 
 function ProofState:new_instance(conclusions)
-   local retval =  ProofState:__new()
-   retval.conclusiosn =  conclusions
-   return retval
+   return ProofState:new(conclusions)
 end
 
 function ProofState:new_var_assgnm()

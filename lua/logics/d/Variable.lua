@@ -6,6 +6,10 @@ local function add_diagnose(s)
    function Variable:new()
       return self:__new()
    end
+
+   function Variable:new_instance()
+      return Variable:new()
+   end
    
    function Variable:get_name()
       return self.name
