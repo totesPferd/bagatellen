@@ -9,12 +9,12 @@ function MetaVariable:new()
    return MALEMetaVariable.new(self)
 end
 
-function MetaVariable:be_a_concept(concept)
+function MetaVariable:be_a_constant(constant)
    local this_val =  self:get_val()
    if not this_val
    then
-      self:set_val(concept)
-      return concept
+      self:set_val(constant)
+      return constant
    end
 end
 

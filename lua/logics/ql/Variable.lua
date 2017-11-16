@@ -9,14 +9,14 @@ function Variable:new()
    return MALEVariable.new(self)
 end
 
-function Variable:get_concept()
+function Variable:get_constant()
 end
 
 function Variable:get_base_qualifier()
    return self, Qualifier:id_factory()
 end
 
-function Variable:destruct_concept(concept)
+function Variable:destruct_constant(constant)
 end
 
 return Variable

@@ -28,9 +28,9 @@ end
 function CompoundExpression:be_a_variable()
 end
 
-function CompoundExpression:destruct_concept(concept)
+function CompoundExpression:destruct_constant(constant)
    local this_base, this_qualifier =  this:get_base_qualifier()
-   return this_base:destruct_concept(concept)
+   return this_base:destruct_constant(constant)
 end
 
 function CompoundExpression:get_val()
