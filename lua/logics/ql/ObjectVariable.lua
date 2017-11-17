@@ -9,6 +9,12 @@ function ObjectVariable:new(qualifier)
    return self:new_ql_variable(male_variable, qualifier)
 end
 
+function ObjectVariable:new_ql_instance_added_qualifier(qualifier)
+   local new_qual =  self:get_qualifier():__clone()
+   new_qual:append_qualifier(qualifier)
+   return self:new_ql_instance(new_qual)
+end
+
 function ObjectVariable:new_ql_variable(male_variable, qualifier)
    local retval =  ObjectVariable:__new()
    retval.male_variable =  male_variable
@@ -50,9 +56,8 @@ function ObjectVariable:get_val()
    local male_val =  self:get_male_variable():get_val()
    if male_val
    then
-      local new_qual =  male_val:get_qualifier():__clone()
-      new_qual:append_qualifier(self:get_qualifier())
-      return self:new_ql_instance(new_qual)
+      return male_val:new_ql_instance_added_qualifier(
+         self:get_qualifier() )
    end
 end
 

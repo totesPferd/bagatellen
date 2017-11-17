@@ -9,6 +9,18 @@ function MetaVariable:new()
    return MALEMetaVariable.new(self)
 end
 
+function MetaVariable:new_ql_instance_added_qualifier(qualifier)
+   local this_val =  self:get_val()
+   if this_val
+   then
+      return this_val:new_ql_instance_added_qualifier(qualifier)
+   end
+end
+
+function MetaVariable:new_instance()
+   return MetaVariable:new()
+end
+
 function MetaVariable:get_constant()
    local this_val =  self:get_val()
    if this_val

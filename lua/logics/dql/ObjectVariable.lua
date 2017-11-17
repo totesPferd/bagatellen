@@ -10,6 +10,12 @@ function ObjectVariable:new_ql_variable(male_variable, qualifier)
    return retval
 end
 
+function ObjectVariable:new_instance()
+   return self:new_ql_variable(
+         self:get_male_variable()
+      ,  self:get_qualifier() )
+end
+
 function ObjectVariable:get_name()
    return self.name
 end

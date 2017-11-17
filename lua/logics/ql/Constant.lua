@@ -11,6 +11,12 @@ function Constant:new(symbol, qualifier)
    return retval
 end
 
+function Constant:new_ql_instance_added_qualifier(qualifier)
+   local new_qual =  self:get_qualifier():__clone()
+   new_qual:append_qualifier(qualifier)
+   return self:new_ql_instance(new_qual)
+end
+
 function Constant:new_ql_instance(qualifier)
    return Constant:new(self:get_symbol(), qualifier)
 end
