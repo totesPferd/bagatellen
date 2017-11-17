@@ -13,15 +13,15 @@ function MetaVariable:get_meta_variable()
    return self
 end
 
-function MetaVariable:get_variable()
+function MetaVariable:get_object_variable()
    local this_val =  self:get_val()
    if this_val
    then
-      return this_val:get_variable()
+      return this_val:get_object_variable()
    end
 end
 
-function MetaVariable:be_a_variable(variable)
+function MetaVariable:be_an_object_variable(variable)
    local this_val =  self:get_val()
    if not this_val
    then
@@ -32,7 +32,7 @@ end
 function MetaVariable:get_val()
    if self.val
    then
-      local var =  self.val:get_variable()
+      local var =  self.val:get_object_variable()
       if var
       then
          return var:get_val()

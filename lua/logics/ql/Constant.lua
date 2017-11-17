@@ -19,7 +19,7 @@ function Constant:get_qualifier()
    return self.qualifier
 end
 
-function Constant:get_variable()
+function Constant:get_object_variable()
 end
 
 function Constant:get_constant()
@@ -30,7 +30,7 @@ function Constant:append_qualifier(qualifier)
    self.qualifier:append_qualifier(qualifier)
 end
 
-function Constant:be_a_variable(variable)
+function Constant:be_an_object_variable(variable)
 end
 
 function Constant:destruct_constant(constant)

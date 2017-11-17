@@ -16,17 +16,17 @@ end
 function Variable:get_meta_variable()
 end
 
-function Variable:get_variable()
+function Variable:get_object_variable()
    return self
 end
 
-function Variable:be_a_variable(variable)
+function Variable:be_an_object_variable(variable)
 end
 
 function Variable:get_val()
    if self.val
    then
-      local var =  self.val:get_variable()
+      local var =  self.val:get_object_variable()
       if var
       then
          return var:get_val()
@@ -37,13 +37,13 @@ function Variable:get_val()
 end
 
 function Variable:set_val(val)
-   local other_var =  val:get_variable()
+   local other_var =  val:get_object_variable()
    if not (other_var and other_var == self)
    then
       local this_val =  self.val
       if this_val
       then
-         local variable =  this_val:get_variable()
+         local variable =  this_val:get_object_variable()
          if variable
          then
             variable:set_val(val)
@@ -55,7 +55,7 @@ function Variable:set_val(val)
 end
 
 function Variable:equate(val)
-   val:be_a_variable(val)
+   val:be_an_object_variable(val)
    local this_val =  self:get_val()
    if this_val
    then

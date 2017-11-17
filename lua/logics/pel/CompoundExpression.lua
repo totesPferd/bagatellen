@@ -27,14 +27,14 @@ end
 function CompoundExpression:get_meta_variable()
 end
 
-function CompoundExpression:get_variable()
+function CompoundExpression:get_object_variable()
 end
 
 function CompoundExpression:get_compound_expression()
    return self
 end
 
-function CompoundExpression:be_a_variable(variable)
+function CompoundExpression:be_an_object_variable(variable)
 end
 
 function CompoundExpression:get_val()

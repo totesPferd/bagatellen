@@ -9,7 +9,7 @@ local QLVariable =  require "logics.ql.Variable"
 function Expression:new(pel_expression)
    local retval =  Expression:__new()
    retval.pel =  pel_expression
-   do local var =  pel_expression:get_variable()
+   do local var =  pel_expression:get_object_variable()
       if var
       then
          retval.ql =  QLVariable:new()

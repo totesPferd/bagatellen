@@ -27,7 +27,7 @@ function QLBase:get_base_compound_expression()
    return self.compound_expression
 end
 
-function QLBase:get_variable()
+function QLBase:get_object_variable()
 end
 
 function QLBase:get_compound_expression()
