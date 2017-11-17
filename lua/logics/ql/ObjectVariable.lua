@@ -10,7 +10,7 @@ function ObjectVariable:new(qualifier)
 end
 
 function ObjectVariable:new_ql_variable(male_variable, qualifier)
-   local retval =  MALEObjectVariable:__new()
+   local retval =  ObjectVariable:__new()
    retval.male_variable =  male_variable
    retval.qualifier =  qualifier
    return retval
