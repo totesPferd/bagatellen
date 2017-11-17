@@ -1,11 +1,11 @@
-local Type =  require "base.type.aux.Type"
+local Variable =  require "logics.male.Variable"
 
-local ObjectVariable =  Type:__new()
+local ObjectVariable =  Variable:__new()
 
 package.loaded["logics.male.ObjectVariable"] =  ObjectVariable
 
 function ObjectVariable:new()
-   local retval =  self:__new()
+   local retval =  Variable.new(self)
    return retval
 end
 
@@ -23,37 +23,6 @@ end
 function ObjectVariable:be_an_object_variable(variable)
 end
 
-function ObjectVariable:get_val()
-   if self.val
-   then
-      local var =  self.val:get_object_variable()
-      if var
-      then
-         return var:get_val()
-      else
-         return self.val
-      end
-   end
-end
-
-function ObjectVariable:set_val(val)
-   local other_var =  val:get_object_variable()
-   if not (other_var and other_var == self)
-   then
-      local this_val =  self.val
-      if this_val
-      then
-         local variable =  this_val:get_object_variable()
-         if variable
-         then
-            variable:set_val(val)
-         end
-      else
-         self.val =  val
-      end
-   end
-end
-
 function ObjectVariable:equate(val)
    val:be_an_object_variable(val)
    local this_val =  self:get_val()
@@ -66,25 +35,6 @@ function ObjectVariable:equate(val)
    else
       self:set_val(val)
       return true
-   end
-end
-
-function ObjectVariable:devar(var_assgnm)
-   local val =  var_assgnm:deref(self)
-   if val
-   then
-      return val
-   else
-      val =  self:get_val()
-      local new_var
-      if val
-      then
-         local new_var =  val:devar(var_assgnm)
-      else
-         local new_var =  self:new_instance()
-      end
-      var_assgnm:add(self, new_var)
-      return new_var
    end
 end
 

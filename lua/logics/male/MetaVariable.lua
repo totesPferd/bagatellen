@@ -1,11 +1,11 @@
-local Type =  require "base.type.aux.Type"
+local Variable =  require "logics.male.Variable"
 
-local MetaVariable =  Type:__new()
+local MetaVariable =  Variable:__new()
 
 package.loaded["logics.male.MetaVariable"] =  MetaVariable
 
 function MetaVariable:new()
-   local retval =  self:__new()
+   local retval =  Variable.new(self)
    return retval
 end
 
@@ -29,49 +29,8 @@ function MetaVariable:be_an_object_variable(variable)
    end
 end
 
-function MetaVariable:get_val()
-   if self.val
-   then
-      local var =  self.val:get_object_variable()
-      if var
-      then
-         return var:get_val()
-      else
-         return self.val
-      end
-   end
-end
-
-function MetaVariable:set_val(val)
-   local other_var =  val:get_meta_variable()
-   if not (other_var and other_var == self)
-   then
-      local this_val =  self.val
-      if this_val
-      then
-         local variable =  this_val:get_meta_variable()
-         if variable
-         then
-            variable:set_val(val)
-         end
-      else
-         self.val =  val
-      end
-   end
-end
-
 -- undefined; by definition as division by zero is undefined!!!
 function MetaVariable:equate(val)
-end
-
-function MetaVariable:devar(var_assgnm)
-   local this_val =  self:get_val()
-   if this_val
-   then
-      return this_val:devar(var_assgnm)
-   else
-      return self
-   end
 end
 
 return MetaVariable
