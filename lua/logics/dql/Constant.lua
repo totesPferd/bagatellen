@@ -9,6 +9,10 @@ function Constant:new(symbol, qualifier)
    return QLConstant.new(self, symbol, qualifier)
 end
 
+function Constant:new_ql_instance(qualifier)
+   return Constant:new(self:get_symbol(), qualifier)
+end
+
 function Constant:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory("(logics::dql::Constant "))
    indentation:insert(self:get_qualifier():get_name())

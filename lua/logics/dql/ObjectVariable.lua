@@ -4,7 +4,7 @@ local String =  require "base.type.String"
 local ObjectVariable =  QLObjectVariable:__new()
 
 function ObjectVariable:new_ql_variable(male_variable, qualifier)
-   local retval =  QLObjectVariable:__new()
+   local retval =  ObjectVariable:__new()
    retval.male_variable =  male_variable
    retval.qualifier =  qualifier
    return retval
