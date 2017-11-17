@@ -47,9 +47,9 @@ function Variable:devar(var_assgnm)
       val =  self:get_val()
       if val
       then
-         local new_var =  val:devar(var_assgnm)
+         new_var =  val:devar(var_assgnm)
       else
-         local new_var =  self:new_instance()
+         new_var =  self:new_instance()
       end
       var_assgnm:add(self, new_var)
       return new_var
