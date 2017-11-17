@@ -24,6 +24,9 @@ function CompoundExpression:get_sub_term_list()
    return self.sub_term_list
 end
 
+function CompoundExpression:get_variable()
+end
+
 function CompoundExpression:get_meta_variable()
 end
 

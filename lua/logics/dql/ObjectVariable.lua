@@ -1,11 +1,25 @@
 local QLObjectVariable =  require "logics.ql.ObjectVariable"
-local d =  require "logics.d.Variable"
 local String =  require "base.type.String"
 
-local ObjectVariable =  d(QLObjectVariable:new())
+local ObjectVariable =  QLObjectVariable:__new()
 
-function ObjectVariable:new_instance()
-   return ObjectVariable:new(self:get_qualifier())
+function ObjectVariable:new_ql_variable(male_variable, qualifier)
+   local retval =  QLObjectVariable:__new()
+   retval.male_variable =  male_variable
+   retval.qualifier =  qualifier
+   return retval
+end
+
+function ObjectVariable:get_name()
+   return self.name
+end
+
+function ObjectVariable:set_name(name)
+   self.name =  name
+end
+
+function ObjectVariable:get_non_nil_name()
+   return self:get_name() or String:string_factory("?")
 end
 
 function ObjectVariable:__diagnose_single_line(indentation)

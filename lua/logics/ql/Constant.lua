@@ -11,12 +11,19 @@ function Constant:new(symbol, qualifier)
    return retval
 end
 
+function Constant:new_ql_instance(qualifier)
+   return Constant:new(self:get_symbol(), qualifier)
+end
+
 function Constant:get_symbol()
    return self.symbol
 end
 
 function Constant:get_qualifier()
    return self.qualifier
+end
+
+function Constant:get_variable()
 end
 
 function Constant:get_object_variable()

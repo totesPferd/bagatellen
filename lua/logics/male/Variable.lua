@@ -3,9 +3,11 @@ local Type =  require "base.type.aux.Type"
 local Variable =  Type:__new()
 
 package.loaded["logics.male.Variable"] =  Variable
+local ValueStore =  require "logics.male.ValueStore"
 
 function Variable:new()
    local retval =  self:__new()
+   retval.value_store =  ValueStore:new()
    return retval
 end
 
@@ -13,35 +15,25 @@ function Variable:new_instance()
    return Variable:new()
 end
 
+function Variable:get_value_store()
+   return self.value_store
+end
+
+function Variable:get_variable()
+   return self
+end
 
 function Variable:get_val()
-   if self.val
-   then
-      local var =  self.val:get_object_variable()
-      if var
-      then
-         return var:get_val()
-      else
-         return self.val
-      end
-   end
+   return self:get_value_store():get_val()
 end
 
 function Variable:set_val(val)
-   local other_var =  val:get_object_variable()
-   if not (other_var and other_var == self)
+   local other_var =  val:get_variable()
+   if other_var
    then
-      local this_val =  self.val
-      if this_val
-      then
-         local variable =  this_val:get_object_variable()
-         if variable
-         then
-            variable:set_val(val)
-         end
-      else
-         self.val =  val
-      end
+      self.value_store =  val:get_value_store()
+   else
+      self.value_store:set_val(val)
    end
 end
 
@@ -51,8 +43,8 @@ function Variable:devar(var_assgnm)
    then
       return val
    else
-      val =  self:get_val()
       local new_var
+      val =  self:get_val()
       if val
       then
          local new_var =  val:devar(var_assgnm)

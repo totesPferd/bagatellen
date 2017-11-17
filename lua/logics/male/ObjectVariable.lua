@@ -13,6 +13,10 @@ function ObjectVariable:new_instance()
    return ObjectVariable:new()
 end
 
+function ObjectVariable:get_variable()
+   return self:get_object_variable()
+end
+
 function ObjectVariable:get_meta_variable()
 end
 
@@ -24,7 +28,7 @@ function ObjectVariable:be_an_object_variable(variable)
 end
 
 function ObjectVariable:equate(val)
-   val:be_an_object_variable(val)
+   val:be_an_object_variable(self)
    local this_val =  self:get_val()
    if this_val
    then
