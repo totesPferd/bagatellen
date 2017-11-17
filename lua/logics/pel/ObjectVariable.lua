@@ -1,22 +1,22 @@
-local MALEVariable =  require "logics.male.Variable"
+local MALEObjectVariable =  require "logics.male.ObjectVariable"
 
-local Variable =  MALEVariable:__new()
+local ObjectVariable =  MALEObjectVariable:__new()
 
-package.loaded["logics.pel.Variable"] =  Variable
+package.loaded["logics.pel.ObjectVariable"] =  ObjectVariable
 -- fuer den Code, der eigentlich nicht hierhergehoert
 local String =  require "base.type.String"
 
-function Variable:new()
-   return MALEVariable.new(self)
+function ObjectVariable:new()
+   return MALEObjectVariable.new(self)
 end
 
-function Variable:get_compound_expression()
+function ObjectVariable:get_compound_expression()
 end
 
 
 -- tut mir leid, geht nicht besser zu machen!
 -- ...gehört eigentlich nach logics.qpel
-function Variable:get_chopped_qualifier_copy(qualifier)
+function ObjectVariable:get_chopped_qualifier_copy(qualifier)
    local retval
    local assgnm_val =  self.assgnm
    if assgnm_val
@@ -37,7 +37,7 @@ function Variable:get_chopped_qualifier_copy(qualifier)
    return retval
 end
 
-function Variable:destruct_compound_expression(symbol, aritiy)
+function ObjectVariable:destruct_compound_expression(symbol, aritiy)
 end
 
-return Variable
+return ObjectVariable

@@ -1,32 +1,32 @@
 local Type =  require "base.type.aux.Type"
 
-local VariableContext =  Type:__new()
+local ObjectVariableContext =  Type:__new()
 
-package.loaded["logics.d.VariableContext"] =  VariableContext
+package.loaded["logics.d.ObjectVariableContext"] =  ObjectVariableContext
 local List =  require "base.type.List"
 local MALEVarAssgnm =  require "logics.male.VarAssgnm"
 local String =  require "base.type.String"
 local StringSet =  require "base.type.set.StringSet"
 
-function VariableContext:new()
+function ObjectVariableContext:new()
    local retval =  self:__new()
    retval.variables =  List:empty_list_factory()
    return retval
 end
 
-function VariableContext:new_instance()
-   return VariableContext:new()
+function ObjectVariableContext:new_instance()
+   return ObjectVariableContext:new()
 end
 
-function VariableContext:add_variable(variable)
+function ObjectVariableContext:add_variable(variable)
    self.variables:append(variable)
 end
 
-function VariableContext:add_variable_context(other)
+function ObjectVariableContext:add_variable_context(other)
    self.variables:append_list(other.variables)
 end
 
-function VariableContext:equate(other)
+function ObjectVariableContext:equate(other)
    local equatable =  true
 
 -- use zip as soon as available
@@ -42,7 +42,7 @@ function VariableContext:equate(other)
    return equatable
 end
 
-function VariableContext:devar()
+function ObjectVariableContext:devar()
    local var_assgnm =  VarAssgnm:new()
    local retval =  self:new_instance()
 
@@ -54,7 +54,7 @@ function VariableContext:devar()
    return retval
 end
 
-function VariableContext:uniquize()
+function ObjectVariableContext:uniquize()
    local do_not_use_set =  StringSet:empty_set_factory()
    for variable in self.variables:elems()
    do local name =  variable:get_name() or String:string_factory("x")
@@ -66,8 +66,8 @@ function VariableContext:uniquize()
    end
 end
 
-function VariableContext:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(logics::d::VariableContext"))
+function ObjectVariableContext:__diagnose_single_line(indentation)
+   indentation:insert(String:string_factory("(logics::d::ObjectVariableContext"))
    for variable in self.variables:elems()
    do
       variable:__diagnose_single_line(indentation)
@@ -75,9 +75,9 @@ function VariableContext:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(")"))
 end
 
-function VariableContext:__diagnose_multiple_line(indentation)
+function ObjectVariableContext:__diagnose_multiple_line(indentation)
    local is_last_elem_multiple_line =  false
-   indentation:insert(String:string_factory("(logics::d::VariableContext"))
+   indentation:insert(String:string_factory("(logics::d::ObjectVariableContext"))
    local deeper_indentation =
       indentation:get_deeper_indentation_factory {}
    for variable in self.variables:elems()
@@ -90,4 +90,4 @@ function VariableContext:__diagnose_multiple_line(indentation)
    indentation:insert(String:parenthesis_off_depending_factory(is_last_elem_multiple_line))
 end
 
-return VariableContext
+return ObjectVariableContext

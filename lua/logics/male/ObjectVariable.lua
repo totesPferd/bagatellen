@@ -1,29 +1,29 @@
 local Type =  require "base.type.aux.Type"
 
-local Variable =  Type:__new()
+local ObjectVariable =  Type:__new()
 
-package.loaded["logics.male.Variable"] =  Variable
+package.loaded["logics.male.ObjectVariable"] =  ObjectVariable
 
-function Variable:new()
+function ObjectVariable:new()
    local retval =  self:__new()
    return retval
 end
 
-function Variable:new_instance()
-   return Variable:new()
+function ObjectVariable:new_instance()
+   return ObjectVariable:new()
 end
 
-function Variable:get_meta_variable()
+function ObjectVariable:get_meta_variable()
 end
 
-function Variable:get_object_variable()
+function ObjectVariable:get_object_variable()
    return self
 end
 
-function Variable:be_an_object_variable(variable)
+function ObjectVariable:be_an_object_variable(variable)
 end
 
-function Variable:get_val()
+function ObjectVariable:get_val()
    if self.val
    then
       local var =  self.val:get_object_variable()
@@ -36,7 +36,7 @@ function Variable:get_val()
    end
 end
 
-function Variable:set_val(val)
+function ObjectVariable:set_val(val)
    local other_var =  val:get_object_variable()
    if not (other_var and other_var == self)
    then
@@ -54,7 +54,7 @@ function Variable:set_val(val)
    end
 end
 
-function Variable:equate(val)
+function ObjectVariable:equate(val)
    val:be_an_object_variable(val)
    local this_val =  self:get_val()
    if this_val
@@ -69,7 +69,7 @@ function Variable:equate(val)
    end
 end
 
-function Variable:devar(var_assgnm)
+function ObjectVariable:devar(var_assgnm)
    local val =  var_assgnm:deref(self)
    if val
    then
@@ -88,4 +88,4 @@ function Variable:devar(var_assgnm)
    end
 end
 
-return Variable
+return ObjectVariable

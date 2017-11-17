@@ -1,15 +1,15 @@
-local QLVariable =  require "logics.ql.Variable"
-local DVariable =  require "logics.d.Variable"
+local QLObjectVariable =  require "logics.ql.ObjectVariable"
+local d =  require "logics.d.Variable"
 local String =  require "base.type.String"
 
-local Variable =  DVariable(QLVariable:new())
+local ObjectVariable =  d(QLObjectVariable:new())
 
-function Variable:new_instance()
-   return Variable:new(self:get_qualifier())
+function ObjectVariable:new_instance()
+   return ObjectVariable:new(self:get_qualifier())
 end
 
-function Variable:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(logics::dql::Variable "))
+function ObjectVariable:__diagnose_single_line(indentation)
+   indentation:insert(String:string_factory("(logics::dql::ObjectVariable "))
    indentation:insert(self:get_qualifier():get_name())
    indentation:insert(String:string_factory(" "))
    indentation:insert(self:get_non_nil_name())
@@ -22,10 +22,10 @@ function Variable:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(")"))
 end
 
-function Variable:__diagnose_multiple_line(indentation)
+function ObjectVariable:__diagnose_multiple_line(indentation)
    local is_last_elem_multiple_line =  true
 
-   indentation:insert(String:string_factory("(logics::dql::Variable "))
+   indentation:insert(String:string_factory("(logics::dql::ObjectVariable "))
    indentation:insert(self:get_qualifier():get_name())
    indentation:insert_newline()
    local deeper_indentation =
@@ -43,4 +43,4 @@ function Variable:__diagnose_multiple_line(indentation)
 end
 
 
-return Variable
+return ObjectVariable
