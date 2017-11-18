@@ -25,12 +25,13 @@ function MetaVariable:get_object_variable()
    end
 end
 
-function MetaVariable:be_an_object_variable(variable)
+function MetaVariable:assign_object_variable_to_meta_variable(variable)
    local this_val =  self:get_val()
    if not this_val
    then
       self:set_val(variable)
    end
+   return true
 end
 
 -- undefined; by definition as division by zero is undefined!!!

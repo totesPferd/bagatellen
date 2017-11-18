@@ -43,7 +43,8 @@ function Constant:append_qualifier(qualifier)
    self.qualifier:append_qualifier(qualifier)
 end
 
-function Constant:be_an_object_variable(variable)
+function Constant:assign_object_variable_to_meta_variable(variable)
+   return true
 end
 
 function Constant:be_a_constant(constant)
