@@ -4,7 +4,7 @@ local ObjectVariable =  MALEObjectVariable:__new()
 
 package.loaded["logics.ql.ObjectVariable"] =  ObjectVariable
 
-function ObjectVariable:new(qualifier, male_variable)
+function ObjectVariable:new(male_variable, qualifier)
    local retval =  MALEObjectVariable.new(self)
    retval.male_variable =  male_variable or MALEObjectVariable:new()
    retval.qualifier =  qualifier
@@ -19,14 +19,14 @@ end
 
 function ObjectVariable:new_ql_instance(qualifier)
    return self.__index:new(
-         qualifier
-      ,  self:get_male_variable() )
+         self:get_male_variable()
+      ,  qualifier )
 end
 
 function ObjectVariable:copy()
    return self.__index:new(
-         self:get_qualifier()
-      ,  self:get_male_variable():copy() )
+      ,  self:get_male_variable():copy()
+         self:get_qualifier() )
 end
 
 function ObjectVariable:get_male_variable()
@@ -70,6 +70,22 @@ function ObjectVariable:__eq(other)
    return
          self:get_male_variable() == other:get_male_variable()
      and self:get_qualifier() == other:get_qualifier()
+end
+
+
+-- --- refactoring:
+
+function ObjectVariable:get_rhs_chopped_copy(qualifier)
+   local new_lhs, new_rhs
+      =  self:get_qualifier():get_rhs_chopped_copy(qualifier)
+   if new_lhs
+   then
+      return
+            self:__index:new(
+                  self:get_meta_variable()
+               ,  new_lhs )
+         ,  new_rhs
+   end
 end
 
 return ObjectVariable

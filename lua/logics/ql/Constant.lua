@@ -79,4 +79,21 @@ function Constant:__eq(other)
    return retval
 end
 
+
+-- --- refactoring.
+
+function Constant:get_rhs_chopped_copy(qualifier)
+   local new_lhs, new_rhs
+      =  self:get_qualifier():get_rhs_chopped_copy(qualifier)
+   if new_lhs
+   then
+      return
+            self:__index:new(
+                  self:get_symbol()
+               ,  new_lhs )
+         ,  new_rhs
+   end
+end
+
+
 return Constant
