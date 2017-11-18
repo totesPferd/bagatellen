@@ -23,9 +23,6 @@ function ToLiteral:get_rhs_term()
    return self.rhs_term
 end
 
-function ToLiteral:get_eq_literal()
-end
-
 function ToLiteral:get_to_literal()
    return self
 end
