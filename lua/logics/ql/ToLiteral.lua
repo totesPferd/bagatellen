@@ -12,7 +12,7 @@ function ToLiteral:new(lhs_term, rhs_term)
 end
 
 function ToLiteral:new_instance(lhs_term, rhs_term)
-   return ToLiteral:new(lhs_term, rhs_term)
+   return self.__index:new(lhs_term, rhs_term)
 end
 
 function ToLiteral:get_lhs_term()
