@@ -54,13 +54,19 @@ function Constant:be_a_constant(constant)
 end
 
 function Constant:equate(other)
+   local retval =  false
    local other_constant =  other:be_a_constant(self)
    if other_constant
    then
-      return true
-   else
-      return false
+      local this_qual =  self:get_qualifier()
+      local rhs_qual =  other:get_lhs_chopped(this_qual)
+      if rhs_qual
+      then
+         this_qual:append_qualifier(rhs_qual)
+         retval =  true
+      end
    end
+   return retval
 end
 
 function Constant:devar(var_assgnm)
