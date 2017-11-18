@@ -37,14 +37,15 @@ function QualifierVariable:destruct_terminal(terminal)
    end
 end
 
-function QualifierVariable:is_lhs_seq(qualifier)
-   retval =  true
+function QualifierVariable:get_lhs_chopped(qualifier)
    local this_val =  self:get_val()
    if this_val
    then
-      retval =  this_val:is_lhs_seq(qualifier)
+      return this_val:get_lhs_chopped(qualifier)
+   elseif qualifier:is_id()
+   then
+      return self
    end
-   return retval
 end
 
 function QualifierVariable:get_rhs_chopped_copy(qualifier)
@@ -52,6 +53,9 @@ function QualifierVariable:get_rhs_chopped_copy(qualifier)
    if this_val
    then
       return this_val:get_rhs_chopped_copy(qualifier)
+   elseif qualifier:is_id()
+   then
+      return self:copy(), qualifier
    end
 end
 

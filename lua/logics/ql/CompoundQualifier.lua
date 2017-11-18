@@ -12,6 +12,10 @@ function CompoundQualifier:new(terminal, qualifier)
    return retval
 end
 
+function CompoundQualifier:new_qualifier_variable()
+   return QualifierVariable:new()
+end
+
 function CompoundQualifier:get_terminal()
    return self.terminal
 end
@@ -68,29 +72,32 @@ function CompoundQualifier:get_val()
    return self
 end
 
-function CompoundQualifier:is_lhs_seq(qualifier)
-   local retval =  false
+function CompoundQualifier:get_lhs_chopped(qualifier)
    local next_qualifier =  qualifier:destruct_terminal(self:get_terminal())
    if next_qualifier
    then
-      retval =  self:get_qualifier():is_lhs_seq(next_qualifier)
+      return self:get_qualifier():get_lhs_chopped(next_qualifier)
+   elseif qualifier:is_id()
+   then
+      return self
    end
-   return retval
 end
 
 function CompoundQualifier:get_rhs_chopped_copy(qualifier)
-   if qualifier:is_lhs_seq(self)
+   local new_rhs =  self:get_lhs_chopped(qualifier)
+   if new_rhs
    then
-      return QualifierVariable:new()
+      return
+            self:new_qualifier_variable()
+         ,  new_rhs
    else
-      local next_rhs_chopped_copy
+      local new_lhs, new_rhs
          =  self:get_qualifier():get_rhs_chopped_copy(qualifier)
-      if next_rhs_chopped_copy
-      then
-         return self.__index:new(
-               self:get_terminal()
-            ,  next_rhs_chopped_copy )
-      end
+      return
+            self.__index:new(
+                  self:get_terminal()
+               ,  new_lhs )
+         ,  new_rhs
    end
 end
 
