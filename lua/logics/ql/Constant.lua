@@ -79,4 +79,8 @@ function Constant:__eq(other)
    return retval
 end
 
+function Constant:append_qualifier(qualifier)
+   self:get_qualifier():append_qualifier(qualifier)
+end
+
 return Constant

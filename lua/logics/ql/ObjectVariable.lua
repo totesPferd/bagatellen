@@ -72,4 +72,8 @@ function ObjectVariable:__eq(other)
      and self:get_qualifier() == other:get_qualifier()
 end
 
+function ObjectVariable:append_qualifier(qualifier)
+   self:get_qualifier():append_qualifier(qualifier)
+end
+
 return ObjectVariable

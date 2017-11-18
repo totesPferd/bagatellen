@@ -101,4 +101,8 @@ function CompoundQualifier:get_rhs_chopped_copy(qualifier)
    end
 end
 
+function CompoundQualifier:append_qualifier(qualifier)
+   self:get_qualifier():append_qualifier(qualifier)
+end
+
 return CompoundQualifier
