@@ -63,4 +63,14 @@ function MetaVariable:get_rhs_chopped_copy(qualifier)
    end
 end
 
+function MetaVariable:devar(var_assgnm)
+   local this_val =  self:get_val()
+   if this_val
+   then
+      return this_val:devar(var_assgnm)
+   else
+      return self
+   end
+end
+
 return MetaVariable

@@ -70,7 +70,8 @@ function Constant:equate(other)
 end
 
 function Constant:devar(var_assgnm)
-   return self
+   local dev_qual =  self:get_qualifier():devar(var_assgnm)
+   return self.__index:new(self:get_symbol(), dev_qual)
 end
 
 function Constant:__eq(other)
