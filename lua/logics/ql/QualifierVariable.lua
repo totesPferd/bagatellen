@@ -32,7 +32,26 @@ end
 function QualifierVariable:destruct_terminal(terminal)
    local this_val =  self:get_val()
    if this_val
+   then
       return this_val:destruct_terminal(terminal)
+   end
+end
+
+function QualifierVariable:is_lhs_seq(qualifier)
+   retval =  true
+   local this_val =  self:get_val()
+   if this_val
+   then
+      retval =  this_val:is_lhs_seq(qualifier)
+   end
+   return retval
+end
+
+function QualifierVariable:get_rhs_chopped_copy(qualifier)
+   local this_val =  self:get_val()
+   if this_val
+   then
+      return this_val:get_rhs_chopped_copy(qualifier)
    end
 end
 

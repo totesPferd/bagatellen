@@ -3,6 +3,7 @@ local Type =  require "base.type.aux.Type"
 local CompoundQualifier =  Type:__new()
 
 package.loaded["logics.ql.CompoundQualifier"] =  CompoundQualifier
+local QualifierVariable =  require "logics.ql.QualifierVariable"
 
 function CompoundQualifier:new(terminal, qualifier)
    local retval =  self:__new()
@@ -61,6 +62,36 @@ end
 function CompoundQualifier:devar(var_assgnm)
    local new_qual =  self:get_qualifier():devar(var_assgnm)
    return self.__index:new(self:get_terminal(), new_qual)
+end
+
+function CompoundQualifier:get_val()
+   return self
+end
+
+function CompoundQualifier:is_lhs_seq(qualifier)
+   local retval =  false
+   local next_qualifier =  qualifier:destruct_terminal(self:get_terminal())
+   if next_qualifier
+   then
+      retval =  self:get_qualifier():is_lhs_seq(next_qualifier)
+   end
+   return retval
+end
+
+function CompoundQualifier:get_rhs_chopped_copy(qualifier)
+   if qualifier:is_lhs_seq(self)
+   then
+      return QualifierVariable:new()
+   else
+      local next_rhs_chopped_copy
+         =  self:get_qualifier():get_rhs_chopped_copy(qualifier)
+      if next_rhs_chopped_copy
+      then
+         return self.__index:new(
+               self:get_terminal()
+            ,  next_rhs_chopped_copy )
+      end
+   end
 end
 
 return CompoundQualifier
