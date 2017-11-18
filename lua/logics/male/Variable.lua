@@ -56,3 +56,4 @@ function Variable:devar(var_assgnm)
    end
 end
 
+return Variable
