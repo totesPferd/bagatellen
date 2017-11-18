@@ -3,6 +3,7 @@ local MALEObjectVariable =  require "logics.male.ObjectVariable"
 local ObjectVariable =  MALEObjectVariable:__new()
 
 package.loaded["logics.ql.ObjectVariable"] =  ObjectVariable
+local BaseVariableCopier =  require "logics.ql.base_variable_copier.ObjectVariable"
 
 function ObjectVariable:new(qualifier)
    local male_variable =  MALEObjectVariable:new()
@@ -28,10 +29,8 @@ function ObjectVariable:new_ql_instance(qualifier)
       ,  qualifier )
 end
 
-function ObjectVariable:new_instance()
-   return self:new_ql_variable(
-         self:get_male_variable()
-      ,  self:get_qualifier() )
+function ObjectVariable:get_base_variable_copier()
+   return BaseVariableCopier
 end
 
 function ObjectVariable:get_male_variable()
