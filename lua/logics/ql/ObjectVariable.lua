@@ -25,8 +25,8 @@ end
 
 function ObjectVariable:copy()
    return self.__index:new(
-      ,  self:get_male_variable():copy()
-         self:get_qualifier() )
+         self:get_male_variable():copy()
+      ,  self:get_qualifier() )
 end
 
 function ObjectVariable:get_male_variable()
@@ -44,7 +44,7 @@ function ObjectVariable:get_qualifier()
    return self.qualifier
 end
 
-function ObjectVariable:destruct_constant(constant)
+function ObjectVariable:be_a_constant(constant)
 end
 
 function ObjectVariable:get_val()
@@ -81,7 +81,7 @@ function ObjectVariable:get_rhs_chopped_copy(qualifier)
    if new_lhs
    then
       return
-            self:__index:new(
+            self.__index:new(
                   self:get_meta_variable()
                ,  new_lhs )
          ,  new_rhs

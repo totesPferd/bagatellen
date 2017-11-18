@@ -69,4 +69,14 @@ function QualifierVariable:append_qualifier(qualifier)
    end
 end
 
+function QualifierVariable:get_id_qualifier_end()
+   local this_val =  self:get_val()
+   if this_val
+   then
+      return this_val:get_id_qualifier_end()
+   else
+      return self
+   end
+end
+
 return QualifierVariable

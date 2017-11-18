@@ -46,7 +46,7 @@ end
 function Constant:be_an_object_variable(variable)
 end
 
-function Constant:destruct_constant(constant)
+function Constant:be_a_constant(constant)
    if self == constant
    then
       return self
@@ -54,7 +54,7 @@ function Constant:destruct_constant(constant)
 end
 
 function Constant:equate(other)
-   local other_constant =  other:destruct_constant(self)
+   local other_constant =  other:be_a_constant(self)
    if other_constant
    then
       return true
