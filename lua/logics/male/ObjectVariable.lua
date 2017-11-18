@@ -9,10 +9,6 @@ function ObjectVariable:new()
    return retval
 end
 
-function ObjectVariable:new_instance()
-   return ObjectVariable:new()
-end
-
 function ObjectVariable:get_variable()
    return self:get_object_variable()
 end

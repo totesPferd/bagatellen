@@ -9,10 +9,6 @@ function MetaVariable:new()
    return MALEMetaVariable.new(self)
 end
 
-function MetaVariable:new_instance()
-   return MetaVariable:new()
-end
-
 function MetaVariable:destruct_compound_expression(symbol, arity)
    local this_val =  self:get_val()
    if this_val

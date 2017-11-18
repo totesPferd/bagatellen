@@ -3,6 +3,7 @@ local Type =  require "base.type.aux.Type"
 local Variable =  Type:__new()
 
 package.loaded["logics.male.Variable"] =  Variable
+local Generic =  require "logics.male.base_variable_copier.Generic"
 local ValueStore =  require "logics.male.ValueStore"
 
 function Variable:new()
@@ -11,8 +12,8 @@ function Variable:new()
    return retval
 end
 
-function Variable:new_instance()
-   return Variable:new()
+function Variable:get_base_variable_copier()
+   return Generic
 end
 
 function Variable:get_value_store()
@@ -49,7 +50,7 @@ function Variable:devar(var_assgnm)
       then
          new_var =  val:devar(var_assgnm)
       else
-         new_var =  self:new_instance()
+         new_var =  self:get_base_variable_copier():new()
       end
       var_assgnm:add(self, new_var)
       return new_var

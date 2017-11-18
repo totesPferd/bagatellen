@@ -9,10 +9,6 @@ function MetaVariable:new()
    return retval
 end
 
-function MetaVariable:new_instance()
-   MetaVariable:new()
-end
-
 function MetaVariable:get_variable()
    return self:get_meta_variable()
 end
