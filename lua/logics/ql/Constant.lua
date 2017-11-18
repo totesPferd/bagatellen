@@ -18,7 +18,7 @@ function Constant:new_ql_instance_added_qualifier(qualifier)
 end
 
 function Constant:new_ql_instance(qualifier)
-   return Constant:new(self:get_symbol(), qualifier)
+   return self.__index:new(self:get_symbol(), qualifier)
 end
 
 function Constant:get_symbol()
