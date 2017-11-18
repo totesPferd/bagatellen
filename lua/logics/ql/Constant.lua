@@ -95,5 +95,8 @@ function Constant:get_rhs_chopped_copy(qualifier)
    end
 end
 
+function Constant:append_qualifier(qualifier)
+   self:get_qualifier():append_qualifier(qualifier)
+end
 
 return Constant

@@ -59,4 +59,14 @@ function QualifierVariable:get_rhs_chopped_copy(qualifier)
    end
 end
 
+function QualifierVariable:append_qualifier(qualifier)
+   local this_val =  self:get_val()
+   if this_val
+   then
+      this_val:append_qualifier(qualifier)
+   else
+      self:set_val(qualifier)
+   end
+end
+
 return QualifierVariable

@@ -88,4 +88,8 @@ function ObjectVariable:get_rhs_chopped_copy(qualifier)
    end
 end
 
+function ObjectVariable:append_qualifier(qualifier)
+   self:get_qualifier():append_qualifier(qualifier)
+end
+
 return ObjectVariable
