@@ -1,5 +1,4 @@
 local Clause =  require "logics.male.Clause"
-local CompoundQualifier =  require "logics.qualifier.CompoundQualifier"
 local MetaVariable =  require "logics.qualifier.MetaVariable"
 local ObjectVariable =  require "logics.qualifier.ObjectVariable"
 local Resolve =  require "logics.male.rule.Resolve"
