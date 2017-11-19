@@ -5,15 +5,21 @@ local MetaVariable =  MALEMetaVariable:__new()
 package.loaded["logics.qualifier.MetaVariable"] =  MetaVariable
 local CompoundQualifier =  require "logics.qualifier.CompoundQualifier"
 
-function MetaVariable:new()
-   return MALEMetaVariable.new(self)
+function MetaVariable:new(rhs_object_variable)
+   local retval =  MALEMetaVariable.new(self)
+   retval.rhs_object_variable =  rhs_object_variable
+   return retval
 end
 
 function MetaVariable:new_compound_qualifier(terminal, qualifier)
    return CompoundQualifier:new(terminal, qualifier)
 end
 
-function MetaVariable:get_compound_qualifier()
+function MetaVariable:get_compound_qualifier_cast()
+end
+
+function MetaVariable:get_rhs_object_variable()
+   return self.rhs_object_variable
 end
 
 function MetaVariable:destruct_terminal(terminal)
@@ -30,6 +36,10 @@ function MetaVariable:destruct_terminal(terminal)
       self:set_val(new_val)
       return new_var
    end
+end
+
+function MetaVariable:append_qualifier(qualifier)
+   self:get_rhs_object_variable():append_qualifier(qualifier)
 end
 
 return MetaVariable

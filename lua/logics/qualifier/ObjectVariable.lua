@@ -8,7 +8,7 @@ function ObjectVariable:new()
    return MALEObjectVariable.new(self)
 end
 
-function ObjectVariable:get_compound_qualifier()
+function ObjectVariable:get_compound_qualifier_cast()
 end
 
 function ObjectVariable:is_id()

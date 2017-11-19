@@ -19,7 +19,7 @@ function Variable:get_value_store()
    return self.value_store
 end
 
-function Variable:get_variable()
+function Variable:get_variable_cast()
    return self
 end
 
@@ -28,7 +28,7 @@ function Variable:get_val()
 end
 
 function Variable:set_val(val)
-   local other_var =  val:get_variable()
+   local other_var =  val:get_variable_cast()
    if other_var
    then
       self.value_store =  val:get_value_store()

@@ -25,7 +25,7 @@ end
 function CompoundQualifier:get_meta_variable()
 end
 
-function CompoundQualifier:get_compound_qualifier()
+function CompoundQualifier:get_compound_qualifier_cast()
    return self
 end
 
@@ -120,7 +120,7 @@ end
 
 function CompoundQualifier:__eq(other)
    local retval =  false
-   local other_compound_qualifier =  other:get_compound_qualifier()
+   local other_compound_qualifier =  other:get_compound_qualifier_cast()
    if other_compound_qualifier
    then
       retval =
