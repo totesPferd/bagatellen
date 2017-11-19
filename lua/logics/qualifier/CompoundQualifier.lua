@@ -3,6 +3,7 @@ local Type =  require "base.type.aux.Type"
 local CompoundQualifier =  Type:__new()
 
 package.loaded["logics.qualifier.CompoundQualifier"] =  CompoundQualifier
+local String =  require "base.type.String"
 
 function CompoundQualifier:new(terminal, qualifier)
    local retval =  self:__new()
@@ -72,8 +73,8 @@ function CompoundQualifier:get_name()
    local this_qualifier =  self:get_qualifier()
    if not this_qualifier:is_id()
    then
-      retval:append(String:string_factory("."))
-      retval:append_string(this_qualifier:get_name())
+      retval:prepend_string(String:string_factory("."))
+      retval:prepend_string(this_qualifier:get_name())
    end
    return retval
 end

@@ -3,6 +3,7 @@ local MALEObjectVariable =  require "logics.male.ObjectVariable"
 local ObjectVariable =  MALEObjectVariable:__new()
 
 package.loaded["logics.qualifier.ObjectVariable"] =  ObjectVariable
+local String =  require "base.type.String"
 
 function ObjectVariable:new()
    return MALEObjectVariable.new(self)
