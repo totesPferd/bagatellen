@@ -36,10 +36,6 @@ end
 function ObjectVariable:get_constant()
 end
 
-function ObjectVariable:append_qualifier(qualifier)
-   self.qualifier():append_qualifier(qualifier)
-end
-
 function ObjectVariable:get_qualifier()
    return self.qualifier
 end
@@ -57,12 +53,12 @@ function ObjectVariable:get_val()
 end
 
 function ObjectVariable:set_val(val)
-   local new_qualifier =  val:get_qualifier():get_rhs_chopped_copy(
+   local new_lhs, new_rhs =  val:get_rhs_chopped_copy(
          self:get_qualifier() )
-   if new_qualifier
+   if new_lhs
    then
       self:get_male_variable():set_val(
-         val:new_ql_instance(new_qualifier) )
+         val.__index:new(new_lhs, new_rhs) )
    end
 end
 

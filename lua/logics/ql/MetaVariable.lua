@@ -63,6 +63,41 @@ function MetaVariable:be_a_constant(constant)
    end
 end
 
+function MetaVariable:assign_object_variable_to_meta_variable(variable)
+   local retval =  true
+   local this_val =  self:get_val()
+   if not this_val
+   then
+      local val_base =  this_val:get_male_variable()
+      local val_qual =  this_val:get_qualifier()
+      retval =  val_qual:lu(self:get_qualifier())
+      if retval
+      then
+         self:get_male_variable():set_val(val_base)
+      end
+   end
+   return retval
+end
+
+function MetaVariable:get_val()
+   local male_val =  self:get_male_variable():get_val()
+   if male_val
+   then
+      return male_val:new_ql_instance_added_qualifier(
+         self:get_qualifier() )
+   end
+end
+
+function MetaVariable:set_val(val)
+   local new_lhs, new_rhs =  val:get_rhs_chopped_copy(
+         self:get_qualifier() )
+   if new_lhs
+   then
+      self:get_male_variable():set_val(
+         val.__index:new(new_lhs, new_rhs) )
+   end
+end
+
 function MetaVariable:get_rhs_chopped_copy(qualifier)
    local this_val =  self:get_val()
    if this_val
