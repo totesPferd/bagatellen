@@ -26,14 +26,4 @@ function ObjectVariable:destruct_terminal(q, terminal)
    end
 end
 
-function ObjectVariable:get_lhs_chopped(qualifier)
-   local this_val =  self:get_val()
-   if this_val
-   then
-      return this_val:get_lhs_chopped(qualifier)
-   else
-      return qualifier
-   end
-end
-
 return ObjectVariable

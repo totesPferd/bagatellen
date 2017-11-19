@@ -1,4 +1,4 @@
-local QLObjectVariable =  require "logics.ql.ObjectVariable"
+local QLObjectVariable =  require "logics.qualifier.ObjectVariable"
 local String =  require "base.type.String"
 
 local ObjectVariable =  QLObjectVariable:__new()

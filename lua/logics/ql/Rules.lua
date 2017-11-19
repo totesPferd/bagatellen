@@ -1,8 +1,7 @@
 local Clause =  require "logics.male.Clause"
-local MetaVariable =  require "logics.ql.MetaVariable"
-local ObjectVariable =  require "logics.ql.ObjectVariable"
-local QualifierMetaVariable =  require "logics.qualifier.MetaVariable"
-local QualifierObjectVariable =  require "logics.qualifier.ObjectVariable"
+local CompoundQualifier =  require "logics.qualifier.CompoundQualifier"
+local MetaVariable =  require "logics.qualifier.MetaVariable"
+local ObjectVariable =  require "logics.qualifier.ObjectVariable"
 local Resolve =  require "logics.male.rule.Resolve"
 local Set =  require "base.type.Set"
 local ToLiteral =  require "logics.ql.ToLiteral"
@@ -16,11 +15,8 @@ local function gen_refl()
 end
 
 local function gen_trans()
-   local qual_ctxt =  QualifierObjectVariable:new()
-   local meta_ctxt =  QualifierMetaVariable:new(qual_ctxt)
-
    local lhs_var =  ObjectVariable:new()
-   local mid_var =  MetaVariable:new(qual_ctxt, meta_ctxt)
+   local mid_var =  MetaVariable:new()
    local rhs_var =  ObjectVariable:new()
    local lhs_cath =  ToLiteral:new(lhs_var, mid_var)
    local rhs_cath =  ToLiteral:new(mid_var, rhs_var)
@@ -36,10 +32,7 @@ local function gen_trans()
 end
 
 local function gen_td()
-   local qual_ctxt =  QualifierObjectVariable:new()
-   local meta_ctxt =  QualifierMetaVariable:new(qual_ctxt)
-
-   local lhs_var =  MetaVariable:new(qual_ctxt, meta_ctxt)
+   local lhs_var =  MetaVariable:new()
    local mid_var =  ObjectVariable:new()
    local rhs_var =  ObjectVariable:new()
    local lhs_cath =  ToLiteral:new(lhs_var, mid_var)

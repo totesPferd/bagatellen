@@ -82,12 +82,4 @@ function CompoundQualifier:__eq(other)
    return retval
 end
 
-function CompoundQualifier:get_lhs_chopped(qualifier)
-   local next_qualifier =  qualifier:destruct_terminal(self, self:get_terminal())
-   if next_qualifier
-   then
-      return self:get_qualifier():get_lhs_chopped(next_qualifier)
-   end
-end
-
 return CompoundQualifier
