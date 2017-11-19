@@ -37,7 +37,7 @@ function ObjectVariable:get_constant()
 end
 
 function ObjectVariable:append_qualifier(qualifier)
-   self.qualifier:append_qualifier(qualifier)
+   self.qualifier():append_qualifier(qualifier)
 end
 
 function ObjectVariable:get_qualifier()
