@@ -1,127 +1,59 @@
-local MALEMetaVariable =  require "logics.male.MetaVariable"
+local Type =  require "base.type.aux.Type"
 
-local MetaVariable =  MALEMetaVariable:__new()
+local MetaVariable =  Type:__new()
 
 package.loaded["logics.ql.MetaVariable"] =  MetaVariable
-local List =  require "base.type.List"
-local ObjectVariable =  require "logics.ql.ObjectVariable"
-local QualifierVariable =  require "logics.ql.QualifierVariable"
+local Constant =  require "logics.ql.Constant"
+local QualifierMetaVariable =  require "logics.qualifier.MetaVariable"
+local QualifierObjectVariable =  require "logics.qualifier.ObjectVariable"
 
-function MetaVariable:new(male_variable, qualifier)
-   local retval =  MALEMetaVariable.new(self)
+function MetaVariable:new(qualifier, male_variable)
+   local retval =  self:__new()
+   retval.male_variable =  male_variable
    retval.qualifier =  qualifier
-   retval.male_variable =  male_variable or MALEMetaVariable:new()
    return retval
 end
 
-function MetaVariable:new_ql_instance_added_qualifier(qualifier)
-   local this_val =  self:get_val()
-   if this_val
-   then
-      return this_val:new_ql_instance_added_qualifier(qualifier)
-   end
+function MetaVariable:new_instance(qualifier)
+   return self.__index:new(qualifier, self_get_male_variable())
 end
 
-function MetaVariable:new_object_variable(qualifier)
-   return ObjectVariable:new(nil, qualifier)
-end
-
-function MetaVariable:get_constant()
-   local this_val =  self:get_val()
-   if this_val
-   then
-      return self:get_constant()
-   end
+function MetaVariable:new_constant(qualifier, symbol)
+   local here_qualifier =  qualifier or self:get_qualifier()
+   return Constant:new(here_qualifier, symbol)
 end
 
 function MetaVariable:get_qualifier()
-   local this_val =  self:get_val()
-   if this_val
-   then
-      return this_val:get_qualifier()
-   else
-      return self.qualifier
-   end
-end
-
-function MetaVariable:append_qualifier(qualifier)
-   self:get_qualifier():append_qualifier(qualifier)
+   return self.qualifier
 end
 
 function MetaVariable:get_male_variable()
    return self.male_variable
 end
 
-function MetaVariable:be_a_constant(constant)
-   local this_val =  self:get_val()
-   if this_val
-   then
-      return this_val:be_a_constant(constant)
-   else
-      self:set_val(constant)
-      return constant
-   end
+function MetaVariable:get_constant_cast()
 end
 
-function MetaVariable:assign_object_variable_to_meta_variable(variable)
-   local retval =  true
-   local this_val =  self:get_val()
-   if not this_val
+function MetaVariable:get_lhs_chop_constant(constant)
+   local this_male_val =  self:get_male_variable():get_val()
+   if this_male_val
    then
-      local val_base =  this_val:get_male_variable()
-      local val_qual =  this_val:get_qualifier()
-      retval =  val_qual:lu(self:get_qualifier())
-      if retval
+      local this_constant =  this_male_val:get_constant_cast()
+      if this_constant
       then
-         self:get_male_variable():set_val(val_base)
+         this_symbol =  this_constant:get_symbol()
+         local another_constant =  new_constant(nil, this_symbol)
+         return another_constant:get_lhs_chop_constant(constant)
       end
-   end
-   return retval
-end
-
-function MetaVariable:get_val()
-   local male_val =  self:get_male_variable():get_val()
-   if male_val
-   then
-      return male_val:new_ql_instance_added_qualifier(
-         self:get_qualifier() )
-   end
-end
-
-function MetaVariable:set_val(val)
-   local new_lhs, new_rhs =  val:get_rhs_chopped_copy(
-         self:get_qualifier() )
-   if new_lhs
-   then
-      self:get_male_variable():set_val(
-         val.__index:new(new_lhs, new_rhs) )
-   end
-end
-
-function MetaVariable:get_rhs_chopped_copy(qualifier)
-   local this_val =  self:get_val()
-   if this_val
-   then
-      return this_val:get_rhs_chopped_copy(qualifier)
    else
-      local new_val =  self:new_obj_variable(qualifier)
-      self:set_val(new_val)
-      local new_male_val =  new_val:get_male_variable()
-      local new_qual =  self:new_qualifier_variable()
-      local new_obj_val =  self:new_object_variable(new_qual)
-      return new_obj_val, new_qual:get_id_qualfier_end()
-   end
-end
-
-function MetaVariable:devar(var_assgnm)
-   local this_val =  self:get_val()
-   if this_val
-   then
-      return this_val:devar(var_assgnm)
-   else
-      local dev_male =  self:get_male_variable():devar(var_assgnm)
-      local dev_qual =  self:get_qualifier():devar(var_assgnm)
-      return self.__index:new(dev_male, dev_qual)
+      local id_qual =  QualifierObjectVariable:new()
+      local symbol =  constant:get_symbol()
+      local qual =  constant:get_qualifier()
+      if qual:lu(self:get_qualifier())
+      then
+         self:get_male_variable():set_val(new_constant(id_qual, symbol))
+         self:get_qualifier():set_val(constant:get_qualifier())
+      end
    end
 end
 

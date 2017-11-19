@@ -105,6 +105,7 @@ function CompoundQualifier:get_rhs_chopped_copy(qualifier)
    local new_rhs =  self:get_lhs_chopped(qualifier)
    if new_rhs
    then
+      self:get_qualifier():append_qualifier(new_rhs)
       return
             self:new_qualifier_variable()
          ,  new_rhs
