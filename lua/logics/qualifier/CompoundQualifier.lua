@@ -62,10 +62,11 @@ end
 function CompoundQualifier:get_name()
    local retval =  self:get_terminal():__clone()
    local this_qualifier =  self:get_qualifier()
-   if not this_qualifier:is_id()
+   local next_string =  this_qualifier:get_name()
+   if next_string
    then
       retval:append_string(String:string_factory("."))
-      retval:append_string(this_qualifier:get_name())
+      retval:append_string(next_string)
    end
    return retval
 end
@@ -80,6 +81,10 @@ function CompoundQualifier:__eq(other)
         and self:get_qualifier() == other_compound_qualifier:get_qualifier()
    end
    return retval
+end
+
+function CompoundQualifier:assign_object_variable_to_meta_variable(variable)
+   return true
 end
 
 return CompoundQualifier
