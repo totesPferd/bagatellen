@@ -6,8 +6,10 @@ package.loaded["logics.qualifier.ObjectVariable"] =  ObjectVariable
 local String =  require "base.type.String"
 local VarAssgnm =  require "logics.male.VarAssgnm"
 
-function ObjectVariable:new()
-   return MALEObjectVariable.new(self)
+function ObjectVariable:new(ctxt_pt)
+   local retval =  MALEObjectVariable.new(self)
+   retval.ctxt_pt =  ctxt_pt
+   return retval
 end
 
 function ObjectVariable:get_compound_qualifier_cast()

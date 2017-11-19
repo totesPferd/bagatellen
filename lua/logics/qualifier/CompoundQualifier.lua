@@ -5,10 +5,11 @@ local CompoundQualifier =  Type:__new()
 package.loaded["logics.qualifier.CompoundQualifier"] =  CompoundQualifier
 local String =  require "base.type.String"
 
-function CompoundQualifier:new(terminal, qualifier)
+function CompoundQualifier:new(ctxt_pt, terminal, qualifier)
    local retval =  self:__new()
    retval.terminal =  terminal
    retval.qualifier =  qualifier
+   retval.ctxt_pt =  ctxt_pt
    return retval
 end
 
@@ -83,7 +84,7 @@ function CompoundQualifier:__eq(other)
 end
 
 function CompoundQualifier:get_lhs_chopped(qualifier)
-   local next_qualifier =  qualifier:destruct_terminal(self:get_terminal())
+   local next_qualifier =  qualifier:destruct_terminal(self, self:get_terminal())
    if next_qualifier
    then
       return self:get_qualifier():get_lhs_chopped(next_qualifier)

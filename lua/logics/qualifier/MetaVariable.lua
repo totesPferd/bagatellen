@@ -6,8 +6,9 @@ package.loaded["logics.qualifier.MetaVariable"] =  MetaVariable
 local CompoundQualifier =  require "logics.qualifier.CompoundQualifier"
 local String =  require "base.type.String"
 
-function MetaVariable:new()
+function MetaVariable:new(ctxt_pt)
    local retval =  MALEMetaVariable.new(self)
+   retval.ctxt_pt =  ctxt_pt
    return retval
 end
 
