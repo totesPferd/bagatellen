@@ -19,6 +19,10 @@ end
 function MetaVariable:get_compound_qualifier_cast()
 end
 
+function MetaVariable:get_ctxt_pt()
+   return self.ctxt_pt
+end
+
 function MetaVariable:destruct_terminal(q, terminal)
    local this_val =  self:get_val()
    if not this_val

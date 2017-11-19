@@ -5,11 +5,10 @@ local CompoundQualifier =  Type:__new()
 package.loaded["logics.qualifier.CompoundQualifier"] =  CompoundQualifier
 local String =  require "base.type.String"
 
-function CompoundQualifier:new(ctxt_pt, terminal, qualifier)
+function CompoundQualifier:new(terminal, qualifier)
    local retval =  self:__new()
    retval.terminal =  terminal
    retval.qualifier =  qualifier
-   retval.ctxt_pt =  ctxt_pt
    return retval
 end
 
