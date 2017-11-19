@@ -18,10 +18,6 @@ end
 function MetaVariable:get_compound_qualifier_cast()
 end
 
-function MetaVariable:get_ctxt_pt()
-   return self.ctxt_pt
-end
-
 function MetaVariable:destruct_terminal(q, terminal)
    local this_val =  self:get_val()
    if not this_val
@@ -30,7 +26,7 @@ function MetaVariable:destruct_terminal(q, terminal)
    end
    if this_val and (this_val == q) or not this_val
    then
-      local ret_pt = q:destruct_terminal(q, terminal)
+      local ret_pt = q:get_qualifier()
       local retval =  self:copy()
       retval:set_val(ret_pt)
       return retval
