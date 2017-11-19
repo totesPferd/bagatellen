@@ -17,21 +17,11 @@ function ObjectVariable:get_name()
    return String:empty_string_factory()
 end
 
-function ObjectVariable:destruct_terminal(terminal)
+function ObjectVariable:destruct_terminal(q, terminal)
    local this_val =  self:get_val()
    if this_val
    then
-      return this_val:destruct_terminal(terminal)
-   end
-end
-
-function ObjectVariable:append_qualifier(qualifier)
-   local this_val =  self:get_val()
-   if this_val
-   then
-      this_val:append_qualifier(qualifier)
-   else
-      self:set_val(qualifier)
+      return this_val:destruct_terminal(q, terminal)
    end
 end
 

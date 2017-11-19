@@ -15,29 +15,22 @@ function MetaVariable:copy()
    return self.__index:new()
 end
 
-function MetaVariable:new_compound_qualifier(terminal, qualifier)
-   return CompoundQualifier:new(terminal, qualifier)
-end
-
 function MetaVariable:get_compound_qualifier_cast()
 end
 
-function MetaVariable:destruct_terminal(terminal)
-
+function MetaVariable:destruct_terminal(q, terminal)
    local this_val =  self:get_val()
-   if this_val
+   if not this_val
    then
-      if this_val:get_terminal() == terminal
-      then
-         return this_val:get_qualifier()
-      end
+      self:set_val(q)
    end
-
-   local new_var =  self:copy()
-   local new_val =  self:new_compound_qualifier(terminal, new_var)
-   self:set_val(new_val)
-   return new_var
-
+   if this_val and (this_val == q) or not this_val
+   then
+      local ret_pt = q:destruct_terminal(q, terminal)
+      local retval =  self:copy()
+      retval:set_val(ret_pt)
+      return retval
+   end
 end
 
 function MetaVariable:get_name()
@@ -48,7 +41,6 @@ function MetaVariable:get_name()
    end
 
    local retval =  String:string_factory("?")
-   retval:append_string(self:get_rhs_object():get_name())
    return retval
 end
 

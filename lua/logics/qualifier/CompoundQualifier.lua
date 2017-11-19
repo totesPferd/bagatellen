@@ -33,7 +33,7 @@ function CompoundQualifier:get_compound_qualifier_cast()
    return self
 end
 
-function CompoundQualifier:destruct_terminal(terminal)
+function CompoundQualifier:destruct_terminal(q, terminal)
    if self:get_terminal() == terminal
    then
       return self:get_qualifier()
@@ -42,7 +42,7 @@ end
 
 function CompoundQualifier:equate(other)
    local retval =  false
-   local next_qual =  other:destruct_terminal(self:get_terminal())
+   local next_qual =  other:destruct_terminal(self, self:get_terminal())
    if next_qual
    then
       retval =  self:get_qualifier():equate(next_qual)
@@ -57,10 +57,6 @@ end
 
 function CompoundQualifier:get_val()
    return self
-end
-
-function CompoundQualifier:append_qualifier(qualifier)
-   self:get_qualifier():append_qualifier(qualifier)
 end
 
 function CompoundQualifier:get_name()
