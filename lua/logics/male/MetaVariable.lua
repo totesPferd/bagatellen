@@ -26,11 +26,6 @@ function MetaVariable:get_object_variable_cast()
 end
 
 function MetaVariable:assign_object_variable_to_meta_variable(variable)
-   local this_val =  self:get_val()
-   if not this_val
-   then
-      self:set_val(variable)
-   end
    return true
 end
 
