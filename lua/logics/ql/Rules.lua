@@ -8,9 +8,7 @@ local Set =  require "base.type.Set"
 local ToLiteral =  require "logics.ql.ToLiteral"
 
 local function gen_refl()
-   local qual_ctxt =  QualifierObjectVariable:new()
-
-   local var =  ObjectVariable:new(qual_ctxt)
+   local var =  ObjectVariable:new()
    local conclusion =  ToLiteral:new(var, var)
    local premises =  Set:empty_set_factory()
    local clause =  Clause:new(premises, conclusion)
@@ -21,9 +19,9 @@ local function gen_trans()
    local qual_ctxt =  QualifierObjectVariable:new()
    local meta_ctxt =  QualifierMetaVariable:new(qual_ctxt)
 
-   local lhs_var =  ObjectVariable:new(qual_ctxt)
+   local lhs_var =  ObjectVariable:new()
    local mid_var =  MetaVariable:new(qual_ctxt, meta_ctxt)
-   local rhs_var =  ObjectVariable:new(qual_ctxt)
+   local rhs_var =  ObjectVariable:new()
    local lhs_cath =  ToLiteral:new(lhs_var, mid_var)
    local rhs_cath =  ToLiteral:new(mid_var, rhs_var)
    local hypoth =  ToLiteral:new(lhs_var, rhs_var)
@@ -42,8 +40,8 @@ local function gen_td()
    local meta_ctxt =  QualifierMetaVariable:new(qual_ctxt)
 
    local lhs_var =  MetaVariable:new(qual_ctxt, meta_ctxt)
-   local mid_var =  ObjectVariable:new(qual_ctxt)
-   local rhs_var =  ObjectVariable:new(qual_ctxt)
+   local mid_var =  ObjectVariable:new()
+   local rhs_var =  ObjectVariable:new()
    local lhs_cath =  ToLiteral:new(lhs_var, mid_var)
    local rhs_cath =  ToLiteral:new(mid_var, rhs_var)
    local hypoth =  ToLiteral:new(lhs_var, rhs_var)

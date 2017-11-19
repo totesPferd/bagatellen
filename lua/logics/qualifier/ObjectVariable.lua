@@ -60,32 +60,8 @@ function ObjectVariable:get_lhs_chopped(qualifier)
    if this_val
    then
       return this_val:get_lhs_chopped(qualifier)
-   elseif self:is_id()
-   then
+   else
       return qualifier
-   end
-end
-
-function ObjectVariable:get_rhs_chopped_copy(qualifier)
-   local this_val =  self:get_val()
-   if this_val
-   then
-      return this_val:get_rhs_chopped_copy(qualifier)
-   else
-      local id =  self:get_id_qualifier_end()
-      local var_assgnm =  VarAssgnm:new()
-      return qualifier:devar(var_assgnm), id
-   end
-end
-
-function ObjectVariable:lu(qualifier)
-   local this_val =  self:get_val()
-   if this_val
-   then
-      return this_val:lu(qualifier)
-   else
-      self:set_val(qualifier)
-      return true
    end
 end
 

@@ -99,40 +99,7 @@ function CompoundQualifier:get_lhs_chopped(qualifier)
    if next_qualifier
    then
       return self:get_qualifier():get_lhs_chopped(next_qualifier)
-   elseif self:is_id()
-   then
-      return qualifier
    end
-end
-
-function CompoundQualifier:get_rhs_chopped_copy(qualifier)
-   local new_rhs =  self:get_lhs_chopped(qualifier)
-   if new_rhs
-   then
-      self:get_qualifier():append_qualifier(new_rhs)
-      return
-            self:new_qualifier_variable()
-         ,  new_rhs
-   else
-      local new_lhs, new_rhs
-         =  self:get_qualifier():get_rhs_chopped_copy(qualifier)
-      return
-            self.__index:new(
-                  self:get_terminal()
-               ,  new_lhs )
-         ,  new_rhs
-   end
-end
-
-function CompoundQualifier:lu(qualifier)
-   local retval =  false
-   local new_other_qualifier
-      =  qualifier:destruct_terminal(self:get_terminal())
-   if new_other_qualifier
-   then
-      return self:get_qualifier():lu(new_other_qualifier)
-   end
-   return retval
 end
 
 return CompoundQualifier
