@@ -11,6 +11,10 @@ function MetaVariable:new(rhs_object)
    return retval
 end
 
+function MetaVariable:copy()
+   return self.__index:new(self:get_rhs_object())
+end
+
 function MetaVariable:new_compound_qualifier(terminal, qualifier)
    return CompoundQualifier:new(terminal, qualifier)
 end
