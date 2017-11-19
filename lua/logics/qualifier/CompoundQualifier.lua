@@ -70,7 +70,7 @@ end
 function CompoundQualifier:get_name()
    local retval =  self:get_terminal():__clone()
    local this_qualifier =  self:get_qualifier()
-   if not this_qualifier.is_id()
+   if not this_qualifier:is_id()
    then
       retval:append(String:string_factory("."))
       retval:append_string(this_qualifier:get_name())

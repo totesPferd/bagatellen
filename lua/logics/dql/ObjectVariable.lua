@@ -20,7 +20,7 @@ function ObjectVariable:__diagnose_single_line(indentation)
    indentation:insert(self:get_qualifier():get_name())
    indentation:insert(String:string_factory(" "))
    indentation:insert(self:get_non_nil_name())
-   local val =  self:get_val()
+   local val =  self:get_male_variable():get_val()
    if val
    then
       indentation:insert(String:string_factory(" "))
@@ -38,7 +38,7 @@ function ObjectVariable:__diagnose_multiple_line(indentation)
    local deeper_indentation =
       indentation:get_deeper_indentation_factory {}
    deeper_indentation:insert(self:get_non_nil_name())
-   local val =  self:get_val()
+   local val =  self:get_male_variable():get_val()
    if val
    then
       deeper_indentation:insert_newline()
