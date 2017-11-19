@@ -63,10 +63,6 @@ function CompoundQualifier:append_qualifier(qualifier)
    self:get_qualifier():append_qualifier(qualifier)
 end
 
-function CompoundQualifier:get_id_qualifier_end()
-   return self:get_qualifier():get_id_qualifier_end()
-end
-
 function CompoundQualifier:get_name()
    local retval =  self:get_terminal():__clone()
    local this_qualifier =  self:get_qualifier()

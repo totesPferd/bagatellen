@@ -35,16 +35,6 @@ function ObjectVariable:append_qualifier(qualifier)
    end
 end
 
-function ObjectVariable:get_id_qualifier_end()
-   local this_val =  self:get_val()
-   if this_val
-   then
-      return this_val:get_id_qualifier_end()
-   else
-      return self
-   end
-end
-
 function ObjectVariable:get_lhs_chopped(qualifier)
    local this_val =  self:get_val()
    if this_val
