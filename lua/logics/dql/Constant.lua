@@ -5,12 +5,12 @@ local Constant =  QLConstant:__new()
 package.loaded["logics.dql.Constant"] =  Constant
 local String =  require "base.type.String"
 
-function Constant:new(symbol, qualifier)
-   return QLConstant.new(self, symbol, qualifier)
+function Constant:new(qualifier, symbol)
+   return QLConstant.new(self, qualifier, symbol)
 end
 
 function Constant:new_ql_instance(qualifier)
-   return Constant:new(self:get_symbol(), qualifier)
+   return Constant:new(qualifier, self:get_symbol())
 end
 
 function Constant:__diagnose_single_line(indentation)
