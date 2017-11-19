@@ -3,6 +3,7 @@ local Type =  require "base.type.aux.Type"
 local ObjectVariable =  Type:__new()
 
 package.loaded["logics.ql.ObjectVariable"] =  ObjectVariable
+local Constant =  require "logics.ql.Constant"
 local MALEObjectVariable =  require "logics.male.ObjectVariable"
 local QualifierObjectVariable =  require "logics.qualifier.ObjectVariable"
 
@@ -16,6 +17,10 @@ end
 
 function ObjectVariable:new_instance(qualifier)
    return self.__index:new(qualifier, self:get_male_variable())
+end
+
+function ObjectVariable:new_constant(qualifier, symbol)
+  return Constant:new(qualifier, symbol)
 end
 
 function ObjectVariable:get_qualifier()
@@ -52,10 +57,16 @@ function ObjectVariable:equate(other)
 end
 
 function ObjectVariable:get_lhs_chop_constant(constant)
-   local this_val =  self:get_val()
-   if this_val
+   local this_male_val =  self:get_male_variable():get_val()
+   if this_male_val
    then
-      return this_val:get_lhs_chop_constant(constant)
+      local new_symbol
+         =  this_male_val:get_constant_cast():get_symbol()
+      local new_qual
+         =  self:get_qualifier()
+      local new_constant
+         =  self:new_constant(new_qual, new_symbol)
+      return new_constant:get_lhs_chop_constant(constant)
    end
 end
 
