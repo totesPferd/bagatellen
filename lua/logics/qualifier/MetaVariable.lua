@@ -4,6 +4,7 @@ local MetaVariable =  MALEMetaVariable:__new()
 
 package.loaded["logics.qualifier.MetaVariable"] =  MetaVariable
 local CompoundQualifier =  require "logics.qualifier.CompoundQualifier"
+local String =  require "base.type.String"
 
 function MetaVariable:new(rhs_object)
    local retval =  MALEMetaVariable.new(self)
@@ -65,6 +66,18 @@ function MetaVariable:is_id()
    else
       return self:get_rhs_object():is_id()
    end
+end
+
+function MetaVariable:get_name()
+   local this_val =  self:get_val()
+   if this_val
+   then
+      return this_val:get_name()
+   end
+
+   local retval =  String:string_factory("?")
+   retval:append_string(self:get_rhs_object():get_name())
+   return retval
 end
 
 return MetaVariable
