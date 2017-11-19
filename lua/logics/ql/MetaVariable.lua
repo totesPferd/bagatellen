@@ -57,4 +57,10 @@ function MetaVariable:get_lhs_chop_constant(constant)
    end
 end
 
+function MetaVariable:devar(var_assgnm)
+   local dev_male =  self:get_male_variable()
+   local dev_qual =  self:get_qualifier()
+   return self.__index:new(dev_qual, dev_male)
+end
+
 return MetaVariable

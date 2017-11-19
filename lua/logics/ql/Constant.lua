@@ -11,7 +11,7 @@ function Constant:new(qualifier, symbol)
    return retval
 end
 
-function Constant:new(qualifier)
+function Constant:new_constant(qualifier)
    return self.__index:new(qualifier, self:get_symbol())
 end
 
@@ -47,6 +47,11 @@ function Constant:get_lhs_chop_constant(constant)
       local dev_qual =  this_qual:get_lhs_chopped(other_qual)
       return dev_qual
    end
+end
+
+function Constant:devar(var_assgnm)
+   local new_qual =  self:get_qualifier():devar(var_assgnm)
+   return self:new_constant(new_qual)
 end
 
 return Constant
