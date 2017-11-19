@@ -3,13 +3,14 @@ local Type =  require "base.type.aux.Type"
 local ObjectVariable =  Type:__new()
 
 package.loaded["logics.ql.ObjectVariable"] =  ObjectVariable
+local MALEObjectVariable =  require "logics.male.ObjectVariable"
 local QualifierObjectVariable =  require "logics.qualifier.ObjectVariable"
 
 function ObjectVariable:new(qualifier, male_variable)
    local retval =  self:__new()
    retval.qualifier =  qualifier
    retval.male_variable
-      =  male_variable or QualifierObjectVariable:new()
+      =  male_variable or MALEObjectVariable:new()
    return retval
 end
 
@@ -23,6 +24,9 @@ end
 
 function ObjectVariable:get_male_variable()
    return self.male_variable
+end
+
+function ObjectVariable:get_variable_cast()
 end
 
 function ObjectVariable:get_constant_cast()

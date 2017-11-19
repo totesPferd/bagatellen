@@ -31,6 +31,9 @@ function MetaVariable:get_male_variable()
    return self.male_variable
 end
 
+function MetaVariable:get_variable_cast()
+end
+
 function MetaVariable:get_constant_cast()
 end
 

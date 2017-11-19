@@ -15,12 +15,19 @@ function Constant:new_constant(qualifier)
    return self.__index:new(qualifier, self:get_symbol())
 end
 
+function Constant:new_instance(qualifier)
+   return self.__index:new(qualifier, self:get_symbol())
+end
+
 function Constant:get_qualifier()
    return self.qualifier
 end
 
 function Constant:get_symbol()
    return self.symbol
+end
+
+function Constant:get_variable_cast()
 end
 
 function Constant:get_constant_cast()

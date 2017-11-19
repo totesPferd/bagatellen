@@ -4,6 +4,7 @@ local ObjectVariable =  MALEObjectVariable:__new()
 
 package.loaded["logics.qualifier.ObjectVariable"] =  ObjectVariable
 local String =  require "base.type.String"
+local VarAssgnm =  require "logics.male.VarAssgnm"
 
 function ObjectVariable:new()
    return MALEObjectVariable.new(self)
@@ -70,9 +71,10 @@ function ObjectVariable:get_rhs_chopped_copy(qualifier)
    if this_val
    then
       return this_val:get_rhs_chopped_copy(qualifier)
-   elseif qualifier:is_id()
-   then
-      return self:copy(), qualifier
+   else
+      local id =  self:get_id_qualifier_end()
+      local var_assgnm =  VarAssgnm:new()
+      return qualifier:devar(var_assgnm), id
    end
 end
 
