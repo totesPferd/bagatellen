@@ -31,7 +31,7 @@ function Variable:set_val(val)
    local other_var =  val:get_variable_cast()
    if other_var
    then
-      self.value_store =  val:get_value_store()
+      self.value_store =  other_var:get_value_store()
    else
       self.value_store:set_val(val)
    end
