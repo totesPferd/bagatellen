@@ -60,7 +60,7 @@ function CompoundQualifier:get_val()
 end
 
 function CompoundQualifier:get_name()
-   local retval =  self:get_terminal():__clone()
+   local retval =  self:get_terminal():__clone():get_name()
    local this_qualifier =  self:get_qualifier()
    local next_string =  this_qualifier:get_name()
    if next_string

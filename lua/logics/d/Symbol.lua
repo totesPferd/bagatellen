@@ -15,6 +15,10 @@ function Symbol:get_name()
    return self.name
 end
 
+function Symbol:append_string(other)
+   self:get_name():append_string(other)
+end
+
 function Symbol:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory("(logics::d::Symbol "))
    indentation:insert(self:get_name())

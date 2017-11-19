@@ -5,7 +5,7 @@ local Constant =  QLConstant:__new()
 package.loaded["logics.dql.Constant"] =  Constant
 local String =  require "base.type.String"
 
-function Constant:new(qualifier, symbol)
+function Constant:new(symbol, qualifier)
    return QLConstant.new(self, symbol, qualifier)
 end
 
