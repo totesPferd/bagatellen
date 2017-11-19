@@ -13,16 +13,6 @@ end
 function ObjectVariable:get_compound_qualifier_cast()
 end
 
-function ObjectVariable:is_id()
-   local this_val =  self:get_val()
-   if this_val
-   then
-      return false
-   else
-      return true
-   end
-end
-
 function ObjectVariable:get_name()
    return String:empty_string_factory()
 end

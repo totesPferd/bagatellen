@@ -40,14 +40,6 @@ function MetaVariable:destruct_terminal(terminal)
 
 end
 
-function MetaVariable:is_id()
-   local this_val =  self:get_val()
-   if this_val
-   then
-      return this_val:is_id()
-   end
-end
-
 function MetaVariable:get_name()
    local this_val =  self:get_val()
    if this_val

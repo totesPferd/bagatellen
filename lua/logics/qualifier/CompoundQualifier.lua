@@ -67,10 +67,6 @@ function CompoundQualifier:get_id_qualifier_end()
    return self:get_qualifier():get_id_qualifier_end()
 end
 
-function CompoundQualifier:is_id()
-   return false
-end
-
 function CompoundQualifier:get_name()
    local retval =  self:get_terminal():__clone()
    local this_qualifier =  self:get_qualifier()
