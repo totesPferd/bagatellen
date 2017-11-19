@@ -65,4 +65,8 @@ function Constant:devar(var_assgnm)
    return self:new_constant(new_qual)
 end
 
+function Constant:assign_object_variable_to_meta_variable(variable)
+   return true
+end
+
 return Constant
