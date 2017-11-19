@@ -93,7 +93,7 @@ function ObjectVariable:append_qualifier(qualifier)
 end
 
 function ObjectVariable:devar(var_assgnm)
-   local dev_male =  self:get_male_variable:devar(var_assgnm)
+   local dev_male =  self:get_male_variable():devar(var_assgnm)
    local dev_qual =  self:get_qualifier():devar(var_assgnm)
    return self.__index:new(dev_male, dev_qual)
 end

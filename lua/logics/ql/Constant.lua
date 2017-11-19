@@ -96,7 +96,7 @@ function Constant:get_rhs_chopped_copy(qualifier)
    if new_lhs
    then
       return
-            self:__index:new(
+            self.__index:new(
                   self:get_symbol()
                ,  new_lhs )
          ,  new_rhs

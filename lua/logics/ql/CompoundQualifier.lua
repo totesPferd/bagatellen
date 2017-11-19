@@ -105,6 +105,17 @@ function CompoundQualifier:append_qualifier(qualifier)
    self:get_qualifier():append_qualifier(qualifier)
 end
 
+function CompoundQualifier:lu(qualifier)
+   local retval =  false
+   local new_other_qualifier
+      =  qualifier:destruct_terminal(self:get_terminal())
+   if new_other_qualifier
+   then
+      return self:get_qualifier():lu(new_other_qualifier)
+   end
+   return retval
+end
+
 function CompoundQualifier:get_id_qualifier_end()
    return self:get_qualifier():get_id_qualifier_end()
 end

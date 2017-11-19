@@ -69,6 +69,17 @@ function QualifierVariable:append_qualifier(qualifier)
    end
 end
 
+function QualifierVariable:lu(qualifier)
+   local this_val =  self:get_val()
+   if this_val
+   then
+      return this_val:lu(qualifier)
+   else
+      self:set_val(qualifier)
+      return true
+   end
+end
+
 function QualifierVariable:get_id_qualifier_end()
    local this_val =  self:get_val()
    if this_val
