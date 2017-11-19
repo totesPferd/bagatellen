@@ -26,6 +26,9 @@ end
 function CompoundQualifier:get_meta_variable()
 end
 
+function CompoundQualifier:get_variable_cast()
+end
+
 function CompoundQualifier:get_compound_qualifier_cast()
    return self
 end
@@ -73,8 +76,8 @@ function CompoundQualifier:get_name()
    local this_qualifier =  self:get_qualifier()
    if not this_qualifier:is_id()
    then
-      retval:prepend_string(String:string_factory("."))
-      retval:prepend_string(this_qualifier:get_name())
+      retval:append_string(String:string_factory("."))
+      retval:append_string(this_qualifier:get_name())
    end
    return retval
 end
@@ -96,9 +99,9 @@ function CompoundQualifier:get_lhs_chopped(qualifier)
    if next_qualifier
    then
       return self:get_qualifier():get_lhs_chopped(next_qualifier)
-   elseif qualifier:is_id()
+   elseif self:is_id()
    then
-      return self
+      return qualifier
    end
 end
 

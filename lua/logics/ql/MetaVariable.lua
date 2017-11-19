@@ -37,7 +37,7 @@ end
 function MetaVariable:get_constant_cast()
 end
 
-function MetaVariable:get_lhs_chop_constant(constant)
+function MetaVariable:get_lhs_chop_constant(other)
    local this_male_val =  self:get_male_variable():get_val()
    if this_male_val
    then
@@ -46,7 +46,7 @@ function MetaVariable:get_lhs_chop_constant(constant)
       then
          this_symbol =  this_constant:get_symbol()
          local another_constant =  new_constant(nil, this_symbol)
-         return another_constant:get_lhs_chop_constant(constant)
+         return another_constant:get_lhs_chop_constant(other)
       end
    else
       local id_qual =  QualifierObjectVariable:new()

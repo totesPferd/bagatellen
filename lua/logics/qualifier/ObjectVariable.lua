@@ -60,9 +60,9 @@ function ObjectVariable:get_lhs_chopped(qualifier)
    if this_val
    then
       return this_val:get_lhs_chopped(qualifier)
-   elseif qualifier:is_id()
+   elseif self:is_id()
    then
-      return self
+      return qualifier
    end
 end
 

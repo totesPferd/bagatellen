@@ -36,7 +36,7 @@ end
 
 function Constant:equate(other)
    local retval =  false
-   local other_dev_qual =  other:get_lhs_chop_constant(self)
+   local other_dev_qual =  self:get_lhs_chop_constant(other)
    if other_dev_qual
    then
       local this_qual =  self:get_qualifier()
@@ -46,13 +46,17 @@ function Constant:equate(other)
    return retval
 end
 
-function Constant:get_lhs_chop_constant(constant)
-   if self:get_symbol() == constant:get_symbol()
+function Constant:get_lhs_chop_constant(other)
+   local other_constant =  other:get_constant_cast()
+   if other_constant
    then
-      local this_qual =  self:get_qualifier()
-      local other_qual =  constant:get_qualifier()
-      local dev_qual =  this_qual:get_lhs_chopped(other_qual)
-      return dev_qual
+      if self:get_symbol() == constant:get_symbol()
+      then
+         local this_qual =  self:get_qualifier()
+         local other_qual =  other_constant:get_qualifier()
+         local dev_qual =  this_qual:get_lhs_chopped(other_qual)
+         return dev_qual
+      end
    end
 end
 

@@ -56,7 +56,7 @@ function ObjectVariable:equate(other)
    end
 end
 
-function ObjectVariable:get_lhs_chop_constant(constant)
+function ObjectVariable:get_lhs_chop_constant(other)
    local this_male_val =  self:get_male_variable():get_val()
    if this_male_val
    then
@@ -66,7 +66,7 @@ function ObjectVariable:get_lhs_chop_constant(constant)
          =  self:get_qualifier()
       local new_constant
          =  self:new_constant(new_qual, new_symbol)
-      return new_constant:get_lhs_chop_constant(constant)
+      return new_constant:get_lhs_chop_constant(other)
    end
 end
 
