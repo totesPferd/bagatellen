@@ -50,7 +50,7 @@ function Constant:get_lhs_chop_constant(other)
    local other_constant =  other:get_constant_cast()
    if other_constant
    then
-      if self:get_symbol() == constant:get_symbol()
+      if self:get_symbol() == other_constant:get_symbol()
       then
          local this_qual =  self:get_qualifier()
          local other_qual =  other_constant:get_qualifier()
