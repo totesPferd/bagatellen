@@ -33,6 +33,26 @@ function ObjectVariable:destruct_terminal(terminal)
    end
 end
 
+function ObjectVariable:append_qualifier(qualifier)
+   local this_val =  self:get_val()
+   if this_val
+   then
+      this_val:append_qualifier(qualifier)
+   else
+      self:set_val(qualifier)
+   end
+end
+
+function ObjectVariable:get_id_qualifier_end()
+   local this_val =  self:get_val()
+   if this_val
+   then
+      return this_val:get_id_qualifier_end()
+   else
+      return self
+   end
+end
+
 function ObjectVariable:get_lhs_chopped(qualifier)
    local this_val =  self:get_val()
    if this_val
@@ -63,26 +83,6 @@ function ObjectVariable:lu(qualifier)
    else
       self:set_val(qualifier)
       return true
-   end
-end
-
-function ObjectVariable:append_qualifier(qualifier)
-   local this_val =  self:get_val()
-   if this_val
-   then
-      this_val:append_qualifier(qualifier)
-   else
-      self:set_val(qualifier)
-   end
-end
-
-function ObjectVariable:get_id_qualifier_end()
-   local this_val =  self:get_val()
-   if this_val
-   then
-      return this_val:get_id_qualifier_end()
-   else
-      return self
    end
 end
 

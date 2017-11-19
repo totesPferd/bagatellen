@@ -53,4 +53,14 @@ function MetaVariable:append_qualifier(qualifier)
    self:get_rhs_object():append_qualifier(qualifier)
 end
 
+function MetaVariable:is_id()
+   local this_val =  self:get_val()
+   if this_val
+   then
+      return this_val:is_id()
+   else
+      return self:get_rhs_object():is_id()
+   end
+end
+
 return MetaVariable
