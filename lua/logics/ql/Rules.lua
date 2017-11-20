@@ -15,10 +15,11 @@ end
 
 local function gen_trans()
    local lhs_var =  ObjectVariable:new()
-   local mid_var =  MetaVariable:new()
+   local mid_var =  ObjectVariable:new()
    local rhs_var =  ObjectVariable:new()
-   local lhs_cath =  ToLiteral:new(lhs_var, mid_var)
-   local rhs_cath =  ToLiteral:new(mid_var, rhs_var)
+   local mid_meta_var =  MetaVariable:new(mid_var)
+   local lhs_cath =  ToLiteral:new(lhs_var, mid_meta_var)
+   local rhs_cath =  ToLiteral:new(mid_meta_var, rhs_var)
    local hypoth =  ToLiteral:new(lhs_var, rhs_var)
 
    local conclusion =  hypoth
@@ -31,12 +32,13 @@ local function gen_trans()
 end
 
 local function gen_td()
-   local lhs_var =  MetaVariable:new()
+   local lhs_var =  ObjectVariable:new()
    local mid_var =  ObjectVariable:new()
    local rhs_var =  ObjectVariable:new()
-   local lhs_cath =  ToLiteral:new(lhs_var, mid_var)
+   local lhs_meta_var =  MetaVariable:new(mid_var)
+   local lhs_cath =  ToLiteral:new(lhs_meta_var, mid_var)
    local rhs_cath =  ToLiteral:new(mid_var, rhs_var)
-   local hypoth =  ToLiteral:new(lhs_var, rhs_var)
+   local hypoth =  ToLiteral:new(lhs_meta_var, rhs_var)
 
    local conclusion =  rhs_cath
    local premises =  Set:empty_set_factory()

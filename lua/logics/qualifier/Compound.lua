@@ -2,13 +2,13 @@ local Type =  require "base.type.aux.Type"
 
 local Compound =  Type:__new()
 
-package.loaded["logics.qualifier.Compound"] =  Compound
+package.loaded["logics.rhs_object.Compound"] =  Compound
 local String =  require "base.type.String"
 
-function Compound:new(terminal, qualifier)
+function Compound:new(terminal, rhs_object)
    local retval =  self:__new()
    retval.terminal =  terminal
-   retval.qualifier =  qualifier
+   retval.rhs_object =  rhs_object
    return retval
 end
 
@@ -16,14 +16,14 @@ function Compound:get_terminal()
    return self.terminal
 end
 
-function Compound:get_qualifier()
-   return self.qualifier
+function Compound:get_rhs_object()
+   return self.rhs_object
 end
 
-function Compound:get_object_variable()
+function Compound:get_object_variable_cast()
 end
 
-function Compound:get_meta_variable()
+function Compound:get_meta_variable_cast()
 end
 
 function Compound:get_variable_cast()
@@ -33,10 +33,14 @@ function Compound:get_compound_cast()
    return self
 end
 
-function Compound:destruct_terminal(q, terminal)
+function Compound:finish()
+   return true
+end
+
+function Compound:destruct_terminal(terminal)
    if self:get_terminal() == terminal
    then
-      return self:get_qualifier()
+      return self:get_rhs_object()
    end
 end
 
@@ -45,13 +49,13 @@ function Compound:equate(other)
    local next_qual =  other:destruct_terminal(self, self:get_terminal())
    if next_qual
    then
-      retval =  self:get_qualifier():equate(next_qual)
+      retval =  self:get_rhs_object():equate(next_qual)
    end
    return retval
 end
 
 function Compound:devar(var_assgnm)
-   local new_qual =  self:get_qualifier():devar(var_assgnm)
+   local new_qual =  self:get_rhs_object():devar(var_assgnm)
    return self.__index:new(self:get_terminal(), new_qual)
 end
 
@@ -61,8 +65,8 @@ end
 
 function Compound:get_name()
    local retval =  self:get_terminal():__clone():get_name()
-   local this_qualifier =  self:get_qualifier()
-   local next_string =  this_qualifier:get_name()
+   local this_rhs_object =  self:get_rhs_object()
+   local next_string =  this_rhs_object:get_name()
    if next_string
    then
       retval:append_string(String:string_factory("."))
@@ -78,13 +82,9 @@ function Compound:__eq(other)
    then
       retval =
             self:get_terminal() == other_compound:get_terminal()
-        and self:get_qualifier() == other_compound:get_qualifier()
+        and self:get_rhs_object() == other_compound:get_rhs_object()
    end
    return retval
-end
-
-function Compound:assign_object_variable_to_meta_variable(variable)
-   return true
 end
 
 function Compound:__diagnose_single_line(indentation)

@@ -25,10 +25,6 @@ function MetaVariable:get_object_variable_cast()
    end
 end
 
-function MetaVariable:assign_object_variable_to_meta_variable(variable)
-   return true
-end
-
 -- undefined; by definition as division by zero is undefined!!!
 function MetaVariable:equate(val)
 end

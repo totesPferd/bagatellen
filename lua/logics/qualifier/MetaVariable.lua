@@ -6,30 +6,45 @@ package.loaded["logics.qualifier.MetaVariable"] =  MetaVariable
 local Compound =  require "logics.qualifier.Compound"
 local String =  require "base.type.String"
 
-function MetaVariable:new()
+function MetaVariable:new(rhs_object)
    local retval =  MALEMetaVariable.new(self)
+   retval.rhs_object =  rhs_object
    return retval
 end
 
 function MetaVariable:copy()
-   return self.__index:new()
+   return self.__index:new(self:get_rhs_object())
+end
+
+function MetaVariable:get_rhs_object()
+   return self.rhs_object
 end
 
 function MetaVariable:get_compound_cast()
 end
 
-function MetaVariable:destruct_terminal(q, terminal)
+function MetaVariable:finish()
    local this_val =  self:get_val()
-   if not this_val
+   local rhs_object =  self:get_rhs_object()
+   if this_val
    then
-      self:set_val(q)
+      return this_val == rhs_object
+   else
+      self:set_val(rhs_object)
+      return true
    end
-   if this_val and (this_val == q) or not this_val
+end
+
+function MetaVariable:destruct_terminal(terminal)
+   local this_val =  self:get_val()
+   if this_val
    then
-      local ret_pt = q:get_qualifier()
-      local retval =  self:copy()
-      retval:set_val(ret_pt)
-      return retval
+      return this_val:destruct_terminal(terminal)
+   else
+      local arg =  self:copy()
+      local val =  Compound:new(terminal, arg)
+      self:set_val(val)
+      return arg
    end
 end
 
