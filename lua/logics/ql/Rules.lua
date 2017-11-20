@@ -5,7 +5,9 @@ local Resolve =  require "logics.male.rule.Resolve"
 local Set =  require "base.type.Set"
 local ToLiteral =  require "logics.ql.ToLiteral"
 
-local function gen_refl()
+local Rules =  {}
+
+function Rules:gen_refl()
    local var =  ObjectVariable:new()
    local conclusion =  ToLiteral:new(var, var)
    local premises =  Set:empty_set_factory()
@@ -13,7 +15,7 @@ local function gen_refl()
    return Resolve:new(clause)
 end
 
-local function gen_trans()
+function Rules:gen_trans()
    local lhs_var =  ObjectVariable:new()
    local mid_var =  ObjectVariable:new()
    local rhs_var =  ObjectVariable:new()
@@ -31,7 +33,7 @@ local function gen_trans()
    return Resolve:new(clause)
 end
 
-local function gen_td()
+function Rules:gen_td()
    local lhs_var =  ObjectVariable:new()
    local mid_var =  ObjectVariable:new()
    local rhs_var =  ObjectVariable:new()
@@ -48,11 +50,5 @@ local function gen_td()
    local clause =  Clause:new(premises, conclusion)
    return Resolve:new(clause)
 end
-
-local Rules =  {
-      ["refl"] =  gen_refl()
-   ,  ["td"] =  gen_td()
-   ,  ["trans"] =  gen_trans()
-}
 
 return Rules
