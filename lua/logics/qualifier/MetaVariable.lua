@@ -3,7 +3,7 @@ local MALEMetaVariable =  require "logics.male.MetaVariable"
 local MetaVariable =  MALEMetaVariable:__new()
 
 package.loaded["logics.qualifier.MetaVariable"] =  MetaVariable
-local CompoundQualifier =  require "logics.qualifier.CompoundQualifier"
+local Compound =  require "logics.qualifier.Compound"
 local String =  require "base.type.String"
 
 function MetaVariable:new()
@@ -15,7 +15,7 @@ function MetaVariable:copy()
    return self.__index:new()
 end
 
-function MetaVariable:get_compound_qualifier_cast()
+function MetaVariable:get_compound_cast()
 end
 
 function MetaVariable:destruct_terminal(q, terminal)
