@@ -3,6 +3,7 @@ local Type =  require "base.type.aux.Type"
 local ToLiteral =  Type:__new()
 
 package.loaded["logics.ql.ToLiteral"] =  ToLiteral
+local String =  require "base.type.String"
 
 function ToLiteral:new(lhs_term, rhs_term)
    local retval =  self:__new()
