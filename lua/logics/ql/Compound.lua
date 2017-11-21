@@ -88,13 +88,13 @@ function Compound:__eq(other)
 end
 
 function Compound:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(logics::qualifier::Compound "))
+   indentation:insert(String:string_factory("(logics::ql::Compound "))
    indentation:insert(self:get_name())
    indentation:insert(String:string_factory(")"))
 end
 
 function Compound:__diagnose_multiple_line(indentation)
-   indentation:insert(String:string_factory("(logics::qualifier::Compound "))
+   indentation:insert(String:string_factory("(logics::ql::Compound "))
    indentation:insert(self:get_name())
    indentation:insert(String:string_factory(")"))
 end

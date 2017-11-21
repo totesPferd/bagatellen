@@ -2,8 +2,8 @@ local MALEMetaVariable =  require "logics.male.MetaVariable"
 
 local MetaVariable =  MALEMetaVariable:__new()
 
-package.loaded["logics.qualifier.MetaVariable"] =  MetaVariable
-local Compound =  require "logics.qualifier.Compound"
+package.loaded["logics.ql.MetaVariable"] =  MetaVariable
+local Compound =  require "logics.ql.Compound"
 local String =  require "base.type.String"
 
 function MetaVariable:new(rhs_object)
@@ -61,7 +61,7 @@ function MetaVariable:get_non_nil_name()
 end
 
 function MetaVariable:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(logics::qualifier::MetaVariable "))
+   indentation:insert(String:string_factory("(logics::ql::MetaVariable "))
    indentation:insert(self:get_non_nil_name())
    local this_val =  self:get_val()
    if this_val
@@ -75,7 +75,7 @@ end
 function MetaVariable:__diagnose_multiple_line(indentation)
    local is_last_elem_multiple_line =  true
 
-   indentation:insert(String:string_factory("(logics::qualifier::MetaVariable"))
+   indentation:insert(String:string_factory("(logics::ql::MetaVariable"))
    indentation:insert_newline()
    local deeper_indentation =
       indentation:get_deeper_indentation_factory {}

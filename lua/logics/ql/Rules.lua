@@ -1,6 +1,6 @@
 local Clause =  require "logics.male.Clause"
-local MetaVariable =  require "logics.qualifier.MetaVariable"
-local ObjectVariable =  require "logics.qualifier.ObjectVariable"
+local MetaVariable =  require "logics.ql.MetaVariable"
+local ObjectVariable =  require "logics.ql.ObjectVariable"
 local Resolve =  require "logics.male.rule.Resolve"
 local Set =  require "base.type.Set"
 local ToLiteral =  require "logics.ql.ToLiteral"
