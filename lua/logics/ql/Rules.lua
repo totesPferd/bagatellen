@@ -5,7 +5,8 @@ local Resolve =  require "logics.male.rule.Resolve"
 local Set =  require "base.type.Set"
 local ToLiteral =  require "logics.ql.ToLiteral"
 
-local Rules =  {}
+local Rules =  require "logics.male.Rules"
+
 
 function Rules:gen_refl()
    local var =  ObjectVariable:new()
