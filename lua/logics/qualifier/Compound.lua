@@ -46,7 +46,7 @@ end
 
 function Compound:equate(other)
    local retval =  false
-   local next_qual =  other:destruct_terminal(self, self:get_terminal())
+   local next_qual =  other:destruct_terminal(self:get_terminal())
    if next_qual
    then
       retval =  self:get_rhs_object():equate(next_qual)
