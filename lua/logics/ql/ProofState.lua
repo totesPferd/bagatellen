@@ -38,12 +38,9 @@ function ProofState:apply_lhs_literal_tactics(proof)
    end
 end
 
-function ProofState:fill_proof(proof)
+function ProofState:normalize()
    self:apply_lhs_literal_tactics(proof)
    self:apply_assumptions()
-   for conclusion in self:get_conclusions()
-   do proof:add(conclusion)
-   end
 end
 
-return Proofs
+return ProofState
