@@ -26,6 +26,10 @@ function Proof:add_proof(other)
    self.action:add_set(other.action)
 end
 
+function Proof:drop(clause)
+   self.action:drop(clause)
+end
+
 function Proof:search(goal)
    local action_list =  self.action:get_randomly_sorted_list()
    for clause in action_list:elems()
