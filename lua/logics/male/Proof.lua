@@ -37,6 +37,16 @@ function Proof:search(goal)
    end
 end
 
+function Proof:search_simply(goal)
+   for clause in self.action
+   do local clause_copy =  clause:devar()
+      if clause_copy:equate(goal)
+      then
+         return clause_copy
+      end
+   end
+end
+
 function Proof:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory("(logics::male::Proof "))
    self.action:__diagnose_single_line(indentation)

@@ -65,6 +65,20 @@ function ProofState:apply_proof(proof)
    end
 end
 
+function ProofState:apply_proof_simply(proof)
+   local rep =  true
+   while rep
+   do rep =  false
+      for conclusion in self:get_conclusions():elems()
+      do local clause =  proof:search_simply(conclusion)
+         if clause
+         then
+            rep =  self:resolve(clause, conclusion)
+         end
+      end
+   end
+end
+
 function ProofState:get_devared_conclusions(var_assgnm)
    local retval =  Set:empty_set_factory()
    for conclusion in self:get_conclusions():elems()
