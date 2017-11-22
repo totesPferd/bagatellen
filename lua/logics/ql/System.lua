@@ -22,9 +22,9 @@ function System:add(qual, d0, d1)
    sps:add_literal(self.literals)
 end
 
-function System:get_normal_form(qual, d0)
+function System:get_normal_form(base, qual, d0)
    local lhs_term =  Compound:new(d0, qual)
-   local rhs_term =  MetaVariable:new(d0)
+   local rhs_term =  MetaVariable:new(base)
    local literal =  ToLiteral:new(lhs_term, d1)
    local sps =  SimpleProofState:new(literal)
    sps:normalize(self.literals)
