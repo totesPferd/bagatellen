@@ -33,7 +33,7 @@ function Compound:get_compound_cast()
    return self
 end
 
-function Compound:finish()
+function Compound:finish(term)
    return true
 end
 

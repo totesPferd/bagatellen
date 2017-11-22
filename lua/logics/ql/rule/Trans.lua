@@ -11,9 +11,8 @@ local ToLiteral =  require "logics.ql.ToLiteral"
 
 function Trans:new()
    local lhs_var =  ObjectVariable:new()
-   local mid_var =  ObjectVariable:new()
    local rhs_var =  ObjectVariable:new()
-   local mid_meta_var =  MetaVariable:new(mid_var)
+   local mid_meta_var =  MetaVariable:new()
    local lhs_cath =  ToLiteral:new(lhs_var, mid_meta_var)
    local rhs_cath =  ToLiteral:new(mid_meta_var, rhs_var)
    local hypoth =  ToLiteral:new(lhs_var, rhs_var)

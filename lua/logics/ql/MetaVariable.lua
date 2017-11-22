@@ -6,51 +6,25 @@ package.loaded["logics.ql.MetaVariable"] =  MetaVariable
 local Compound =  require "logics.ql.Compound"
 local String =  require "base.type.String"
 
-function MetaVariable:new(rhs_object)
+function MetaVariable:new()
    local retval =  MALEMetaVariable.new(self)
-   retval.rhs_object =  rhs_object
    return retval
 end
 
 function MetaVariable:copy()
-   return self.__index:new(self:get_rhs_object())
-end
-
-function MetaVariable:devar(var_assgnm)
-   local val =  var_assgnm:deref(self)
-   if val
-   then
-      return val
-   else
-      local new_var
-      val =  self:get_val()
-      if val
-      then
-         new_var =  val:devar(var_assgnm)
-      else
-         local dev_rhs_object =  self:get_rhs_object():devar(var_assgnm)
-         new_var =  self.__index:new(dev_rhs_object)
-      end
-      var_assgnm:add(self, new_var)
-      return new_var
-   end
-end
-
-function MetaVariable:get_rhs_object()
-   return self.rhs_object
+   return self.__index:new()
 end
 
 function MetaVariable:get_compound_cast()
 end
 
-function MetaVariable:finish()
+function MetaVariable:finish(term)
    local this_val =  self:get_val()
-   local rhs_object =  self:get_rhs_object()
    if this_val
    then
-      return this_val == rhs_object:get_val()
+      return this_val == term:get_val()
    else
-      self:set_val(rhs_object)
+      self:set_val(term)
       return true
    end
 end

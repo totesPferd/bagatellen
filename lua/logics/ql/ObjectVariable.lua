@@ -14,7 +14,7 @@ end
 function ObjectVariable:get_compound_cast()
 end
 
-function ObjectVariable:finish()
+function ObjectVariable:finish(term)
    return true
 end
 
@@ -31,7 +31,7 @@ function ObjectVariable:equate(other)
    if this_val
    then
       return this_val:equate(other)
-   elseif other:finish()
+   elseif other:finish(self)
    then
       self:set_val(other)
       return true
