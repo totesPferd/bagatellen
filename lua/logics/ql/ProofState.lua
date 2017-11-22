@@ -11,16 +11,10 @@ local ReflRule =  require "logics.ql.rule.Refl"
 local TransRule =  require "logics.ql.rule.Trans"
 
 function ProofState:apply_assumptions()
-   local retval =  true
    for conclusion in self:get_conclusions():elems()
    do local rule =  ReflRule:new()
-      retval =  self:apply_rule(rule, conclusion)
-      if not retval
-      then
-         break
-      end
+      self:apply_rule(rule, conclusion)
    end
-   return retval
 end
 
 function ProofState:apply_lhs_literal_tactics(proof)
@@ -41,6 +35,14 @@ function ProofState:apply_lhs_literal_tactics(proof)
             end
          end
       end
+   end
+end
+
+function ProofState:fill_proof(proof)
+   self:apply_lhs_literal_tactics(proof)
+   self:apply_assumptions()
+   for conclusion in self:get_conclusions()
+   do proof:add(conclusion)
    end
 end
 
