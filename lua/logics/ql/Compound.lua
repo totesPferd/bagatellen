@@ -44,6 +44,12 @@ function Compound:destruct_terminal(terminal)
    end
 end
 
+function Compound:get_backup()
+end
+
+function Compound:restore(val)
+end
+
 function Compound:equate(other)
    local retval =  false
    local next_qual =  other:destruct_terminal(self:get_terminal())

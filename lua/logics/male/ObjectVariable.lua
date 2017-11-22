@@ -20,18 +20,28 @@ function ObjectVariable:get_object_variable_cast()
    return self
 end
 
+function ObjectVariable:get_backup()
+end
+
+function ObjectVariable:restore(val)
+end
+
 function ObjectVariable:equate(val)
+   local retval =  true
+   local backup =  val:get_backup()
    local this_val =  self:get_val()
    if this_val
    then
-      return this_val:equate(val)
-   elseif self == val
+      retval =  this_val:equate(val)
+      if not retval
+      then
+         val:restore(backup)
+      end
+   elseif self ~= val
    then
-      return true
-   else
       self:set_val(val)
-      return true
    end
+   return retval
 end
 
 return ObjectVariable

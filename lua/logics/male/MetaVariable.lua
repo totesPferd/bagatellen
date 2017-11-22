@@ -25,6 +25,14 @@ function MetaVariable:get_object_variable_cast()
    end
 end
 
+function MetaVariable:get_backup()
+   return self:get_val()
+end
+
+function MetaVariable:restore(val)
+   self:set_val(val)
+end
+
 -- undefined; by definition as division by zero is undefined!!!
 function MetaVariable:equate(val)
 end
