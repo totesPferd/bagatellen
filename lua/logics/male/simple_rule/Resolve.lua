@@ -9,7 +9,7 @@ local Set =  require "base.type.Set"
 local String =  require "base.type.String"
 local VarAssgnm =  require "logics.male.VarAssgnm"
 
-function Resolve:get_resolve()
+function Resolve:get_resolve_cast()
    return self
 end
 
@@ -24,10 +24,18 @@ function Resolve:new_instance(premis, conclusion)
    return Resolve:new(premis, conclusion)
 end
 
+function Resolve:get_premis()
+   return self.premis
+end
+
+function Resolve:get_conclusion()
+   return self.conclusion
+end
+
 function Resolve:apply(simple_proof_state, goal)
    return simple_proof_state:resolve(
          self:get_premis()
-      ,  self:conclusion()
+      ,  self:get_conclusion()
       ,  goal )
 end
 

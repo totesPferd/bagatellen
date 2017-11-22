@@ -25,7 +25,7 @@ function SimpleProofState:apply_literal_tactics(literals)
 end
 
 function SimpleProofState:normalize(literals)
-   self:apply_lhs_literal_tactics(literals)
+   self:apply_literal_tactics(literals)
    self:apply_assumptions()
 end
 

@@ -12,7 +12,7 @@ function Rule:new()
    return retval
 end
 
-function Rule:get_resolve()
+function Rule:get_resolve_cast()
 end
 
 function Rule:apply(proof_state, goal)

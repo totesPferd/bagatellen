@@ -12,7 +12,7 @@ function SimpleRule:new()
    return retval
 end
 
-function SimpleRule:get_resolve()
+function SimpleRule:get_resolve_cast()
 end
 
 function SimpleRule:apply(simple_proof_state, goal)
