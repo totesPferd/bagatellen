@@ -48,7 +48,7 @@ function MetaVariable:finish()
    local rhs_object =  self:get_rhs_object()
    if this_val
    then
-      return this_val == rhs_object
+      return this_val == rhs_object:get_val()
    else
       self:set_val(rhs_object)
       return true
