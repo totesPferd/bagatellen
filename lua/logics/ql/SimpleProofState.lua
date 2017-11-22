@@ -9,12 +9,16 @@ end
 
 function SimpleProofState:apply_literal_tactics(literals)
    local rep =  true
-   local conclusion =  self:get_conclusion()
    while rep
    do rep =  false
       for literal in literals:elems()
-      do local rule =  TransRule:new(literal):devar()
-         local success =  self:apply_rule(rule, self:get_conclusion())
+      do local conclusion =  self:get_conclusion()
+         if not conclusion
+         then
+            break
+         end
+         local rule =  TransRule:new(literal):devar()
+         local success =  self:apply_rule(rule, conclusion)
          if success
          then
             rep =  true
