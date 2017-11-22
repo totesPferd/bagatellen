@@ -7,22 +7,32 @@ package.loaded["logics.male.ProofTrack"] =  ProofTrack
 local Indentation =  require "base.Indentation"
 local String =  require "base.type.String"
 
-function ProofTrack:new(proof, conclusions)
+function ProofTrack:new(proof_state, proof)
+   local conclusions =  proof_state:get_conclusions()
    local retval =  ProofState.new(self, conclusions)
    retval.proof =  proof
+   retval.proof_state =  proof_state
    return retval
 end
 
-function ProofTrack:new_instance(premises, conclusions)
-   return ProofTrack:new(self:get_proof(), premises, conclusions)
+function ProofTrack:new_instance(proof_state)
+   return ProofTrack:new(proof_state, self:get_proof())
 end
 
 function ProofTrack:get_proof()
    return self.proof
 end
 
+function ProofTrack:get_proof_state()
+   return self.proof_state
+end
+
+function ProofTrack:get_conclusions()
+   return self:get_proof_state():get_conclusions()
+end
+
 function ProofTrack:resolve(axiom, goal)
-   local retval =  ProofState.resolve(self, axiom, goal)
+   local retval =  self:get_proof_state():resolve(axiom, goal)
    if retval
    then
       self:get_proof():add(rule)
@@ -31,9 +41,8 @@ function ProofTrack:resolve(axiom, goal)
 end
 
 function ProofTrack:devar()
-   local retval =  ProofState.devar(self)
-   retval.proof =  self:get_proof()
-   return retval
+   local proof_state =  self:get_proof_state():devar()
+   return self:new_instance(proof_state)
 end
 
 function ProofTrack:__diagnose_single_line(indentation)

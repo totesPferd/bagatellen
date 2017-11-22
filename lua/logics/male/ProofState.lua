@@ -49,7 +49,6 @@ function ProofState:apply_rule(rule, goal)
    return retval
 end
 
-
 function ProofState:apply_proof(proof)
    local rep =  true
    while rep
@@ -60,11 +59,7 @@ function ProofState:apply_proof(proof)
       do local clause =  proof:search(conclusion)
          if clause
          then
-            rep =  true
-            conclusions:drop(goal)
-            for premise in axiom:get_premises():elems()
-            do conclusions:add(premise)
-            end
+            rep =  self:resolve(clause, conclusion)
          end
       end
    end
