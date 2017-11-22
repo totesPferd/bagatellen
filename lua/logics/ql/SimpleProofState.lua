@@ -11,7 +11,8 @@ function SimpleProofState:apply_literal_tactics(literals)
    local rep =  true
    while rep
    do rep =  false
-      for literal in literals:elems()
+      local literals_copy =  literals:__clone()
+      for literal in literals_copy:elems()
       do local conclusion =  self:get_conclusion()
          if not conclusion
          then
