@@ -16,6 +16,26 @@ function MetaVariable:copy()
    return self.__index:new(self:get_rhs_object())
 end
 
+function MetaVariable:devar(var_assgnm)
+   local val =  var_assgnm:deref(self)
+   if val
+   then
+      return val
+   else
+      local new_var
+      val =  self:get_val()
+      if val
+      then
+         new_var =  val:devar(var_assgnm)
+      else
+         local dev_rhs_object =  self:get_rhs_object():devar(var_assgnm)
+         new_var =  self.__index:new(dev_rhs_object)
+      end
+      var_assgnm:add(self, new_var)
+      return new_var
+   end
+end
+
 function MetaVariable:get_rhs_object()
    return self.rhs_object
 end
