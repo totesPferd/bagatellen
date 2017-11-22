@@ -31,7 +31,11 @@ end
 
 function SimpleProofState:add_literal(literals)
    self:normalize(literals)
-   literals:add(self:get_conclusion())
+   local conclusion =  self:get_conclusion()
+   if conclusion
+   then
+      literals:add(self:get_conclusion())
+   end
 end
 
 return SimpleProofState

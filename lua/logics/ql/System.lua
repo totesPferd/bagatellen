@@ -3,7 +3,6 @@ local Type =  require "base.type.aux.Type"
 local System =  Type:__new()
 
 package.loaded["logics.ql.System"] =  System
-local Compound =  require "logics.ql.Compound"
 local MetaVariable =  require "logics.ql.MetaVariable"
 local Set =  require "base.type.Set"
 local SimpleProofState =  require "logics.ql.SimpleProofState"
@@ -15,18 +14,21 @@ function System:new()
    return retval
 end
 
-function System:add(qual, d0, d1)
-   local lhs_term =  Compound:new(d0, qual)
-   local literal =  ToLiteral:new(lhs_term, d1)
-   local sps =  SimpleProofState:new(literal)
+function System:add(to_literal)
+   local sps =  SimpleProofState:new(to_literal)
    sps:add_literal(self.literals)
+
+   for literal in self.literals
+   do self.literals:drop(literal)
+      sps =  SimpleProofState:new(literal)
+      sps:add_literal(self.literals)
+   end
 end
 
-function System:get_normal_form(base, qual, d0)
-   local lhs_term =  Compound:new(d0, qual)
+function System:get_normal_form(base, lhs_term)
    local rhs_term =  MetaVariable:new(base)
-   local literal =  ToLiteral:new(lhs_term, d1)
-   local sps =  SimpleProofState:new(literal)
+   local to_literal =  ToLiteral:new(lhs_term, rhs_term)
+   local sps =  SimpleProofState:new(to_literal)
    sps:normalize(self.literals)
    return rhs_term:get_val()
 end
