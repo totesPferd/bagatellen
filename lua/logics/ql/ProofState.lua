@@ -1,3 +1,11 @@
+-- ProofState fuer QL zu Kanonen auf Spatzen geschossen
+-- anstelle ProofState:get_conclusions() reicht
+-- moeglicherweise auch ProofState:get_conclusion()
+-- , d.h. anstelle einer Schuessel voll Beweiszielen reicht es,
+-- einen Behaelter vorzusehen, der hoechstens ein Beweisziel speichern
+-- muss.
+
+
 local ProofState =  require "logics.male.ProofState"
 local ReflRule =  require "logics.ql.rule.Refl"
 local TransRule =  require "logics.ql.rule.Trans"
