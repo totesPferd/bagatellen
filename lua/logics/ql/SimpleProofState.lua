@@ -14,7 +14,7 @@ function SimpleProofState:apply_literal_tactics(literals)
    do rep =  false
       for literal in literals:elems()
       do local rule =  TransRule:new(literal):devar()
-         local success =  self:apply_rule(rule, conclusion)
+         local success =  self:apply_rule(rule, self:get_conclusion())
          if success
          then
             rep =  true
