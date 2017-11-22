@@ -13,7 +13,7 @@ function SimpleProofState:apply_literal_tactics(literals)
    while rep
    do rep =  false
       for literal in literals:elems()
-      do local rule =  TransRule:new(literal)
+      do local rule =  TransRule:new(literal):devar()
          local success =  self:apply_rule(rule, conclusion)
          if success
          then
