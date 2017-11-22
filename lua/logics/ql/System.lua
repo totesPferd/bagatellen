@@ -18,7 +18,7 @@ function System:add(to_literal)
    local sps =  SimpleProofState:new(to_literal)
    sps:add_literal(self.literals)
 
-   for literal in self.literals
+   for literal in self.literals:elems()
    do self.literals:drop(literal)
       sps =  SimpleProofState:new(literal)
       sps:add_literal(self.literals)

@@ -9,7 +9,7 @@ local ToLiteral =  require "logics.ql.ToLiteral"
 function Refl:new()
    local var =  ObjectVariable:new()
    local conclusion =  ToLiteral:new(var, var)
-   return Resolve:new(nil, conlusion)
+   return Resolve:new(nil, conclusion)
 end
 
 function Refl:get_refl_cast()
