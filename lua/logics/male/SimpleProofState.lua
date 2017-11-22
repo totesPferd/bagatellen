@@ -45,8 +45,7 @@ function SimpleProofState:resolve(premis, conclusion, goal)
 end
 
 function SimpleProofState:apply_rule(rule, goal)
-   local retval =  rule:apply(self, goal)
-   return retval
+   return rule:apply(self, goal)
 end
 
 function SimpleProofState:devar()
