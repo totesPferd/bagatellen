@@ -8,8 +8,7 @@ local Indentation =  require "base.Indentation"
 local String =  require "base.type.String"
 
 function ProofTrack:new(proof_state, proof)
-   local conclusions =  proof_state:get_conclusions()
-   local retval =  ProofState.new(self, conclusions)
+   local retval =  ProofState.__new(self)
    retval.proof =  proof
    retval.proof_state =  proof_state
    return retval
