@@ -70,15 +70,7 @@ function Compound:get_val()
 end
 
 function Compound:get_name()
-   local retval =  self:get_terminal():__clone():get_name()
-   local this_rhs_object =  self:get_rhs_object()
-   local next_string =  this_rhs_object:get_name()
-   if next_string
-   then
-      retval:append_string(String:string_factory("."))
-      retval:append_string(next_string)
-   end
-   return retval
+   return self:get_terminal():get_name() or String:string_factory("??")
 end
 
 function Compound:__eq(other)
@@ -96,13 +88,23 @@ end
 function Compound:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory("(logics::ql::Compound "))
    indentation:insert(self:get_name())
+   indentation:insert(String:string_factory(" "))
+   self:get_rhs_object():__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(")"))
 end
 
 function Compound:__diagnose_multiple_line(indentation)
+   local is_last_elem_multiple_line =  true
+
    indentation:insert(String:string_factory("(logics::ql::Compound "))
    indentation:insert(self:get_name())
-   indentation:insert(String:string_factory(")"))
+   indentation:insert_newline()
+   local deeper_indentation =
+      indentation:get_deeper_indentation_factory {}
+   is_last_elem_multiple_line
+      =  self:get_rhs_object():__diagnose_complex(deeper_indentation)
+   deeper_indentation:save()
+   indentation:insert(String:parenthesis_off_depending_factory(is_last_elem_multiple_line))
 end
 
 return Compound

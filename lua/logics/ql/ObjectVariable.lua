@@ -67,19 +67,18 @@ end
 function ObjectVariable:__diagnose_multiple_line(indentation)
    local is_last_elem_multiple_line =  true
 
-   indentation:insert(String:string_factory("(logics::ql::ObjectVariable"))
-   indentation:insert_newline()
-   local deeper_indentation =
-      indentation:get_deeper_indentation_factory {}
-   deeper_indentation:insert(self:get_non_nil_name())
+   indentation:insert(String:string_factory("(logics::ql::ObjectVariable "))
+   indentation:insert(self:get_non_nil_name())
    local this_val =  self:get_val()
    if this_val
    then
-      deeper_indentation:insert_newline()
+      indentation:insert_newline()
+      local deeper_indentation =
+         indentation:get_deeper_indentation_factory {}
       is_last_elem_multiple_line
          =  this_val:__diagnose_complex(deeper_indentation)
+      deeper_indentation:save()
    end
-   deeper_indentation:save()
    indentation:insert(String:parenthesis_off_depending_factory(is_last_elem_multiple_line))
 end
 
