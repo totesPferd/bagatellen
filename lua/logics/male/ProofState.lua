@@ -4,7 +4,6 @@ local ProofState =  Type:__new()
 
 
 package.loaded["logics.male.ProofState"] =  ProofState
-local Clause =  require "logics.male.Clause"
 local Indentation =  require "base.Indentation"
 local Set =  require "base.type.Set"
 local String =  require "base.type.String"
