@@ -14,29 +14,11 @@ end
 function ObjectVariable:get_compound_cast()
 end
 
-function ObjectVariable:finish(term)
-   return true
-end
-
 function ObjectVariable:destruct_terminal(terminal)
    local this_val =  self:get_val()
    if this_val
    then
       return this_val:destruct_terminal(terminal)
-   end
-end
-
-function ObjectVariable:equate(other)
-   local this_val =  self:get_val()
-   if this_val
-   then
-      return this_val:equate(other)
-   elseif other:finish(self)
-   then
-      self:set_val(other)
-      return true
-   else
-      return false
    end
 end
 

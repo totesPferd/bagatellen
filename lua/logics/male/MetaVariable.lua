@@ -33,8 +33,26 @@ function MetaVariable:restore(val)
    self:set_val(val)
 end
 
--- undefined; by definition as division by zero is undefined!!!
-function MetaVariable:equate(val)
+function MetaVariable:finish(term)
+   local this_val =  self:get_val()
+   if this_val
+   then
+      return this_val == term:get_val()
+   else
+      self:set_val(term)
+      return true
+   end
+end
+
+function MetaVariable:equate(other)
+   local this_val =  self:get_val()
+   if this_val
+   then
+      return this_val:equate(other)
+   else
+      self:set_val(other)
+      return true
+   end
 end
 
 return MetaVariable

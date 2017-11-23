@@ -26,20 +26,26 @@ end
 function ObjectVariable:restore(val)
 end
 
-function ObjectVariable:equate(val)
+function ObjectVariable:finish(val)
+   return self ~= val
+end
+
+function ObjectVariable:equate(other)
    local retval =  true
-   local backup =  val:get_backup()
+   local backup =  other:get_backup()
    local this_val =  self:get_val()
    if this_val
    then
-      retval =  this_val:equate(val)
+      retval =  this_val:equate(other)
       if not retval
       then
-         val:restore(backup)
+         other:restore(backup)
       end
-   elseif self ~= val
+   elseif other:finish(self)
    then
-      self:set_val(val)
+      self:set_val(other)
+   else
+      retval =  false
    end
    return retval
 end

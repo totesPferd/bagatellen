@@ -18,17 +18,6 @@ end
 function MetaVariable:get_compound_cast()
 end
 
-function MetaVariable:finish(term)
-   local this_val =  self:get_val()
-   if this_val
-   then
-      return this_val == term:get_val()
-   else
-      self:set_val(term)
-      return true
-   end
-end
-
 function MetaVariable:destruct_terminal(terminal)
    local this_val =  self:get_val()
    if this_val
