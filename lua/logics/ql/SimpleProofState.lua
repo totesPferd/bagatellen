@@ -39,7 +39,7 @@ function SimpleProofState:add_literal(literals)
    local conclusion =  self:get_conclusion()
    if conclusion
    then
-      literals:add(self:get_conclusion())
+      literals:add(conclusion)
    end
 end
 
