@@ -45,14 +45,23 @@ end
 
 function Resolve:devar()
    local var_assgnm =  VarAssgnm:new()
-   local dev_premis =  self:get_premis():devar(var_assgnm)
+   local premis =  self:get_premis()
+   local dev_premis
+   if premis
+   then
+      dev_premis =  self:get_premis():devar(var_assgnm)
+   end
    local dev_conclusion =  self:get_conclusion():devar(var_assgnm)
    return self:new_instance(dev_premis, dev_conclusion)
 end
 
 function Resolve:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory("(logics::male::simple_rule::Resolve "))
-   self:get_premis():__diagnose_single_line(indentation)
+   local premis =  self:get_premis()
+   if premis
+   then
+      self:get_premis():__diagnose_single_line(indentation)
+   end
    indentation:insert(String:string_factory(" "))
    self:get_conclusion():__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(")"))
@@ -64,8 +73,12 @@ function Resolve:__diagnose_multiple_line(indentation)
    indentation:insert_newline()
    local deeper_indentation =
       indentation:get_deeper_indentation_factory {}
-   self:get_premis():__diagnose_complex(deeper_indentation)
-   indentation:insert_newline()
+   local premis =  self:get_premis()
+   if premis
+   then
+      self:get_premis():__diagnose_complex(deeper_indentation)
+      indentation:insert_newline()
+   end
    is_last_elem_multiple_line =
       self:get_conclusion():__diagnose_complex(deeper_indentation)
    deeper_indentation:save()
