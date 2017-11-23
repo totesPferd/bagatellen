@@ -76,9 +76,10 @@ function Resolve:__diagnose_multiple_line(indentation)
    local premis =  self:get_premis()
    if premis
    then
+      deeper_indentation:insert_newline()
       self:get_premis():__diagnose_complex(deeper_indentation)
-      indentation:insert_newline()
    end
+   deeper_indentation:insert_newline()
    is_last_elem_multiple_line =
       self:get_conclusion():__diagnose_complex(deeper_indentation)
    deeper_indentation:save()
