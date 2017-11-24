@@ -37,6 +37,18 @@ function Variable:set_val(val)
    end
 end
 
+function Variable:__eq(other)
+   local other_variable =  other:get_variable_cast()
+   if self:get_value_store() == other_variable:get_value_store()
+   then
+      return true
+   end
+
+   local this_val =  self:get_val()
+   local other_val =  other:get_val()
+   return this_val and other_val and this_val == other_val
+end
+
 function Variable:devar(var_assgnm)
    local val =  var_assgnm:deref(self)
    if val

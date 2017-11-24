@@ -75,12 +75,14 @@ end
 
 function Compound:__eq(other)
    local retval =  false
-   local other_compound =  other:get_compound_cast()
+   local other_compound =  other:get_val():get_compound_cast()
    if other_compound
    then
       retval =
             self:get_terminal() == other_compound:get_terminal()
-        and self:get_rhs_object() == other_compound:get_rhs_object()
+        and
+                  self:get_rhs_object():get_val()
+               == other_compound:get_rhs_object():get_val()
    end
    return retval
 end
