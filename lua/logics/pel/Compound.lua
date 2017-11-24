@@ -1,60 +1,67 @@
 local Type =  require "base.type.aux.Type"
 
-local CompoundExpression =  Type:__new()
+local Compound =  Type:__new()
 
-package.loaded["logics.pel.CompoundExpression"] =  CompoundExpression
+package.loaded["logics.pel.Compound"] =  Compound
 local List =  require "base.type.List"
 
-function CompoundExpression:new(symbol, sub_term_list)
+function Compound:new(symbol, sub_term_list)
    local retval =  self:__new()
    retval.symbol =  symbol
    retval.sub_term_list =  sub_term_list
    return retval
 end
 
-function CompoundExpression:new_instance(symbol, sub_term_list)
-   return CompoundExpression:new(symbol, sub_term_list)
+function Compound:new_instance(symbol, sub_term_list)
+   return self.__index:new(symbol, sub_term_list)
 end
 
-function CompoundExpression:get_symbol()
+function Compound:get_symbol()
    return self.symbol
 end
 
-function CompoundExpression:get_sub_term_list()
+function Compound:get_sub_term_list()
    return self.sub_term_list
 end
 
-function CompoundExpression:get_variable()
+function Compound:get_variable()
 end
 
-function CompoundExpression:get_meta_variable()
+function Compound:get_meta_variable_cast()
 end
 
-function CompoundExpression:get_object_variable()
+function Compound:get_object_variable_cast()
 end
 
-function CompoundExpression:get_compound_expression()
+function Compound:get_compound_cast()
    return self
 end
 
-function CompoundExpression:be_an_object_variable(variable)
+function Compound:finish(term)
+   return true
 end
 
-function CompoundExpression:get_val()
+function Compound:get_val()
    return self
 end
 
-function CompoundExpression:destruct_compound_expression(symbol, arity)
+function Compound:destruct_compound(symbol, arity)
    if symbol == self:get_symbol()
    then
       return self:get_sub_term_list():__clone()
    end
 end
 
+function Compound:backup()
+end
+
+function Compound:restore()
+end
+
 -- do destroy this object after this method returns false!!!
-function CompoundExpression:equate(other)
+function Compound:equate(other)
    local equatable =  false
-   local other_sub_term_list =  other:destruct_compound_expression(
+   local other_sub_term_list =  other:destruct_compound(
          self:get_symbol()
       ,  #self:get_sub_term_list() )
    if other_sub_term_list
@@ -73,7 +80,7 @@ function CompoundExpression:equate(other)
    return equatable
 end
 
-function CompoundExpression:devar(var_assgnm)
+function Compound:devar(var_assgnm)
 -- matter for using map, zip, reduce et al.
    local new_sub_term_list =  List:empty_list_factory()
    for sub_term in self:get_sub_term_list():elems()
@@ -83,18 +90,18 @@ function CompoundExpression:devar(var_assgnm)
    return self:new_instance(self:get_symbol(), new_sub_term_list)
 end
 
-function CompoundExpression:__eq(other)
+function Compound:__eq(other)
    local retval =  false
-   local other_compound_expression =  other:get_compound_expression()
-   if other_compound_expression
+   local other_compound =  other:get_compound_cast()
+   if other_compound
    then
-      retval =  self:get_symbol() == other_compound_expression:get_symbol()
+      retval =  self:get_symbol() == other_compound:get_symbol()
       if retval
       then
          retval =  true
 -- wieder Material fuer moses et al.
          local other_sub_terms
-            =  other_compound_expression:get_sub_term_list():__clone()
+            =  other_compound:get_sub_term_list():__clone()
          for sub_term in self:get_sub_term_list():elems()
          do local other_sub_term =  other_sub_terms:get_head()
             other_sub_terms:cut_head()
@@ -109,18 +116,4 @@ function CompoundExpression:__eq(other)
    return retval
 end
 
--- tut mir leid, geht nicht besser zu machen!
--- ...gehört eigentlich nach logics.qpel
-function CompoundExpression:get_chopped_qualifier_copy(qualifier)
-   local new_symbol
-      =  self:get_symbol():get_chopped_qualifier_copy(qualifier)
--- map/reduce et al.!!!
-   local new_sub_term_list =  List:empty_list_factory()
-   for sub_term in self:get_sub_term_list():elems()
-   do new_sub_term_list:append(
-      sub_term:get_chopped_qualifier_copy(qualifier) )
-   end
-   return self:new_instance(new_symbol, new_sub_term_list)
-end
-
-return CompoundExpression
+return Compound
