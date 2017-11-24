@@ -44,7 +44,9 @@ function MetaVariable:get_non_nil_name()
 end
 
 function MetaVariable:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(logics::ql::MetaVariable "))
+   indentation:insert(String:string_factory("(logics::ql::MetaVariable ["))
+   indentation:insert(String:string_factory(tostring(self)))
+   indentation:insert(String:string_factory("] "))
    indentation:insert(self:get_non_nil_name())
    local this_val =  self:get_val()
    if this_val
@@ -58,7 +60,9 @@ end
 function MetaVariable:__diagnose_multiple_line(indentation)
    local is_last_elem_multiple_line =  true
 
-   indentation:insert(String:string_factory("(logics::ql::MetaVariable "))
+   indentation:insert(String:string_factory("(logics::ql::MetaVariable ["))
+   indentation:insert(String:string_factory(tostring(self)))
+   indentation:insert(String:string_factory("] "))
    indentation:insert(self:get_non_nil_name())
    local this_val =  self:get_val()
    if this_val
