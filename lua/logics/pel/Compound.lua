@@ -25,7 +25,7 @@ function Compound:get_sub_term_list()
    return self.sub_term_list
 end
 
-function Compound:get_variable()
+function Compound:get_variable_cast()
 end
 
 function Compound:get_meta_variable_cast()

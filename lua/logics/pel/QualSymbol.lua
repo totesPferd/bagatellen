@@ -27,7 +27,7 @@ end
 
 function QualSymbol:__eq(other)
    local retval =  false
-   local other_qual_symbol =  other:get_qual_symbol()
+   local other_qual_symbol =  other:get_qual_symbol_cast()
    if other_qual_symbol
    then
       retval =  self:get_qualifier() == other_qual_symbol:get_qualifier()
