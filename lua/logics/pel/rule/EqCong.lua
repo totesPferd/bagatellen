@@ -11,10 +11,10 @@ local ObjectVariable =  require "logics.pel.ObjectVariable"
 local Set =  require "base.type.Set"
 
 function EqCong:new(symbol, arity)
-   lhs_vars =  List:empty_list_factory()
-   rhs_vars =  List:empty_list_factory()
-   premises =  Set:empty_set_factory()
-   premis_list =  {}
+   local lhs_vars =  List:empty_list_factory()
+   local rhs_vars =  List:empty_list_factory()
+   local premises =  Set:empty_set_factory()
+   local premis_list =  {}
    local eq_symbol =  EqSymbol:new()
    for i = 1, arity
    do local lhs_var =  ObjectVariable:new()

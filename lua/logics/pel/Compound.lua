@@ -49,6 +49,7 @@ end
 function Compound:destruct_compound(symbol, arity)
    if symbol == self:get_symbol()
    then
+print("yeah! #1", symbol:diagnose {}, arity)
       return self:get_sub_term_list():__clone()
    end
 end
