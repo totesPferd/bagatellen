@@ -15,12 +15,16 @@ function Variable:copy()
    return self.__index:new()
 end
 
+function Variable:get_variable_cast()
+   return self
+end
+
 function Variable:get_value_store()
    return self.value_store
 end
 
-function Variable:get_variable_cast()
-   return self
+function Variable:set_value_store(val)
+   self.value_store =  val
 end
 
 function Variable:get_val()
@@ -31,9 +35,9 @@ function Variable:set_val(val)
    local other_var =  val:get_variable_cast()
    if other_var
    then
-      self.value_store =  other_var:get_value_store()
+      self:set_value_store(other_var:get_value_store())
    else
-      self.value_store:set_val(val)
+      self:get_value_store():set_val(val)
    end
 end
 

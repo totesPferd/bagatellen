@@ -26,11 +26,11 @@ function MetaVariable:get_object_variable_cast()
 end
 
 function MetaVariable:get_backup()
-   return self:get_val()
+   return self:get_value_store()
 end
 
 function MetaVariable:restore(val)
-   self:set_val(val)
+   self:set_value_store(val)
 end
 
 function MetaVariable:finish(term)
