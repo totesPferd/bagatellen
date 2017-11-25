@@ -28,5 +28,13 @@ function DefSymbol:__eq(other)
    return retval
 end
 
+function DefSymbol:__diagnose_single_line(indentation)
+   indentation:insert(String:string_factory("(logics::pel::DefSymbol)"))
+end
+
+function DefSymbol:__diagnose_multiple_line(indentation)
+   indentation:insert(String:string_factory("(logics::pel::DefSymbol)"))
+end
+
 return DefSymbol
 

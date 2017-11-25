@@ -28,5 +28,13 @@ function EqSymbol:__eq(other)
    return retval
 end
 
+function EqSymbol:__diagnose_single_line(indentation)
+   indentation:insert(String:string_factory("(logics::pel::EqSymbol)"))
+end
+
+function EqSymbol:__diagnose_multiple_line(indentation)
+   indentation:insert(String:string_factory("(logics::pel::EqSymbol)"))
+end
+
 return EqSymbol
 

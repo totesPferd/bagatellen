@@ -116,4 +116,32 @@ function Compound:__eq(other)
    return retval
 end
 
+function Compound:__diagnose_single_line(indentation)
+   indentation:insert(String:string_factory("(logics::pel::Compound "))
+   self:get_symbol():__diagnose_single_line(indentation)
+   for sub_term in self:get_sub_term_list():elems()
+   do indentation:insert(String:string_factory(" "))
+      sub_term:__diagnose_single_line(indentation)
+   end
+   indentation:insert(String:string_factory(")"))
+end
+
+function Compound:__diagnose_multiple_line(indentation)
+   local is_last_elem_multiple_line =  true
+
+   indentation:insert(String:string_factory("(logics::pel::Compound"))
+   indentation:insert_newline()
+   local deeper_indentation =
+      indentation:get_deeper_indentation_factory {}
+   is_last_elem_multiple_line
+      =  self:get_symbol():__diagnose_complex(deeper_indentation)
+   for sub_term in self:get_sub_term_list():elems()
+   do deeper_indentation:inssert_newline()
+      is_last_elem_multiple_line
+         =  sub_term:__diagnose_complex(deeper_indentation)
+   end
+   deeper_indentation:save()
+   indentation:insert(String:parenthesis_off_depending_factory(is_last_elem_multiple_line))
+end
+
 return Compound
