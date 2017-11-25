@@ -4,6 +4,7 @@ local Compound =  Type:__new()
 
 package.loaded["logics.pel.Compound"] =  Compound
 local List =  require "base.type.List"
+local String =  require "base.type.String"
 
 function Compound:new(symbol, sub_term_list)
    local retval =  self:__new()

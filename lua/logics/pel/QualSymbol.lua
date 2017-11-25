@@ -3,9 +3,10 @@ local Type =  require "base.type.aux.Type"
 local QualSymbol =  Type:__new()
 
 package.loaded["logics.pel.QualSymbol"] =  QualSymbol
+local String =  require "base.type.String"
 
 function QualSymbol:new(qualifier)
-   local retval self:__new()
+   local retval =  self:__new()
    retval.qualifier =  qualifier
    return retval
 end
