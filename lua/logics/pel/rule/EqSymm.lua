@@ -25,7 +25,9 @@ function EqSymm:new()
    local premises =  Set:empty_set_factory()
    premises:add(premis)
    local clause =  Clause:new(premises, conclusion)
-   return Resolve.new(self, clause)
+   local retval =  Resolve.new(self, clause)
+   retval.premis =  premis
+   return retval
 end
 
 function EqSymm:get_eq_refl_cast()
@@ -42,6 +44,10 @@ function EqSymm:get_eq_cong_cast()
 end
 
 function EqSymm:get_strict_cast()
+end
+
+function EqSymm:get_premis()
+   return self.premis
 end
 
 return EqSymm

@@ -29,10 +29,13 @@ function EqTrans:new()
    local rhs_premis =  Compound:new(eq_symbol, args_rhs_premis)
    local conclusion =  Compound:new(eq_symbol, args_conclusion)
    local premises =  Set:empty_set_factory()
-   premises:add(lhs_remis)
-   premises:add(rhs_remis)
+   premises:add(lhs_premis)
+   premises:add(rhs_premis)
    local clause =  Clause:new(premises, conclusion)
-   return Resolve.new(self, clause)
+   local retval =  Resolve.new(self, clause)
+   retval.lhs_premis =  lhs_premis
+   retval.rhs_premis =  rhs_premis
+   return retval
 end
 
 function EqTrans:get_eq_refl_cast()
@@ -49,6 +52,14 @@ function EqTrans:get_eq_cong_cast()
 end
 
 function EqTrans:get_strict_cast()
+end
+
+function EqTrans:get_lhs_premis()
+   return self.lhs_premis
+end
+
+function EqTrans:get_rhs_premis()
+   return self.rhs_premis
 end
 
 return EqTrans

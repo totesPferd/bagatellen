@@ -3,11 +3,16 @@ local MALEMetaVariable =  require "logics.male.MetaVariable"
 local MetaVariable =  MALEMetaVariable:__new()
 
 package.loaded["logics.pel.MetaVariable"] =  MetaVariable
+local Compound =  require "logics.pel.Compound"
 local List =  require "base.type.List"
 local String =  require "base.type.String"
 
 function MetaVariable:new()
    return MALEMetaVariable.new(self)
+end
+
+function MetaVariable:new_compound(symbol, arg_list)
+   return Compound:new(symbol, arg_list)
 end
 
 function MetaVariable:get_compound_cast()
@@ -24,12 +29,13 @@ function MetaVariable:destruct_compound(symbol, arity)
       return this_val:destruct_compound(symbol, arity)
    else
 -- map/reduce et al.!!!
-      local retval =  List:empty_list_factory()
-      for i = 1,arity
-      do retval:append(self:copy())
+      local arg_list =  List:empty_list_factory()
+      for i = 1, arity
+      do arg_list:append(self:copy())
       end
-      self:set_val(retval)
-      return retval:__clone()
+      local val =  self:new_compound(symbol, arg_list)
+      self:set_val(val)
+      return arg_list
    end
 end
 

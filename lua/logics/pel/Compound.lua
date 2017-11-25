@@ -64,7 +64,7 @@ function Compound:equate(other)
    local equatable =  false
    local other_sub_term_list =  other:destruct_compound(
          self:get_symbol()
-      ,  #self:get_sub_term_list() )
+      ,  self:get_sub_term_list():__len() )
    if other_sub_term_list
    then
       equatable =  true
