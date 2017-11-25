@@ -2,7 +2,7 @@ local Resolve =  require "logics.male.rule.Resolve"
 
 local Td =  Resolve:__new()
 
-package.loaded["logics.ql.rule.refl"] =  Td
+package.loaded["logics.ql.rule.Td"] =  Td
 local Clause =  require "logics.male.Clause"
 local MetaVariable =  require "logics.ql.MetaVariable"
 local ObjectVariable =  require "logics.ql.ObjectVariable"
