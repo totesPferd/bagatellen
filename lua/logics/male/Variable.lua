@@ -4,6 +4,7 @@ local Variable =  Type:__new()
 
 package.loaded["logics.male.Variable"] =  Variable
 local ValueStore =  require "logics.male.ValueStore"
+local String =  require "base.type.String"
 
 function Variable:new()
    local retval =  self:__new()

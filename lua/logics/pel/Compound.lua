@@ -68,15 +68,27 @@ function Compound:equate(other)
       ,  self:get_sub_term_list():__len() )
    if other_sub_term_list
    then
+      local other_sub_term_backups =  List:empty_list_factory()
+      for other_sub_term in other_sub_term_list:elems()
+      do other_sub_term_backups:append(other_sub_term:get_backup())
+      end
+      local other_sub_term_list_copy =  other_sub_term_list:__clone()
       equatable =  true
       for sub_term in self:get_sub_term_list():elems()
-      do local other_sub_term =  other_sub_term_list:get_head()
-         other_sub_term_list:cut_head()
+      do local other_sub_term =  other_sub_term_list_copy:get_head()
+         other_sub_term_list_copy:cut_head()
          equatable =  sub_term:equate(other_sub_term)
          if not equatable
          then
-            other:restore(backup)
             break
+         end
+      end
+      if not equatable
+      then
+         other:restore(backup)
+         for other_sub_term in other_sub_term_list:elems()
+         do other_sub_term:restore(other_sub_term_backups:get_head())
+            other_sub_term_backups:cut_head()
          end
       end
    else
