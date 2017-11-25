@@ -15,7 +15,7 @@ function EqCong:new(symbol, arity)
    rhs_vars =  List:empty_list_factory()
    premises =  Set:empty_set_factory()
    local eq_symbol =  EqSymbol:new()
-   for i in 1, arity
+   for i = 1, arity
    do local lhs_var =  ObjectVariable:new()
       local rhs_var =  ObjectVariable:new()
       local eq_args =  List:empty_list_factory()

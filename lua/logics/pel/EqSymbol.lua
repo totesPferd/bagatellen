@@ -21,7 +21,7 @@ end
 
 function EqSymbol:__eq(other)
    local retval =  false
-   local other_eq_symbol =  other:get_eq_symbol()
+   local other_eq_symbol =  other:get_eq_symbol_cast()
    if other_eq_symbol
    then
       retval =  true
