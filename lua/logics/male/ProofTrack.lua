@@ -34,7 +34,7 @@ function ProofTrack:resolve(axiom, goal)
    local retval =  self:get_proof_state():resolve(axiom, goal)
    if retval
    then
-      self:get_proof():add(rule)
+      self:get_proof():add(axiom)
    end
    return retval
 end
