@@ -30,11 +30,9 @@ function MetaVariable:restore(backup)
 end
 
 function MetaVariable:finish(term)
-   local this_val =  self:get_val()
-   if this_val
-   then
-      return this_val == term:get_val()
-   elseif self:is_bound()
+   if
+         self:is_bound()
+     and self:get_val() ~= term
    then
       return false
    else
