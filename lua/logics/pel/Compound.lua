@@ -137,7 +137,7 @@ function Compound:__diagnose_multiple_line(indentation)
    is_last_elem_multiple_line
       =  self:get_symbol():__diagnose_complex(deeper_indentation)
    for sub_term in self:get_sub_term_list():elems()
-   do deeper_indentation:inssert_newline()
+   do deeper_indentation:insert_newline()
       is_last_elem_multiple_line
          =  sub_term:__diagnose_complex(deeper_indentation)
    end

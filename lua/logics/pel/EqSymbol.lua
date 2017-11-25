@@ -3,6 +3,7 @@ local Type =  require "base.type.aux.Type"
 local EqSymbol =  Type:__new()
 
 package.loaded["logics.pel.EqSymbol"] =  EqSymbol
+local String =  require "base.type.String"
 
 function EqSymbol:new()
    return self:__new()
