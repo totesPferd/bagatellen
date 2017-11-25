@@ -53,7 +53,7 @@ function Compound:destruct_compound(symbol, arity)
    end
 end
 
-function Compound:backup()
+function Compound:get_backup()
 end
 
 function Compound:restore()
