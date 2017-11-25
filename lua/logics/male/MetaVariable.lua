@@ -26,11 +26,11 @@ function MetaVariable:get_object_variable_cast()
 end
 
 function MetaVariable:get_backup()
-   return self:get_value_store()
+   return self:get_val()
 end
 
 function MetaVariable:restore(val)
-   self:set_value_store(val)
+   self:set_val_direct(val)
 end
 
 function MetaVariable:finish(term)
@@ -45,14 +45,20 @@ function MetaVariable:finish(term)
 end
 
 function MetaVariable:equate(other)
+   local retval =  true
+   local backup =  other:get_backup()
    local this_val =  self:get_val()
    if this_val
    then
-      return this_val:equate(other)
+      retval =  this_val:equate(other)
+      if not retval
+      then
+         other:restore(backup)
+      end
    else
       self:set_val(other)
-      return true
    end
+   return retval
 end
 
 return MetaVariable

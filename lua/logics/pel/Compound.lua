@@ -79,6 +79,8 @@ function Compound:equate(other)
             break
          end
       end
+   else
+      other:restore(backup)
    end
 
    return equatable

@@ -31,13 +31,17 @@ function Variable:get_val()
    return self:get_value_store():get_val()
 end
 
+function Variable:set_val_direct(val)
+   self:get_value_store():set_val(val)
+end
+
 function Variable:set_val(val)
    local other_var =  val:get_variable_cast()
    if other_var
    then
       self:set_value_store(other_var:get_value_store())
    else
-      self:get_value_store():set_val(val)
+      self:set_val_direct(val)
    end
 end
 

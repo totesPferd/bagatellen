@@ -45,6 +45,7 @@ function ObjectVariable:equate(other)
    then
       self:set_val(other)
    else
+      other:restore(backup)
       retval =  false
    end
    return retval
