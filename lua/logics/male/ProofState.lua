@@ -58,7 +58,8 @@ function ProofState:apply_proof(proof)
       do local clause =  proof:search(conclusion)
          if clause
          then
-            rep =  rep or self:resolve(clause, conclusion)
+            conclusions:add_set(clause:get_premises())
+            rep =  true
          end
       end
    end
@@ -72,7 +73,8 @@ function ProofState:apply_proof_simply(proof)
       do local clause =  proof:search_simply(conclusion)
          if clause
          then
-            rep =  self:resolve(clause, conclusion)
+            conclusions:add_set(clause:get_premises())
+            rep =  true
          end
       end
    end
