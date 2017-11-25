@@ -43,18 +43,8 @@ function ObjectVariable:equate(other)
    if this_val
    then
       retval =  this_val:equate(other)
-   elseif other:finish(self)
-   then
-      if
-            self:is_bound()
-        and self ~= other:get_val()
-      then
-         retval =  false
-      else
-         self:set_val(other)
-      end
    else
-      retval =  false
+      retval =  other:finish(self)
    end
    return retval
 end
