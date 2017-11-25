@@ -61,6 +61,7 @@ end
 
 -- do destroy this object after this method returns false!!!
 function Compound:equate(other)
+   local backup =  other:get_backup()
    local equatable =  false
    local other_sub_term_list =  other:destruct_compound(
          self:get_symbol()
@@ -73,7 +74,9 @@ function Compound:equate(other)
          other_sub_term_list:cut_head()
          equatable =  sub_term:equate(other_sub_term)
          if not equatable
-         then break
+         then
+            other:restore(backup)
+            break
          end
       end
    end
