@@ -32,20 +32,14 @@ end
 
 function ObjectVariable:equate(other)
    local retval =  true
-   local backup =  other:get_backup()
    local this_val =  self:get_val()
    if this_val
    then
       retval =  this_val:equate(other)
-      if not retval
-      then
-         other:restore(backup)
-      end
    elseif other:finish(self)
    then
       self:set_val(other)
    else
-      other:restore(backup)
       retval =  false
    end
    return retval

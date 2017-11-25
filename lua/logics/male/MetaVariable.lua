@@ -46,15 +46,10 @@ end
 
 function MetaVariable:equate(other)
    local retval =  true
-   local backup =  other:get_backup()
    local this_val =  self:get_val()
    if this_val
    then
       retval =  this_val:equate(other)
-      if not retval
-      then
-         other:restore(backup)
-      end
    else
       self:set_val(other)
    end

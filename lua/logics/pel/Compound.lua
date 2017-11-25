@@ -49,7 +49,7 @@ end
 function Compound:destruct_compound(symbol, arity)
    if symbol == self:get_symbol()
    then
-      return self:get_sub_term_list():__clone()
+      return self:get_sub_term_list()
    end
 end
 
