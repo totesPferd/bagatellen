@@ -35,7 +35,8 @@ function MetaVariable:finish(term)
    then
       return this_val == term:get_val()
    else
-      self:set_val(term)
+      self:set_val_direct(term)
+      self:set_bound()
       return true
    end
 end
