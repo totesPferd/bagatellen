@@ -32,7 +32,7 @@ function EqTrans:new()
    premises:add(lhs_remis)
    premises:add(rhs_remis)
    local clause =  Clause:new(premises, conclusion)
-   return Resolve:new(clause)
+   return Resolve.new(self, clause)
 end
 
 function EqTrans:get_eq_refl_cast()

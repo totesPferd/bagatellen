@@ -23,7 +23,7 @@ function Trans:new()
    premises:add(rhs_cath)
 
    local clause =  Clause:new(premises, conclusion)
-   local retval =  Resolve:new(clause)
+   local retval =  Resolve.new(self, clause)
 
    retval.lhs_literal =  lhs_cath
    retval.rhs_literal =  rhs_cath

@@ -30,7 +30,7 @@ function Strict:new(symbol, arity, place)
    premises:add(premis)
 
    local clause =  Clause:new(premises, conclusion)
-   return Resolve:new(clause)
+   return Resolve.new(self, clause)
 end
 
 function Strict:get_eq_refl_cast()

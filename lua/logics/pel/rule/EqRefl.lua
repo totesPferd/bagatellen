@@ -19,7 +19,7 @@ function EqRefl:new()
    local conclusion =  Compound:new(eq_symbol, args)
    local premises =  Set:empty_set_factory()
    local clause =  Clause:new(premises, conclusion)
-   return Resolve:new(clause)
+   return Resolve.new(self, clause)
 end
 
 function EqRefl:get_eq_refl_cast()

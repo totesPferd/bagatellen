@@ -14,7 +14,7 @@ function Trans:new(literal)
    local premis =  ToLiteral:new(rhs_term, rhs_var)
    local conclusion =  ToLiteral:new(lhs_term, rhs_var)
 
-   local retval =  Resolve:new(premis, conclusion)
+   local retval =  Resolve.new(self, premis, conclusion)
 
    return retval
 end

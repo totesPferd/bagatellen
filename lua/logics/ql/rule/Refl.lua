@@ -13,7 +13,7 @@ function Refl:new()
    local conclusion =  ToLiteral:new(var, var)
    local premises =  Set:empty_set_factory()
    local clause =  Clause:new(premises, conclusion)
-   return Resolve:new(clause)
+   return Resolve.new(self, clause)
 end
 
 function Refl:get_refl_cast()

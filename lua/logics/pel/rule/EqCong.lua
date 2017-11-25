@@ -32,7 +32,7 @@ function EqCong:new(symbol, arity)
    eq_args:append(rhs_term)
    local conclusion =  Compound:new(eq_symbol, eq_args)
    local clause =  Clause:new(premises, conclusion)
-   return Resolve:new(clause)
+   return Resolve.new(self, clause)
 end
 
 function EqCong:get_eq_refl_cast()
