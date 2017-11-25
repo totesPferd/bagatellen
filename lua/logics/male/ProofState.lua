@@ -58,7 +58,7 @@ function ProofState:apply_proof(proof)
       do local clause =  proof:search(conclusion)
          if clause
          then
-            rep =  self:resolve(clause, conclusion)
+            rep =  rep or self:resolve(clause, conclusion)
          end
       end
    end
