@@ -39,7 +39,17 @@ function Compound:get_compound_cast()
 end
 
 function Compound:finish(term)
-   return true
+   local retval =  true
+   if
+         self ~= term:get_val()
+     and term:is_bound()
+   then
+      retval =  false
+   else
+      term:set_val_direct(self)
+      term:set_bound()
+   end
+   return retval
 end
 
 function Compound:get_val()

@@ -22,8 +22,19 @@ end
 function ObjectVariable:restore(val)
 end
 
-function ObjectVariable:finish(val)
-   return true
+function ObjectVariable:finish(term)
+   local retval =  true
+   local this_value_store =  self:get_value_store()
+   if
+         this_value_store ~= term:get_value_store()
+     and term:is_bound()
+   then
+      retval =  false
+   else
+      term:set_value_store(this_value_store)
+      term:set_bound()
+   end
+   return retval
 end
 
 function ObjectVariable:equate(other)

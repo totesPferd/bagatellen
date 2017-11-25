@@ -34,6 +34,9 @@ function MetaVariable:finish(term)
    if this_val
    then
       return this_val == term:get_val()
+   elseif self:is_bound()
+   then
+      return false
    else
       self:set_val_direct(term)
       self:set_bound()
