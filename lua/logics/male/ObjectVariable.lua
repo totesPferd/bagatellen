@@ -27,7 +27,7 @@ function ObjectVariable:restore(val)
 end
 
 function ObjectVariable:finish(val)
-   return self ~= val
+   return true
 end
 
 function ObjectVariable:equate(other)
@@ -38,7 +38,12 @@ function ObjectVariable:equate(other)
       retval =  this_val:equate(other)
    elseif other:finish(self)
    then
-      self:set_val(other)
+      if self:is_bound() and this_val ~= other:get_val()
+      then
+         retval =  false
+      else
+         self:set_val(other)
+      end
    else
       retval =  false
    end

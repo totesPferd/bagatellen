@@ -26,11 +26,16 @@ function MetaVariable:get_object_variable_cast()
 end
 
 function MetaVariable:get_backup()
-   return self:get_val()
+   return { self:is_bound(), self:get_val() }
 end
 
-function MetaVariable:restore(val)
-   self:set_val_direct(val)
+function MetaVariable:restore(backup)
+   if backup
+   then
+      local bound_switch, val =  unpack(backup)
+      self:set_bound_switch_direct(bound_switch)
+      self:set_val_direct(val)
+   end
 end
 
 function MetaVariable:finish(term)

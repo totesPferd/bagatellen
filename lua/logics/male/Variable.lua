@@ -8,6 +8,7 @@ local String =  require "base.type.String"
 
 function Variable:new()
    local retval =  self:__new()
+   retval.bound_switch =  false
    retval.value_store =  ValueStore:new()
    return retval
 end
@@ -44,6 +45,19 @@ function Variable:set_val(val)
    else
       self:set_val_direct(val)
    end
+   self:set_bound()
+end
+
+function Variable:is_bound()
+   return self.bound_switch
+end
+
+function Variable:set_bound_switch_direct(val)
+   self.bound_switch =  val
+end
+
+function Variable:set_bound()
+   self:set_bound_switch_direct(true)
 end
 
 function Variable:__eq(other)
