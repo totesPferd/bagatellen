@@ -9,10 +9,6 @@ function MetaVariable:new()
    return retval
 end
 
-function MetaVariable:get_variable_cast()
-   return self:get_meta_variable_cast()
-end
-
 function MetaVariable:get_meta_variable_cast()
    return self
 end

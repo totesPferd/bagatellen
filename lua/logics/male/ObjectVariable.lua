@@ -9,10 +9,6 @@ function ObjectVariable:new()
    return retval
 end
 
-function ObjectVariable:get_variable_cast()
-   return self:get_object_variable_cast()
-end
-
 function ObjectVariable:get_meta_variable_cast()
 end
 
