@@ -44,7 +44,7 @@ function Compound:finish(term)
    return true
 end
 
-function Compound:get_val()
+function Compound:get_bound_val()
    return self
 end
 

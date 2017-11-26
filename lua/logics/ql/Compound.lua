@@ -67,7 +67,7 @@ function Compound:devar(var_assgnm)
    return self.__index:new(self:get_terminal(), new_qual)
 end
 
-function Compound:get_val()
+function Compound:get_bound_val()
    return self
 end
 
@@ -77,14 +77,14 @@ end
 
 function Compound:__eq(other)
    local retval =  false
-   local other_compound =  other:get_val():get_compound_cast()
+   local other_compound =  other:get_bound_val():get_compound_cast()
    if other_compound
    then
       retval =
             self:get_terminal() == other_compound:get_terminal()
         and
-                  self:get_rhs_object():get_val()
-               == other_compound:get_rhs_object():get_val()
+                  self:get_rhs_object():get_bound_val()
+               == other_compound:get_rhs_object():get_bound_val()
    end
    return retval
 end
