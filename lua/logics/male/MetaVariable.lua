@@ -24,7 +24,7 @@ function MetaVariable:restore(backup)
    if backup
    then
       local val =  unpack(backup)
-      self:set_val_direct(val)
+      self:set_val(val)
    end
 end
 
