@@ -26,7 +26,8 @@ function MetaVariable:destruct_terminal(terminal)
    else
       local arg =  self:copy()
       local val =  Compound:new(terminal, arg)
-      self:set_val(val)
+      self:set_val_direct(val)
+      self:set_bound()
       return arg
    end
 end

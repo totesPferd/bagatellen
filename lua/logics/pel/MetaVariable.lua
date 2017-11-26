@@ -34,7 +34,8 @@ function MetaVariable:destruct_compound(symbol, arity)
       do arg_list:append(self:copy())
       end
       local val =  self:new_compound(symbol, arg_list)
-      self:set_val(val)
+      self:set_val_direct(val)
+      self:set_bound()
       return arg_list
    end
 end
