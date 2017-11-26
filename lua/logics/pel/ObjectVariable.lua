@@ -12,11 +12,11 @@ end
 function ObjectVariable:get_compound_cast()
 end
 
-function ObjectVariable:destruct_compound(symbol, arity)
+function ObjectVariable:destruct_compound(p, symbol, arity)
    local this_val =  self:get_bound_val()
    if this_val
    then
-      return this_val:destruct_compound(symbol, arity)
+      return this_val:destruct_compound(this_val, symbol, arity)
    end
 end
 

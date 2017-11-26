@@ -22,20 +22,14 @@ function MetaVariable:copy()
    return self.__index:new()
 end
 
-function MetaVariable:destruct_compound(symbol, arity)
+function MetaVariable:destruct_compound(p, symbol, arity)
    local this_val =  self:get_bound_val()
    if this_val
    then
-      return this_val:destruct_compound(symbol, arity)
+      return this_val:destruct_compound(this_val, symbol, arity)
    else
--- map/reduce et al.!!!
-      local arg_list =  List:empty_list_factory()
-      for i = 1, arity
-      do arg_list:append(self:copy())
-      end
-      local val =  self:new_compound(symbol, arg_list)
-      self:set_val(val)
-      return arg_list
+      self:set_val(p)
+      return p:get_sub_term_list()
    end
 end
 

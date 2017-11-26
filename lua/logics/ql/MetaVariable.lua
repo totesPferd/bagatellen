@@ -18,16 +18,14 @@ end
 function MetaVariable:get_compound_cast()
 end
 
-function MetaVariable:destruct_terminal(terminal)
+function MetaVariable:destruct_terminal(p, terminal)
    local this_val =  self:get_bound_val()
    if this_val
    then
-      return this_val:destruct_terminal(terminal)
+      return this_val:destruct_terminal(this_val, terminal)
    else
-      local arg =  self:copy()
-      local val =  Compound:new(terminal, arg)
-      self:set_val(val)
-      return arg
+      self:set_val(p)
+      return p:get_rhs_object()
    end
 end
 

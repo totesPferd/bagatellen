@@ -47,7 +47,7 @@ function Compound:get_bound_val()
    return self
 end
 
-function Compound:destruct_compound(symbol, arity)
+function Compound:destruct_compound(p, symbol, arity)
    if symbol == self:get_symbol()
    then
       return self:get_sub_term_list()
@@ -69,7 +69,8 @@ function Compound:equate(other)
    local backup =  other:get_backup()
    local equatable =  false
    local other_sub_term_list =  other:destruct_compound(
-         self:get_symbol()
+         self
+      ,  self:get_symbol()
       ,  self:get_sub_term_list():__len() )
    if other_sub_term_list
    then
