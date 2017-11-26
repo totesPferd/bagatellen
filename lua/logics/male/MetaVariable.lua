@@ -30,18 +30,10 @@ function MetaVariable:restore(backup)
 end
 
 function MetaVariable:finish(term)
-   local retval =  false
-   if self:get_val() == term
+   retval =  false
+   if not term:is_bound()
    then
-      retval =  true
-   elseif not self:is_bound()
-   then
-      self:set_val(term)
-      retval =  true
-   elseif not term:is_bound()
-   then
-      self:push_val(term)
-      return true
+      retval =  self:push_val(term)
    end
    return retval
 end

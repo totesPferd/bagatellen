@@ -63,27 +63,32 @@ function Variable:set_bound()
 end
 
 function Variable:push_val(term)
-   local this_val =  self:get_val()
-   if this_val
-   then
-      local this_var =  this_val:get_variable_cast()
-      if this_var
-      then
-         return this_var:push_val(term)
-      end
-   end
    term:set_value_store(self:get_value_store())
    term:set_bound()
+   return true
 end
 
 function Variable:equate(other)
-   local retval
+   local retval =  false
    local this_val =  self:get_bound_val()
    if this_val
    then
       retval =  this_val:equate(other)
+   elseif not self:is_bound()
+   then
+      retval =  other:push_val(self)
    else
-      retval =  other:finish(self)
+      local other_variable =  other:get_variable_cast()
+      if other_variable
+      then
+         if self:get_value_store() == other_variable:get_value_store()
+         then
+            retval =  true
+         elseif not other:is_bound()
+         then
+            retval =  self:push(other)
+         end
+      end
    end
    return retval
 end

@@ -33,11 +33,6 @@ function Compound:get_compound_cast()
    return self
 end
 
-function Compound:finish(term)
-   term:set_val(self)
-   return true
-end
-
 function Compound:destruct_terminal(p, terminal)
    if self:get_terminal() == terminal
    then
@@ -53,6 +48,7 @@ end
 
 function Compound:push_val(term)
    term:set_val(self)
+   return true
 end
 
 function Compound:equate(other)

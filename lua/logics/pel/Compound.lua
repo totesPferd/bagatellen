@@ -38,11 +38,6 @@ function Compound:get_compound_cast()
    return self
 end
 
-function Compound:finish(term)
-   term:set_val(self)
-   return true
-end
-
 function Compound:get_bound_val()
    return self
 end
@@ -62,6 +57,7 @@ end
 
 function Compound:push_val(term)
    term:set_val(self)
+   return true
 end
 
 -- do destroy this object after this method returns false!!!
