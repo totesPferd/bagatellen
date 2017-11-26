@@ -39,7 +39,7 @@ end
 
 function ObjectVariable:equate(other)
    local retval =  true
-   local this_val =  self:get_val()
+   local this_val =  self:get_bound_val()
    if this_val
    then
       retval =  this_val:equate(other)
