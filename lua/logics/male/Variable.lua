@@ -46,13 +46,7 @@ function Variable:set_val_direct(val)
 end
 
 function Variable:set_val(val)
-   local other_var =  val:get_variable_cast()
-   if other_var
-   then
-      self:set_value_store(other_var:get_value_store())
-   else
-      self:set_val_direct(val)
-   end
+   self:set_val_direct(val)
    self:set_bound()
 end
 

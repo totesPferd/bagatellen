@@ -36,8 +36,7 @@ function MetaVariable:finish(term)
       retval =  true
    elseif not self:is_bound()
    then
-      self:set_val_direct(term)
-      self:set_bound()
+      self:set_val(term)
       retval =  true
    end
    return retval

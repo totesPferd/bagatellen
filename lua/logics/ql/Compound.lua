@@ -34,8 +34,7 @@ function Compound:get_compound_cast()
 end
 
 function Compound:finish(term)
-   term:set_val_direct(self)
-   term:set_bound()
+   term:set_val(self)
    return true
 end
 
