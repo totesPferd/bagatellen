@@ -11,15 +11,7 @@ function MetaVariable:new()
    return MALEMetaVariable.new(self)
 end
 
-function MetaVariable:new_compound(symbol, arg_list)
-   return Compound:new(symbol, arg_list)
-end
-
 function MetaVariable:get_compound_cast()
-end
-
-function MetaVariable:copy()
-   return self.__index:new()
 end
 
 function MetaVariable:destruct_compound(p, symbol, arity)

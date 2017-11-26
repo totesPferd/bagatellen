@@ -11,10 +11,6 @@ function MetaVariable:new()
    return retval
 end
 
-function MetaVariable:copy()
-   return self.__index:new()
-end
-
 function MetaVariable:get_compound_cast()
 end
 
