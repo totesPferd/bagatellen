@@ -15,7 +15,7 @@ function MetaVariable:get_compound_cast()
 end
 
 function MetaVariable:destruct_compound(p, symbol, arity)
-   local this_val =  self:get_bound_val()
+   local this_val =  self:get_val()
    if this_val
    then
       return this_val:destruct_compound(this_val, symbol, arity)

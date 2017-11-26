@@ -15,7 +15,7 @@ function ObjectVariable:get_compound_cast()
 end
 
 function ObjectVariable:destruct_terminal(p, terminal)
-   local this_val =  self:get_bound_val()
+   local this_val =  self:get_val()
    if this_val
    then
       return this_val:destruct_terminal(this_val, terminal)

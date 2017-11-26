@@ -33,14 +33,6 @@ function Variable:get_val()
    return self:get_value_store():get_val()
 end
 
-function Variable:get_bound_val()
-   local this_val =  self:get_val()
-   if this_val
-   then
-      return this_val:get_bound_val()
-   end
-end
-
 function Variable:set_val_direct(val)
    self:get_value_store():set_val(val)
 end
@@ -70,7 +62,7 @@ end
 
 function Variable:equate(other)
    local retval =  false
-   local this_val =  self:get_bound_val()
+   local this_val =  self:get_val()
    if this_val
    then
       retval =  this_val:equate(other)
@@ -100,8 +92,8 @@ function Variable:__eq(other)
       return true
    end
 
-   local this_val =  self:get_bound_val()
-   local other_val =  other:get_bound_val()
+   local this_val =  self:get_val()
+   local other_val =  other:get_val()
    return this_val and other_val and this_val == other_val
 end
 
@@ -112,7 +104,7 @@ function Variable:devar(var_assgnm)
       return val
    else
       local new_var
-      val =  self:get_bound_val()
+      val =  self:get_val()
       if val
       then
          new_var =  val:devar(var_assgnm)
