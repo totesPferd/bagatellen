@@ -51,6 +51,10 @@ end
 function Compound:restore(val)
 end
 
+function Compound:push_val(term)
+   term:set_val(self)
+end
+
 function Compound:equate(other)
    local retval =  false
    local next_qual =  other:destruct_terminal(self:get_terminal())

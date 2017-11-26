@@ -60,6 +60,10 @@ end
 function Compound:restore()
 end
 
+function Compound:push_val(term)
+   term:set_val(self)
+end
+
 -- do destroy this object after this method returns false!!!
 function Compound:equate(other)
    local backup =  other:get_backup()

@@ -62,6 +62,19 @@ function Variable:set_bound()
    self:set_bound_switch_direct(true)
 end
 
+function Variable:push_val(term)
+   local this_val =  self:get_val()
+   if this_val
+   then
+      local this_var =  this_val:get_variable_cast()
+      if this_var
+      then
+         return this_var:push_val(term)
+      end
+   end
+   term:set_value_store(self:get_value_store())
+end
+
 function Variable:equate(other)
    local retval
    local this_val =  self:get_bound_val()

@@ -38,6 +38,10 @@ function MetaVariable:finish(term)
    then
       self:set_val(term)
       retval =  true
+   elseif not term:is_bound()
+   then
+      self:push_val(term)
+      return true
    end
    return retval
 end
