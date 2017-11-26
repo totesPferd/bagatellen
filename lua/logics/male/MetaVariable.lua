@@ -46,7 +46,7 @@ end
 
 function MetaVariable:push_val(var)
    local retval
-   local this_val =  self:get_bound_val()
+   local this_val =  self:get_val()
    if this_val
    then
       retval =  this_val:push_val(var)
