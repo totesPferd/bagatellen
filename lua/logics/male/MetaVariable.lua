@@ -17,23 +17,41 @@ function MetaVariable:get_object_variable_cast()
 end
 
 function MetaVariable:get_backup()
-   return { self:is_bound(), self:get_val() }
+   return { self:get_val() }
 end
 
 function MetaVariable:restore(backup)
    if backup
    then
-      local bound_switch, val =  unpack(backup)
-      self:set_bound_switch_direct(bound_switch)
+      local val =  unpack(backup)
       self:set_val_direct(val)
    end
 end
 
-function MetaVariable:finish(term)
-   retval =  false
-   if not term:is_bound()
+function MetaVariable:get_object_variable()
+   return self.object_variable
+end
+
+function MetaVariable:set_object_variable(val)
+   self.object_variable =  val
+end
+
+function MetaVariable:get_bound_val()
+   local this_object_variable =  self:get_object_variable()
+   if this_object_variable
    then
-      retval =  self:push_val(term)
+      return this_object_variable:get_bound_val()
+   end
+end
+
+function MetaVariable:push_val(var)
+   local retval
+   local this_val =  self:get_bound_val()
+   if this_val
+   then
+      retval =  this_val:push_val(var)
+   else
+      retval =  self:set_object_variable(var)
    end
    return retval
 end

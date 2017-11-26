@@ -22,4 +22,8 @@ end
 function ObjectVariable:restore(val)
 end
 
+function ObjectVariable:get_bound_val()
+   return self:get_val()
+end
+
 return ObjectVariable

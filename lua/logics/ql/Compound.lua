@@ -46,8 +46,12 @@ end
 function Compound:restore(val)
 end
 
-function Compound:push_val(term)
-   term:set_val(self)
+function Compound:get_bound_val()
+   return self
+end
+
+function Compound:push_val(var)
+   var:set_val(self)
    return true
 end
 

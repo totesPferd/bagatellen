@@ -8,7 +8,6 @@ local String =  require "base.type.String"
 
 function Variable:new()
    local retval =  self:__new()
-   retval.bound_switch =  false
    retval.value_store =  ValueStore:new()
    return retval
 end
@@ -33,54 +32,23 @@ function Variable:get_val()
    return self:get_value_store():get_val()
 end
 
-function Variable:set_val_direct(val)
+function Variable:set_val(val)
    self:get_value_store():set_val(val)
 end
 
-function Variable:set_val(val)
-   self:set_val_direct(val)
-   self:set_bound()
-end
-
-function Variable:is_bound()
-   return self.bound_switch
-end
-
-function Variable:set_bound_switch_direct(val)
-   self.bound_switch =  val
-end
-
-function Variable:set_bound()
-   self:set_bound_switch_direct(true)
-end
-
-function Variable:push_val(term)
-   term:set_value_store(self:get_value_store())
-   term:set_bound()
+function Variable:push_val(var)
+   var:set_value_store(self:get_value_store())
    return true
 end
 
 function Variable:equate(other)
    local retval =  false
-   local this_val =  self:get_val()
+   local this_val =  self:get_bound_val()
    if this_val
    then
       retval =  this_val:equate(other)
-   elseif not self:is_bound()
-   then
-      retval =  other:push_val(self)
    else
-      local other_variable =  other:get_variable_cast()
-      if other_variable
-      then
-         if self:get_value_store() == other_variable:get_value_store()
-         then
-            retval =  true
-         elseif not other:is_bound()
-         then
-            retval =  self:push(other)
-         end
-      end
+      retval =  other:push_val(self)
    end
    return retval
 end
