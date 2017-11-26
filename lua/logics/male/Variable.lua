@@ -68,6 +68,18 @@ function Variable:set_bound()
    self:set_bound_switch_direct(true)
 end
 
+function Variable:equate(other)
+   local retval
+   local this_val =  self:get_bound_val()
+   if this_val
+   then
+      retval =  this_val:equate(other)
+   else
+      retval =  other:finish(self)
+   end
+   return retval
+end
+
 function Variable:__eq(other)
    local other_variable =  other:get_variable_cast()
    if self:get_value_store() == other_variable:get_value_store()
