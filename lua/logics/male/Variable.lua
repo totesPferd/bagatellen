@@ -73,6 +73,7 @@ function Variable:push_val(term)
       end
    end
    term:set_value_store(self:get_value_store())
+   term:set_bound()
 end
 
 function Variable:equate(other)

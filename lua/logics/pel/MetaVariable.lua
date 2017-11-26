@@ -23,7 +23,7 @@ function MetaVariable:copy()
 end
 
 function MetaVariable:destruct_compound(symbol, arity)
-   local this_val =  self:get_val()
+   local this_val =  self:get_bound_val()
    if this_val
    then
       return this_val:destruct_compound(symbol, arity)
