@@ -38,6 +38,8 @@ function ObjectVariable:__diagnose_single_line(indentation)
    then
       indentation:insert(String:string_factory("bound; "))
    end
+   indentation:insert(String:string_factory(tostring(self:get_value_store())))
+   indentation:insert(String:string_factory(" "))
    indentation:insert(String:string_factory(tostring(self)))
    indentation:insert(String:string_factory("] "))
    indentation:insert(self:get_non_nil_name())
@@ -58,6 +60,8 @@ function ObjectVariable:__diagnose_multiple_line(indentation)
    then
       indentation:insert(String:string_factory("bound; "))
    end
+   indentation:insert(String:string_factory(tostring(self:get_value_store())))
+   indentation:insert(String:string_factory(" "))
    indentation:insert(String:string_factory(tostring(self)))
    indentation:insert(String:string_factory("] "))
    indentation:insert(self:get_non_nil_name())
