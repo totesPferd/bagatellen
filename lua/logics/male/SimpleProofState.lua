@@ -46,6 +46,34 @@ function SimpleProofState:resolve(simple_clause, goal)
    return retval
 end
 
+function SimpleProofState:apply_simple_proof(simple_proof)
+   local rep =  true
+   while rep
+   do rep =  false
+      local conclusion =  self:get_conclusion()
+      local simple_clause =  simple_proof:search(conclusion)
+      if simple_clause
+      then
+         self:set_conclusion(simple_clause:get_premise())
+         rep =  true
+      end
+   end
+end
+
+function SimpleProofState:apply_simple_proof_simply(simple_proof)
+   local rep =  true
+   while rep
+   do rep =  false
+      local conclusion =  self:get_conclusion()
+      local simple_clause =  simple_proof:search_simply(conclusion)
+      if simple_clause
+      then
+         self:set_conclusion(simple_clause:get_premise())
+         rep =  true
+      end
+   end
+end
+
 function SimpleProofState:devar()
    local var_assgnm =  self:new_var_assgnm()
    local dev_conclusion =  self:get_conclusion():devar(var_assgnm)
