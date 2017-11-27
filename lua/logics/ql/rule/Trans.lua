@@ -1,9 +1,7 @@
-local Resolve =  require "logics.male.rule.Resolve"
-
-local Trans =  Resolve:__new()
+local Clause =  require "logics.male.Clause"
+local Trans =  Clause:__new()
 
 package.loaded["logics.ql.rule.Trans"] =  Trans
-local Clause =  require "logics.male.Clause"
 local Set =  require "base.type.Set"
 local ToLiteral =  require "logics.ql.ToLiteral"
 local Variable =  require "logics.ql.Variable"
@@ -27,8 +25,7 @@ function Trans:new(lhs, rhs)
       premises:add(lhs_cath)
       premises:add(rhs_cath)
    
-      local clause =  Clause:new(premises, conclusion)
-      return Resolve.new(self, clause)
+      return Clause.new(self, premises, conclusion)
    end
 end
 

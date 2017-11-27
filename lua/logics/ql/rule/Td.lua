@@ -1,9 +1,7 @@
-local Resolve =  require "logics.male.rule.Resolve"
-
-local Td =  Resolve:__new()
+local Clause =  require "logics.male.Clause"
+local Td =  Clause:__new()
 
 package.loaded["logics.ql.rule.Td"] =  Td
-local Clause =  require "logics.male.Clause"
 local Variable =  require "logics.ql.Variable"
 local Set =  require "base.type.Set"
 local ToLiteral =  require "logics.ql.ToLiteral"
@@ -27,8 +25,7 @@ function Td:new(lhs, hhs)
       premises:add(lhs_cath)
       premises:add(hypoth)
    
-      local clause =  Clause:new(premises, conclusion)
-      return Resolve.new(self, clause)
+      return Clause.new(self, premises, conclusion)
 end
 
 function Td:get_refl_cast()

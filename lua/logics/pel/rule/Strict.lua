@@ -1,9 +1,7 @@
-local Resolve =  require "logics.male.rule.Resolve"
-
-local Strict =  Resolve:__new()
+local Clause =  require "logics.male.Clause"
+local Strict =  Clause:__new()
 
 package.loaded["logics.pel.rule.Strict"] =  Strict
-local Clause =  require "logics.male.Clause"
 local Compound =  require "logics.pel.Compound"
 local DefSymbol =  require "logics.pel.DefSymbol"
 local List =  require "base.type.List"
@@ -28,8 +26,7 @@ function Strict:new(symbol, arity, place)
    local premises =  Set:empty_set_factory()
    premises:add(premis)
 
-   local clause =  Clause:new(premises, conclusion)
-   return Resolve.new(self, clause)
+   return Clause.new(self, premises, conclusion)
 end
 
 function Strict:get_eq_refl_cast()

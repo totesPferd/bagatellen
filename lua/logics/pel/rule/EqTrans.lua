@@ -1,9 +1,7 @@
-local Resolve =  require "logics.male.rule.Resolve"
-
-local EqTrans =  Resolve:__new()
+local Clause =  require "logics.male.Clause"
+local EqTrans =  Clause:__new()
 
 package.loaded["logics.pel.rule.EqTrans"] =  EqTrans
-local Clause =  require "logics.male.Clause"
 local Compound =  require "logics.pel.Compound"
 local EqSymbol =  require "logics.pel.EqSymbol"
 local List =  require "base.type.List"
@@ -37,8 +35,7 @@ function EqTrans:new(lhs, rhs)
       local premises =  Set:empty_set_factory()
       premises:add(lhs_premis)
       premises:add(rhs_premis)
-      local clause =  Clause:new(premises, conclusion)
-      local retval =  Resolve.new(self, clause)
+      local retval =  Clause.new(self, premises, conclusion)
       retval.lhs_premis =  lhs_premis
       retval.rhs_premis =  rhs_premis
       return retval

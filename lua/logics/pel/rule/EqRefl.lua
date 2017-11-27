@@ -1,9 +1,7 @@
-local Resolve =  require "logics.male.rule.Resolve"
-
-local EqRefl =  Resolve:__new()
+local Clause =  require "logics.male.Clause"
+local EqRefl =  Clause:__new()
 
 package.loaded["logics.pel.rule.EqRefl"] =  EqRefl
-local Clause =  require "logics.male.Clause"
 local Compound =  require "logics.pel.Compound"
 local EqSymbol =  require "logics.pel.EqSymbol"
 local List =  require "base.type.List"
@@ -18,8 +16,7 @@ function EqRefl:new()
    args:append(var)
    local conclusion =  Compound:new(eq_symbol, args)
    local premises =  Set:empty_set_factory()
-   local clause =  Clause:new(premises, conclusion)
-   return Resolve.new(self, clause)
+   return Clause.new(self, premises, conclusion)
 end
 
 function EqRefl:get_eq_refl_cast()
