@@ -43,11 +43,6 @@ function ProofState:resolve(axiom, goal)
    return retval
 end
 
-function ProofState:apply_rule(rule, goal)
-   local retval =  rule:apply(self, goal)
-   return retval
-end
-
 function ProofState:apply_proof(proof)
    local rep =  true
    while rep
