@@ -7,35 +7,42 @@ local Clause =  require "logics.male.Clause"
 local Compound =  require "logics.pel.Compound"
 local EqSymbol =  require "logics.pel.EqSymbol"
 local List =  require "base.type.List"
-local MetaVariable =  require "logics.pel.MetaVariable"
-local ObjectVariable =  require "logics.pel.ObjectVariable"
 local Set =  require "base.type.Set"
+local Variable =  require "logics.pel.Variable"
 
-function EqTrans:new()
-   local var_a =  ObjectVariable:new()
-   local var_b =  MetaVariable:new()
-   local var_c =  ObjectVariable:new()
+function EqTrans:new(lhs, rhs)
+   local var_a =  Variable:new()
+   local var_b =  Variable:new()
+   local var_c =  Variable:new()
    local eq_symbol =  EqSymbol:new()
    local args_lhs_premis =  List:empty_list_factory()
    args_lhs_premis:append(var_a)
    args_lhs_premis:append(var_b)
    local args_rhs_premis =  List:empty_list_factory()
-   args_rhs_premis:append(var_b)
-   args_rhs_premis:append(var_c)
-   local args_conclusion =  List:empty_list_factory()
-   args_conclusion:append(var_a)
-   args_conclusion:append(var_c)
-   local lhs_premis =  Compound:new(eq_symbol, args_lhs_premis)
-   local rhs_premis =  Compound:new(eq_symbol, args_rhs_premis)
-   local conclusion =  Compound:new(eq_symbol, args_conclusion)
-   local premises =  Set:empty_set_factory()
-   premises:add(lhs_premis)
-   premises:add(rhs_premis)
-   local clause =  Clause:new(premises, conclusion)
-   local retval =  Resolve.new(self, clause)
-   retval.lhs_premis =  lhs_premis
-   retval.rhs_premis =  rhs_premis
-   return retval
+
+   local success =  true
+   success =  success and lhs:equate(args_lhs_premis)
+   success =  success and rhs:equate(args_rhs_premis)
+
+   if success
+   then
+      args_rhs_premis:append(var_b)
+      args_rhs_premis:append(var_c)
+      local args_conclusion =  List:empty_list_factory()
+      args_conclusion:append(var_a)
+      args_conclusion:append(var_c)
+      local lhs_premis =  Compound:new(eq_symbol, args_lhs_premis)
+      local rhs_premis =  Compound:new(eq_symbol, args_rhs_premis)
+      local conclusion =  Compound:new(eq_symbol, args_conclusion)
+      local premises =  Set:empty_set_factory()
+      premises:add(lhs_premis)
+      premises:add(rhs_premis)
+      local clause =  Clause:new(premises, conclusion)
+      local retval =  Resolve.new(self, clause)
+      retval.lhs_premis =  lhs_premis
+      retval.rhs_premis =  rhs_premis
+      return retval
+   end
 end
 
 function EqTrans:get_eq_refl_cast()

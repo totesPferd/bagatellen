@@ -7,12 +7,12 @@ local Clause =  require "logics.male.Clause"
 local Compound =  require "logics.pel.Compound"
 local EqSymbol =  require "logics.pel.EqSymbol"
 local List =  require "base.type.List"
-local ObjectVariable =  require "logics.pel.ObjectVariable"
+local Variable =  require "logics.pel.Variable"
 local Set =  require "base.type.Set"
 
 function EqSymm:new()
-   local var_a =  ObjectVariable:new()
-   local var_b =  ObjectVariable:new()
+   local var_a =  Variable:new()
+   local var_b =  Variable:new()
    local eq_symbol =  EqSymbol:new()
    local args_premis =  List:empty_list_factory()
    args_premis:append(var_a)

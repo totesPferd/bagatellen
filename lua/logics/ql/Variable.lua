@@ -1,39 +1,41 @@
-local MALEObjectVariable =  require "logics.male.ObjectVariable"
+local MALEVariable =  require "logics.male.Variable"
 
-local ObjectVariable =  MALEObjectVariable:__new()
+local Variable =  MALEVariable:__new()
 
-package.loaded["logics.pel.ObjectVariable"] =  ObjectVariable
+package.loaded["logics.ql.Variable"] =  Variable
 local String =  require "base.type.String"
+local VarAssgnm =  require "logics.male.VarAssgnm"
 
-function ObjectVariable:new()
-   return MALEObjectVariable.new(self)
+function Variable:new()
+   local retval =  MALEVariable.new(self)
+   return retval
 end
 
-function ObjectVariable:get_compound_cast()
+function Variable:get_compound_cast()
 end
 
-function ObjectVariable:destruct_compound(p, symbol, arity)
+function Variable:destruct_terminal(terminal)
    local this_val =  self:get_val()
    if this_val
    then
-      return this_val:destruct_compound(this_val, symbol, arity)
+      return this_val:destruct_terminal(terminal)
    end
 end
 
-function ObjectVariable:get_name()
+function Variable:get_name()
    return self.name
 end
 
-function ObjectVariable:set_name(name)
+function Variable:set_name(name)
    self.name =  name
 end
 
-function ObjectVariable:get_non_nil_name()
+function Variable:get_non_nil_name()
    return self:get_name() or String:string_factory("?")
 end
 
-function ObjectVariable:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(logics::pel::ObjectVariable ["))
+function Variable:__diagnose_single_line(indentation)
+   indentation:insert(String:string_factory("(logics::ql::Variable ["))
    indentation:insert(String:string_factory(tostring(self:get_value_store())))
    indentation:insert(String:string_factory(" "))
    indentation:insert(String:string_factory(tostring(self)))
@@ -48,10 +50,10 @@ function ObjectVariable:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(")"))
 end
 
-function ObjectVariable:__diagnose_multiple_line(indentation)
+function Variable:__diagnose_multiple_line(indentation)
    local is_last_elem_multiple_line =  true
 
-   indentation:insert(String:string_factory("(logics::pel::ObjectVariable ["))
+   indentation:insert(String:string_factory("(logics::ql::Variable ["))
    indentation:insert(String:string_factory(tostring(self:get_value_store())))
    indentation:insert(String:string_factory(" "))
    indentation:insert(String:string_factory(tostring(self)))
@@ -70,4 +72,4 @@ function ObjectVariable:__diagnose_multiple_line(indentation)
    indentation:insert(String:parenthesis_off_depending_factory(is_last_elem_multiple_line))
 end
 
-return ObjectVariable
+return Variable

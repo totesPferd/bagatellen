@@ -7,8 +7,8 @@ local Clause =  require "logics.male.Clause"
 local Compound =  require "logics.pel.Compound"
 local EqSymbol =  require "logics.pel.EqSymbol"
 local List =  require "base.type.List"
-local ObjectVariable =  require "logics.pel.ObjectVariable"
 local Set =  require "base.type.Set"
+local Variable =  require "logics.pel.Variable"
 
 function EqCong:new(symbol, arity)
    local lhs_vars =  List:empty_list_factory()
@@ -17,8 +17,8 @@ function EqCong:new(symbol, arity)
    local premis_list =  {}
    local eq_symbol =  EqSymbol:new()
    for i = 1, arity
-   do local lhs_var =  ObjectVariable:new()
-      local rhs_var =  ObjectVariable:new()
+   do local lhs_var =  Variable:new()
+      local rhs_var =  Variable:new()
       local eq_args =  List:empty_list_factory()
       eq_args:append(lhs_var)
       eq_args:append(rhs_var)

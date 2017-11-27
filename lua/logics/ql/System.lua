@@ -3,10 +3,10 @@ local Type =  require "base.type.aux.Type"
 local System =  Type:__new()
 
 package.loaded["logics.ql.System"] =  System
-local MetaVariable =  require "logics.ql.MetaVariable"
 local Set =  require "base.type.Set"
 local SimpleProofState =  require "logics.ql.SimpleProofState"
 local ToLiteral =  require "logics.ql.ToLiteral"
+local Variable =  require "logics.ql.Variable"
 
 function System:new()
    local retval =  self:__new()
@@ -27,7 +27,7 @@ function System:add(to_literal)
 end
 
 function System:get_normal_form(lhs_term)
-   local rhs_term =  MetaVariable:new()
+   local rhs_term =  Variable:new()
    local to_literal =  ToLiteral:new(lhs_term, rhs_term)
    local sps =  SimpleProofState:new(to_literal)
    sps:normalize(self.literals)

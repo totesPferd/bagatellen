@@ -28,12 +28,6 @@ end
 function Compound:get_variable_cast()
 end
 
-function Compound:get_meta_variable_cast()
-end
-
-function Compound:get_object_variable_cast()
-end
-
 function Compound:get_compound_cast()
    return self
 end
@@ -42,17 +36,11 @@ function Compound:get_val()
    return self
 end
 
-function Compound:destruct_compound(p, symbol, arity)
+function Compound:destruct_compound(symbol, arity)
    if symbol == self:get_symbol()
    then
       return self:get_sub_term_list()
    end
-end
-
-function Compound:get_backup()
-end
-
-function Compound:restore()
 end
 
 function Compound:get_bound_val()
@@ -69,15 +57,10 @@ function Compound:equate(other)
    local backup =  other:get_backup()
    local equatable =  false
    local other_sub_term_list =  other:destruct_compound(
-         self
-      ,  self:get_symbol()
+         self:get_symbol()
       ,  self:get_sub_term_list():__len() )
    if other_sub_term_list
    then
-      local other_sub_term_backups =  List:empty_list_factory()
-      for other_sub_term in other_sub_term_list:elems()
-      do other_sub_term_backups:append(other_sub_term:get_backup())
-      end
       local other_sub_term_list_copy =  other_sub_term_list:__clone()
       equatable =  true
       for sub_term in self:get_sub_term_list():elems()
@@ -89,16 +72,6 @@ function Compound:equate(other)
             break
          end
       end
-      if not equatable
-      then
-         other:restore(backup)
-         for other_sub_term in other_sub_term_list:elems()
-         do other_sub_term:restore(other_sub_term_backups:get_head())
-            other_sub_term_backups:cut_head()
-         end
-      end
-   else
-      other:restore(backup)
    end
 
    return equatable

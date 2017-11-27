@@ -7,19 +7,18 @@ local Clause =  require "logics.male.Clause"
 local Compound =  require "logics.pel.Compound"
 local DefSymbol =  require "logics.pel.DefSymbol"
 local List =  require "base.type.List"
-local MetaVariable =  require "logics.pel.ObjectVariable"
-local ObjectVariable =  require "logics.pel.ObjectVariable"
 local Set =  require "base.type.Set"
+local Variable =  require "logics.pel.Variable"
 
 function Strict:new(symbol, arity, place)
-   local conclusion_var =  ObjectVariable:new()
+   local conclusion_var
    local args =  List:empty_list_factory()
    for i = 1, arity
-   do if i == place
+   do local var =  Variable:new()
+      args:append(var)
+      if i == place
       then
-         args:append(conclusion_var)
-      else
-         args:append(MetaVariable:new())
+         conclusion_var =  var
       end
    end
    local premis_term =  Compound:new(symbol, args)

@@ -20,12 +20,6 @@ function Compound:get_rhs_object()
    return self.rhs_object
 end
 
-function Compound:get_object_variable_cast()
-end
-
-function Compound:get_meta_variable_cast()
-end
-
 function Compound:get_variable_cast()
 end
 
@@ -33,17 +27,11 @@ function Compound:get_compound_cast()
    return self
 end
 
-function Compound:destruct_terminal(p, terminal)
+function Compound:destruct_terminal(terminal)
    if self:get_terminal() == terminal
    then
       return self:get_rhs_object()
    end
-end
-
-function Compound:get_backup()
-end
-
-function Compound:restore(val)
 end
 
 function Compound:get_bound_val()
@@ -57,7 +45,7 @@ end
 
 function Compound:equate(other)
    local retval =  false
-   local next_qual =  other:destruct_terminal(self, self:get_terminal())
+   local next_qual =  other:destruct_terminal(self:get_terminal())
    if next_qual
    then
       retval =  self:get_rhs_object():equate(next_qual)
