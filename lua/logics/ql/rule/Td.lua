@@ -26,6 +26,7 @@ function Td:new(lhs, hhs)
       premises:add(hypoth)
    
       return Clause.new(self, premises, conclusion)
+   end
 end
 
 function Td:get_refl_cast()

@@ -1,5 +1,5 @@
 local Type =  require "base.type.aux.Type"
-local SimpleClause =  SimpleRule:__new()
+local SimpleClause =  Type:__new()
 
 
 package.loaded["logics.male.SimpleClause"] =  SimpleClause
