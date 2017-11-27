@@ -1,49 +1,37 @@
-local SimpleRule =  require "logics.male.SimpleRule"
+local Type =  require "base.type.aux.Type"
+local SimpleClause =  SimpleRule:__new()
 
-local Resolve =  SimpleRule:__new()
 
-
-package.loaded["logics.male.simple_rule.Resolve"] =  Resolve
+package.loaded["logics.male.SimpleClause"] =  SimpleClause
 local Indentation =  require "base.Indentation"
 local Set =  require "base.type.Set"
 local String =  require "base.type.String"
 local VarAssgnm =  require "logics.male.VarAssgnm"
 
-function Resolve:get_resolve_cast()
-   return self
-end
-
-function Resolve:new(premis, conclusion)
-   local retval =  SimpleRule.new(self)
+function SimpleClause:new(premis, conclusion)
+   local retval =  self:__new()
    retval.premis =  premis
    retval.conclusion =  conclusion
    return retval
 end
 
-function Resolve:new_instance(premis, conclusion)
-   return Resolve:new(premis, conclusion)
+function SimpleClause:new_instance(premis, conclusion)
+   return SimpleClause:new(premis, conclusion)
 end
 
-function Resolve:get_premis()
+function SimpleClause:get_premis()
    return self.premis
 end
 
-function Resolve:get_conclusion()
+function SimpleClause:get_conclusion()
    return self.conclusion
 end
 
-function Resolve:apply(simple_proof_state, goal)
-   return simple_proof_state:resolve(
-         self:get_premis()
-      ,  self:get_conclusion()
-      ,  goal )
-end
-
-function Resolve:equate(goal)
+function SimpleClause:equate(goal)
    return self:get_conclusion():equate(goal)
 end
 
-function Resolve:devar()
+function SimpleClause:devar()
    local var_assgnm =  VarAssgnm:new()
    local premis =  self:get_premis()
    local dev_premis
@@ -55,8 +43,8 @@ function Resolve:devar()
    return self:new_instance(dev_premis, dev_conclusion)
 end
 
-function Resolve:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(logics::male::simple_rule::Resolve "))
+function SimpleClause:__diagnose_single_line(indentation)
+   indentation:insert(String:string_factory("(logics::male::SimpleClause "))
    local premis =  self:get_premis()
    if premis
    then
@@ -67,8 +55,8 @@ function Resolve:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory(")"))
 end
 
-function Resolve:__diagnose_multiple_line(indentation)
-   indentation:insert(String:string_factory("(logics::male::simple_rule::Resolve"))
+function SimpleClause:__diagnose_multiple_line(indentation)
+   indentation:insert(String:string_factory("(logics::male::SimpleClause"))
    local is_last_elem_multiple_line =  true
    indentation:insert_newline()
    local deeper_indentation =
@@ -86,4 +74,4 @@ function Resolve:__diagnose_multiple_line(indentation)
    indentation:insert(String:parenthesis_off_depending_factory(is_last_elem_multiple_line))
 end
 
-return Resolve
+return SimpleClause

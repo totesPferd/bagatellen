@@ -35,17 +35,15 @@ function SimpleProofState:is_proven()
    return not self:get_conclusion()
 end
 
-function SimpleProofState:resolve(premis, conclusion, goal)
+function SimpleProofState:resolve(simple_clause, goal)
+   local premis =  simple_clause:get_premis()
+   local conclusion =  simple_clause:get_conclusion()
    local retval =  conclusion:equate(goal)
    if retval
    then
       self:set_conclusion(premis)
    end
    return retval
-end
-
-function SimpleProofState:apply_rule(rule, goal)
-   return rule:apply(self, goal)
 end
 
 function SimpleProofState:devar()

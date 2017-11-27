@@ -4,7 +4,7 @@ local TransRule =  require "logics.ql.simple_rule.Trans"
 
 function SimpleProofState:apply_assumptions()
    local rule =  ReflRule:new()
-   self:apply_rule(rule, self:get_conclusion())
+   self:resolve(rule, self:get_conclusion())
 end
 
 function SimpleProofState:apply_literal_tactics(literals)
@@ -19,7 +19,7 @@ function SimpleProofState:apply_literal_tactics(literals)
             break
          end
          local rule =  TransRule:new(literal):devar()
-         local success =  self:apply_rule(rule, conclusion)
+         local success =  self:resolve(rule, conclusion)
          if success
          then
             rep =  true
