@@ -32,6 +32,10 @@ function Variable:get_val()
    return self:get_value_store():get_val()
 end
 
+function Variable:get_bound_val()
+   return self:get_val()
+end
+
 function Variable:set_val(val)
    self:get_value_store():set_val(val)
 end

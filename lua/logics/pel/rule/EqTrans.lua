@@ -19,8 +19,8 @@ function EqTrans:new(lhs, rhs)
    local args_rhs_premis =  List:empty_list_factory()
 
    local success =  true
-   success =  success and lhs:equate(args_lhs_premis)
-   success =  success and rhs:equate(args_rhs_premis)
+   success =  success and args_lhs_premis:equate(lhs)
+   success =  success and args_rhs_premis:equate(rhs)
 
    if success
    then

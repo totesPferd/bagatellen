@@ -14,8 +14,8 @@ function Trans:new(lhs, rhs)
    local rhs_cath =  ToLiteral:new(mid_var, rhs_var)
 
    local success =  true
-   success =  success and lhs:equate(lhs_cath)
-   success =  success and rhs:equate(rhs_cath)
+   success =  success and lhs_cath:equate(lhs)
+   success =  success and rhs_cath:equate(rhs)
 
    if success
    then
@@ -25,7 +25,10 @@ function Trans:new(lhs, rhs)
       premises:add(lhs_cath)
       premises:add(rhs_cath)
    
-      return Clause.new(self, premises, conclusion)
+      local retval =  Clause.new(self, premises, conclusion)
+      retval.lhs_premis =  lhs_cath
+      retval.rhs_premis =  rhs_cath
+      return retval
    end
 end
 
@@ -37,6 +40,14 @@ function Trans:get_trans_cast()
 end
 
 function Trans:get_td_cast()
+end
+
+function Trans:get_lhs_premis()
+   return self.lhs_premis
+end
+
+function Trans:get_rhs_premis()
+   return self.rhs_premis
 end
 
 return Trans

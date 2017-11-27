@@ -14,8 +14,8 @@ function Td:new(lhs, hhs)
    local hypoth =  ToLiteral:new(lhs_var, rhs_var)
 
    local success =  true
-   success =  success and lhs:equate(lhs_cath)
-   success =  success and hhs:equate(hypoth)
+   success =  success and lhs_cath:equate(lhs)
+   success =  success and hypoth:equate(hhs)
 
    if success
    then
@@ -25,7 +25,10 @@ function Td:new(lhs, hhs)
       premises:add(lhs_cath)
       premises:add(hypoth)
    
-      return Clause.new(self, premises, conclusion)
+      local retval =  Clause.new(self, premises, conclusion)
+      retval.lhs_premis =  lhs_cath
+      retval.hhs_premis =  hypoth
+      return retval
    end
 end
 
@@ -37,6 +40,14 @@ end
 
 function Td:get_td_cast()
    return self
+end
+
+function Td:get_lhs_premis()
+   return self.lhs_premis
+end
+
+function Td:get_hhs_premis()
+   return self.hhs_premis
 end
 
 return Td
