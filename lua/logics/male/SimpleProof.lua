@@ -22,6 +22,12 @@ function SimpleProof:add(simple_clause)
    self.action:add(simple_clause)
 end
 
+function SimpleProof:copy()
+   retval =  self.__index:new()
+   retval.action =  self.action
+   return retval
+end
+
 function SimpleProof:add_proof(other)
    self.action:add_set(other.action)
 end

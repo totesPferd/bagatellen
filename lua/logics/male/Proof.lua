@@ -18,6 +18,12 @@ function Proof:new()
    return retval
 end
 
+function Proof:copy()
+   retval =  self.__index:new()
+   retval.action =  self.action
+   return retval
+end
+
 function Proof:add(clause)
    self.action:add(clause)
 end
