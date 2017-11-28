@@ -54,7 +54,6 @@ end
 
 -- do destroy this object after this method returns false!!!
 function Compound:equate(other)
-   local backup =  other:get_backup()
    local equatable =  false
    local other_sub_term_list =  other:destruct_compound(
          self:get_symbol()

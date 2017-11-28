@@ -17,25 +17,23 @@ function EqTrans:new(lhs, rhs)
    args_lhs_premis:append(var_a)
    args_lhs_premis:append(var_b)
    local args_rhs_premis =  List:empty_list_factory()
+   args_rhs_premis:append(var_b)
+   args_rhs_premis:append(var_c)
+   local args_conclusion =  List:empty_list_factory()
+   local lhs_premis =  Compound:new(eq_symbol, args_lhs_premis)
+   local rhs_premis =  Compound:new(eq_symbol, args_rhs_premis)
+   local ret_conclusion =  Compound:new(eq_symbol, args_conclusion)
 
    local success =  true
-   success =  success and args_lhs_premis:equate(lhs)
-   success =  success and args_rhs_premis:equate(rhs)
+   success =  success and lhs_premis:equate(lhs)
+   success =  success and rhs_premis:equate(rhs)
 
    if success
    then
-      args_rhs_premis:append(var_b)
-      args_rhs_premis:append(var_c)
-      local args_conclusion =  List:empty_list_factory()
-      args_conclusion:append(var_a)
-      args_conclusion:append(var_c)
-      local lhs_premis =  Compound:new(eq_symbol, args_lhs_premis)
-      local rhs_premis =  Compound:new(eq_symbol, args_rhs_premis)
-      local conclusion =  Compound:new(eq_symbol, args_conclusion)
-      local premises =  Set:empty_set_factory()
-      premises:add(lhs_premis)
-      premises:add(rhs_premis)
-      local retval =  Clause.new(self, premises, conclusion)
+      local ret_premises =  List:empty_list_factory()
+      ret_premises:append(lhs_premis)
+      ret_premises:append(rhs_premis)
+      local retval =  Clause.new(self, ret_premises, ret_conclusion)
       retval.lhs_premis =  lhs_premis
       retval.rhs_premis =  rhs_premis
       return retval
