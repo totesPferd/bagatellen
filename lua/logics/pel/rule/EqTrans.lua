@@ -6,6 +6,7 @@ local Compound =  require "logics.pel.Compound"
 local EqSymbol =  require "logics.pel.EqSymbol"
 local List =  require "base.type.List"
 local Set =  require "base.type.Set"
+local VarAssgnm =  require "logics.male.VarAssgnm"
 local Variable =  require "logics.pel.Variable"
 
 function EqTrans:new(lhs, rhs)
@@ -62,6 +63,20 @@ end
 
 function EqTrans:get_rhs_premis()
    return self.rhs_premis
+end
+
+function EqTrans:devar()
+   local var_assgnm =  VarAssgnm:new()
+   local new_lhs_premis =  self:get_lhs_premis():devar(var_assgnm)
+   local new_rhs_premis =  self:get_rhs_premis():devar(var_assgnm)
+   local new_conclusion =  self:get_conclusion():devar(var_assgnm)
+   local new_premises =  Set:empty_set_factory()
+   new_premises:add(new_lhs_premis)
+   new_premises:add(new_rhs_premis)
+   local retval =  Clause.new(self, new_premises, new_conclusion)
+   retval.lhs_premis =  new_lhs_premis
+   retval.rhs_premis =  new_rhs_premis
+   return retval
 end
 
 return EqTrans

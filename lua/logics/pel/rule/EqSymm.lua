@@ -5,8 +5,9 @@ package.loaded["logics.pel.rule.EqSymm"] =  EqSymm
 local Compound =  require "logics.pel.Compound"
 local EqSymbol =  require "logics.pel.EqSymbol"
 local List =  require "base.type.List"
-local Variable =  require "logics.pel.Variable"
 local Set =  require "base.type.Set"
+local VarAssgnm =  require "logics.male.VarAssgnm"
+local Variable =  require "logics.pel.Variable"
 
 function EqSymm:new()
    local var_a =  Variable:new()
@@ -45,6 +46,16 @@ end
 
 function EqSymm:get_premis()
    return self.premis
+end
+
+function EqSymm:devar()
+   local var_assgnm =  VarAssgnm:new()
+   local new_premises =  Set:empty_set_factory()
+   for premis in self:get_premises():elems()
+   do new_premises:add(premis:devar(var_assgnm))
+   end
+   local new_conclusion =  self:get_conclusion():devar(var_assgnm)
+   return Clause.new(self, new_premises, new_conclusion)
 end
 
 return EqSymm

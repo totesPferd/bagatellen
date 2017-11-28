@@ -6,6 +6,7 @@ local Compound =  require "logics.pel.Compound"
 local EqSymbol =  require "logics.pel.EqSymbol"
 local List =  require "base.type.List"
 local Set =  require "base.type.Set"
+local VarAssgnm =  require "logics.male.VarAssgnm"
 local Variable =  require "logics.pel.Variable"
 
 function EqCong:new(symbol, arity)
@@ -55,6 +56,23 @@ end
 
 function EqCong:get_premis(place)
    return self.premis_list[place]
+end
+
+function EqCong:devar()
+   local var_assgnm =  VarAssgnm:new()
+
+   local new_premis_list =  {}
+   local new_premis_set =  Set:empty_set_factory()
+   for k, premis in pairs(self.premis_list)
+   do local new_premis =  premis:devar(var_assgnm)
+      table.insert(new_premis_list, new_premis)
+      new_premis_set:add(new_premis)
+   end
+
+   local new_conclusion =  self:get_conclusion():devar(var_assgnm)
+   local retval =  Clause.new(self, new_premis_set, new_conclusion)
+   retval.premis_list =  new_premis_list
+   return retval
 end
 
 return EqCong

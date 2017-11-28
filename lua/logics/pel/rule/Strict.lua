@@ -6,6 +6,7 @@ local Compound =  require "logics.pel.Compound"
 local DefSymbol =  require "logics.pel.DefSymbol"
 local List =  require "base.type.List"
 local Set =  require "base.type.Set"
+local VarAssgnm =  require "logics.male.VarAssgnm" 
 local Variable =  require "logics.pel.Variable"
 
 function Strict:new(symbol, arity, place)
@@ -43,6 +44,16 @@ end
 
 function Strict:get_strict_cast()
    return self
+end
+
+function Strict:devar()
+   local var_assgnm =  VarAssgnm:new()
+   local new_premises =  Set:empty_set_factory()
+   for premis in self:get_premises():elems()
+   do new_premises:add(premis:devar(var_assgnm))
+   end
+   local new_conclusion =  self:get_conclusion():devar(var_assgnm)
+   return Clause.new(self, new_premises, new_conclusion)
 end
 
 return Strict
