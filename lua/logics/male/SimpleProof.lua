@@ -57,6 +57,39 @@ function SimpleProof:search_simply(goal)
    end
 end
 
+function SimpleProof:apply(simple_proof_state, goal)
+   local retval
+   local rule_found =  self:search_simply(goal)
+   if rule_found
+   then
+      retval =  true
+      self:drop(goal)
+      local premis =  rule_found:get_premis()
+      if premis
+      then
+         retval =  self:apply(simple_proof_state, premis)
+      end
+      self:add(goal)
+   else
+      if simple_proof_state
+      then
+         simple_proof_state:add(goal)
+      end
+      retval =  false
+   end
+   return retval
+end
+
+function SimpleProof:minimize()
+   for rule in self.action:elems()
+   do self:drop(rule)
+      if not self:apply(nil, rule)
+      then
+         self:add(rule)
+      end
+   end
+end
+
 function SimpleProof:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory("(logics::male::SimpleProof "))
    self.action:__diagnose_single_line(indentation)

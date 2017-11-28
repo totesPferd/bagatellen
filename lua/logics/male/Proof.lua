@@ -57,6 +57,41 @@ function Proof:search_simply(goal)
    end
 end
 
+function Proof:apply(proof_state, goal)
+   local retval
+   local rule_found =  self:search_simply(goal)
+   if rule_found
+   then
+      self:drop(goal)
+      retval =  true
+      for premis in rule_found:get_premises():elems()
+      do retval =  retval and self:apply(proof_state, premis)
+         if not proof_state and not retval
+         then
+            break
+         end
+      end
+      self:add(goal)
+   else
+      if proof_state
+      then
+         proof_state:add(goal)
+      end
+      retval =  false
+   end
+   return retval
+end
+
+function Proof:minimize()
+   for rule in self.action:elems()
+   do self:drop(rule)
+      if not self:apply(nil, rule)
+      then
+         self:add(rule)
+      end
+   end
+end
+
 function Proof:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory("(logics::male::Proof "))
    self.action:__diagnose_single_line(indentation)
