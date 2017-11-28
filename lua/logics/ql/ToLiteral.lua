@@ -16,6 +16,10 @@ function ToLiteral:new_instance(lhs_term, rhs_term)
    return self.__index:new(lhs_term, rhs_term)
 end
 
+function ToLiteral:get_to_literal_cast()
+   return self
+end
+
 function ToLiteral:get_lhs_term()
    return self.lhs_term
 end

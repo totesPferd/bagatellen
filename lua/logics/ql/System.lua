@@ -31,7 +31,15 @@ function System:get_normal_form(lhs_term)
    local to_literal =  ToLiteral:new(lhs_term, rhs_term)
    local sps =  SimpleProofState:new(to_literal)
    sps:normalize(self.literals)
-   return rhs_term:get_val()
+   local conclusion =  sps:get_conclusion()
+   if conclusion
+   then
+      local conclusion_to_literal =  conclusion:get_to_literal_cast()
+      if conclusion_to_literal
+      then
+         return conclusion_to_literal:get_lhs_term():get_val()
+      end
+   end
 end
 
 return System
