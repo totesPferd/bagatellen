@@ -49,6 +49,14 @@ function Clause:devar()
    return self:new_instance(new_premises, new_conclusion)
 end
 
+function Clause:apply(goal)
+   local dev_clause =  self:devar()
+   if dev_clause:equate(goal)
+   then
+      return dev_clause
+   end
+end
+
 function Clause:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory("(logics::male::Clause "))
    self:get_premises():__diagnose_single_line(indentation)
