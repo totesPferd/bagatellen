@@ -21,13 +21,15 @@ function EqTrans:new()
    args_rhs_premis:append(var_b)
    args_rhs_premis:append(var_c)
    local args_conclusion =  List:empty_list_factory()
+   args_conclusion:append(var_a)
+   args_conclusion:append(var_c)
    local lhs_premis =  Compound:new(eq_symbol, args_lhs_premis)
    local rhs_premis =  Compound:new(eq_symbol, args_rhs_premis)
    local ret_conclusion =  Compound:new(eq_symbol, args_conclusion)
 
-   local ret_premises =  List:empty_list_factory()
-   ret_premises:append(lhs_premis)
-   ret_premises:append(rhs_premis)
+   local ret_premises =  Set:empty_set_factory()
+   ret_premises:add(lhs_premis)
+   ret_premises:add(rhs_premis)
    local retval =  Clause.new(self, ret_premises, ret_conclusion)
    retval.lhs_premis =  lhs_premis
    retval.rhs_premis =  rhs_premis
