@@ -74,6 +74,14 @@ function SimpleProofState:apply_simple_proof_simply(simple_proof)
    end
 end
 
+function SimpleProofState:push_to_proof(simple_proof)
+   local conclusion =  self:get_conclusion()
+   if conclusion
+   then 
+      simple_proof:add(conclusion)
+   end
+end
+
 function SimpleProofState:devar()
    local var_assgnm =  self:new_var_assgnm()
    local dev_conclusion =  self:get_conclusion():devar(var_assgnm)

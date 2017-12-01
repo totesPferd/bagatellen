@@ -8,8 +8,10 @@ local SimpleProof =  Type:__new()
 
 
 package.loaded["logics.male.SimpleProof"] =  SimpleProof
-local Set =  require "base.type.Set"
+local Assume =  require "logics.male.simple_rule.Assume"
 local Indentation =  require "base.Indentation"
+local SimpleProofState =  require "logics.male.SimpleProofState"
+local Set =  require "base.type.Set"
 local String =  require "base.type.String"
 
 function SimpleProof:new()
@@ -18,13 +20,21 @@ function SimpleProof:new()
    return retval
 end
 
+function SimpleProof:new_assume(literal)
+   return Assume:new(literal)
+end
+
+function SimpleProof:new_simple_proof_state(conclusion)
+   return SimpleProofState:new(conclusion)
+end
+
 function SimpleProof:add(simple_clause)
    self.action:add(simple_clause)
 end
 
 function SimpleProof:copy()
    retval =  self.__index:new()
-   retval.action =  self.action
+   retval.action =  self.action:__clone()
    return retval
 end
 
@@ -83,10 +93,17 @@ end
 function SimpleProof:minimize()
    for rule in self.action:elems()
    do self:drop(rule)
-      if not self:apply(nil, rule)
+      local new_proof =  self:copy()
+      local premis =  rule:get_premis()
+      if premis
       then
-         self:add(rule)
+         local assume =  self:new_assume(premis)
+         new_proof:add(assume)
       end
+      local conclusion =  rule:get_conclusion()
+      local simple_proof_state =  self:new_simple_proof_state(conclusion)
+      self:apply(simple_proof_state, conclusion)
+      simple_proof_state:push_to_proof(self)
    end
 end
 

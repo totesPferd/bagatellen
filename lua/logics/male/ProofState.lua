@@ -75,6 +75,12 @@ function ProofState:apply_proof_simply(proof)
    end
 end
 
+function ProofState:push_to_proof(proof)
+   for conclusion in self:get_conclusions():elems()
+   do proof:add(conclusion)
+   end
+end
+
 function ProofState:get_devared_conclusions(var_assgnm)
    local retval =  Set:empty_set_factory()
    for conclusion in self:get_conclusions():elems()

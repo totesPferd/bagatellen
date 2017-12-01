@@ -8,8 +8,10 @@ local Proof =  Type:__new()
 
 
 package.loaded["logics.male.Proof"] =  Proof
-local Set =  require "base.type.Set"
+local Assume =  require "logics.male.rule.Assume"
 local Indentation =  require "base.Indentation"
+local ProofState =  require "logics.male.ProofState"
+local Set =  require "base.type.Set"
 local String =  require "base.type.String"
 
 function Proof:new()
@@ -18,9 +20,17 @@ function Proof:new()
    return retval
 end
 
+function Proof:new_assume(literal)
+   return Assume:new(literal)
+end
+
+function Proof:new_proof_state(conclusions)
+   return ProofState:new(conclusions)
+end
+
 function Proof:copy()
    retval =  self.__index:new()
-   retval.action =  self.action
+   retval.action =  self.action:__clone()
    return retval
 end
 
@@ -85,10 +95,18 @@ end
 function Proof:minimize()
    for rule in self.action:elems()
    do self:drop(rule)
-      if not self:apply(nil, rule)
-      then
-         self:add(rule)
+      local new_proof =  self:copy()
+      local premises =  rule:get_premises()
+      for premis in premises():elems()
+      do local assume =  self:new_assume(premis)
+         new_proof:add(assume)
       end
+      local conclusion =  rule:get_conclusion()
+      local conclusions =  Set:empty_set_factory()
+      conclusions:add(conclusion)
+      local proof_state =  self:new_proof_state(conclusions)
+      self:apply(proof_state, conclusion)
+      proof_state:push_to_proof(self)
    end
 end
 
