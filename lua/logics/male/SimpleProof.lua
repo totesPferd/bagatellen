@@ -67,9 +67,8 @@ function SimpleProof:search_simply(goal)
 end
 
 function Proof:_apply_step(proof_state, goal)
-   local retval
+   local retval =  true
    self:drop(goal)
-   retval =  true
    local premis =  goal:get_premis()
    if premis
    then

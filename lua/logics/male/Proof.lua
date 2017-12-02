@@ -67,9 +67,8 @@ function Proof:search_simply(goal)
 end
 
 function Proof:_apply_step(proof_state, goal)
-   local retval
+   local retval =  true
    self:drop(goal)
-   retval =  true
    for premis in goal:get_premises():elems()
    do if self.action:is_in(premis)
       then
