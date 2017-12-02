@@ -59,37 +59,43 @@ end
 
 function Proof:search_simply(goal)
    for clause in self.action:elems()
-   do local clause_copy =  clause:devar()
-      if clause_copy:equate(goal)
+   do if clause:equate(goal)
       then
-         return clause, clause_copy
+         return clause
       end
    end
 end
 
-function Proof:apply(proof_state, goal)
+function Proof:_apply_step(proof_state, goal)
    local retval
-   local rule_found, rule_found_copy =  self:search_simply(goal)
-   if rule_found
-   then
-      self:drop(rule_found)
-      retval =  true
-      for premis in rule_found_copy:get_premises():elems()
-      do retval =  retval and self:apply(proof_state, premis)
-         if not proof_state and not retval
-         then
-            break
-         end
-      end
-      self:add(rule_found)
-   else
-      if proof_state
+   self:drop(goal)
+   retval =  true
+   for premis in goal:get_premises():elems()
+   do if self.action:is_in(premis)
       then
-         proof_state:add(goal)
+         retval =  retval and self:_apply_step(proof_state, premis)
+      else
+         if proof_state
+         then
+            proof_state:add(goal)
+         end
+         retval =  false
       end
-      retval =  false
+      if not proof_state and not retval
+      then
+         break
+      end
    end
+   self:add(goal)
    return retval
+end
+
+function Proof:apply(proof_state, goal)
+   local new_goal =  self:search_simply(goal)
+   if new_goal
+   then
+      return self:_apply_step(proof_state, new_goal)
+   end
 end
 
 function Proof:add_rule(rule)
