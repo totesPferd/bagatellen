@@ -6,6 +6,7 @@ local SimpleProofState =  Type:__new()
 package.loaded["logics.male.SimpleProofState"] =  SimpleProofState
 local Indentation =  require "base.Indentation"
 local Set =  require "base.type.Set"
+local SimpleClause =  require "logics.male.SimpleClause"
 local String =  require "base.type.String"
 local VarAssgnm =  require "logics.male.VarAssgnm"
 
@@ -21,6 +22,10 @@ end
 
 function SimpleProofState:new_var_assgnm()
    return VarAssgnm:new()
+end
+
+function SimpleProofState:new_simple_clause(premis, conclusion)
+   return SimpleClause:new(premis, conclusion)
 end
 
 function SimpleProofState:get_conclusion()
@@ -74,11 +79,12 @@ function SimpleProofState:apply_simple_proof_simply(simple_proof)
    end
 end
 
-function SimpleProofState:push_to_proof(simple_proof)
+function SimpleProofState:push_to_proof(simple_proof, premis)
    local conclusion =  self:get_conclusion()
    if conclusion
    then 
-      simple_proof:add(conclusion)
+      local next_simple_clause =  self:new_simple_clause(premis, conclusion)
+      simple_proof:add(next_simple_clause)
    end
 end
 

@@ -101,7 +101,7 @@ function SimpleProof:add_rule(rule)
    local conclusion =  rule:get_conclusion()
    local simple_proof_state =  self:new_simple_proof_state(conclusion)
    self:apply(simple_proof_state, conclusion)
-   simple_proof_state:push_to_proof(self)
+   simple_proof_state:push_to_proof(self, premis)
 end
 
 function SimpleProof:minimize()

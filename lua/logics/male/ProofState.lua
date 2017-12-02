@@ -4,6 +4,7 @@ local ProofState =  Type:__new()
 
 
 package.loaded["logics.male.ProofState"] =  ProofState
+local Clause =  require "logics.male.Clause"
 local Indentation =  require "base.Indentation"
 local Set =  require "base.type.Set"
 local String =  require "base.type.String"
@@ -17,6 +18,10 @@ end
 
 function ProofState:new_instance(conclusions)
    return ProofState:new(conclusions)
+end
+
+function ProofState:new_clause(premises, conclusion)
+   return Clause:new(premises, conclusion)
 end
 
 function ProofState:new_var_assgnm()
@@ -75,9 +80,10 @@ function ProofState:apply_proof_simply(proof)
    end
 end
 
-function ProofState:push_to_proof(proof)
+function ProofState:push_to_proof(proof, premises)
    for conclusion in self:get_conclusions():elems()
-   do proof:add(conclusion)
+   do  local next_clause =  self:new_clause(premises, conclusion)
+       proof:add(next_clause)
    end
 end
 

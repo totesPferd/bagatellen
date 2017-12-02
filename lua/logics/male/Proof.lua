@@ -104,7 +104,7 @@ function Proof:add_rule(rule)
    conclusions:add(conclusion)
    local proof_state =  self:new_proof_state(conclusions)
    self:apply(proof_state, conclusion)
-   proof_state:push_to_proof(self)
+   proof_state:push_to_proof(self, premises)
 end
 
 function Proof:minimize()
