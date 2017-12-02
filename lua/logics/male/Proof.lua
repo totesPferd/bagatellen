@@ -58,7 +58,7 @@ function Proof:search(goal)
 end
 
 function Proof:search_simply(goal)
-   for clause in self.action
+   for clause in self.action:elems()
    do local clause_copy =  clause:devar()
       if clause_copy:equate(goal)
       then

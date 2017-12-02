@@ -58,7 +58,7 @@ function SimpleProof:search(goal)
 end
 
 function SimpleProof:search_simply(goal)
-   for simple_clause in self.action
+   for simple_clause in self.action:elems()
    do local simple_clause_copy =  simple_clause:devar()
       if simple_clause_copy:equate(goal)
       then
