@@ -71,6 +71,7 @@ end
 
 function SimpleProof:apply(simple_proof_state, goal)
    local retval =  true
+   local progress =  true
    local found_rule, found_rule_instance
       =  self:_search_simply_start(simple_proof_state, goal)
    if found_rule
@@ -88,8 +89,9 @@ function SimpleProof:apply(simple_proof_state, goal)
          simple_proof_state:add(premis)
       end
       retval =  false
+      progress =  false
    end
-   return retval
+   return retval, progress
 end
 
 function SimpleProof:add_rule(rule)
@@ -102,14 +104,23 @@ function SimpleProof:add_rule(rule)
    end
    local conclusion =  rule:get_conclusion()
    local simple_proof_state =  self:new_simple_proof_state(conclusion)
-   self:apply(simple_proof_state, conclusion)
+   local status, progress =  self:apply(simple_proof_state, conclusion)
    simple_proof_state:push_to_simple_proof(self, premis)
+   return progress
 end
 
 function SimpleProof:minimize()
-   for rule in self.action:__clone():elems()
-   do self:drop(rule)
-      self:add_rule(rule)
+   local rep =  true
+   while rep
+   do rep =  false
+      for rule in self.action:__clone():elems()
+      do self:drop(rule)
+         local progress =  self:add_rule(rule)
+         if progress
+         then
+            rep =  true
+         end
+      end
    end
 end
 

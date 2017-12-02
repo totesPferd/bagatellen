@@ -71,6 +71,7 @@ end
 
 function Proof:apply(proof_state, goal)
    local retval =  true
+   local progress =  true
    local found_rule, found_rule_instance
       =  self:_search_simply_start(proof_state, goal)
    if found_rule
@@ -90,8 +91,9 @@ function Proof:apply(proof_state, goal)
          proof_state:add(premis)
       end
       retval =  false
+      progress =  false
    end
-   return retval
+   return retval, progress
 end
 
 function Proof:add_rule(rule)
@@ -105,14 +107,23 @@ function Proof:add_rule(rule)
    local conclusions =  Set:empty_set_factory()
    conclusions:add(conclusion)
    local proof_state =  self:new_proof_state(conclusions)
-   self:apply(proof_state, conclusion)
+   local status, progress =  self:apply(proof_state, conclusion)
    proof_state:push_to_proof(self, premises)
+   return progress
 end
 
 function Proof:minimize()
-   for rule in self.action:__clone():elems()
-   do self:drop(rule)
-      self:add_rule(rule)
+   local rep =  true
+   while rep
+   do rep =  false
+      for rule in self.action:__clone():elems()
+      do self:drop(rule)
+         local progress =  self:add_rule(rule)
+         if progress
+         then
+            rep =  true
+         end
+      end
    end
 end
 
