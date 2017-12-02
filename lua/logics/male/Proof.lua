@@ -108,7 +108,7 @@ function Proof:add_rule(rule)
 end
 
 function Proof:minimize()
-   for rule in self.action:elems()
+   for rule in self.action:__clone():elems()
    do self:drop(rule)
       self:add_rule(rule)
    end
