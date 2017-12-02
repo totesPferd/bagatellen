@@ -67,15 +67,6 @@ function Proof:_search_simply_start(goal)
    end
 end
 
-function Proof:_search_simply_step(goal)
-   for clause in self.action:elems()
-   do if clause:get_conclusion() == goal
-      then
-         return clause
-      end
-   end
-end
-
 function Proof:apply(proof_state, goal)
    local retval =  true
    local found_rule, found_rule_instance =  self:_search_simply_start(goal)
