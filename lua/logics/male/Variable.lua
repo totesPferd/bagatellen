@@ -58,15 +58,17 @@ function Variable:equate(other)
 end
 
 function Variable:__eq(other)
+   local retval
    local other_variable =  other:get_variable_cast()
    if self:get_value_store() == other_variable:get_value_store()
    then
-      return true
+      retval =  true
+   else
+      local this_val =  self:get_val()
+      local other_val =  other:get_val()
+      retval =  this_val and other_val and this_val == other_val
    end
-
-   local this_val =  self:get_val()
-   local other_val =  other:get_val()
-   return this_val and other_val and this_val == other_val
+   return retval
 end
 
 function Variable:devar(var_assgnm)
