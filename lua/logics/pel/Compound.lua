@@ -48,8 +48,7 @@ function Compound:get_bound_val()
 end
 
 function Compound:push_val(var)
-   var:set_val(self)
-   return true
+   return var:set_val(self)
 end
 
 -- do destroy this object after this method returns false!!!

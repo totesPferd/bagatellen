@@ -13,7 +13,7 @@ function Strict:new(symbol, arity, place)
    local conclusion_var
    local args =  List:empty_list_factory()
    for i = 1, arity
-   do local var =  Variable:new()
+   do local var =  Variable:new(true)
       args:append(var)
       if i == place
       then

@@ -6,8 +6,8 @@ package.loaded["logics.ql.Variable"] =  Variable
 local String =  require "base.type.String"
 local VarAssgnm =  require "logics.male.VarAssgnm"
 
-function Variable:new()
-   local retval =  MALEVariable.new(self)
+function Variable:new(settable)
+   local retval =  MALEVariable.new(self, settable)
    return retval
 end
 

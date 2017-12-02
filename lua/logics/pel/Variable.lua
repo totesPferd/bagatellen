@@ -5,8 +5,8 @@ local Variable =  MALEVariable:__new()
 package.loaded["logics.pel.Variable"] =  Variable
 local String =  require "base.type.String"
 
-function Variable:new()
-   return MALEVariable.new(self)
+function Variable:new(settable)
+   return MALEVariable.new(self, settable)
 end
 
 function Variable:get_compound_cast()

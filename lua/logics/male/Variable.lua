@@ -6,14 +6,15 @@ package.loaded["logics.male.Variable"] =  Variable
 local ValueStore =  require "logics.male.ValueStore"
 local String =  require "base.type.String"
 
-function Variable:new()
+function Variable:new(settable)
    local retval =  self:__new()
    retval.value_store =  ValueStore:new()
+   retval.settable_switch =  settable or false
    return retval
 end
 
 function Variable:copy()
-   return self.__index:new()
+   return self.__index:new(true)
 end
 
 function Variable:get_variable_cast()
@@ -24,8 +25,17 @@ function Variable:get_value_store()
    return self.value_store
 end
 
+function Variable:is_settable()
+   return self.settable_switch
+end
+
 function Variable:set_value_store(val)
-   self.value_store =  val
+   retval =  self:is_settable()
+   if retval
+   then
+      self.value_store =  val
+   end
+   return retval
 end
 
 function Variable:get_val()
@@ -37,12 +47,16 @@ function Variable:get_bound_val()
 end
 
 function Variable:set_val(val)
-   self:get_value_store():set_val(val)
+   retval =  self:is_settable()
+   if retval
+   then
+      self:get_value_store():set_val(val)
+   end
+   return retval
 end
 
 function Variable:push_val(var)
-   var:set_value_store(self:get_value_store())
-   return true
+   return var:set_value_store(self:get_value_store())
 end
 
 function Variable:equate(other)
