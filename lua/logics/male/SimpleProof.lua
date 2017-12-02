@@ -90,20 +90,24 @@ function SimpleProof:apply(simple_proof_state, goal)
    return retval
 end
 
+function SimpleProof:add_rule(rule)
+   local new_proof =  self:copy()
+   local premis =  rule:get_premis()
+   if premis
+   then
+      local assume =  self:new_assume(premis)
+      new_proof:add(assume)
+   end
+   local conclusion =  rule:get_conclusion()
+   local simple_proof_state =  self:new_simple_proof_state(conclusion)
+   self:apply(simple_proof_state, conclusion)
+   simple_proof_state:push_to_proof(self)
+end
+
 function SimpleProof:minimize()
    for rule in self.action:elems()
    do self:drop(rule)
-      local new_proof =  self:copy()
-      local premis =  rule:get_premis()
-      if premis
-      then
-         local assume =  self:new_assume(premis)
-         new_proof:add(assume)
-      end
-      local conclusion =  rule:get_conclusion()
-      local simple_proof_state =  self:new_simple_proof_state(conclusion)
-      self:apply(simple_proof_state, conclusion)
-      simple_proof_state:push_to_proof(self)
+      self:add_rule(rule)
    end
 end
 

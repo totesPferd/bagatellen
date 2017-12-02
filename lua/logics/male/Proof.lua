@@ -92,21 +92,25 @@ function Proof:apply(proof_state, goal)
    return retval
 end
 
+function Proof:add_rule(rule)
+   local new_proof =  self:copy()
+   local premises =  rule:get_premises()
+   for premis in premises():elems()
+   do local assume =  self:new_assume(premis)
+      new_proof:add(assume)
+   end
+   local conclusion =  rule:get_conclusion()
+   local conclusions =  Set:empty_set_factory()
+   conclusions:add(conclusion)
+   local proof_state =  self:new_proof_state(conclusions)
+   self:apply(proof_state, conclusion)
+   proof_state:push_to_proof(self)
+end
+
 function Proof:minimize()
    for rule in self.action:elems()
    do self:drop(rule)
-      local new_proof =  self:copy()
-      local premises =  rule:get_premises()
-      for premis in premises():elems()
-      do local assume =  self:new_assume(premis)
-         new_proof:add(assume)
-      end
-      local conclusion =  rule:get_conclusion()
-      local conclusions =  Set:empty_set_factory()
-      conclusions:add(conclusion)
-      local proof_state =  self:new_proof_state(conclusions)
-      self:apply(proof_state, conclusion)
-      proof_state:push_to_proof(self)
+      self:add_rule(rule)
    end
 end
 
