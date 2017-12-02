@@ -62,7 +62,7 @@ function Proof:_search_simply_start(goal)
    do local dev_clause =  clause:devar()
       if dev_clause:equate(goal)
       then
-         return dev_clause
+         return clause, dev_clause
       end
    end
 end
@@ -76,36 +76,28 @@ function Proof:_search_simply_step(goal)
    end
 end
 
-function Proof:_apply_step(proof_state, rule)
-   local retval =  true
-   self:drop(rule)
-   for premis in rule:get_premises():elems()
-   do local new_rule =  self:_search_simply_step(premis)
-      if new_rule
-      then
-         retval =  retval and self:_apply_step(proof_state, new_rule)
-      else
-         if proof_state
-         then
-            proof_state:add(premis)
-         end
-         retval =  false
-      end
-      if not proof_state and not retval
-      then
-         break
-      end
-   end
-   self:add(rule)
-   return retval
-end
-
 function Proof:apply(proof_state, goal)
-   local new_goal =  self:_search_simply_start(goal)
-   if new_goal
+   local retval =  true
+   local found_rule, found_rule_instance =  self:_search_simply_start(goal)
+   if found_rule
    then
-      return self:_apply_step(proof_state, new_goal)
+      self:drop(found_rule)
+      for premis in found_rule_instance:get_premises():elems()
+      do retval =  self:apply(proof_state, premis)
+         if not proof_state and not retval
+         then
+            break
+         end
+      end
+      self:add(found_rule)
+   else
+      if proof_state
+      then
+         proof_state:add(premis)
+      end
+      retval =  false
    end
+   return retval
 end
 
 function Proof:add_rule(rule)
