@@ -52,7 +52,7 @@ function SimpleProof:search(goal)
    do local simple_clause_copy =  simple_clause:devar()
       if simple_clause_copy:equate(goal)
       then
-         return simple_clause, simple_clause_copy
+         return simple_clause_copy
       end
    end
 end

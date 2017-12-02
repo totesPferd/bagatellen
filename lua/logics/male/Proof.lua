@@ -52,7 +52,7 @@ function Proof:search(goal)
    do local clause_copy =  clause:devar()
       if clause_copy:equate(goal)
       then
-         return clause, clause_copy
+         return clause_copy
       end
    end
 end
