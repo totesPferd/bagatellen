@@ -60,12 +60,14 @@ end
 function Variable:__eq(other)
    local retval
    local other_variable =  other:get_variable_cast()
-   if self:get_value_store() == other_variable:get_value_store()
+   if
+         other_variable
+     and self:get_value_store() == other_variable:get_value_store()
    then
       retval =  true
    else
-      local this_val =  self:get_val()
-      local other_val =  other:get_val()
+      local this_val =  self:get_bound_val()
+      local other_val =  other:get_bound_val()
       retval =  this_val and other_val and this_val == other_val
    end
    return retval
