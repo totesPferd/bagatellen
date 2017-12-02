@@ -27,6 +27,10 @@ function Compound:get_compound_cast()
    return self
 end
 
+function Compound:set_unsettable()
+   self:get_rhs_object():set_unsettable()
+end
+
 function Compound:destruct_terminal(terminal)
    if self:get_terminal() == terminal
    then

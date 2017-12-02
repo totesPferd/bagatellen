@@ -28,6 +28,16 @@ function Variable:is_settable()
    return self:get_value_store():is_settable()
 end
 
+function Variable:set_unsettable()
+   local this_val =  self:get_bound_val()
+   if this_val
+   then
+      this_val:set_unsettable()
+   else
+      self:get_value_store():set_unsettable()
+   end
+end
+
 function Variable:set_value_store(val)
    self.value_store =  val
 end

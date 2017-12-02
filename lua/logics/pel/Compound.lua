@@ -32,6 +32,12 @@ function Compound:get_compound_cast()
    return self
 end
 
+function Compound:set_unsettable()
+   for sub_term in self:get_sub_term_list():elems()
+   do sub_term:set_unsettable()
+   end
+end
+
 function Compound:get_val()
    return self
 end
