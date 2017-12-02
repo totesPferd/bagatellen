@@ -43,6 +43,10 @@ end
 function SimpleProofState:use(rule)
 end
 
+function SimpleProofState:drop()
+   self.conclusion =  nil
+end
+
 function SimpleProofState:resolve(simple_clause, goal)
    local premis =  simple_clause:get_premis()
    local conclusion =  simple_clause:get_conclusion()
@@ -55,31 +59,12 @@ function SimpleProofState:resolve(simple_clause, goal)
    return retval
 end
 
-function SimpleProofState:apply_simple_proof(simple_proof)
-   local rep =  true
-   while rep
-   do rep =  false
-      local conclusion =  self:get_conclusion()
-      local simple_clause =  simple_proof:search(conclusion)
-      if simple_clause
-      then
-         self:set_conclusion(simple_clause:get_premise())
-         rep =  true
-      end
-   end
-end
-
-function SimpleProofState:apply_simple_proof_simply(simple_proof)
-   local rep =  true
-   while rep
-   do rep =  false
-      local conclusion =  self:get_conclusion()
-      local simple_clause =  simple_proof:search_simply(conclusion)
-      if simple_clause
-      then
-         self:set_conclusion(simple_clause:get_premise())
-         rep =  true
-      end
+function SimpleProofState:apply_proof(proof)
+   local conclusion =  self:get_conclusion()
+   if conclusion
+   then
+      self:drop()
+      proof:apply(self, conclusion)
    end
 end
 

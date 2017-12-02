@@ -46,17 +46,6 @@ function SimpleProof:drop(simple_clause)
    self.action:drop(simple_clause)
 end
 
-function SimpleProof:search(goal)
-   local action_list =  self.action:get_randomly_sorted_list()
-   for simple_clause in action_list:elems()
-   do local simple_clause_copy =  simple_clause:devar()
-      if simple_clause_copy:equate(goal)
-      then
-         return simple_clause_copy
-      end
-   end
-end
-
 function SimpleProof:_search_simply_start(simple_proof_state, goal)
    goal:set_unsettable()
    for clause in self.action:elems()

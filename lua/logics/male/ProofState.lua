@@ -43,6 +43,10 @@ end
 function ProofState:use(rule)
 end
 
+function ProofState:drop(conclusion)
+   self:get_conclusions():drop(conclusion)
+end
+
 function ProofState:resolve(axiom, goal)
    local retval =  axiom:equate(goal)
    if retval
@@ -57,34 +61,9 @@ function ProofState:resolve(axiom, goal)
 end
 
 function ProofState:apply_proof(proof)
-   local rep =  true
-   while rep
-   do rep =  false
-      local conclusions =  self:get_conclusions()
-      local conclusions_list =  conclusions:get_randomly_sorted_list()
-      for conclusion in conclusions_list:elems()
-      do local clause =  proof:search(conclusion)
-         if clause
-         then
-            conclusions:add_set(clause:get_premises())
-            rep =  true
-         end
-      end
-   end
-end
-
-function ProofState:apply_proof_simply(proof)
-   local rep =  true
-   while rep
-   do rep =  false
-      for conclusion in self:get_conclusions():elems()
-      do local clause =  proof:search_simply(conclusion)
-         if clause
-         then
-            conclusions:add_set(clause:get_premises())
-            rep =  true
-         end
-      end
+   for conclusion in self:get_conclusions():elems()
+   do self:drop(conclusion)
+      proof:apply(self, conclusion)
    end
 end
 

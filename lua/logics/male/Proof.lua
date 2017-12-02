@@ -46,17 +46,6 @@ function Proof:drop(clause)
    self.action:drop(clause)
 end
 
-function Proof:search(goal)
-   local action_list =  self.action:get_randomly_sorted_list()
-   for clause in action_list:elems()
-   do local clause_copy =  clause:devar()
-      if clause_copy:equate(goal)
-      then
-         return clause_copy
-      end
-   end
-end
-
 function Proof:_search_simply_start(proof_state, goal)
    goal:set_unsettable()
    for clause in self.action:elems()
