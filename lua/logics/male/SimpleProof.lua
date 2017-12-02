@@ -57,71 +57,53 @@ function SimpleProof:search(goal)
    end
 end
 
-function SimpleProof:_search_simply_start(goal)
+function SimpleProof:_search_simply_start(simple_proof_state, goal)
+   goal:set_unsettable()
    for clause in self.action:elems()
    do local dev_clause =  clause:devar()
       if dev_clause:equate(goal)
       then
-         return dev_clause
+         simple_proof_state:use(dev_clause)
+         return clause, dev_clause
       end
    end
 end
 
-function SimpleProof:_search_simply_step(goal)
-   for clause in self.action:elems()
-   do if clause:get_conclusion() == goal
-      then
-         return clause
-      end
-   end
-end
-
-function Proof:_apply_step(proof_state, rule)
+function SimpleProof:apply(simple_proof_state, goal)
    local retval =  true
-   self:drop(rule)
-   local premis =  rule:get_premis()
-   if premis
+   local found_rule, found_rule_instance
+      =  self:_search_simply_start(simple_proof_state, goal)
+   if found_rule
    then
-      local new_rule =  self:_search_simply_step(premis)
-      if new_rule
+      self:drop(found_rule)
+      local premis =  found_rule_instance:get_premis()
+      if premis
       then
-         retval =  retval and self:_apply_step(proof_state, new_rule)
-      else
-         if proof_state
-         then
-            proof_state:add(premis)
-         end
-         retval =  false
+         retval =  self:apply(simple_proof_state, premis)
       end
-      if not proof_state and not retval
+      self:add(found_rule)
+   else
+      if simple_proof_state
       then
-         break
+         simple_proof_state:add(premis)
       end
+      retval =  false
    end
-   self:add(rule)
    return retval
 end
 
-function SimpleProof:apply(proof_state, goal)
-   local new_goal =  self:_search_simply_start(goal)
-   if new_goal
-   then
-      return self:_apply_step(proof_state, new_goal)
-   end
-end
-
 function SimpleProof:add_rule(rule)
-   local new_proof =  self:copy()
+   local new_simple_proof =  self:copy()
    local premis =  rule:get_premis()
    if premis
    then
       local assume =  self:new_assume(premis)
-      new_proof:add(assume)
+      new_simple_proof:add(assume)
    end
    local conclusion =  rule:get_conclusion()
    local simple_proof_state =  self:new_simple_proof_state(conclusion)
    self:apply(simple_proof_state, conclusion)
-   simple_proof_state:push_to_proof(self, premis)
+   simple_proof_state:push_to_simple_proof(self, premis)
 end
 
 function SimpleProof:minimize()

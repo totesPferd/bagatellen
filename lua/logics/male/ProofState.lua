@@ -40,10 +40,14 @@ function ProofState:is_proven()
    return self:get_conclusions():is_empty()
 end
 
+function ProofState:use(rule)
+end
+
 function ProofState:resolve(axiom, goal)
    local retval =  axiom:equate(goal)
    if retval
    then
+      self:use(axiom)
       self:get_conclusions():drop(goal)
       for premise in axiom:get_premises():elems()
       do self:get_conclusions():add(premise)

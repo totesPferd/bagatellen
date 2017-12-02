@@ -30,13 +30,8 @@ function ProofTrack:get_conclusions()
    return self:get_proof_state():get_conclusions()
 end
 
-function ProofTrack:resolve(axiom, goal)
-   local retval =  self:get_proof_state():resolve(axiom, goal)
-   if retval
-   then
-      self:get_proof():add(axiom)
-   end
-   return retval
+function ProofTrack:use(rule)
+   self:get_proof():add(rule)
 end
 
 function ProofTrack:devar()

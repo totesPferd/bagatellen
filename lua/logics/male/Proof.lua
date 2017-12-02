@@ -57,12 +57,13 @@ function Proof:search(goal)
    end
 end
 
-function Proof:_search_simply_start(goal)
+function Proof:_search_simply_start(proof_state, goal)
    goal:set_unsettable()
    for clause in self.action:elems()
    do local dev_clause =  clause:devar()
       if dev_clause:equate(goal)
       then
+         proof_state:use(dev_clause)
          return clause, dev_clause
       end
    end
@@ -70,7 +71,8 @@ end
 
 function Proof:apply(proof_state, goal)
    local retval =  true
-   local found_rule, found_rule_instance =  self:_search_simply_start(goal)
+   local found_rule, found_rule_instance
+      =  self:_search_simply_start(proof_state, goal)
    if found_rule
    then
       self:drop(found_rule)
