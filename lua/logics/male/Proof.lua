@@ -58,6 +58,7 @@ function Proof:search(goal)
 end
 
 function Proof:_search_simply_start(goal)
+   goal:set_unsettable()
    for clause in self.action:elems()
    do local dev_clause =  clause:devar()
       if dev_clause:equate(goal)
@@ -94,7 +95,7 @@ end
 function Proof:add_rule(rule)
    local new_proof =  self:copy()
    local premises =  rule:get_premises()
-   for premis in premises():elems()
+   for premis in premises:elems()
    do local assume =  self:new_assume(premis)
       new_proof:add(assume)
    end
