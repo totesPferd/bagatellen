@@ -52,7 +52,7 @@ function Proof:search(goal)
    do local clause_copy =  clause:devar()
       if clause_copy:equate(goal)
       then
-         return clause_copy
+         return clause
       end
    end
 end
@@ -62,7 +62,7 @@ function Proof:search_simply(goal)
    do local clause_copy =  clause:devar()
       if clause_copy:equate(goal)
       then
-         return clause_copy
+         return clause
       end
    end
 end
@@ -72,7 +72,7 @@ function Proof:apply(proof_state, goal)
    local rule_found =  self:search_simply(goal)
    if rule_found
    then
-      self:drop(goal)
+      self:drop(rule_found)
       retval =  true
       for premis in rule_found:get_premises():elems()
       do retval =  retval and self:apply(proof_state, premis)

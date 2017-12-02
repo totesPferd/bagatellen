@@ -52,7 +52,7 @@ function SimpleProof:search(goal)
    do local simple_clause_copy =  simple_clause:devar()
       if simple_clause_copy:equate(goal)
       then
-         return simple_clause_copy
+         return simple_clause
       end
    end
 end
@@ -62,7 +62,7 @@ function SimpleProof:search_simply(goal)
    do local simple_clause_copy =  simple_clause:devar()
       if simple_clause_copy:equate(goal)
       then
-         return simple_clause_copy
+         return simple_clause
       end
    end
 end
@@ -73,7 +73,7 @@ function SimpleProof:apply(simple_proof_state, goal)
    if rule_found
    then
       retval =  true
-      self:drop(goal)
+      self:drop(rule_found)
       local premis =  rule_found:get_premis()
       if premis
       then
