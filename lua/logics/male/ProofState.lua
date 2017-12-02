@@ -32,6 +32,10 @@ function ProofState:get_conclusions()
    return self.conclusions
 end
 
+function ProofState:add(literal)
+   self:get_conclusions():add(literal)
+end
+
 function ProofState:is_proven()
    return self:get_conclusions():is_empty()
 end

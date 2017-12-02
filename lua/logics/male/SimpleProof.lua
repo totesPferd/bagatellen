@@ -57,28 +57,39 @@ function SimpleProof:search(goal)
    end
 end
 
-function SimpleProof:search_simply(goal)
+function SimpleProof:_search_simply_start(goal)
    for clause in self.action:elems()
-   do if clause:equate(goal)
+   do local dev_clause =  clause:devar()
+      if dev_clause:equate(goal)
+      then
+         return dev_clause
+      end
+   end
+end
+
+function SimpleProof:_search_simply_step(goal)
+   for clause in self.action:elems()
+   do if clause:get_conclusion() == goal
       then
          return clause
       end
    end
 end
 
-function Proof:_apply_step(proof_state, goal)
+function Proof:_apply_step(proof_state, rule)
    local retval =  true
-   self:drop(goal)
-   local premis =  goal:get_premis()
+   self:drop(rule)
+   local premis =  rule:get_premis()
    if premis
    then
-      if self.action:is_in(premis)
+      local new_rule =  self:_search_simply_step(premis)
+      if new_rule
       then
-         retval =  retval and self:_apply_step(proof_state, premis)
+         retval =  retval and self:_apply_step(proof_state, new_rule)
       else
          if proof_state
          then
-            proof_state:add(goal)
+            proof_state:add(premis)
          end
          retval =  false
       end
@@ -87,12 +98,12 @@ function Proof:_apply_step(proof_state, goal)
          break
       end
    end
-   self:add(goal)
+   self:add(rule)
    return retval
 end
 
-function Proof:apply(proof_state, goal)
-   local new_goal =  self:search_simply(goal)
+function SimpleProof:apply(proof_state, goal)
+   local new_goal =  self:_search_simply_start(goal)
    if new_goal
    then
       return self:_apply_step(proof_state, new_goal)
