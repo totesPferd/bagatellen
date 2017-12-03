@@ -53,7 +53,7 @@ function Variable:is_bound()
 end
    
 function Variable:set_value_store(val)
-   local retval =  not self:is_bound()
+   local retval =  not self:is_bound() and self:is_settable()
    if retval
    then
       self.value_store =  val
