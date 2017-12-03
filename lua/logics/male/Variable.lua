@@ -8,6 +8,7 @@ local String =  require "base.type.String"
 
 function Variable:new(settable)
    local retval =  self:__new()
+   retval.bound_switch =  false
    retval.value_store =  ValueStore:new(settable)
    return retval
 end
@@ -38,8 +39,26 @@ function Variable:set_unsettable()
    end
 end
 
+function Variable:is_bound()
+   local retval =  self.bound_switch
+   if not retval
+   then
+      local this_val =  self:get_val()
+      if this_val
+      then
+         retval =  true
+      end
+   end
+   return retval
+end
+   
 function Variable:set_value_store(val)
-   self.value_store =  val
+   local retval =  not self:is_bound()
+   if retval
+   then
+      self.value_store =  val
+   end
+   return retval
 end
 
 function Variable:get_val()
@@ -51,8 +70,7 @@ function Variable:set_val(val)
 end
 
 function Variable:push_val(var)
-   var:set_value_store(self:get_value_store())
-   return true
+   return var:set_value_store(self:get_value_store())
 end
 
 function Variable:equate(other)
