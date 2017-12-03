@@ -32,6 +32,11 @@ function ToLiteral:get_to_literal()
    return self
 end
 
+function ToLiteral:set_unsettable()
+   self:get_lhs_term():set_unsettable()
+   self:get_rhs_term():set_unsettable()
+end
+
 function ToLiteral:equate(other)
    local retval =  false
    local other_to_literal =  other:get_to_literal()

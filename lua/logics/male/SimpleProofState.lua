@@ -43,6 +43,10 @@ end
 function SimpleProofState:use(rule)
 end
 
+function SimpleProofState:add(simple_clause)
+   self.conclusion =  simple_clause
+end
+
 function SimpleProofState:drop()
    self.conclusion =  nil
 end
@@ -68,7 +72,7 @@ function SimpleProofState:apply_proof(proof)
    end
 end
 
-function SimpleProofState:push_to_proof(simple_proof, premis)
+function SimpleProofState:push_to_simple_proof(simple_proof, premis)
    local conclusion =  self:get_conclusion()
    if conclusion
    then 
