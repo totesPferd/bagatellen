@@ -10,8 +10,8 @@ local VarAssgnm =  require "logics.male.VarAssgnm"
 local Variable =  require "logics.pel.Variable"
 
 function EqSymm:new()
-   local var_a =  Variable:new(true)
-   local var_b =  Variable:new(true)
+   local var_a =  Variable:new()
+   local var_b =  Variable:new()
    local eq_symbol =  EqSymbol:new()
    local args_premis =  List:empty_list_factory()
    args_premis:append(var_a)

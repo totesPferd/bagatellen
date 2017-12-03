@@ -16,8 +16,8 @@ function EqCong:new(symbol, arity)
    local premis_list =  {}
    local eq_symbol =  EqSymbol:new()
    for i = 1, arity
-   do local lhs_var =  Variable:new(true)
-      local rhs_var =  Variable:new(true)
+   do local lhs_var =  Variable:new()
+      local rhs_var =  Variable:new()
       local eq_args =  List:empty_list_factory()
       eq_args:append(lhs_var)
       eq_args:append(rhs_var)

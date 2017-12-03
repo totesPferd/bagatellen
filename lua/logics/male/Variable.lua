@@ -6,10 +6,10 @@ package.loaded["logics.male.Variable"] =  Variable
 local ValueStore =  require "logics.male.ValueStore"
 local String =  require "base.type.String"
 
-function Variable:new(settable)
+function Variable:new()
    local retval =  self:__new()
    retval.bound_switch =  false
-   retval.value_store =  ValueStore:new(settable)
+   retval.value_store =  ValueStore:new()
    return retval
 end
 
@@ -57,6 +57,7 @@ function Variable:set_value_store(val)
    if retval
    then
       self.value_store =  val
+      self.settable_switch =  false
       self.bound_switch =  true
    end
    return retval

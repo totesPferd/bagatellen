@@ -4,9 +4,9 @@ local ValueStore =  Type:__new()
 
 package.loaded["logics.male.ValueStore"] =  ValueStore
 
-function ValueStore:new(settable)
+function ValueStore:new()
    local retval =  self:__new()
-   retval.settable_switch =  settable or false
+   retval.settable_switch =  true
    return retval
 end
 

@@ -47,7 +47,6 @@ function SimpleProof:drop(simple_clause)
 end
 
 function SimpleProof:_search_simply_start(simple_proof_state, goal)
-   goal:set_settable_switch(false)
    for clause in self.action:elems()
    do local dev_clause =  clause:devar()
       if dev_clause:equate(goal)

@@ -10,7 +10,7 @@ local VarAssgnm =  require "logics.male.VarAssgnm"
 local Variable =  require "logics.pel.Variable"
 
 function EqRefl:new()
-   local var =  Variable:new(true)
+   local var =  Variable:new()
    local eq_symbol =  EqSymbol:new()
    local args =  List:empty_list_factory()
    args:append(var)

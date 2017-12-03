@@ -10,9 +10,9 @@ local VarAssgnm =  require "logics.male.VarAssgnm"
 local Variable =  require "logics.pel.Variable"
 
 function EqTrans:new()
-   local var_a =  Variable:new(true)
-   local var_b =  Variable:new(true)
-   local var_c =  Variable:new(true)
+   local var_a =  Variable:new()
+   local var_b =  Variable:new()
+   local var_c =  Variable:new()
    local eq_symbol =  EqSymbol:new()
    local args_lhs_premis =  List:empty_list_factory()
    args_lhs_premis:append(var_a)
