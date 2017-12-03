@@ -29,7 +29,7 @@ function Variable:is_settable()
 end
 
 function Variable:set_unsettable()
-   local this_val =  self:get_bound_val()
+   local this_val =  self:get_val()
    if this_val
    then
       this_val:set_unsettable()
@@ -46,10 +46,6 @@ function Variable:get_val()
    return self:get_value_store():get_val()
 end
 
-function Variable:get_bound_val()
-   return self:get_val()
-end
-
 function Variable:set_val(val)
    return self:get_value_store():set_val(val)
 end
@@ -61,7 +57,7 @@ end
 
 function Variable:equate(other)
    local retval =  false
-   local this_val =  self:get_bound_val()
+   local this_val =  self:get_val()
    if this_val
    then
       retval =  this_val:equate(other)
@@ -80,8 +76,8 @@ function Variable:__eq(other)
    then
       retval =  true
    else
-      local this_val =  self:get_bound_val()
-      local other_val =  other:get_bound_val()
+      local this_val =  self:get_val()
+      local other_val =  other:get_val()
       retval =  this_val and other_val and this_val == other_val
    end
    return retval

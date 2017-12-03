@@ -49,10 +49,6 @@ function Compound:destruct_compound(symbol, arity)
    end
 end
 
-function Compound:get_bound_val()
-   return self
-end
-
 function Compound:push_val(var)
    return var:set_val(self)
 end

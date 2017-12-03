@@ -38,7 +38,7 @@ function Compound:destruct_terminal(terminal)
    end
 end
 
-function Compound:get_bound_val()
+function Compound:get_val()
    return self
 end
 
@@ -59,10 +59,6 @@ end
 function Compound:devar(var_assgnm)
    local new_qual =  self:get_rhs_object():devar(var_assgnm)
    return self.__index:new(self:get_terminal(), new_qual)
-end
-
-function Compound:get_val()
-   return self
 end
 
 function Compound:get_name()
