@@ -75,7 +75,7 @@ function SimpleProof:apply(simple_proof_state, goal)
    else
       if simple_proof_state
       then
-         simple_proof_state:add(premis)
+         simple_proof_state:add(goal)
       end
       retval =  false
       progress =  false

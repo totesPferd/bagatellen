@@ -77,7 +77,7 @@ function Proof:apply(proof_state, goal)
    else
       if proof_state
       then
-         proof_state:add(premis)
+         proof_state:add(goal)
       end
       retval =  false
       progress =  false

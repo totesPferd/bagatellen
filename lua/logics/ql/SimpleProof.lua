@@ -12,7 +12,8 @@ function SimpleProof:new()
 end
 
 function SimpleProof:add_literal(literal)
-   return self:add_rule(TransRule:new(literal))
+   local rule =  TransRule:new(literal)
+   return self:add_rule(rule)
 end
 
 function SimpleProof:add_literals(literals)
