@@ -28,6 +28,13 @@ function Clause:get_conclusion()
    return self.conclusion
 end
 
+function Clause:set_settable_switch(mode)
+   self:get_conclusion():set_settable_switch(mode)
+   for premis in self:get_premises():elems()
+   do premis:set_settable_switch(mode)
+   end
+end
+
 function Clause:equate(goal)
    return self:get_conclusion():equate(goal)
 end

@@ -27,6 +27,15 @@ function SimpleClause:get_conclusion()
    return self.conclusion
 end
 
+function SimpleClause:set_settable_switch(mode)
+   self:get_conclusion():set_settable_switch(mode)
+   local premis =  self:get_premis()
+   if premis
+   then
+      premis:set_settable_switch(mode)
+   end
+end
+
 function SimpleClause:equate(goal)
    return self:get_conclusion():equate(goal)
 end

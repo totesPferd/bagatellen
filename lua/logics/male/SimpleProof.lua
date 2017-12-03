@@ -75,7 +75,6 @@ function SimpleProof:apply(simple_proof_state, goal)
    else
       if simple_proof_state
       then
-         goal:set_settable_switch(true)
          simple_proof_state:add(goal)
       end
       retval =  false

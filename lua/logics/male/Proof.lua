@@ -77,7 +77,6 @@ function Proof:apply(proof_state, goal)
    else
       if proof_state
       then
-         goal:set_settable_switch(true)
          proof_state:add(goal)
       end
       retval =  false
