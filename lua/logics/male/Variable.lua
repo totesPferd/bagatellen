@@ -3,30 +3,29 @@ local Type =  require "base.type.aux.Type"
 local Variable =  Type:__new()
 
 package.loaded["logics.male.Variable"] =  Variable
-local ValueStore =  require "logics.male.ValueStore"
+local MetaVariable =  require "logics.male.MetaVariable"
 local String =  require "base.type.String"
 
 function Variable:new()
    local retval =  self:__new()
-   retval.bound_switch =  false
-   retval.value_store =  ValueStore:new()
+   retval.settable_switch =  true
    return retval
 end
 
+function Variable:new_meta_variable()
+   return MetaVariable:new()
+end
+
 function Variable:copy()
-   return self.__index:new(true)
+   return self.__index:new()
 end
 
 function Variable:get_variable_cast()
    return self
 end
 
-function Variable:get_value_store()
-   return self.value_store
-end
-
 function Variable:is_settable()
-   return self:get_value_store():is_settable()
+   return self.settable_switch
 end
 
 function Variable:set_settable_switch(mode)
@@ -35,47 +34,39 @@ function Variable:set_settable_switch(mode)
    then
       this_val:set_settable_switch(mode)
    else
-      self:get_value_store():set_settable_switch(mode)
+      self.settable_switch =  mode
    end
-end
-
-function Variable:is_bound()
-   local retval =  self.bound_switch
-   if not retval
-   then
-      local this_val =  self:get_val()
-      if this_val
-      then
-         retval =  true
-      end
-   end
-   return retval
-end
-   
-function Variable:set_value_store(val)
-   local retval =  not self:is_bound() and self:is_settable()
-   if retval
-   then
-      self.value_store =  val
-      self.value_store:set_settable_switch(false)
-      self.bound_switch =  true
-   end
-   return retval
 end
 
 function Variable:get_val()
-   return self:get_value_store():get_val()
+   return self.val
 end
 
 function Variable:set_val(val)
-   return self:get_value_store():set_val(val)
+   local retval =  self:is_settable()
+   if retval
+   then
+      self.val =  val
+   end
+   return retval
+end
+
+function Variable:set_value_store(val)
+   local retval =  self:is_settable()
+   if retval and self:set_val(val)
+   then
+      val:set_settable_switch(false)
+   end
+   return retval
 end
 
 function Variable:push_val(var)
    local retval =  self == var
    if not retval
    then
-      retval =  var:set_value_store(self:get_value_store())
+      local next_meta_var =  self:new_meta_variable()
+      self:set_val(next_meta_var)
+      retval =  var:set_value_store(next_meta_var)
    end
    return retval
 end
@@ -95,17 +86,9 @@ end
 function Variable:__eq(other)
    local retval
    local other_variable =  other:get_variable_cast()
-   if
-         other_variable
-     and self:get_value_store() == other_variable:get_value_store()
-   then
-      retval =  true
-   else
-      local this_val =  self:get_val()
-      local other_val =  other:get_val()
-      retval =  this_val and other_val and this_val == other_val
-   end
-   return retval
+   local this_val =  self:get_val()
+   local other_val =  other:get_val()
+   return this_val and other_val and this_val == other_val
 end
 
 function Variable:devar(var_assgnm)

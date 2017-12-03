@@ -23,12 +23,15 @@ function MetaVariable:destruct_compound(symbol, arity)
    then
       return this_val:destruct_compound(symbol, arity)
    else
-      local new_sub_term_list
+      local new_sub_term_list =  List:empty_list_factory()
       for i = 1, arity
       do local next_var =  self:new_instance()
          new_sub_term_list:append(next_var)
       end
-      return self:new_compound(symbol, new_sub_term_list)
+      if self:set_val(new_compound)
+      then
+         return new_sub_term_list
+      end
    end
 end
 
@@ -46,8 +49,6 @@ end
 
 function MetaVariable:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory("(logics::pel::MetaVariable ["))
-   indentation:insert(String:string_factory(tostring(self:get_value_store())))
-   indentation:insert(String:string_factory(" "))
    indentation:insert(String:string_factory(tostring(self)))
    indentation:insert(String:string_factory("] "))
    indentation:insert(self:get_non_nil_name())
@@ -64,8 +65,6 @@ function MetaVariable:__diagnose_multiple_line(indentation)
    local is_last_elem_multiple_line =  true
 
    indentation:insert(String:string_factory("(logics::pel::MetaVariable ["))
-   indentation:insert(String:string_factory(tostring(self:get_value_store())))
-   indentation:insert(String:string_factory(" "))
    indentation:insert(String:string_factory(tostring(self)))
    indentation:insert(String:string_factory("] "))
    indentation:insert(self:get_non_nil_name())

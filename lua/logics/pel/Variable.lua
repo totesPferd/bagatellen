@@ -3,10 +3,15 @@ local MALEVariable =  require "logics.male.Variable"
 local Variable =  MALEVariable:__new()
 
 package.loaded["logics.pel.Variable"] =  Variable
+local MetaVariable =  require "logics.pel.MetaVariable"
 local String =  require "base.type.String"
 
 function Variable:new(settable)
    return MALEVariable.new(self, settable)
+end
+
+function Variable:new_meta_variable()
+   return MetaVariable:new()
 end
 
 function Variable:get_compound_cast()
@@ -34,8 +39,6 @@ end
 
 function Variable:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory("(logics::pel::Variable ["))
-   indentation:insert(String:string_factory(tostring(self:get_value_store())))
-   indentation:insert(String:string_factory(" "))
    indentation:insert(String:string_factory(tostring(self)))
    indentation:insert(String:string_factory("] "))
    indentation:insert(self:get_non_nil_name())
@@ -43,7 +46,7 @@ function Variable:__diagnose_single_line(indentation)
    if this_val
    then
       indentation:insert(String:string_factory(" "))
-      self:get_val():__diagnose_single_line(indentation)
+      this_val:__diagnose_single_line(indentation)
    end
    indentation:insert(String:string_factory(")"))
 end
@@ -52,8 +55,6 @@ function Variable:__diagnose_multiple_line(indentation)
    local is_last_elem_multiple_line =  true
 
    indentation:insert(String:string_factory("(logics::pel::Variable ["))
-   indentation:insert(String:string_factory(tostring(self:get_value_store())))
-   indentation:insert(String:string_factory(" "))
    indentation:insert(String:string_factory(tostring(self)))
    indentation:insert(String:string_factory("] "))
    indentation:insert(self:get_non_nil_name())

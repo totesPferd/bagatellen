@@ -23,7 +23,10 @@ function MetaVariable:destruct_terminal(terminal)
       return this_val:destruct_terminal(terminal)
    else
       local next_instance =  self:new_instance()
-      return self:new_compound(terminal, next_instance)
+      if self:set_val(self:new_compound(terminal, next_instance))
+      then
+         return next_instance
+      end
    end
 end
 
@@ -41,8 +44,6 @@ end
 
 function MetaVariable:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory("(logics::ql::MetaVariable ["))
-   indentation:insert(String:string_factory(tostring(self:get_value_store())))
-   indentation:insert(String:string_factory(" "))
    indentation:insert(String:string_factory(tostring(self)))
    indentation:insert(String:string_factory("] "))
    indentation:insert(self:get_non_nil_name())
@@ -59,8 +60,6 @@ function MetaVariable:__diagnose_multiple_line(indentation)
    local is_last_elem_multiple_line =  true
 
    indentation:insert(String:string_factory("(logics::ql::MetaVariable ["))
-   indentation:insert(String:string_factory(tostring(self:get_value_store())))
-   indentation:insert(String:string_factory(" "))
    indentation:insert(String:string_factory(tostring(self)))
    indentation:insert(String:string_factory("] "))
    indentation:insert(self:get_non_nil_name())

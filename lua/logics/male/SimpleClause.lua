@@ -67,7 +67,6 @@ end
 function SimpleClause:__diagnose_multiple_line(indentation)
    indentation:insert(String:string_factory("(logics::male::SimpleClause"))
    local is_last_elem_multiple_line =  true
-   indentation:insert_newline()
    local deeper_indentation =
       indentation:get_deeper_indentation_factory {}
    local premis =  self:get_premis()

@@ -11,10 +11,6 @@ function MetaVariable:new_instance()
    return self.__index:new()
 end
 
-function MetaVariable:is_settable()
-   return true
-end
-
 function MetaVariable:set_settable_switch(mode)
    local this_val =  self:get_val()
    if this_val
