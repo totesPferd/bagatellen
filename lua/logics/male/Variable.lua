@@ -57,7 +57,7 @@ function Variable:set_value_store(val)
    if retval
    then
       self.value_store =  val
-      self.settable_switch =  false
+      self.value_store:set_settable_switch(false)
       self.bound_switch =  true
    end
    return retval
