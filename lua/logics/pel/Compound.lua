@@ -32,9 +32,9 @@ function Compound:get_compound_cast()
    return self
 end
 
-function Compound:set_unsettable()
+function Compound:set_settable_switch(mode)
    for sub_term in self:get_sub_term_list():elems()
-   do sub_term:set_unsettable()
+   do sub_term:set_settable_switch(mode)
    end
 end
 

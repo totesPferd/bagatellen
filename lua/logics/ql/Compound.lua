@@ -27,8 +27,8 @@ function Compound:get_compound_cast()
    return self
 end
 
-function Compound:set_unsettable()
-   self:get_rhs_object():set_unsettable()
+function Compound:set_settable_switch(mode)
+   self:get_rhs_object():set_settable_switch(mode)
 end
 
 function Compound:destruct_terminal(terminal)

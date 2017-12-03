@@ -29,13 +29,13 @@ function Variable:is_settable()
    return self:get_value_store():is_settable()
 end
 
-function Variable:set_unsettable()
+function Variable:set_settable_switch(mode)
    local this_val =  self:get_val()
    if this_val
    then
-      this_val:set_unsettable()
+      this_val:set_settable_switch(mode)
    else
-      self:get_value_store():set_unsettable()
+      self:get_value_store():set_settable_switch(mode)
    end
 end
 

@@ -47,7 +47,7 @@ function Proof:drop(clause)
 end
 
 function Proof:_search_simply_start(proof_state, goal)
-   goal:set_unsettable()
+   goal:set_settable_switch(false)
    for clause in self.action:elems()
    do local dev_clause =  clause:devar()
       if dev_clause:equate(goal)
@@ -77,6 +77,7 @@ function Proof:apply(proof_state, goal)
    else
       if proof_state
       then
+         goal:set_settable_switch(true)
          proof_state:add(goal)
       end
       retval =  false

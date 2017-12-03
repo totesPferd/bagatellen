@@ -32,9 +32,9 @@ function ToLiteral:get_to_literal()
    return self
 end
 
-function ToLiteral:set_unsettable()
-   self:get_lhs_term():set_unsettable()
-   self:get_rhs_term():set_unsettable()
+function ToLiteral:set_settable_switch(mode)
+   self:get_lhs_term():set_settable_switch(mode)
+   self:get_rhs_term():set_settable_switch(mode)
 end
 
 function ToLiteral:equate(other)

@@ -14,8 +14,8 @@ function ValueStore:is_settable()
    return self.settable_switch
 end
 
-function ValueStore:set_unsettable()
-   self.settable_switch =  false
+function ValueStore:set_settable_switch(mode)
+   self.settable_switch =  mode
 end
 
 function ValueStore:get_val()
