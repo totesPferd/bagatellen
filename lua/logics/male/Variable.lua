@@ -71,7 +71,12 @@ function Variable:set_val(val)
 end
 
 function Variable:push_val(var)
-   return var:set_value_store(self:get_value_store())
+   local retval =  self == var
+   if not retval
+   then
+      retval =  var:set_value_store(self:get_value_store())
+   end
+   return retval
 end
 
 function Variable:equate(other)
