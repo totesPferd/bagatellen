@@ -12,4 +12,11 @@ function SimpleProof:add_literal(literal)
    return self:add_rule(TransRule:new(literal))
 end
 
+function SimpleProof:add_literals(literals)
+   for literal in literals
+   do self:add_literal(literal)
+   end
+   self:minimize()
+end
+
 return SimpleProof
