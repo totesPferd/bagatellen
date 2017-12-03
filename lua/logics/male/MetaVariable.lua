@@ -1,0 +1,24 @@
+local Variable =  require "logics.male.Variable"
+local MetaVariable =  Variable:__new()
+
+package.loaded["logics.male.MetaVariable"] =  MetaVariable
+
+function MetaVariable:new()
+   return Variable.new(self, true)
+end
+
+function MetaVariable:new_instance()
+   return self.__index:new()
+end
+
+function MetaVariable:push_val(var)
+   local this_val =  self:get_val()
+   if this_val
+   then
+      return this_val:push_val(var)
+   else
+      return var:set_val(self)
+   end
+end
+
+return MetaVariable
