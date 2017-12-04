@@ -24,7 +24,7 @@ function Unsettable:get_val()
 end
 
 function Unsettable:push_val(var)
-   return false
+   return var:set_val(self:get_val())
 end
 
 function Unsettable:equate(other)
