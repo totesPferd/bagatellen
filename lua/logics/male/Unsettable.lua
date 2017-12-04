@@ -28,7 +28,7 @@ function Unsettable:push_val(var)
 end
 
 function Unsettable:equate(other)
-   return self == other
+   return self == other:get_val()
 end
 
 function Unsettable:val_eq(other)
