@@ -42,25 +42,33 @@ function Variable:is_settable()
    return retval
 end
 
-function Variable:set_settable_switch(mode)
+function Variable:set_settable()
    local this_val =  self:get_val()
    if this_val
    then
-      if mode
-      then
-         local unsettable =  this_val:get_unsettable_cast()
-         if unsettable
-         then
-            self.val =  nil
-         else
-            this_val:set_settable_switch(true)
-         end
-      else
-         this_val:set_settable_switch(false)
-      end
-   elseif not mode
+      this_val:set_settable_switch(true)
+   else
+      self.val =  nil
+   end
+end
+
+function Variable:set_unsettable()
+   local this_val =  self:get_val()
+   if this_val
    then
-      self:set_val(self:new_unsettable())
+      this_val:set_settable_switch(false)
+   else
+      local next_unsettable =  self:new_unsettable()
+      self.val =  next_unsettable
+   end
+end
+
+function Variable:set_settable_switch(mode)
+   if mode
+   then
+      self:set_settable()
+   else
+      self:set_unsettable()
    end
 end
 
@@ -77,20 +85,8 @@ function Variable:set_val(val)
    return retval
 end
 
-function Variable:set_value_store(val)
-   local retval =  self:set_val(val)
-   if retval
-   then
-      val:set_settable_switch(false)
-   end
-   return retval
-end
-
 function Variable:push_val(var)
-   local next_unsettable =  self:new_unsettable()
-   self:set_val(next_unsettable)
-   retval =  var:set_value_store(next_unsettable)
-   return retval
+   return var:set_val(self:get_val())
 end
 
 function Variable:equate(other)
