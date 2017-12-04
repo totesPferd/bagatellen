@@ -56,6 +56,10 @@ function Compound:push_val(var)
    return var:set_val(self)
 end
 
+function Compound:push_unsettable(unsettable)
+   return false
+end
+
 -- do destroy this object after this method returns false!!!
 function Compound:equate(other)
    local equatable =  false

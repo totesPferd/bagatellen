@@ -29,4 +29,16 @@ function MetaVariable:push_val(var)
    end
 end
 
+function MetaVariable:push_unsettable(unsettable)
+   local retval =  true
+   local this_val =  self:get_val()
+   if this_val
+   then
+      retval =  this_val:push_unsettable(unsettable)
+   else
+      retval =  self:set_val(unsettable)
+   end
+   return retval
+end
+
 return MetaVariable

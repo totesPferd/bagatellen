@@ -89,6 +89,16 @@ function Variable:push_val(var)
    return var:set_val(self:get_val())
 end
 
+function Variable:push_unsettable(unsettable)
+   local retval =  false
+   local this_val =  self:get_val()
+   if this_val
+   then
+      retval =  this_val:push_unsettable(unsettable)
+   end
+   return retval
+end
+
 function Variable:equate(other)
    local retval =  false
    local this_val =  self:get_val()

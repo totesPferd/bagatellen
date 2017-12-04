@@ -49,6 +49,10 @@ function Compound:push_val(var)
    return var:set_val(self)
 end
 
+function Compound:push_unsettable(unsettable)
+   return false
+end
+
 function Compound:equate(other)
    local retval =  false
    local next_qual =  other:destruct_terminal(self:get_terminal())
