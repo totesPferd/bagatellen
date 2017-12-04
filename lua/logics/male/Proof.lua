@@ -100,7 +100,7 @@ function Proof:add_rule(rule)
    return progress
 end
 
-function Proof:minimize()
+function Proof:minimize_trs()
    local rep =  true
    while rep
    do rep =  false

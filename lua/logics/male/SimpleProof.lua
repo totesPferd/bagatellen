@@ -97,7 +97,7 @@ function SimpleProof:add_rule(rule)
    return progress
 end
 
-function SimpleProof:minimize()
+function SimpleProof:minimize_trs()
    local rep =  true
    while rep
    do rep =  false

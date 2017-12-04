@@ -20,7 +20,7 @@ function SimpleProof:add_literals(literals)
    for literal in literals:elems()
    do self:add_literal(literal)
    end
-   self:minimize()
+   self:minimize_trs()
 end
 
 function SimpleProof:get_normal_form(lhs_term)
