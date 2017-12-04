@@ -82,7 +82,7 @@ function SimpleProof:apply(simple_proof_state, goal)
    return retval, progress
 end
 
-function SimpleProof:add_rule(rule)
+function SimpleProof:add_rule(rule, drop_mode)
    local new_simple_proof =  self:copy()
    local premis =  rule:get_premis()
    if premis
@@ -93,17 +93,20 @@ function SimpleProof:add_rule(rule)
    local conclusion =  rule:get_conclusion()
    local simple_proof_state =  self:new_simple_proof_state(conclusion)
    local status, progress =  self:apply(simple_proof_state, conclusion)
-   simple_proof_state:push_to_simple_proof(self, premis)
+   if not drop_mode or not progress
+   then
+      simple_proof_state:push_to_simple_proof(self, premis)
+   end
    return progress
 end
 
-function SimpleProof:minimize_trs()
+function SimpleProof:minimize_trs(drop_mode)
    local rep =  true
    while rep
    do rep =  false
       for rule in self.action:__clone():elems()
       do self:drop(rule)
-         local progress =  self:add_rule(rule)
+         local progress =  self:add_rule(rule, drop_mode)
          if progress
          then
             rep =  true

@@ -84,7 +84,7 @@ function Proof:apply(proof_state, goal)
    return retval, progress
 end
 
-function Proof:add_rule(rule)
+function Proof:add_rule(rule, drop_mode)
    local new_proof =  self:copy()
    local premises =  rule:get_premises()
    for premis in premises:elems()
@@ -96,17 +96,20 @@ function Proof:add_rule(rule)
    conclusions:add(conclusion)
    local proof_state =  self:new_proof_state(conclusions)
    local status, progress =  self:apply(proof_state, conclusion)
-   proof_state:push_to_proof(self, premises)
+   if not drop_mode or not progress
+   then
+      proof_state:push_to_proof(self, premises)
+   end
    return progress
 end
 
-function Proof:minimize_trs()
+function Proof:minimize_trs(drop_mode)
    local rep =  true
    while rep
    do rep =  false
       for rule in self.action:__clone():elems()
       do self:drop(rule)
-         local progress =  self:add_rule(rule)
+         local progress =  self:add_rule(rule, drop_mode)
          if progress
          then
             rep =  true
