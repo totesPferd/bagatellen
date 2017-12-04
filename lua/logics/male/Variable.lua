@@ -61,13 +61,9 @@ function Variable:set_value_store(val)
 end
 
 function Variable:push_val(var)
-   local retval =  self == var
-   if not retval
-   then
-      local next_meta_var =  self:new_meta_variable()
-      self:set_val(next_meta_var)
-      retval =  var:set_value_store(next_meta_var)
-   end
+   local next_meta_var =  self:new_meta_variable()
+   self:set_val(next_meta_var)
+   retval =  var:set_value_store(next_meta_var)
    return retval
 end
 
@@ -77,18 +73,24 @@ function Variable:equate(other)
    if this_val
    then
       retval =  this_val:equate(other)
+   elseif self == other
+   then
+      retval =  true
    else
       retval =  other:push_val(self)
    end
    return retval
 end
 
-function Variable:__eq(other)
-   local retval
-   local other_variable =  other:get_variable_cast()
-   local this_val =  self:get_val()
-   local other_val =  other:get_val()
-   return this_val and other_val and this_val == other_val
+function Variable:val_eq(other)
+   local retval =  self == other
+   if not retval
+   then
+      local this_val =  self:get_val()
+      local other_val =  other:get_val()
+      retval =  this_val and other_val and this_val:val_eq(other_val)
+   end
+   return retval
 end
 
 function Variable:devar(var_assgnm)

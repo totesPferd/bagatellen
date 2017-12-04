@@ -87,7 +87,7 @@ function Compound:devar(var_assgnm)
    return self:new_instance(self:get_symbol(), new_sub_term_list)
 end
 
-function Compound:__eq(other)
+function Compound:val_eq(other)
    local retval =  false
    local other_compound =  other:get_compound_cast()
    if other_compound
@@ -102,7 +102,7 @@ function Compound:__eq(other)
          for sub_term in self:get_sub_term_list():elems()
          do local other_sub_term =  other_sub_terms:get_head()
             other_sub_terms:cut_head()
-            retval =  sub_term == other_sub_term
+            retval =  sub_term:val_eq(other_sub_term)
             if not retval
             then
                break

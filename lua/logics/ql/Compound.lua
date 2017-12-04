@@ -65,7 +65,7 @@ function Compound:get_name()
    return self:get_terminal():get_name() or String:string_factory("??")
 end
 
-function Compound:__eq(other)
+function Compound:val_eq(other)
    local retval =  false
    local other_compound =  other:get_val():get_compound_cast()
    if other_compound
@@ -73,8 +73,8 @@ function Compound:__eq(other)
       retval =
             self:get_terminal() == other_compound:get_terminal()
         and
-                  self:get_rhs_object():get_val()
-               == other_compound:get_rhs_object():get_val()
+                  self:get_rhs_object():get_val():val_eq(
+                        other_compound:get_rhs_object():get_val() )
    end
    return retval
 end
