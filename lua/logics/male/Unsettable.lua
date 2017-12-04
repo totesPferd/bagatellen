@@ -20,6 +20,7 @@ function Unsettable:set_settable_switch(mode)
 end
 
 function Unsettable:get_val()
+   return self
 end
 
 function Unsettable:push_val(var)
@@ -38,7 +39,7 @@ function Unsettable:devar(var_assgnm)
 end
 
 function Unsettable:__diagnose_single_line(indentation)
-   indentation:insert(String:string_factory("(logics::ql::Unsettable ["))
+   indentation:insert(String:string_factory("(logics::male::Unsettable ["))
    indentation:insert(String:string_factory(tostring(self)))
    indentation:insert(String:string_factory("]"))
    indentation:insert(String:string_factory(")"))
@@ -47,7 +48,7 @@ end
 function Unsettable:__diagnose_multiple_line(indentation)
    local is_last_elem_multiple_line =  true
 
-   indentation:insert(String:string_factory("(logics::ql::Unsettable ["))
+   indentation:insert(String:string_factory("(logics::male::Unsettable ["))
    indentation:insert(String:string_factory(tostring(self)))
    indentation:insert(String:string_factory("]"))
    indentation:insert(String:parenthesis_off_depending_factory(is_last_elem_multiple_line))
