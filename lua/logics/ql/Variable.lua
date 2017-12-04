@@ -3,8 +3,8 @@ local MALEVariable =  require "logics.male.Variable"
 local Variable =  MALEVariable:__new()
 
 package.loaded["logics.ql.Variable"] =  Variable
-local MetaVariable =  require "logics.ql.MetaVariable"
 local String =  require "base.type.String"
+local Unsettable =  require "logics.ql.Unsettable"
 local VarAssgnm =  require "logics.male.VarAssgnm"
 
 function Variable:new(settable)
@@ -12,8 +12,8 @@ function Variable:new(settable)
    return retval
 end
 
-function Variable:new_meta_variable()
-   return MetaVariable:new()
+function Variable:new_unsettable()
+   return Unsettable:new()
 end
 
 function Variable:get_compound_cast()

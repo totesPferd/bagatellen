@@ -3,17 +3,16 @@ local Type =  require "base.type.aux.Type"
 local Variable =  Type:__new()
 
 package.loaded["logics.male.Variable"] =  Variable
-local MetaVariable =  require "logics.male.MetaVariable"
 local String =  require "base.type.String"
+local Unsettable =  require "logics.male.Unsettable"
 
 function Variable:new()
    local retval =  self:__new()
-   retval.settable_switch =  true
    return retval
 end
 
-function Variable:new_meta_variable()
-   return MetaVariable:new()
+function Variable:new_unsettable()
+   return Unsettable:new()
 end
 
 function Variable:copy()
@@ -24,17 +23,44 @@ function Variable:get_variable_cast()
    return self
 end
 
+function Variable:get_unsettable_cast()
+end
+
+function Variable:new_unsettable()
+   return Unsettable:new()
+end
+
 function Variable:is_settable()
-   return self.settable_switch
+   local retval
+   local this_val =  self:get_val()
+   if this_val
+   then
+      retval =  false
+   else
+      retval =  true
+   end
+   return retval
 end
 
 function Variable:set_settable_switch(mode)
    local this_val =  self:get_val()
    if this_val
    then
-      this_val:set_settable_switch(mode)
-   else
-      self.settable_switch =  mode
+      if mode
+      then
+         local unsettable =  this_val:get_unsettable_cast()
+         if unsettable
+         then
+            self.val =  nil
+         else
+            this_val:set_settable_switch(true)
+         end
+      else
+         this_val:set_settable_switch(false)
+      end
+   elseif not mode
+   then
+      self:set_val(self:new_unsettable())
    end
 end
 
@@ -52,8 +78,8 @@ function Variable:set_val(val)
 end
 
 function Variable:set_value_store(val)
-   local retval =  self:is_settable()
-   if retval and self:set_val(val)
+   local retval =  self:set_val(val)
+   if retval
    then
       val:set_settable_switch(false)
    end
@@ -61,9 +87,9 @@ function Variable:set_value_store(val)
 end
 
 function Variable:push_val(var)
-   local next_meta_var =  self:new_meta_variable()
-   self:set_val(next_meta_var)
-   retval =  var:set_value_store(next_meta_var)
+   local next_unsettable =  self:new_unsettable()
+   self:set_val(next_unsettable)
+   retval =  var:set_value_store(next_unsettable)
    return retval
 end
 
@@ -104,7 +130,9 @@ function Variable:devar(var_assgnm)
       if val
       then
          new_var =  val:devar(var_assgnm)
-      else
+      end
+      if not new_var
+      then
          new_var =  self:copy()
       end
       var_assgnm:add(self, new_var)

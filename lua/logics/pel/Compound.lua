@@ -28,6 +28,9 @@ end
 function Compound:get_variable_cast()
 end
 
+function Compound:get_unsettable_cast()
+end
+
 function Compound:get_compound_cast()
    return self
 end
