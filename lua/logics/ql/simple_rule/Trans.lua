@@ -6,7 +6,7 @@ local Variable =  require "logics.ql.Variable"
 local ToLiteral =  require "logics.ql.ToLiteral"
 
 function Trans:new(literal)
-   local rhs_var =  Variable:new()
+   local rhs_var =  Variable:new(true)
    local lhs_term =  literal:get_lhs_term()
    local rhs_term =  literal:get_rhs_term()
    local premis =  ToLiteral:new(rhs_term, rhs_var)

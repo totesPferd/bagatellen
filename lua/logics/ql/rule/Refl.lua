@@ -7,7 +7,7 @@ local Set =  require "base.type.Set"
 local ToLiteral =  require "logics.ql.ToLiteral"
 
 function Refl:new()
-   local var =  Variable:new()
+   local var =  Variable:new(true)
    local conclusion =  ToLiteral:new(var, var)
    local premises =  Set:empty_set_factory()
    return Clause.new(self, premises, conclusion)

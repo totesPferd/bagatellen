@@ -5,8 +5,8 @@ package.loaded["logics.ql.MetaVariable"] =  MetaVariable
 local Compound =  require "logics.ql.Compound"
 local String =  require "base.type.String"
 
-function MetaVariable:new()
-   return MALEMetaVariable.new(self)
+function MetaVariable:new(settable)
+   return MALEMetaVariable.new(self, settable)
 end
 
 function MetaVariable:new_compound(terminal, rhs_object)
@@ -44,6 +44,10 @@ end
 
 function MetaVariable:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory("(logics::ql::MetaVariable ["))
+   if self:is_settable()
+   then
+      indentation:insert(String:string_factory("unsettable; "))
+   end
    indentation:insert(String:string_factory(tostring(self)))
    indentation:insert(String:string_factory("] "))
    indentation:insert(self:get_non_nil_name())
@@ -60,6 +64,10 @@ function MetaVariable:__diagnose_multiple_line(indentation)
    local is_last_elem_multiple_line =  true
 
    indentation:insert(String:string_factory("(logics::ql::MetaVariable ["))
+   if self:is_settable()
+   then
+      indentation:insert(String:string_factory("unsettable; "))
+   end
    indentation:insert(String:string_factory(tostring(self)))
    indentation:insert(String:string_factory("] "))
    indentation:insert(self:get_non_nil_name())

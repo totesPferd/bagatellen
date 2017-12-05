@@ -7,9 +7,9 @@ local Set =  require "base.type.Set"
 local ToLiteral =  require "logics.ql.ToLiteral"
 
 function Td:new()
-   local mid_var =  Variable:new()
-   local rhs_var =  Variable:new()
-   local lhs_var =  Variable:new()
+   local mid_var =  Variable:new(true)
+   local rhs_var =  Variable:new(true)
+   local lhs_var =  Variable:new(true)
    local lhs_cath =  ToLiteral:new(lhs_var, mid_var)
    local hypoth =  ToLiteral:new(lhs_var, rhs_var)
 

@@ -7,9 +7,9 @@ local ToLiteral =  require "logics.ql.ToLiteral"
 local Variable =  require "logics.ql.Variable"
 
 function Trans:new()
-   local lhs_var =  Variable:new()
-   local rhs_var =  Variable:new()
-   local mid_var =  Variable:new()
+   local lhs_var =  Variable:new(true)
+   local rhs_var =  Variable:new(true)
+   local mid_var =  Variable:new(true)
    local lhs_cath =  ToLiteral:new(lhs_var, mid_var)
    local rhs_cath =  ToLiteral:new(mid_var, rhs_var)
 

@@ -4,30 +4,19 @@ local Variable =  Type:__new()
 
 package.loaded["logics.male.Variable"] =  Variable
 local String =  require "base.type.String"
-local Unsettable =  require "logics.male.Unsettable"
 
-function Variable:new()
+function Variable:new(settable)
    local retval =  self:__new()
+   retval.settable_switch =  settable or false
    return retval
 end
 
-function Variable:new_unsettable()
-   return Unsettable:new()
-end
-
 function Variable:copy()
-   return self.__index:new()
+   return self.__index:new(true)
 end
 
 function Variable:get_variable_cast()
    return self
-end
-
-function Variable:get_unsettable_cast()
-end
-
-function Variable:new_unsettable()
-   return Unsettable:new()
 end
 
 function Variable:is_settable()
@@ -37,38 +26,18 @@ function Variable:is_settable()
    then
       retval =  false
    else
-      retval =  true
+      retval =  self.settable_switch
    end
    return retval
 end
 
-function Variable:set_settable()
-   local this_val =  self:get_val()
-   if this_val
-   then
-      this_val:set_settable_switch(true)
-   else
-      self.val =  nil
-   end
-end
-
-function Variable:set_unsettable()
+function Variable:set_settable_switch(mode)
    local this_val =  self:get_val()
    if this_val
    then
       this_val:set_settable_switch(false)
    else
-      local next_unsettable =  self:new_unsettable()
-      self.val =  next_unsettable
-   end
-end
-
-function Variable:set_settable_switch(mode)
-   if mode
-   then
-      self:set_settable()
-   else
-      self:set_unsettable()
+      self.settable_switch =  mode
    end
 end
 
@@ -86,15 +55,13 @@ function Variable:set_val(val)
 end
 
 function Variable:push_val(var)
-   return var:set_val(self:get_val())
-end
-
-function Variable:push_unsettable(unsettable)
-   local retval =  false
+   local retval
    local this_val =  self:get_val()
    if this_val
    then
-      retval =  this_val:push_unsettable(unsettable)
+      retval =  var:set_val(self:get_val())
+   else
+      retval =  var:set_val(self)
    end
    return retval
 end

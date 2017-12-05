@@ -28,9 +28,6 @@ end
 function Compound:get_variable_cast()
 end
 
-function Compound:get_unsettable_cast()
-end
-
 function Compound:get_compound_cast()
    return self
 end
@@ -54,10 +51,6 @@ end
 
 function Compound:push_val(var)
    return var:set_val(self)
-end
-
-function Compound:push_unsettable(unsettable)
-   return false
 end
 
 -- do destroy this object after this method returns false!!!

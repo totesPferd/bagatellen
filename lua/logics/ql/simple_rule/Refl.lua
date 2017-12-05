@@ -6,7 +6,7 @@ local Variable =  require "logics.ql.Variable"
 local ToLiteral =  require "logics.ql.ToLiteral"
 
 function Refl:new()
-   local var =  Variable:new()
+   local var =  Variable:new(true)
    local conclusion =  ToLiteral:new(var, var)
    return SimpleClause.new(self, nil, conclusion)
 end

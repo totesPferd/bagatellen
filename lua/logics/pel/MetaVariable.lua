@@ -6,8 +6,8 @@ local Compound =  require "logics.pel.Compound"
 local List =  require "base.type.List"
 local String =  require "base.type.String"
 
-function MetaVariable:new()
-   return MALEMetaVariable.new(self)
+function MetaVariable:new(settable)
+   return MALEMetaVariable.new(self, settable)
 end
 
 function MetaVariable:new_compound(symbol, sub_term_list)
