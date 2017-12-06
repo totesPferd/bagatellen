@@ -42,6 +42,10 @@ function Compound:get_val()
    return self
 end
 
+function Compound:get_val_rec()
+   return self
+end
+
 function Compound:destruct_compound(symbol, arity)
    if symbol == self:get_symbol()
    then

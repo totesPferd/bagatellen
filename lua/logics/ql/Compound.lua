@@ -42,6 +42,10 @@ function Compound:get_val()
    return self
 end
 
+function Compound:get_val_rec()
+   return self
+end
+
 function Compound:push_val(var)
    return var:set_val(self)
 end

@@ -45,6 +45,16 @@ function Variable:get_val()
    return self.val
 end
 
+function Variable:get_val_rec()
+   retval =  self
+   local this_val =  self:get_val()
+   if this_val
+   then
+      retval =  this_val:get_val_rec()
+   end
+   return retval
+end
+
 function Variable:set_val(val)
    local retval =  self:is_settable()
    if retval
@@ -67,8 +77,6 @@ function Variable:push_val(var)
 end
 
 function Variable:equate(other)
-local s_a =  self:diagnose {}
-local o_a =  other:diagnose {}
    local retval =  false
    local this_val =  self:get_val()
    if this_val
@@ -84,12 +92,12 @@ local o_a =  other:diagnose {}
 end
 
 function Variable:val_eq(other)
-   local retval =  self == other
-   if not retval
+   local retval =  false
+   if other
    then
-      local this_val =  self:get_val()
-      local other_val =  other:get_val()
-      retval =  this_val and other_val and this_val:val_eq(other_val)
+      local this_val_rec =  self:get_val_rec()
+      local other_val_rec =  other:get_val_rec()
+      retval =  self_val_rec == other_val_rec
    end
    return retval
 end
