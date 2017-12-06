@@ -79,15 +79,14 @@ end
 function Variable:equate(other)
    local retval =  false
    local this_val =  self:get_val()
-   local other_val_rec =  other:get_val_rec()
    if this_val
    then
       retval =  this_val:equate(other)
-   elseif self == other_val_rec
+   elseif self == other:get_val_rec()
    then
       retval =  true
    else
-      retval =  other_val_rec:push_val(self)
+      retval =  other:push_val(self)
    end
    return retval
 end
