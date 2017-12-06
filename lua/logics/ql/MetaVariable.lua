@@ -5,8 +5,8 @@ package.loaded["logics.ql.MetaVariable"] =  MetaVariable
 local Compound =  require "logics.ql.Compound"
 local String =  require "base.type.String"
 
-function MetaVariable:new(settable)
-   return MALEMetaVariable.new(self, settable)
+function MetaVariable:new()
+   return MALEMetaVariable.new(self)
 end
 
 function MetaVariable:new_compound(terminal, rhs_object)
