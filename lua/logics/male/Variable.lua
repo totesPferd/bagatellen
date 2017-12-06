@@ -97,7 +97,13 @@ function Variable:val_eq(other)
    then
       local this_val_rec =  self:get_val_rec()
       local other_val_rec =  other:get_val_rec()
-      retval =  self_val_rec:val_eq(other_val_rec)
+      local this_val_rec_var =  this_val_rec:get_variable_cast()
+      if this_val_rec_var
+      then
+         retval =  self_val_rec_var == other_val_rec_var
+      else
+         retval =  self_val_rec:val_eq(other_val_rec)
+      end
    end
    return retval
 end
