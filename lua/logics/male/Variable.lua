@@ -82,7 +82,7 @@ function Variable:equate(other)
    if this_val
    then
       retval =  this_val:equate(other)
-   elseif self == other
+   elseif self == other:get_val_rec()
    then
       retval =  true
    else
