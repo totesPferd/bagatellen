@@ -46,7 +46,7 @@ function Variable:get_val()
 end
 
 function Variable:get_val_rec()
-   local retval
+   local retval =  self
    local this_val =  self:get_val()
    if this_val
    then
@@ -78,9 +78,10 @@ end
 
 function Variable:equate(other)
    local retval =  false
+   local this_val =  self:get_val()
    local this_val_rec =  self:get_val_rec()
-   local other_val_rec =  other:get_val_rec() or other
-   if this_val_rec
+   local other_val_rec =  other:get_val_rec()
+   if this_val
    then
       retval =  this_val_rec:equate(other_val_rec)
    elseif self == other_val_rec
@@ -96,8 +97,8 @@ function Variable:val_eq(other)
    local retval =  false
    if other
    then
-      local this_val_rec =  self:get_val_rec() or self
-      local other_val_rec =  other:get_val_rec() or other
+      local this_val_rec =  self:get_val_rec()
+      local other_val_rec =  other:get_val_rec()
       local this_val_rec_var =  this_val_rec:get_variable_cast()
       if this_val_rec_var
       then
