@@ -34,7 +34,7 @@ end
 
 function Variable:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory("(logics::pel::Variable ["))
-   if self:is_settable()
+   if not self:is_settable()
    then
       indentation:insert(String:string_factory("unsettable; "))
    end
