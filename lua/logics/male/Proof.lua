@@ -91,11 +91,12 @@ function Proof:add_rule(rule, drop_mode)
    do local assume =  self:new_assume(premis)
       new_proof:add(assume)
    end
+   rule:set_settable_switch(false)
    local conclusion =  rule:get_conclusion()
    local conclusions =  Set:empty_set_factory()
    conclusions:add(conclusion)
    local proof_state =  self:new_proof_state(conclusions)
-   local status, progress =  self:apply(proof_state, conclusion)
+   local status, progress =  new_proof:apply(proof_state, conclusion)
    if not drop_mode or not progress
    then
       proof_state:push_to_proof(self, premises)

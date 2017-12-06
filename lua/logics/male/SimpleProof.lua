@@ -90,9 +90,11 @@ function SimpleProof:add_rule(rule, drop_mode)
       local assume =  self:new_assume(premis)
       new_simple_proof:add(assume)
    end
+   rule:set_settable_switch(false)
    local conclusion =  rule:get_conclusion()
    local simple_proof_state =  self:new_simple_proof_state(conclusion)
-   local status, progress =  self:apply(simple_proof_state, conclusion)
+   local status, progress
+      =  new_simple_proof:apply(simple_proof_state, conclusion)
    if not drop_mode or not progress
    then
       simple_proof_state:push_to_simple_proof(self, premis)
