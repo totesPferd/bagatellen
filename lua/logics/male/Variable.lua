@@ -35,7 +35,7 @@ function Variable:set_settable_switch(mode)
    local this_val =  self:get_val()
    if this_val
    then
-      this_val:set_settable_switch(false)
+      this_val:set_settable_switch(mode)
    else
       self.settable_switch =  mode
    end
