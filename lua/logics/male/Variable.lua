@@ -67,6 +67,8 @@ function Variable:push_val(var)
 end
 
 function Variable:equate(other)
+local s_a =  self:diagnose {}
+local o_a =  other:diagnose {}
    local retval =  false
    local this_val =  self:get_val()
    if this_val
@@ -78,6 +80,12 @@ function Variable:equate(other)
    else
       retval =  other:push_val(self)
    end
+print("yeah! #4a", s_a)
+print("yeah! #4b", o_a)
+print("yeah! #4c", retval)
+print("yeah! #4d", self:diagnose {})
+print("yeah! #4e", other:diagnose {})
+print()
    return retval
 end
 
