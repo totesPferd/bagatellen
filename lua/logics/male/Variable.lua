@@ -80,12 +80,6 @@ local o_a =  other:diagnose {}
    else
       retval =  other:push_val(self)
    end
-print("yeah! #4a", s_a)
-print("yeah! #4b", o_a)
-print("yeah! #4c", retval)
-print("yeah! #4d", self:diagnose {})
-print("yeah! #4e", other:diagnose {})
-print()
    return retval
 end
 
