@@ -19,4 +19,16 @@ function MetaVariable:set_settable_switch(mode)
    end
 end
 
+function MetaVariable:push_val(var)
+   local retval
+   local this_val =  self:get_val()
+   if this_val
+   then
+      retval =  var:set_val(self:get_val())
+   else
+      retval =  self:set_val(var)
+   end
+   return retval
+end
+
 return MetaVariable
