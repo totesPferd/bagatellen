@@ -26,6 +26,10 @@ function ProofTrack:get_proof_state()
    return self.proof_state
 end
 
+function ProofTrack:get_var_ctxt()
+   return self:get_proof_state():get_var_ctxt()
+end
+
 function ProofTrack:get_conclusions()
    return self:get_proof_state():get_conclusions()
 end
