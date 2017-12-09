@@ -18,6 +18,10 @@ function ProofState:new(var_ctxt, conclusions)
    return retval
 end
 
+function ProofState:get_var_ctxt()
+   return self.var_ctxt
+end
+
 function ProofState:new_instance(conclusions)
    return ProofState:new(conclusions)
 end
