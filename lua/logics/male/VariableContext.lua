@@ -7,6 +7,7 @@ local List =  require "base.type.List"
 local MALEVarAssgnm =  require "logics.male.VarAssgnm"
 local String =  require "base.type.String"
 local StringSet =  require "base.type.set.StringSet"
+local VarAssgnm =  require "logics.male.VarAssgnm"
 
 function VariableContext:new()
    local retval =  self:__new()
