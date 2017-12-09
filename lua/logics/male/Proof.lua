@@ -91,7 +91,6 @@ function Proof:add_rule(rule, drop_mode)
    do local assume =  self:new_assume(premis)
       new_proof:add(assume)
    end
-   rule:set_settable_switch(false)
    local conclusion =  rule:get_conclusion()
    local conclusions =  Set:empty_set_factory()
    conclusions:add(conclusion)

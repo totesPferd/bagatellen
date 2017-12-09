@@ -32,6 +32,20 @@ function List:is_empty()
    return #self.val == 0
 end
 
+--- Does contain my list an element?
+--  @param element
+--  @return boolean
+function List:is_in(elem)
+   local retval =  false
+   for k, v in pairs(self.val)
+   do if v == elem
+      then
+         retval =  true
+      end
+   end
+   return retval
+end
+
 --- Does list end with other?
 --  @return boolean
 function List:is_final_seq(other)

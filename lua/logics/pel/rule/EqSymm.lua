@@ -8,10 +8,14 @@ local List =  require "base.type.List"
 local Set =  require "base.type.Set"
 local VarAssgnm =  require "logics.male.VarAssgnm"
 local Variable =  require "logics.pel.Variable"
+local VariableContext =  require "logics.male.VariableContext"
 
 function EqSymm:new()
-   local var_a =  Variable:new(true)
-   local var_b =  Variable:new(true)
+   local var_a =  Variable:new()
+   local var_b =  Variable:new()
+   local var_ctxt =  VariableContext:new()
+   var_ctxt:add_variable(var_a)
+   var_ctxt:add_variable(var_b)
    local eq_symbol =  EqSymbol:new()
    local args_premis =  List:empty_list_factory()
    args_premis:append(var_a)
@@ -23,7 +27,7 @@ function EqSymm:new()
    local conclusion =  Compound:new(eq_symbol, args_conclusion)
    local premises =  Set:empty_set_factory()
    premises:add(premis)
-   local retval =  Clause.new(self, premises, conclusion)
+   local retval =  Clause.new(self, var_ctxt, premises, conclusion)
    retval.premis =  premis
    return retval
 end
@@ -50,12 +54,13 @@ end
 
 function EqSymm:devar()
    local var_assgnm =  VarAssgnm:new()
+   local new_var_ctxt =  self:get_var_ctxt():devar(var_assgnm)
    local new_premises =  Set:empty_set_factory()
    for premis in self:get_premises():elems()
    do new_premises:add(premis:devar(var_assgnm))
    end
    local new_conclusion =  self:get_conclusion():devar(var_assgnm)
-   return Clause.new(self, new_premises, new_conclusion)
+   return Clause.new(self, new_var_ctxt, new_premises, new_conclusion)
 end
 
 return EqSymm

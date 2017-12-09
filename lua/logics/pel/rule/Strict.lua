@@ -8,12 +8,15 @@ local List =  require "base.type.List"
 local Set =  require "base.type.Set"
 local VarAssgnm =  require "logics.male.VarAssgnm" 
 local Variable =  require "logics.pel.Variable"
+local VariableContext =  require "logics.male.VariableContext"
 
 function Strict:new(symbol, arity, place)
+   local var_ctxt =  VariableContext:new()
    local conclusion_var
    local args =  List:empty_list_factory()
    for i = 1, arity
-   do local var =  Variable:new(true)
+   do local var =  Variable:new()
+      var_ctxt:add(var)
       args:append(var)
       if i == place
       then
@@ -27,7 +30,7 @@ function Strict:new(symbol, arity, place)
    local premises =  Set:empty_set_factory()
    premises:add(premis)
 
-   return Clause.new(self, premises, conclusion)
+   return Clause.new(self, var_ctxt, premises, conclusion)
 end
 
 function Strict:get_eq_refl_cast()
@@ -48,12 +51,13 @@ end
 
 function Strict:devar()
    local var_assgnm =  VarAssgnm:new()
+   local new_var_ctxt =  self:get_var_ctxt():devar(var_assgnm)
    local new_premises =  Set:empty_set_factory()
    for premis in self:get_premises():elems()
    do new_premises:add(premis:devar(var_assgnm))
    end
    local new_conclusion =  self:get_conclusion():devar(var_assgnm)
-   return Clause.new(self, new_premises, new_conclusion)
+   return Clause.new(self, new_var_ctxt, new_premises, new_conclusion)
 end
 
 return Strict

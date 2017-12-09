@@ -8,11 +8,16 @@ local List =  require "base.type.List"
 local Set =  require "base.type.Set"
 local VarAssgnm =  require "logics.male.VarAssgnm"
 local Variable =  require "logics.pel.Variable"
+local VariableContext =  require "logics.male.VariableContext"
 
 function EqTrans:new()
-   local var_a =  Variable:new(true)
-   local var_b =  Variable:new(true)
-   local var_c =  Variable:new(true)
+   local var_a =  Variable:new()
+   local var_b =  Variable:new()
+   local var_c =  Variable:new()
+   local var_ctxt =  VariableContext:new()
+   var_ctxt:add_variable(var_a)
+   var_ctxt:add_variable(var_b)
+   var_ctxt:add_variable(var_c)
    local eq_symbol =  EqSymbol:new()
    local args_lhs_premis =  List:empty_list_factory()
    args_lhs_premis:append(var_a)
@@ -30,7 +35,7 @@ function EqTrans:new()
    local ret_premises =  Set:empty_set_factory()
    ret_premises:add(lhs_premis)
    ret_premises:add(rhs_premis)
-   local retval =  Clause.new(self, ret_premises, ret_conclusion)
+   local retval =  Clause.new(self, var_ctxt, ret_premises, ret_conclusion)
    retval.lhs_premis =  lhs_premis
    retval.rhs_premis =  rhs_premis
    return retval
@@ -62,13 +67,18 @@ end
 
 function EqTrans:devar()
    local var_assgnm =  VarAssgnm:new()
+   local new_var_ctxt =  self:get_var_ctxt():devar(var_assgnm)
    local new_lhs_premis =  self:get_lhs_premis():devar(var_assgnm)
    local new_rhs_premis =  self:get_rhs_premis():devar(var_assgnm)
    local new_conclusion =  self:get_conclusion():devar(var_assgnm)
    local new_premises =  Set:empty_set_factory()
    new_premises:add(new_lhs_premis)
    new_premises:add(new_rhs_premis)
-   local retval =  Clause.new(self, new_premises, new_conclusion)
+   local retval =  Clause.new(
+         self
+      ,  new_var_ctxt
+      ,  new_premises
+      ,  new_conclusion )
    retval.lhs_premis =  new_lhs_premis
    retval.rhs_premis =  new_rhs_premis
    return retval

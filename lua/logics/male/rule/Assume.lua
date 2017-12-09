@@ -6,7 +6,9 @@ local Set =  require "base.type.Set"
 
 function Assume:new(literal)
    local premises =  Set:empty_set_factory()
-   return Clause.new(self, premises, literal)
+   local var_ctxt =  literal:get_var_ctxt()
+   local term =  literal:get_term()
+   return Clause.new(self, var_ctxt, premises, term)
 end
 
 return Assume

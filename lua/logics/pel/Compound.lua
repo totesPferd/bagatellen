@@ -32,12 +32,6 @@ function Compound:get_compound_cast()
    return self
 end
 
-function Compound:set_settable_switch(mode)
-   for sub_term in self:get_sub_term_list():elems()
-   do sub_term:set_settable_switch(mode)
-   end
-end
-
 function Compound:get_val()
    return self
 end
@@ -58,7 +52,7 @@ function Compound:push_val(var)
 end
 
 -- do destroy this object after this method returns false!!!
-function Compound:equate(other)
+function Compound:equate(var_ctxt, other)
    local equatable =  false
    local other_sub_term_list =  other:destruct_compound(
          self:get_symbol()

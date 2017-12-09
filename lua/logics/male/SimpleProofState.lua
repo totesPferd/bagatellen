@@ -77,7 +77,6 @@ function SimpleProofState:push_to_simple_proof(simple_proof, premis)
    if conclusion
    then 
       local next_simple_clause =  self:new_simple_clause(premis, conclusion)
-      next_simple_clause:set_settable_switch(true)
       simple_proof:add(next_simple_clause)
    end
 end

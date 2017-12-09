@@ -70,7 +70,6 @@ end
 function ProofState:push_to_proof(proof, premises)
    for conclusion in self:get_conclusions():elems()
    do  local next_clause =  self:new_clause(premises, conclusion)
-       next_clause:set_settable_switch(true)
        proof:add(next_clause)
    end
 end

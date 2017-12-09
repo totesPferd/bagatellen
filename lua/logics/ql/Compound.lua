@@ -27,10 +27,6 @@ function Compound:get_compound_cast()
    return self
 end
 
-function Compound:set_settable_switch(mode)
-   self:get_rhs_object():set_settable_switch(mode)
-end
-
 function Compound:destruct_terminal(terminal)
    if self:get_terminal() == terminal
    then
@@ -50,12 +46,12 @@ function Compound:push_val(var)
    return var:set_val(self)
 end
 
-function Compound:equate(other)
+function Compound:equate(var_ctxt, other)
    local retval =  false
    local next_qual =  other:destruct_terminal(self:get_terminal())
    if next_qual
    then
-      retval =  self:get_rhs_object():equate(next_qual)
+      retval =  self:get_rhs_object():equate(var_ctxt, next_qual)
    end
    return retval
 end

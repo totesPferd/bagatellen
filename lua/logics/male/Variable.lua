@@ -5,40 +5,29 @@ local Variable =  Type:__new()
 package.loaded["logics.male.Variable"] =  Variable
 local String =  require "base.type.String"
 
-function Variable:new(settable)
+function Variable:new()
    local retval =  self:__new()
-   retval.settable_switch =  settable or false
    return retval
 end
 
 function Variable:copy()
-   return self.__index:new(true)
+   return self.__index:new()
 end
 
 function Variable:get_variable_cast()
    return self
 end
 
-function Variable:is_settable()
+function Variable:is_settable(var_ctxt)
    local retval
    local this_val =  self:get_val()
    if this_val
    then
       retval =  false
    else
-      retval =  self.settable_switch
+      retval =  not var_ctxt:is_in(self)
    end
    return retval
-end
-
-function Variable:set_settable_switch(mode)
-   local this_val =  self:get_val()
-   if this_val
-   then
-      this_val:set_settable_switch(mode)
-   else
-      self.settable_switch =  mode
-   end
 end
 
 function Variable:get_val()
@@ -55,8 +44,8 @@ function Variable:get_val_rec()
    return retval
 end
 
-function Variable:set_val(val)
-   local retval =  self:is_settable()
+function Variable:set_val(var_ctxt, val)
+   local retval =  self:is_settable(var_ctxt)
    if retval
    then
       self.val =  val
@@ -76,14 +65,14 @@ function Variable:push_val(var)
    return retval
 end
 
-function Variable:equate(other)
+function Variable:equate(var_ctxt, other)
    local retval =  false
    local this_val =  self:get_val()
    local this_val_rec =  self:get_val_rec()
    local other_val_rec =  other:get_val_rec()
    if this_val
    then
-      retval =  this_val_rec:equate(other_val_rec)
+      retval =  this_val_rec:equate(var_ctxt, other_val_rec)
    elseif self == other_val_rec
    then
       retval =  true

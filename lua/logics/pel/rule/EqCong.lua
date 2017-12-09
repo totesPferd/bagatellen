@@ -8,16 +8,20 @@ local List =  require "base.type.List"
 local Set =  require "base.type.Set"
 local VarAssgnm =  require "logics.male.VarAssgnm"
 local Variable =  require "logics.pel.Variable"
+local VariableContext =  require "logics.male.VariableContext"
 
 function EqCong:new(symbol, arity)
+   local var_ctxt =  VariableContext:new()
    local lhs_vars =  List:empty_list_factory()
    local rhs_vars =  List:empty_list_factory()
    local premises =  Set:empty_set_factory()
    local premis_list =  {}
    local eq_symbol =  EqSymbol:new()
    for i = 1, arity
-   do local lhs_var =  Variable:new(true)
-      local rhs_var =  Variable:new(true)
+   do local lhs_var =  Variable:new()
+      local rhs_var =  Variable:new()
+      var_ctxt:add_variable(lhs_var)
+      var_ctxt:add_variable(rhs_var)
       local eq_args =  List:empty_list_factory()
       eq_args:append(lhs_var)
       eq_args:append(rhs_var)
@@ -33,7 +37,7 @@ function EqCong:new(symbol, arity)
    eq_args:append(lhs_term)
    eq_args:append(rhs_term)
    local conclusion =  Compound:new(eq_symbol, eq_args)
-   local retval =  Clause.new(self, premises, conclusion)
+   local retval =  Clause.new(self, var_ctxt, premises, conclusion)
    retval.premis_list =  premis_list
    return retval
 end
@@ -61,6 +65,7 @@ end
 function EqCong:devar()
    local var_assgnm =  VarAssgnm:new()
 
+   local new_var_ctxt =  self:get_var_ctxt():devar(var_assgnm)
    local new_premis_list =  {}
    local new_premis_set =  Set:empty_set_factory()
    for k, premis in pairs(self.premis_list)
@@ -70,7 +75,11 @@ function EqCong:devar()
    end
 
    local new_conclusion =  self:get_conclusion():devar(var_assgnm)
-   local retval =  Clause.new(self, new_premis_set, new_conclusion)
+   local retval =  Clause.new(
+         self
+      ,  new_var_ctxt
+      ,  new_premis_set
+      ,  new_conclusion )
    retval.premis_list =  new_premis_list
    return retval
 end
