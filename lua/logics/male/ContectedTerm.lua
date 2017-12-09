@@ -2,6 +2,7 @@ local Type =  require "base.type.aux.Type"
 local ContectedTerm =  Type:__new()
 
 package.loaded["logics.male.ContectedTerm"] =  ContectedTerm
+local String =  require "base.type.String"
 
 function ContectedTerm:new(var_ctxt, term)
    local retval =  self:__new()
