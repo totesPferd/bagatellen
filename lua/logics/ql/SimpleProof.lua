@@ -21,8 +21,8 @@ function SimpleProof:new_meta_variable()
    return MetaVariable:new()
 end
 
-function SimpleProof:add_literal(literal)
-   local rule =  TransRule:new(literal)
+function SimpleProof:add_literal(contected_literal)
+   local rule =  TransRule:new(contected_literal)
    return self:add_rule(rule)
 end
 

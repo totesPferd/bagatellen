@@ -25,7 +25,7 @@ function Variable:is_settable(var_ctxt)
    then
       retval =  false
    else
-      retval =  not var_ctxt:is_in(self)
+      retval =  var_ctxt:is_in(self)
    end
    return retval
 end

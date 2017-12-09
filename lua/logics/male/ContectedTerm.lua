@@ -24,10 +24,10 @@ function ContectedTerm:get_term()
 end
 
 function ContectedTerm:equate(other)
-   local other_var_ctxt =  other:get_var_ctxt()
+   local this_var_ctxt =  self:get_var_ctxt()
    local this_term =  self:get_term()
    local other_term =  other:get_term()
-   return this_term:equate(other_var_ctxt, other_term)
+   return this_term:equate(this_var_ctxt, other_term)
 end
 
 function ContectedTerm:devar(var_assgnm)
