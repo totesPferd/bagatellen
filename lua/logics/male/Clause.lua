@@ -55,6 +55,7 @@ function Clause:get_contected_conclusion()
 end
 
 function Clause:equate(goal)
+   self.var_ctxt =  goal:get_var_ctxt()
    return self:get_contected_conclusion():equate(goal)
 end
 
