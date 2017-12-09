@@ -33,7 +33,7 @@ end
 function ContectedTerm:devar(var_assgnm)
    local new_var_ctxt =  self:get_var_ctxt():devar(var_assgnm)
    local new_term =  self:get_term():devar(var_assgnm)
-   return self:new_instance(new_term, new_var_ctxt)
+   return self:new_instance(new_var_ctxt, new_term)
 end
 
 function ContectedTerm:val_eq(other)
