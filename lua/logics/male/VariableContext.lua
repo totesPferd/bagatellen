@@ -7,7 +7,6 @@ local List =  require "base.type.List"
 local MALEVarAssgnm =  require "logics.male.VarAssgnm"
 local String =  require "base.type.String"
 local StringSet =  require "base.type.set.StringSet"
-local VarAssgnm =  require "logics.male.VarAssgnm"
 
 function VariableContext:new()
    local retval =  self:__new()
@@ -51,8 +50,7 @@ function VariableContext:equate(other)
    return equatable
 end
 
-function VariableContext:devar()
-   local var_assgnm =  VarAssgnm:new()
+function VariableContext:devar(var_assgnm)
    local retval =  self:new_instance()
 
 -- map/reduce et al.!!!
