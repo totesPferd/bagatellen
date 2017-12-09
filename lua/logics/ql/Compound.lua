@@ -42,8 +42,8 @@ function Compound:get_val_rec()
    return self
 end
 
-function Compound:push_val(var)
-   return var:set_val(self)
+function Compound:push_val(var_ctxt, var)
+   return var:set_val(var_ctxt, self)
 end
 
 function Compound:equate(var_ctxt, other)

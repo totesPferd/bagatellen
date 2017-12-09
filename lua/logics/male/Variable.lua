@@ -53,14 +53,14 @@ function Variable:set_val(var_ctxt, val)
    return retval
 end
 
-function Variable:push_val(var)
+function Variable:push_val(var_ctxt, var)
    local retval
    local this_val =  self:get_val()
    if this_val
    then
-      retval =  var:set_val(self:get_val())
+      retval =  var:set_val(var_ctxt, self:get_val())
    else
-      retval =  var:set_val(self)
+      retval =  var:set_val(var_ctxt, self)
    end
    return retval
 end
@@ -77,7 +77,7 @@ function Variable:equate(var_ctxt, other)
    then
       retval =  true
    else
-      retval =  other_val_rec:push_val(self)
+      retval =  other_val_rec:push_val(var_ctxt, self)
    end
    return retval
 end

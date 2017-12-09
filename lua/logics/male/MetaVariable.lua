@@ -21,14 +21,14 @@ function MetaVariable:is_settable(var_ctxt)
    end
 end
 
-function MetaVariable:push_val(var)
+function MetaVariable:push_val(var_ctxt, var)
    local retval
    local this_val =  self:get_val()
    if this_val
    then
-      retval =  var:set_val(self:get_val())
+      retval =  var:set_val(var_ctxt, self:get_val())
    else
-      retval =  self:set_val(var)
+      retval =  self:set_val(var_ctxt, var)
    end
    return retval
 end

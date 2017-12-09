@@ -47,8 +47,8 @@ function Compound:destruct_compound(symbol, arity)
    end
 end
 
-function Compound:push_val(var)
-   return var:set_val(self)
+function Compound:push_val(var_ctxt, var)
+   return var:set_val(var_ctxt, self)
 end
 
 -- do destroy this object after this method returns false!!!
