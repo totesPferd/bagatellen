@@ -64,7 +64,7 @@ function Compound:equate(var_ctxt, other)
       for sub_term in self:get_sub_term_list():elems()
       do local other_sub_term =  other_sub_term_list_copy:get_head()
          other_sub_term_list_copy:cut_head()
-         equatable =  sub_term:equate(other_sub_term)
+         equatable =  sub_term:equate(var_ctxt, other_sub_term)
          if not equatable
          then
             break
