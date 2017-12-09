@@ -72,10 +72,7 @@ end
 function ProofState:apply_proof(proof)
    for conclusion in self:get_conclusions():elems()
    do self:drop(conclusion)
-      local contected_conclusion =  self:new_contected_term(
-            self:get_var_ctxt()
-         ,  conclusion )
-      proof:apply(self, contected_conclusion)
+      proof:apply(self, conclusion)
    end
 end
 

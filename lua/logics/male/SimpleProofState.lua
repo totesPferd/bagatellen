@@ -81,10 +81,7 @@ function SimpleProofState:apply_proof(proof)
    if conclusion
    then
       self:drop()
-      local contected_conclusion =  self:new_contected_term(
-            self:get_var_ctxt()
-         ,  conclusion )
-      proof:apply(self, contected_conclusion)
+      proof:apply(self, conclusion)
    end
 end
 

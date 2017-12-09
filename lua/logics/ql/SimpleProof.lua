@@ -38,16 +38,13 @@ function SimpleProof:get_normal_form(lhs_contected_term)
    local lhs_term =  lhs_contected_term:get_term()
    local rhs_term =  self:new_meta_variable()
    local to_literal =  ToLiteral:new(lhs_term, rhs_term)
-   local contected_to_literal =  self:new_contected_term(
-         lhs_var_ctxt
-      ,  to_literal )
-   local sps =  SimpleProofState:new(contected_to_literal)
+   local sps =  SimpleProofState:new(lhs_var_ctxt, to_literal)
    sps:apply_proof(self)
    local conclusion =  sps:get_conclusion()
    if conclusion
    then
       local conclusion_to_literal
-         =  conclusion:get_term():get_to_literal_cast()
+         =  conclusion:get_to_literal_cast()
       if conclusion_to_literal
       then
          return self:new_contected_term(
