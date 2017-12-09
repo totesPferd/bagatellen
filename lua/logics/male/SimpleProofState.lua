@@ -4,15 +4,17 @@ local SimpleProofState =  Type:__new()
 
 
 package.loaded["logics.male.SimpleProofState"] =  SimpleProofState
+local ContectedTerm =  require "logics.male.ContectedTerm"
 local Indentation =  require "base.Indentation"
 local Set =  require "base.type.Set"
 local SimpleClause =  require "logics.male.SimpleClause"
 local String =  require "base.type.String"
 local VarAssgnm =  require "logics.male.VarAssgnm"
 
-function SimpleProofState:new(conclusion)
+function SimpleProofState:new(var_ctxt, conclusion)
    local retval =  self:__new()
    retval.conclusion =  conclusion
+   retval.var_ctxt =  var_ctxt
    return retval
 end
 
@@ -20,16 +22,24 @@ function SimpleProofState:new_instance(conclusion)
    return SimpleProofState:new(conclusion)
 end
 
+function SimpleProofState:new_contected_term(var_ctxt, term)
+   return SimpleProofState:new(var_ctxt, term)
+end
+
 function SimpleProofState:new_var_assgnm()
    return VarAssgnm:new()
 end
 
-function SimpleProofState:new_simple_clause(premis, conclusion)
-   return SimpleClause:new(premis, conclusion)
+function SimpleProofState:new_simple_clause(var_ctxt, premis, conclusion)
+   return SimpleClause:new(var_ctxt, premis, conclusion)
 end
 
 function SimpleProofState:get_conclusion()
    return self.conclusion
+end
+
+function SimpleProofState:get_var_ctxt()
+   return self.var_ctxt
 end
 
 function SimpleProofState:set_conclusion(conclusion)
@@ -43,8 +53,8 @@ end
 function SimpleProofState:use(rule)
 end
 
-function SimpleProofState:add(simple_clause)
-   self.conclusion =  simple_clause
+function SimpleProofState:add(conclusion)
+   self.conclusion =  conclusion
 end
 
 function SimpleProofState:drop()
@@ -53,8 +63,11 @@ end
 
 function SimpleProofState:resolve(simple_clause, goal)
    local premis =  simple_clause:get_premis()
-   local conclusion =  simple_clause:get_conclusion()
-   local retval =  conclusion:equate(goal)
+   local conclusion =  simple_clause:get_contected_conclusion()
+   local contected_goal =  self:new_contected_term(
+         self:get_var_ctxt()
+      ,  goal )
+   local retval =  conclusion:equate(contected_goal)
    if retval
    then
       self:use(simple_clause)
@@ -68,7 +81,10 @@ function SimpleProofState:apply_proof(proof)
    if conclusion
    then
       self:drop()
-      proof:apply(self, conclusion)
+      local contected_conclusion =  self:new_contected_term(
+            self:get_var_ctxt()
+         ,  conclusion )
+      proof:apply(self, contected_conclusion)
    end
 end
 
@@ -76,7 +92,10 @@ function SimpleProofState:push_to_simple_proof(simple_proof, premis)
    local conclusion =  self:get_conclusion()
    if conclusion
    then 
-      local next_simple_clause =  self:new_simple_clause(premis, conclusion)
+      local next_simple_clause =  self:new_simple_clause(
+            self:get_var_ctxt()
+         ,  premis
+         ,  conclusion )
       simple_proof:add(next_simple_clause)
    end
 end

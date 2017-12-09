@@ -5,14 +5,16 @@ local ProofState =  Type:__new()
 
 package.loaded["logics.male.ProofState"] =  ProofState
 local Clause =  require "logics.male.Clause"
+local ContectedTerm =  require "logics.male.ContectedTerm"
 local Indentation =  require "base.Indentation"
 local Set =  require "base.type.Set"
 local String =  require "base.type.String"
 local VarAssgnm =  require "logics.male.VarAssgnm"
 
-function ProofState:new(conclusions)
+function ProofState:new(var_ctxt, conclusions)
    local retval =  self:__new()
    retval.conclusions =  conclusions
+   retval.var_ctxt =  var_ctxt
    return retval
 end
 
@@ -20,8 +22,12 @@ function ProofState:new_instance(conclusions)
    return ProofState:new(conclusions)
 end
 
-function ProofState:new_clause(premises, conclusion)
-   return Clause:new(premises, conclusion)
+function ProofState:new_contected_term(var_ctxt, term)
+   return ContectedTerm:new(var_ctxt, term)
+end
+
+function ProofState:new_clause(var_ctxt, premises, conclusion)
+   return Clause:new(var_ctxt, premises, conclusion)
 end
 
 function ProofState:new_var_assgnm()
@@ -48,13 +54,16 @@ function ProofState:drop(conclusion)
 end
 
 function ProofState:resolve(axiom, goal)
-   local retval =  axiom:equate(goal)
+   local contected_goal =  self:new_contected_term(
+         self:get_var_ctxt()
+      ,  goal)
+   local retval =  axiom:equate(contected_goal)
    if retval
    then
       self:use(axiom)
       self:get_conclusions():drop(goal)
-      for premise in axiom:get_premises():elems()
-      do self:get_conclusions():add(premise)
+      for premis in axiom:get_premises():elems()
+      do self:get_conclusions():add(premis)
       end
    end
    return retval
@@ -63,13 +72,17 @@ end
 function ProofState:apply_proof(proof)
    for conclusion in self:get_conclusions():elems()
    do self:drop(conclusion)
-      proof:apply(self, conclusion)
+      local contected_conclusion =  self:new_contected_term(
+            self:get_var_ctxt()
+         ,  conclusion )
+      proof:apply(self, contected_conclusion)
    end
 end
 
 function ProofState:push_to_proof(proof, premises)
+   local var_ctxt =  self:get_var_ctxt()
    for conclusion in self:get_conclusions():elems()
-   do  local next_clause =  self:new_clause(premises, conclusion)
+   do  local next_clause =  self:new_clause(var_ctxt, premises, conclusion)
        proof:add(next_clause)
    end
 end

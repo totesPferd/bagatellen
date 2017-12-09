@@ -9,6 +9,7 @@ local Proof =  Type:__new()
 
 package.loaded["logics.male.Proof"] =  Proof
 local Assume =  require "logics.male.rule.Assume"
+local ContectedTerm =  require "logics.male.ContectedTerm"
 local Indentation =  require "base.Indentation"
 local ProofState =  require "logics.male.ProofState"
 local Set =  require "base.type.Set"
@@ -24,8 +25,12 @@ function Proof:new_assume(literal)
    return Assume:new(literal)
 end
 
-function Proof:new_proof_state(conclusions)
-   return ProofState:new(conclusions)
+function Proof:new_contected_term(var_ctxt, term)
+   return ContectedTerm:new(var_ctxt, term)
+end
+
+function Proof:new_proof_state(var_ctxt, conclusions)
+   return ProofState:new(var_ctxt, conclusions)
 end
 
 function Proof:copy()
@@ -47,9 +52,13 @@ function Proof:drop(clause)
 end
 
 function Proof:_search_simply_start(proof_state, goal)
+   local var_ctxt =  proof_state:get_var_ctxt()
+   local contected_goal =  self:new_contected_term(
+         var_ctxt
+      ,  goal )
    for clause in self.action:elems()
    do local dev_clause =  clause:devar()
-      if dev_clause:equate(goal)
+      if dev_clause:equate(contected_goal)
       then
          proof_state:use(dev_clause)
          return clause, dev_clause
@@ -85,20 +94,21 @@ function Proof:apply(proof_state, goal)
 end
 
 function Proof:add_rule(rule, drop_mode)
+   local var_ctxt =  rule:get_var_ctxt()
    local new_proof =  self:copy()
-   local premises =  rule:get_premises()
-   for premis in premises:elems()
-   do local assume =  self:new_assume(premis)
+   local contected_premises =  rule:get_contected_premises()
+   for contected_premis in contected_premises:elems()
+   do local assume =  self:new_assume(contected_premis)
       new_proof:add(assume)
    end
    local conclusion =  rule:get_conclusion()
    local conclusions =  Set:empty_set_factory()
    conclusions:add(conclusion)
-   local proof_state =  self:new_proof_state(conclusions)
+   local proof_state =  self:new_proof_state(var_ctxt, conclusions)
    local status, progress =  new_proof:apply(proof_state, conclusion)
    if not drop_mode or not progress
    then
-      proof_state:push_to_proof(self, premises)
+      proof_state:push_to_proof(self, rule:get_premises())
    end
    return progress
 end

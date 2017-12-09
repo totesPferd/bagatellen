@@ -9,6 +9,7 @@ local SimpleProof =  Type:__new()
 
 package.loaded["logics.male.SimpleProof"] =  SimpleProof
 local Assume =  require "logics.male.simple_rule.Assume"
+local ContectedTerm =  require "logics.male.ContectedTerm"
 local Indentation =  require "base.Indentation"
 local SimpleProofState =  require "logics.male.SimpleProofState"
 local Set =  require "base.type.Set"
@@ -24,8 +25,12 @@ function SimpleProof:new_assume(literal)
    return Assume:new(literal)
 end
 
-function SimpleProof:new_simple_proof_state(conclusion)
-   return SimpleProofState:new(conclusion)
+function SimpleProof:new_contected_term(var_ctxt, term)
+   return ContectedTerm:new(var_ctxt, term)
+end
+
+function SimpleProof:new_simple_proof_state(var_ctxt, conclusion)
+   return SimpleProofState:new(var_ctxt, conclusion)
 end
 
 function SimpleProof:add(simple_clause)
@@ -47,9 +52,13 @@ function SimpleProof:drop(simple_clause)
 end
 
 function SimpleProof:_search_simply_start(simple_proof_state, goal)
+   local var_ctxt =  simple_proof_state:get_var_ctxt()
+   local contected_goal =  self:new_contected_term(
+         var_ctxt
+      ,  goal )
    for clause in self.action:elems()
    do local dev_clause =  clause:devar()
-      if dev_clause:equate(goal)
+      if dev_clause:equate(contected_goal)
       then
          simple_proof_state:use(dev_clause)
          return clause, dev_clause
@@ -84,19 +93,22 @@ end
 
 function SimpleProof:add_rule(rule, drop_mode)
    local new_simple_proof =  self:copy()
-   local premis =  rule:get_premis()
+   local contected_premis =  rule:get_contected_premis()
    if premis
    then
-      local assume =  self:new_assume(premis)
+      local assume =  self:new_assume(contected_premis)
       new_simple_proof:add(assume)
    end
+   local var_ctxt =  rule:get_var_ctxt()
    local conclusion =  rule:get_conclusion()
-   local simple_proof_state =  self:new_simple_proof_state(conclusion)
+   local simple_proof_state =  self:new_simple_proof_state(
+         var_ctxt
+      ,  conclusion )
    local status, progress
       =  new_simple_proof:apply(simple_proof_state, conclusion)
    if not drop_mode or not progress
    then
-      simple_proof_state:push_to_simple_proof(self, premis)
+      simple_proof_state:push_to_simple_proof(self, rule:get_premis())
    end
    return progress
 end
