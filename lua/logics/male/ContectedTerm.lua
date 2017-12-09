@@ -35,6 +35,10 @@ function ContectedTerm:devar(var_assgnm)
    return self:new_instance(new_term, new_var_ctxt)
 end
 
+function ContectedTerm:val_eq(other)
+   return self:get_term():val_eq(other:get_term())
+end
+
 function ContectedTerm:__diagnose_single_line(indentation)
    indentation:insert(String:string_factory("(logics::male::ContectedTerm "))
    self:get_var_ctxt():__diagnose_single_line(indentation)
