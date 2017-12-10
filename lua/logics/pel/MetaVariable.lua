@@ -17,18 +17,18 @@ end
 function MetaVariable:get_compound_cast()
 end
 
-function MetaVariable:destruct_compound(symbol, arity)
+function MetaVariable:destruct_compound(var_ctxt, symbol, arity)
    local this_val =  self:get_val()
    if this_val
    then
-      return this_val:destruct_compound(symbol, arity)
+      return this_val:destruct_compound(var_ctxt, symbol, arity)
    else
       local new_sub_term_list =  List:empty_list_factory()
       for i = 1, arity
       do local next_var =  self:new_instance()
          new_sub_term_list:append(next_var)
       end
-      if self:set_val(new_compound)
+      if self:set_val(var_ctxt, new_compound)
       then
          return new_sub_term_list
       end

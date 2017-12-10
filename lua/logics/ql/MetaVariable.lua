@@ -16,14 +16,14 @@ end
 function MetaVariable:get_compound_cast()
 end
 
-function MetaVariable:destruct_terminal(terminal)
+function MetaVariable:destruct_terminal(var_ctxt, terminal)
    local this_val =  self:get_val()
    if this_val
    then
-      return this_val:destruct_terminal(terminal)
+      return this_val:destruct_terminal(var_ctxt, terminal)
    else
       local next_instance =  self:new_instance()
-      if self:set_val(self:new_compound(terminal, next_instance))
+      if self:set_val(var_ctxt, self:new_compound(terminal, next_instance))
       then
          return next_instance
       end

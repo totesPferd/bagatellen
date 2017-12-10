@@ -40,7 +40,7 @@ function Compound:get_val_rec()
    return self
 end
 
-function Compound:destruct_compound(symbol, arity)
+function Compound:destruct_compound(var_ctxt, symbol, arity)
    if symbol == self:get_symbol()
    then
       return self:get_sub_term_list()
@@ -55,7 +55,8 @@ end
 function Compound:equate(var_ctxt, other)
    local equatable =  false
    local other_sub_term_list =  other:destruct_compound(
-         self:get_symbol()
+         var_ctxt
+      ,  self:get_symbol()
       ,  self:get_sub_term_list():__len() )
    if other_sub_term_list
    then

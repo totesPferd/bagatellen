@@ -12,11 +12,11 @@ end
 function Variable:get_compound_cast()
 end
 
-function Variable:destruct_compound(symbol, arity)
+function Variable:destruct_compound(var_ctxt, symbol, arity)
    local this_val =  self:get_val()
    if this_val
    then
-      return this_val:destruct_compound(symbol, arity)
+      return this_val:destruct_compound(var_ctxt, symbol, arity)
    end
 end
 

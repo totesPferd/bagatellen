@@ -14,11 +14,11 @@ end
 function Variable:get_compound_cast()
 end
 
-function Variable:destruct_terminal(terminal)
+function Variable:destruct_terminal(var_ctxt, terminal)
    local this_val =  self:get_val()
    if this_val
    then
-      return this_val:destruct_terminal(terminal)
+      return this_val:destruct_terminal(var_ctxt, terminal)
    end
 end
 
