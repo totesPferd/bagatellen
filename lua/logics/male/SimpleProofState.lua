@@ -74,7 +74,7 @@ end
 function SimpleProofState:resolve(simple_clause)
    local retval =  false
    local contected_goal =  self:get_contected_conclusion()
-   if goal
+   if contected_goal
    then
       local premis =  simple_clause:get_premis()
       local conclusion =  simple_clause:get_contected_conclusion()
