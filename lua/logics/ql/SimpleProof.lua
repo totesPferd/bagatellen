@@ -4,6 +4,7 @@ local SimpleProof =  MALESimpleProof:__new()
 package.loaded["logics.ql.SimpleProof"] =  SimpleProof
 local ContectedTerm =  require "logics.male.ContectedTerm"
 local MetaVariable =  require "logics.ql.MetaVariable"
+local ReflRule =  require "logics.ql.simple_rule.Refl"
 local SimpleProofState =  require "logics.male.SimpleProofState"
 local ToLiteral =  require "logics.ql.ToLiteral"
 local TransRule =  require "logics.ql.simple_rule.Trans"
@@ -40,6 +41,7 @@ function SimpleProof:get_normal_form(lhs_contected_term)
    local to_literal =  ToLiteral:new(lhs_term, rhs_term)
    local sps =  SimpleProofState:new(lhs_var_ctxt, to_literal)
    sps:apply_proof(self)
+
    local conclusion =  sps:get_conclusion()
    if conclusion
    then

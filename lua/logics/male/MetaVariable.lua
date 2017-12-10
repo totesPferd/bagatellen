@@ -26,7 +26,7 @@ function MetaVariable:push_val(var_ctxt, var)
    local this_val =  self:get_val()
    if this_val
    then
-      retval =  var:set_val(var_ctxt, self:get_val())
+      retval =  this_val:push_val(var_ctxt, var)
    else
       retval =  self:set_val(var_ctxt, var)
    end

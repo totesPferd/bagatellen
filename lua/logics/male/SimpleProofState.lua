@@ -23,7 +23,7 @@ function SimpleProofState:new_instance(conclusion)
 end
 
 function SimpleProofState:new_contected_term(var_ctxt, term)
-   return SimpleProofState:new(var_ctxt, term)
+   return ContectedTerm:new(var_ctxt, term)
 end
 
 function SimpleProofState:new_var_assgnm()
@@ -46,6 +46,16 @@ function SimpleProofState:set_conclusion(conclusion)
    self.conclusion =  conclusion
 end
 
+function SimpleProofState:get_contected_conclusion()
+   local goal =  self:get_conclusion()
+   if goal
+   then
+      return self:new_contected_term(
+            self:get_var_ctxt()
+         ,  goal )
+   end
+end
+
 function SimpleProofState:is_proven()
    return not self:get_conclusion()
 end
@@ -61,17 +71,19 @@ function SimpleProofState:drop()
    self.conclusion =  nil
 end
 
-function SimpleProofState:resolve(simple_clause, goal)
-   local premis =  simple_clause:get_premis()
-   local conclusion =  simple_clause:get_contected_conclusion()
-   local contected_goal =  self:new_contected_term(
-         self:get_var_ctxt()
-      ,  goal )
-   local retval =  conclusion:equate(contected_goal)
-   if retval
+function SimpleProofState:resolve(simple_clause)
+   local retval =  false
+   local contected_goal =  self:get_contected_conclusion()
+   if goal
    then
-      self:use(simple_clause)
-      self:set_conclusion(premis)
+      local premis =  simple_clause:get_premis()
+      local conclusion =  simple_clause:get_contected_conclusion()
+      retval =  conclusion:equate(contected_goal)
+      if retval
+      then
+         self:use(simple_clause)
+         self:set_conclusion(premis)
+      end
    end
    return retval
 end

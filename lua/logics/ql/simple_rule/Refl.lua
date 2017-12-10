@@ -9,7 +9,7 @@ local ToLiteral =  require "logics.ql.ToLiteral"
 function Refl:new()
    local var =  Variable:new()
    local var_ctxt =  VariableContext:new()
-   var_ctxt:add_vaiable(var)
+   var_ctxt:add_variable(var)
    local conclusion =  ToLiteral:new(var, var)
    return SimpleClause.new(self, var_ctxt, nil, conclusion)
 end
