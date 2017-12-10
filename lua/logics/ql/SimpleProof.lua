@@ -4,7 +4,6 @@ local SimpleProof =  MALESimpleProof:__new()
 package.loaded["logics.ql.SimpleProof"] =  SimpleProof
 local ContectedTerm =  require "logics.male.ContectedTerm"
 local MetaVariable =  require "logics.ql.MetaVariable"
-local ReflRule =  require "logics.ql.simple_rule.Refl"
 local SimpleProofState =  require "logics.male.SimpleProofState"
 local ToLiteral =  require "logics.ql.ToLiteral"
 local TransRule =  require "logics.ql.simple_rule.Trans"
