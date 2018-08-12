@@ -342,7 +342,7 @@ function URITemplate:_next_cur(ctxt)
    if substitute
    then
       if
-            (ctxt.item.operator == "#" or ctxt.item.interprete ~= "string" or substitute ~= "")
+            (not(ctxt.item.operator) or ctxt.item.operator == "#" or ctxt.item.interprete ~= "string" or substitute ~= "")
         and (ctxt.item.interprete ~= "label" or not(is_empty(substitute)))
       then
          if ctxt.item.first
