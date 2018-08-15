@@ -1,5 +1,5 @@
 -- cf. https://tools.ietf.org/html/rfc6570
-URITemplate =  (require "base.oop.obj"):__new()
+local URITemplate =  (require "base.oop.obj"):__new()
 
 local function is_empty(s)
    local retval =  false
