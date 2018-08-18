@@ -1,5 +1,228 @@
 -- cf. https://tools.ietf.org/html/rfc6570
-local URITemplate =  (require "base.oop.obj"):__new()
+local FSM =  (require "base.oop.obj"):__new()
+
+function FSM:new(str)
+   local retval =  self:__new()
+   retval.ctxt =  {}
+   retval.str =  str
+   return retval
+end
+
+-- abstract methods
+function FSM:eval_regular_char(s)
+end
+function FSM:eval_next_var()
+end
+function FSM:eval_tmpl_off()
+end
+--
+
+function FSM:_err_coll(c)
+   error("err_coll")
+end
+
+function FSM:_err_expand(c)
+   error("err_expand")
+end
+
+function FSM:_err_prefix(c)
+   error("err_prefix")
+end
+
+function FSM:_err_tmpl(c)
+   error("err_tmpl")
+end
+
+function FSM:_expand_mode()
+   self.ctxt.item.cur.expand =  true
+end
+
+function FSM:_next_var()
+   self:eval_next_var()
+end
+
+function FSM:_prefix_num(c)
+   local n =  c:byte(1, -1) - 48
+   self.ctxt.item.cur.prefix =  (self.ctxt.item.cur.prefix or 0) * 10 + n
+end
+
+function FSM:_tmpl_off()
+   self:eval_tmpl_off()
+end
+
+function FSM:_tmpl_on()
+   self:_init_cur()
+end
+
+function FSM:_tmpl_op_amp()
+   self.ctxt.item.operator =  '&'
+   self.ctxt.item.interprete =  "query"
+   self.ctxt.item.j =  '&'
+   self.ctxt.item.start =  '&'
+end
+
+function FSM:_tmpl_op_hash()
+   self.ctxt.item.operator =  '#'
+   self.ctxt.item.safe =  true
+   self.ctxt.item.start =  '#'
+end
+
+function FSM:_tmpl_op_label(c)
+   self.ctxt.item.operator =  c
+   self.ctxt.item.interprete =  "label"
+   self.ctxt.item.j =  c
+   self.ctxt.item.start =  c
+end
+
+function FSM:_tmpl_op_plus()
+   self.ctxt.item.operator =  '+'
+   self.ctxt.item.safe =  true
+end
+
+function FSM:_tmpl_op_qm()
+   self.ctxt.item.operator =  '?'
+   self.ctxt.item.interprete =  "query"
+   self.ctxt.item.j =  '&'
+   self.ctxt.item.start =  '?'
+end
+
+function FSM:_tmpl_op_reg(c)
+   self.ctxt.item.operator =  c
+   self.ctxt.item.j =  c
+   self.ctxt.item.start =  c
+end
+
+function FSM:_tmpl_op_sc()
+   self.ctxt.item.operator =  ';'
+   self.ctxt.item.interprete =  "semi_path"
+   self.ctxt.item.j =  ';'
+   self.ctxt.item.start =  ';'
+end
+
+function FSM:_tmpl_reg(c)
+   self.ctxt.item.cur.name =  self.ctxt.item.cur.name .. c
+end
+
+function FSM:_init_cur()
+   self.ctxt.item =  {}
+   self.ctxt.item.first =  true
+   self.ctxt.item.interprete =  "string"
+   self.ctxt.item.j =  ','
+   self.ctxt.item.safe =  false
+   self.ctxt.item.start =  ''
+   self:_reset_cur()
+end
+
+function FSM:_reset_cur()
+   self.ctxt.item.cur =  {
+         ['expand'] = false
+      ,  ['name'] = '' }
+end
+
+function FSM:open()
+   local mode =  "collecting"
+   for _, v in pairs { self.str:byte(1,-1) }
+   do c =  string.char(v)
+      if mode == "collecting"
+      then
+         if (v >= 0x30 and v <= 0x39) or (v >= 0x41 and v <= 0x5A) or (v >= 0x61 and v <= 0x7A) or c == "-" or c == "." or c == "_" or c == "~" or c == "%"
+          or c == ":" or c =="/" or c == "?" or c == "#" or c == "[" or c == "]" or c == "@"
+          or c == "!" or c == "$" or c == "&" or c == "'" or c == "(" or c == ")" or c == "*" or c == "+" or c == "," or c == ";" or c == "="
+         then
+            self:eval_regular_char(c)
+         elseif c == "{"
+         then
+            self:_tmpl_on()
+            mode =  "template_op"
+         else
+            self:_err_coll(c)
+         end
+      elseif mode == "template_op" or mode == "template"
+      then
+         if mode == "template_op" and (c == "." or c == "/")
+         then
+            self:_tmpl_op_label(c)
+            mode =  "template"
+         elseif mode == "template_op" and (c == "=" or c == "," or c == "!" or c == "@" or c == "|")
+         then
+            self:_tmpl_op_reg(c)
+            mode =  "template"
+         elseif mode == "template_op" and c == "&"
+         then
+            self:_tmpl_op_amp()
+            mode =  "template"
+         elseif mode == "template_op" and c == "#"
+         then
+            self:_tmpl_op_hash()
+            mode =  "template"
+         elseif mode == "template_op" and c == "+"
+         then
+            self:_tmpl_op_plus()
+            mode =  "template"
+         elseif mode == "template_op" and c == "?"
+         then
+            self:_tmpl_op_qm()
+            mode =  "template"
+         elseif mode == "template_op" and c == ";"
+         then
+            self:_tmpl_op_sc()
+            mode =  "template"
+         elseif c == "}"
+         then
+            self:_tmpl_off()
+            mode =  "collecting"
+         elseif (v >= 0x30 and v <= 0x39) or (v >= 0x41 and v <= 0x5A) or (v >= 0x61 and v <= 0x7A) or c == "_" or c == "%" or c == "."
+         then
+            self:_tmpl_reg(c)
+            mode =  "template"
+         elseif c == "*"
+         then
+            self:_expand_mode()
+            mode =  "expand"
+         elseif c == ":"
+         then
+            mode =  "prefix"
+         elseif c == ","
+         then
+            self:_next_var()
+         else
+            self:_err_tmpl(c)
+            mode =  "template"
+         end
+      elseif mode == "expand"
+      then
+         if c == ","
+         then
+            self:_next_var()
+            mode =  "template"
+         elseif c == "}"
+         then
+            self:_tmpl_off()
+            mode =  "collecting"
+         else
+            self:_err_expand(c)
+            mode =  "template"
+         end
+      elseif mode == "prefix"
+      then
+         if c == ","
+         then
+            self:_next_var()
+            mode =  "template"
+         elseif c == "}"
+         then
+            self:_tmpl_off()
+            mode =  "collecting"
+         elseif v >= 0x30 and v <= 0x39
+         then
+            self:_prefix_num(c)
+         else
+            self:_err_prefix(c)
+            mode =  "template"
+         end
+      end
+   end
+end
 
 local function is_empty(s)
    local retval =  false
@@ -13,18 +236,27 @@ local function is_empty(s)
    return retval
 end
 
-function URITemplate:_direct_output(ctxt, s)
-   ctxt.result =  ctxt.result .. s
+local OutputFSM =  FSM:__new()
+
+function OutputFSM:new(arg, str)
+   local retval =  FSM.new(self, str)
+   retval.arg =  arg
+   retval.result =  ""
+   return retval
 end
 
-function URITemplate:_quoted_output(ctxt, s)
+function OutputFSM:_direct_output(s)
+   self.result =  self.result .. s
+end
+
+function OutputFSM:_quoted_output(s)
    for _, v in pairs { tostring(s):byte(1, -1) }
    do local c =  string.char(v)
       if (v >= 0x30 and v <= 0x39) or (v >= 0x41 and v <= 0x5A) or (v >= 0x61 and v<= 0x7A) or c == '_' or c == '.' or c == '-'
       then
-         self:_direct_output(ctxt, c)
+         self:_direct_output(c)
       elseif
-           ctxt.item.safe
+           self.ctxt.item.safe
        and (     c == ':'
               or c == '/'
               or c == '?'
@@ -42,337 +274,242 @@ function URITemplate:_quoted_output(ctxt, s)
               or c == ';'
               or c == '=' )
       then
-         self:_direct_output(ctxt, c)
+         self:_direct_output(c)
       else
-         self:_direct_output(ctxt, string.format("%%%02X", v))
+         self:_direct_output(string.format("%%%02X", v))
       end
    end
 end
 
-function URITemplate:_label_output(ctxt, s)
+function OutputFSM:_label_output(s)
    if type(s) == "table"
    then
       local first =  true
-      local join_str =  ctxt.item.j
-      if not(ctxt.item.cur.expand)
+      local join_str =  self.ctxt.item.j
+      if not(self.ctxt.item.cur.expand)
       then
          join_str =  ","
       end
       for k, v in pairs(s)
       do if not(first)
          then
-            self:_direct_output(ctxt, join_str)
+            self:_direct_output(join_str)
          else
             first =  false
          end
          if type(k) == "string"
          then
-            self:_quoted_output(ctxt, k)
-            if ctxt.item.cur.expand
+            self:_quoted_output(k)
+            if self.ctxt.item.cur.expand
             then
-               self:_direct_output(ctxt, "=")
+               self:_direct_output("=")
             else
-               self:_direct_output(ctxt, ",")
+               self:_direct_output(",")
             end
          end
-         self:_quoted_output(ctxt, v)
+         self:_quoted_output(v)
       end
    else
       local value
-      if ctxt.item.cur.prefix
+      if self.ctxt.item.cur.prefix
       then
-         value =  s:sub(1, ctxt.item.cur.prefix)
+         value =  s:sub(1, self.ctxt.item.cur.prefix)
       else
          value =  s
       end
-      self:_quoted_output(ctxt, value)
+      self:_quoted_output(value)
    end
    return true
 end
 
-function URITemplate:_query_output(ctxt, s)
+function OutputFSM:_query_output(s)
    if type(s) == "table"
    then
-      local join_str =  ctxt.item.j
-      if not(ctxt.item.cur.expand)
+      local join_str =  self.ctxt.item.j
+      if not(self.ctxt.item.cur.expand)
       then
          join_str =  ","
-         self:_direct_output(ctxt, ctxt.item.cur.name)
-         self:_direct_output(ctxt, "=")
+         self:_direct_output(self.ctxt.item.cur.name)
+         self:_direct_output("=")
       end
       local first =  true
       for k, v in pairs(s)
       do if not(first)
          then
-            self:_direct_output(ctxt, join_str)
+            self:_direct_output(join_str)
          else
             first =  false
          end
-         if ctxt.item.cur.expand
+         if self.ctxt.item.cur.expand
          then
             if type(k) == "string"
             then
-               self:_quoted_output(ctxt, k)
+               self:_quoted_output(k)
             else
-               self:_direct_output(ctxt, ctxt.item.cur.name)
+               self:_direct_output(self.ctxt.item.cur.name)
             end
-            self:_direct_output(ctxt, "=")
+            self:_direct_output("=")
          else
             if type(k) == "string"
             then
-               self:_quoted_output(ctxt, k)
-               self:_direct_output(ctxt, ",")
+               self:_quoted_output(k)
+               self:_direct_output(",")
             end
          end
-         self:_quoted_output(ctxt, v)
+         self:_quoted_output(v)
       end
    else
       local value
-      if ctxt.item.cur.prefix
+      if self.ctxt.item.cur.prefix
       then
-         value =  s:sub(1, ctxt.item.cur.prefix)
+         value =  s:sub(1, self.ctxt.item.cur.prefix)
       else
          value =  s
       end
-      self:_direct_output(ctxt, ctxt.item.cur.name)
-      self:_direct_output(ctxt, "=")
-      self:_quoted_output(ctxt, value)
+      self:_direct_output(self.ctxt.item.cur.name)
+      self:_direct_output("=")
+      self:_quoted_output(value)
    end
    return true
 end
 
-function URITemplate:_semi_path_output(ctxt, s)
+function OutputFSM:_semi_path_output(s)
    if type(s) == "table"
    then
-      local join_str =  ctxt.item.j
-      if not(ctxt.item.cur.expand)
+      local join_str =  self.ctxt.item.j
+      if not(self.ctxt.item.cur.expand)
       then
          join_str =  ","
-         self:_direct_output(ctxt, ctxt.item.cur.name)
-         self:_direct_output(ctxt, "=")
+         self:_direct_output(self.ctxt.item.cur.name)
+         self:_direct_output("=")
       end
       local first =  true
       for k, v in pairs(s)
       do if not(first)
          then
-            self:_direct_output(ctxt, join_str)
+            self:_direct_output(join_str)
          else
             first =  false
          end
-         if ctxt.item.cur.expand
+         if self.ctxt.item.cur.expand
          then
             if type(k) == "string"
             then
-               self:_quoted_output(ctxt, k)
+               self:_quoted_output(k)
             else
-               self:_direct_output(ctxt, ctxt.item.cur.name)
+               self:_direct_output(self.ctxt.item.cur.name)
             end
-            self:_direct_output(ctxt, "=")
+            self:_direct_output("=")
          else
             if type(k) == "string"
             then
-               self:_quoted_output(ctxt, k)
-               self:_direct_output(ctxt, ",")
+               self:_quoted_output(k)
+               self:_direct_output(",")
             end
          end
-         self:_quoted_output(ctxt, v)
+         self:_quoted_output(v)
       end
    else
       local value
-      if ctxt.item.cur.prefix
+      if self.ctxt.item.cur.prefix
       then
-         value =  s:sub(1, ctxt.item.cur.prefix)
+         value =  s:sub(1, self.ctxt.item.cur.prefix)
       else
          value =  s
       end
-      self:_direct_output(ctxt, ctxt.item.cur.name)
+      self:_direct_output(self.ctxt.item.cur.name)
       if value ~= ""
       then
-         self:_direct_output(ctxt, "=")
-         self:_quoted_output(ctxt, value)
+         self:_direct_output("=")
+         self:_quoted_output(value)
       end
    end
    return true
 end
 
-function URITemplate:_string_output(ctxt, s)
+function OutputFSM:_string_output(s)
    if type(s) == "table"
    then
       local first =  true
       for k, v in pairs(s)
       do if not(first)
          then
-            self:_direct_output(ctxt, ",")
+            self:_direct_output(",")
          else
             first =  false
          end
          if type(k) == "string"
          then
-            self:_quoted_output(ctxt, k)
-            if ctxt.item.cur.expand
+            self:_quoted_output(k)
+            if self.ctxt.item.cur.expand
             then
-               self:_direct_output(ctxt, "=")
+               self:_direct_output("=")
             else
-               self:_direct_output(ctxt, ",")
+               self:_direct_output(",")
             end
          end
-         self:_quoted_output(ctxt, v)
+         self:_quoted_output(v)
       end
    else
       local value
-      if ctxt.item.cur.prefix
+      if self.ctxt.item.cur.prefix
       then
-         value =  s:sub(1, ctxt.item.cur.prefix)
+         value =  s:sub(1, self.ctxt.item.cur.prefix)
       else
          value =  s
       end
-      self:_quoted_output(ctxt, value)
+      self:_quoted_output(value)
    end
    return true
 end
 
-function URITemplate:_collecting(ctxt, c)
-   self:_direct_output(ctxt, c)
+function OutputFSM:eval_regular_char(s)
+   self:_direct_output(s)
 end
 
-function URITemplate:_err_coll(ctxt, c)
-   error("err_coll")
-end
-
-function URITemplate:_err_expand(ctxt, c)
-   error("err_expand")
-end
-
-function URITemplate:_err_prefix(ctxt, c)
-   error("err_prefix")
-end
-
-function URITemplate:_err_tmpl(ctxt, c)
-   error("err_tmpl")
-end
-
-function URITemplate:_expand_mode(ctxt)
-   ctxt.item.cur.expand =  true
-end
-
-function URITemplate:_next_var(ctxt)
-   self:_next_cur(ctxt)
-end
-
-function URITemplate:_prefix_num(ctxt, c)
-   local n =  c:byte(1, -1) - 48
-   ctxt.item.cur.prefix =  (ctxt.item.cur.prefix or 0) * 10 + n
-end
-
-function URITemplate:_tmpl_off(ctxt)
-   self:_next_cur(ctxt)
-end
-
-function URITemplate:_tmpl_on(ctxt)
-   self:_init_cur(ctxt)
-end
-
-function URITemplate:_tmpl_op_amp(ctxt)
-   ctxt.item.operator =  '&'
-   ctxt.item.interprete =  "query"
-   ctxt.item.j =  '&'
-   ctxt.item.start =  '&'
-end
-
-function URITemplate:_tmpl_op_hash(ctxt)
-   ctxt.item.operator =  '#'
-   ctxt.item.safe =  true
-   ctxt.item.start =  '#'
-end
-
-function URITemplate:_tmpl_op_label(ctxt, c)
-   ctxt.item.operator =  c
-   ctxt.item.interprete =  "label"
-   ctxt.item.j =  c
-   ctxt.item.start =  c
-end
-
-function URITemplate:_tmpl_op_plus(ctxt)
-   ctxt.item.operator =  '+'
-   ctxt.item.safe =  true
-end
-
-function URITemplate:_tmpl_op_qm(ctxt)
-   ctxt.item.operator =  '?'
-   ctxt.item.interprete =  "query"
-   ctxt.item.j =  '&'
-   ctxt.item.start =  '?'
-end
-
-function URITemplate:_tmpl_op_reg(ctxt, c)
-   ctxt.item.operator =  c
-   ctxt.item.j =  c
-   ctxt.item.start =  c
-end
-
-function URITemplate:_tmpl_op_sc(ctxt)
-   ctxt.item.operator =  ';'
-   ctxt.item.interprete =  "semi_path"
-   ctxt.item.j =  ';'
-   ctxt.item.start =  ';'
-end
-
-function URITemplate:_tmpl_reg(ctxt, c)
-   ctxt.item.cur.name =  ctxt.item.cur.name .. c
-end
-
-function URITemplate:_init_cur(ctxt)
-   ctxt.item =  {}
-   ctxt.item.first =  true
-   ctxt.item.interprete =  "string"
-   ctxt.item.j =  ','
-   ctxt.item.safe =  false
-   ctxt.item.start =  ''
-   self:_reset_cur(ctxt)
-end
-
-function URITemplate:_reset_cur(ctxt)
-   ctxt.item.cur =  {
-         ['expand'] = false
-      ,  ['name'] = '' }
-end
-
-function URITemplate:_next_cur(ctxt)
-   local substitute =  ctxt.arg[ctxt.item.cur.name]
+function OutputFSM:eval_next_var()
+   local substitute =  self.arg[self.ctxt.item.cur.name]
    if substitute
    then
       if
-            (not(ctxt.item.operator) or ctxt.item.operator == "#" or ctxt.item.interprete ~= "string" or substitute ~= "")
-        and (ctxt.item.interprete ~= "label" or not(is_empty(substitute)))
+            (not(self.ctxt.item.operator) or self.ctxt.item.operator == "#" or self.ctxt.item.interprete ~= "string" or substitute ~= "")
+        and (self.ctxt.item.interprete ~= "label" or not(is_empty(substitute)))
       then
-         if ctxt.item.first
+         if self.ctxt.item.first
          then
-            self:_direct_output(ctxt, ctxt.item.start)
+            self:_direct_output(self.ctxt.item.start)
          else
-            self:_direct_output(ctxt, ctxt.item.j)
+            self:_direct_output(self.ctxt.item.j)
          end
          local value
-         if ctxt.item.interprete == "label"
+         if self.ctxt.item.interprete == "label"
          then
-            value =  self:_label_output(ctxt, substitute)
-         elseif ctxt.item.interprete == "query"
+            value =  self:_label_output(substitute)
+         elseif self.ctxt.item.interprete == "query"
          then
-            value =  self:_query_output(ctxt, substitute)
-         elseif ctxt.item.interprete == "semi_path"
+            value =  self:_query_output(substitute)
+         elseif self.ctxt.item.interprete == "semi_path"
          then
-            value =  self:_semi_path_output(ctxt, substitute)
-         elseif ctxt.item.interprete == "string"
+            value =  self:_semi_path_output(substitute)
+         elseif self.ctxt.item.interprete == "string"
          then
-            value =  self:_string_output(ctxt, substitute)
+            value =  self:_string_output(substitute)
          end
          if value
          then
-            ctxt.item.first =  false
+            self.ctxt.item.first =  false
          end
       end
    end
-   self:_reset_cur(ctxt)
+   self:_reset_cur()
 end
+
+function OutputFSM:eval_tmpl_off()
+   return self:eval_next_var()
+end
+
+
+local URITemplate =  (require "base.oop.obj"):__new()
 
 function URITemplate:new(str)
    local retval =  self:__new()
@@ -381,112 +518,9 @@ function URITemplate:new(str)
 end
 
 function URITemplate:instantiate(arg)
-   local ctxt =  { ['arg'] = arg, ['result'] = "" }
-
-   local mode =  "collecting"
-   for _, v in pairs { self.str:byte(1,-1) }
-   do c =  string.char(v)
-      if mode == "collecting"
-      then
-         if (v >= 0x30 and v <= 0x39) or (v >= 0x41 and v <= 0x5A) or (v >= 0x61 and v <= 0x7A) or c == "-" or c == "." or c == "_" or c == "~" or c == "%"
-          or c == ":" or c =="/" or c == "?" or c == "#" or c == "[" or c == "]" or c == "@"
-          or c == "!" or c == "$" or c == "&" or c == "'" or c == "(" or c == ")" or c == "*" or c == "+" or c == "," or c == ";" or c == "="
-         then
-            self:_collecting(ctxt, c)
-         elseif c == "{"
-         then
-            self:_tmpl_on(ctxt)
-            mode =  "template_op"
-         else
-            self:_err_coll(ctxt, c)
-         end
-      elseif mode == "template_op" or mode == "template"
-      then
-         if mode == "template_op" and (c == "." or c == "/")
-         then
-            self:_tmpl_op_label(ctxt, c)
-            mode =  "template"
-         elseif mode == "template_op" and (c == "=" or c == "," or c == "!" or c == "@" or c == "|")
-         then
-            self:_tmpl_op_reg(ctxt, c)
-            mode =  "template"
-         elseif mode == "template_op" and c == "&"
-         then
-            self:_tmpl_op_amp(ctxt)
-            mode =  "template"
-         elseif mode == "template_op" and c == "#"
-         then
-            self:_tmpl_op_hash(ctxt)
-            mode =  "template"
-         elseif mode == "template_op" and c == "+"
-         then
-            self:_tmpl_op_plus(ctxt)
-            mode =  "template"
-         elseif mode == "template_op" and c == "?"
-         then
-            self:_tmpl_op_qm(ctxt)
-            mode =  "template"
-         elseif mode == "template_op" and c == ";"
-         then
-            self:_tmpl_op_sc(ctxt)
-            mode =  "template"
-         elseif c == "}"
-         then
-            self:_tmpl_off(ctxt)
-            mode =  "collecting"
-         elseif (v >= 0x30 and v <= 0x39) or (v >= 0x41 and v <= 0x5A) or (v >= 0x61 and v <= 0x7A) or c == "_" or c == "%" or c == "."
-         then
-            self:_tmpl_reg(ctxt, c)
-            mode =  "template"
-         elseif c == "*"
-         then
-            self:_expand_mode(ctxt)
-            mode =  "expand"
-         elseif c == ":"
-         then
-            mode =  "prefix"
-         elseif c == ","
-         then
-            self:_next_var(ctxt)
-         else
-            self:_err_tmpl(ctxt, c)
-            mode =  "template"
-         end
-      elseif mode == "expand"
-      then
-         if c == ","
-         then
-            self:_next_var(ctxt)
-            mode =  "template"
-         elseif c == "}"
-         then
-            self:_tmpl_off(ctxt)
-            mode =  "collecting"
-         else
-            self:_err_expand(ctxt, c)
-            mode =  "template"
-         end
-      elseif mode == "prefix"
-      then
-         if c == ","
-         then
-            self:_next_var(ctxt)
-            mode =  "template"
-         elseif c == "}"
-         then
-            self:_tmpl_off(ctxt)
-            mode =  "collecting"
-         elseif v >= 0x30 and v <= 0x39
-         then
-            self:_prefix_num(ctxt, c)
-         else
-            self:_err_prefix(ctxt, c)
-            mode =  "template"
-         end
-      end
-   end
-
-   return ctxt.result
+   local outputFSM =  OutputFSM:new(arg, self.str)
+   outputFSM:open()
+   return outputFSM.result
 end
 
 return URITemplate
