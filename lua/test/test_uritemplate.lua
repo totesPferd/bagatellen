@@ -312,6 +312,8 @@ local test_cases =  {{
                       ,  result = "&semi=%3B&dot=.&comma=%2C" }}}
 }
 
+local eq_dict =  require "utils.table.eq"
+
 local function list_to_dict(l)
    local mode =  "key"
    local key =  nil
@@ -328,23 +330,6 @@ local function list_to_dict(l)
    end
    return retval
 end
-
-local function eq_dict(x, y)
-   for k, v in pairs(x)
-   do if y[k] ~= v
-      then
-         return false
-      end
-   end
-   for k, v in pairs(y)
-   do if x[k] ~= v
-      then
-         return false
-      end
-   end
-   return true
-end
-
 
 for nr, test_case in pairs(test_cases)
 do for s, e in pairs(test_case.expect)
