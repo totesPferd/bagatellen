@@ -271,8 +271,8 @@ function OutputFSM:_quoted_output(s)
    end
 end
 
-function OutputFSM:_label_output(s)
-   if type(s) == "table"
+function OutputFSM:_label_output()
+   if type(self.ctxt.item.cur.substitute) == "table"
    then
       local first =  true
       local join_str =  self.ctxt.item.j
@@ -280,7 +280,7 @@ function OutputFSM:_label_output(s)
       then
          join_str =  ","
       end
-      for k, v in pairs(s)
+      for k, v in pairs(self.ctxt.item.cur.substitute)
       do if not(first)
          then
             self:_direct_output(join_str)
@@ -303,17 +303,20 @@ function OutputFSM:_label_output(s)
       local value
       if self.ctxt.item.cur.prefix
       then
-         value =  s:sub(1, self.ctxt.item.cur.prefix)
+         value =  string.sub(
+               self.ctxt.item.cur.substitute
+            ,  1
+            ,  self.ctxt.item.cur.prefix )
       else
-         value =  s
+         value = self.ctxt.item.cur.substitute 
       end
       self:_quoted_output(value)
    end
    return true
 end
 
-function OutputFSM:_query_output(s)
-   if type(s) == "table"
+function OutputFSM:_query_output()
+   if type(self.ctxt.item.cur.substitute) == "table"
    then
       local join_str =  self.ctxt.item.j
       if not(self.ctxt.item.cur.expand)
@@ -323,7 +326,7 @@ function OutputFSM:_query_output(s)
          self:_direct_output("=")
       end
       local first =  true
-      for k, v in pairs(s)
+      for k, v in pairs(self.ctxt.item.cur.substitute)
       do if not(first)
          then
             self:_direct_output(join_str)
@@ -352,9 +355,12 @@ function OutputFSM:_query_output(s)
       local value
       if self.ctxt.item.cur.prefix
       then
-         value =  s:sub(1, self.ctxt.item.cur.prefix)
+         value =  string.sub(
+               self.ctxt.item.cur.substitute
+            ,  1
+            ,  self.ctxt.item.cur.prefix )
       else
-         value =  s
+         value =  self.ctxt.item.cur.substitute
       end
       self:_direct_output(self.ctxt.item.cur.name)
       self:_direct_output("=")
@@ -363,8 +369,8 @@ function OutputFSM:_query_output(s)
    return true
 end
 
-function OutputFSM:_semi_path_output(s)
-   if type(s) == "table"
+function OutputFSM:_semi_path_output()
+   if type(self.ctxt.item.cur.substitute) == "table"
    then
       local join_str =  self.ctxt.item.j
       if not(self.ctxt.item.cur.expand)
@@ -374,7 +380,7 @@ function OutputFSM:_semi_path_output(s)
          self:_direct_output("=")
       end
       local first =  true
-      for k, v in pairs(s)
+      for k, v in pairs(self.ctxt.item.cur.substitute)
       do if not(first)
          then
             self:_direct_output(join_str)
@@ -403,9 +409,12 @@ function OutputFSM:_semi_path_output(s)
       local value
       if self.ctxt.item.cur.prefix
       then
-         value =  s:sub(1, self.ctxt.item.cur.prefix)
+         value =  string.sub(
+               self.ctxt.item.cur.substitute
+            ,  1
+            ,  self.ctxt.item.cur.prefix )
       else
-         value =  s
+         value =  self.ctxt.item.cur.substitute
       end
       self:_direct_output(self.ctxt.item.cur.name)
       if value ~= ""
@@ -417,11 +426,11 @@ function OutputFSM:_semi_path_output(s)
    return true
 end
 
-function OutputFSM:_string_output(s)
-   if type(s) == "table"
+function OutputFSM:_string_output()
+   if type(self.ctxt.item.cur.substitute) == "table"
    then
       local first =  true
-      for k, v in pairs(s)
+      for k, v in pairs(self.ctxt.item.cur.substitute)
       do if not(first)
          then
             self:_direct_output(",")
@@ -444,9 +453,12 @@ function OutputFSM:_string_output(s)
       local value
       if self.ctxt.item.cur.prefix
       then
-         value =  s:sub(1, self.ctxt.item.cur.prefix)
+         value =  string.sub(
+               self.ctxt.item.cur.substitute
+            ,  1
+            ,  self.ctxt.item.cur.prefix )
       else
-         value =  s
+         value =  self.ctxt.item.cur.substitute
       end
       self:_quoted_output(value)
    end
@@ -458,12 +470,12 @@ function OutputFSM:eval_regular_char(s)
 end
 
 function OutputFSM:eval_next_var()
-   local substitute =  self.arg[self.ctxt.item.cur.name]
-   if substitute
+   self.ctxt.item.cur.substitute =  self.arg[self.ctxt.item.cur.name]
+   if self.ctxt.item.cur.substitute
    then
       if
-            (not(self.ctxt.item.operator) or self.ctxt.item.operator == "#" or self.ctxt.item.interprete ~= "string" or substitute ~= "")
-        and (self.ctxt.item.interprete ~= "label" or not(is_empty(substitute)))
+            (not(self.ctxt.item.operator) or self.ctxt.item.operator == "#" or self.ctxt.item.interprete ~= "string" or self.ctxt.item.cur.substitute ~= "")
+        and (self.ctxt.item.interprete ~= "label" or not(is_empty(self.ctxt.item.cur.substitute)))
       then
          if self.ctxt.item.first
          then
@@ -474,16 +486,16 @@ function OutputFSM:eval_next_var()
          local value
          if self.ctxt.item.interprete == "label"
          then
-            value =  self:_label_output(substitute)
+            value =  self:_label_output()
          elseif self.ctxt.item.interprete == "query"
          then
-            value =  self:_query_output(substitute)
+            value =  self:_query_output()
          elseif self.ctxt.item.interprete == "semi_path"
          then
-            value =  self:_semi_path_output(substitute)
+            value =  self:_semi_path_output()
          elseif self.ctxt.item.interprete == "string"
          then
-            value =  self:_string_output(substitute)
+            value =  self:_string_output()
          end
          if value
          then
