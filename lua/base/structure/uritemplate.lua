@@ -1,4 +1,5 @@
 -- cf. https://tools.ietf.org/html/rfc6570
+local is_empty =  require "utils.table.is_empty"
 local FSM =  (require "base.oop.obj"):__new()
 
 function FSM:new(str)
@@ -224,17 +225,6 @@ function FSM:open()
    end
 end
 
-local function is_empty(s)
-   local retval =  false
-   if type(s) == "table"
-   then
-      retval =  true
-      for k, v in pairs(s)
-      do retval =  false
-      end
-   end
-   return retval
-end
 
 local OutputFSM =  FSM:__new()
 
