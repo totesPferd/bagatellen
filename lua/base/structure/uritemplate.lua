@@ -126,9 +126,31 @@ function FSM:open()
    do c =  string.char(v)
       if mode == "collecting"
       then
-         if (v >= 0x30 and v <= 0x39) or (v >= 0x41 and v <= 0x5A) or (v >= 0x61 and v <= 0x7A) or c == "-" or c == "." or c == "_" or c == "~" or c == "%"
-          or c == ":" or c =="/" or c == "?" or c == "#" or c == "[" or c == "]" or c == "@"
-          or c == "!" or c == "$" or c == "&" or c == "'" or c == "(" or c == ")" or c == "*" or c == "+" or c == "," or c == ";" or c == "="
+         if
+               (v >= 0x30 and v <= 0x39)
+            or (v >= 0x41 and v <= 0x5A)
+            or (v >= 0x61 and v <= 0x7A)
+            or c == "-"
+            or c == "."
+            or c == "_"
+            or c == "~"
+            or c == "%"
+            or c == ":"
+            or c =="/"
+            or c == "?"
+            or c == "#"
+            or c == "[" or c == "]"
+            or c == "@"
+            or c == "!"
+            or c == "$"
+            or c == "&"
+            or c == "'"
+            or c == "(" or c == ")"
+            or c == "*"
+            or c == "+"
+            or c == ","
+            or c == ";"
+            or c == "="
          then
             self:eval_regular_char(c)
          elseif c == "{"
@@ -144,7 +166,14 @@ function FSM:open()
          then
             self:_tmpl_op_label(c)
             mode =  "template"
-         elseif mode == "template_op" and (c == "=" or c == "," or c == "!" or c == "@" or c == "|")
+         elseif
+               mode == "template_op"
+          and (
+                    c == "="
+                 or c == ","
+                 or c == "!"
+                 or c == "@"
+                 or c == "|" )
          then
             self:_tmpl_op_reg(c)
             mode =  "template"
@@ -172,7 +201,13 @@ function FSM:open()
          then
             self:_tmpl_off()
             mode =  "collecting"
-         elseif (v >= 0x30 and v <= 0x39) or (v >= 0x41 and v <= 0x5A) or (v >= 0x61 and v <= 0x7A) or c == "_" or c == "%" or c == "."
+         elseif
+              (v >= 0x30 and v <= 0x39)
+           or (v >= 0x41 and v <= 0x5A)
+           or (v >= 0x61 and v <= 0x7A)
+           or c == "_"
+           or c == "%"
+           or c == "."
          then
             self:_tmpl_reg(c)
             mode =  "template"
@@ -225,6 +260,42 @@ function FSM:open()
    end
 end
 
+function FSM:is_none_quote_necessary(c)
+   local retval =  false
+   local v =  string.byte(c, 1, -1)
+   if 
+         (v >= 0x30 and v <= 0x39)
+      or (v >= 0x41 and v <= 0x5A)
+      or (v >= 0x61 and v <= 0x7A)
+      or c == '_'
+      or c == '.'
+      or c == '-'
+      then
+         retval =  true
+      elseif
+            self.ctxt.item.safe
+        and (
+                  c == ':'
+               or c == '/'
+               or c == '?'
+               or c == '#'
+               or c == '[' or c == ']'
+               or c == '@'
+               or c == '!'
+               or c == '$'
+               or c == '&'
+               or c == "'"
+               or c == '(' or c == ')'
+               or c == '*'
+               or c == '+'
+               or c == ','
+               or c == ';'
+               or c == '=' )
+      then
+         retval =  true
+      end
+   return retval
+end
 
 local OutputFSM =  FSM:__new()
 
@@ -242,27 +313,7 @@ end
 function OutputFSM:_quoted_output(s)
    for _, v in pairs { tostring(s):byte(1, -1) }
    do local c =  string.char(v)
-      if (v >= 0x30 and v <= 0x39) or (v >= 0x41 and v <= 0x5A) or (v >= 0x61 and v<= 0x7A) or c == '_' or c == '.' or c == '-'
-      then
-         self:_direct_output(c)
-      elseif
-           self.ctxt.item.safe
-       and (     c == ':'
-              or c == '/'
-              or c == '?'
-              or c == '#'
-              or c == '[' or c == ']'
-              or c == '@'
-              or c == '!'
-              or c == '$'
-              or c == '&'
-              or c == "'"
-              or c == '(' or c == ')'
-              or c == '*'
-              or c == '+'
-              or c == ','
-              or c == ';'
-              or c == '=' )
+      if self:is_none_quote_necessary(c)
       then
          self:_direct_output(c)
       else
@@ -482,8 +533,14 @@ function OutputFSM:eval_next_var()
    if self.ctxt.item.cur.substitute
    then
       if
-            (not(self.ctxt.item.operator) or self.ctxt.item.operator == "#" or self.ctxt.item.interprete ~= "string" or not(self:is_string_empty()))
-        and (self.ctxt.item.interprete ~= "label" or not(self:is_label_empty()))
+            (
+                  not(self.ctxt.item.operator)
+               or self.ctxt.item.operator == "#"
+               or self.ctxt.item.interprete ~= "string"
+               or not(self:is_string_empty()) )
+        and (
+              self.ctxt.item.interprete ~= "label"
+           or not(self:is_label_empty()) )
       then
          if self.ctxt.item.first
          then
