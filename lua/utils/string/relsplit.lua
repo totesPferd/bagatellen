@@ -14,13 +14,13 @@ local function relsplit(str, delimiter, rel)
             looping_mode =  false
          else
             local cur_char =  string.sub(s.str, 1, 1)
-            if cur_char == delimiter
-            then
-               looping_mode =  false
-            elseif arg_mode == "a" and cur_char == rel
+            if arg_mode == "a" and cur_char == rel
             then
                arg_mode =  "b"
                retval_b =  ""
+            elseif cur_char == delimiter
+            then
+               looping_mode =  false
             elseif arg_mode == "a"
             then
                retval_a =  retval_a .. cur_char
