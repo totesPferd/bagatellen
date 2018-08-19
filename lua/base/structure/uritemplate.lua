@@ -467,9 +467,9 @@ function OutputFSM:eval_next_var()
       then
          if self.ctxt.item.first
          then
-            self:_direct_output(self.ctxt.item.start)
+            self:eval_regular_char(self.ctxt.item.start)
          else
-            self:_direct_output(self.ctxt.item.j)
+            self:eval_regular_char(self.ctxt.item.j)
          end
          local value
          if self.ctxt.item.interprete == "label"
