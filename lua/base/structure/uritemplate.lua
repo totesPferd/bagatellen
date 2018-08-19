@@ -465,6 +465,14 @@ function OutputFSM:_string_output()
    return true
 end
 
+function OutputFSM:is_label_empty()
+   return is_empty(self.ctxt.item.cur.substitute)
+end
+
+function OutputFSM:is_string_empty()
+   return self.ctxt.item.cur.substitute == ""
+end
+
 function OutputFSM:eval_regular_char(s)
    self:_direct_output(s)
 end
@@ -474,8 +482,8 @@ function OutputFSM:eval_next_var()
    if self.ctxt.item.cur.substitute
    then
       if
-            (not(self.ctxt.item.operator) or self.ctxt.item.operator == "#" or self.ctxt.item.interprete ~= "string" or self.ctxt.item.cur.substitute ~= "")
-        and (self.ctxt.item.interprete ~= "label" or not(is_empty(self.ctxt.item.cur.substitute)))
+            (not(self.ctxt.item.operator) or self.ctxt.item.operator == "#" or self.ctxt.item.interprete ~= "string" or not(self:is_string_empty()))
+        and (self.ctxt.item.interprete ~= "label" or not(self:is_label_empty()))
       then
          if self.ctxt.item.first
          then
