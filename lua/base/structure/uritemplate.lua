@@ -20,6 +20,8 @@ function FSM:eval_string()
 end
 function FSM:eval_regular_char(s)
 end
+function FSM:eval_name()
+end
 function FSM:is_label_empty()
 end
 function FSM:is_string_empty()
@@ -422,7 +424,7 @@ function OutputFSM:eval_query()
       if not(self.ctxt.item.cur.expand)
       then
          join_str =  ","
-         self:eval_regular_char(self.ctxt.item.cur.name)
+         self:eval_name()
          self:eval_regular_char("=")
       end
       local first =  true
@@ -439,7 +441,7 @@ function OutputFSM:eval_query()
             then
                self:_quoted_output(k)
             else
-               self:eval_regular_char(self.ctxt.item.cur.name)
+               self:eval_name()
             end
             self:eval_regular_char("=")
          else
@@ -462,7 +464,7 @@ function OutputFSM:eval_query()
       else
          value =  self.ctxt.item.cur.substitute
       end
-      self:eval_regular_char(self.ctxt.item.cur.name)
+      self:eval_name()
       self:eval_regular_char("=")
       self:_quoted_output(value)
    end
@@ -476,7 +478,7 @@ function OutputFSM:eval_semi_path()
       if not(self.ctxt.item.cur.expand)
       then
          join_str =  ","
-         self:eval_regular_char(self.ctxt.item.cur.name)
+         self:eval_name()
          self:eval_regular_char("=")
       end
       local first =  true
@@ -493,7 +495,7 @@ function OutputFSM:eval_semi_path()
             then
                self:_quoted_output(k)
             else
-               self:eval_regular_char(self.ctxt.item.cur.name)
+               self:eval_name()
             end
             self:eval_regular_char("=")
          else
@@ -516,7 +518,7 @@ function OutputFSM:eval_semi_path()
       else
          value =  self.ctxt.item.cur.substitute
       end
-      self:eval_regular_char(self.ctxt.item.cur.name)
+      self:eval_name()
       if value ~= ""
       then
          self:eval_regular_char("=")
@@ -563,6 +565,10 @@ function OutputFSM:eval_string()
       self:_quoted_output(value)
    end
    return true
+end
+
+function OutputFSM:eval_name()
+   self:eval_regular_char(self.ctxt.item.cur.name)
 end
 
 function OutputFSM:is_label_empty()
