@@ -20,8 +20,6 @@ function FSM:eval_string()
 end
 function FSM:eval_regular_char(s)
 end
-function FSM:eval_name()
-end
 function FSM:is_label_empty()
 end
 function FSM:is_string_empty()
