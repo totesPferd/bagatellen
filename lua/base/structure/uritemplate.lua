@@ -322,7 +322,7 @@ function OutputFSM:_quoted_output(s)
    end
 end
 
-function OutputFSM:_label_output()
+function OutputFSM:eval_label()
    if type(self.ctxt.item.cur.substitute) == "table"
    then
       local first =  true
@@ -366,7 +366,7 @@ function OutputFSM:_label_output()
    return true
 end
 
-function OutputFSM:_query_output()
+function OutputFSM:eval_query()
    if type(self.ctxt.item.cur.substitute) == "table"
    then
       local join_str =  self.ctxt.item.j
@@ -420,7 +420,7 @@ function OutputFSM:_query_output()
    return true
 end
 
-function OutputFSM:_semi_path_output()
+function OutputFSM:eval_semi_path()
    if type(self.ctxt.item.cur.substitute) == "table"
    then
       local join_str =  self.ctxt.item.j
@@ -477,7 +477,7 @@ function OutputFSM:_semi_path_output()
    return true
 end
 
-function OutputFSM:_string_output()
+function OutputFSM:eval_string()
    if type(self.ctxt.item.cur.substitute) == "table"
    then
       local first =  true
@@ -551,16 +551,16 @@ function OutputFSM:eval_next_var()
          local value
          if self.ctxt.item.interprete == "label"
          then
-            value =  self:_label_output()
+            value =  self:eval_label()
          elseif self.ctxt.item.interprete == "query"
          then
-            value =  self:_query_output()
+            value =  self:eval_query()
          elseif self.ctxt.item.interprete == "semi_path"
          then
-            value =  self:_semi_path_output()
+            value =  self:eval_semi_path()
          elseif self.ctxt.item.interprete == "string"
          then
-            value =  self:_string_output()
+            value =  self:eval_string()
          end
          if value
          then
