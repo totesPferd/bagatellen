@@ -127,8 +127,7 @@ function FSM:_reset_cur()
 end
 
 function FSM:_next_var()
-   self:pre_next_var()
-   if self.ctxt.item.cur.substitute
+   if self:pre_next_var()
    then
       if
             (
@@ -580,6 +579,7 @@ end
 
 function OutputFSM:pre_next_var()
    self.ctxt.item.cur.substitute =  self.arg[self.ctxt.item.cur.name]
+   return type(self.ctxt.item.cur.substitute) ~= "nil"
 end
 
 
