@@ -528,9 +528,13 @@ function OutputFSM:eval_regular_char(s)
    self:_direct_output(s)
 end
 
-function OutputFSM:eval_next_var()
+function OutputFSM:pre_eval_next_var()
    self.ctxt.item.cur.substitute =  self.arg[self.ctxt.item.cur.name]
-   if self.ctxt.item.cur.substitute
+   return type(self.ctxt.item.cur.substitute) ~= "nil"
+end
+
+function OutputFSM:eval_next_var()
+   if self:pre_eval_next_var()
    then
       if
             (
