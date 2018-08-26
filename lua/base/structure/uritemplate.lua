@@ -10,11 +10,21 @@ function FSM:new(str)
 end
 
 -- abstract methods
+function FSM:eval_label()
+end
+function FSM:eval_query()
+end
+function FSM:eval_semi_path()
+end
+function FSM:eval_string()
+end
 function FSM:eval_regular_char(s)
 end
-function FSM:eval_next_var()
+function FSM:is_label_empty()
 end
-function FSM:eval_tmpl_off()
+function FSM:is_string_empty()
+end
+function FSM:pre_next_var()
 end
 --
 
@@ -38,17 +48,13 @@ function FSM:_expand_mode()
    self.ctxt.item.cur.expand =  true
 end
 
-function FSM:_next_var()
-   self:eval_next_var()
-end
-
 function FSM:_prefix_num(c)
    local n =  c:byte(1, -1) - 48
    self.ctxt.item.cur.prefix =  (self.ctxt.item.cur.prefix or 0) * 10 + n
 end
 
 function FSM:_tmpl_off()
-   self:eval_tmpl_off()
+   self:_next_var()
 end
 
 function FSM:_tmpl_on()
@@ -118,6 +124,48 @@ function FSM:_reset_cur()
    self.ctxt.item.cur =  {
          ['expand'] = false
       ,  ['name'] = '' }
+end
+
+function FSM:_next_var()
+   if self:pre_next_var()
+   then
+      if
+            (
+                  not(self.ctxt.item.operator)
+               or self.ctxt.item.operator == "#"
+               or self.ctxt.item.interprete ~= "string"
+               or not(self:is_string_empty()) )
+        and (
+              self.ctxt.item.interprete ~= "label"
+           or not(self:is_label_empty()) )
+      then
+         if self.ctxt.item.first
+         then
+            self:eval_regular_char(self.ctxt.item.start)
+         else
+            self:eval_regular_char(self.ctxt.item.j)
+         end
+         local value
+         if self.ctxt.item.interprete == "label"
+         then
+            value =  self:eval_label()
+         elseif self.ctxt.item.interprete == "query"
+         then
+            value =  self:eval_query()
+         elseif self.ctxt.item.interprete == "semi_path"
+         then
+            value =  self:eval_semi_path()
+         elseif self.ctxt.item.interprete == "string"
+         then
+            value =  self:eval_string()
+         end
+         if value
+         then
+            self.ctxt.item.first =  false
+         end
+      end
+   end
+   self:_reset_cur()
 end
 
 function FSM:open()
@@ -296,6 +344,7 @@ function FSM:is_none_quote_necessary(c)
       end
    return retval
 end
+
 
 local OutputFSM =  FSM:__new()
 
@@ -516,6 +565,10 @@ function OutputFSM:eval_string()
    return true
 end
 
+function OutputFSM:eval_regular_char(s)
+   self:_direct_output(s)
+end
+
 function OutputFSM:is_label_empty()
    return is_empty(self.ctxt.item.cur.substitute)
 end
@@ -524,59 +577,9 @@ function OutputFSM:is_string_empty()
    return self.ctxt.item.cur.substitute == ""
 end
 
-function OutputFSM:eval_regular_char(s)
-   self:_direct_output(s)
-end
-
-function OutputFSM:pre_eval_next_var()
+function OutputFSM:pre_next_var()
    self.ctxt.item.cur.substitute =  self.arg[self.ctxt.item.cur.name]
    return type(self.ctxt.item.cur.substitute) ~= "nil"
-end
-
-function OutputFSM:eval_next_var()
-   if self:pre_eval_next_var()
-   then
-      if
-            (
-                  not(self.ctxt.item.operator)
-               or self.ctxt.item.operator == "#"
-               or self.ctxt.item.interprete ~= "string"
-               or not(self:is_string_empty()) )
-        and (
-              self.ctxt.item.interprete ~= "label"
-           or not(self:is_label_empty()) )
-      then
-         if self.ctxt.item.first
-         then
-            self:eval_regular_char(self.ctxt.item.start)
-         else
-            self:eval_regular_char(self.ctxt.item.j)
-         end
-         local value
-         if self.ctxt.item.interprete == "label"
-         then
-            value =  self:eval_label()
-         elseif self.ctxt.item.interprete == "query"
-         then
-            value =  self:eval_query()
-         elseif self.ctxt.item.interprete == "semi_path"
-         then
-            value =  self:eval_semi_path()
-         elseif self.ctxt.item.interprete == "string"
-         then
-            value =  self:eval_string()
-         end
-         if value
-         then
-            self.ctxt.item.first =  false
-         end
-      end
-   end
-   self:_reset_cur()
-end
-
-function OutputFSM:eval_tmpl_off()
-   return self:eval_next_var()
 end
 
 
