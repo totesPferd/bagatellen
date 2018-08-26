@@ -355,7 +355,7 @@ function OutputFSM:new(arg, str)
    return retval
 end
 
-function OutputFSM:_direct_output(s)
+function OutputFSM:eval_regular_char(s)
    self.result =  self.result .. s
 end
 
@@ -364,9 +364,9 @@ function OutputFSM:_quoted_output(s)
    do local c =  string.char(v)
       if self:is_none_quote_necessary(c)
       then
-         self:_direct_output(c)
+         self:eval_regular_char(c)
       else
-         self:_direct_output(string.format("%%%02X", v))
+         self:eval_regular_char(string.format("%%%02X", v))
       end
    end
 end
@@ -383,7 +383,7 @@ function OutputFSM:eval_label()
       for k, v in pairs(self.ctxt.item.cur.substitute)
       do if not(first)
          then
-            self:_direct_output(join_str)
+            self:eval_regular_char(join_str)
          else
             first =  false
          end
@@ -392,9 +392,9 @@ function OutputFSM:eval_label()
             self:_quoted_output(k)
             if self.ctxt.item.cur.expand
             then
-               self:_direct_output("=")
+               self:eval_regular_char("=")
             else
-               self:_direct_output(",")
+               self:eval_regular_char(",")
             end
          end
          self:_quoted_output(v)
@@ -422,14 +422,14 @@ function OutputFSM:eval_query()
       if not(self.ctxt.item.cur.expand)
       then
          join_str =  ","
-         self:_direct_output(self.ctxt.item.cur.name)
-         self:_direct_output("=")
+         self:eval_regular_char(self.ctxt.item.cur.name)
+         self:eval_regular_char("=")
       end
       local first =  true
       for k, v in pairs(self.ctxt.item.cur.substitute)
       do if not(first)
          then
-            self:_direct_output(join_str)
+            self:eval_regular_char(join_str)
          else
             first =  false
          end
@@ -439,14 +439,14 @@ function OutputFSM:eval_query()
             then
                self:_quoted_output(k)
             else
-               self:_direct_output(self.ctxt.item.cur.name)
+               self:eval_regular_char(self.ctxt.item.cur.name)
             end
-            self:_direct_output("=")
+            self:eval_regular_char("=")
          else
             if type(k) == "string"
             then
                self:_quoted_output(k)
-               self:_direct_output(",")
+               self:eval_regular_char(",")
             end
          end
          self:_quoted_output(v)
@@ -462,8 +462,8 @@ function OutputFSM:eval_query()
       else
          value =  self.ctxt.item.cur.substitute
       end
-      self:_direct_output(self.ctxt.item.cur.name)
-      self:_direct_output("=")
+      self:eval_regular_char(self.ctxt.item.cur.name)
+      self:eval_regular_char("=")
       self:_quoted_output(value)
    end
    return true
@@ -476,14 +476,14 @@ function OutputFSM:eval_semi_path()
       if not(self.ctxt.item.cur.expand)
       then
          join_str =  ","
-         self:_direct_output(self.ctxt.item.cur.name)
-         self:_direct_output("=")
+         self:eval_regular_char(self.ctxt.item.cur.name)
+         self:eval_regular_char("=")
       end
       local first =  true
       for k, v in pairs(self.ctxt.item.cur.substitute)
       do if not(first)
          then
-            self:_direct_output(join_str)
+            self:eval_regular_char(join_str)
          else
             first =  false
          end
@@ -493,14 +493,14 @@ function OutputFSM:eval_semi_path()
             then
                self:_quoted_output(k)
             else
-               self:_direct_output(self.ctxt.item.cur.name)
+               self:eval_regular_char(self.ctxt.item.cur.name)
             end
-            self:_direct_output("=")
+            self:eval_regular_char("=")
          else
             if type(k) == "string"
             then
                self:_quoted_output(k)
-               self:_direct_output(",")
+               self:eval_regular_char(",")
             end
          end
          self:_quoted_output(v)
@@ -516,10 +516,10 @@ function OutputFSM:eval_semi_path()
       else
          value =  self.ctxt.item.cur.substitute
       end
-      self:_direct_output(self.ctxt.item.cur.name)
+      self:eval_regular_char(self.ctxt.item.cur.name)
       if value ~= ""
       then
-         self:_direct_output("=")
+         self:eval_regular_char("=")
          self:_quoted_output(value)
       end
    end
@@ -533,7 +533,7 @@ function OutputFSM:eval_string()
       for k, v in pairs(self.ctxt.item.cur.substitute)
       do if not(first)
          then
-            self:_direct_output(",")
+            self:eval_regular_char(",")
          else
             first =  false
          end
@@ -542,9 +542,9 @@ function OutputFSM:eval_string()
             self:_quoted_output(k)
             if self.ctxt.item.cur.expand
             then
-               self:_direct_output("=")
+               self:eval_regular_char("=")
             else
-               self:_direct_output(",")
+               self:eval_regular_char(",")
             end
          end
          self:_quoted_output(v)
@@ -563,10 +563,6 @@ function OutputFSM:eval_string()
       self:_quoted_output(value)
    end
    return true
-end
-
-function OutputFSM:eval_regular_char(s)
-   self:_direct_output(s)
 end
 
 function OutputFSM:is_label_empty()
