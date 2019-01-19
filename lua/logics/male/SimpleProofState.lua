@@ -19,7 +19,7 @@ function SimpleProofState:new(var_ctxt, conclusion)
 end
 
 function SimpleProofState:new_instance(conclusion)
-   return SimpleProofState:new(conclusion)
+   return SimpleProofState:new(self:get_var_ctxt(), conclusion)
 end
 
 function SimpleProofState:new_contected_term(var_ctxt, term)
