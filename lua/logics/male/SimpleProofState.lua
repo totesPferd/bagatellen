@@ -18,8 +18,8 @@ function SimpleProofState:new(var_ctxt, conclusion)
    return retval
 end
 
-function SimpleProofState:new_instance(conclusion)
-   return SimpleProofState:new(self:get_var_ctxt(), conclusion)
+function SimpleProofState:new_instance(var_ctxt, conclusion)
+   return SimpleProofState:new(var_ctxt, conclusion)
 end
 
 function SimpleProofState:new_contected_term(var_ctxt, term)
@@ -112,7 +112,8 @@ end
 function SimpleProofState:devar()
    local var_assgnm =  self:new_var_assgnm()
    local dev_conclusion =  self:get_conclusion():devar(var_assgnm)
-   return self:new_instance(dev_conclusion)
+   local new_var_ctxt =  self:get_var_ctxt():devar(var_assgn)
+   return self:new_instance(new_var_ctxt, dev_conclusion)
 end
 
 function SimpleProofState:__diagnose_single_line(indentation)

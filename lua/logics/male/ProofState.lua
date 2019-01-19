@@ -22,8 +22,8 @@ function ProofState:get_var_ctxt()
    return self.var_ctxt
 end
 
-function ProofState:new_instance(conclusions)
-   return ProofState:new(self:get_var_ctxt(), conclusions)
+function ProofState:new_instance(var_ctxt, conclusions)
+   return ProofState:new(var_ctxt, conclusions)
 end
 
 function ProofState:new_contected_term(var_ctxt, term)
@@ -99,7 +99,8 @@ end
 function ProofState:devar()
    local var_assgnm =  self:new_var_assgnm()
    local new_conclusions =  self:get_devared_conclusions(var_assgnm)
-   return self:new_instance(new_conclusions)
+   local new_var_ctxt =  self:get_var_ctxt():devar(var_assgn)
+   return self:new_instance(new_var_ctxt, new_conclusions)
 end
 
 function ProofState:__diagnose_single_line(indentation)
