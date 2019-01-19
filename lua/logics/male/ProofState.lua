@@ -23,7 +23,7 @@ function ProofState:get_var_ctxt()
 end
 
 function ProofState:new_instance(conclusions)
-   return ProofState:new(conclusions)
+   return ProofState:new(self:get_var_ctxt(), conclusions)
 end
 
 function ProofState:new_contected_term(var_ctxt, term)
