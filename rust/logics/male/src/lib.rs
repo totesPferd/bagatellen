@@ -1,4 +1,5 @@
 mod literal;
+mod selector;
 
 #[cfg(test)]
 mod tests {
