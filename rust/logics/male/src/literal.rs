@@ -1,7 +1,5 @@
-mod literal {
+pub trait Literal {
 
-   trait Literal {
+   fn equate(this: Self, other: Self) -> bool;
 
-      fn equate(this: Self, other: Self) -> bool;
-
-}}
+}
