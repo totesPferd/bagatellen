@@ -12,4 +12,5 @@ with
     fun cut(ks, set nil) =  ks
       | cut(ks, set(y :: ll)) =  cut(drop_s(y, ks), set ll)
     fun subseteq_s(set kl, set ll) =  subseteq_l(kl, ll)
+    fun map_s f (set kl) =  set (map f kl)
 end;
