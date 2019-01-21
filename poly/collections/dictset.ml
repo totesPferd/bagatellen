@@ -14,6 +14,17 @@ with
            some v
         else
            deref(k, dict ll)
+    local
+       fun lset(k, v, nil) =  [(k,v)]
+         | lset(k, v, ((f, w) :: ll))
+         = if  k = f
+           then
+              (f, v) :: ll
+           else
+              (f, v) :: lset(k, v, ll)
+    in
+       fun set_d (k, v, dict ll) =  dict(lset(k, v, ll))
+    end
     val empty_s =  set nil
     fun singleton_s(x) =  set [ x ]
     fun is_member_s(x, set ll) =  is_member_l(x, ll)
