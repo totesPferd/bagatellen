@@ -41,9 +41,10 @@ with
               (f, store) :: lstore )
            else
               (f, store) :: lset_r(k, v, lstore)
+       fun dset_r(k, v, dict ll) =  dict(lset_r(k, v, ll))
     in
        fun set_r(k, v, dstore)
-         = dstore :=  lset_r(k, v, !dstore);
+         = dstore :=  dset_r(k, v, !dstore);
     end
 
     val empty_s =  set nil
