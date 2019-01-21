@@ -15,7 +15,7 @@ with
         else
            deref(k, dict ll)
     local
-       fun lset(k, v, nil) =  [(k,v)]
+       fun lset(k, v, nil) =  [(k, v)]
          | lset(k, v, ((f, w) :: ll))
          = if  k = f
            then
@@ -25,6 +25,27 @@ with
     in
        fun set_d (k, v, dict ll) =  dict(lset(k, v, ll))
     end
+
+    fun deref_r(k, ref_d) =  map_o ! (deref(k, !ref_d))
+    local
+       fun lset_r(k, v, nil)
+         = let
+              val store =  ref(v)
+           in
+              [ (k, store) ]
+           end
+         | lset_r(k, v, ((f, store) :: lstore))
+         = if  k = f
+           then (
+              store :=  v;
+              (f, store) :: lstore )
+           else
+              (f, store) :: lset_r(k, v, lstore)
+    in
+       fun set_r(k, v, dstore)
+         = dstore :=  lset_r(k, v, !dstore);
+    end
+
     val empty_s =  set nil
     fun singleton_s(x) =  set [ x ]
     fun is_member_s(x, set ll) =  is_member_l(x, ll)
