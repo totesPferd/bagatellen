@@ -1,7 +1,19 @@
 use "collections/list.ml";
+use "collections/option.ml";
 
-abstype 'a set =  set of 'a list
+abstype ('a, 'b) dict =  dict of ('a * 'b) list
+    and 'a set =  set of 'a list
 with
+    val empty_d =  dict nil
+    fun map_d f (dict kl) =  dict (map (fn (k, v) => (k, f(v))) kl)
+    fun keys (set kd) =  set (map (fn (k, v) => k) kd)
+    fun deref(k, dict nil) =  none
+      | deref(k, dict ((f, v) :: ll))
+      = if  k = f
+        then
+           some v
+        else
+           deref(k, dict ll)
     val empty_s =  set nil
     fun singleton_s(x) =  set [ x ]
     fun is_member_s(x, set ll) =  is_member_l(x, ll)
