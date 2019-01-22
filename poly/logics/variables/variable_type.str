@@ -1,0 +1,31 @@
+use "logics/variables/variable_type.sig";
+
+structure VariableType:> VariableType =
+   struct
+      type 'a Variable =  { name: string option, store: 'a option ref }
+
+      fun new () =  ref { name = none, store = ref none }
+
+      fun get_name var_store =  #name(!var_store)
+      fun get_val var_store =  !(#store(!var_store))
+      fun copy var_store =  ref { name = get_name var_store, store = ref(get_val var_store) }
+
+      fun is_settable var_store
+        =  case (get_val var_store) of
+              none   => true
+            | some _ => false
+      fun set_val value var_store
+        = let
+             val retval =  is_settable(var_store)
+          in
+             if  retval
+             then (
+                #store (!var_store) := some value;
+                retval )
+             else
+                retval
+          end
+
+      fun set_name name var_store =  var_store :=  { name = some name, store = #store(!var_store) }
+
+   end;
