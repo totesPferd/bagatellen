@@ -37,6 +37,7 @@ with
        fun set_r(k, v, dstore)
          = dstore :=  dset_r(k, v, !dstore);
     end
+    fun update_r(k, v, dstore) =  Option.isSome (Option.map (fn(store) => store := v) (deref(k, !dstore)))
 
     val empty_s =  set nil
     fun singleton_s(x) =  set [ x ]
