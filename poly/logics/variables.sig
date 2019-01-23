@@ -1,5 +1,3 @@
-use "collections/option.ml";
-
 signature Variables =
    sig
       type Variable
@@ -7,7 +5,7 @@ signature Variables =
 
       val new_var:      Variable ref
       val copy_var:     Variable ref -> Variable ref
-      val get_val:      Variable ref -> 'a option
+      val get_val:      Variable ref -> 'a Option.option
 
       val new_val_ctxt: VariableContext ref
       val contains_var: Variable ref -> VariableContext ref -> bool

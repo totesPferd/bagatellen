@@ -2,24 +2,24 @@ use "logics/variables/variable_type.sig";
 
 structure VariableType:> VariableType =
    struct
-      type 'a Variable =  'a option
+      type 'a Variable =  'a Option.option
 
-      fun new () =  ref none
+      fun new () =  ref Option.NONE
 
       fun get_val var_store =  !var_store
       fun copy var_store =  ref(get_val var_store)
 
       fun is_settable var_store
         =  case (get_val var_store) of
-              none   => true
-            | some _ => false
+              Option.NONE   => true
+            | Option.SOME _ => false
       fun set_val value var_store
         = let
              val retval =  is_settable var_store
           in
              if  retval
              then (
-                var_store := some value;
+                var_store := Option.SOME value;
                 retval )
              else
                 retval
