@@ -5,6 +5,7 @@ with
     fun map_d f (dict kl) =  dict (map (fn (k, v) => (k, f(v))) kl)
     fun keys (set kd) =  set (map (fn (k, v) => k) kd)
     fun deref(k, dict ll) =  Option.map (fn (f, v) => v) (List.find (fn (f, v) => (k = f)) ll)
+    fun rev_deref(v, dict ll) =  Option.map (fn (f, v) => f) (List.find (fn (f, w) => (v = w)) ll)
     local
        fun lset(k, v, nil) =  [(k, v)]
          | lset(k, v, ((f, w) :: ll))
@@ -18,6 +19,7 @@ with
     end
 
     fun deref_r(k, ref_d) =  Option.map ! (deref(k, !ref_d))
+    fun rev_deref_r(v, ref_d) =  (rev_deref(v, !ref_d))
     local
        fun lset_r(k, v, nil)
          = let
