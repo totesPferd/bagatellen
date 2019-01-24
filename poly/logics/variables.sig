@@ -3,14 +3,15 @@ signature Variables =
       type Variable
       type VariableContext
 
-      val new_var:      Variable ref
-      val copy_var:     Variable ref -> Variable ref
-      val get_val:      Variable ref -> 'a Option.option
+      val new_var:      Variable
+      val copy_var:     Variable -> Variable
+      val eq_var:       Variable * Variable -> bool
+      val get_val:      Variable -> 'a Option.option
 
-      val new_val_ctxt: VariableContext ref
-      val contains_var: Variable ref -> VariableContext ref -> bool
-      val add_var:      Variable ref -> VariableContext ref -> unit
-      val add_var_ctxt: VariableContext ref -> VariableContext ref -> unit
-      val is_settable:  Variable ref -> VariableContext ref -> bool
-      val set_val:      'a -> Variable ref -> VariableContext ref -> bool
+      val new_val_ctxt: VariableContext
+      val contains_var: Variable -> VariableContext -> bool
+      val add_var:      Variable -> VariableContext -> unit
+      val add_var_ctxt: VariableContext -> VariableContext -> unit
+      val is_settable:  Variable -> VariableContext -> bool
+      val set_val:      'a -> Variable -> VariableContext -> bool
 end;

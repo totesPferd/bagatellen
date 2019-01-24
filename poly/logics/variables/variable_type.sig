@@ -1,11 +1,13 @@
 signature VariableType =
    sig
-      type 'a Variable
+      eqtype 'a Variable
 
-      val new:         unit -> 'a Variable ref
-      val copy:        'a Variable ref -> 'a Variable ref
+      val new:         unit -> 'a Variable
+      val copy:        'a Variable -> 'a Variable
 
-      val get_val:     'a Variable ref -> 'a Option.option
-      val is_settable: 'a Variable ref -> bool
-      val set_val:     'a -> 'a Variable ref -> bool
+      val eq:          'a Variable * 'a Variable -> bool
+
+      val get_val:     'a Variable -> 'a Option.option
+      val is_settable: 'a Variable -> bool
+      val set_val:     'a -> 'a Variable -> bool
    end;

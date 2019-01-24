@@ -1,0 +1,19 @@
+use "logics/variables/variable_context_type.sig";
+use "logics/variables/variable_type.str";
+
+structure VariableContextType: VariableContextType =
+   struct
+      structure VariableType =  VariableType
+
+      type 'a VariableContext =  (string Option.option ref * 'a VariableType.Variable) list ref
+
+      fun new () =  ref nil
+
+      local
+          fun get_name_ref var var_ctxt
+            = Option.map (fn (f, _) => f) (List.find (fn (_, w) => VariableType.eq(var, w)) (!var_ctxt))
+      in
+          fun get_name var var_ctxt =  Option.join (Option.map ! (get_name_ref var var_ctxt))
+          fun set_name (name, var) var_ctxt =  Option.isSome (Option.map (fn (store) => store := Option.SOME name) (get_name_ref var var_ctxt))
+      end
+   end;
