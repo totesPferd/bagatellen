@@ -1,6 +1,6 @@
 use "logics/variables.sig";
 
-signature VariableContexts =
+signature PELVariableContexts =
    sig
       structure Variables: Variables
 

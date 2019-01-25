@@ -1,7 +1,7 @@
-use "logics/pel/variable_contexts.sig";
+use "logics/pel/pel_variable_contexts.sig";
 use "logics/variables/variables.str";
 
-structure VariableContexts: VariableContexts =
+structure PELVariableContexts: PELVariableContexts =
    struct
       structure Variables =  Variables
 
