@@ -1,6 +1,6 @@
-use "logics/variables/variable_type.sig";
+use "logics/variables.sig";
 
-structure VariableType:> VariableType =
+structure Variables :> Variables =
    struct
       type 'a Variable =  'a Option.option ref
 
