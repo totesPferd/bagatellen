@@ -1,6 +1,6 @@
 use "logics/variables.sig";
 
-structure Variables :> Variables =
+structure Variables: Variables =
    struct
       type 'a Variable =  'a Option.option ref
 
