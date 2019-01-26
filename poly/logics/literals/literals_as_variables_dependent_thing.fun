@@ -1,7 +1,7 @@
 use "logics/literals.sig";
 use "logics/variables_depending_thing.sig";
 
-functor LiteralsAsVariablesDependentThing(L: Literals): VariablesDependingThing =
+functor LiteralsAsVariablesDependingThing(L: Literals): VariablesDependingThing =
    struct
       structure Variables =  L.Variables
       type L =  L.T
