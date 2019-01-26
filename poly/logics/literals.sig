@@ -7,10 +7,12 @@ signature Literals =
       structure Variables: Variables
 
       type MultiLiteral
-      datatype Literal =  Constructor of Constructors.Constructor * MultiLiteral |  Variable of Literal Variables.Variable
+      type Literal
 
+      val get_val:      Literal -> Literal
       val eq:           Literal * Literal -> bool
+      val multi_eq:     MultiLiteral * MultiLiteral -> bool
 
-      val equate:       Literal * Literal -> unit
-      val multi_equate: MultiLiteral * MultiLiteral -> unit
+      val equate:       Literal * Literal -> bool
+      val multi_equate: MultiLiteral * MultiLiteral -> bool
    end;

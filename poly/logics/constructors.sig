@@ -1,6 +1,6 @@
 signature Constructors =
    sig
-      type Constructor
+      eqtype Constructor
 
       val eq: Constructor * Constructor -> bool
    end;
