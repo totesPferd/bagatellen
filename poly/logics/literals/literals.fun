@@ -40,8 +40,23 @@ functor Literals(C: Constructors): Literals =
 
       and multi_equate(xi, ypsilon) =  ListPair.all (equate) (xi, ypsilon)
 
-      fun map f (Construction(c, xi)) =  Construction(c, multi_map f xi)
-        | map f (Variable x) =  Variable (f x)
-      and multi_map f xi =  List.map (map f) xi
-
+      fun pmap f (Construction(c, xi))
+        = (
+             case (multi_pmap f xi) of
+                Option.NONE => Option.NONE
+             |  Option.SOME ypsilon =>  Option.SOME (Construction(c, ypsilon)) )
+        | pmap f (Variable x)
+        = (
+             case (f x) of
+                Option.NONE =>  Option.NONE
+             |  Option.SOME y =>  Option.SOME (Variable y) )
+      and multi_pmap f nil =  Option.SOME nil
+        | multi_pmap f (x :: xi)
+        = (
+             case (pmap f x) of
+                Option.NONE =>  Option.NONE
+             |  Option.SOME y =>
+                   case (multi_pmap f xi) of
+                      Option.NONE =>  Option.NONE
+                   |  Option.SOME ypsilon =>  Option.SOME (y :: ypsilon) )
    end;

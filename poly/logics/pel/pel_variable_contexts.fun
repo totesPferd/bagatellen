@@ -3,24 +3,22 @@ use "collections/type.sig";
 use "logics/literals.sig";
 use "logics/variable_contexts.sig";
 use "logics/variables_depending_thing.sig";
-use "logics/variables/var_eq.fun";
 
 functor PELVariableContexts(Ty: VariablesDependingThing): VariableContexts =
    struct
-      structure VarEq =  VarEq(Ty)
-      structure Dicts =  Dicts(VarEq)
-      structure Variables =  VarEq.Variables
+      structure Dicts =  Dicts(Ty)
+      structure Variables =  Ty.Variables
 
-      type T =  Ty.T
-      type VariableContext =  (string Option.option ref * Ty.T Variables.Variable) list
-      type AlphaConverter = { ctxt: VariableContext, alpha: Ty.T Variables.Variable Dicts.T }
+      type T =  Ty.L
+      type VariableContext =  (string Option.option ref * T Variables.Variable) list
+      type AlphaConverter = { ctxt: VariableContext, alpha: T Variables.Variable Dicts.T }
 
       val get_variable_context: AlphaConverter -> VariableContext =  #ctxt
       fun alpha_convert nil =  { ctxt = nil, alpha = Dicts.empty }
-        | alpha_convert ((name_r, (var: Ty.T Variables.Variable)) :: tl)
+        | alpha_convert ((name_r, (var: T Variables.Variable)) :: (tl: VariableContext))
         = let
-             val step_tl =  alpha_convert tl
-             val var_hd =   Variables.copy(var)
+             val step_tl:AlphaConverter =  alpha_convert tl
+             val var_hd: T Variables.Variable =   Variables.copy(var)
              val ctxt_hd =  (ref (!name_r), var_hd)
              val ctxt =     ctxt_hd :: (#ctxt step_tl)
              val alpha =    Dicts.set (var, var_hd, #alpha step_tl)
@@ -29,6 +27,7 @@ functor PELVariableContexts(Ty: VariablesDependingThing): VariableContexts =
           end
 
       fun apply_alpha_converter (alpha: AlphaConverter) x =  Dicts.deref(x, #alpha alpha)
+      fun apply_alpha_converter_as_vdt (alpha: AlphaConverter) l =  Ty.pmap (apply_alpha_converter alpha) l
 
       fun new () =  nil
 
