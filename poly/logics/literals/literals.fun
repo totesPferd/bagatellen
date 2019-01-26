@@ -7,8 +7,8 @@ functor Literals(C: Constructors): Literals =
       structure Constructors =  C
       structure Variables = Variables
 
-      datatype Literal =  Construction of Constructors.Constructor * Literal list |  Variable of Literal Variables.Variable
-      type MultiLiteral =  Literal list
+      datatype T =  Construction of Constructors.Constructor * T list |  Variable of T Variables.Variable
+      type MultiLiteral =  T list
 
       fun get_val (p as Construction(c, xi)) =  p
         | get_val (p as Variable x)

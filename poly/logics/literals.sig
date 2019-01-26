@@ -7,12 +7,12 @@ signature Literals =
       structure Variables: Variables
 
       type MultiLiteral
-      type Literal
+      type T
 
-      val get_val:      Literal -> Literal
-      val eq:           Literal * Literal -> bool
+      val get_val:      T -> T
+      val eq:           T * T -> bool
       val multi_eq:     MultiLiteral * MultiLiteral -> bool
 
-      val equate:       Literal * Literal -> bool
+      val equate:       T * T -> bool
       val multi_equate: MultiLiteral * MultiLiteral -> bool
    end;
