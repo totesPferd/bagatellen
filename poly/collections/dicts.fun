@@ -7,6 +7,7 @@ functor Dicts(E: Eqs): Dicts =
    struct
       structure DictSet = DictSet(E)
       structure Eqs     = DictSet.Eqs
+      structure Sets    = Sets(E)
 
       type 'a T =  'a DictSet.dict
 
@@ -15,4 +16,5 @@ functor Dicts(E: Eqs): Dicts =
       val set =           DictSet.set_d
       val deref =         DictSet.deref
 
+      val keys =           DictSet.keys
    end;

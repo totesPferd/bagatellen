@@ -2,7 +2,7 @@ use "collections/dictset.fun";
 use "collections/eqs.sig";
 use "collections/sets.sig";
 
-functor Sets(E: Eqs) :> Sets =
+functor Sets(E: Eqs): Sets =
    struct
       structure DictSet = DictSet(E)
       structure Eqs = DictSet.Eqs
