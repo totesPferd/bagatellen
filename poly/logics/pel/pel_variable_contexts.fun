@@ -15,10 +15,10 @@ functor PELVariableContexts(Ty: VariablesDependingThing): VariableContexts =
 
       val get_variable_context: AlphaConverter -> VariableContext =  #ctxt
       fun alpha_convert nil =  { ctxt = nil, alpha = Dicts.empty }
-        | alpha_convert ((name_r, (var: T Variables.Variable)) :: (tl: VariableContext))
+        | alpha_convert ((name_r, var) :: tl)
         = let
-             val step_tl:AlphaConverter =  alpha_convert tl
-             val var_hd: T Variables.Variable =   Variables.copy(var)
+             val step_tl =  alpha_convert tl
+             val var_hd =   Variables.copy(var)
              val ctxt_hd =  (ref (!name_r), var_hd)
              val ctxt =     ctxt_hd :: (#ctxt step_tl)
              val alpha =    Dicts.set (var, var_hd, #alpha step_tl)
