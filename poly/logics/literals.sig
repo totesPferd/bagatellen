@@ -15,4 +15,7 @@ signature Literals =
 
       val equate:       T * T -> bool
       val multi_equate: MultiLiteral * MultiLiteral -> bool
-   end;
+
+      val map:          (T Variables.Variable -> T Variables.Variable) -> T -> T
+      val multi_map:    (T Variables.Variable -> T Variables.Variable) -> MultiLiteral -> MultiLiteral
+  end;

@@ -39,4 +39,9 @@ functor Literals(C: Constructors): Literals =
           => Variables.set_val l x
 
       and multi_equate(xi, ypsilon) =  ListPair.all (equate) (xi, ypsilon)
+
+      fun map f (Construction(c, xi)) =  Construction(c, multi_map f xi)
+        | map f (Variable x) =  Variable (f x)
+      and multi_map f xi =  List.map (map f) xi
+
    end;

@@ -2,9 +2,10 @@ use "collections/dicts.fun";
 use "collections/type.sig";
 use "logics/literals.sig";
 use "logics/variable_contexts.sig";
+use "logics/variables_depending_thing.sig";
 use "logics/variables/var_eq.fun";
 
-functor PELVariableContexts(Ty: Type): VariableContexts =
+functor PELVariableContexts(Ty: VariablesDependingThing): VariableContexts =
    struct
       structure VarEq =  VarEq(Ty)
       structure Dicts =  Dicts(VarEq)
