@@ -1,5 +1,7 @@
+use "collections/type.sig";
+
 signature Eqs =
    sig
-      type T
-      val eq: T * T -> bool
+      structure Type: Type
+      val eq: Type.T * Type.T -> bool
    end;

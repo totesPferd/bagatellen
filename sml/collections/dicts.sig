@@ -10,8 +10,8 @@ signature Dicts =
       type 'b T
 
       val empty: 'b T;
-      val set:   Eqs.T * 'b * 'b T -> 'b T
-      val deref: Eqs.T * 'b T -> 'b Option.option
+      val set:   Eqs.Type.T * 'b * 'b T -> 'b T
+      val deref: Eqs.Type.T * 'b T -> 'b Option.option
 
       val map:   ('a -> 'b) -> 'a T -> 'b T
 

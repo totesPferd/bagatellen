@@ -7,17 +7,17 @@ signature Sets =
       type T
 
       val empty:           T
-      val map:             (Eqs.T -> Eqs.T) -> T -> T
-      val singleton:       Eqs.T -> T
-      val drop:            Eqs.T * T -> T
-      val drop_if_exists:  Eqs.T * T -> T Option.option
-      val insert:          Eqs.T * T -> T
+      val map:             (Eqs.Type.T -> Eqs.Type.T) -> T -> T
+      val singleton:       Eqs.Type.T -> T
+      val drop:            Eqs.Type.T * T -> T
+      val drop_if_exists:  Eqs.Type.T * T -> T Option.option
+      val insert:          Eqs.Type.T * T -> T
       val cut:             T * T -> T
       val union:           T * T -> T
 
-      val is_member:       Eqs.T * T -> bool
+      val is_member:       Eqs.Type.T * T -> bool
       val is_empty:        T -> bool
       val subseteq:        T * T -> bool
 
-      val pmap:            (Eqs.T -> Eqs.T Option.option) -> T -> T Option.option
+      val pmap:            (Eqs.Type.T -> Eqs.Type.T Option.option) -> T -> T Option.option
    end;
