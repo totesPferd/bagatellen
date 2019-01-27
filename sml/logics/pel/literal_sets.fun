@@ -3,14 +3,17 @@ use "collections/sets.fun";
 use "logics/literals.sig";
 use "logics/literal_sets.sig";
 
-functor LiteralSets(L: Literals): LiteralSets =
+functor LiteralSets(Lit: Literals): LiteralSets =
    struct
-      structure Literals =  L
-      structure DictSet =  DictSet(L)
+      structure Literals =  Lit
+      structure DictSet =  DictSet(Literals)
       structure LSets = Sets(DictSet)
-      type LiteralSet =  LSets.T
-      type Selector = L.T
-      type Clause =  { antecedent: LiteralSet, conclusion: Literals.T }
+      structure Variables =  Literals.Variables
+      type L =  LSets.T
+      type T =  Literals.T Variables.Variable
+      type Selector = Literals.T
+      type Clause =  { antecedent: L, conclusion: Literals.T }
+      val eq = Variables.eq
 
       val is_proven = LSets.is_empty
       fun resolve (sel, clause: Clause, ls)
@@ -22,4 +25,7 @@ functor LiteralSets(L: Literals): LiteralSets =
                    Option.SOME (LSets.union(ls, #antecedent clause))
                 else
                    Option.NONE
+
+      fun pmap (phi: T -> T Option.option) =  LSets.pmap (Lit.pmap phi)
+
    end;

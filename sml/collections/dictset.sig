@@ -25,4 +25,5 @@ signature DictSet =
       val cut:              set * set -> set
       val subseteq_s:       set * set -> bool
 
+      val pmap_s:           (Eqs.T -> Eqs.T Option.option) -> set -> set Option.option
    end;

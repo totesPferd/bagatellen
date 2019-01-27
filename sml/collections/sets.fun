@@ -20,4 +20,5 @@ functor Sets(D: DictSet): Sets =
       val is_empty =        D.is_empty_s
       val subseteq  =       D.subseteq_s
 
+      val pmap =            D.pmap_s
    end;

@@ -18,4 +18,6 @@ signature Sets =
       val is_member:       Eqs.T * T -> bool
       val is_empty:        T -> bool
       val subseteq:        T * T -> bool
+
+      val pmap:            (Eqs.T -> Eqs.T Option.option) -> T -> T Option.option
    end;
