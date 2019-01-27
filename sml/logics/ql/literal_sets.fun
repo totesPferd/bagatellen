@@ -4,12 +4,11 @@ use "logics/literal_sets.sig";
 functor QLLiteralSets(Lit: Literals): LiteralSets =
    struct
       structure Literals =  Lit
-      structure Variables =  Literals.Variables
       type L =  Literals.T Option.option
-      type T =  Literals.T Variables.Variable
+      type T =  Literals.V
       type Selector = unit
       type Clause =  { antecedent: L, conclusion: Literals.T }
-      val eq = Variables.eq
+      val eq = Literals.veq
 
       val is_proven = Option.isSome
       fun resolve (sel, clause: Clause, ls)

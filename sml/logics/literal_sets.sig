@@ -4,12 +4,11 @@ use "logics/variables.sig";
 signature LiteralSets =
    sig
       structure Literals: Literals
-      structure Variables: Variables
 
       type L
       type Selector
       type Clause =  { antecedent: L, conclusion: Literals.T }
-      type T =  Literals.T Variables.Variable
+      type T =  Literals.V
       val eq: T * T -> bool
 
       val is_proven: L -> bool

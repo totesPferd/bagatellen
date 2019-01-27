@@ -13,6 +13,8 @@ functor Literals(X:
 
       datatype T =  Construction of Constructors.Constructor * T list |  Variable of T Variables.Variable
       type MultiLiteral =  T list
+      type V =  T Variables.Variable
+      val veq =  Variables.eq
 
       fun get_val (p as Construction(c, xi)) =  p
         | get_val (p as Variable x)

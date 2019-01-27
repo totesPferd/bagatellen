@@ -8,12 +8,11 @@ functor PELLiteralSets(Lit: Literals): LiteralSets =
       structure Literals =  Lit
       structure DictSet =  DictSet(Literals)
       structure LSets = Sets(DictSet)
-      structure Variables =  Literals.Variables
       type L =  LSets.T
-      type T =  Literals.T Variables.Variable
+      type T =  Literals.V
       type Selector = Literals.T
       type Clause =  { antecedent: L, conclusion: Literals.T }
-      val eq = Variables.eq
+      val eq = Literals.veq
 
       val is_proven = LSets.is_empty
       fun resolve (sel, clause: Clause, ls)
