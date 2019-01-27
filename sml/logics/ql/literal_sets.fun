@@ -1,7 +1,7 @@
 use "logics/literals.sig";
 use "logics/literal_sets.sig";
 
-functor LiteralSets(Lit: Literals): LiteralSets =
+functor QLLiteralSets(Lit: Literals): LiteralSets =
    struct
       structure Literals =  Lit
       structure Variables =  Literals.Variables
