@@ -1,11 +1,15 @@
 use "logics/constructors.sig";
 use "logics/literals.sig";
-use "logics/variables/variables.str";
+use "logics/variables.sig";
 
-functor Literals(C: Constructors): Literals =
+functor Literals(X:
+   sig
+      structure C: Constructors
+      structure V: Variables
+   end ): Literals =
    struct
-      structure Constructors =  C
-      structure Variables = Variables
+      structure Constructors =  X.C
+      structure Variables = X.V
 
       datatype T =  Construction of Constructors.Constructor * T list |  Variable of T Variables.Variable
       type MultiLiteral =  T list
