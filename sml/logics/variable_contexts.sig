@@ -13,4 +13,5 @@ signature VariableContexts =
       val apply_alpha_converter:         AlphaConverter -> T Variables.Variable -> T Variables.Variable Option.option
       val apply_alpha_converter_as_vdt:  AlphaConverter -> T -> T Option.option
 
+      val uniquize:                      VariableContext -> unit
    end;
