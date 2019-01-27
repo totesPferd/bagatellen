@@ -24,7 +24,14 @@ functor DictSet(E: Eqs): DictSet =
       fun map_s f (s: set) =  map f s
       fun singleton x =  [ x ]
       fun is_member_s(x, s) =  List.exists (fn (y) => Eqs.eq(x, y)) s
+      val is_empty_s =  List.null
       fun drop_s(x, s) =  List.filter (fn (y) => not(Eqs.eq(x, y))) s
+      fun drop_if_exists_s(x, s)
+        = if is_member_s(x, s)
+          then
+             Option.SOME (drop_s(x, s))
+          else
+             Option.NONE
       fun insert_s(x, s)
         = if is_member_s(x, s)
           then
