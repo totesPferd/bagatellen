@@ -1,8 +1,14 @@
+use "collections/type.sig";
 use "logics/variables.sig";
 
-structure Variables: Variables =
+functor Variables(B: Type): Variables =
    struct
-      type 'a Variable =  'a Option.option ref
+      structure Base = B
+
+      structure Variable =
+         struct
+            type T =  B.T Option.option ref
+         end
 
       fun new () =  ref Option.NONE
 
