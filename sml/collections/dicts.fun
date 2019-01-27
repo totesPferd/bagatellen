@@ -1,20 +1,18 @@
-use "collections/dictset.fun";
+use "collections/dictset.sig";
 use "collections/dicts.sig";
-use "collections/eqs.sig";
 use "collections/sets.fun";
 
-functor Dicts(E: Eqs): Dicts =
+functor Dicts(D: DictSet): Dicts =
    struct
-      structure DictSet = DictSet(E)
-      structure Eqs     = DictSet.Eqs
-      structure Sets    = Sets(E)
+      structure Eqs     = D.Eqs
+      structure Sets    = Sets(D)
 
-      type 'a T =  'a DictSet.dict
+      type 'b T =        'b D.dict
 
-      val empty =         DictSet.empty_d
-      val map =           DictSet.map_d
-      val set =           DictSet.set_d
-      val deref =         DictSet.deref
+      val empty =         D.empty_d
+      val map =           D.map_d
+      val set =           D.set_d
+      val deref =         D.deref
 
-      val keys =           DictSet.keys
+      val keys =          D.keys
    end;

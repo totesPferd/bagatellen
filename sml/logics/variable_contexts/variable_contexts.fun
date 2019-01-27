@@ -1,12 +1,13 @@
 use "collections/dicts.fun";
-use "collections/type.sig";
+use "collections/dictset.fun";
 use "logics/literals.sig";
 use "logics/variable_contexts.sig";
 use "logics/variables_depending_thing.sig";
 
 functor VariableContexts(Ty: VariablesDependingThing): VariableContexts =
    struct
-      structure Dicts =  Dicts(Ty)
+      structure DictSet =  DictSet(Ty)
+      structure Dicts =  Dicts(DictSet)
       structure Variables =  Ty.Variables
 
       type T =  Ty.L

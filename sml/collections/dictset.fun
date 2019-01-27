@@ -1,6 +1,7 @@
+use "collections/dictset.sig";
 use "collections/eqs.sig";
 
-functor DictSet(E: Eqs) =
+functor DictSet(E: Eqs): DictSet =
    struct
       structure Eqs =  E
 

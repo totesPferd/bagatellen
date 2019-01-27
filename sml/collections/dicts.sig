@@ -5,6 +5,7 @@ signature Dicts =
    sig
       structure Eqs: Eqs
       structure Sets: Sets
+      sharing Sets.Eqs = Eqs
 
       type 'b T
 
