@@ -15,6 +15,7 @@ functor Literals(X:
       type MultiLiteral =  T list
       type V =  T Variables.Variable
       val veq =  Variables.eq
+      val vcopy =  Variables.copy
 
       fun get_val (p as Construction(c, xi)) =  p
         | get_val (p as Variable x)

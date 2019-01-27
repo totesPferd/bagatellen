@@ -5,6 +5,10 @@ signature LiteralSets =
    sig
       structure Literals: Literals
 
+      type V
+      val veq: V * V -> bool
+      val vcopy: V -> V
+
       type L
       type Selector
       type Clause =  { antecedent: L, conclusion: Literals.T }

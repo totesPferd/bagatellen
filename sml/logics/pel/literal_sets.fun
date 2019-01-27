@@ -13,6 +13,9 @@ functor PELLiteralSets(Lit: Literals): LiteralSets =
       type Selector = Literals.T
       type Clause =  { antecedent: L, conclusion: Literals.T }
       val eq = Literals.veq
+      type V =  Literals.V
+      val veq =  Literals.veq
+      val vcopy =  Literals.vcopy
 
       val is_proven = LSets.is_empty
       fun resolve (sel, clause: Clause, ls)
