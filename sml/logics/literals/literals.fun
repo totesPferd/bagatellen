@@ -6,13 +6,14 @@ functor Literals(X:
    sig
       structure C: Constructors
       structure V: Variables
-   end ): Literals =
+   end ) : Literals =
    struct
       structure Constructors =  X.C
       structure Variables = X.V
 
       datatype T =  Construction of Constructors.Constructor * T list |  Variable of T Variables.Variable
       type MultiLiteral =  T list
+      type L =  T
       type V =  T Variables.Variable
       val veq =  Variables.eq
       val vcopy =  Variables.copy

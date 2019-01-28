@@ -6,6 +6,7 @@ signature Literals =
       structure Constructors: Constructors
 
       type MultiLiteral
+      type L
       type T
       type V
 
