@@ -9,7 +9,6 @@ functor PELLiteralSets(Lit: Literals): LiteralSets =
       structure DictSet =  DictSet(Literals)
       structure LSets = Sets(DictSet)
       type L =  LSets.T
-      type T =  Literals.V
       type Selector = Literals.T
       type Clause =  { antecedent: L, conclusion: Literals.T }
       val eq = Literals.veq
@@ -28,6 +27,6 @@ functor PELLiteralSets(Lit: Literals): LiteralSets =
                 else
                    Option.NONE
 
-      fun pmap (phi: T -> T Option.option) =  LSets.pmap (Lit.pmap phi)
+      fun pmap (phi: V -> V Option.option) =  LSets.pmap (Lit.pmap phi)
 
    end;

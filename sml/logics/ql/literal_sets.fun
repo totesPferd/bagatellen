@@ -5,7 +5,6 @@ functor QLLiteralSets(Lit: Literals): LiteralSets =
    struct
       structure Literals =  Lit
       type L =  Literals.T Option.option
-      type T =  Literals.V
       type Selector = unit
       type Clause =  { antecedent: L, conclusion: Literals.T }
       val eq = Literals.veq
@@ -24,6 +23,6 @@ functor QLLiteralSets(Lit: Literals): LiteralSets =
                 else
                    Option.NONE
 
-     fun pmap (phi: T -> T Option.option) Option.NONE =  Option.NONE
-       | pmap (phi: T -> T Option.option) (Option.SOME l) =  Option.SOME(Literals.pmap phi l)
+     fun pmap (phi: V -> V Option.option) Option.NONE =  Option.NONE
+       | pmap (phi: V -> V Option.option) (Option.SOME l) =  Option.SOME(Literals.pmap phi l)
    end;
