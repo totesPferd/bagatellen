@@ -19,5 +19,6 @@ signature Sets =
       val is_empty:        T -> bool
       val subseteq:        T * T -> bool
 
+      val find:            (Eqs.T -> bool) -> T -> Eqs.T Option.option
       val pmap:            (Eqs.T -> Eqs.T Option.option) -> T -> T Option.option
    end;

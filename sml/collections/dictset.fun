@@ -44,6 +44,7 @@ functor DictSet(E: Eqs): DictSet =
       | cut(s, y :: t) =  cut(drop_s(y, s), t)
     fun subseteq_s(s, t) =  List.all (fn (x) => is_member_s(x, t)) s
 
+    fun find_s P s =  List.find P s
     fun pmap_s f nil =  Option.NONE
       | pmap_s f (x :: xi)
       = case (f x) of
