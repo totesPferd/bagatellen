@@ -17,5 +17,6 @@ signature LiteralSets =
       val is_proven: L -> bool
       val resolve: Selector * Clause *  L -> L Option.option
 
+      val transition: (Literals.T * 'b -> 'b Option.option) -> L -> 'b -> 'b
       val pmap: (V -> V Option.option) -> L -> L Option.option
    end;

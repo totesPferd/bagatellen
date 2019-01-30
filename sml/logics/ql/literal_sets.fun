@@ -23,6 +23,12 @@ functor QLLiteralSets(Lit: Literals): LiteralSets =
                 else
                    Option.NONE
 
+     fun transition phi Option.NONE b =  b
+       | transition phi (Option.SOME x) b
+       = case(phi (x, b)) of
+            Option.NONE =>  b
+         |  Option.SOME c => c
+
      fun pmap (phi: V -> V Option.option) Option.NONE =  Option.NONE
        | pmap (phi: V -> V Option.option) (Option.SOME l) =  Option.SOME(Literals.pmap phi l)
    end;

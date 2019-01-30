@@ -27,6 +27,7 @@ functor PELLiteralSets(Lit: Literals): LiteralSets =
                 else
                    Option.NONE
 
+      fun transition phi l b =  LSets.transition phi l b
       fun pmap (phi: V -> V Option.option) =  LSets.pmap (Lit.pmap phi)
 
    end;

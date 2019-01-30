@@ -21,5 +21,8 @@ functor Sets(D: DictSet): Sets =
       val subseteq  =       D.subseteq_s
 
       val find =            D.find_s
+
+      val transition =      D.transition_s
+
       val pmap =            D.pmap_s
    end;

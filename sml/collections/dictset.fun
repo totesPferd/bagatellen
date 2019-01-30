@@ -1,9 +1,11 @@
+use "collections/acc.sml";
 use "collections/dictset.sig";
 use "collections/eqs.sig";
 
 functor DictSet(E: Eqs): DictSet =
    struct
       structure Eqs =  E
+      structure Acc =  Acc
 
       type 'a dict =  { key: Eqs.T, value: 'a } list
       type set     =  Eqs.T list
@@ -45,6 +47,9 @@ functor DictSet(E: Eqs): DictSet =
     fun subseteq_s(s, t) =  List.all (fn (x) => is_member_s(x, t)) s
 
     fun find_s P s =  List.find P s
+
+    fun transition_s phi s b =  Acc.transition phi s b
+
     fun pmap_s f nil =  Option.NONE
       | pmap_s f (x :: xi)
       = case (f x) of
