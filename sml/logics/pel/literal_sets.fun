@@ -14,6 +14,8 @@ functor PELLiteralSets(Lit: Literals): LiteralSets =
       type Selector = Literals.T
       type Clause =  { antecedent: T, conclusion: Literals.T }
 
+      val eq =  LSets.eq
+
       val is_proven = LSets.is_empty
       fun resolve (sel, clause: Clause, ls)
         = case (LSets.drop_if_exists(sel, ls)) of

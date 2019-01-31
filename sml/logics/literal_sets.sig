@@ -11,6 +11,8 @@ signature LiteralSets =
       type Selector
       type Clause =  { antecedent: T, conclusion: Literals.T }
 
+      val eq: T * T -> bool
+
       val is_proven: T -> bool
       val resolve: Selector * Clause *  T -> T Option.option
 
