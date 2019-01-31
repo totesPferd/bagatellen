@@ -16,9 +16,9 @@ functor Literals(X:
       type L =  T
       structure Variables =
          struct
-            type Variable =  T PolymorphicVariables.Variable
-            val veq =  PolymorphicVariables.eq
-            val vcopy =  PolymorphicVariables.copy
+            type T =  T PolymorphicVariables.Variable
+            val eq =  PolymorphicVariables.eq
+            val copy =  PolymorphicVariables.copy
          end
       fun get_val (p as Construction(c, xi)) =  p
         | get_val (p as Variable x)

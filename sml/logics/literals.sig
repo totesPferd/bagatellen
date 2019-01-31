@@ -18,6 +18,6 @@ signature Literals =
       val multi_equate: MultiLiteral * MultiLiteral -> bool
 
 
-      val pmap:         (Variables.Variable -> Variables.Variable Option.option) -> T -> T Option.option
-      val multi_pmap:   (Variables.Variable -> Variables.Variable Option.option) -> MultiLiteral -> MultiLiteral Option.option
+      val pmap:         (Variables.T -> Variables.T Option.option) -> T -> T Option.option
+      val multi_pmap:   (Variables.T -> Variables.T Option.option) -> MultiLiteral -> MultiLiteral Option.option
   end;

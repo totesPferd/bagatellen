@@ -27,6 +27,6 @@ functor QLLiteralSets(Lit: Literals): LiteralSets =
             Option.NONE =>  b
          |  Option.SOME c => c
 
-     fun pmap (phi: Variables.Variable -> Variables.Variable Option.option) Option.NONE =  Option.NONE
-       | pmap (phi: Variables.Variable -> Variables.Variable Option.option) (Option.SOME l) =  Option.SOME(Literals.pmap phi l)
+     fun pmap (phi: Variables.T -> Variables.T Option.option) Option.NONE =  Option.NONE
+       | pmap (phi: Variables.T -> Variables.T Option.option) (Option.SOME l) =  Option.SOME(Literals.pmap phi l)
    end;

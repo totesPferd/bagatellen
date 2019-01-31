@@ -4,5 +4,5 @@ signature VariablesDependingThing =
    sig
       structure Variables: Variables
       type L
-      val pmap: (Variables.Variable -> Variables.Variable Option.option) -> L -> L Option.option
+      val pmap: (Variables.T -> Variables.T Option.option) -> L -> L Option.option
    end;

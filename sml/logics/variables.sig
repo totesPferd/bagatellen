@@ -1,6 +1,6 @@
 signature Variables =
    sig
-      type Variable
-      val veq:   Variable * Variable -> bool
-      val vcopy: Variable -> Variable
+      type T
+      val eq:   T * T -> bool
+      val copy: T -> T
    end;

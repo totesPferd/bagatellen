@@ -7,7 +7,7 @@ functor LiteralSetAsVariablesDependingThing(X: LiteralSets): VariablesDependingT
       structure Variables =  X.Variables
       type L =  X.Clause
 
-      fun pmap (phi: Variables.Variable -> Variables.Variable Option.option) (cl: X.Clause)
+      fun pmap (phi: Variables.T -> Variables.T Option.option) (cl: X.Clause)
         = case (X.Literals.pmap phi (#conclusion cl)) of
              Option.NONE =>  Option.NONE
           |  Option.SOME c
