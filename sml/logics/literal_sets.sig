@@ -1,5 +1,4 @@
 use "logics/literals.sig";
-use "logics/variables.sig";
 
 signature LiteralSets =
    sig

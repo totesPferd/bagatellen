@@ -1,5 +1,3 @@
-use "logics/variables.sig";
-
 signature VariablesDependingThing =
    sig
       type L

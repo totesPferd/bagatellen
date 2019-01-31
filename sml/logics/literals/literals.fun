@@ -1,26 +1,26 @@
 use "logics/constructors.sig";
 use "logics/literals.sig";
-use "logics/variables.sig";
+use "logics/polymorphic_variables.sig";
 
 functor Literals(X:
    sig
       structure C: Constructors
-      structure V: Variables
+      structure V: PolymorphicVariables
    end ) : Literals =
    struct
       structure Constructors =  X.C
-      structure Variables = X.V
+      structure PolymorphicVariables = X.V
 
-      datatype T =  Construction of Constructors.Constructor * T list |  Variable of T Variables.Variable
+      datatype T =  Construction of Constructors.Constructor * T list |  Variable of T PolymorphicVariables.Variable
       type MultiLiteral =  T list
       type L =  T
-      type V =  T Variables.Variable
-      val veq =  Variables.eq
-      val vcopy =  Variables.copy
+      type V =  T PolymorphicVariables.Variable
+      val veq =  PolymorphicVariables.eq
+      val vcopy =  PolymorphicVariables.copy
 
       fun get_val (p as Construction(c, xi)) =  p
         | get_val (p as Variable x)
-        = case (Variables.get_val x) of
+        = case (PolymorphicVariables.get_val x) of
              Option.NONE => p
           |  Option.SOME k => get_val k
 
@@ -30,7 +30,7 @@ functor Literals(X:
                 => Constructors.eq(c, d) andalso multi_eq(xi, ypsilon)
           |  (Construction(c, xi), Variable y) => false
           |  (Variable x, Construction(d, ypsilon)) => false
-          |  (Variable x, Variable y) =>  Variables.eq(x, y)
+          |  (Variable x, Variable y) =>  PolymorphicVariables.eq(x, y)
 
       and multi_eq(xi, ypsilon) =  List.all (eq) (ListPair.zip(xi, ypsilon))
 
@@ -44,7 +44,7 @@ functor Literals(X:
                false
           |  (Construction(c, xi), Variable y) =>  false
           |  (Variable x, l)
-          => Variables.set_val l x
+          => PolymorphicVariables.set_val l x
 
       and multi_equate(xi, ypsilon) =  ListPair.all (equate) (xi, ypsilon)
 

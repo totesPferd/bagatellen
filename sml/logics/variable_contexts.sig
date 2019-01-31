@@ -1,5 +1,3 @@
-use "logics/variables.sig";
-
 signature VariableContexts =
    sig
       type T

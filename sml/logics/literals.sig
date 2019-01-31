@@ -1,5 +1,4 @@
 use "logics/constructors.sig";
-use "logics/variables.sig";
 
 signature Literals =
    sig
