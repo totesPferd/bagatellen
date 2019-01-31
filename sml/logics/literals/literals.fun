@@ -14,10 +14,12 @@ functor Literals(X:
       datatype T =  Construction of Constructors.Constructor * T list |  Variable of T PolymorphicVariables.Variable
       type MultiLiteral =  T list
       type L =  T
-      type Variable =  T PolymorphicVariables.Variable
-      val veq =  PolymorphicVariables.eq
-      val vcopy =  PolymorphicVariables.copy
-
+      structure Variables =
+         struct
+            type Variable =  T PolymorphicVariables.Variable
+            val veq =  PolymorphicVariables.eq
+            val vcopy =  PolymorphicVariables.copy
+         end
       fun get_val (p as Construction(c, xi)) =  p
         | get_val (p as Variable x)
         = case (PolymorphicVariables.get_val x) of

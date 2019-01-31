@@ -1,16 +1,14 @@
 use "logics/constructors.sig";
+use "logics/variables.sig";
 
 signature Literals =
    sig
       structure Constructors: Constructors
+      structure Variables: Variables
 
       type MultiLiteral
       type L
       type T
-
-      type Variable
-      val veq:          Variable * Variable -> bool
-      val vcopy:        Variable -> Variable
 
       val get_val:      T -> T
       val eq:           T * T -> bool
@@ -20,6 +18,6 @@ signature Literals =
       val multi_equate: MultiLiteral * MultiLiteral -> bool
 
 
-      val pmap:         (Variable -> Variable Option.option) -> T -> T Option.option
-      val multi_pmap:   (Variable -> Variable Option.option) -> MultiLiteral -> MultiLiteral Option.option
+      val pmap:         (Variables.Variable -> Variables.Variable Option.option) -> T -> T Option.option
+      val multi_pmap:   (Variables.Variable -> Variables.Variable Option.option) -> MultiLiteral -> MultiLiteral Option.option
   end;

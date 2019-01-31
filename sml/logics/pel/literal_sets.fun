@@ -7,7 +7,7 @@ use "logics/variables.sig";
 functor PELLiteralSets(Lit: Literals): LiteralSets =
    struct
       structure Literals =  Lit
-      structure Variables =  Lit:Variables
+      structure Variables =  Lit.Variables
       structure DictSet =  DictSet(Literals)
       structure LSets = Sets(DictSet)
       type L =  LSets.T
@@ -26,6 +26,6 @@ functor PELLiteralSets(Lit: Literals): LiteralSets =
                    Option.NONE
 
       fun transition phi l b =  LSets.transition phi l b
-      fun pmap (phi: Lit.Variable -> Lit.Variable Option.option) =  LSets.pmap (Lit.pmap phi)
+      fun pmap (phi: Variables.Variable -> Variables.Variable Option.option) =  LSets.pmap (Lit.pmap phi)
 
    end;

@@ -5,7 +5,7 @@ use "logics/variables.sig";
 functor QLLiteralSets(Lit: Literals): LiteralSets =
    struct
       structure Literals =  Lit
-      structure Variables =  Lit:Variables
+      structure Variables =  Lit.Variables
       type L =  Literals.T Option.option
       type Selector = unit
       type Clause =  { antecedent: L, conclusion: Literals.T }
@@ -27,6 +27,6 @@ functor QLLiteralSets(Lit: Literals): LiteralSets =
             Option.NONE =>  b
          |  Option.SOME c => c
 
-     fun pmap (phi: Lit.Variable -> Lit.Variable Option.option) Option.NONE =  Option.NONE
-       | pmap (phi: Lit.Variable -> Lit.Variable Option.option) (Option.SOME l) =  Option.SOME(Literals.pmap phi l)
+     fun pmap (phi: Variables.Variable -> Variables.Variable Option.option) Option.NONE =  Option.NONE
+       | pmap (phi: Variables.Variable -> Variables.Variable Option.option) (Option.SOME l) =  Option.SOME(Literals.pmap phi l)
    end;

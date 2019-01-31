@@ -1,15 +1,13 @@
 use "logics/literal_sets.sig";
 use "logics/variables_depending_thing.sig";
+use "logics/variables.sig";
 
 functor LiteralSetAsVariablesDependingThing(X: LiteralSets): VariablesDependingThing =
    struct
-      type V =  X.V
+      structure Variables =  X.Variables
       type L =  X.Clause
 
-      val veq =  X.veq
-      val vcopy =  X.vcopy
-
-      fun pmap (phi: V -> V Option.option) (cl: X.Clause)
+      fun pmap (phi: Variables.Variable -> Variables.Variable Option.option) (cl: X.Clause)
         = case (X.Literals.pmap phi (#conclusion cl)) of
              Option.NONE =>  Option.NONE
           |  Option.SOME c

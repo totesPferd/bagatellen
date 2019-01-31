@@ -5,6 +5,7 @@ signature LiteralSets =
    sig
       structure Literals: Literals
       structure Variables: Variables
+      sharing Variables =  Literals.Variables
 
       type L
       type Selector
@@ -14,5 +15,5 @@ signature LiteralSets =
       val resolve: Selector * Clause *  L -> L Option.option
 
       val transition: (Literals.T * 'b -> 'b Option.option) -> L -> 'b -> 'b
-      val pmap: (Literals.Variable -> Literals.Variable Option.option) -> L -> L Option.option
+      val pmap: (Variables.Variable -> Variables.Variable Option.option) -> L -> L Option.option
    end;
