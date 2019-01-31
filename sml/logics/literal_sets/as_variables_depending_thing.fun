@@ -5,7 +5,7 @@ use "logics/variables.sig";
 functor LiteralSetAsVariablesDependingThing(X: LiteralSets): VariablesDependingThing =
    struct
       structure Variables =  X.Variables
-      type L =  X.Clause
+      type T =  X.Clause
 
       fun vmap (phi: Variables.T -> Variables.T) (cl: X.Clause)
         = { antecedent =  X.vmap phi (#antecedent cl), conclusion =  X.Literals.vmap phi (#conclusion cl) }

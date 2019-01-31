@@ -7,13 +7,13 @@ signature LiteralSets =
       structure Variables: Variables
       sharing Variables =  Literals.Variables
 
-      type L
+      type T
       type Selector
-      type Clause =  { antecedent: L, conclusion: Literals.T }
+      type Clause =  { antecedent: T, conclusion: Literals.T }
 
-      val is_proven: L -> bool
-      val resolve: Selector * Clause *  L -> L Option.option
+      val is_proven: T -> bool
+      val resolve: Selector * Clause *  T -> T Option.option
 
-      val transition: (Literals.T * 'b -> 'b Option.option) -> L -> 'b -> 'b
-      val vmap: (Variables.T -> Variables.T) -> L -> L
+      val transition: (Literals.T * 'b -> 'b Option.option) -> T -> 'b -> 'b
+      val vmap: (Variables.T -> Variables.T) -> T -> T
    end;

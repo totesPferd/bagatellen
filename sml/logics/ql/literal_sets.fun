@@ -6,9 +6,9 @@ functor QLLiteralSets(Lit: Literals): LiteralSets =
    struct
       structure Literals =  Lit
       structure Variables =  Lit.Variables
-      type L =  Literals.T Option.option
+      type T =  Literals.T Option.option
       type Selector = unit
-      type Clause =  { antecedent: L, conclusion: Literals.T }
+      type Clause =  { antecedent: T, conclusion: Literals.T }
 
       val is_proven = Option.isSome
       fun resolve (sel, clause: Clause, ls)

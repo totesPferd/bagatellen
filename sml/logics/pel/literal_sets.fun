@@ -10,9 +10,9 @@ functor PELLiteralSets(Lit: Literals): LiteralSets =
       structure Variables =  Lit.Variables
       structure DictSet =  DictSet(Literals)
       structure LSets = Sets(DictSet)
-      type L =  LSets.T
+      type T =  LSets.T
       type Selector = Literals.T
-      type Clause =  { antecedent: L, conclusion: Literals.T }
+      type Clause =  { antecedent: T, conclusion: Literals.T }
 
       val is_proven = LSets.is_empty
       fun resolve (sel, clause: Clause, ls)
