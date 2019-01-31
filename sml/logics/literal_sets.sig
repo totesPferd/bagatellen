@@ -15,5 +15,5 @@ signature LiteralSets =
       val resolve: Selector * Clause *  L -> L Option.option
 
       val transition: (Literals.T * 'b -> 'b Option.option) -> L -> 'b -> 'b
-      val pmap: (Variables.T -> Variables.T Option.option) -> L -> L Option.option
+      val vmap: (Variables.T -> Variables.T) -> L -> L
    end;

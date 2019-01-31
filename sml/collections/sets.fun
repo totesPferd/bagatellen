@@ -25,5 +25,4 @@ functor Sets(D: DictSet): Sets =
 
       val transition =      D.transition_s
 
-      val pmap =            D.pmap_s
    end;

@@ -29,5 +29,4 @@ signature DictSet =
       val find_s:           (Eqs.T -> bool) -> set -> Eqs.T Option.option
 
       val transition_s:     (Eqs.T * 'b -> 'b Option.option) -> set -> 'b -> 'b
-      val pmap_s:           (Eqs.T -> Eqs.T Option.option) -> set -> set Option.option
    end;

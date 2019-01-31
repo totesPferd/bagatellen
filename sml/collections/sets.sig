@@ -23,5 +23,4 @@ signature Sets =
       val find:            (Eqs.T -> bool) -> T -> Eqs.T Option.option
 
       val transition:      (Eqs.T * 'b -> 'b Option.option) -> T -> 'b -> 'b
-      val pmap:            (Eqs.T -> Eqs.T Option.option) -> T -> T Option.option
    end;

@@ -28,8 +28,12 @@ functor VariableContexts(Ty: VariablesDependingThing): VariableContexts =
              { ctxt = ctxt, alpha = alpha }
           end
 
-      fun apply_alpha_converter (alpha: AlphaConverter) x =  Dicts.deref(x, #alpha alpha)
-      fun apply_alpha_converter_as_vdt (alpha: AlphaConverter) l =  Ty.pmap (apply_alpha_converter alpha) l
+      exception OutOfContext
+      fun apply_alpha_converter (alpha: AlphaConverter) x
+        = case(Dicts.deref(x, #alpha alpha)) of
+             Option.NONE => raise OutOfContext
+          |  Option.SOME v => v
+      fun apply_alpha_converter_as_vdt (alpha: AlphaConverter) l =  Ty.vmap (apply_alpha_converter alpha) l
 
       fun new () =  nil
 
