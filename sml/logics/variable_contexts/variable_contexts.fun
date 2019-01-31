@@ -14,8 +14,9 @@ functor VariableContexts(Ty: VariablesDependingThing): VariableContexts =
       structure DictSet =  DictSet(TyEq)
       structure Dicts =  Dicts(DictSet)
 
+      structure Variables =  Ty.Variables
+
       type T =  Ty.L
-      type V =  Ty.Variables.Variable
       type VariableContext =  (string Option.option ref * Ty.Variables.Variable) list
       type AlphaConverter = { ctxt: VariableContext, alpha: Ty.Variables.Variable Dicts.T }
 
