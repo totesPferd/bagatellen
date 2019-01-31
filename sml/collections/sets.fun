@@ -19,6 +19,7 @@ functor Sets(D: DictSet): Sets =
       val is_member =       D.is_member_s
       val is_empty =        D.is_empty_s
       val subseteq  =       D.subseteq_s
+      val eq =              D.eq_s
 
       val find =            D.find_s
 

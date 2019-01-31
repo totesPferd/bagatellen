@@ -45,6 +45,7 @@ functor DictSet(E: Eqs): DictSet =
     fun cut(s, nil) =  s
       | cut(s, y :: t) =  cut(drop_s(y, s), t)
     fun subseteq_s(s, t) =  List.all (fn (x) => is_member_s(x, t)) s
+    fun eq_s(s, t) =  subseteq_s(s, t) andalso subseteq_s(t, s)
 
     fun find_s P s =  List.find P s
 

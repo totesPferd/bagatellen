@@ -24,6 +24,7 @@ signature DictSet =
       val union:            set * set -> set
       val cut:              set * set -> set
       val subseteq_s:       set * set -> bool
+      val eq_s:             set * set -> bool
 
       val find_s:           (Eqs.T -> bool) -> set -> Eqs.T Option.option
 
