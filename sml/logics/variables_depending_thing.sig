@@ -1,8 +1,8 @@
+use "logics/variables.sig";
+
 signature VariablesDependingThing =
    sig
+      structure Variables: Variables
       type L
-      type V
-      val veq: V * V -> bool
-      val vcopy: V -> V 
-      val pmap: (V -> V Option.option) -> L -> L Option.option
+      val pmap: (Variables.Variable -> Variables.Variable Option.option) -> L -> L Option.option
    end;

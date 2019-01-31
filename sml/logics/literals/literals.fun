@@ -14,7 +14,7 @@ functor Literals(X:
       datatype T =  Construction of Constructors.Constructor * T list |  Variable of T PolymorphicVariables.Variable
       type MultiLiteral =  T list
       type L =  T
-      type V =  T PolymorphicVariables.Variable
+      type Variable =  T PolymorphicVariables.Variable
       val veq =  PolymorphicVariables.eq
       val vcopy =  PolymorphicVariables.copy
 

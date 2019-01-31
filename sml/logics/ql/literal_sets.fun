@@ -1,16 +1,14 @@
 use "logics/literals.sig";
 use "logics/literal_sets.sig";
+use "logics/variables.sig";
 
 functor QLLiteralSets(Lit: Literals): LiteralSets =
    struct
       structure Literals =  Lit
+      structure Variables =  Lit:Variables
       type L =  Literals.T Option.option
       type Selector = unit
       type Clause =  { antecedent: L, conclusion: Literals.T }
-      val eq = Literals.veq
-      type V =  Literals.V
-      val veq =  Literals.veq
-      val vcopy =  Literals.vcopy
 
       val is_proven = Option.isSome
       fun resolve (sel, clause: Clause, ls)
@@ -29,6 +27,6 @@ functor QLLiteralSets(Lit: Literals): LiteralSets =
             Option.NONE =>  b
          |  Option.SOME c => c
 
-     fun pmap (phi: V -> V Option.option) Option.NONE =  Option.NONE
-       | pmap (phi: V -> V Option.option) (Option.SOME l) =  Option.SOME(Literals.pmap phi l)
+     fun pmap (phi: Lit.Variable -> Lit.Variable Option.option) Option.NONE =  Option.NONE
+       | pmap (phi: Lit.Variable -> Lit.Variable Option.option) (Option.SOME l) =  Option.SOME(Literals.pmap phi l)
    end;

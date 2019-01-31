@@ -8,23 +8,23 @@ functor VariableContexts(Ty: VariablesDependingThing): VariableContexts =
    struct
       structure TyEq =
          struct
-            type T = Ty.V
-            val eq = Ty.veq
+            type T = Ty.Variables.Variable
+            val eq = Ty.Variables.veq
          end
       structure DictSet =  DictSet(TyEq)
       structure Dicts =  Dicts(DictSet)
 
       type T =  Ty.L
-      type V =  Ty.V
-      type VariableContext =  (string Option.option ref * Ty.V) list
-      type AlphaConverter = { ctxt: VariableContext, alpha: Ty.V Dicts.T }
+      type V =  Ty.Variables.Variable
+      type VariableContext =  (string Option.option ref * Ty.Variables.Variable) list
+      type AlphaConverter = { ctxt: VariableContext, alpha: Ty.Variables.Variable Dicts.T }
 
       val get_variable_context: AlphaConverter -> VariableContext =  #ctxt
       fun alpha_convert nil =  { ctxt = nil, alpha = Dicts.empty }
         | alpha_convert ((name_r, var) :: tl)
         = let
              val step_tl =  alpha_convert tl
-             val var_hd =   Ty.vcopy(var)
+             val var_hd =   Ty.Variables.vcopy(var)
              val ctxt_hd =  (ref (!name_r), var_hd)
              val ctxt =     ctxt_hd :: (#ctxt step_tl)
              val alpha =    Dicts.set (var, var_hd, #alpha step_tl)
@@ -39,7 +39,7 @@ functor VariableContexts(Ty: VariablesDependingThing): VariableContexts =
 
       local
           fun get_name_ref var var_ctxt
-            = Option.map (fn (f, _) => f) (List.find (fn (_, w) => Ty.veq(var, w)) (var_ctxt))
+            = Option.map (fn (f, _) => f) (List.find (fn (_, w) => Ty.Variables.veq(var, w)) (var_ctxt))
       in
           fun get_name var var_ctxt =  Option.join (Option.map ! (get_name_ref var var_ctxt))
           fun set_name (name, var) var_ctxt =  Option.isSome (Option.map (fn (store) => store := Option.SOME name) (get_name_ref var var_ctxt))
