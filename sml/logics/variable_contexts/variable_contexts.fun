@@ -1,26 +1,25 @@
 use "collections/dicts.fun";
 use "collections/dictset.fun";
 use "logics/literals.sig";
+use "logics/variables.sig";
 use "logics/variable_contexts.sig";
-use "logics/variables_depending_thing.sig";
 
-functor VariableContexts(Ty: VariablesDependingThing): VariableContexts =
+functor VariableContexts(Var: Variables): VariableContexts =
    struct
-      structure DictSet =  DictSet(Ty.Variables)
+      structure DictSet =  DictSet(Var)
       structure Dicts =  Dicts(DictSet)
 
-      structure Variables =  Ty.Variables
+      structure Variables =  Var
 
-      type T =  Ty.T
-      type VariableContext =  (string Option.option ref * Ty.Variables.T) list
-      type AlphaConverter = { ctxt: VariableContext, alpha: Ty.Variables.T Dicts.T }
+      type VariableContext =  (string Option.option ref * Variables.T) list
+      type AlphaConverter = { ctxt: VariableContext, alpha: Variables.T Dicts.T }
 
       val get_variable_context: AlphaConverter -> VariableContext =  #ctxt
       fun alpha_convert nil =  { ctxt = nil, alpha = Dicts.empty }
         | alpha_convert ((name_r, var) :: tl)
         = let
              val step_tl =  alpha_convert tl
-             val var_hd =   Ty.Variables.copy(var)
+             val var_hd =   Variables.copy(var)
              val ctxt_hd =  (ref (!name_r), var_hd)
              val ctxt =     ctxt_hd :: (#ctxt step_tl)
              val alpha =    Dicts.set (var, var_hd, #alpha step_tl)
@@ -33,13 +32,12 @@ functor VariableContexts(Ty: VariablesDependingThing): VariableContexts =
         = case(Dicts.deref(x, #alpha alpha)) of
              Option.NONE => raise OutOfContext
           |  Option.SOME v => v
-      fun apply_alpha_converter_as_vdt (alpha: AlphaConverter) l =  Ty.vmap (apply_alpha_converter alpha) l
 
       fun new () =  nil
 
       local
           fun get_name_ref var var_ctxt
-            = Option.map (fn (f, _) => f) (List.find (fn (_, w) => Ty.Variables.eq(var, w)) (var_ctxt))
+            = Option.map (fn (f, _) => f) (List.find (fn (_, w) => Variables.eq(var, w)) (var_ctxt))
       in
           fun get_name var var_ctxt =  Option.join (Option.map ! (get_name_ref var var_ctxt))
           fun set_name (name, var) var_ctxt =  Option.isSome (Option.map (fn (store) => store := Option.SOME name) (get_name_ref var var_ctxt))
