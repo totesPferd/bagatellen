@@ -10,6 +10,6 @@ functor ClauseExtract(X: LiteralSets) =
       fun eq(c: T, d: T)
         = X.eq (#antecedent c, #antecedent d) andalso X.Literals.eq (#conclusion c, #conclusion d)
       fun vmap (phi: Variables.T -> Variables.T) (cl: X.Clause)
-        = { antecedent =  X.vmap phi (#antecedent cl), conclusion =  X.Literals.vmap phi (#conclusion cl) }
+        = ({ antecedent =  X.vmap phi (#antecedent cl), conclusion =  X.Literals.vmap phi (#conclusion cl) }): X.Clause
 
    end;
