@@ -7,7 +7,6 @@ signature Literals =
       structure Variables: Variables
 
       type MultiLiteral
-      type L
       type T
 
       val get_val:      T -> T

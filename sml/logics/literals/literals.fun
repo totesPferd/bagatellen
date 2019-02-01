@@ -13,7 +13,6 @@ functor Literals(X:
 
       datatype T =  Construction of Constructors.Constructor * T list |  Variable of T PolymorphicVariables.Variable
       type MultiLiteral =  T list
-      type L =  T
       structure Variables =
          struct
             type T =  T PolymorphicVariables.Variable
