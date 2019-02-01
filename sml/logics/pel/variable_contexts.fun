@@ -2,9 +2,8 @@ use "collections/dicts.fun";
 use "collections/dictset.fun";
 use "logics/literals.sig";
 use "logics/variables.sig";
-use "logics/variable_contexts.sig";
 
-functor VariableContexts(Var: Variables): VariableContexts =
+functor PELVariableContexts(Var: Variables) =
    struct
       structure DictSet =  DictSet(Var)
       structure Dicts =  Dicts(DictSet)
