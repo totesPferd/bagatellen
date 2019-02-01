@@ -23,6 +23,7 @@ functor Sets(D: DictSet): Sets =
 
       val find =            D.find_s
 
+      val ofind =           D.ofind_s
       val transition =      D.transition_s
 
    end;

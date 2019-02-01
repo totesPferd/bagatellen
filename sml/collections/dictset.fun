@@ -49,6 +49,12 @@ functor DictSet(E: Eqs): DictSet =
 
     fun find_s P s =  List.find P s
 
+    fun ofind_s f nil =  Option.NONE
+      | ofind_s f (hd :: tl)
+      = case(f hd) of
+           Option.NONE => ofind_s f tl
+        |  Option.SOME y =>  Option.SOME y
+
     fun transition_s phi s b =  Acc.transition phi s b
 
    end;
