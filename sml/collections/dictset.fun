@@ -29,11 +29,11 @@ functor DictSet(E: Eqs): DictSet =
                 Option.NONE =>  raise ZipSrcDoesNotAgree
              |  Option.SOME v => v
       in
-         fun zip_d a b
+         fun zip_d ((a: 'a dict), (b: 'b dict))
            = List.foldl
                 (
                    fn ({ key = k, value = v}, d) =>  set_d(k, (v, deref_direct(k, b)), d) )
-                empty_d
+                (empty_d: ('a * 'b) dict)
                 a
       end
 

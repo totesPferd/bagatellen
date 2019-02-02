@@ -37,6 +37,9 @@ functor PELVariableContexts(Var: Variables) =
              Option.NONE => raise OutOfContext
           |  Option.SOME v => v
 
+      fun alpha_zip_all ((alpha: AlphaConverter), (beta: AlphaConverter)) P
+        = Dicts.all P (Dicts.zip ((#alpha alpha), (#alpha beta)))
+
       fun new () =  nil
 
       local
