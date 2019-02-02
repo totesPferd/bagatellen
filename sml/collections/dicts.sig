@@ -13,6 +13,7 @@ signature Dicts =
       val set:   Eqs.T * 'b * 'b T -> 'b T
       val deref: Eqs.T * 'b T -> 'b Option.option
       val all:   ('b -> bool) -> 'b T -> bool
+      val zip:   ('a T) * ('b T) -> ('a * 'b) T
 
       val map:   ('a -> 'b) -> 'a T -> 'b T
 

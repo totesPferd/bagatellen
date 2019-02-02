@@ -14,6 +14,7 @@ functor Dicts(D: DictSet): Dicts =
       val set =           D.set_d
       val deref =         D.deref
       val all =           D.all_d
+      val zip =           D.zip_d
 
       val keys =          D.keys
    end;

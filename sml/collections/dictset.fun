@@ -22,6 +22,20 @@ functor DictSet(E: Eqs): DictSet =
            else
               a :: set_d(k, v, d)
       fun all_d P = List.all (fn { key = _, value = v } => P v)
+      exception ZipSrcDoesNotAgree
+      local
+         fun deref_direct(k, d)
+           = case (deref(k, d)) of
+                Option.NONE =>  raise ZipSrcDoesNotAgree
+             |  Option.SOME v => v
+      in
+         fun zip_d a b
+           = List.foldl
+                (
+                   fn ({ key = k, value = v}, d) =>  set_d(k, (v, deref_direct(k, b)), d) )
+                empty_d
+                a
+      end
 
       val empty_s =  nil
       fun map_s f (s: set) =  map f s
