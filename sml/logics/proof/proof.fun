@@ -26,7 +26,7 @@ functor Proof(X:
 
       fun apply (proof: Proof) (proof_state: LiteralSet.T) (goal: Literals.T)
         = let
-             val alpha =  VariableContexts.alpha_convert (#context proof)
+             val alpha =  VariableContexts.alpha_convert (fn x => x) (#context proof)
              fun omega cl
                = let
                     val der_cl =  Clause.vmap (VariableContexts.apply_alpha_converter alpha) cl

@@ -16,9 +16,9 @@ functor QLVariableContexts(Var: Variables) =
       type AlphaConverter = { ctxt: VariableContext.T, dst: Variables.T, src: Variables.T }
 
       val get_variable_context: AlphaConverter -> VariableContext.T =  #ctxt
-      fun alpha_convert v
+      fun alpha_convert f v
         = let
-             val vcopy =  Variables.copy v
+             val vcopy =  Variables.fcopy f v
           in
              { ctxt = vcopy, dst = vcopy, src = v }
           end

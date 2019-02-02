@@ -9,7 +9,7 @@ signature VariableContexts =
 
       type AlphaConverter
 
-      val alpha_convert:                 VariableContext.T -> AlphaConverter
+      val alpha_convert:                 (Variables.Base -> Variables.Base) -> VariableContext.T -> AlphaConverter
       val get_variable_context:          AlphaConverter -> VariableContext.T
       val apply_alpha_converter:         AlphaConverter -> Variables.T -> Variables.T
 

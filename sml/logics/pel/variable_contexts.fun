@@ -24,9 +24,9 @@ functor PELVariableContexts(Var: Variables) =
       val get_variable_context: AlphaConverter -> VariableContext.T =  #ctxt
 
       local
-         fun alpha_convert_item ((name_r, var), a: AlphaConverter)
+         fun alpha_convert_item f ((name_r, var), a: AlphaConverter)
            = let
-                val var_item =   Variables.copy(var)
+                val var_item =   Variables.fcopy f var
                 val ctxt_item =  (ref (!name_r), var_item)
                 val ctxt =  ctxt_item :: (#ctxt a)
                 val alpha =  Dicts.set (var, var_item, #alpha a)
@@ -34,8 +34,8 @@ functor PELVariableContexts(Var: Variables) =
                 { ctxt = ctxt, alpha = alpha }
              end
       in
-         fun alpha_convert (vc: VariableContext.T)
-           = List.foldl alpha_convert_item { ctxt = nil, alpha = Dicts.empty } vc
+         fun alpha_convert f (vc: VariableContext.T)
+           = List.foldl (alpha_convert_item f) { ctxt = nil, alpha = Dicts.empty } vc
       end
 
       exception OutOfContext
