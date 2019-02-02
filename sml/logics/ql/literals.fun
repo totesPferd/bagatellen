@@ -12,7 +12,6 @@ functor PELLiterals(X:
       structure PolymorphicVariables = X.V
 
       datatype T =  Construction of Constructors.Constructor * T |  Variable of T PolymorphicVariables.Variable
-      type MultiLiteral =  T
       structure Variables =
          struct
             type T =  T PolymorphicVariables.Variable
@@ -32,7 +31,6 @@ functor PELLiterals(X:
           |  (Construction(c, xi), Variable y) => false
           |  (Variable x, Construction(d, ypsilon)) => false
           |  (Variable x, Variable y) =>  PolymorphicVariables.eq(x, y)
-
       and multi_eq(xi, ypsilon) =  eq(xi, ypsilon)
 
       fun equate(k, l)
