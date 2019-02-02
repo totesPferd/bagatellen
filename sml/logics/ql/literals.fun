@@ -2,7 +2,7 @@ use "logics/constructors.sig";
 use "logics/literals.sig";
 use "logics/polymorphic_variables.sig";
 
-functor PELLiterals(X:
+functor QLLiterals(X:
    sig
       structure C: Constructors
       structure V: PolymorphicVariables
