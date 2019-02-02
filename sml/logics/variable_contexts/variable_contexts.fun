@@ -7,7 +7,7 @@ use "logics/variables.sig";
 use "logics/variable_contexts.sig";
 use "logics/variables_depending_thing.sig";
 
-functor PELVariableContexts(X:
+functor VariableContexts(X:
    sig
       structure Var: Variables
       structure PT: PointerType
@@ -18,6 +18,7 @@ functor PELVariableContexts(X:
       structure Dicts =  Dicts(DictSet)
 
       structure Variables =  X.Var
+      structure PointerType =  X.PT
 
       structure VariableContext: VariablesDependingThing =
          struct
