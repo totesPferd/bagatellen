@@ -7,7 +7,6 @@ functor QLLiteralSets(Lit: Literals): LiteralSets =
       structure Literals =  Lit
       structure Variables =  Lit.Variables
       type T =  Literals.T Option.option
-      type Selector = unit
       type Clause =  { antecedent: T, conclusion: Literals.T }
 
       fun eq (Option.NONE, Option.NONE) =  true
@@ -16,15 +15,21 @@ functor QLLiteralSets(Lit: Literals): LiteralSets =
         | eq (Option.SOME x, Option.SOME y) =  Lit.eq(x, y)
 
       val is_proven = Option.isSome
+
+      exception DoesNotContainLiteral
+      exception ResolutionEmptyLiteralSet
       fun resolve (sel, clause: Clause, ls)
         = case (ls) of
-             Option.NONE => Option.NONE
+             Option.NONE => raise ResolutionEmptyLiteralSet
           |  Option.SOME l
-             => if Literals.equate(l, #conclusion clause)
+             => if Literals.eq(sel, l)
                 then
-                   Option.SOME (#antecedent clause)
-                else
-                   Option.NONE
+                   if Literals.equate(l, #conclusion clause)
+                   then
+                      Option.SOME (#antecedent clause)
+                   else
+                      Option.NONE
+                else raise DoesNotContainLiteral
 
       fun transition phi Option.NONE b =  b
         | transition phi (Option.SOME x) b

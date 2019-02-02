@@ -11,19 +11,20 @@ functor PELLiteralSets(Lit: Literals): LiteralSets =
       structure DictSet =  DictSet(Literals)
       structure LSets = Sets(DictSet)
       type T =  LSets.T
-      type Selector = Literals.T
       type Clause =  { antecedent: T, conclusion: Literals.T }
 
       val eq =  LSets.eq
 
       val is_proven = LSets.is_empty
+
+      exception DoesNotContainLiteral
       fun resolve (sel, clause: Clause, ls)
         = case (LSets.drop_if_exists(sel, ls)) of
-             Option.NONE => Option.NONE
-          |  Option.SOME ls
+             Option.NONE => raise DoesNotContainLiteral
+          |  Option.SOME ls'
              => if Literals.equate(sel, #conclusion clause)
                 then
-                   Option.SOME (LSets.union(ls, #antecedent clause))
+                   Option.SOME (LSets.union(ls', #antecedent clause))
                 else
                    Option.NONE
 
