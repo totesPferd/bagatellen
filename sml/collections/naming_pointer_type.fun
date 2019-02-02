@@ -28,6 +28,24 @@ functor NamingPointerType(B: Eqs) =
       fun fold f b (c: ContainerType.T)
         = List.foldl (fn ((_, a), x) =>  f(a, x)) b c
 
+      fun map (phi: BaseType.T -> BaseType.T) (c: ContainerType.T)
+        = (List.map (fn (n, x) => (ref (!n), phi x)) c): ContainerType.T
+
+      local
+         fun mapfold_item f g ((name_r: string Option.option ref, x: BaseType.T), (v: ContainerType.T, w))
+           = let
+                val x_item =  f x
+                val nx_item =  (ref (!name_r), x_item)
+                val next_v =  nx_item :: v
+                val next_w =  g(x, x_item, w)
+             in
+                (next_v, next_w)
+             end
+      in fun mapfold f g w0 c
+           = List.foldl (mapfold_item f g) (nil, w0) (c: ContainerType.T)
+      end
+             
+
       val new =  nil: ContainerType.T
 
       local
