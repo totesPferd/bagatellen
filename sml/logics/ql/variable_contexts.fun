@@ -1,14 +1,21 @@
 use "logics/literals.sig";
 use "logics/variables.sig";
+use "logics/variables_depending_thing.sig";
 
 functor QLVariableContexts(Var: Variables) =
    struct
       structure Variables =  Var
 
-      type VariableContext =  Variables.T
-      type AlphaConverter = { ctxt: VariableContext, dst: Variables.T, src: Variables.T }
+      structure VariableContext: VariablesDependingThing =
+         struct
+            structure Variables =  Variables
+            type T =  Variables.T
+            fun vmap f =  f
+         end;
 
-      val get_variable_context: AlphaConverter -> VariableContext =  #ctxt
+      type AlphaConverter = { ctxt: VariableContext.T, dst: Variables.T, src: Variables.T }
+
+      val get_variable_context: AlphaConverter -> VariableContext.T =  #ctxt
       fun alpha_convert v
         = let
              val vcopy =  Variables.copy v

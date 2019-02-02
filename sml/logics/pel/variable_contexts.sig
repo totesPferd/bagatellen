@@ -1,6 +1,8 @@
+use "logics/variables_depending_thing.sig";
+
 signature PELVariableContexts =
    sig
-      type VariableContext
+      structure VariableContext: VariablesDependingThing
 
-      val uniquize:                      VariableContext -> unit
+      val uniquize:                      VariableContext.T -> unit
    end;

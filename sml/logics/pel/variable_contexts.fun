@@ -3,6 +3,7 @@ use "collections/dictset.fun";
 use "logics/literals.sig";
 use "logics/variables.sig";
 use "logics/variable_contexts.sig";
+use "logics/variables_depending_thing.sig";
 
 functor PELVariableContexts(Var: Variables) =
    struct
@@ -11,10 +12,16 @@ functor PELVariableContexts(Var: Variables) =
 
       structure Variables =  Var
 
-      type VariableContext =  (string Option.option ref * Variables.T) list
-      type AlphaConverter = { ctxt: VariableContext, alpha: Variables.T Dicts.T }
+      structure VariableContext: VariablesDependingThing =
+         struct
+            structure Variables =  Variables
+            type T =  (string Option.option ref * Variables.T) list
+            fun vmap f s =  List.map (fn (n, v) => (ref (!n), f v)) s
+         end;
 
-      val get_variable_context: AlphaConverter -> VariableContext =  #ctxt
+      type AlphaConverter = { ctxt: VariableContext.T, alpha: Variables.T Dicts.T }
+
+      val get_variable_context: AlphaConverter -> VariableContext.T =  #ctxt
 
       local
          fun alpha_convert_item ((name_r, var), a: AlphaConverter)
@@ -27,7 +34,7 @@ functor PELVariableContexts(Var: Variables) =
                 { ctxt = ctxt, alpha = alpha }
              end
       in
-         fun alpha_convert (vc: VariableContext)
+         fun alpha_convert (vc: VariableContext.T)
            = List.foldl alpha_convert_item { ctxt = nil, alpha = Dicts.empty } vc
       end
 
