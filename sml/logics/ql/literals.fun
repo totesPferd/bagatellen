@@ -14,9 +14,11 @@ functor PELLiterals(X:
       datatype T =  Construction of Constructors.Constructor * T |  Variable of T PolymorphicVariables.Variable
       structure Variables =
          struct
-            type T =  T PolymorphicVariables.Variable
+            type Base =  T
+            type T =  Base PolymorphicVariables.Variable
             val eq =  PolymorphicVariables.eq
             val copy =  PolymorphicVariables.copy
+            val fcopy =  PolymorphicVariables.fcopy
          end
       fun get_val (p as Construction(c, xi)) =  p
         | get_val (p as Variable x)
