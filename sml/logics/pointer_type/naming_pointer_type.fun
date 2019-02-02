@@ -32,6 +32,8 @@ functor NamingPointerType(B: Variables) =
              |  Option.SOME (_, b) =>  b
           end
 
+      val fold =  List.foldl
+
       val new =  nil: ContainerType.T
 
       local

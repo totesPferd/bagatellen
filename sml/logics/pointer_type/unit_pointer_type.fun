@@ -19,4 +19,9 @@ functor UnitPointerType(B: Variables): PointerType =
              Option.NONE => raise NotFound
           |  Option.SOME b => b
 
+      fun fold f b t
+        = case (t) of
+             Option.NONE =>  b
+          |  Option.SOME c => f (c, b)
+
    end;
