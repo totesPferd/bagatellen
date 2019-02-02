@@ -21,6 +21,7 @@ functor DictSet(E: Eqs): DictSet =
               a :: d
            else
               a :: set_d(k, v, d)
+      fun all_d P = List.all (fn { key = _, value = v } => P v)
 
       val empty_s =  nil
       fun map_s f (s: set) =  map f s

@@ -12,6 +12,7 @@ signature DictSet =
       val keys:             'a dict -> set
       val deref:            Eqs.T * 'a dict -> 'a Option.option
       val set_d:            Eqs.T * 'a * 'a dict -> 'a dict
+      val all_d:            ('a -> bool) -> 'a dict -> bool
 
       val empty_s:          set
       val map_s:            (Eqs.T -> Eqs.T) -> set -> set
