@@ -2,8 +2,9 @@ use "collections/dicts.fun";
 use "collections/dictset.fun";
 use "logics/literals.sig";
 use "logics/variables.sig";
+use "logics/variable_contexts.sig";
 
-functor PELVariableContexts(Var: Variables) =
+functor PELVariableContexts(Var: Variables): VariableContexts =
    struct
       structure DictSet =  DictSet(Var)
       structure Dicts =  Dicts(DictSet)
@@ -14,17 +15,21 @@ functor PELVariableContexts(Var: Variables) =
       type AlphaConverter = { ctxt: VariableContext, alpha: Variables.T Dicts.T }
 
       val get_variable_context: AlphaConverter -> VariableContext =  #ctxt
-      fun alpha_convert nil =  { ctxt = nil, alpha = Dicts.empty }
-        | alpha_convert ((name_r, var) :: tl)
-        = let
-             val step_tl =  alpha_convert tl
-             val var_hd =   Variables.copy(var)
-             val ctxt_hd =  (ref (!name_r), var_hd)
-             val ctxt =     ctxt_hd :: (#ctxt step_tl)
-             val alpha =    Dicts.set (var, var_hd, #alpha step_tl)
-          in
-             { ctxt = ctxt, alpha = alpha }
-          end
+
+      local
+         fun alpha_convert_item ((name_r, var), a: AlphaConverter)
+           = let
+                val var_item =   Variables.copy(var)
+                val ctxt_item =  (ref (!name_r), var_item)
+                val ctxt =  ctxt_item :: (#ctxt a)
+                val alpha =  Dicts.set (var, var_item, #alpha a)
+             in
+                { ctxt = ctxt, alpha = alpha }
+             end
+      in
+         fun alpha_convert (vc: VariableContext)
+           = List.foldl alpha_convert_item { ctxt = nil, alpha = Dicts.empty } vc
+      end
 
       exception OutOfContext
       fun apply_alpha_converter (alpha: AlphaConverter) x
