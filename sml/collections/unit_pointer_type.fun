@@ -1,14 +1,16 @@
 use "collections/pointer_type.sig";
 use "collections/type.sig";
 use "collections/unit_type.sml";
+use "logics/variables.sig";
 
-functor UnitPointerType(B: Type): PointerType =
+functor UnitPointerType(B: Variables): PointerType =
    struct
       structure BaseType =  B
       structure ContainerType =
          struct
             type T =  B.T Option.option
          end
+      structure ItemType =  B
       structure PointerType =  UnitType
 
       exception NotFound

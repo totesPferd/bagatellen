@@ -1,13 +1,20 @@
 use "collections/eqs.sig";
 use "collections/pointer_type.sig";
 use "collections/string_type.sml";
+use "logics/variables.sig";
 
-functor NamingPointerType(B: Eqs) =
+functor NamingPointerType(B: Variables) =
    struct
       structure BaseType =  B
+      structure ItemType =
+         struct
+            type T =  string Option.option ref * B.T
+            fun eq((_, v), (_, w)) =  B.eq(v, w)
+            fun copy (n, v) =  (ref (!n), B.copy v)
+         end
       structure ContainerType =
          struct
-            type T =  (string Option.option ref * B.T) list
+            type T =  ItemType.T list
          end
       structure PointerType =  StringType
 
