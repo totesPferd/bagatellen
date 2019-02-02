@@ -22,7 +22,7 @@ functor Proof(X:
       structure LiteralSet =  Sets(LiteralDictSet)
       structure CVDT =  Clause:VariablesDependingThing
 
-      type Proof =  { context: VariableContexts.VariableContext, clauses: ClauseSet.T }
+      type Proof =  { context: VariableContexts.VariableContext.T, clauses: ClauseSet.T }
 
       fun apply (proof: Proof) (proof_state: LiteralSet.T) (goal: Literals.T)
         = let

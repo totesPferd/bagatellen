@@ -4,6 +4,7 @@ signature PolymorphicVariables =
 
       val new:         unit -> 'a Variable
       val copy:        'a Variable -> 'a Variable
+      val fcopy:       ('a -> 'b) -> 'a Variable -> 'b Variable
 
       val eq:          'a Variable * 'a Variable -> bool
 
