@@ -47,6 +47,14 @@ functor PELVariableContexts(Var: Variables) =
       fun alpha_zip_all ((alpha: AlphaConverter), (beta: AlphaConverter)) P
         = Dicts.all P (Dicts.zip ((#alpha alpha), (#alpha beta)))
 
+      fun alpha_map f (alpha: AlphaConverter)
+        = let
+             val beta =  alpha_convert f (#ctxt alpha)
+             val result_dict =  Dicts.map (fn v => Option.valOf (Dicts.deref(v, (#alpha beta)))) (#alpha alpha)
+          in
+             { ctxt =  #ctxt beta, alpha =  result_dict }: AlphaConverter
+          end
+
       fun new () =  nil
 
       local

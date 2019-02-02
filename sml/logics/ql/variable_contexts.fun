@@ -33,4 +33,12 @@ functor QLVariableContexts(Var: Variables) =
 
       fun alpha_zip_all ((alpha: AlphaConverter), (beta: AlphaConverter)) (P: Variables.T * Variables.T -> bool)
        =  P ((#dst alpha), (#dst beta))
+
+     fun alpha_map f (alpha: AlphaConverter)
+        = let
+             val beta =  alpha_convert f (#ctxt alpha)
+          in
+             { ctxt =  #ctxt beta, dst = (#dst beta), src = (#src alpha)}: AlphaConverter
+          end
+
    end;
