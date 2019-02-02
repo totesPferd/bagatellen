@@ -4,7 +4,7 @@ use "logics/literals.sig";
 use "logics/variables.sig";
 use "logics/variable_contexts.sig";
 
-functor PELVariableContexts(Var: Variables): VariableContexts =
+functor PELVariableContexts(Var: Variables) =
    struct
       structure DictSet =  DictSet(Var)
       structure Dicts =  Dicts(DictSet)

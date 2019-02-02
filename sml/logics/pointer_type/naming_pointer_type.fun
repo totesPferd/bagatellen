@@ -1,6 +1,6 @@
 use "collections/eqs.sig";
-use "collections/pointer_type.sig";
 use "collections/string_type.sml";
+use "logics/pointer_type.sig";
 use "logics/variables.sig";
 
 functor NamingPointerType(B: Variables) =

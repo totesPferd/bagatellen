@@ -1,6 +1,6 @@
-use "collections/pointer_type.sig";
 use "collections/type.sig";
 use "collections/unit_type.sml";
+use "logics/pointer_type.sig";
 use "logics/variables.sig";
 
 functor UnitPointerType(B: Variables): PointerType =
