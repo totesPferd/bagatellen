@@ -24,4 +24,6 @@ functor QLVariableContexts(Var: Variables) =
           else
              raise OutOfContext
 
+      fun alpha_zip_all ((alpha: AlphaConverter), (beta: AlphaConverter)) (P: Variables.T * Variables.T -> bool)
+       =  P ((#dst alpha), (#dst beta))
    end;

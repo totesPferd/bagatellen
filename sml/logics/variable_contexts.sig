@@ -11,4 +11,5 @@ signature VariableContexts =
       val get_variable_context:          AlphaConverter -> VariableContext
       val apply_alpha_converter:         AlphaConverter -> Variables.T -> Variables.T
 
+      val alpha_zip_all:                 AlphaConverter * AlphaConverter -> (Variables.T * Variables.T -> bool) -> bool
    end;
