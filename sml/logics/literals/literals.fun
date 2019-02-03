@@ -73,6 +73,18 @@ functor Literals(I: LiteralsIn): Literals =
          end
    
       val replace =  I.PT.replace
+
+      fun resolve (conclusion, antecedent) pointer base
+        = let
+             val item =  I.PT.select(pointer, base)
+          in
+             if Out.equate(conclusion, item)
+             then
+                Option.SOME (replace(item, antecedent) base)
+             else
+                Option.NONE
+          end
+
       val transition =  I.PT.transition
 
    end;

@@ -28,6 +28,7 @@ signature Literals =
          end
 
       val replace:    Out.T * Multi.T -> Multi.T -> Multi.T
+      val resolve:    Out.T * Multi.T -> LiteralsIn.PT.PointerType.T -> Multi.T -> Multi.T Option.option
 
       val transition: (Out.T * 'b -> 'b Option.option) -> Multi.T -> 'b -> 'b
 
