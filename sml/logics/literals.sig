@@ -1,17 +1,16 @@
-use "logics/constructors.sig";
+use "logics/literals/in.sig";
 use "logics/variables.sig";
 
 signature Literals =
    sig
-      structure Constructors: Constructors
+      structure LiteralsIn: LiteralsIn
       structure Variables: Variables
+      structure Construction:
+         sig
+            type T
+         end
 
-      type T
+      val equate:       LiteralsIn.PT.BaseType.T * LiteralsIn.PT.BaseType.T -> bool
+      val multi_equate: LiteralsIn.PT.ContainerType.T * LiteralsIn.PT.ContainerType.T -> bool
 
-      val get_val:      T -> T
-      val eq:           T * T -> bool
-
-      val equate:       T * T -> bool
-
-      val vmap:         (Variables.T -> Variables.T) -> T -> T
   end;

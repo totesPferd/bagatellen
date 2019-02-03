@@ -22,6 +22,15 @@ functor UnitPointerType(B: Type): PointerType =
 
       fun map f =  Option.map f
 
+      fun all P Option.NONE =  true
+        | all P (Option.SOME x) = P x
+
+      exception ZipLengthsDoesNotAgree
+      fun all_zip P (Option.NONE, Option.NONE) =  true
+        | all_zip P (Option.SOME x_1, Option.SOME x_2) =  P(x_1, x_2)
+        | all_zip P (Option.NONE, Option.SOME x_2) =  raise ZipLengthsDoesNotAgree
+        | all_zip P (Option.SOME x_1, Option.NONE) =  raise ZipLengthsDoesNotAgree
+
       fun mapfold f g w0 Option.NONE = (Option.NONE, w0)
         | mapfold f g w0 (Option.SOME x) 
         = let

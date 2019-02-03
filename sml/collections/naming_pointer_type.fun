@@ -31,6 +31,14 @@ functor NamingPointerType(B: Eqs) =
       fun map (phi: BaseType.T -> BaseType.T) (c: ContainerType.T)
         = (List.map (fn (n, x) => (ref (!n), phi x)) c): ContainerType.T
 
+      fun all (P: BaseType.T -> bool) (c: ContainerType.T)
+        = List.all (fn (n, x) => P x) c
+
+      fun all_zip (P: BaseType.T * BaseType.T -> bool) (c_1: ContainerType.T, c_2: ContainerType.T)
+        = List.all
+             (fn ((n_1, x_1), (n_2, x_2)) => P(x_1, x_2))
+             (ListPair.zip (c_1, c_2))
+
       local
          fun mapfold_item f g ((name_r: string Option.option ref, x: BaseType.T), (v: ContainerType.T, w))
            = let
