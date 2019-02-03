@@ -1,8 +1,8 @@
 use "collections/pointer_type.sig";
-use "collections/type.sig";
+use "collections/eqs.sig";
 use "collections/unit_type.sml";
 
-functor UnitPointerType(B: Type): PointerType =
+functor UnitPointerType(B: Eqs): PointerType =
    struct
       structure BaseType =  B
       structure ContainerType =
@@ -46,5 +46,14 @@ functor UnitPointerType(B: Type): PointerType =
         = case(phi (x, b)) of
              Option.NONE =>  b
           |  Option.SOME c => c
+
+      exception ResolutionSetDoesNotContainConclusion
+      fun resolve(x, c) Option.NONE =  raise ResolutionSetDoesNotContainConclusion
+        | resolve(x, c) (Option.SOME y)
+        = if B.eq(x, y)
+          then
+             c
+          else
+             raise ResolutionSetDoesNotContainConclusion
 
    end;

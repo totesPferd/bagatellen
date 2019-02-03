@@ -57,6 +57,30 @@ functor NamingPointerType(B: Eqs) =
              
       fun transition f (c: ContainerType.T) =  Acc.transition (fn ((n, x: BaseType.T), y) => f(x, y)) c
 
+      fun insert (t, nil) =  [ t ]
+        | insert ((m, x), ((n, y) :: tl))
+        = if B.eq(x, y)
+          then
+             (m, y) :: tl
+          else
+             (n, y) :: (insert ((m, x), tl))
+
+      fun union (c_1: ContainerType.T, c_2: ContainerType.T)
+        = List.foldl insert c_1 c_2
+
+      exception ResolutionSetDoesNotContainConclusion
+      fun resolve(x, c) nil =  raise ResolutionSetDoesNotContainConclusion
+        | resolve(x, c: ContainerType.T) (((n, y) :: tl): ContainerType.T)
+        = if B.eq(x, y)
+          then
+             union (c, tl)
+          else
+             (n, y) :: (resolve(x, c) tl)
+
+
+(*
+ *
+ *)
 
       val new =  nil: ContainerType.T
 
