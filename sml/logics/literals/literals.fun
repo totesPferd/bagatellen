@@ -74,7 +74,21 @@ functor Literals(I: LiteralsIn): Literals =
    
       val replace =  I.PT.replace
 
-      fun resolve (conclusion, antecedent) pointer base
+      structure Clause =
+         struct
+            structure Variables =  Variables
+
+            type T =  { antecedent: Multi.T, conclusion: Out.T }
+
+            fun eq ({ antecedent = a_1, conclusion =  c_1 }, { antecedent = a_2, conclusion = c_2 })
+              = Multi.eq(a_1, a_2) andalso Out.eq(c_1, c_2)
+
+            fun vmap f { antecedent = a, conclusion = c }
+              = { antecedent = Multi.vmap f a, conclusion = Out.vmap f c }
+
+         end
+
+      fun resolve { antecedent = antecedent, conclusion = conclusion } pointer base
         = let
              val item =  I.PT.select(pointer, base)
           in
