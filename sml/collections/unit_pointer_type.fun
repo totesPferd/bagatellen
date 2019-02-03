@@ -22,6 +22,8 @@ functor UnitPointerType(B: Eqs): PointerType =
 
       fun map f =  Option.map f
 
+      fun is_empty (c: ContainerType.T) =  not (Option.isSome c)
+
       fun all P Option.NONE =  true
         | all P (Option.SOME x) = P x
 

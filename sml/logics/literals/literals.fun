@@ -55,6 +55,8 @@ functor Literals(I: LiteralsIn): Literals =
 
             val equate =  Out.multi_equate
             val eq =  Out.multi_eq
+            val is_empty =  I.PT.is_empty
+
          end
 
       structure Construction =

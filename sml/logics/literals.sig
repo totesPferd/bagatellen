@@ -14,6 +14,7 @@ signature Literals =
             type T
             val equate:       T * T -> bool
             val eq:           T * T -> bool
+            val is_empty:     T -> bool
          end
       structure Out:
          sig
