@@ -23,6 +23,8 @@ functor Literals(I: LiteralsIn): Literals =
 
       structure Out =
          struct
+            structure Variables =  Variables
+
             type T =  I.PT.BaseType.T
 
             fun equate(k, l)
@@ -47,15 +49,21 @@ functor Literals(I: LiteralsIn): Literals =
                 |  (I.Variable x, I.Variable y) =>  I.PV.eq(x, y)
             and multi_eq(xi, ypsilon) =  I.PT.all_zip (eq) (xi, ypsilon)
 
+            val vmap =  I.reconstruct
+
          end
 
       structure Multi =
          struct
+            structure Variables =  Variables
+
             type T =  I.PT.ContainerType.T
 
             val equate =  Out.multi_equate
             val eq =  Out.multi_eq
             val is_empty =  I.PT.is_empty
+
+            fun vmap f =  I.PT.map (Out.vmap f)
 
          end
 

@@ -10,6 +10,7 @@ signature LiteralsIn =
 
       datatype T =  Construction of C.T * PT.ContainerType.T | Variable of T PV.Variable
 
-      val destruct: PT.BaseType.T -> T
+      val destruct:    PT.BaseType.T -> T
+      val reconstruct: (T PV.Variable -> T PV.Variable)  -> PT.BaseType.T -> PT.BaseType.T
 
    end;

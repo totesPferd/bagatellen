@@ -11,16 +11,20 @@ signature Literals =
          end
       structure Multi:
          sig
+            structure Variables:  Variables
             type T
             val equate:       T * T -> bool
             val eq:           T * T -> bool
             val is_empty:     T -> bool
+            val vmap:         (Variables.T -> Variables.T) -> T -> T
          end
       structure Out:
          sig
+            structure Variables:  Variables
             type T
             val equate:       T * T -> bool
             val eq:           T * T -> bool
+            val vmap:         (Variables.T -> Variables.T) -> T -> T
          end
 
       val resolve:    Out.T * Multi.T -> Multi.T -> Multi.T
