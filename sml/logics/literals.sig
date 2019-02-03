@@ -33,6 +33,9 @@ signature Literals =
             val eq:           T * T -> bool
             val vmap:         (Variables.T -> Variables.T) -> T -> T
          end
+      sharing Multi.Variables = Variables
+      sharing Out.Variables = Variables
+      sharing Clause.Variables = Variables
 
       val resolve:    Clause.T -> LiteralsIn.PT.PointerType.T -> Multi.T -> Multi.T Option.option
 
