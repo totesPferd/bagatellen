@@ -13,11 +13,13 @@ signature Literals =
          sig
             type T
             val equate:       T * T -> bool
+            val eq:           T * T -> bool
          end
       structure Out:
          sig
             type T
             val equate:       T * T -> bool
+            val eq:           T * T -> bool
          end
 
   end;
