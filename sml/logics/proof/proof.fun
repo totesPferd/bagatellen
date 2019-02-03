@@ -16,20 +16,20 @@ functor Proof(X:
       structure Clause =  Literals.Clause
       structure ClauseDictSet =  DictSet(Clause)
       structure ClauseSet =  Sets(ClauseDictSet)
-      structure LiteralDictSet =  DictSet(Literals.Out)
+      structure LiteralDictSet =  DictSet(Literals.Single)
       structure LiteralSet =  Sets(LiteralDictSet)
       structure CVDT =  Clause:VariablesDependingThing
 
       type Proof =  { context: VariableContexts.VariableContext.T, clauses: ClauseSet.T }
 
-      fun apply (proof: Proof) (proof_state: LiteralSet.T) (goal: Literals.Out.T)
+      fun apply (proof: Proof) (proof_state: LiteralSet.T) (goal: Literals.Single.T)
         = let
              val alpha =  VariableContexts.alpha_convert (fn x => x) (#context proof)
              fun omega cl
                = let
                     val der_cl =  Clause.vmap (VariableContexts.apply_alpha_converter alpha) cl
                  in
-                    if Literals.Out.equate((#conclusion der_cl), goal)
+                    if Literals.Single.equate((#conclusion der_cl), goal)
                     then
                        Option.SOME (cl, der_cl)
                     else

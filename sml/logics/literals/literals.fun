@@ -21,7 +21,7 @@ functor Literals(I: LiteralsIn): Literals =
              Option.NONE => p
           |  Option.SOME k => get_val k
 
-      structure Out =
+      structure Single =
          struct
             structure Variables =  Variables
 
@@ -59,11 +59,11 @@ functor Literals(I: LiteralsIn): Literals =
 
             type T =  I.PT.ContainerType.T
 
-            val equate =  Out.multi_equate
-            val eq =  Out.multi_eq
+            val equate =  Single.multi_equate
+            val eq =  Single.multi_eq
             val is_empty =  I.PT.is_empty
 
-            fun vmap f =  I.PT.map (Out.vmap f)
+            fun vmap f =  I.PT.map (Single.vmap f)
 
          end
 
@@ -78,13 +78,13 @@ functor Literals(I: LiteralsIn): Literals =
          struct
             structure Variables =  Variables
 
-            type T =  { antecedent: Multi.T, conclusion: Out.T }
+            type T =  { antecedent: Multi.T, conclusion: Single.T }
 
             fun eq ({ antecedent = a_1, conclusion =  c_1 }, { antecedent = a_2, conclusion = c_2 })
-              = Multi.eq(a_1, a_2) andalso Out.eq(c_1, c_2)
+              = Multi.eq(a_1, a_2) andalso Single.eq(c_1, c_2)
 
             fun vmap f { antecedent = a, conclusion = c }
-              = { antecedent = Multi.vmap f a, conclusion = Out.vmap f c }
+              = { antecedent = Multi.vmap f a, conclusion = Single.vmap f c }
 
          end
 
@@ -92,7 +92,7 @@ functor Literals(I: LiteralsIn): Literals =
         = let
              val item =  I.PT.select(pointer, base)
           in
-             if Out.equate(conclusion, item)
+             if Single.equate(conclusion, item)
              then
                 Option.SOME (replace(item, antecedent) base)
              else
