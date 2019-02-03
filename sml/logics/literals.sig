@@ -9,8 +9,15 @@ signature Literals =
          sig
             type T
          end
-
-      val equate:       LiteralsIn.PT.BaseType.T * LiteralsIn.PT.BaseType.T -> bool
-      val multi_equate: LiteralsIn.PT.ContainerType.T * LiteralsIn.PT.ContainerType.T -> bool
+      structure Multi:
+         sig
+            type T
+            val equate:       T * T -> bool
+         end
+      structure Out:
+         sig
+            type T
+            val equate:       T * T -> bool
+         end
 
   end;
