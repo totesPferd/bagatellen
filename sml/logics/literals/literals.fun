@@ -62,4 +62,6 @@ functor Literals(I: LiteralsIn): Literals =
             type T =  I.T
          end
    
+      val transition =  I.PT.transition
+
    end;

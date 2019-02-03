@@ -22,4 +22,6 @@ signature Literals =
             val eq:           T * T -> bool
          end
 
+      val transition: (Out.T * 'b -> 'b Option.option) -> Multi.T -> 'b -> 'b
+
   end;
