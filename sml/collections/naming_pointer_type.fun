@@ -1,9 +1,11 @@
+use "collections/acc.sml";
 use "collections/eqs.sig";
 use "collections/pointer_type.sig";
 use "collections/string_type.sml";
 
 functor NamingPointerType(B: Eqs) =
    struct
+      structure Acc =  Acc
       structure BaseType =  B
       structure ContainerType =
          struct
@@ -53,6 +55,8 @@ functor NamingPointerType(B: Eqs) =
            = List.foldl (mapfold_item f g) (nil, w0) (c: ContainerType.T)
       end
              
+      fun transition f (c: ContainerType.T) =  Acc.transition (fn ((n, x: BaseType.T), y) => f(x, y)) c
+
 
       val new =  nil: ContainerType.T
 

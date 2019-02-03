@@ -40,4 +40,11 @@ functor UnitPointerType(B: Type): PointerType =
           in
              (next_v, next_w)
           end
+
+      fun transition phi Option.NONE b =  b
+        | transition phi (Option.SOME x) b
+        = case(phi (x, b)) of
+             Option.NONE =>  b
+          |  Option.SOME c => c
+
    end;
