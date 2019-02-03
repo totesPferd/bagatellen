@@ -50,8 +50,8 @@ functor UnitPointerType(B: Eqs): PointerType =
           |  Option.SOME c => c
 
       exception ResolutionSetDoesNotContainConclusion
-      fun resolve(x, c) Option.NONE =  raise ResolutionSetDoesNotContainConclusion
-        | resolve(x, c) (Option.SOME y)
+      fun replace(x, c) Option.NONE =  raise ResolutionSetDoesNotContainConclusion
+        | replace(x, c) (Option.SOME y)
         = if B.eq(x, y)
           then
              c

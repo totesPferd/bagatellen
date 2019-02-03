@@ -71,13 +71,13 @@ functor NamingPointerType(B: Eqs) =
         = List.foldl insert c_1 c_2
 
       exception ResolutionSetDoesNotContainConclusion
-      fun resolve(x, c) nil =  raise ResolutionSetDoesNotContainConclusion
-        | resolve(x, c: ContainerType.T) (((n, y) :: tl): ContainerType.T)
+      fun replace(x, c) nil =  raise ResolutionSetDoesNotContainConclusion
+        | replace(x, c: ContainerType.T) (((n, y) :: tl): ContainerType.T)
         = if B.eq(x, y)
           then
              union (c, tl)
           else
-             (n, y) :: (resolve(x, c) tl)
+             (n, y) :: (replace(x, c) tl)
 
 
 (*

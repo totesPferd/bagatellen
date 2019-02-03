@@ -27,7 +27,7 @@ signature Literals =
             val vmap:         (Variables.T -> Variables.T) -> T -> T
          end
 
-      val resolve:    Out.T * Multi.T -> Multi.T -> Multi.T
+      val replace:    Out.T * Multi.T -> Multi.T -> Multi.T
 
       val transition: (Out.T * 'b -> 'b Option.option) -> Multi.T -> 'b -> 'b
 
