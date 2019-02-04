@@ -1,59 +1,62 @@
 use "collections/dictset.fun";
 use "collections/sets.fun";
+use "logics/clauses.sig";
+use "logics/contected_literals.sig";
 use "logics/literals.sig";
 use "logics/proof.sig";
 use "logics/variable_contexts.sig";
 
 functor Proof(X:
    sig
-      structure Lit: Literals
-      structure VC: VariableContexts
-      sharing Lit.Variables = VC.Variables
+      structure Clauses: Clauses
+      structure CLits: ContectedLiterals
+      structure ClauseSet: Sets
+      structure CLitSet: Sets
+      sharing Clauses.Literals =  CLits.Literals
+      sharing Clauses.VariableContexts =  CLits.VariableContexts
+      sharing Clauses.Variables = CLits.Variables
+      sharing ClauseSet.Eqs = Clauses
+      sharing CLitSet.Eqs =  CLits
    end ): Proof =
    struct
-      structure Literals =  X.Lit
-      structure VariableContexts =  X.VC
-      structure Clause =  Literals.Clause
-      structure ClauseDictSet =  DictSet(Clause)
-      structure ClauseSet =  Sets(ClauseDictSet)
-      structure LiteralDictSet =  DictSet(Literals.Single)
-      structure LiteralSet =  Sets(LiteralDictSet)
-      structure CVDT =  Clause:VariablesDependingThing
+      structure Clauses =  X.Clauses
+      structure CLits =  X.CLits
+      structure ClauseSet =  X.ClauseSet
+      structure CLitSet =  X.CLitSet
 
-      type Proof =  { context: VariableContexts.VariableContext.T, clauses: ClauseSet.T }
+      type Proof =  ClauseSet.T
 
-      fun apply (proof: Proof) (proof_state: LiteralSet.T) (goal: Literals.Single.T)
+      fun apply (proof: Proof) (proof_state: CLitSet.T) (goal: CLits.T)
         = let
-             val alpha =  VariableContexts.alpha_convert (fn x => x) (#context proof)
-             fun omega cl
+             fun omega (cl: Clauses.T)
                = let
-                    val der_cl =  Clause.vmap (VariableContexts.apply_alpha_converter alpha) cl
+                    val alpha =  Clauses.alpha_convert (fn x => x) cl
+                    val der_cl =  Clauses.apply_alpha_conversion alpha cl
                  in
-                    if Literals.Single.equate((#conclusion der_cl), goal)
+                    if Clauses.Literals.Single.equate((Clauses.get_conclusion der_cl), (CLits.get_conclusion goal))
                     then
                        Option.SOME (cl, der_cl)
                     else
                        Option.NONE
                  end
-             val psi
+             val (psi: (Clauses.T * Clauses.T) Option.option)
                = ClauseSet.ofind
-                    omega
-                    (#clauses proof)
+                    (omega: Clauses.T -> ((Clauses.T * Clauses.T) Option.option))
+                    proof
           in
              case (psi) of
                 Option.NONE
-                   => LiteralSet.insert(goal, proof_state)
-             |  Option.SOME (cl, der_cl)
-                   => Literals.transition
+                   => CLitSet.insert(goal, proof_state)
+             |  Option.SOME (cl: Clauses.T, der_cl: Clauses.T)
+                   => Clauses.Literals.transition
                          (
-                            fn (premis, ps)
+                            fn (premis: Clauses.Literals.Single.T, ps: CLitSet.T)
                                => Option.SOME (
                                      apply
-                                        { context = (#context proof), clauses = ClauseSet.drop(cl, (#clauses proof)) }
+                                        (ClauseSet.drop(cl, proof))
                                         ps
-                                        premis ))
-                         (#antecedent der_cl)
+                                        (CLits.get_t(CLits.get_context goal, premis)) ))
+                         (Clauses.get_antecedent der_cl)
                          proof_state
           end
-
    end;

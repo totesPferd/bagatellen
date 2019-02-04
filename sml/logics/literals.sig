@@ -26,20 +26,15 @@ signature Literals =
             val eq:           T * T -> bool
             val vmap:         (Variables.T -> Variables.T) -> T -> T
          end
-      structure Clause:
+      structure PointerType:
          sig
-            structure Variables:  Variables
-            type T =  { antecedent: Multi.T, conclusion: Single.T }
-            val eq:           T * T -> bool
-            val vmap:         (Variables.T -> Variables.T) -> T -> T
+            type T
          end
       sharing Multi.Variables = Variables
       sharing Single.Variables = Variables
-      sharing Clause.Variables = Variables
-
-      val resolve:    Clause.T -> LiteralsIn.PT.PointerType.T -> Multi.T -> Multi.T Option.option
 
       val replace:    Single.T * Multi.T -> Multi.T -> Multi.T
+      val select:     PointerType.T * Multi.T -> Single.T
       val transition: (Single.T * 'b -> 'b Option.option) -> Multi.T -> 'b -> 'b
 
   end;
