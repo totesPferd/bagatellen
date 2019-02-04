@@ -1,3 +1,4 @@
+use "collections/eqs.sig";
 use "collections/pointer_type.sig";
 use "logics/variables.sig";
 use "logics/variables_depending_thing.sig";
@@ -6,7 +7,13 @@ signature VariableContexts =
    sig
       structure PointerType: PointerType
       structure Variables: Variables
-      structure VariableContext: VariablesDependingThing
+      structure VariableContext:
+         sig
+            structure Variables: Variables
+            type T
+            val eq: T * T -> bool
+            val vmap: (Variables.T -> Variables.T) -> T -> T
+         end
       sharing VariableContext.Variables =  Variables
       sharing PointerType.BaseType =  Variables
 
