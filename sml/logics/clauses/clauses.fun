@@ -24,8 +24,9 @@ functor Clauses(X:
       fun apply_alpha_conversion alpha { context = ctxt, antecedent = a, conclusion = c }
         = let
              val der_context =  VariableContexts.get_variable_context alpha
-             val der_antecedent =  Literals.Multi.vmap (VariableContexts.apply_alpha_converter alpha) a
-             val der_conclusion =  Literals.Single.vmap (VariableContexts.apply_alpha_converter alpha) c
+             val phi =  VariableContexts.apply_alpha_converter alpha
+             val der_antecedent =  Literals.Multi.vmap phi a
+             val der_conclusion =  Literals.Single.vmap phi c
           in
              { context =  der_context, antecedent = der_antecedent, conclusion = der_conclusion }
           end

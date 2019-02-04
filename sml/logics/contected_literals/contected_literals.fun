@@ -23,7 +23,8 @@ functor ContectedLiterals(X:
       fun apply_alpha_conversion alpha { context = ctxt, conclusion = c }
         = let
              val der_context =  VariableContexts.get_variable_context alpha
-             val der_conclusion =  Literals.Single.vmap (VariableContexts.apply_alpha_converter alpha) c
+             val phi =  VariableContexts.apply_alpha_converter alpha
+             val der_conclusion =  Literals.Single.vmap phi c
           in
              { context =  der_context, conclusion = der_conclusion }
           end
