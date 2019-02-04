@@ -10,19 +10,19 @@ functor Proof(X:
    sig
       structure Clauses: Clauses
       structure CLits: ContectedLiterals
-      structure ClauseSet: Sets
-      structure CLitSet: Sets
       sharing Clauses.Literals =  CLits.Literals
       sharing Clauses.VariableContexts =  CLits.VariableContexts
       sharing Clauses.Variables = CLits.Variables
-      sharing ClauseSet.Eqs = Clauses
-      sharing CLitSet.Eqs =  CLits
    end ): Proof =
    struct
       structure Clauses =  X.Clauses
       structure CLits =  X.CLits
-      structure ClauseSet =  X.ClauseSet
-      structure CLitSet =  X.CLitSet
+
+      structure ClauseDictSet =  DictSet(Clauses)
+      structure CLitDictSet =  DictSet(CLits)
+
+      structure ClauseSet =  Sets(ClauseDictSet)
+      structure CLitSet =  Sets(CLitDictSet)
 
       type Proof =  ClauseSet.T
 
