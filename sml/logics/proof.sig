@@ -11,5 +11,5 @@ signature Proof =
       sharing CLitSet.Eqs = CLits
 
       type Proof
-      val apply: Proof -> CLitSet.T -> CLits.T -> CLitSet.T
+      val apply: Proof -> CLitSet.T -> CLits.T -> bool * CLitSet.T
    end;

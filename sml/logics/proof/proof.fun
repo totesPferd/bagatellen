@@ -46,17 +46,24 @@ functor Proof(X:
           in
              case (psi) of
                 Option.NONE
-                   => CLitSet.insert(goal, proof_state)
+                   => (false, CLitSet.insert(goal, proof_state))
              |  Option.SOME (cl: Clauses.T, der_cl: Clauses.T)
-                   => Clauses.Literals.transition
-                         (
-                            fn (premis: Clauses.Literals.Single.T, ps: CLitSet.T)
-                               => Option.SOME (
-                                     apply
-                                        (ClauseSet.drop(cl, proof))
-                                        ps
-                                        (CLits.get_t(CLits.get_context goal, premis)) ))
-                         (Clauses.get_antecedent der_cl)
-                         proof_state
+                   => (
+                            true
+                          , Clauses.Literals.transition
+                               (
+                                  fn (premis: Clauses.Literals.Single.T, ps: CLitSet.T)
+                                     => Option.SOME (
+                                           let
+                                              val (progress, result)
+                                                = apply
+                                                    (ClauseSet.drop(cl, proof))
+                                                    ps
+                                                    (CLits.get_t(CLits.get_context goal, premis))
+                                           in
+                                              result
+                                           end ))
+                               (Clauses.get_antecedent der_cl)
+                               proof_state )
           end
    end;
