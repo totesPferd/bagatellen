@@ -75,9 +75,12 @@ functor Literals(I: LiteralsIn): Literals =
 
       structure PointerType =  I.PT.PointerType
    
-      val replace =  I.PT.replace
       val select =  I.PT.select
 
+      val fe =  I.PT.fe
+      val fop =  I.PT.fop
+
+      val replace =  I.PT.replace
       val transition =  I.PT.transition
 
    end;
