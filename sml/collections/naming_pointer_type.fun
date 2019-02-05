@@ -1,6 +1,5 @@
 use "collections/acc.sml";
 use "collections/eqs.sig";
-use "collections/pointer_type.sig";
 use "collections/string_type.sml";
 
 functor NamingPointerType(B: Eqs) =
@@ -70,6 +69,14 @@ functor NamingPointerType(B: Eqs) =
 
       fun union (c_1: ContainerType.T, c_2: ContainerType.T)
         = List.foldl insert c_1 c_2
+
+      fun fe (x: BaseType.T) =  [ (ref Option.NONE, x) ]
+      fun fop phi (c: ContainerType.T)
+        = transition (
+                fn (x: BaseType.T, c': ContainerType.T)
+                 => Option.SOME (union(phi x, c')) )
+                c
+                nil
 
       exception ResolutionSetDoesNotContainConclusion
       fun replace(x, c) nil =  raise ResolutionSetDoesNotContainConclusion

@@ -50,6 +50,9 @@ functor UnitPointerType(B: Eqs): PointerType =
              Option.NONE =>  b
           |  Option.SOME c => c
 
+      fun fe (x: BaseType.T) =  Option.SOME x
+      fun fop phi (c: ContainerType.T) =  Option.join (Option.map phi c)
+
       exception ResolutionSetDoesNotContainConclusion
       fun replace(x, c) Option.NONE =  raise ResolutionSetDoesNotContainConclusion
         | replace(x, c) (Option.SOME y)

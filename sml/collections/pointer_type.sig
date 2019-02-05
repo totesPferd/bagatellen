@@ -15,9 +15,13 @@ signature PointerType =
       val all:        (BaseType.T -> bool) -> ContainerType.T -> bool
       val all_zip:    (BaseType.T * BaseType.T -> bool) -> (ContainerType.T * ContainerType.T) -> bool
 
-      val replace:    BaseType.T * ContainerType.T -> ContainerType.T -> ContainerType.T
-
       val mapfold:    (BaseType.T -> BaseType.T) -> (BaseType.T * BaseType.T * 'a -> 'a) -> 'a -> ContainerType.T -> (ContainerType.T * 'a)
+
+      val fe:         BaseType.T -> ContainerType.T
+      val fop:        (BaseType.T -> ContainerType.T) -> ContainerType.T -> ContainerType.T
+
+      (* auf der Abschussliste: *)
+      val replace:    BaseType.T * ContainerType.T -> ContainerType.T -> ContainerType.T
       val transition: (BaseType.T * 'b -> 'b Option.option) -> ContainerType.T -> 'b -> 'b
 
    end;
