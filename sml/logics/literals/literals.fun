@@ -61,6 +61,7 @@ functor Literals(I: LiteralsIn): Literals =
 
             val equate =  Single.multi_equate
             val eq =  Single.multi_eq
+            val empty =  I.PT.empty
             val is_empty =  I.PT.is_empty
 
             fun vmap f =  I.PT.map (Single.vmap f)

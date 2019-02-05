@@ -66,4 +66,11 @@ functor Proof(X:
                                (Clauses.get_antecedent der_cl)
                                proof_state )
           end
+
+      fun make_clause_from_contected_literal (clit: CLits.T)
+        = let
+             val antecedent =  CLits.Literals.Multi.empty()
+          in
+             Clauses.get_t(CLits.get_context(clit), antecedent, CLits.get_conclusion(clit))
+          end
    end;

@@ -33,6 +33,7 @@ functor NamingPointerType(B: Eqs) =
       fun map (phi: BaseType.T -> BaseType.T) (c: ContainerType.T)
         = (List.map (fn (n, x) => (ref (!n), phi x)) c): ContainerType.T
 
+      fun empty() =  nil
       fun is_empty (c: ContainerType.T) =  (List.null c)
 
       fun all (P: BaseType.T -> bool) (c: ContainerType.T)
