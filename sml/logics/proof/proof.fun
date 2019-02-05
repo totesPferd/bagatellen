@@ -73,4 +73,35 @@ functor Proof(X:
           in
              Clauses.get_t(CLits.get_context(clit), antecedent, CLits.get_conclusion(clit))
           end
+
+      fun get_contected_conclusion (clause: Clauses.T)
+        = CLits.get_t(Clauses.get_context clause, Clauses.get_conclusion clause)
+
+      fun add_assumption_to_proof (clit: CLits.T) (proof: Proof)
+        = let
+             val assumption_as_clause =  make_clause_from_contected_literal clit
+          in
+             ClauseSet.insert(assumption_as_clause, proof)
+          end
+
+      fun apply_proof_on_clause (proof: Proof) (proof_state: CLitSet.T) (goal: Clauses.T)
+        = let
+             val prepared_proof
+               = Clauses.Literals.transition
+                    (
+                       fn (premis: Clauses.Literals.Single.T, mod_proof: Proof)
+                          => Option.SOME (
+                                let
+                                   val antecedent =  CLits.Literals.Multi.empty()
+                                   val premis_as_clause
+                                     = Clauses.get_t(Clauses.get_context goal, antecedent, premis)
+                                in
+                                   ClauseSet.insert(premis_as_clause, mod_proof)
+                                end ))
+                    (Clauses.get_antecedent goal)
+                    proof
+          in
+             apply prepared_proof proof_state (get_contected_conclusion goal)
+          end
+
    end;
