@@ -21,6 +21,7 @@ signature PointerType =
       val fe:         BaseType.T -> ContainerType.T
       val fop:        (BaseType.T -> ContainerType.T) -> ContainerType.T -> ContainerType.T
       val is_in:      BaseType.T * ContainerType.T -> bool
+      val subeq:      ContainerType.T * ContainerType.T -> bool
 
       (* auf der Abschussliste: *)
       val replace:    BaseType.T * ContainerType.T -> ContainerType.T -> ContainerType.T

@@ -55,6 +55,11 @@ functor UnitPointerType(B: Eqs): PointerType =
       fun is_in (x: BaseType.T, c: ContainerType.T)
         = Option.isSome (Option.map (fn (y) => BaseType.eq(x, y)) c)
 
+      fun subeq(c_1: ContainerType.T, c_2: ContainerType.T)
+        = case(c_1) of
+             Option.NONE => true
+          |  Option.SOME x => is_in(x, c_2)
+
       exception ResolutionSetDoesNotContainConclusion
       fun replace(x, c) Option.NONE =  raise ResolutionSetDoesNotContainConclusion
         | replace(x, c) (Option.SOME y)

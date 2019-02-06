@@ -17,6 +17,7 @@ signature Literals =
             val eq:           T * T -> bool
             val empty:        unit -> T
             val is_empty:     T -> bool
+            val subeq:        T * T -> bool
             val vmap:         (Variables.T -> Variables.T) -> T -> T
          end
       structure Single:
