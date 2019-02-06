@@ -38,6 +38,7 @@ signature Literals =
 
       val fe:         Single.T -> Multi.T
       val fop:        (Single.T -> Multi.T) -> Multi.T -> Multi.T
+      val is_in:      Single.T * Multi.T -> bool
 
       (* auf der Abschussliste: *)
       val replace:    Single.T * Multi.T -> Multi.T -> Multi.T

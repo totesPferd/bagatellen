@@ -1,8 +1,9 @@
+use "collections/eqs.sig";
 use "collections/type.sig";
 
 signature PointerType =
    sig
-      structure BaseType: Type
+      structure BaseType: Eqs
       structure ContainerType: Type
       structure PointerType: Type
 
@@ -19,6 +20,7 @@ signature PointerType =
 
       val fe:         BaseType.T -> ContainerType.T
       val fop:        (BaseType.T -> ContainerType.T) -> ContainerType.T -> ContainerType.T
+      val is_in:      BaseType.T * ContainerType.T -> bool
 
       (* auf der Abschussliste: *)
       val replace:    BaseType.T * ContainerType.T -> ContainerType.T -> ContainerType.T

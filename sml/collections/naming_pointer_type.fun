@@ -77,6 +77,11 @@ functor NamingPointerType(B: Eqs) =
                  => Option.SOME (union(phi x, c')) )
                 c
                 nil
+      fun is_in (x: BaseType.T, c: ContainerType.T)
+        = List.exists
+             (fn (n, y) => BaseType.eq(x, y))
+             c
+
 
       exception ResolutionSetDoesNotContainConclusion
       fun replace(x, c) nil =  raise ResolutionSetDoesNotContainConclusion
