@@ -129,6 +129,12 @@ functor Contecteds(X:
       fun make_clause_from_conclusion { context = ctxt, conclusion = c }
         = { context = ctxt, antecedent = Literals.Multi.empty(), conclusion = c }
 
+      fun make_multi_clause_from_antecedent { context = ctxt, antecedent = a }
+        = { context = ctxt, antecedent = Literals.Multi.empty(), conclusion = a }
+
+      fun empty_multi_clause { context = ctxt, antecedent = a }
+        = { context = ctxt, antecedent = a, conclusion = Literals.Multi.empty() }
+
       fun get_antecedent { context = ctxt, antecedent = a, conclusion = c }
         = { context = ctxt, antecedent = a }
 

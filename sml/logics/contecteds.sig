@@ -73,6 +73,8 @@ signature Contecteds =
       sharing MultiClauses.VariableContexts =  VariableContexts
 
       val make_clause_from_conclusion: Conclusions.T -> Clauses.T
+      val make_multi_clause_from_antecedent: Antecedents.T -> MultiClauses.T
+      val empty_multi_clause: Antecedents.T -> MultiClauses.T
       val get_antecedent: Clauses.T -> Antecedents.T
       val get_conclusion: Clauses.T -> Conclusions.T
       val multi_get_antecedent: MultiClauses.T -> Antecedents.T
