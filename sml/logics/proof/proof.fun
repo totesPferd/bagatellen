@@ -14,7 +14,7 @@ functor Proof(X: Contecteds): Proof =
 
       type Proof =  ClauseSet.T
 
-      fun apply (proof: Proof) (goal: Contecteds.Clauses.T)
+      fun apply_telling_progress (proof: Proof) (goal: Contecteds.Clauses.T)
         = if Contecteds.Clauses.is_assumption goal
           then
              (false, Contecteds.empty_multi_clause (Contecteds.get_antecedent goal))
@@ -56,11 +56,33 @@ functor Proof(X: Contecteds): Proof =
                                                                    (Contecteds.Clauses.get_context goal)
                                                                 ,  (Contecteds.Clauses.get_antecedent goal)
                                                                 ,  g )
-                                                             val (progress, result) =  apply proof premis
                                                           in
-                                                             Contecteds.MultiClauses.get_conclusion result
+                                                             Contecteds.MultiClauses.get_conclusion (apply proof premis)
                                                           end )
                                                     (Contecteds.Clauses.get_antecedent der_cl) ))))
             end
-
+      and apply (proof: Proof) (goal: Contecteds.Clauses.T)
+        = let
+             val (progress, result) =  apply_telling_progress proof goal
+          in
+             result
+          end
+      and multi_apply (proof: Proof) (goal: Contecteds.MultiClauses.T)
+        = Contecteds.MultiClauses.construct (
+                (Contecteds.MultiClauses.get_context goal)
+             ,  (Contecteds.MultiClauses.get_antecedent goal)
+             ,  (
+                   Contecteds.Literals.fop
+                      (
+                         fn (g: Contecteds.Literals.Single.T)
+                         => let
+                               val premis
+                                 = Contecteds.Clauses.construct (
+                                       (Contecteds.MultiClauses.get_context goal)
+                                    ,  (Contecteds.MultiClauses.get_antecedent goal)
+                                    ,  g )
+                            in
+                               Contecteds.MultiClauses.get_conclusion (apply proof premis)
+                            end )
+                   (Contecteds.MultiClauses.get_conclusion goal) ))
    end;

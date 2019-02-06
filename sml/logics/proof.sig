@@ -6,6 +6,7 @@ signature Proof =
       structure Contecteds: Contecteds
 
       type Proof
-      val apply: Proof -> Contecteds.Clauses.T -> bool * Contecteds.MultiClauses.T
+      val apply: Proof -> Contecteds.Clauses.T -> Contecteds.MultiClauses.T
+      val multi_apply: Proof -> Contecteds.MultiClauses.T -> Contecteds.MultiClauses.T
 
    end;
