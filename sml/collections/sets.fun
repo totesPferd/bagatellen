@@ -8,6 +8,7 @@ functor Sets(D: DictSet): Sets =
       type T =  D.set
 
       val empty =           D.empty_s
+      val getItem =         D.getItem_s
       val map =             D.map_s
       val singleton =       D.singleton
       val drop =            D.drop_s

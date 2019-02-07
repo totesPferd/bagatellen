@@ -16,6 +16,7 @@ signature DictSet =
       val zip_d:            ('a dict) * ('b dict) -> ('a * 'b) dict
 
       val empty_s:          set
+      val getItem_s:        set -> (Eqs.T * set) Option.option
       val map_s:            (Eqs.T -> Eqs.T) -> set -> set
       val singleton:        Eqs.T -> set
       val is_empty_s:       set -> bool

@@ -7,6 +7,7 @@ signature Sets =
       type T
 
       val empty:           T
+      val getItem :        T -> (Eqs.T * T) Option.option
       val map:             (Eqs.T -> Eqs.T) -> T -> T
       val singleton:       Eqs.T -> T
       val drop:            Eqs.T * T -> T

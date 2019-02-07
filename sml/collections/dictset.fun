@@ -38,6 +38,7 @@ functor DictSet(E: Eqs): DictSet =
       end
 
       val empty_s =  nil
+      val getItem_s =  List.getItem
       fun map_s f (s: set) =  map f s
       fun singleton x =  [ x ]
       fun is_member_s(x, s) =  List.exists (fn (y) => Eqs.eq(x, y)) s
