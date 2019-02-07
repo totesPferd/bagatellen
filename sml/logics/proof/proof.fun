@@ -17,7 +17,7 @@ functor Proof(X: Contecteds): Proof =
       fun apply_telling_progress is_conventional (proof: Proof) (goal: Contecteds.Clauses.T)
         = if Contecteds.Clauses.is_assumption goal
           then
-             (false, Contecteds.empty_multi_clause (Contecteds.get_antecedent goal))
+             Option.SOME (Contecteds.empty_multi_clause (Contecteds.get_antecedent goal))
           else
              let
                 fun omega (cl: Contecteds.Clauses.T)
@@ -39,7 +39,7 @@ functor Proof(X: Contecteds): Proof =
              in
                 case (psi) of
                    Option.NONE
-                      => (false, Contecteds.multi_fe goal)
+                      => Option.NONE
                 |  Option.SOME (cl: Contecteds.Clauses.T, der_cl: Contecteds.Clauses.T)
                       => let
                             val proof'
@@ -48,9 +48,8 @@ functor Proof(X: Contecteds): Proof =
                                    proof
                                 else
                                    ClauseSet.drop(cl, proof)
-                         in (
-                               true
-                            ,  (
+                         in Option.SOME (
+                               (
                                      Contecteds.MultiClauses.construct (
                                            (Contecteds.Clauses.get_context goal)
                                         ,  (Contecteds.Clauses.get_antecedent goal)
@@ -70,11 +69,9 @@ functor Proof(X: Contecteds): Proof =
                          end
             end
       and apply_in_both_manners is_conventional (proof: Proof) (goal: Contecteds.Clauses.T)
-        = let
-             val (progress, result) =  apply_telling_progress is_conventional proof goal
-          in
-             result
-          end
+        = case(apply_telling_progress is_conventional proof goal) of
+             Option.NONE =>  (Contecteds.multi_fe goal)
+          |  Option.SOME result =>  result
 
       fun multi_apply_in_both_manners is_conventional (proof: Proof) (goal: Contecteds.MultiClauses.T)
         = Contecteds.MultiClauses.construct (
