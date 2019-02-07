@@ -99,5 +99,11 @@ functor Proof(X: Contecteds): Proof =
       val multi_apply =  multi_apply_in_both_manners false
       val apply_conventionally =  apply_in_both_manners true
       val multi_apply_conventionally =  multi_apply_in_both_manners true
-
+      fun add_clause_to_proof(cl: Contecteds.Clauses.T, proof: Proof) =  ClauseSet.insert(cl, proof)
+      fun add_multi_clause_to_proof (mcl: Contecteds.MultiClauses.T, proof: Proof)
+       =  Contecteds.clause_transition (
+             fn (cl: Contecteds.Clauses.T, b: Proof)
+             => Option.SOME (add_clause_to_proof(cl, b)) )
+             mcl
+             proof
    end;
