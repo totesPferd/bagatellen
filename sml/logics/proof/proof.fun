@@ -114,10 +114,14 @@ functor Proof(X: Contecteds): Proof =
                    case (apply_telling_progress false p_2 cl) of
                       Option.NONE =>  ClauseSet.adjunct(cl, p_2)
                    |  Option.SOME (mcl: Contecteds.MultiClauses.T)
-                      => let
-                            val p_3 =  add_multi_clause_to_proof(mcl, p_2)
-                         in
-                            mini_complete p_3
-                         end
+                      => if (Contecteds.MultiClauses.is_empty mcl)
+                         then
+                            p_2
+                         else
+                            let
+                               val p_3 =  add_multi_clause_to_proof(mcl, p_2)
+                            in
+                               mini_complete p_3
+                            end
                 end
    end;
