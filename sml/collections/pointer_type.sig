@@ -23,8 +23,9 @@ signature PointerType =
       val is_in:      BaseType.T * ContainerType.T -> bool
       val subeq:      ContainerType.T * ContainerType.T -> bool
 
+      val transition: (BaseType.T * 'b -> 'b Option.option) -> ContainerType.T -> 'b -> 'b
+
       (* auf der Abschussliste: *)
       val replace:    BaseType.T * ContainerType.T -> ContainerType.T -> ContainerType.T
-      val transition: (BaseType.T * 'b -> 'b Option.option) -> ContainerType.T -> 'b -> 'b
 
    end;

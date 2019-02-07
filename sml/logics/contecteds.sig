@@ -83,7 +83,7 @@ signature Contecteds =
       val fe:  Conclusions.T -> Antecedents.T
       val multi_fe:  Clauses.T -> MultiClauses.T
 
-      (* auf der Abschussliste: *)
       val transition: (Conclusions.T * 'b -> 'b Option.option) -> Antecedents.T -> 'b -> 'b
+      val clause_transition: (Clauses.T * 'b -> 'b Option.option) -> MultiClauses.T -> 'b -> 'b
 
    end;

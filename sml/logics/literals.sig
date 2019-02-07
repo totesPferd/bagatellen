@@ -41,8 +41,9 @@ signature Literals =
       val fop:        (Single.T -> Multi.T) -> Multi.T -> Multi.T
       val is_in:      Single.T * Multi.T -> bool
 
+      val transition: (Single.T * 'b -> 'b Option.option) -> Multi.T -> 'b -> 'b
+
       (* auf der Abschussliste: *)
       val replace:    Single.T * Multi.T -> Multi.T -> Multi.T
-      val transition: (Single.T * 'b -> 'b Option.option) -> Multi.T -> 'b -> 'b
 
   end;

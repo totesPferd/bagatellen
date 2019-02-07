@@ -160,4 +160,14 @@ functor Contecteds(X:
           in
              Literals.transition psi (#antecedent a)
           end
+
+      fun clause_transition phi (mcl: MultiClauses.T)
+        = let
+             val ctxt =  MultiClauses.get_context mcl
+             val antecedent =  MultiClauses.get_antecedent mcl
+             fun psi (c: Literals.Single.T, b)
+               = phi ({ context = ctxt, antecedent = antecedent, conclusion = c }, b)
+          in
+             Literals.transition psi (#conclusion mcl)
+          end
    end;
