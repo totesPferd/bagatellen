@@ -14,7 +14,7 @@ functor Proof(X: Contecteds): Proof =
 
       type Proof =  ClauseSet.T
 
-      fun apply_telling_progress (proof: Proof) (goal: Contecteds.Clauses.T)
+      fun apply_telling_progress is_conventional (proof: Proof) (goal: Contecteds.Clauses.T)
         = if Contecteds.Clauses.is_assumption goal
           then
              (false, Contecteds.empty_multi_clause (Contecteds.get_antecedent goal))
@@ -41,7 +41,14 @@ functor Proof(X: Contecteds): Proof =
                    Option.NONE
                       => (false, Contecteds.multi_fe goal)
                 |  Option.SOME (cl: Contecteds.Clauses.T, der_cl: Contecteds.Clauses.T)
-                      => (
+                      => let
+                            val proof'
+                              = if is_conventional
+                                then
+                                   proof
+                                else
+                                   ClauseSet.drop(cl, proof)
+                         in (
                                true
                             ,  (
                                      Contecteds.MultiClauses.construct (
@@ -57,17 +64,19 @@ functor Proof(X: Contecteds): Proof =
                                                                 ,  (Contecteds.Clauses.get_antecedent goal)
                                                                 ,  g )
                                                           in
-                                                             Contecteds.MultiClauses.get_conclusion (apply proof premis)
+                                                             Contecteds.MultiClauses.get_conclusion (apply_in_both_manners is_conventional proof' premis)
                                                           end )
                                                     (Contecteds.Clauses.get_antecedent der_cl) ))))
+                         end
             end
-      and apply (proof: Proof) (goal: Contecteds.Clauses.T)
+      and apply_in_both_manners is_conventional (proof: Proof) (goal: Contecteds.Clauses.T)
         = let
-             val (progress, result) =  apply_telling_progress proof goal
+             val (progress, result) =  apply_telling_progress is_conventional proof goal
           in
              result
           end
-      and multi_apply (proof: Proof) (goal: Contecteds.MultiClauses.T)
+
+      fun multi_apply_in_both_manners is_conventional (proof: Proof) (goal: Contecteds.MultiClauses.T)
         = Contecteds.MultiClauses.construct (
                 (Contecteds.MultiClauses.get_context goal)
              ,  (Contecteds.MultiClauses.get_antecedent goal)
@@ -82,7 +91,13 @@ functor Proof(X: Contecteds): Proof =
                                     ,  (Contecteds.MultiClauses.get_antecedent goal)
                                     ,  g )
                             in
-                               Contecteds.MultiClauses.get_conclusion (apply proof premis)
+                               Contecteds.MultiClauses.get_conclusion (apply_in_both_manners is_conventional proof premis)
                             end )
                    (Contecteds.MultiClauses.get_conclusion goal) ))
+
+      val apply =  apply_in_both_manners false
+      val multi_apply =  multi_apply_in_both_manners false
+      val apply_conventionally =  apply_in_both_manners true
+      val multi_apply_conventionally =  multi_apply_in_both_manners true
+
    end;
