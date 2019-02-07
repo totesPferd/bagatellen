@@ -14,8 +14,10 @@ functor Sets(D: DictSet): Sets =
       val drop =            D.drop_s
       val drop_if_exists =  D.drop_if_exists_s
       val insert =          D.insert_s
+      val sum =             D.sum_s
       val cut =             D.cut
       val union =           D.union
+      val intersect =       D.intersect
 
       val is_member =       D.is_member_s
       val is_empty =        D.is_empty_s

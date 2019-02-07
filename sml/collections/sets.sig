@@ -13,8 +13,10 @@ signature Sets =
       val drop:            Eqs.T * T -> T
       val drop_if_exists:  Eqs.T * T -> T Option.option
       val insert:          Eqs.T * T -> T
+      val sum:             T * T -> T
       val cut:             T * T -> T
       val union:           T * T -> T
+      val intersect:       T * T -> T
 
       val is_member:       Eqs.T * T -> bool
       val is_empty:        T -> bool

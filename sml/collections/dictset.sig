@@ -24,8 +24,10 @@ signature DictSet =
       val drop_s:           Eqs.T * set -> set
       val drop_if_exists_s: Eqs.T * set -> set Option.option
       val insert_s:         Eqs.T * set -> set
+      val sum_s:            set * set -> set
       val union:            set * set -> set
       val cut:              set * set -> set
+      val intersect:        set * set -> set
       val subseteq_s:       set * set -> bool
       val eq_s:             set * set -> bool
 

@@ -56,21 +56,34 @@ functor DictSet(E: Eqs): DictSet =
              s
           else
              x :: s
+      fun sum_s (l_1, l_2) =  l_1 @ l_2
       fun union(nil, t) =  t
       | union(x :: s, t) =  insert_s (x, union(s, t))
-    fun cut(s, nil) =  s
-      | cut(s, y :: t) =  cut(drop_s(y, s), t)
-    fun subseteq_s(s, t) =  List.all (fn (x) => is_member_s(x, t)) s
-    fun eq_s(s, t) =  subseteq_s(s, t) andalso subseteq_s(t, s)
-
-    fun find_s P s =  List.find P s
-
-    fun ofind_s f nil =  Option.NONE
-      | ofind_s f (hd :: tl)
-      = case(f hd) of
-           Option.NONE => ofind_s f tl
-        |  Option.SOME y =>  Option.SOME y
-
-    fun transition_s phi s b =  Acc.transition phi s b
-
+      fun cut(s, nil) =  s
+        | cut(s, y :: t) =  cut(drop_s(y, s), t)
+      fun intersect(nil, l_2) =  nil
+        | intersect((x :: l_1), l_2)
+        = let
+             val l'
+               = if is_member_s(x, l_2)
+                 then
+                    [ x ]
+                 else
+                    nil
+          in
+             l' @ (intersect(l_1, l_2))
+          end
+      fun subseteq_s(s, t) =  List.all (fn (x) => is_member_s(x, t)) s
+      fun eq_s(s, t) =  subseteq_s(s, t) andalso subseteq_s(t, s)
+  
+      fun find_s P s =  List.find P s
+  
+      fun ofind_s f nil =  Option.NONE
+        | ofind_s f (hd :: tl)
+        = case(f hd) of
+             Option.NONE => ofind_s f tl
+          |  Option.SOME y =>  Option.SOME y
+  
+      fun transition_s phi s b =  Acc.transition phi s b
+  
    end;
