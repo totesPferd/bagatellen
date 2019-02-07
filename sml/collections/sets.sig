@@ -10,6 +10,7 @@ signature Sets =
       val getItem :        T -> (Eqs.T * T) Option.option
       val map:             (Eqs.T -> Eqs.T) -> T -> T
       val singleton:       Eqs.T -> T
+      val adjunct:         Eqs.T * T -> T
       val drop:            Eqs.T * T -> T
       val drop_if_exists:  Eqs.T * T -> T Option.option
       val insert:          Eqs.T * T -> T

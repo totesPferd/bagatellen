@@ -11,6 +11,7 @@ functor Sets(D: DictSet): Sets =
       val getItem =         D.getItem_s
       val map =             D.map_s
       val singleton =       D.singleton
+      val adjunct =         D.adjunct_s
       val drop =            D.drop_s
       val drop_if_exists =  D.drop_if_exists_s
       val insert =          D.insert_s

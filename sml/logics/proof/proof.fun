@@ -103,4 +103,21 @@ functor Proof(X: Contecteds): Proof =
              => Option.SOME (add_clause_to_proof(cl, b)) )
              mcl
              proof
+
+      fun mini_complete (proof: Proof)
+        = case (ClauseSet.getItem proof) of
+             Option.NONE =>  proof
+          |  Option.SOME (cl: Contecteds.Clauses.T, p_1: Proof)
+             => let
+                   val p_2 =  mini_complete p_1
+                in
+                   case (apply_telling_progress false p_2 cl) of
+                      Option.NONE =>  ClauseSet.adjunct(cl, p_2)
+                   |  Option.SOME (mcl: Contecteds.MultiClauses.T)
+                      => let
+                            val p_3 =  add_multi_clause_to_proof(mcl, p_2)
+                         in
+                            mini_complete p_3
+                         end
+                end
    end;

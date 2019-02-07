@@ -21,6 +21,7 @@ signature DictSet =
       val singleton:        Eqs.T -> set
       val is_empty_s:       set -> bool
       val is_member_s:      Eqs.T * set -> bool
+      val adjunct_s:        Eqs.T * set -> set
       val drop_s:           Eqs.T * set -> set
       val drop_if_exists_s: Eqs.T * set -> set Option.option
       val insert_s:         Eqs.T * set -> set
