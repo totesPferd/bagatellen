@@ -64,14 +64,13 @@ functor DictSet(E: Eqs): DictSet =
       fun intersect(nil, l_2) =  nil
         | intersect((x :: l_1), l_2)
         = let
-             val l'
-               = if is_member_s(x, l_2)
-                 then
-                    [ x ]
-                 else
-                    nil
+             val tail =  intersect(l_1, l_2)
           in
-             l' @ (intersect(l_1, l_2))
+             if is_member_s(x, l_2)
+             then
+                x :: tail
+             else
+                tail
           end
       fun subseteq_s(s, t) =  List.all (fn (x) => is_member_s(x, t)) s
       fun eq_s(s, t) =  subseteq_s(s, t) andalso subseteq_s(t, s)
