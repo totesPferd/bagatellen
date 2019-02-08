@@ -16,4 +16,9 @@ signature Proof =
       val add_multi_clause_to_proof:  Contecteds.Clauses.Multi.T * Multi.T -> Multi.T
       val mini_complete:              Multi.T -> Multi.T
 
+      val fe:                         Single.T -> Multi.T
+      val fop:                        (Single.T -> Multi.T) -> Multi.T -> Multi.T
+      val is_in:                      Single.T * Multi.T -> bool
+      val transition:                 (Single.T * 'b -> 'b Option.option) -> Multi.T -> 'b -> 'b
+
    end;

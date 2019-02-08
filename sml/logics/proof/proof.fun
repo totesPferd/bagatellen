@@ -123,4 +123,10 @@ functor Proof(X: Contecteds): Proof =
                                mini_complete p_3
                             end
                 end
+
+      val fe =  Multi.fe
+      val fop =  Multi.fop
+      val is_in =  Multi.is_in
+      val transition =  Multi.transition
+
    end;

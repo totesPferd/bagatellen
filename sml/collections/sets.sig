@@ -19,7 +19,7 @@ signature Sets =
       val union:           T * T -> T
       val intersect:       T * T -> T
 
-      val is_member:       Eqs.T * T -> bool
+      val is_in    :       Eqs.T * T -> bool
       val is_empty:        T -> bool
       val subseteq:        T * T -> bool
       val eq:              T * T -> bool
@@ -27,5 +27,8 @@ signature Sets =
       val find:            (Eqs.T -> bool) -> T -> Eqs.T Option.option
 
       val ofind:           (Eqs.T -> 'b Option.option) -> T -> 'b Option.option
+
+      val fe:              Eqs.T -> T
+      val fop:             (Eqs.T -> T) -> T -> T
       val transition:      (Eqs.T * 'b -> 'b Option.option) -> T -> 'b -> 'b
    end;

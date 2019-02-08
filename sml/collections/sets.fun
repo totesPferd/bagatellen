@@ -20,7 +20,7 @@ functor Sets(D: DictSet): Sets =
       val union =           D.union
       val intersect =       D.intersect
 
-      val is_member =       D.is_member_s
+      val is_in =           D.is_in_s
       val is_empty =        D.is_empty_s
       val subseteq  =       D.subseteq_s
       val eq =              D.eq_s
@@ -28,6 +28,9 @@ functor Sets(D: DictSet): Sets =
       val find =            D.find_s
 
       val ofind =           D.ofind_s
+
+      val fe =              D.fe_s
+      val fop =             D.fop_s
       val transition =      D.transition_s
 
    end;

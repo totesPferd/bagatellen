@@ -20,7 +20,6 @@ signature DictSet =
       val map_s:            (Eqs.T -> Eqs.T) -> set -> set
       val singleton:        Eqs.T -> set
       val is_empty_s:       set -> bool
-      val is_member_s:      Eqs.T * set -> bool
       val adjunct_s:        Eqs.T * set -> set
       val drop_s:           Eqs.T * set -> set
       val drop_if_exists_s: Eqs.T * set -> set Option.option
@@ -35,5 +34,9 @@ signature DictSet =
       val find_s:           (Eqs.T -> bool) -> set -> Eqs.T Option.option
 
       val ofind_s:          (Eqs.T -> 'b Option.option) -> set -> 'b Option.option
+
+      val fe_s:             Eqs.T -> set
+      val fop_s:            (Eqs.T -> set) -> set -> set
+      val is_in_s:          Eqs.T * set -> bool
       val transition_s:     (Eqs.T * 'b -> 'b Option.option) -> set -> 'b -> 'b
    end;

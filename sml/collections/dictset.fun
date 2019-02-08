@@ -41,18 +41,18 @@ functor DictSet(E: Eqs): DictSet =
       val getItem_s =  List.getItem
       fun map_s f (s: set) =  map f s
       fun singleton x =  [ x ]
-      fun is_member_s(x, s) =  List.exists (fn (y) => Eqs.eq(x, y)) s
+      fun is_in_s(x, s) =  List.exists (fn (y) => Eqs.eq(x, y)) s
       val is_empty_s =  List.null
       fun adjunct_s(x, s) =  x :: s
       fun drop_s(x, s) =  List.filter (fn (y) => not(Eqs.eq(x, y))) s
       fun drop_if_exists_s(x, s)
-        = if is_member_s(x, s)
+        = if is_in_s(x, s)
           then
              Option.SOME (drop_s(x, s))
           else
              Option.NONE
       fun insert_s(x, s)
-        = if is_member_s(x, s)
+        = if is_in_s(x, s)
           then
              s
           else
@@ -67,13 +67,13 @@ functor DictSet(E: Eqs): DictSet =
         = let
              val tail =  intersect(l_1, l_2)
           in
-             if is_member_s(x, l_2)
+             if is_in_s(x, l_2)
              then
                 x :: tail
              else
                 tail
           end
-      fun subseteq_s(s, t) =  List.all (fn (x) => is_member_s(x, t)) s
+      fun subseteq_s(s, t) =  List.all (fn (x) => is_in_s(x, t)) s
       fun eq_s(s, t) =  subseteq_s(s, t) andalso subseteq_s(t, s)
   
       fun find_s P s =  List.find P s
@@ -84,6 +84,12 @@ functor DictSet(E: Eqs): DictSet =
              Option.NONE => ofind_s f tl
           |  Option.SOME y =>  Option.SOME y
   
+      fun fe_s b =  [ b ]
       fun transition_s phi s b =  Acc.transition phi s b
+      fun fop_s phi s
+        = transition_s (
+             fn (x, b) => Option.SOME (union (phi x, b)) )
+          s
+          nil
   
    end;
