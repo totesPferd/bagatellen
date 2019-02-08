@@ -120,7 +120,7 @@ functor NamingPointerType(B: Eqs) =
              fun get_candidate(name_r, b)
                = (
                     case (!name_r) of
-                       Option.NONE => "x"
+                       Option.NONE => "_"
                     |  Option.SOME n => n )
              fun get_next_do_not_use_list((name_r, b), do_not_use_list)
                = let
