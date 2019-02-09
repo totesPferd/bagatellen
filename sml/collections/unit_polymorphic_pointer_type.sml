@@ -1,13 +1,11 @@
-use "collections/pointer_type.sig";
-use "collections/eqs.sig";
+use "collections/polymorphic_pointer_type.sig";
 use "collections/unit_type.sml";
 
-functor UnitPointerType(B: Eqs): PointerType =
+structure UnitPolymorphicPointerType: PolymorphicPointerType =
    struct
-      structure BaseType =  B
       structure ContainerType =
          struct
-            type T =  B.T Option.option
+            type 'a T =  'a Option.option
          end
       structure PointerType =  UnitType
 
@@ -23,7 +21,7 @@ functor UnitPointerType(B: Eqs): PointerType =
       fun map f =  Option.map f
 
       fun empty () =  Option.NONE
-      fun is_empty (c: ContainerType.T) =  not (Option.isSome c)
+      fun is_empty (c: 'a ContainerType.T) =  not (Option.isSome c)
 
       fun all P Option.NONE =  true
         | all P (Option.SOME x) = P x
@@ -50,14 +48,14 @@ functor UnitPointerType(B: Eqs): PointerType =
              Option.NONE =>  b
           |  Option.SOME c => c
 
-      fun fe (x: BaseType.T) =  Option.SOME x
-      fun fop phi (c: ContainerType.T) =  Option.join (Option.map phi c)
-      fun is_in (x: BaseType.T, c: ContainerType.T)
-        = Option.isSome (Option.map (fn (y) => BaseType.eq(x, y)) c)
+      val fe =  Option.SOME
+      fun p_fop (eq) phi (c: 'a ContainerType.T) =  Option.join (Option.map phi c)
+      fun p_is_in (eq: 'a * 'a -> bool) (x: 'a, c: 'a ContainerType.T)
+        = Option.isSome (Option.map (fn (y) => eq(x, y)) c)
 
-      fun subeq(c_1: ContainerType.T, c_2: ContainerType.T)
+      fun p_subeq (eq: 'a * 'a -> bool) (c_1: 'a ContainerType.T, c_2: 'a ContainerType.T)
         = case(c_1) of
              Option.NONE => true
-          |  Option.SOME x => is_in(x, c_2)
+          |  Option.SOME x => p_is_in (eq) (x, c_2)
 
    end;

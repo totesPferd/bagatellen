@@ -1,19 +1,17 @@
 use "collections/acc.sml";
-use "collections/eqs.sig";
 use "collections/string_type.sml";
 
-functor NamingPointerType(B: Eqs) =
+structure NamingPolymorphicPointerType =
    struct
       structure Acc =  Acc
-      structure BaseType =  B
       structure ContainerType =
          struct
-            type T =  (string Option.option ref * B.T) list
+            type 'a T =  (string Option.option ref * 'a) list
          end
       structure PointerType =  StringType
 
       exception NotFound
-      fun select(sel: PointerType.T, c: ContainerType.T)
+      fun select(sel: PointerType.T, c: 'a ContainerType.T)
         = let
              fun is_found(s, b)
                = case(!s) of
@@ -26,25 +24,25 @@ functor NamingPointerType(B: Eqs) =
              |  Option.SOME (_, b) =>  b
           end
 
-      fun fold f b (c: ContainerType.T)
+      fun fold f b (c: 'a ContainerType.T)
         = List.foldl (fn ((_, a), x) =>  f(a, x)) b c
 
-      fun map (phi: BaseType.T -> BaseType.T) (c: ContainerType.T)
-        = (List.map (fn (n, x) => (ref (!n), phi x)) c): ContainerType.T
+      fun map (phi: 'a -> 'a) (c: 'a ContainerType.T)
+        = (List.map (fn (n, x) => (ref (!n), phi x)) c): 'a ContainerType.T
 
       fun empty() =  nil
-      fun is_empty (c: ContainerType.T) =  (List.null c)
+      fun is_empty (c: 'a ContainerType.T) =  (List.null c)
 
-      fun all (P: BaseType.T -> bool) (c: ContainerType.T)
+      fun all (P: 'a -> bool) (c: 'a ContainerType.T)
         = List.all (fn (n, x) => P x) c
 
-      fun all_zip (P: BaseType.T * BaseType.T -> bool) (c_1: ContainerType.T, c_2: ContainerType.T)
+      fun all_zip (P: 'a * 'a -> bool) (c_1: 'a ContainerType.T, c_2: 'a ContainerType.T)
         = List.all
              (fn ((n_1, x_1), (n_2, x_2)) => P(x_1, x_2))
              (ListPair.zip (c_1, c_2))
 
       local
-         fun mapfold_item f g ((name_r: string Option.option ref, x: BaseType.T), (v: ContainerType.T, w))
+         fun mapfold_item f g ((name_r: string Option.option ref, x: 'a), (v: 'a ContainerType.T, w))
            = let
                 val x_item =  f x
                 val nx_item =  (ref (!name_r), x_item)
@@ -54,53 +52,53 @@ functor NamingPointerType(B: Eqs) =
                 (next_v, next_w)
              end
       in fun mapfold f g w0 c
-           = List.foldl (mapfold_item f g) (nil, w0) (c: ContainerType.T)
+           = List.foldl (mapfold_item f g) (nil, w0) (c: 'a ContainerType.T)
       end
              
-      fun transition f (c: ContainerType.T) =  Acc.transition (fn ((n, x: BaseType.T), y) => f(x, y)) c
+      fun transition f (c: 'a ContainerType.T) =  Acc.transition (fn ((n, x: 'a), y) => f(x, y)) c
 
-      fun insert (t, nil) =  [ t ]
-        | insert ((m, x), ((n, y) :: tl))
-        = if B.eq(x, y)
+      fun p_insert (eq) (t, nil) =  [ t ]
+        | p_insert (eq) ((m, x), ((n, y) :: tl))
+        = if eq(x, y)
           then
              (m, y) :: tl
           else
-             (n, y) :: (insert ((m, x), tl))
+             (n, y) :: (p_insert (eq) ((m, x), tl))
 
-      fun union (c_1: ContainerType.T, c_2: ContainerType.T)
-        = List.foldl insert c_1 c_2
+      fun p_union (eq) (c_1: 'a ContainerType.T, c_2: 'a ContainerType.T)
+        = List.foldl (p_insert (eq)) c_1 c_2
 
-      fun fe (x: BaseType.T) =  [ (ref Option.NONE, x) ]
-      fun fop phi (c: ContainerType.T)
+      fun fe (x: 'a) =  [ (ref Option.NONE, x) ]
+      fun p_fop (eq) phi (c: 'a ContainerType.T)
         = transition (
-                fn (x: BaseType.T, c': ContainerType.T)
-                 => Option.SOME (union(phi x, c')) )
+                fn (x: 'a, c': 'a ContainerType.T)
+                 => Option.SOME (p_union (eq) (phi x, c')) )
                 c
                 nil
-      fun is_in (x: BaseType.T, c: ContainerType.T)
+      fun p_is_in (eq: 'a * 'a -> bool) (x: 'a, c: 'a ContainerType.T)
         = List.exists
-             (fn (n, y) => BaseType.eq(x, y))
+             (fn (n, y) => eq(x, y))
              c
 
-      fun subeq(c_1: ContainerType.T, c_2: ContainerType.T)
-        = List.all (fn (n, x) => is_in(x, c_2)) c_1
+      fun p_subeq (eq: 'a * 'a -> bool) (c_1: 'a ContainerType.T, c_2: 'a ContainerType.T)
+        = List.all (fn (n, x) => p_is_in (eq) (x, c_2)) c_1
 
 
 (*
  *
  *)
 
-      val new =  nil: ContainerType.T
+      val new =  nil: 'a ContainerType.T
 
       local
-          fun get_name_ref b container
-            = Option.map (fn (f, _) => f) (List.find (fn (_, w) => B.eq(b, w)) (container))
+          fun get_name_ref (eq) b container
+            = Option.map (fn (f, _) => f) (List.find (fn (_, w) => eq(b, w)) (container))
       in
-          fun get_name b (container: ContainerType.T) =  Option.join (Option.map ! (get_name_ref b container))
-          fun set_name (name, b) (container: ContainerType.T) =  Option.isSome (Option.map (fn (store) => store := Option.SOME name) (get_name_ref b container))
+          fun get_name (eq) b (container: 'a ContainerType.T) =  Option.join (Option.map ! (get_name_ref (eq) b container))
+          fun set_name (eq) (name, b) (container: 'a ContainerType.T) =  Option.isSome (Option.map (fn (store) => store := Option.SOME name) (get_name_ref (eq) b container))
       end
 
-      fun uniquize(container: ContainerType.T)
+      fun uniquize(container: 'a ContainerType.T)
         = let
              fun rename(do_not_use_list, candidate)
                = if (List.exists (fn (n) => (n = candidate)) do_not_use_list)

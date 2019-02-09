@@ -1,5 +1,4 @@
 use "collections/dictset.fun";
-use "collections/naming_pointer_type.fun";
 use "collections/pointer_type.sig";
 use "logics/literals.sig";
 use "logics/variables.sig";
