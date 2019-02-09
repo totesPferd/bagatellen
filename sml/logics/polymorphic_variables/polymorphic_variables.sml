@@ -7,7 +7,7 @@ structure PolymorphicVariables: PolymorphicVariables =
       fun new () =  ref Option.NONE
 
       fun get_val var_store =  !var_store
-      fun copy var_store =  ref(get_val var_store)
+      fun copy var_store =  ref(Option.NONE)
 
       fun eq (x, y) =  (x = y)
 
