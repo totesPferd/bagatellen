@@ -1,7 +1,7 @@
 use "collections/eqs.sig";
 use "collections/type.sig";
 
-signature PointerType =
+signature PointeredType =
    sig
       structure BaseType: Eqs
       structure ContainerType: Type

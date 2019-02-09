@@ -1,12 +1,14 @@
 use "collections/acc.sml";
 use "collections/string_type.sml";
 
-structure NamingPolymorphicPointerType =
+structure NamingPolymorphicPointeredType =
    struct
       structure Acc =  Acc
       structure ContainerType =
          struct
             type 'a T =  (string Option.option ref * 'a) list
+            fun polymorphic_eq (eq)
+              = ListPair.all (fn ((m, x), (n, y)) => eq (x, y)) 
          end
       structure PointerType =  StringType
 

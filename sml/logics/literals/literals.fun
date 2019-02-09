@@ -1,55 +1,84 @@
+use "collections/pointered_type.fun";
+use "collections/polymorphic_pointered_type.sig";
 use "logics/constructors.sig";
 use "logics/literals.sig";
-use "logics/literals/in.sig";
+use "logics/polymorphic_variables.sig";
 
-functor Literals(I: LiteralsIn): Literals =
+functor Literals(X:
+   sig
+      structure C:   Constructors
+      structure PPT: PolymorphicPointeredType
+      structure PV:  PolymorphicVariables
+   end ): Literals =
    struct
-      structure LiteralsIn =  I
+      datatype Construction =  Construction of X.C.T * Construction X.PPT.ContainerType.T | Variable of Construction X.PV.Variable
 
       structure Variables =
          struct
-            type Base = I.T
-            type T =  Base I.PV.Variable
-            val eq =  I.PV.eq
-            val copy =  I.PV.copy
-            val fcopy =  I.PV.fcopy
+            type Base =  Construction
+            type T =  Base X.PV.Variable
+            val eq =  X.PV.eq
+            val copy =  X.PV.copy
+            val fcopy =  X.PV.fcopy
          end
 
-      fun get_val (p as I.Construction(c, xi)) =  p
-        | get_val (p as I.Variable x)
-        = case (I.PV.get_val x) of
+      fun get_val (p as Construction(c, xi)) =  p
+        | get_val (p as Variable x)
+        = case (X.PV.get_val x) of
              Option.NONE => p
           |  Option.SOME k => get_val k
 
+      structure BaseType =
+         struct
+            type T =  Construction
+            fun eq(k, l)
+              = case ((get_val k), (get_val l)) of
+                  (Construction(c, xi), Construction(d, ypsilon))
+                  => X.C.eq(c, d) andalso multi_eq(xi, ypsilon)
+                | (Construction(c, xi), Variable y) => false
+                | (Variable x, Construction(d, ypsilon)) => false
+                | (Variable x, Variable y) =>  Variables.eq (x, y)
+            and multi_eq (xi, ypsilon) =  X.PPT.ContainerType.polymorphic_eq (eq) (xi, ypsilon)
+         end
+
+      structure PointeredType =  PointeredType(
+         struct
+            structure B =  BaseType
+            structure PPT =  X.PPT
+         end )
+
+      fun equate(k, l)
+        = case (get_val k, get_val l) of
+             (Construction(c, xi), Construction(d, ypsilon))
+          => if X.C.eq(c, d)
+             then
+               multi_equate(xi, ypsilon)
+            else
+               false
+          |  (Construction(c, xi), Variable y) =>  false
+          |  (Variable x, l)
+          => X.PV.set_val l x
+      and multi_equate(xi, ypsilon) =  PointeredType.all_zip (equate) (xi, ypsilon)
+
+      fun vmap f k
+        = case (get_val k) of
+             Construction(c, xi)
+             => Construction(c, multi_vmap f xi)
+          |  Variable x
+             => Variable (f x)
+      and multi_vmap f =  PointeredType.map (vmap f)
+
       structure Single =
          struct
+            structure BaseType =  BaseType
             structure Variables =  Variables
 
-            type T =  I.PT.BaseType.T
+            type T =  Construction
 
-            fun equate(k, l)
-              = case (get_val (I.destruct k), get_val (I.destruct l)) of
-                   (I.Construction(c, xi), I.Construction(d, ypsilon))
-                => if I.C.eq(c, d)
-                   then
-                     multi_equate(xi, ypsilon)
-                  else
-                     false
-                |  (I.Construction(c, xi), I.Variable y) =>  false
-                |  (I.Variable x, l)
-                => I.PV.set_val l x
-            and multi_equate(xi, ypsilon) =  I.PT.all_zip (equate) (xi, ypsilon)
+            val eq =  BaseType.eq
 
-           fun eq(k, l)
-              = case (get_val (I.destruct k), get_val (I.destruct l)) of
-                   (I.Construction(c, xi), I.Construction(d, ypsilon))
-                      => I.C.eq(c, d) andalso multi_eq(xi, ypsilon)
-                |  (I.Construction(c, xi), I.Variable y) => false
-                |  (I.Variable x, I.Construction(d, ypsilon)) => false
-                |  (I.Variable x, I.Variable y) =>  I.PV.eq(x, y)
-            and multi_eq(xi, ypsilon) =  I.PT.all_zip (eq) (xi, ypsilon)
-
-            val vmap =  I.reconstruct
+            val equate =  equate
+            val vmap =  vmap
 
          end
 
@@ -57,31 +86,24 @@ functor Literals(I: LiteralsIn): Literals =
          struct
             structure Variables =  Variables
 
-            type T =  I.PT.ContainerType.T
+            type T =  PointeredType.ContainerType.T
 
-            val equate =  Single.multi_equate
-            val eq =  Single.multi_eq
-            val empty =  I.PT.empty
-            val is_empty =  I.PT.is_empty
-            val subeq =  I.PT.subeq
+            val equate =  multi_equate
+            val eq =  BaseType.multi_eq
+            val empty =  PointeredType.empty
+            val is_empty =  PointeredType.is_empty
+            val subeq =  PointeredType.subeq
 
-            fun vmap f =  I.PT.map (Single.vmap f)
+            fun vmap f =  multi_vmap
 
          end
 
-      structure Construction =
-         struct
-            type T =  I.T
-         end
+      val select =  PointeredType.select
 
-      structure PointerType =  I.PT.PointerType
-   
-      val select =  I.PT.select
+      val fe =  PointeredType.fe
+      val fop =  PointeredType.fop
+      val is_in  =  PointeredType.is_in
 
-      val fe =  I.PT.fe
-      val fop =  I.PT.fop
-      val is_in  =  I.PT.is_in
-
-      val transition =  I.PT.transition
+      val transition =  PointeredType.transition
 
    end;

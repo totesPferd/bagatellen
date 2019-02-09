@@ -1,10 +1,11 @@
 use "collections/type.sig";
 
-signature PolymorphicPointerType =
+signature PolymorphicPointeredType =
    sig
       structure ContainerType:
          sig
             type 'a T
+            val polymorphic_eq: ('a * 'a -> bool) -> 'a T * 'a T -> bool
          end
       structure PointerType: Type
 

@@ -1,12 +1,12 @@
 use "collections/eqs.sig";
-use "collections/pointer_type.sig";
-use "collections/polymorphic_pointer_type.sig";
+use "collections/pointered_type.sig";
+use "collections/polymorphic_pointered_type.sig";
 
-functor PointerType(X:
+functor PointeredType(X:
    sig
       structure B: Eqs
-      structure PPT: PolymorphicPointerType
-   end ): PointerType =
+      structure PPT: PolymorphicPointeredType
+   end ): PointeredType =
    struct
       structure BaseType = X.B
       structure PointerType = X.PPT.PointerType

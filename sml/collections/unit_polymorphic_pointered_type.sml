@@ -1,11 +1,15 @@
-use "collections/polymorphic_pointer_type.sig";
+use "collections/polymorphic_pointered_type.sig";
 use "collections/unit_type.sml";
 
-structure UnitPolymorphicPointerType: PolymorphicPointerType =
+structure UnitPolymorphicPointeredType: PolymorphicPointeredType =
    struct
       structure ContainerType =
          struct
             type 'a T =  'a Option.option
+            fun polymorphic_eq (eq) (Option.NONE, Option.NONE) =  true
+              | polymorphic_eq (eq) (Option.SOME _, Option.NONE) =  false
+              | polymorphic_eq (eq) (Option.NONE, Option.SOME _) = false
+              | polymorphic_eq (eq) (Option.SOME x, Option.SOME y) =  eq (x, y)
          end
       structure PointerType =  UnitType
 
