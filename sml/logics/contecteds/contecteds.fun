@@ -9,16 +9,19 @@ functor Contecteds(X:
       sharing Lit.Variables = VarCtxt.Variables
    end ): Contecteds  =
    struct
+      structure Constructors =  X.Lit.Constructors
       structure Literals =  X.Lit
       structure VariableContexts =  X.VarCtxt
       structure Variables =  X.Lit.Variables
 
       structure ContectedLiterals =
          struct
+            structure Constructors =  Constructors
             structure Literals =  Literals
             structure VariableContexts =  VariableContexts
             structure Single =
                struct
+                  structure Constructors =  Constructors
                   structure Literals =  Literals
                   structure VariableContexts =  VariableContexts
                   type T =  { context: VariableContexts.VariableContext.T, conclusion: Literals.Single.T }
@@ -30,14 +33,15 @@ functor Contecteds(X:
                   fun get_conclusion (cl: T) =  #conclusion cl
                   fun construct(ctxt, c) =  { context = ctxt, conclusion = c }: T
       
-                  fun apply_alpha_conversion alpha { context = ctxt, conclusion = c }
+                  fun qualify rho alpha { context = ctxt, conclusion = c }
                     = let
                          val der_context =  VariableContexts.get_variable_context alpha
                          val phi =  VariableContexts.apply_alpha_converter alpha
-                         val der_conclusion =  Literals.Single.vmap phi c
+                         val der_conclusion =  Literals.Single.vcmap (phi, rho) c
                       in
                          { context =  der_context, conclusion = der_conclusion }
                       end
+                  fun apply_alpha_conversion (alpha: VariableContexts.AlphaConverter) (x:T) =  qualify (fn x: Constructors.T => x) alpha x
       
                   fun equate (c_1: T, c_2: T)
                     = Literals.Single.equate(#conclusion c_1, #conclusion c_2)
@@ -45,6 +49,7 @@ functor Contecteds(X:
                end
             structure Multi =
                struct
+                  structure Constructors =  Constructors
                   structure Literals =  Literals
                   structure VariableContexts =  VariableContexts
                   type T =  { context: VariableContexts.VariableContext.T, antecedent: Literals.Multi.T }
@@ -56,14 +61,15 @@ functor Contecteds(X:
                   fun get_antecedent (cl: T) =  #antecedent cl
                   fun construct(ctxt, a) =  { context = ctxt, antecedent = a }: T
       
-                  fun apply_alpha_conversion alpha { context = ctxt, antecedent = a }
+                  fun qualify rho alpha { context = ctxt, antecedent = a }
                     = let
                          val der_context =  VariableContexts.get_variable_context alpha
                          val phi =  VariableContexts.apply_alpha_converter alpha
-                         val der_antecedent =  Literals.Multi.vmap phi a
+                         val der_antecedent =  Literals.Multi.vcmap (phi, rho) a
                       in
                          { context =  der_context, antecedent = der_antecedent }
                       end
+                  fun apply_alpha_conversion (alpha: VariableContexts.AlphaConverter) (x:T) =  qualify (fn x: Constructors.T => x) alpha x
       
                   fun empty ctxt =  { context = ctxt, antecedent = Literals.Multi.empty() }
       
@@ -85,10 +91,12 @@ functor Contecteds(X:
 
       structure Clauses =
          struct
+            structure Constructors =  Constructors
             structure Literals =  Literals
             structure VariableContexts =  VariableContexts
             structure Single =
                struct
+                  structure Constructors =  Constructors
                   structure Literals =  Literals
                   structure VariableContexts =  VariableContexts
                   type T =  { context: VariableContexts.VariableContext.T, antecedent: Literals.Multi.T, conclusion: Literals.Single.T }
@@ -101,15 +109,16 @@ functor Contecteds(X:
                   fun get_conclusion (cl: T) =  #conclusion cl
                   fun construct(ctxt, a, c) =  { context = ctxt, antecedent = a, conclusion = c }: T
       
-                  fun apply_alpha_conversion alpha { context = ctxt, antecedent = a, conclusion = c }
+                  fun qualify rho alpha { context = ctxt, antecedent = a, conclusion = c }
                     = let
                          val der_context =  VariableContexts.get_variable_context alpha
                          val phi =  VariableContexts.apply_alpha_converter alpha
-                         val der_antecedent =  Literals.Multi.vmap phi a
-                         val der_conclusion =  Literals.Single.vmap phi c
+                         val der_antecedent =  Literals.Multi.vcmap (phi, rho) a
+                         val der_conclusion =  Literals.Single.vcmap (phi, rho) c
                       in
                          { context =  der_context, antecedent = der_antecedent, conclusion = der_conclusion }
                       end
+                  fun apply_alpha_conversion (alpha: VariableContexts.AlphaConverter) (x:T) =  qualify (fn x: Constructors.T => x) alpha x
       
                   fun is_assumption(cl: T)
                     = Literals.is_in(#conclusion cl, #antecedent cl)
@@ -118,6 +127,7 @@ functor Contecteds(X:
       
             structure Multi =
                struct
+                  structure Constructors =  Constructors
                   structure Literals =  Literals
                   structure VariableContexts =  VariableContexts
                   type T =  { context: VariableContexts.VariableContext.T, antecedent: Literals.Multi.T, conclusion: Literals.Multi.T }
@@ -130,15 +140,16 @@ functor Contecteds(X:
                   fun get_conclusion (cl: T) =  #conclusion cl
                   fun construct(ctxt, a, c) =  { context = ctxt, antecedent = a, conclusion = c }: T
       
-                  fun apply_alpha_conversion alpha { context = ctxt, antecedent = a, conclusion = c }
+                  fun qualify rho alpha { context = ctxt, antecedent = a, conclusion = c }
                     = let
                          val der_context =  VariableContexts.get_variable_context alpha
                          val phi =  VariableContexts.apply_alpha_converter alpha
-                         val der_antecedent =  Literals.Multi.vmap phi a
-                         val der_conclusion =  Literals.Multi.vmap phi c
+                         val der_antecedent =  Literals.Multi.vcmap (phi, rho) a
+                         val der_conclusion =  Literals.Multi.vcmap (phi, rho) c
                       in
                          { context =  der_context, antecedent = der_antecedent, conclusion = der_conclusion }
                       end
+                  fun apply_alpha_conversion (alpha: VariableContexts.AlphaConverter) (x:T) =  qualify (fn x: Constructors.T => x) alpha x
       
                   fun is_empty (mcl: T) =  Literals.Multi.is_empty(#conclusion mcl)
                   fun is_assumption(mcl: T)

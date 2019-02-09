@@ -1,19 +1,24 @@
 use "collections/type.sig";
+use "logics/constructors.sig";
 use "logics/literals.sig";
 use "logics/variables.sig";
 use "logics/variable_contexts.sig";
 
 signature Contecteds =
    sig
+      structure Constructors: Constructors
       structure Literals: Literals
       structure VariableContexts: VariableContexts
+      sharing Literals.Constructors =  Constructors
       sharing Literals.Variables = VariableContexts.Variables
       structure Clauses:
          sig
+            structure Constructors: Constructors
             structure Literals: Literals
             structure VariableContexts: VariableContexts
             structure Single:
                sig
+                  structure Constructors: Constructors
                   structure Literals: Literals
                   structure VariableContexts: VariableContexts
                   type T
@@ -22,12 +27,14 @@ signature Contecteds =
                   val get_antecedent: T -> Literals.Multi.T
                   val get_conclusion: T -> Literals.Single.T
                   val construct: VariableContexts.VariableContext.T * Literals.Multi.T * Literals.Single.T  -> T
+                  val qualify: (Constructors.T -> Constructors.T) -> VariableContexts.AlphaConverter -> T -> T
                   val apply_alpha_conversion: VariableContexts.AlphaConverter -> T -> T
       
                   val is_assumption: T -> bool
                end
             structure Multi:
                sig
+                  structure Constructors: Constructors
                   structure Literals: Literals
                   structure VariableContexts: VariableContexts
                   type T
@@ -36,11 +43,14 @@ signature Contecteds =
                   val get_antecedent: T -> Literals.Multi.T
                   val get_conclusion: T -> Literals.Multi.T
                   val construct: VariableContexts.VariableContext.T * Literals.Multi.T * Literals.Multi.T  -> T
+                  val qualify: (Constructors.T -> Constructors.T) -> VariableContexts.AlphaConverter -> T -> T
                   val apply_alpha_conversion: VariableContexts.AlphaConverter -> T -> T
       
                   val is_empty: T -> bool
                   val is_assumption: T -> bool
                end
+            sharing Single.Constructors =  Constructors
+            sharing Multi.Constructors =  Constructors
             sharing Single.Literals =  Literals
             sharing Multi.Literals =  Literals
             sharing Single.VariableContexts =  VariableContexts
@@ -50,10 +60,12 @@ signature Contecteds =
          end
       structure ContectedLiterals:
          sig
+            structure Constructors: Constructors
             structure Literals: Literals
             structure VariableContexts: VariableContexts
             structure Single:
                sig
+                  structure Constructors: Constructors
                   structure Literals: Literals
                   structure VariableContexts: VariableContexts
                   type T
@@ -61,11 +73,13 @@ signature Contecteds =
                   val get_context: T -> VariableContexts.VariableContext.T
                   val get_conclusion: T -> Literals.Single.T
                   val construct: VariableContexts.VariableContext.T * Literals.Single.T  -> T
+                  val qualify: (Constructors.T -> Constructors.T) -> VariableContexts.AlphaConverter -> T -> T
                   val apply_alpha_conversion: VariableContexts.AlphaConverter -> T -> T
                   val equate: T * T -> bool
                end
             structure Multi:
                sig
+                  structure Constructors: Constructors
                   structure Literals: Literals
                   structure VariableContexts: VariableContexts
                   type T
@@ -73,11 +87,14 @@ signature Contecteds =
                   val get_context: T -> VariableContexts.VariableContext.T
                   val get_antecedent: T -> Literals.Multi.T
                   val construct: VariableContexts.VariableContext.T * Literals.Multi.T -> T
+                  val qualify: (Constructors.T -> Constructors.T) -> VariableContexts.AlphaConverter -> T -> T
                   val apply_alpha_conversion: VariableContexts.AlphaConverter -> T -> T
                   val empty: VariableContexts.VariableContext.T -> T
       
                   val is_empty: T -> bool
                end
+            sharing Single.Constructors =  Constructors
+            sharing Multi.Constructors =  Constructors
             sharing Single.Literals =  Literals
             sharing Multi.Literals =  Literals
             sharing Single.VariableContexts =  VariableContexts
@@ -85,6 +102,8 @@ signature Contecteds =
             val transition: (Single.T * 'b -> 'b Option.option) -> Multi.T -> 'b -> 'b
             val fe:  Single.T -> Multi.T
          end
+      sharing Clauses.Constructors =  Constructors
+      sharing ContectedLiterals.Constructors =  Constructors
       sharing Clauses.Literals =  Literals
       sharing ContectedLiterals.Literals =  Literals
       sharing ContectedLiterals.VariableContexts =  VariableContexts
