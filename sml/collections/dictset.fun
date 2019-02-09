@@ -7,89 +7,95 @@ functor DictSet(E: Eqs): DictSet =
       structure Eqs =  E
       structure Acc =  Acc
 
-      type 'a dict =  { key: Eqs.T, value: 'a } list
-      type set     =  Eqs.T list
 
-      val empty_d =  nil
-      fun map_d f (d: 'a dict) =  map (fn a => { key = #key a, value = f(#value a) }) d
-      fun keys (d: 'a dict) =  (map #key d): set
-      fun deref(k, d: 'a dict) =  Option.map #value (List.find (fn a => Eqs.eq(k, #key a)) d)
-      fun set_d(k, v, nil) =  [ { key = k, value = v } ]
-        | set_d(k, v, a :: (d: 'a dict))
-         = if  Eqs.eq(k, #key a)
-           then
-              a :: d
-           else
-              a :: set_d(k, v, d)
-      fun all_d P = List.all (fn { key = _, value = v } => P v)
-      exception ZipSrcDoesNotAgree
-      local
-         fun deref_direct(k, d)
-           = case (deref(k, d)) of
-                Option.NONE =>  raise ZipSrcDoesNotAgree
-             |  Option.SOME v => v
-      in
-         fun zip_d ((a: 'a dict), (b: 'b dict))
-           = List.foldl
-                (
-                   fn ({ key = k, value = v}, d) =>  set_d(k, (v, deref_direct(k, b)), d) )
-                (empty_d: ('a * 'b) dict)
-                a
-      end
+      structure Dicts =
+         struct
+            type 'a dict =  { key: Eqs.T, value: 'a } list
+            val empty =  nil
+            fun map (f: 'a -> 'b) (d: 'a dict) =  List.map (fn a => { key = #key a, value = f(#value a) }) d
+            fun deref(k, d: 'a dict) =  Option.map (#value) (List.find (fn a => Eqs.eq(k, #key a)) d)
+            fun set(k, v, nil) =  [ { key = k, value = v } ]
+              | set(k, v, a :: (d: 'a dict))
+               = if  Eqs.eq(k, #key a)
+                 then
+                    a :: d
+                 else
+                    a :: set(k, v, d)
+            fun all P = List.all (fn { key = _, value = v } => P v)
+            exception ZipSrcDoesNotAgree
+            local
+               fun deref_direct(k, d)
+                 = case (deref(k, d)) of
+                      Option.NONE =>  raise ZipSrcDoesNotAgree
+                   |  Option.SOME v => v
+            in
+               fun zip ((a: 'a dict), (b: 'b dict))
+                 = List.foldl
+                      (
+                         fn ({ key = k, value = v}, d) =>  set(k, (v, deref_direct(k, b)), d) )
+                      (empty: ('a * 'b) dict)
+                      a
+            end
+         end
 
-      val empty_s =  nil
-      val getItem_s =  List.getItem
-      fun map_s f (s: set) =  map f s
-      fun singleton x =  [ x ]
-      fun is_in_s(x, s) =  List.exists (fn (y) => Eqs.eq(x, y)) s
-      val is_empty_s =  List.null
-      fun adjunct_s(x, s) =  x :: s
-      fun drop_s(x, s) =  List.filter (fn (y) => not(Eqs.eq(x, y))) s
-      fun drop_if_exists_s(x, s)
-        = if is_in_s(x, s)
-          then
-             Option.SOME (drop_s(x, s))
-          else
-             Option.NONE
-      fun insert_s(x, s)
-        = if is_in_s(x, s)
-          then
-             s
-          else
-             x :: s
-      fun sum_s (l_1, l_2) =  l_1 @ l_2
-      fun union(nil, t) =  t
-      | union(x :: s, t) =  insert_s (x, union(s, t))
-      fun cut(s, nil) =  s
-        | cut(s, y :: t) =  cut(drop_s(y, s), t)
-      fun intersect(nil, l_2) =  nil
-        | intersect((x :: l_1), l_2)
-        = let
-             val tail =  intersect(l_1, l_2)
-          in
-             if is_in_s(x, l_2)
-             then
-                x :: tail
-             else
-                tail
-          end
-      fun subseteq_s(s, t) =  List.all (fn (x) => is_in_s(x, t)) s
-      fun eq_s(s, t) =  subseteq_s(s, t) andalso subseteq_s(t, s)
+      structure Sets =
+         struct
+            type T =  Eqs.T list
+            val empty =  nil
+            val getItem =  List.getItem
+            fun map f (s: T) =  map f s
+            fun singleton x =  [ x ]
+            fun is_in(x, s) =  List.exists (fn (y) => Eqs.eq(x, y)) s
+            val is_empty =  List.null
+            fun adjunct(x, s) =  x :: s
+            fun drop(x, s) =  List.filter (fn (y) => not(Eqs.eq(x, y))) s
+            fun drop_if_exists(x, s)
+              = if is_in(x, s)
+                then
+                   Option.SOME (drop(x, s))
+                else
+                   Option.NONE
+            fun insert(x, s)
+              = if is_in(x, s)
+                then
+                   s
+                else
+                   x :: s
+            fun sum (l_1, l_2) =  l_1 @ l_2
+            fun union(nil, t) =  t
+            | union(x :: s, t) =  insert (x, union(s, t))
+            fun cut(s, nil) =  s
+              | cut(s, y :: t) =  cut(drop(y, s), t)
+            fun intersect(nil, l_2) =  nil
+              | intersect((x :: l_1), l_2)
+              = let
+                   val tail =  intersect(l_1, l_2)
+                in
+                   if is_in(x, l_2)
+                   then
+                      x :: tail
+                   else
+                      tail
+                end
+            fun subseteq(s, t) =  List.all (fn (x) => is_in(x, t)) s
+            fun eq(s, t) =  subseteq(s, t) andalso subseteq(t, s)
+        
+            fun find P s =  List.find P s
+        
+            fun ofind f nil =  Option.NONE
+              | ofind f (hd :: tl)
+              = case(f hd) of
+                   Option.NONE => ofind f tl
+                |  Option.SOME y =>  Option.SOME y
+        
+            fun fe b =  [ b ]
+            fun transition phi s b =  Acc.transition phi s b
+            fun fop phi s
+              = transition (
+                   fn (x, b) => Option.SOME (union (phi x, b)) )
+                s
+                nil
+         end
   
-      fun find_s P s =  List.find P s
-  
-      fun ofind_s f nil =  Option.NONE
-        | ofind_s f (hd :: tl)
-        = case(f hd) of
-             Option.NONE => ofind_s f tl
-          |  Option.SOME y =>  Option.SOME y
-  
-      fun fe_s b =  [ b ]
-      fun transition_s phi s b =  Acc.transition phi s b
-      fun fop_s phi s
-        = transition_s (
-             fn (x, b) => Option.SOME (union (phi x, b)) )
-          s
-          nil
-  
+      fun keys (d: 'a Dicts.dict) =  (map #key d): Sets.T
    end;

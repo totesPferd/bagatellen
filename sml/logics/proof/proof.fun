@@ -1,5 +1,4 @@
 use "collections/dictset.fun";
-use "collections/sets.fun";
 use "logics/contecteds.sig";
 use "logics/literals.sig";
 use "logics/proof.sig";
@@ -11,7 +10,7 @@ functor Proof(X: Contecteds): Proof =
       structure Single =  Contecteds.Clauses.Single
 
       structure ClauseDictSet =  DictSet(Single)
-      structure Multi =  Sets(ClauseDictSet)
+      structure Multi =  ClauseDictSet.Sets
 
       fun apply_telling_progress is_conventional (proof: Multi.T) (goal: Single.T)
         = if Single.is_assumption goal

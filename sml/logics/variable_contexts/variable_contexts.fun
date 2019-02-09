@@ -1,4 +1,3 @@
-use "collections/dicts.fun";
 use "collections/dictset.fun";
 use "collections/naming_pointer_type.fun";
 use "collections/pointer_type.sig";
@@ -15,7 +14,7 @@ functor VariableContexts(X:
    end) =
    struct
       structure DictSet =  DictSet(X.Var)
-      structure Dicts =  Dicts(DictSet)
+      structure Dicts =  DictSet.Dicts
 
       structure Variables =  X.Var
       structure PointerType =  X.PT
@@ -28,7 +27,7 @@ functor VariableContexts(X:
             val vmap =  X.PT.map
          end;
 
-      type AlphaConverter = { ctxt: VariableContext.T, alpha: Variables.T Dicts.T }
+      type AlphaConverter = { ctxt: VariableContext.T, alpha: Variables.T Dicts.dict }
 
       val get_variable_context: AlphaConverter -> VariableContext.T =  #ctxt
 
@@ -37,7 +36,7 @@ functor VariableContexts(X:
              val (vc', d)
                = X.PT.mapfold
                    (Variables.fcopy f)
-                   (fn (old, new, a: Variables.T Dicts.T) =>  Dicts.set(old, new, a))
+                   (fn (old, new, a: Variables.T Dicts.dict) =>  Dicts.set(old, new, a))
                    Dicts.empty
                    vc
           in
