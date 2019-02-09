@@ -38,7 +38,7 @@ functor Contecteds(X:
                       in
                          { context =  der_context, conclusion = der_conclusion }
                       end
-      
+
                   fun equate (c_1: T, c_2: T)
                     = Literals.Single.equate(#conclusion c_1, #conclusion c_2)
       

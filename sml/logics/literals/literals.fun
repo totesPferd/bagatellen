@@ -5,6 +5,7 @@ use "logics/literals/in.sig";
 functor Literals(I: LiteralsIn): Literals =
    struct
       structure LiteralsIn =  I
+      structure Constructors =  LiteralsIn.C
 
       structure Variables =
          struct
@@ -23,6 +24,7 @@ functor Literals(I: LiteralsIn): Literals =
 
       structure Single =
          struct
+            structure Constructors =  Constructors
             structure Variables =  Variables
 
             type T =  I.PT.BaseType.T
@@ -49,12 +51,14 @@ functor Literals(I: LiteralsIn): Literals =
                 |  (I.Variable x, I.Variable y) =>  I.PV.eq(x, y)
             and multi_eq(xi, ypsilon) =  I.PT.all_zip (eq) (xi, ypsilon)
 
-            val vmap =  I.reconstruct
+            val cmap =  I.creconstruct
+            val vmap =  I.vreconstruct
 
          end
 
       structure Multi =
          struct
+            structure Constructors =  Constructors
             structure Variables =  Variables
 
             type T =  I.PT.ContainerType.T
@@ -65,6 +69,7 @@ functor Literals(I: LiteralsIn): Literals =
             val is_empty =  I.PT.is_empty
             val subeq =  I.PT.subeq
 
+            fun cmap rho =  I.PT.map (Single.cmap rho)
             fun vmap f =  I.PT.map (Single.vmap f)
 
          end
