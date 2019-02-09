@@ -8,7 +8,6 @@ structure PolymorphicVariables: PolymorphicVariables =
 
       fun get_val var_store =  !var_store
       fun copy var_store =  ref(get_val var_store)
-      fun fcopy f var_store =  ref (Option.map f (get_val var_store))
 
       fun eq (x, y) =  (x = y)
 

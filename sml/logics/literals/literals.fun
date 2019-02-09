@@ -21,7 +21,6 @@ functor Literals(X:
             type T =  Base X.PV.Variable
             val eq =  X.PV.eq
             val copy =  X.PV.copy
-            val fcopy =  X.PV.fcopy
          end
 
       fun get_val (p as Construction(c, xi)) =  p

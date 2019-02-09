@@ -21,7 +21,7 @@ functor Proof(X: Contecteds): Proof =
                 fun omega (cl: Single.T)
                   = let
                        val ctxt =  Single.get_context cl
-                       val alpha =  Contecteds.VariableContexts.alpha_convert (fn x => x) ctxt
+                       val alpha =  Contecteds.VariableContexts.alpha_convert ctxt
                        val der_cl =  Single.apply_alpha_conversion alpha cl
                     in
                        if Contecteds.Literals.Single.equate(Single.get_conclusion der_cl, Single.get_conclusion goal)

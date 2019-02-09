@@ -30,11 +30,11 @@ functor VariableContexts(X:
 
       val get_variable_context: AlphaConverter -> VariableContext.T =  #ctxt
 
-      fun alpha_convert f (vc: VariableContext.T)
+      fun alpha_convert (vc: VariableContext.T)
         = let
              val (vc', d)
                = X.PT.mapfold
-                   (Variables.fcopy f)
+                   (Variables.copy)
                    (fn (old, new, a: Variables.T Dicts.dict) =>  Dicts.set(old, new, a))
                    Dicts.empty
                    vc
@@ -51,9 +51,9 @@ functor VariableContexts(X:
       fun alpha_zip_all ((alpha: AlphaConverter), (beta: AlphaConverter)) P
         = Dicts.all P (Dicts.zip ((#alpha alpha), (#alpha beta)))
 
-      fun alpha_map f (alpha: AlphaConverter)
+      fun alpha_map (alpha: AlphaConverter)
         = let
-             val beta =  alpha_convert f (#ctxt alpha)
+             val beta =  alpha_convert (#ctxt alpha)
              val result_dict =  Dicts.map (fn v => Option.valOf (Dicts.deref(v, (#alpha beta)))) (#alpha alpha)
           in
              { ctxt =  #ctxt beta, alpha =  result_dict }: AlphaConverter

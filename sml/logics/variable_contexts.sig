@@ -19,10 +19,10 @@ signature VariableContexts =
 
       type AlphaConverter
 
-      val alpha_convert:                 (Variables.Base -> Variables.Base) -> VariableContext.T -> AlphaConverter
+      val alpha_convert:                 VariableContext.T -> AlphaConverter
       val get_variable_context:          AlphaConverter -> VariableContext.T
       val apply_alpha_converter:         AlphaConverter -> Variables.T -> Variables.T
 
       val alpha_zip_all:                 AlphaConverter * AlphaConverter -> (Variables.T * Variables.T -> bool) -> bool
-      val alpha_map:                     (Variables.Base -> Variables.Base) -> AlphaConverter -> AlphaConverter
+      val alpha_map:                     AlphaConverter -> AlphaConverter
    end;
