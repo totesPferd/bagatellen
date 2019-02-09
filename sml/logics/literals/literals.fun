@@ -63,14 +63,6 @@ functor Literals(X:
           => X.PV.set_val l x
       and multi_equate(xi, ypsilon) =  PointeredType.all_zip (equate) (xi, ypsilon)
 
-      fun vmap f k
-        = case (get_val k) of
-             Construction(c, xi)
-             => Construction(c, multi_vmap f xi)
-          |  Variable x
-             => Variable (f x)
-      and multi_vmap f =  PointeredType.map (vmap f)
-
       fun vcmap (f, rho) k
         = case (get_val k) of
              Construction(c, xi)
@@ -78,6 +70,9 @@ functor Literals(X:
            | (Variable x)
              => Variable (f x)
       and multi_vcmap (f, rho) =  PointeredType.map (vcmap (f, rho))
+
+      fun vmap f =  vcmap (f, (fn x => x))
+      fun multi_vmap f =  multi_vcmap(f, (fn x => x))
 
       structure Single =
          struct
