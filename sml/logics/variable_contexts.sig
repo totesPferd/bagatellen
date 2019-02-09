@@ -1,7 +1,6 @@
 use "collections/eqs.sig";
 use "collections/pointered_type.sig";
 use "logics/variables.sig";
-use "logics/variables_depending_thing.sig";
 
 signature VariableContexts =
    sig

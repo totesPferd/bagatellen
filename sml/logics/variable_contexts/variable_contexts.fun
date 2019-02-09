@@ -3,7 +3,6 @@ use "collections/pointered_type.sig";
 use "logics/literals.sig";
 use "logics/variables.sig";
 use "logics/variable_contexts.sig";
-use "logics/variables_depending_thing.sig";
 
 functor VariableContexts(X:
    sig
@@ -18,7 +17,7 @@ functor VariableContexts(X:
       structure Variables =  X.Var
       structure PointeredType =  X.PT
 
-      structure VariableContext: VariablesDependingThing =
+      structure VariableContext =
          struct
             structure Variables =  Variables
             type T =  X.PT.ContainerType.T
