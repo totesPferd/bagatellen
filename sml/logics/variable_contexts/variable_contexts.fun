@@ -1,5 +1,5 @@
 use "collections/dictset.fun";
-use "collections/pointer_type.sig";
+use "collections/pointered_type.sig";
 use "logics/literals.sig";
 use "logics/variables.sig";
 use "logics/variable_contexts.sig";
@@ -8,7 +8,7 @@ use "logics/variables_depending_thing.sig";
 functor VariableContexts(X:
    sig
       structure Var: Variables
-      structure PT: PointerType
+      structure PT: PointeredType
       sharing PT.BaseType = Var
    end) =
    struct
@@ -16,7 +16,7 @@ functor VariableContexts(X:
       structure Dicts =  DictSet.Dicts
 
       structure Variables =  X.Var
-      structure PointerType =  X.PT
+      structure PointeredType =  X.PT
 
       structure VariableContext: VariablesDependingThing =
          struct

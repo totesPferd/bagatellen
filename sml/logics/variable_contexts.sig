@@ -1,11 +1,11 @@
 use "collections/eqs.sig";
-use "collections/pointer_type.sig";
+use "collections/pointered_type.sig";
 use "logics/variables.sig";
 use "logics/variables_depending_thing.sig";
 
 signature VariableContexts =
    sig
-      structure PointerType: PointerType
+      structure PointeredType: PointeredType
       structure Variables: Variables
       structure VariableContext:
          sig
@@ -15,7 +15,7 @@ signature VariableContexts =
             val vmap: (Variables.T -> Variables.T) -> T -> T
          end
       sharing VariableContext.Variables =  Variables
-      sharing PointerType.BaseType =  Variables
+      sharing PointeredType.BaseType =  Variables
 
       type AlphaConverter
 

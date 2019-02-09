@@ -47,6 +47,8 @@ functor Literals(X:
             structure PPT =  X.PPT
          end )
 
+      structure PointerType =  PointeredType.PointerType
+
       fun equate(k, l)
         = case (get_val k, get_val l) of
              (Construction(c, xi), Construction(d, ypsilon))
@@ -94,7 +96,7 @@ functor Literals(X:
             val is_empty =  PointeredType.is_empty
             val subeq =  PointeredType.subeq
 
-            fun vmap f =  multi_vmap
+            fun vmap f =  multi_vmap f
 
          end
 
