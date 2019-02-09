@@ -103,6 +103,8 @@ functor Proof(X: Contecteds): Proof =
              mcl
              proof
 
+      val combine_proofs =  Multi.union
+
       fun mini_complete (proof: Multi.T)
         = case (Multi.getItem proof) of
              Option.NONE =>  proof
@@ -123,8 +125,18 @@ functor Proof(X: Contecteds): Proof =
                                mini_complete p_3
                             end
                 end
+      fun reduce_double_occurences (proof: Multi.T)
+        = case (Multi.getItem proof) of
+             Option.NONE =>  proof
+          |  Option.SOME (cl: Single.T, p_1: Multi.T)
+             => let
+                   val p_2 =  reduce_double_occurences p_1
+                in
+                   case (apply_telling_progress false p_2 cl) of
+                      Option.NONE =>  Multi.adjunct(cl, p_2)
+                   |  Option.SOME (mcl: Contecteds.Clauses.Multi.T) => p_2
+                end
 
-      val combine_proofs =  Multi.union
 
       val fe =  Multi.fe
       val fop =  Multi.fop

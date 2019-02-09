@@ -16,8 +16,10 @@ signature Proof =
       val multi_apply_conventionally: Multi.T -> Contecteds.Clauses.Multi.T -> Contecteds.Clauses.Multi.T
       val add_clause_to_proof:        Contecteds.Clauses.Single.T * Multi.T -> Multi.T
       val add_multi_clause_to_proof:  Contecteds.Clauses.Multi.T * Multi.T -> Multi.T
-      val mini_complete:              Multi.T -> Multi.T
       val combine_proofs:             Multi.T * Multi.T -> Multi.T
+
+      val mini_complete:              Multi.T -> Multi.T
+      val reduce_double_occurences:   Multi.T -> Multi.T
 
       val fe:                         Single.T -> Multi.T
       val fop:                        (Single.T -> Multi.T) -> Multi.T -> Multi.T
