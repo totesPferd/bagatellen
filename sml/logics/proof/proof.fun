@@ -124,6 +124,8 @@ functor Proof(X: Contecteds): Proof =
                             end
                 end
 
+      val combine_proofs =  Multi.union
+
       val fe =  Multi.fe
       val fop =  Multi.fop
       val is_in =  Multi.is_in
