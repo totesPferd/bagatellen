@@ -85,15 +85,6 @@ functor NamingPointerType(B: Eqs) =
       fun subeq(c_1: ContainerType.T, c_2: ContainerType.T)
         = List.all (fn (n, x) => is_in(x, c_2)) c_1
 
-      exception ResolutionSetDoesNotContainConclusion
-      fun replace(x, c) nil =  raise ResolutionSetDoesNotContainConclusion
-        | replace(x, c: ContainerType.T) (((n, y) :: tl): ContainerType.T)
-        = if B.eq(x, y)
-          then
-             union (c, tl)
-          else
-             (n, y) :: (replace(x, c) tl)
-
 
 (*
  *

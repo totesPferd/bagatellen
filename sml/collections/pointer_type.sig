@@ -25,7 +25,4 @@ signature PointerType =
 
       val transition: (BaseType.T * 'b -> 'b Option.option) -> ContainerType.T -> 'b -> 'b
 
-      (* auf der Abschussliste: *)
-      val replace:    BaseType.T * ContainerType.T -> ContainerType.T -> ContainerType.T
-
    end;

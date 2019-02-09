@@ -82,7 +82,6 @@ functor Literals(I: LiteralsIn): Literals =
       val fop =  I.PT.fop
       val is_in  =  I.PT.is_in
 
-      val replace =  I.PT.replace
       val transition =  I.PT.transition
 
    end;

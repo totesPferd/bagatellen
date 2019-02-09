@@ -43,7 +43,4 @@ signature Literals =
 
       val transition: (Single.T * 'b -> 'b Option.option) -> Multi.T -> 'b -> 'b
 
-      (* auf der Abschussliste: *)
-      val replace:    Single.T * Multi.T -> Multi.T -> Multi.T
-
   end;
