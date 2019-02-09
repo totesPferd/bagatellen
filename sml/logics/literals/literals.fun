@@ -71,10 +71,12 @@ functor Literals(X:
              => Variable (f x)
       and multi_vmap f =  PointeredType.map (vmap f)
 
-      fun vcmap (f, rho) (Construction(c, xi))
-        = Construction(rho c, multi_vcmap (f, rho) xi)
-        | vcmap (f, rho) (Variable x)
-        = Variable (f x)
+      fun vcmap (f, rho) k
+        = case (get_val k) of
+             Construction(c, xi)
+             => Construction(rho c, multi_vcmap (f, rho) xi)
+           | (Variable x)
+             => Variable (f x)
       and multi_vcmap (f, rho) =  PointeredType.map (vcmap (f, rho))
 
       structure Single =
