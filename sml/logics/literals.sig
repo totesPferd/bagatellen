@@ -1,7 +1,9 @@
+use "logics/constructors.sig";
 use "logics/variables.sig";
 
 signature Literals =
    sig
+      structure Constructors: Constructors
       structure Variables: Variables
       structure Multi:
          sig
@@ -13,7 +15,8 @@ signature Literals =
             val is_empty:     T -> bool
             val subeq:        T * T -> bool
             val vmap:         (Variables.T -> Variables.T) -> T -> T
-         end
+            val vcmap:        (Variables.T -> Variables.T) * (Constructors.T -> Constructors.T) -> T -> T
+        end
       structure Single:
          sig
             structure Variables:  Variables
@@ -21,6 +24,7 @@ signature Literals =
             val equate:       T * T -> bool
             val eq:           T * T -> bool
             val vmap:         (Variables.T -> Variables.T) -> T -> T
+            val vcmap:        (Variables.T -> Variables.T) * (Constructors.T -> Constructors.T) -> T -> T
          end
       structure PointerType:
          sig

@@ -11,7 +11,9 @@ functor Literals(X:
       structure PV:  PolymorphicVariables
    end ): Literals =
    struct
-      datatype Construction =  Construction of X.C.T * Construction X.PPT.ContainerType.T | Variable of Construction X.PV.Variable
+      structure Constructors =  X.C
+
+      datatype Construction =  Construction of Constructors.T * Construction X.PPT.ContainerType.T | Variable of Construction X.PV.Variable
 
       structure Variables =
          struct
@@ -70,6 +72,12 @@ functor Literals(X:
              => Variable (f x)
       and multi_vmap f =  PointeredType.map (vmap f)
 
+      fun vcmap (f, rho) (Construction(c, xi))
+        = Construction(rho c, multi_vcmap (f, rho) xi)
+        | vcmap (f, rho) (Variable x)
+        = Variable (f x)
+      and multi_vcmap (f, rho) =  PointeredType.map (vcmap (f, rho))
+
       structure Single =
          struct
             structure BaseType =  BaseType
@@ -81,6 +89,7 @@ functor Literals(X:
 
             val equate =  equate
             val vmap =  vmap
+            val vcmap =  vcmap
 
          end
 
@@ -96,7 +105,8 @@ functor Literals(X:
             val is_empty =  PointeredType.is_empty
             val subeq =  PointeredType.subeq
 
-            fun vmap f =  multi_vmap f
+            val vmap =  multi_vmap
+            val vcmap =  multi_vcmap
 
          end
 
