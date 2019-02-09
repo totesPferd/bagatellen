@@ -134,7 +134,12 @@ functor Proof(X: Contecteds): Proof =
                 in
                    case (apply_telling_progress false p_2 cl) of
                       Option.NONE =>  Multi.adjunct(cl, p_2)
-                   |  Option.SOME (mcl: Contecteds.Clauses.Multi.T) => p_2
+                   |  Option.SOME (mcl: Contecteds.Clauses.Multi.T)
+                      => if (Contecteds.Clauses.Multi.is_empty mcl)
+                         then
+                            p_2
+                         else
+                            Multi.adjunct(cl, p_2)
                 end
 
 
