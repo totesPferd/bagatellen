@@ -1,8 +1,10 @@
 use "collections/type.sig";
+use "logics/constructors.sig";
 use "logics/contecteds.sig";
 
 signature Proof =
    sig
+      structure Constructors: Constructors
       structure Contecteds: Contecteds
       structure Single: Type
       structure Multi: Type
@@ -19,6 +21,9 @@ signature Proof =
       val fe:                         Single.T -> Multi.T
       val fop:                        (Single.T -> Multi.T) -> Multi.T -> Multi.T
       val is_in:                      Single.T * Multi.T -> bool
+
+      val qualify:                    (Constructors.T -> Constructors.T) -> Multi.T -> Multi.T
+
       val transition:                 (Single.T * 'b -> 'b Option.option) -> Multi.T -> 'b -> 'b
 
    end;
