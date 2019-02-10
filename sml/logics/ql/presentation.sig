@@ -32,4 +32,6 @@ signature Presentation =
       val get_normalform: state -> (Contecteds.ContectedLiterals.Single.T) -> Contecteds.Clauses.Multi.T
       val ceq: state -> (VariableContexts.VariableContext.T * Literals.Single.T * Literals.Single.T) -> bool
 
+      val seqset: Contecteds.ContectedLiterals.Single.T * Contecteds.ContectedLiterals.Single.T -> Contecteds.ContectedLiterals.Single.T
+
    end;

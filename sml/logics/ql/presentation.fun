@@ -146,4 +146,18 @@ functor Presentation(X:
           in
              Contecteds.Clauses.Multi.eq(nf_1, nf_2)
           end
+
+      fun seqset (clit_1: Contecteds.ContectedLiterals.Single.T, clit_2: Contecteds.ContectedLiterals.Single.T)
+        = let
+             val var_ctxt_1 =  Contecteds.ContectedLiterals.Single.get_context clit_1
+             val var_ctxt_2 =  Contecteds.ContectedLiterals.Single.get_context clit_2
+             val lit_1 =  Contecteds.ContectedLiterals.Single.get_conclusion clit_1
+             val lit_2 =  Contecteds.ContectedLiterals.Single.get_conclusion clit_2
+             val var =  X.VC.PointeredType.select(X.UV.UnitType.point, var_ctxt_2)
+             val var_lit_2 =  Literals.Single.variable var
+             val _ =  Literals.Single.equate(var_lit_2, lit_1)
+          in
+             Contecteds.ContectedLiterals.Single.construct(var_ctxt_1,  lit_2)
+          end
+             
    end;
