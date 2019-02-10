@@ -6,7 +6,5 @@ signature UnitPointeredType =
    sig
      structure PointeredType: PointeredType
 
-     val get_val:   PointeredType.ContainerType.T -> PointeredType.BaseType.T Option.option
-
    end;
 

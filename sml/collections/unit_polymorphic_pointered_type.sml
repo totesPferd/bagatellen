@@ -66,6 +66,4 @@ structure UnitPolymorphicPointeredType =
  *
  *)
 
-      fun get_val x = x
-
    end;

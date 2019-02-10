@@ -8,6 +8,7 @@ signature NamingPointeredType =
 
      val sum:       PointeredType.ContainerType.T * PointeredType.ContainerType.T -> PointeredType.ContainerType.T
 
+     val adjoin:    string * PointeredType.BaseType.T -> PointeredType.ContainerType.T -> PointeredType.ContainerType.T
      val get_name : PointeredType.BaseType.T
                     -> PointeredType.ContainerType.T -> string option
      val set_name : string * PointeredType.BaseType.T

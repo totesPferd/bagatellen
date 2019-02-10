@@ -12,6 +12,4 @@ functor UnitPointeredType(B: Eqs): UnitPointeredType =
             structure PPT =  UnitPolymorphicPointeredType
          end )
 
-      val get_val =  UnitPolymorphicPointeredType.get_val
-
    end;
