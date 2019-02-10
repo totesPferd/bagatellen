@@ -9,12 +9,13 @@ signature VariableContexts =
       structure VariableContext:
          sig
             structure Variables: Variables
-            type T =  PointeredType.ContainerType.T
+            type T
             val eq: T * T -> bool
             val vmap: (Variables.T -> Variables.T) -> T -> T
          end
       sharing VariableContext.Variables =  Variables
       sharing PointeredType.BaseType =  Variables
+      sharing PointeredType.ContainerType =  VariableContext
 
       type AlphaConverter
 
