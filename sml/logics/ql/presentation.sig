@@ -24,11 +24,12 @@ signature Presentation =
       type state
 
       val get_typecheck_clause: state -> (Contecteds.ContectedLiterals.Single.T * string * string) -> Contecteds.Clauses.Single.T
-      val typecheck: state -> (Contecteds.ContectedLiterals.Single.T * string * string) -> Proof.Multi.T
+      val typecheck: state -> (Contecteds.ContectedLiterals.Single.T * string * string) -> Contecteds.Clauses.Multi.T
       val add_module: string -> state -> state
       val add_qualifier: string * string * string -> state -> state
       val add_equation: (VariableContexts.VariableContext.T * Literals.Single.T * Literals.Single.T) -> state -> state
 
-      val get_normalform: state -> string -> Qualifier.T Option.option
-      val ceq: state -> string * string -> bool
+      val get_normalform: state -> (Contecteds.ContectedLiterals.Single.T) -> Contecteds.Clauses.Multi.T
+      val ceq: state -> (VariableContexts.VariableContext.T * Literals.Single.T * Literals.Single.T) -> bool
+
    end;
