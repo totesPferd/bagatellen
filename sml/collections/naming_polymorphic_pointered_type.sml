@@ -70,6 +70,9 @@ structure NamingPolymorphicPointeredType =
       fun p_union (eq) (c_1: 'a ContainerType.T, c_2: 'a ContainerType.T)
         = List.foldl (p_insert (eq)) c_1 c_2
 
+      fun sum (c_1: 'a ContainerType.T, c_2: 'a ContainerType.T)
+        = c_1 @ c_2
+
       fun fe (x: 'a) =  [ (ref Option.NONE, x) ]
       fun p_fop (eq) phi (c: 'a ContainerType.T)
         = transition (
