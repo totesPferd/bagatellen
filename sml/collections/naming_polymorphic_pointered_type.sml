@@ -93,11 +93,11 @@ structure NamingPolymorphicPointeredType =
       val new =  nil: 'a ContainerType.T
 
       local
-          fun get_name_ref (eq) b container
+          fun p_get_name_ref (eq) b container
             = Option.map (fn (f, _) => f) (List.find (fn (_, w) => eq(b, w)) (container))
       in
-          fun get_name (eq) b (container: 'a ContainerType.T) =  Option.join (Option.map ! (get_name_ref (eq) b container))
-          fun set_name (eq) (name, b) (container: 'a ContainerType.T) =  Option.isSome (Option.map (fn (store) => store := Option.SOME name) (get_name_ref (eq) b container))
+          fun p_get_name (eq) b (container: 'a ContainerType.T) =  Option.join (Option.map ! (p_get_name_ref (eq) b container))
+          fun p_set_name (eq) (name, b) (container: 'a ContainerType.T) =  Option.isSome (Option.map (fn (store) => store := Option.SOME name) (p_get_name_ref (eq) b container))
       end
 
       fun uniquize(container: 'a ContainerType.T)
