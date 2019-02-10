@@ -2,10 +2,7 @@ signature Modules =
    sig
       type T
 
-      val new_anonymous: unit -> T
-      val new: string -> T
-      val get_name: T -> string Option.option
-
+      val new: unit -> T
       val eq: T * T -> bool
 
    end;
