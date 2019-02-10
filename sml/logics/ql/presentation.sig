@@ -1,13 +1,22 @@
+use "logics/contecteds.sig";
+use "logics/literals.sig";
 use "logics/proof.sig";
+use "logics/ql/constructors.sig";
 use "logics/ql/qualifier.sig";
 
 signature Presentation =
    sig
+      structure Contecteds: Contecteds
+      structure QLConstructors: QLConstructors
+      structure Literals: Literals
       structure Proof: Proof
       structure Qualifier: Qualifier
-
-      structure ModulesBag: NamingPointeredType
-      structure QualifierBag: NamingPointeredType
+      sharing Contecteds.Constructors =  QLConstructors
+      sharing Contecteds.Literals =  Literals
+      sharing Literals.Constructors =  QLConstructors
+      sharing QLConstructors.Qualifier =  Qualifier
+      sharing Proof.Constructors =  QLConstructors
+      sharing Proof.Contecteds =  Contecteds
 
       type state
 
