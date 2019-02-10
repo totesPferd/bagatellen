@@ -1,6 +1,6 @@
-signature UnitType =
+signature StringType =
    sig
       type T
-      val point: T
+      val point: string -> T
       val eq: T * T -> bool
    end;

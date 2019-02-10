@@ -6,6 +6,7 @@ use "collections/pointered_type.fun";
 functor NamingPointeredType(B: Eqs): NamingPointeredType =
    struct
       structure NamingPolymorphicPointeredType =  NamingPolymorphicPointeredType
+      structure StringType =  NamingPolymorphicPointeredType.PointerType
       structure PointeredType =  PointeredType(
          struct
             structure B =  B

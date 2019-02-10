@@ -1,7 +1,8 @@
-use "collections/eqs.sig";
+use "collections/string_type.sig";
 
-structure StringType: Eqs =
+structure StringType: StringType =
    struct
       type T =  string
+      fun point str =  str
       fun eq(s, t) =  (s = t)
    end;

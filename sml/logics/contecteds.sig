@@ -106,8 +106,8 @@ signature Contecteds =
       sharing ContectedLiterals.Constructors =  Constructors
       sharing Clauses.Literals =  Literals
       sharing ContectedLiterals.Literals =  Literals
-      sharing ContectedLiterals.VariableContexts =  VariableContexts
       sharing Clauses.VariableContexts =  VariableContexts
+      sharing ContectedLiterals.VariableContexts =  VariableContexts
 
       val make_clause_from_conclusion: ContectedLiterals.Single.T -> Clauses.Single.T
       val make_multi_clause_from_antecedent: ContectedLiterals.Multi.T -> Clauses.Multi.T

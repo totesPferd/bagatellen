@@ -1,10 +1,12 @@
 use "collections/eqs.sig";
 use "collections/pointered_type.sig";
-use "collections/type.sig";
+use "collections/string_type.sig";
 
 signature NamingPointeredType =
    sig
+     structure StringType: StringType
      structure PointeredType: PointeredType
+     sharing PointeredType.PointerType =  StringType
 
      val sum:       PointeredType.ContainerType.T * PointeredType.ContainerType.T -> PointeredType.ContainerType.T
 

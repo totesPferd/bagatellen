@@ -9,7 +9,7 @@ signature VariableContexts =
       structure VariableContext:
          sig
             structure Variables: Variables
-            type T
+            type T =  PointeredType.ContainerType.T
             val eq: T * T -> bool
             val vmap: (Variables.T -> Variables.T) -> T -> T
          end
