@@ -7,4 +7,8 @@ signature QLConstructors =
       include Constructors
       structure Modules: Modules
       structure Qualifier: Qualifier
-   end;
+
+      val module: Modules.T -> T
+      val qualifier: Qualifier.T -> T
+
+   end

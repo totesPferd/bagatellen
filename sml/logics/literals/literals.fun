@@ -82,6 +82,7 @@ functor Literals(X:
 
             type T =  Construction
 
+            fun variable v =  Variable v
             val eq =  BaseType.eq
 
             val equate =  equate
@@ -113,6 +114,7 @@ functor Literals(X:
       val fop =  PointeredType.fop
       val is_in  =  PointeredType.is_in
 
+      fun construct (c, m) =  Construction(c, m)
       val transition =  PointeredType.transition
 
    end;

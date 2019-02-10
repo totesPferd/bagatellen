@@ -6,6 +6,7 @@ use "collections/unit_polymorphic_pointered_type.sml";
 functor UnitPointeredType(B: Eqs): UnitPointeredType =
    struct
       structure UnitPolymorphicPointeredType =  UnitPolymorphicPointeredType
+      structure UnitType =  UnitPolymorphicPointeredType.PointerType
       structure PointeredType =  PointeredType(
          struct
             structure B =  B

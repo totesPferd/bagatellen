@@ -1,9 +1,11 @@
+use "collections/pointered_type.sig";
 use "logics/constructors.sig";
 use "logics/variables.sig";
 
 signature Literals =
    sig
       structure Constructors: Constructors
+      structure PointeredType: PointeredType
       structure Variables: Variables
       structure Multi:
          sig
@@ -21,6 +23,7 @@ signature Literals =
          sig
             structure Variables:  Variables
             type T
+            val variable:     Variables.T -> T
             val equate:       T * T -> bool
             val eq:           T * T -> bool
             val vmap:         (Variables.T -> Variables.T) -> T -> T
@@ -39,6 +42,7 @@ signature Literals =
       val fop:        (Single.T -> Multi.T) -> Multi.T -> Multi.T
       val is_in:      Single.T * Multi.T -> bool
 
+      val construct:  (Constructors.T * Multi.T) -> Single.T
       val transition: (Single.T * 'b -> 'b Option.option) -> Multi.T -> 'b -> 'b
 
   end;

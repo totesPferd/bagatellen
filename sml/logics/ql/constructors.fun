@@ -18,4 +18,7 @@ functor QLConstructors (X:
         | eq(Qualifier p, Module n) =  false
         | eq(Qualifier p, Qualifier q) =  X.Q.eq(p, q)
 
+      fun module m =  Module m
+      fun qualifier q =  Qualifier q
+
    end;
