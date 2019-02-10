@@ -20,7 +20,8 @@ signature Presentation =
 
       type state
 
-      val typecheck: state -> Proof.Multi.T
+      val get_typecheck_clause: state -> (Contecteds.ContectedLiterals.Single.T * string * string) -> Contecteds.Clauses.Single.T Option.option
+      val typecheck: state -> (Contecteds.ContectedLiterals.Single.T * string * string) -> Proof.Multi.T Option.option
       val add_module: string -> state -> state
       val add_qualifier: string * string * string -> state -> state Option.option
 
