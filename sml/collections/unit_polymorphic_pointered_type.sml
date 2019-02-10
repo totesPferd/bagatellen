@@ -1,7 +1,7 @@
 use "collections/polymorphic_pointered_type.sig";
 use "collections/unit_type.sml";
 
-structure UnitPolymorphicPointeredType: PolymorphicPointeredType =
+structure UnitPolymorphicPointeredType =
    struct
       structure ContainerType =
          struct
@@ -61,5 +61,11 @@ structure UnitPolymorphicPointeredType: PolymorphicPointeredType =
         = case(c_1) of
              Option.NONE => true
           |  Option.SOME x => p_is_in (eq) (x, c_2)
+
+(*
+ *
+ *)
+
+      fun get_val x = x
 
    end;

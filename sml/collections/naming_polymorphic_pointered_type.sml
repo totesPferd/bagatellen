@@ -90,8 +90,6 @@ structure NamingPolymorphicPointeredType =
  *
  *)
 
-      val new =  nil: 'a ContainerType.T
-
       local
           fun p_get_name_ref (eq) b container
             = Option.map (fn (f, _) => f) (List.find (fn (_, w) => eq(b, w)) (container))
