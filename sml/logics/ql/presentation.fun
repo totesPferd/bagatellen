@@ -124,26 +124,26 @@ functor Presentation(X:
           end
 
       fun add_equation (var_ctxt: VariableContexts.VariableContext.T, lit_1: Literals.Single.T, lit_2: Literals.Single.T) (state: state)
-        = case (X.VC.PointeredType.select(X.UV.UnitType.point, var_ctxt)) of
-             Option.NONE => Option.NONE
-          |  Option.SOME var =>
-             let
-                val qual =  Qualifier.new()
-                val new_qual_bag =  QualifierBag.sum (QualifierBag.PointeredType.fe qual, #qualifier state)
-                val qual_lit =  Literals.construct(QLConstructors.qualifier qual, Literals.fe (Literals.Single.variable var))
-                val antecedent =  Literals.fe qual_lit
-                val cl_1 =  Contecteds.Clauses.Single.construct(var_ctxt, antecedent, lit_1)
-                val cl_2 =  Contecteds.Clauses.Single.construct(var_ctxt, antecedent, lit_2)
-                val new_eq_bag
-                  = Proof.add_clause_to_proof (cl_1, Proof.add_clause_to_proof(cl_2, #equations state))
-             in
-                Option.SOME (
-                   {
-                      equations =  new_eq_bag
-                   ,  modules = #modules state
-                   ,  qualifier = new_qual_bag
-                   ,  typecheck_info = #typecheck_info state }: state )
-             end
+        = let
+             val qual_vars =
+                case (X.VC.PointeredType.select(X.UV.UnitType.point, var_ctxt)) of
+                   Option.NONE => Literals.Multi.empty()
+                |  Option.SOME var => Literals.fe (Literals.Single.variable var)
+             val qual =  Qualifier.new()
+             val new_qual_bag =  QualifierBag.sum (QualifierBag.PointeredType.fe qual, #qualifier state)
+             val qual_lit =  Literals.construct(QLConstructors.qualifier qual, qual_vars)
+             val antecedent =  Literals.fe qual_lit
+             val cl_1 =  Contecteds.Clauses.Single.construct(var_ctxt, antecedent, lit_1)
+             val cl_2 =  Contecteds.Clauses.Single.construct(var_ctxt, antecedent, lit_2)
+             val new_eq_bag
+               = Proof.add_clause_to_proof (cl_1, Proof.add_clause_to_proof(cl_2, #equations state))
+          in
+             {
+                equations =  new_eq_bag
+             ,  modules = #modules state
+             ,  qualifier = new_qual_bag
+             ,  typecheck_info = #typecheck_info state }: state
+          end
 
       fun get_normalform (state: state) (lit: Contecteds.ContectedLiterals.Single.T)
         = let
