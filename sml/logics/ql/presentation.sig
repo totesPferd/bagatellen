@@ -26,7 +26,7 @@ signature Presentation =
       val get_typecheck_clause: state -> (Contecteds.ContectedLiterals.Single.T * string * string) -> Contecteds.Clauses.Single.T Option.option
       val typecheck: state -> (Contecteds.ContectedLiterals.Single.T * string * string) -> Contecteds.Clauses.Multi.T Option.option
       val add_module: string -> state -> state
-      val add_qualifier: string * string * string -> state -> state Option.option
+      val add_qualifier: string * string * string -> state -> state
       val add_equation: (VariableContexts.VariableContext.T * Literals.Single.T * Literals.Single.T) -> state -> state Option.option
 
       val get_normalform: state -> (Contecteds.ContectedLiterals.Single.T) -> Contecteds.Clauses.Multi.T

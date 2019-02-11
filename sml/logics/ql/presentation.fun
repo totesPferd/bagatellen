@@ -101,6 +101,7 @@ functor Presentation(X:
              ,  typecheck_info = #typecheck_info state }: state 
           end
 
+      exception ParanormalEffectHasOccured
       fun add_qualifier (str: string, d0: string, d1: string) (state: state)
         = let
              val qual =  Qualifier.new()
@@ -112,14 +113,14 @@ functor Presentation(X:
              val (clo: Contecteds.Clauses.Single.T Option.option) =  get_typecheck_clause state (ctxt_qual_lit, d0, d1)
              val new_tc_info =  Option.map (fn cl => Proof.add_clause_to_proof (cl, #typecheck_info state)) clo
           in
-             Option.map
-                (fn nti =>
-                   {
+             case (new_tc_info) of
+                Option.NONE =>  raise ParanormalEffectHasOccured
+             |  Option.SOME nti
+                => {
                       equations = #equations state
                    ,  modules = #modules state
                    ,  qualifier = new_bag
-                   ,  typecheck_info = nti }: state )
-                new_tc_info
+                   ,  typecheck_info = nti }: state
           end
 
       fun add_equation (var_ctxt: VariableContexts.VariableContext.T, lit_1: Literals.Single.T, lit_2: Literals.Single.T) (state: state)
