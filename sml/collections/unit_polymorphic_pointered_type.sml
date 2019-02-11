@@ -13,11 +13,7 @@ structure UnitPolymorphicPointeredType =
          end
       structure PointerType =  UnitType
 
-      exception NotFound
-      fun select(sel, c)
-        = case (c) of
-             Option.NONE => raise NotFound
-          |  Option.SOME b => b
+      fun select(sel, c) =  c
 
       fun fold f b Option.NONE =  b
         | fold f b (Option.SOME x) =  f(x, b)

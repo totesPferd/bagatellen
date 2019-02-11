@@ -12,18 +12,17 @@ structure NamingPolymorphicPointeredType =
          end
       structure PointerType =  StringType
 
-      exception NotFound
       fun select(sel: PointerType.T, c: 'a ContainerType.T)
         = let
              fun is_found(s, b)
                = case(!s) of
                     Option.NONE =>  false
-                 |  Option.SOME x => (sel = x)
+                 |  Option.SOME x => PointerType.eq(sel, x)
              val found =  List.find is_found c
           in
              case (found) of
-                Option.NONE =>  raise NotFound
-             |  Option.SOME (_, b) =>  b
+                Option.NONE =>  Option.NONE
+             |  Option.SOME (_, b) =>  Option.SOME b
           end
 
       fun fold f b (c: 'a ContainerType.T)

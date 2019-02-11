@@ -1,4 +1,4 @@
-use "collections/type.sig";
+use "collections/eqs.sig";
 
 signature PolymorphicPointeredType =
    sig
@@ -7,9 +7,9 @@ signature PolymorphicPointeredType =
             type 'a T
             val polymorphic_eq: ('a * 'a -> bool) -> 'a T * 'a T -> bool
          end
-      structure PointerType: Type
+      structure PointerType: Eqs
 
-      val select:  PointerType.T * 'a ContainerType.T -> 'a
+      val select:  PointerType.T * 'a ContainerType.T -> 'a Option.option
 
       val fold:       ('a * 'b -> 'b) -> 'b -> 'a ContainerType.T -> 'b
       val map:        ('a -> 'a) -> 'a ContainerType.T -> 'a ContainerType.T

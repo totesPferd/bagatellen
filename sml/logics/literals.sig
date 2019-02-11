@@ -36,7 +36,7 @@ signature Literals =
       sharing Multi.Variables = Variables
       sharing Single.Variables = Variables
 
-      val select:     PointerType.T * Multi.T -> Single.T
+      val select:     PointerType.T * Multi.T -> Single.T Option.option
 
       val fe:         Single.T -> Multi.T
       val fop:        (Single.T -> Multi.T) -> Multi.T -> Multi.T

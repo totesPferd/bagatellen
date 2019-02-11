@@ -5,9 +5,9 @@ signature PointeredType =
    sig
       structure BaseType: Eqs
       structure ContainerType: Type
-      structure PointerType: Type
+      structure PointerType: Eqs
 
-      val select:  PointerType.T * ContainerType.T -> BaseType.T
+      val select:  PointerType.T * ContainerType.T -> BaseType.T Option.option
 
       val fold:       (BaseType.T * 'b -> 'b) -> 'b -> ContainerType.T -> 'b
       val map:        (BaseType.T -> BaseType.T) -> ContainerType.T -> ContainerType.T
