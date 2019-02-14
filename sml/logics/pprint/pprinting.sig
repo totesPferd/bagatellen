@@ -1,8 +1,7 @@
-use "logics/pprint/base.sig";
+use "logics/pprint/pprintable.sig";
 
 signature PPrintPPrintable =
    sig
-      structure PPrintBase: PPrintBase
-      type T
-      val pprint: TextIO.outstream * T * int -> PPrintBase.state -> PPrintBase.state
+      structure PPrintPPrintable: PPrintPPrintable
+      val pprint: TextIO.outstream * PPrintPPrintable.T * int -> PPrintPPrintable.PPrintBase.state -> PPrintPPrintable.PPrintBase.state
    end;
