@@ -1,6 +1,7 @@
 use "logics/pprint/base.sig";
+use "logics/pprint/config.sig";
 
-structure PPrintBase: PPrintBase =
+functor PPrintBase(X: PPrintConfig): PPrintBase =
    struct
       datatype ws_req =  no_need_of_ws | need_of_ws | forced_need_of_ws;
 
@@ -14,31 +15,43 @@ structure PPrintBase: PPrintBase =
       fun print_nl stream state
          = (   TextIO.output(stream, "\n")
             ;  { col = 1, is_need_ws = no_need_of_ws }: state )
+      fun print_ws (stream,str) (state: state)
+         = (   TextIO.output(stream, str)
+            ;  { col = (#col state) + String.size(str), is_need_ws =  no_need_of_ws }: state )
       fun print_par (stream, str) (state: state)
          =  let
+               val state'
+                  =  if (#col state) + String.size(str) > (#page_width X.config)
+                     then
+                        print_nl stream state
+                     else
+                        state
                val real_col
-                  =  if (#is_need_ws state) = forced_need_of_ws
+                  =  if (#is_need_ws state') = forced_need_of_ws
                      then (
                            TextIO.output(stream, " ")
-                        ;  (#col state) + 1 )
+                        ;  (#col state') + 1 )
                      else
-                        (#col state)
+                        (#col state')
             in (
                   TextIO.output(stream, str)
                ;  {  col = real_col + String.size(str), is_need_ws =  need_of_ws }: state )
             end
-      fun print_ws (stream,str) (state: state)
-         = (   TextIO.output(stream, str)
-            ;  { col = (#col state) + String.size(str), is_need_ws =  no_need_of_ws }: state )
       fun print (stream, str) (state: state)
          =  let
+               val state'
+                  =  if (#col state) + String.size(str) > (#page_width X.config)
+                     then
+                        print_nl stream state
+                     else
+                        state
                val real_col
-                  =  if (#is_need_ws state) = need_of_ws
+                  =  if (#is_need_ws state') = need_of_ws
                      then (
                            TextIO.output(stream, " ")
-                        ;  (#col state) + 1)
+                        ;  (#col state') + 1)
                      else
-                        (#col state)
+                        (#col state')
             in (  TextIO.output(stream, str)
                ;  { col = real_col + String.size(str), is_need_ws = need_of_ws }: state )
             end
