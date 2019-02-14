@@ -46,7 +46,7 @@ functor PPrintBase(X: PPrintConfig): PPrintBase =
                      else
                         state
                val real_col
-                  =  if (#is_need_ws state') = need_of_ws
+                  =  if not ((#is_need_ws state') = no_need_of_ws)
                      then (
                            TextIO.output(stream, " ")
                         ;  (#col state') + 1)
