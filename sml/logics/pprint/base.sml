@@ -7,14 +7,18 @@ structure PPrintBase: PPrintBase =
          ,  is_need_ws: bool }
 
       val init =  { col = 1, is_need_ws = false }: state
+      fun print_par (stream, str) (state: state)
+         =  (  TextIO.output(stream, str)
+            ;  {  col =  (#col state) + String.size(str), is_need_ws =  true }: state )
       fun print_nl stream state
-         = (
-               TextIO.output(stream, "\n")
+         = (   TextIO.output(stream, "\n")
             ;  { col = 1, is_need_ws = false }: state )
-      fun print (stream, str, is_need_ws) (state: state)
-         = (
-               TextIO.output(stream, str)
-            ;  { col =  (#col state) + String.size(str), is_need_ws = is_need_ws }: state )
+      fun print_ws (stream,str) (state: state)
+         = (   TextIO.output(stream, str)
+            ;  { col =  (#col state) + String.size(str), is_need_ws =  false }: state )
+      fun print (stream, str) (state: state)
+         = (   TextIO.output(stream, str)
+            ;  { col =  (#col state) + String.size(str), is_need_ws = true }: state )
 
       local
          fun ntp (stream, pos) (state: state)
@@ -22,7 +26,7 @@ structure PPrintBase: PPrintBase =
                then
                   state
                else
-                  ntp (stream, pos) (print(stream, " ", false) state)
+                  ntp (stream, pos) (print(stream, " ") state)
       in fun navigate_to_pos (stream, pos) (state: state)
             =  let
                   val real_col
