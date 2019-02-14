@@ -1,10 +1,10 @@
-use "logics/pprint/base.sig";
+use "logics/pprint/indent_base.sig";
 
 signature PPrintPPrintable =
    sig
-      structure PPrintBase: PPrintBase
+      structure PPrintIndentBase: PPrintIndentBase
       type T
 
       val single_line: T -> string
-      val multi_line: TextIO.outstream * T -> PPrintBase.state -> PPrintBase.state
+      val multi_line: TextIO.outstream * T -> PPrintIndentBase.indent * PPrintIndentBase.state -> PPrintIndentBase.state
    end;
