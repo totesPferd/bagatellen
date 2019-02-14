@@ -12,9 +12,12 @@ functor PPrintIndentBase(X:
       type state =  X.B.state
 
       val init =  ( { indent = 0 }: indent, X.B.init )
+      val force_ws =  X.B.force_ws
       fun get_deeper_indent ({ indent = indent }: indent)
          =  { indent = indent + (#indent X.C.config) }: indent
       val print_nl =  X.B.print_nl
+      val print_par =  X.B.print_par
+      val print_ws =  X.B.print_ws
       val print =  X.B.print
       fun navigate_to_pos (stream, pos) (indent, state)
          =  let

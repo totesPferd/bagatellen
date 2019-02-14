@@ -11,6 +11,9 @@ structure PPrintBase: PPrintBase =
       val init =  { col = 1, is_need_ws = no_need_of_ws }: state
       fun force_ws (state: state)
          =  {  col = (#col state), is_need_ws = forced_need_of_ws }
+      fun print_nl stream state
+         = (   TextIO.output(stream, "\n")
+            ;  { col = 1, is_need_ws = no_need_of_ws }: state )
       fun print_par (stream, str) (state: state)
          =  let
                val real_col
@@ -24,9 +27,6 @@ structure PPrintBase: PPrintBase =
                   TextIO.output(stream, str)
                ;  {  col = real_col + String.size(str), is_need_ws =  need_of_ws }: state )
             end
-      fun print_nl stream state
-         = (   TextIO.output(stream, "\n")
-            ;  { col = 1, is_need_ws = no_need_of_ws }: state )
       fun print_ws (stream,str) (state: state)
          = (   TextIO.output(stream, str)
             ;  { col = (#col state) + String.size(str), is_need_ws =  no_need_of_ws }: state )
