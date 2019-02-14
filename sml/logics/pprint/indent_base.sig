@@ -6,6 +6,7 @@ signature PPrintIndentBase =
       val init:              indent * state
       val force_ws:          state -> state
       val get_deeper_indent: indent -> indent
+      val get_rel_width:     indent -> int
       val print_nl:          TextIO.outstream -> state -> state
       val print_par:         TextIO.outstream * string -> state -> state
       val print_ws:          TextIO.outstream * string -> state -> state
