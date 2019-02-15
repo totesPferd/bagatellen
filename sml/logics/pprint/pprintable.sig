@@ -6,5 +6,5 @@ signature PPrintPPrintable =
       type T
 
       val single_line: T -> string
-      val multi_line: TextIO.outstream * T -> PPrintIndentBase.indent * PPrintIndentBase.state -> PPrintIndentBase.state
+      val multi_line: TextIO.outstream * T * int -> PPrintIndentBase.indent * PPrintIndentBase.state -> PPrintIndentBase.state
    end;
