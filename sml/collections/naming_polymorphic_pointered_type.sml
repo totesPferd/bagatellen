@@ -96,6 +96,8 @@ structure NamingPolymorphicPointeredType =
 
       fun adjoin (str, x, c) =  (ref (Option.SOME str), x) :: c
 
+      fun full_transition f (c: 'a ContainerType.T) =  Acc.transition (fn ((n, x: 'a), y) => f(!n, x, y)) c
+
       local
           fun p_get_name_ref (eq) b container
             = Option.map (fn (f, _) => f) (List.find (fn (_, w) => eq(b, w)) (container))
