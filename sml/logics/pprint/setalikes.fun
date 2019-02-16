@@ -15,15 +15,16 @@ functor PPrintSetAlikes(X:
    end ): PPrintPPrintable =
    struct
       structure SinglePPrinting =  PPrintPPrinting(X.X.Single)
+      structure ContextType =  X.X.Single.ContextType
 
       structure PPrintIndentBase =  X.X.Single.PPrintIndentBase
       type T =  X.X.Multi.T
 
-      fun (single_line: T -> string) (mt: T)
+      fun single_line ctxt (mt: T)
          =  X.X.transition
                (  fn (st: X.X.Single.T, str: string)
                      => let
-                           val item =  X.X.Single.single_line st
+                           val item =  X.X.Single.single_line ctxt st
                         in if str = ""
                            then
                               Option.SOME item
@@ -33,7 +34,8 @@ functor PPrintSetAlikes(X:
                mt
                ""
 
-      fun (multi_line: TextIO.outstream * T * int -> PPrintIndentBase.indent * PPrintIndentBase.state -> PPrintIndentBase.state)
+      fun multi_line
+         ctxt
          ((stream: TextIO.outstream), (mt: X.X.Multi.T), (rhs_indent: int))
          (indent, state)
          =  let
@@ -47,7 +49,7 @@ functor PPrintSetAlikes(X:
                               |  Option.SOME (t: X.X.Single.T)
                                     => let
                                           val state'' =  PPrintIndentBase.navigate_to_pos (stream, 0) (indent', state')
-                                          val state''' =  SinglePPrinting.pprint (stream, t, 0) (indent', state'')
+                                          val state''' =  SinglePPrinting.pprint ctxt (stream, t, 0) (indent', state'')
                                           val state'''' =  PPrintIndentBase.navigate_to_pos (stream, 0) (indent, state''')
                                           val state''''' =  PPrintIndentBase.print_par (stream, (#delim X.DelimConfig.config)) state''''
                                        in Option.SOME ((Option.SOME st), state''''')
