@@ -1,9 +1,9 @@
 use "collections/dictset.fun";
+use "collections/occurences.fun";
 use "collections/pointered_type.fun";
 use "collections/polymorphic_pointered_type.sig";
 use "logics/constructors.sig";
 use "logics/literals.sig";
-use "logics/occurences/occurences.fun";
 use "logics/polymorphic_variables.sig";
 
 functor Literals(X:

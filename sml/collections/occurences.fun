@@ -1,5 +1,5 @@
 use "collections/dictset.sig";
-use "logics/occurences.sig";
+use "collections/occurences.sig";
 
 functor Occurences(X: DictSet): Occurences =
    struct

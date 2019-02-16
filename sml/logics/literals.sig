@@ -1,6 +1,6 @@
+use "collections/occurences.sig";
 use "collections/pointered_type.sig";
 use "logics/constructors.sig";
-use "logics/occurences.sig";
 use "logics/variables.sig";
 
 signature Literals =
