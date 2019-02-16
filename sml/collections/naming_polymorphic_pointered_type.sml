@@ -102,6 +102,13 @@ structure NamingPolymorphicPointeredType =
           fun p_set_name (eq) (name, b) (container: 'a ContainerType.T) =  Option.isSome (Option.map (fn (store) => store := Option.SOME name) (p_get_name_ref (eq) b container))
       end
 
+      fun p_add (eq) x c
+         =  if Option.isSome (p_get_name (eq) x c)
+            then
+               c
+            else
+               (ref Option.NONE, x) :: c
+
       fun uniquize(container: 'a ContainerType.T)
         = let
              fun rename(do_not_use_list, candidate)

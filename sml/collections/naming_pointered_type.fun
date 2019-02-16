@@ -15,6 +15,7 @@ functor NamingPointeredType(B: Eqs): NamingPointeredType =
 
       val sum =  NamingPolymorphicPointeredType.sum
 
+      val add      =  NamingPolymorphicPointeredType.p_add B.eq
       val adjoin   =  NamingPolymorphicPointeredType.adjoin
       val get_name =  NamingPolymorphicPointeredType.p_get_name B.eq
       val set_name =  NamingPolymorphicPointeredType.p_set_name B.eq
