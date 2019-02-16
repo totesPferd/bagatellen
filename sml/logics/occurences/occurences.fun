@@ -9,6 +9,7 @@ functor Occurences(X: DictSet): Occurences =
             multiple_occ: DictSet.Sets.T
          ,  occ: DictSet.Sets.T }
 
+      val empty =  { multiple_occ =  DictSet.Sets.empty, occ =  DictSet.Sets.empty }: occurences
       fun singleton x =  { multiple_occ =  DictSet.Sets.empty, occ = DictSet.Sets.singleton x }: occurences
       fun unif_occurences ({ multiple_occ = A_1, occ = B_1 }: occurences, { multiple_occ = A_2, occ = B_2 }: occurences)
          =  {  multiple_occ
