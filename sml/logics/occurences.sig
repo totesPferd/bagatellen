@@ -8,6 +8,7 @@ signature Occurences =
             multiple_occ: DictSet.Sets.T
          ,  occ: DictSet.Sets.T }
 
+      val singleton: DictSet.Eqs.T -> occurences
       val unif_occurences: occurences * occurences -> occurences
 
    end;
