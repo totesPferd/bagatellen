@@ -16,7 +16,7 @@ signature Literals =
             type T
             val equate:         T * T -> bool
             val eq:             T * T -> bool
-            val empty:          unit -> T
+            val empty:          T
             val is_empty:       T -> bool
             val subeq:          T * T -> bool
             val vmap:           (Variables.T -> Variables.T) -> T -> T

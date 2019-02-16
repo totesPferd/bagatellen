@@ -11,7 +11,7 @@ signature PointeredType =
 
       val fold:       (BaseType.T * 'b -> 'b) -> 'b -> ContainerType.T -> 'b
       val map:        (BaseType.T -> BaseType.T) -> ContainerType.T -> ContainerType.T
-      val empty:      unit -> ContainerType.T
+      val empty:      ContainerType.T
       val is_empty:   ContainerType.T -> bool
       val all:        (BaseType.T -> bool) -> ContainerType.T -> bool
       val all_zip:    (BaseType.T * BaseType.T -> bool) -> (ContainerType.T * ContainerType.T) -> bool

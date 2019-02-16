@@ -71,7 +71,7 @@ functor Contecteds(X:
                       end
                   fun apply_alpha_conversion (alpha: VariableContexts.AlphaConverter) (x:T) =  qualify (fn x: Constructors.T => x) alpha x
       
-                  fun empty ctxt =  { context = ctxt, antecedent = Literals.Multi.empty() }
+                  fun empty ctxt =  { context = ctxt, antecedent = Literals.Multi.empty }
       
                   fun is_empty (a: T) =  Literals.Multi.is_empty(#antecedent a)
                end
@@ -173,13 +173,13 @@ functor Contecteds(X:
 
 
       fun make_clause_from_conclusion { context = ctxt, conclusion = c }
-        = { context = ctxt, antecedent = Literals.Multi.empty(), conclusion = c }
+        = { context = ctxt, antecedent = Literals.Multi.empty, conclusion = c }
 
       fun make_multi_clause_from_antecedent { context = ctxt, antecedent = a }
-        = { context = ctxt, antecedent = Literals.Multi.empty(), conclusion = a }
+        = { context = ctxt, antecedent = Literals.Multi.empty, conclusion = a }
 
       fun empty_multi_clause { context = ctxt, antecedent = a }
-        = { context = ctxt, antecedent = a, conclusion = Literals.Multi.empty() }
+        = { context = ctxt, antecedent = a, conclusion = Literals.Multi.empty }
 
       fun get_antecedent { context = ctxt, antecedent = a, conclusion = c }
         = { context = ctxt, antecedent = a }

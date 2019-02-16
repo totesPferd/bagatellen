@@ -18,7 +18,7 @@ functor PointeredType(X:
 
       val fold =        X.PPT.fold
       val map =         X.PPT.map
-      val empty =       X.PPT.empty
+      val empty =       X.PPT.empty ()
       val is_empty =    X.PPT.is_empty
       val all =         X.PPT.all
       val all_zip =     X.PPT.all_zip
