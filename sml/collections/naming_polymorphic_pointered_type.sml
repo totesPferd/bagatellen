@@ -118,7 +118,7 @@ structure NamingPolymorphicPointeredType =
       end
 
       fun p_add (eq) x c
-         =  if Option.isSome (p_get_name (eq) x c)
+         =  if p_is_in (eq) (x, c)
             then
                c
             else
