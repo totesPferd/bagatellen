@@ -42,6 +42,12 @@ structure UnitPolymorphicPointeredType =
              (next_v, next_w)
           end
 
+      fun filter P Option.NONE =  Option.NONE
+      |   filter P (Option.SOME x)
+         =  if P x
+            then Option.SOME x
+            else Option.NONE
+
       fun translate (phi, b_0) Option.NONE =  b_0
       |   translate (phi, b_0) (Option.SOME x) =  phi(Option.NONE, x, b_0)
 

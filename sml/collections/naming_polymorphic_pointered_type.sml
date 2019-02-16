@@ -56,6 +56,17 @@ structure NamingPolymorphicPointeredType =
            = List.foldl (mapfold_item f g) (nil, w0) (c: 'a ContainerType.T)
       end
              
+      fun filter P (c: 'a ContainerType.T)
+         =  Acc.transition
+            (   fn ((n, x: 'a), y)
+                => Option.SOME (
+                      if P x
+                      then
+                         (ref (!n), x) :: y
+                      else
+                         y ))
+             c
+             nil
       fun translate (phi, b_0) (c: 'a ContainerType.T)
          =  Acc.transition (fn ((n, x: 'a), y) => Option.SOME(phi (!n, x, y))) c b_0
       fun transition f (c: 'a ContainerType.T) =  Acc.transition (fn ((n, x: 'a), y) => f(x, y)) c
