@@ -21,9 +21,10 @@ functor Literals(X:
          struct
             type Base =  Construction
             type T =  Base X.PV.Variable
-            val new =  X.PV.new
+            val new =  X.PV.new ()
             val eq =  X.PV.eq
             val copy =  X.PV.copy
+            val get_val =  X.PV.get_val
             val is_bound =  Option.isSome o X.PV.get_val
          end
 
