@@ -24,6 +24,7 @@ functor Literals(X:
             val new =  X.PV.new
             val eq =  X.PV.eq
             val copy =  X.PV.copy
+            val is_bound =  Option.isSome o X.PV.get_val
          end
 
       structure DictSet =  DictSet(Variables)
