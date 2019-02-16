@@ -1,7 +1,9 @@
+use "collections/dictset.fun";
 use "collections/pointered_type.fun";
 use "collections/polymorphic_pointered_type.sig";
 use "logics/constructors.sig";
 use "logics/literals.sig";
+use "logics/occurences/occurences.fun";
 use "logics/polymorphic_variables.sig";
 
 functor Literals(X:
@@ -23,6 +25,9 @@ functor Literals(X:
             val eq =  X.PV.eq
             val copy =  X.PV.copy
          end
+
+      structure DictSet =  DictSet(Variables)
+      structure Occurences =  Occurences(DictSet)
 
       fun get_val (p as Construction(c, xi)) =  p
         | get_val (p as Variable x)
@@ -93,6 +98,16 @@ functor Literals(X:
       fun vmap f =  vcmap (f, (fn x => x))
       fun multi_vmap f =  multi_vcmap(f, (fn x => x))
 
+      fun get_occurences (Construction(c, xi))
+         =  multi_get_occurences xi
+      |   get_occurences (Variable x)
+         =  Occurences.singleton(x)
+      and multi_get_occurences xi
+         = PointeredType.transition
+              (  fn (t, occ) => Option.SOME (Occurences.unif_occurences (get_occurences t, occ)) )
+              xi
+              Occurences.empty
+
       structure Single =
          struct
             structure BaseType =  BaseType
@@ -107,6 +122,7 @@ functor Literals(X:
             val vmap =  vmap
             val vcmap =  vcmap
 
+            val get_occurences =  get_occurences
          end
 
       structure Multi =
@@ -124,6 +140,7 @@ functor Literals(X:
             val vmap =  multi_vmap
             val vcmap =  multi_vcmap
 
+            val get_occurences =  multi_get_occurences
          end
 
       val select =  PointeredType.select
