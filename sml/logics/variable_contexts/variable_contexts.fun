@@ -23,6 +23,7 @@ functor VariableContexts(X:
             type T =  X.PT.ContainerType.T
             val eq =  X.PT.all_zip (X.Var.eq)
             val vmap =  X.PT.map
+            val filter_bound_vars =  X.PT.filter (Variables.is_bound)
          end;
 
       type AlphaConverter = { ctxt: VariableContext.T, alpha: Variables.T Dicts.dict }
