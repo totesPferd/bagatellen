@@ -29,6 +29,7 @@ signature Contecteds =
                   val construct: VariableContexts.VariableContext.T * Literals.Multi.T * Literals.Single.T  -> T
                   val qualify: (Constructors.T -> Constructors.T) -> VariableContexts.AlphaConverter -> T -> T
                   val apply_alpha_conversion: VariableContexts.AlphaConverter -> T -> T
+                  val get_occurences: T -> Literals.Occurences.occurences
       
                   val is_assumption: T -> bool
                end
@@ -45,6 +46,7 @@ signature Contecteds =
                   val construct: VariableContexts.VariableContext.T * Literals.Multi.T * Literals.Multi.T  -> T
                   val qualify: (Constructors.T -> Constructors.T) -> VariableContexts.AlphaConverter -> T -> T
                   val apply_alpha_conversion: VariableContexts.AlphaConverter -> T -> T
+                  val get_occurences: T -> Literals.Occurences.occurences
       
                   val is_empty: T -> bool
                   val is_assumption: T -> bool
@@ -75,6 +77,7 @@ signature Contecteds =
                   val construct: VariableContexts.VariableContext.T * Literals.Single.T  -> T
                   val qualify: (Constructors.T -> Constructors.T) -> VariableContexts.AlphaConverter -> T -> T
                   val apply_alpha_conversion: VariableContexts.AlphaConverter -> T -> T
+                  val get_occurences: T -> Literals.Occurences.occurences
                   val equate: T * T -> bool
                end
             structure Multi:
@@ -89,6 +92,7 @@ signature Contecteds =
                   val construct: VariableContexts.VariableContext.T * Literals.Multi.T -> T
                   val qualify: (Constructors.T -> Constructors.T) -> VariableContexts.AlphaConverter -> T -> T
                   val apply_alpha_conversion: VariableContexts.AlphaConverter -> T -> T
+                  val get_occurences: T -> Literals.Occurences.occurences
                   val empty: VariableContexts.VariableContext.T -> T
       
                   val is_empty: T -> bool

@@ -42,6 +42,7 @@ functor Contecteds(X:
                          { context =  der_context, conclusion = der_conclusion }
                       end
                   fun apply_alpha_conversion (alpha: VariableContexts.AlphaConverter) (x:T) =  qualify (fn x: Constructors.T => x) alpha x
+                  fun get_occurences (x:T) =  Literals.Single.get_occurences (#conclusion x)
       
                   fun equate (c_1: T, c_2: T)
                     = Literals.Single.equate(#conclusion c_1, #conclusion c_2)
@@ -70,6 +71,7 @@ functor Contecteds(X:
                          { context =  der_context, antecedent = der_antecedent }
                       end
                   fun apply_alpha_conversion (alpha: VariableContexts.AlphaConverter) (x:T) =  qualify (fn x: Constructors.T => x) alpha x
+                  fun get_occurences (x:T) =  Literals.Multi.get_occurences (#antecedent x)
       
                   fun empty ctxt =  { context = ctxt, antecedent = Literals.Multi.empty }
       
@@ -119,10 +121,15 @@ functor Contecteds(X:
                          { context =  der_context, antecedent = der_antecedent, conclusion = der_conclusion }
                       end
                   fun apply_alpha_conversion (alpha: VariableContexts.AlphaConverter) (x:T) =  qualify (fn x: Constructors.T => x) alpha x
+
+                  fun get_occurences (x:T)
+                     =  Literals.Occurences.unif_occurences (
+                           Literals.Multi.get_occurences (#antecedent x)
+                        ,  Literals.Single.get_occurences (#conclusion x) )
       
                   fun is_assumption(cl: T)
                     = Literals.is_in(#conclusion cl, #antecedent cl)
-      
+
                end
       
             structure Multi =
@@ -150,7 +157,12 @@ functor Contecteds(X:
                          { context =  der_context, antecedent = der_antecedent, conclusion = der_conclusion }
                       end
                   fun apply_alpha_conversion (alpha: VariableContexts.AlphaConverter) (x:T) =  qualify (fn x: Constructors.T => x) alpha x
-      
+
+                  fun get_occurences (x:T)
+                     =  Literals.Occurences.unif_occurences (
+                           Literals.Multi.get_occurences (#antecedent x)
+                        ,  Literals.Multi.get_occurences (#conclusion x) )
+
                   fun is_empty (mcl: T) =  Literals.Multi.is_empty(#conclusion mcl)
                   fun is_assumption(mcl: T)
                     = Literals.Multi.subeq(#antecedent mcl, #conclusion mcl)
