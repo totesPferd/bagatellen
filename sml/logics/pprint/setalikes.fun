@@ -62,7 +62,7 @@ functor PPrintSetAlikes(X:
                   |  Option.SOME (t: X.X.Single.T)
                      => let
                            val state_after'' =  PPrintIndentBase.navigate_to_pos (stream, rhs_indent) (indent', state_after)
-                           val state_after''' =  SinglePPrinting.pprint ctxt (stream, t, 0) (indent', state_after'')
+                           val state_after''' =  SinglePPrinting.pprint ctxt (stream, t, rhs_indent) (indent', state_after'')
                         in
                            state_after'''
                         end
