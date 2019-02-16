@@ -60,7 +60,12 @@ functor PPrintSetAlikes(X:
                   =  case(last_item) of
                      Option.NONE =>  state_after
                   |  Option.SOME (t: X.X.Single.T)
-                     => PPrintIndentBase.navigate_to_pos (stream, rhs_indent) (indent', state_after)
+                     => let
+                           val state_after'' =  PPrintIndentBase.navigate_to_pos (stream, rhs_indent) (indent', state_after)
+                           val state_after''' =  SinglePPrinting.pprint ctxt (stream, t, 0) (indent', state_after'')
+                        in
+                           state_after'''
+                        end
             in
                state_after'
             end
