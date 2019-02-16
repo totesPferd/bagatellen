@@ -10,9 +10,10 @@ signature VariableContexts =
          sig
             structure Variables: Variables
             type T
-            val eq:                T * T -> bool
-            val vmap:              (Variables.T -> Variables.T) -> T -> T
-            val filter_bound_vars: T -> T
+            val eq:                  T * T -> bool
+            val vmap:                (Variables.T -> Variables.T) -> T -> T
+            val filter_bound_vars:   T -> T
+            val filter_unbound_vars: T -> T
          end
       sharing VariableContext.Variables =  Variables
       sharing PointeredType.BaseType =  Variables
