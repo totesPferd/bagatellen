@@ -29,7 +29,7 @@ functor PPrintSetAlikes(X:
                            then
                               Option.SOME item
                            else
-                              Option.SOME (str ^ (#delim X.DelimConfig.config) ^ " " ^ item)
+                              Option.SOME (str ^ X.DelimConfig.delim ^ " " ^ item)
                         end )
                mt
                ""
@@ -51,7 +51,7 @@ functor PPrintSetAlikes(X:
                                           val state'' =  PPrintIndentBase.navigate_to_pos (stream, 0) (indent', state')
                                           val state''' =  SinglePPrinting.pprint ctxt (stream, t, 0) (indent', state'')
                                           val state'''' =  PPrintIndentBase.navigate_to_pos (stream, 0) (indent, state''')
-                                          val state''''' =  PPrintIndentBase.print_par (stream, (#delim X.DelimConfig.config)) state''''
+                                          val state''''' =  PPrintIndentBase.print_par (stream, X.DelimConfig.delim) state''''
                                        in Option.SOME ((Option.SOME st), state''''')
                                        end )
                         mt

@@ -1,6 +1,4 @@
 signature PPrintDelimConfig =
    sig
-      type Config = {
-         delim: string }
-      val config: Config
+      val delim: string
    end;
