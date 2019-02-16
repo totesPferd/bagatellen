@@ -110,6 +110,15 @@ functor Literals(X:
               xi
               Occurences.empty
 
+      fun traverse (f_1, f_2, f_3, z_0) (Construction(c, xi))
+         =  f_1(c, multi_traverse(f_1, f_2, f_3, z_0) xi)
+      |   traverse (f_1, f_2, f_3, z_0) (Variable x)
+         =  f_2(x)
+      and multi_traverse (f_1, f_2, f_3, z_0) xi
+         = PointeredType.transition
+              (fn (s, r) =>  f_3(traverse(f_1, f_2, f_3, z_0) s, r))
+              xi z_0
+
       structure Single =
          struct
             structure BaseType =  BaseType
@@ -125,6 +134,8 @@ functor Literals(X:
             val vcmap =  vcmap
 
             val get_occurences =  get_occurences
+
+            val traverse =  traverse
          end
 
       structure Multi =
@@ -143,6 +154,8 @@ functor Literals(X:
             val vcmap =  multi_vcmap
 
             val get_occurences =  multi_get_occurences
+
+            val traverse =  multi_traverse
          end
 
       val select =  PointeredType.select

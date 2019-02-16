@@ -22,6 +22,7 @@ signature Literals =
             val vmap:           (Variables.T -> Variables.T) -> T -> T
             val vcmap:          (Variables.T -> Variables.T) * (Constructors.T -> Constructors.T) -> T -> T
             val get_occurences: T -> Occurences.occurences
+            val traverse:       (Constructors.T * 'm -> 's) * (Variables.T -> 's) * ('s * 'm -> 'm Option.option) * 'm -> T -> 'm
         end
       structure Single:
          sig
@@ -33,6 +34,7 @@ signature Literals =
             val vmap:           (Variables.T -> Variables.T) -> T -> T
             val vcmap:          (Variables.T -> Variables.T) * (Constructors.T -> Constructors.T) -> T -> T
             val get_occurences: T -> Occurences.occurences
+            val traverse:       (Constructors.T * 'm -> 's) * (Variables.T -> 's) * ('s * 'm -> 'm Option.option) * 'm -> T -> 's
          end
       structure PointerType:
          sig
@@ -47,7 +49,7 @@ signature Literals =
       val fop:        (Single.T -> Multi.T) -> Multi.T -> Multi.T
       val is_in:      Single.T * Multi.T -> bool
 
-      val construct:  (Constructors.T * Multi.T) -> Single.T
+      val construct:  Constructors.T * Multi.T -> Single.T
       val transition: (Single.T * 'b -> 'b Option.option) -> Multi.T -> 'b -> 'b
 
   end;
