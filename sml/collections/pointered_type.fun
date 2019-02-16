@@ -30,6 +30,7 @@ functor PointeredType(X:
       val is_in =       X.PPT.p_is_in X.B.eq
       val subeq =       X.PPT.p_subeq X.B.eq
 
+      val translate =   X.PPT.translate
       val transition =  X.PPT.transition
 
    end;

@@ -23,6 +23,7 @@ signature PointeredType =
       val is_in:      BaseType.T * ContainerType.T -> bool
       val subeq:      ContainerType.T * ContainerType.T -> bool
 
+      val translate:  (string Option.option * BaseType.T * 'b -> 'b) * 'b -> ContainerType.T  -> 'b
       val transition: (BaseType.T * 'b -> 'b Option.option) -> ContainerType.T -> 'b -> 'b
 
    end;
