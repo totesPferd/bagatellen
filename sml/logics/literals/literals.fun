@@ -64,12 +64,30 @@ functor Literals(X:
           => X.PV.set_val l x
       and multi_equate(xi, ypsilon) =  PointeredType.all_zip (equate) (xi, ypsilon)
 
-      fun vcmap (f, rho) k
-        = case (get_val k) of
-             Construction(c, xi)
-             => Construction(rho c, multi_vcmap (f, rho) xi)
-           | (Variable x)
-             => Variable (f x)
+      fun vcmap (f, rho) (Construction(c, xi))
+         =  Construction(rho c, multi_vcmap (f, rho) xi)
+      |   vcmap (f, rho) (Variable x)
+         =  let
+               val new_var =  f x
+            in (  (  if (X.PV.is_settable new_var)
+                     then
+                        let
+                           val kval =  X.PV.get_val x
+                        in if Option.isSome kval
+                           then
+                              let
+                                 val new_value =  vcmap (f, rho) (Option.valOf kval)
+                              in (
+                                    X.PV.set_val (new_var, new_value)
+                                 ;  () )
+                              end
+                           else
+                              ()
+                        end
+                     else
+                        () )
+                  ;  Variable new_var )
+            end
       and multi_vcmap (f, rho) =  PointeredType.map (vcmap (f, rho))
 
       fun vmap f =  vcmap (f, (fn x => x))
