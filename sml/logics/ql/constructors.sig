@@ -11,4 +11,5 @@ signature QLConstructors =
       val module: Modules.T -> T
       val qualifier: Qualifier.T -> T
 
+      val traverse: (Modules.T -> 'a) * (Qualifier.T -> 'a) -> T -> 'a
    end

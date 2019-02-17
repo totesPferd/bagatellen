@@ -92,7 +92,7 @@ functor Presentation(X:
       fun add_module str (state: state)
         = let
              val module =  Modules.new()
-             val new_bag =  ModulesBag.adjoin (str, module) (#modules state)
+             val new_bag =  ModulesBag.adjoin (str, module, (#modules state))
           in
              {
                 equations = #equations state
@@ -105,8 +105,8 @@ functor Presentation(X:
       fun add_qualifier (str: string, d0: string, d1: string) (state: state)
         = let
              val qual =  Qualifier.new()
-             val new_bag =  QualifierBag.adjoin (str, qual) (#qualifier state)
-             val new_var =  X.V.new()
+             val new_bag =  QualifierBag.adjoin (str, qual, (#qualifier state))
+             val new_var =  X.V.new
              val new_var_ctxt =  X.VC.PointeredType.fe new_var
              val qual_lit =  Literals.construct(QLConstructors.qualifier qual, Literals.fe (Literals.Single.variable new_var))
              val ctxt_qual_lit =  Contecteds.ContectedLiterals.Single.construct(new_var_ctxt, qual_lit)
@@ -127,7 +127,7 @@ functor Presentation(X:
         = let
              val qual_vars =
                 case (X.VC.PointeredType.select(X.UV.UnitType.point, var_ctxt)) of
-                   Option.NONE => Literals.Multi.empty()
+                   Option.NONE => Literals.Multi.empty
                 |  Option.SOME var => Literals.fe (Literals.Single.variable var)
              val qual =  Qualifier.new()
              val new_qual_bag =  QualifierBag.sum (QualifierBag.PointeredType.fe qual, #qualifier state)
@@ -180,4 +180,15 @@ functor Presentation(X:
                     Option.SOME (Contecteds.ContectedLiterals.Single.construct(var_ctxt_1,  lit_2))
                  end
           end
+
+      fun get_constructors_name (state: state)
+         = let
+              fun mod_resolve m
+                 =  ":" ^ Option.valOf (ModulesBag.get_name m (#modules state))
+
+              fun qual_resolve q
+                 =  "[" ^ Option.valOf (QualifierBag.get_name q (#qualifier state)) ^ "]"
+
+           in QLConstructors.traverse (mod_resolve, qual_resolve)
+           end
    end;

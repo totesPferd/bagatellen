@@ -34,4 +34,6 @@ signature Presentation =
 
       val seqset: Contecteds.ContectedLiterals.Single.T * Contecteds.ContectedLiterals.Single.T -> Contecteds.ContectedLiterals.Single.T Option.option
 
+      val get_constructors_name: state -> QLConstructors.T -> string
+
    end;

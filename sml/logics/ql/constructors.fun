@@ -21,4 +21,7 @@ functor QLConstructors (X:
       fun module m =  Module m
       fun qualifier q =  Qualifier q
 
+      fun traverse (fm, fq) (Module m) =  fm m
+        | traverse (fm, fq) (Qualifier q) =  fq q
+
    end;
