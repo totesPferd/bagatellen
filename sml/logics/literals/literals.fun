@@ -74,9 +74,9 @@ functor Literals(X:
           => X.PV.set_val l x
       and multi_equate(xi, ypsilon) =  PointeredType.all_zip (equate) (xi, ypsilon)
 
-      fun vcmap (f, rho) (Construction(c, xi))
-         =  Construction(rho c, multi_vcmap (f, rho) xi)
-      |   vcmap (f, rho) (Variable x)
+      fun vmap f (Construction(c, xi))
+         =  Construction(c, multi_vmap f xi)
+      |   vmap f (Variable x)
          =  let
                val new_var =  f x
             in (  (  if (X.PV.is_settable new_var)
@@ -86,7 +86,7 @@ functor Literals(X:
                         in if Option.isSome kval
                            then
                               let
-                                 val new_value =  vcmap (f, rho) (Option.valOf kval)
+                                 val new_value =  vmap f (Option.valOf kval)
                               in (
                                     X.PV.set_val (new_var, new_value)
                                  ;  () )
@@ -98,10 +98,7 @@ functor Literals(X:
                         () )
                   ;  Variable new_var )
             end
-      and multi_vcmap (f, rho) =  PointeredType.map (vcmap (f, rho))
-
-      fun vmap f =  vcmap (f, (fn x => x))
-      fun multi_vmap f =  multi_vcmap(f, (fn x => x))
+      and multi_vmap f =  PointeredType.map (vmap f)
 
       fun get_occurences (Construction(c, xi))
          =  multi_get_occurences xi
@@ -134,7 +131,6 @@ functor Literals(X:
 
             val equate =  equate
             val vmap =  vmap
-            val vcmap =  vcmap
 
             val get_occurences =  get_occurences
 
@@ -154,7 +150,6 @@ functor Literals(X:
             val subeq =  PointeredType.subeq
 
             val vmap =  multi_vmap
-            val vcmap =  multi_vcmap
 
             val get_occurences =  multi_get_occurences
 

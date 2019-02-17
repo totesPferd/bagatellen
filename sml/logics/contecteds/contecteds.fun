@@ -33,15 +33,14 @@ functor Contecteds(X:
                   fun get_conclusion (cl: T) =  #conclusion cl
                   fun construct(ctxt, c) =  { context = ctxt, conclusion = c }: T
       
-                  fun qualify rho alpha { context = ctxt, conclusion = c }
+                  fun apply_alpha_conversion (alpha: VariableContexts.AlphaConverter) ({ context = ctxt, conclusion = c }: T)
                     = let
                          val der_context =  VariableContexts.get_variable_context alpha
                          val phi =  VariableContexts.apply_alpha_converter alpha
-                         val der_conclusion =  Literals.Single.vcmap (phi, rho) c
+                         val der_conclusion =  Literals.Single.vmap phi c
                       in
                          { context =  der_context, conclusion = der_conclusion }
                       end
-                  fun apply_alpha_conversion (alpha: VariableContexts.AlphaConverter) (x:T) =  qualify (fn x: Constructors.T => x) alpha x
                   fun get_occurences (x:T) =  Literals.Single.get_occurences (#conclusion x)
       
                   fun equate (c_1: T, c_2: T)
@@ -62,15 +61,14 @@ functor Contecteds(X:
                   fun get_antecedent (cl: T) =  #antecedent cl
                   fun construct(ctxt, a) =  { context = ctxt, antecedent = a }: T
       
-                  fun qualify rho alpha { context = ctxt, antecedent = a }
+                  fun apply_alpha_conversion (alpha: VariableContexts.AlphaConverter) ({ context = ctxt, antecedent = a }: T)
                     = let
                          val der_context =  VariableContexts.get_variable_context alpha
                          val phi =  VariableContexts.apply_alpha_converter alpha
-                         val der_antecedent =  Literals.Multi.vcmap (phi, rho) a
+                         val der_antecedent =  Literals.Multi.vmap phi a
                       in
                          { context =  der_context, antecedent = der_antecedent }
                       end
-                  fun apply_alpha_conversion (alpha: VariableContexts.AlphaConverter) (x:T) =  qualify (fn x: Constructors.T => x) alpha x
                   fun get_occurences (x:T) =  Literals.Multi.get_occurences (#antecedent x)
       
                   fun empty ctxt =  { context = ctxt, antecedent = Literals.Multi.empty }
@@ -111,16 +109,15 @@ functor Contecteds(X:
                   fun get_conclusion (cl: T) =  #conclusion cl
                   fun construct(ctxt, a, c) =  { context = ctxt, antecedent = a, conclusion = c }: T
       
-                  fun qualify rho alpha { context = ctxt, antecedent = a, conclusion = c }
+                  fun apply_alpha_conversion (alpha: VariableContexts.AlphaConverter) ({ context = ctxt, antecedent = a, conclusion = c }: T)
                     = let
                          val der_context =  VariableContexts.get_variable_context alpha
                          val phi =  VariableContexts.apply_alpha_converter alpha
-                         val der_antecedent =  Literals.Multi.vcmap (phi, rho) a
-                         val der_conclusion =  Literals.Single.vcmap (phi, rho) c
+                         val der_antecedent =  Literals.Multi.vmap phi a
+                         val der_conclusion =  Literals.Single.vmap phi c
                       in
                          { context =  der_context, antecedent = der_antecedent, conclusion = der_conclusion }
                       end
-                  fun apply_alpha_conversion (alpha: VariableContexts.AlphaConverter) (x:T) =  qualify (fn x: Constructors.T => x) alpha x
 
                   fun get_occurences (x:T)
                      =  Literals.Occurences.unif_occurences (
@@ -147,16 +144,15 @@ functor Contecteds(X:
                   fun get_conclusion (cl: T) =  #conclusion cl
                   fun construct(ctxt, a, c) =  { context = ctxt, antecedent = a, conclusion = c }: T
       
-                  fun qualify rho alpha { context = ctxt, antecedent = a, conclusion = c }
+                  fun apply_alpha_conversion (alpha: VariableContexts.AlphaConverter) ({ context = ctxt, antecedent = a, conclusion = c }: T)
                     = let
                          val der_context =  VariableContexts.get_variable_context alpha
                          val phi =  VariableContexts.apply_alpha_converter alpha
-                         val der_antecedent =  Literals.Multi.vcmap (phi, rho) a
-                         val der_conclusion =  Literals.Multi.vcmap (phi, rho) c
+                         val der_antecedent =  Literals.Multi.vmap phi a
+                         val der_conclusion =  Literals.Multi.vmap phi c
                       in
                          { context =  der_context, antecedent = der_antecedent, conclusion = der_conclusion }
                       end
-                  fun apply_alpha_conversion (alpha: VariableContexts.AlphaConverter) (x:T) =  qualify (fn x: Constructors.T => x) alpha x
 
                   fun get_occurences (x:T)
                      =  Literals.Occurences.unif_occurences (

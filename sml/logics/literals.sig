@@ -20,7 +20,6 @@ signature Literals =
             val is_empty:       T -> bool
             val subeq:          T * T -> bool
             val vmap:           (Variables.T -> Variables.T) -> T -> T
-            val vcmap:          (Variables.T -> Variables.T) * (Constructors.T -> Constructors.T) -> T -> T
             val get_occurences: T -> Occurences.occurences
             val traverse:       (Constructors.T * 'm -> 's) * (Variables.T -> 's) * ('s * 'm -> 'm Option.option) * 'm -> T -> 'm
         end
@@ -32,7 +31,6 @@ signature Literals =
             val equate:         T * T -> bool
             val eq:             T * T -> bool
             val vmap:           (Variables.T -> Variables.T) -> T -> T
-            val vcmap:          (Variables.T -> Variables.T) * (Constructors.T -> Constructors.T) -> T -> T
             val get_occurences: T -> Occurences.occurences
             val traverse:       (Constructors.T * 'm -> 's) * (Variables.T -> 's) * ('s * 'm -> 'm Option.option) * 'm -> T -> 's
          end

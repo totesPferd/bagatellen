@@ -147,19 +147,6 @@ functor Proof(X: Contecteds): Proof =
       val fop =  Multi.fop
       val is_in =  Multi.is_in
 
-      fun qualify rho
-        = let
-             fun single_qualify rho (cl: Single.T)
-               = let
-                    val ctxt =  Single.get_context cl
-                    val alpha_converter =  Contecteds.VariableContexts.alpha_convert ctxt
-                 in
-                    Contecteds.Clauses.Single.qualify rho alpha_converter cl
-                 end
-          in
-             fop (fe o (single_qualify rho))
-          end
-
       val transition =  Multi.transition
 
    end;

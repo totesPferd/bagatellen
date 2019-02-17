@@ -27,7 +27,6 @@ signature Contecteds =
                   val get_antecedent: T -> Literals.Multi.T
                   val get_conclusion: T -> Literals.Single.T
                   val construct: VariableContexts.VariableContext.T * Literals.Multi.T * Literals.Single.T  -> T
-                  val qualify: (Constructors.T -> Constructors.T) -> VariableContexts.AlphaConverter -> T -> T
                   val apply_alpha_conversion: VariableContexts.AlphaConverter -> T -> T
                   val get_occurences: T -> Literals.Occurences.occurences
       
@@ -44,7 +43,6 @@ signature Contecteds =
                   val get_antecedent: T -> Literals.Multi.T
                   val get_conclusion: T -> Literals.Multi.T
                   val construct: VariableContexts.VariableContext.T * Literals.Multi.T * Literals.Multi.T  -> T
-                  val qualify: (Constructors.T -> Constructors.T) -> VariableContexts.AlphaConverter -> T -> T
                   val apply_alpha_conversion: VariableContexts.AlphaConverter -> T -> T
                   val get_occurences: T -> Literals.Occurences.occurences
       
@@ -75,7 +73,6 @@ signature Contecteds =
                   val get_context: T -> VariableContexts.VariableContext.T
                   val get_conclusion: T -> Literals.Single.T
                   val construct: VariableContexts.VariableContext.T * Literals.Single.T  -> T
-                  val qualify: (Constructors.T -> Constructors.T) -> VariableContexts.AlphaConverter -> T -> T
                   val apply_alpha_conversion: VariableContexts.AlphaConverter -> T -> T
                   val get_occurences: T -> Literals.Occurences.occurences
                   val equate: T * T -> bool
@@ -90,7 +87,6 @@ signature Contecteds =
                   val get_context: T -> VariableContexts.VariableContext.T
                   val get_antecedent: T -> Literals.Multi.T
                   val construct: VariableContexts.VariableContext.T * Literals.Multi.T -> T
-                  val qualify: (Constructors.T -> Constructors.T) -> VariableContexts.AlphaConverter -> T -> T
                   val apply_alpha_conversion: VariableContexts.AlphaConverter -> T -> T
                   val get_occurences: T -> Literals.Occurences.occurences
                   val empty: VariableContexts.VariableContext.T -> T
