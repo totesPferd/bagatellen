@@ -42,6 +42,7 @@ signature Literals =
          end
       sharing Multi.Variables = Variables
       sharing Single.Variables = Variables
+      sharing Variables.Base =  Single
 
       val select:     PointerType.T * Multi.T -> Single.T Option.option
 
