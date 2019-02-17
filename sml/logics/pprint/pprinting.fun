@@ -1,21 +1,14 @@
-use "logics/pprint/pprintable.sig";
+use "logics/pprint/polymorphic_pprinting.fun";
 use "logics/pprint/pprinting.sig";
 
 functor PPrintPPrinting(X: PPrintPPrintable): PPrintPPrinting =
    struct
       structure PPrintPPrintable =  X
-      fun pprint ctxt (stream, t, rhs_indent) (indent, state)
-         = let
-              val check_single_line =  PPrintPPrintable.single_line ctxt t
-              val real_width =  PPrintPPrintable.PPrintIndentBase.get_rel_width(indent) - rhs_indent
-           in if String.size(check_single_line) + 1 > real_width
-              then
-                 PPrintPPrintable.multi_line ctxt (stream, t, rhs_indent) (indent, state)
-              else
-                 let
-                    val state' =  PPrintPPrintable.PPrintIndentBase.print (stream, check_single_line) state
-                    val state'' =  PPrintPPrintable.PPrintIndentBase.force_ws state'
-                 in state''
-                 end
-           end
+      structure PPrintPolymorphicPPrinting =
+         PPrintPolymorphicPPrinting(
+            struct
+               structure ContextType =  X.ContextType
+               structure PPrintIndentBase =  X.PPrintIndentBase
+            end )
+      val pprint =  PPrintPolymorphicPPrinting.pprint PPrintPPrintable.single_line PPrintPPrintable.multi_line
    end;
