@@ -29,6 +29,7 @@ functor PPrintPPrintableLiterals(X:
       structure Literals =  X.Lit
       structure NamingPointeredType =  X.NPT
       structure PPrintIndentBase =  X.PP.PPrintIndentBase
+      structure Variables =  Literals.Variables
       structure VariableContexts =  X.VarCtxt
 
       datatype Construction =  Construction of X.Lit.Constructors.T * (Construction list) | Variable of string * X.Lit.Variables.T

@@ -12,6 +12,7 @@ signature PPrintPPrintableLiterals =
       structure NamingPointeredType: NamingPointeredType
       structure PPrintIndentBase: PPrintIndentBase
       structure VariableContexts: VariableContexts
+      structure Variables: Variables
       structure Single: PPrintPPrintable
       structure Multi: PPrintPPrintable
       sharing Single.ContextType = ContextType
@@ -21,5 +22,8 @@ signature PPrintPPrintableLiterals =
       sharing NamingPointeredType.PointeredType.BaseType = VariableContexts.Variables
       sharing NamingPointeredType.PointeredType = VariableContexts.PointeredType
       sharing Literals.Single =  Single
+      sharing Literals.Variables =  Variables
+      sharing VariableContexts.VariableContext =  ContextType
+      sharing VariableContexts.Variables =  Variables
 
    end;
