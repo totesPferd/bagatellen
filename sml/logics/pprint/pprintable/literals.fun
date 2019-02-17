@@ -66,7 +66,7 @@ functor PPrintPPrintableLiterals(X:
          =  let
                val state' =  PPrintIndentBase.print (stream, X.get_constructors_name c) state
                val state'' =  PPrintIndentBase.print_par (stream, "(") state'
-               val state''' =  multi_l_multi_line ctxt (stream, xi, rhs_indent) (indent, state'')
+               val state''' =  multi_l_multi_line ctxt (stream, xi, rhs_indent - 1) (indent, state'')
                val state'''' =  PPrintIndentBase.print_par (stream, ")") state'''
             in
                state''''
