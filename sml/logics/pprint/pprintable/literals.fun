@@ -4,6 +4,7 @@ use "logics/pprint/indent_base.sig";
 use "logics/pprint/polymorphic_pprinting.sig";
 use "logics/pprint/polymorphic_setalikes.sig";
 use "logics/pprint/pprintable.sig";
+use "logics/pprint/pprintable/literals.sig";
 use "logics/variable_contexts.sig";
 
 functor PPrintPPrintableLiterals(X:
@@ -21,7 +22,7 @@ functor PPrintPPrintableLiterals(X:
       sharing PP.PPrintIndentBase = PS.PPrintIndentBase
 
       val get_constructors_name: Lit.Constructors.T -> string
-   end ) =
+   end ): PPrintPPrintableLiterals =
    struct
 
       structure ContextType =  X.VarCtxt.VariableContext
