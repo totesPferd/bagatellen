@@ -1,4 +1,4 @@
-use "collections/naming_pointered_type.sig";
+use "collections/naming_pointered_type_extension.sig";
 use "logics/literals.sig";
 use "logics/pprint/indent_base.sig";
 use "logics/pprint/polymorphic_pprinting.sig";
@@ -10,7 +10,7 @@ use "logics/variable_contexts.sig";
 functor PPrintPPrintableLiterals(X:
    sig
       structure Lit: Literals
-      structure NPT: NamingPointeredType
+      structure NPT: NamingPointeredTypeExtension
       structure VarCtxt: VariableContexts
       structure PP: PPrintPolymorphicPPrinting
       structure PS: PPrintPolymorphicSetalikes
@@ -27,7 +27,7 @@ functor PPrintPPrintableLiterals(X:
 
       structure ContextType =  X.VarCtxt.VariableContext
       structure Literals =  X.Lit
-      structure NamingPointeredType =  X.NPT
+      structure NamingPointeredTypeExtension =  X.NPT
       structure PPrintIndentBase =  X.PP.PPrintIndentBase
       structure Variables =  Literals.Variables
       structure VariableContexts =  X.VarCtxt

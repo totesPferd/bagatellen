@@ -12,12 +12,12 @@ functor PPrintContext(X:
       structure PPrintPPrintableLiterals =  X.PPrintPPrintableLiterals
       structure ContextType =  PPrintPPrintableLiterals.ContextType
       structure Literals =  PPrintPPrintableLiterals.Literals
-      structure NamingPointeredType =  PPrintPPrintableLiterals.NamingPointeredType
+      structure NamingPointeredTypeExtension =  PPrintPPrintableLiterals.NamingPointeredTypeExtension
       structure PPrintIndentBase =  PPrintPPrintableLiterals.PPrintIndentBase
       structure Variables =  Literals.Variables
 
       fun multi_line (ctxt: ContextType.T) stream (indent, state)
-         =  NamingPointeredType.transition
+         =  NamingPointeredTypeExtension.transition
                (  fn (pn, v, state_1)
                      =>  case (pn) of
                             Option.NONE => Option.SOME state_1

@@ -1,13 +1,13 @@
 use "collections/combi_type.sig";
-use "collections/naming_pointered_type.sig";
+use "collections/naming_pointered_type_extension.sig";
 use "collections/pointered_type.sig";
 use "collections/sum_type.sig";
-use "collections/unit_pointered_type.sig";
+use "collections/unit_pointered_type_extension.sig";
 
 functor CombiPointeredType(X:
    sig
-      structure NPT: NamingPointeredType
-      structure UPT: UnitPointeredType
+      structure NPT: NamingPointeredTypeExtension
+      structure UPT: UnitPointeredTypeExtension
       structure PointerType: CombiType
       structure BaseType: SumType
       sharing BaseType.T_A =  NPT.PointeredType.BaseType

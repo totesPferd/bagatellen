@@ -1,12 +1,12 @@
-use "collections/naming_pointered_type.sig";
+use "collections/naming_pointered_type_extension.sig";
 use "collections/occurences.sig";
 
 signature ONPT =
    sig
-      structure NamingPointeredType: NamingPointeredType
+      structure NamingPointeredTypeExtension: NamingPointeredTypeExtension
       structure Occurences: Occurences
-      sharing NamingPointeredType.PointeredType.BaseType = Occurences.DictSet.Eqs
+      sharing NamingPointeredTypeExtension.PointeredType.BaseType = Occurences.DictSet.Eqs
 
-      val add: Occurences.occurences -> NamingPointeredType.PointeredType.ContainerType.T -> NamingPointeredType.PointeredType.ContainerType.T
+      val add: Occurences.occurences -> NamingPointeredTypeExtension.PointeredType.ContainerType.T -> NamingPointeredTypeExtension.PointeredType.ContainerType.T
 
    end;

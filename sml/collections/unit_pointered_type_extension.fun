@@ -1,9 +1,9 @@
 use "collections/eqs.sig";
 use "collections/pointered_type.fun";
-use "collections/unit_pointered_type.sig";
+use "collections/unit_pointered_type_extension.sig";
 use "collections/unit_polymorphic_pointered_type.sml";
 
-functor UnitPointeredType(B: Eqs): UnitPointeredType =
+functor UnitPointeredTypeExtension(B: Eqs): UnitPointeredTypeExtension =
    struct
       structure UnitPolymorphicPointeredType =  UnitPolymorphicPointeredType
       structure UnitType =  UnitPolymorphicPointeredType.PointerType

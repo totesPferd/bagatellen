@@ -2,7 +2,7 @@ use "collections/eqs.sig";
 use "collections/pointered_type.sig";
 use "collections/string_type.sig";
 
-signature NamingPointeredType =
+signature NamingPointeredTypeExtension =
    sig
      structure StringType: StringType
      structure PointeredType: PointeredType

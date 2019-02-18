@@ -3,7 +3,7 @@ use "collections/pointered_type.sig";
 use "collections/type.sig";
 use "collections/unit_type.sig";
 
-signature UnitPointeredType =
+signature UnitPointeredTypeExtension =
    sig
      structure UnitType: UnitType
      structure PointeredType: PointeredType

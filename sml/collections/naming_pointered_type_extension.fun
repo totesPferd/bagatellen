@@ -1,9 +1,9 @@
 use "collections/eqs.sig";
-use "collections/naming_pointered_type.sig";
+use "collections/naming_pointered_type_extension.sig";
 use "collections/naming_polymorphic_pointered_type.sml";
 use "collections/pointered_type.fun";
 
-functor NamingPointeredType(B: Eqs): NamingPointeredType =
+functor NamingPointeredTypeExtension(B: Eqs): NamingPointeredTypeExtension =
    struct
       structure NamingPolymorphicPointeredType =  NamingPolymorphicPointeredType
       structure StringType =  NamingPolymorphicPointeredType.PointerType

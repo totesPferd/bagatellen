@@ -1,5 +1,5 @@
-use "collections/naming_pointered_type.sig";
-use "collections/unit_pointered_type.sig";
+use "collections/naming_pointered_type_extension.sig";
+use "collections/unit_pointered_type_extension.sig";
 use "logics/contecteds.sig";
 use "logics/literals.sig";
 use "logics/proof.sig";
@@ -15,13 +15,13 @@ functor Presentation(X:
       structure CX: Contecteds
       structure L: Literals
       structure M: Modules
-      structure NM: NamingPointeredType
-      structure NQ: NamingPointeredType
+      structure NM: NamingPointeredTypeExtension
+      structure NQ: NamingPointeredTypeExtension
       structure P: Proof
       structure C: QLConstructors
       structure Q: Qualifier
-      structure UL: UnitPointeredType
-      structure UV: UnitPointeredType
+      structure UL: UnitPointeredTypeExtension
+      structure UV: UnitPointeredTypeExtension
       structure V: Variables
       structure VC: VariableContexts
 
