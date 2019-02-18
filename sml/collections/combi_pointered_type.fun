@@ -27,14 +27,6 @@ functor CombiPointeredType(X:
                ,  (fn () => Option.map BaseType.inj_b (X.UPT.PointeredType.select(X.UPT.UnitType.point, m_u))) )
                pointer
 
-      fun fold phi b (m_n, m_u)
-         =  let
-               val b_1 =  X.NPT.PointeredType.fold (fn (x, b') => phi(BaseType.inj_a x, b')) b m_n
-               val b_2 =  X.UPT.PointeredType.fold (fn (x, b') => phi(BaseType.inj_b x, b')) b_1 m_u
-            in
-               b_2
-            end
-
       exception NonFunctorial
       fun non_functorial_a x
          =  BaseType.traverse ((fn x => x), (fn y => raise NonFunctorial)) x

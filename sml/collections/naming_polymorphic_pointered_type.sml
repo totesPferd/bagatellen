@@ -25,9 +25,6 @@ structure NamingPolymorphicPointeredType =
              |  Option.SOME (_, b) =>  Option.SOME b
           end
 
-      fun fold f b (c: 'a ContainerType.T)
-        = List.foldl (fn ((_, a), x) =>  f(a, x)) b c
-
       fun map (phi: 'a -> 'a) (c: 'a ContainerType.T)
         = (List.map (fn (n, x) => (ref (!n), phi x)) c): 'a ContainerType.T
 

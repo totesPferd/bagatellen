@@ -11,7 +11,6 @@ signature PolymorphicPointeredType =
 
       val select:  PointerType.T * 'a ContainerType.T -> 'a Option.option
 
-      val fold:       ('a * 'b -> 'b) -> 'b -> 'a ContainerType.T -> 'b
       val map:        ('a -> 'a) -> 'a ContainerType.T -> 'a ContainerType.T
       val empty:      unit -> 'a ContainerType.T
       val is_empty:   'a ContainerType.T -> bool

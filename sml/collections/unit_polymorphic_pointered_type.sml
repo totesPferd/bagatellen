@@ -15,9 +15,6 @@ structure UnitPolymorphicPointeredType =
 
       fun select(sel, c) =  c
 
-      fun fold f b Option.NONE =  b
-        | fold f b (Option.SOME x) =  f(x, b)
-
       fun map f =  Option.map f
 
       fun empty () =  Option.NONE
