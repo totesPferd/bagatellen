@@ -14,24 +14,23 @@ functor PointeredType(X:
          struct
             type T =  X.B.T X.PPT.ContainerType.T
          end
-      val select =      X.PPT.select
+      val select =                  X.PPT.select
 
-      val fold =        X.PPT.fold
-      val map =         X.PPT.map
-      val empty =       X.PPT.empty ()
-      val is_empty =    X.PPT.is_empty
-      val all =         X.PPT.all
-      val all_zip =     X.PPT.all_zip
+      val fold =                    X.PPT.fold
+      val map =                     X.PPT.map
+      val empty: ContainerType.T =  X.PPT.empty ()
+      val is_empty =                X.PPT.is_empty
+      val all =                     X.PPT.all
+      val all_zip =                 X.PPT.all_zip
 
-      val mapfold =     X.PPT.mapfold
+      val mapfold =                 X.PPT.mapfold
 
-      val fe =          X.PPT.fe
-      val fop =         X.PPT.p_fop X.B.eq
-      val is_in =       X.PPT.p_is_in X.B.eq
-      val subeq =       X.PPT.p_subeq X.B.eq
+      val fe =                      X.PPT.fe
+      val fop =                     X.PPT.p_fop X.B.eq
+      val is_in =                   X.PPT.p_is_in X.B.eq
+      val subeq =                   X.PPT.p_subeq X.B.eq
 
-      val filter =      X.PPT.filter
-      val translate =   X.PPT.translate
-      val transition =  X.PPT.transition
+      val filter =                  X.PPT.filter
+      val transition =              X.PPT.transition
 
    end;

@@ -96,14 +96,6 @@ functor CombiPointeredType(X:
             in (m_n_1, m_u_1)
             end
 
-      fun translate (phi, b) (m_n, m_u)
-         =  let
-               val b_1 =  X.NPT.PointeredType.translate ((fn (s, x, b') => phi(s, BaseType.inj_a x, b')), b) m_n
-               val b_2 =  X.UPT.PointeredType.translate ((fn (s, x, b') => phi(s, BaseType.inj_b x, b')), b_1) m_u
-            in
-               b_2
-            end
-
       fun transition phi (m_n, m_u) b
          =  let
                val b_1 =  X.NPT.PointeredType.transition (fn (x, b') => phi(BaseType.inj_a x, b')) m_n b

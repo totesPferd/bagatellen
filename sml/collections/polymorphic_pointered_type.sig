@@ -26,7 +26,6 @@ signature PolymorphicPointeredType =
       val p_subeq:    ('a * 'a -> bool) -> 'a ContainerType.T * 'a ContainerType.T -> bool
 
       val filter:     ('a -> bool) -> 'a ContainerType.T -> 'a ContainerType.T
-      val translate:  (string Option.option * 'a * 'b -> 'b) * 'b -> 'a ContainerType.T -> 'b
       val transition: ('a * 'b -> 'b Option.option) -> 'a ContainerType.T -> 'b -> 'b
 
    end;

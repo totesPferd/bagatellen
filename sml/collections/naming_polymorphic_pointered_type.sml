@@ -67,8 +67,7 @@ structure NamingPolymorphicPointeredType =
                          y ))
              c
              nil
-      fun translate (phi, b_0) (c: 'a ContainerType.T)
-         =  Acc.transition (fn ((n, x: 'a), y) => Option.SOME(phi (!n, x, y))) c b_0
+
       fun transition f (c: 'a ContainerType.T) =  Acc.transition (fn ((n, x: 'a), y) => f(x, y)) c
 
       fun p_insert (eq) (t, nil) =  [ t ]
