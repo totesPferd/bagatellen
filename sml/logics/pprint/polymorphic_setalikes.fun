@@ -1,4 +1,4 @@
-use "collections/type.sig";
+use "general/type.sig";
 use "logics/pprint/delim_config.sig";
 use "logics/pprint/pprintable.sig";
 use "logics/pprint/polymorphic_setalikes.sig";

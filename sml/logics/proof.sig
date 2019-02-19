@@ -1,4 +1,4 @@
-use "collections/type.sig";
+use "general/type.sig";
 use "logics/constructors.sig";
 use "logics/contecteds.sig";
 

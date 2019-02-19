@@ -1,4 +1,4 @@
-use "collections/eqs.sig";
+use "general/eqs.sig";
 use "collections/pointered_type.sig";
 use "collections/polymorphic_pointered_type.sig";
 

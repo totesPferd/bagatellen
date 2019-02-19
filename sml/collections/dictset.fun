@@ -1,6 +1,6 @@
 use "collections/acc.sml";
 use "collections/dictset.sig";
-use "collections/eqs.sig";
+use "general/eqs.sig";
 
 functor DictSet(E: Eqs): DictSet =
    struct

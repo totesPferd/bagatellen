@@ -1,6 +1,6 @@
-use "collections/eqs.sig";
+use "general/eqs.sig";
 use "collections/pointered_type.sig";
-use "collections/type.sig";
+use "general/type.sig";
 use "collections/unit_type.sig";
 
 signature UnitPointeredTypeExtension =

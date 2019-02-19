@@ -1,4 +1,4 @@
-use "collections/type.sig";
+use "general/type.sig";
 use "logics/pprint/indent_base.sig";
 
 signature PPrintPolymorphicPPrinting =

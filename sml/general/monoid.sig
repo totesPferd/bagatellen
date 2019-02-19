@@ -1,4 +1,4 @@
-use "collections/type.sig";
+use "general/type.sig";
 
 signature Monoid =
    sig

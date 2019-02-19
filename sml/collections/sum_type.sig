@@ -1,4 +1,4 @@
-use "collections/eqs.sig";
+use "general/eqs.sig";
 
 signature SumType =
    sig

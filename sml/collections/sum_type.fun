@@ -1,4 +1,4 @@
-use "collections/eqs.sig";
+use "general/eqs.sig";
 use "collections/sum_type.sig";
 
 functor SumType(X:

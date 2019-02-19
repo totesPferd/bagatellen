@@ -1,5 +1,5 @@
 use "collections/naming_pointered_type_extension.sig";
-use "collections/type.sig";
+use "general/type.sig";
 use "logics/literals.sig";
 use "logics/pprint/indent_base.sig";
 use "logics/pprint/pprintable.sig";

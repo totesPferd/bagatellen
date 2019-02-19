@@ -1,5 +1,5 @@
-use "collections/eqs.sig";
-use "collections/type.sig";
+use "general/eqs.sig";
+use "general/type.sig";
 
 signature PointeredType =
    sig
