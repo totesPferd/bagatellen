@@ -12,6 +12,6 @@ functor BaseMap(X:
 
       type T =  Start.T -> End.T
 
-      fun apply (f, x) =  f x
+      fun apply f x =  f x
 
    end;

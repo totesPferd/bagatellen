@@ -18,6 +18,6 @@ functor PairMap(X:
 
       type T =  X.FstMap.T * X.SndMap.T
 
-      fun apply((f_1, f_2), p) =  End.tuple(X.FstMap.apply(f_1, Start.fst p), X.SndMap.apply(f_2, Start.snd p))
+      fun apply (f_1, f_2) p =  End.tuple(X.FstMap.apply f_1 (Start.fst p), X.SndMap.apply f_2 (Start.snd p))
 
    end;

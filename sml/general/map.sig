@@ -7,6 +7,6 @@ signature Map =
 
       type T
 
-      val apply: T * Start.T -> End.T
+      val apply: T -> Start.T -> End.T
 
    end;
