@@ -15,6 +15,9 @@ signature PairMapExtension =
       sharing End.FstType =  FstMap.End
       sharing End.SndType =  SndMap.End
 
+      val fst: PairMap.T -> FstMap.T
+      val snd: PairMap.T -> SndMap.T
+
       val get_map: FstMap.T * SndMap.T -> PairMap.T
 
    end;

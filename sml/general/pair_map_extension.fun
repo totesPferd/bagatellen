@@ -29,6 +29,9 @@ functor PairMapExtension(X:
             fun apply (f_1, f_2) p =  End.tuple(FstMap.apply f_1 (Start.fst p), SndMap.apply f_2 (Start.snd p))
          end
 
+      fun fst (f_1, f_2) =  f_1
+      fun snd (f_1, f_2) =  f_2
+
       fun get_map (fst_m, snd_m) =  (fst_m, snd_m)
 
    end;
