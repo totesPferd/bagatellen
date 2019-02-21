@@ -1,16 +1,16 @@
 use "general/compose_map.sig";
-use "general/pair_map_extension.sig";
+use "general/sum_map_extension.sig";
 
-functor PairComposeMap(X:
+functor SumComposeMap(X:
    sig
-      structure A: PairMapExtension
-      structure B: PairMapExtension
+      structure A: SumMapExtension
+      structure B: SumMapExtension
       structure FstCM: ComposeMap
       structure SndCM: ComposeMap
-      structure RPME: PairMapExtension
-      sharing A.PairMap.Start = RPME.PairMap.Start
-      sharing A.PairMap.End = B.PairMap.Start
-      sharing B.PairMap.End = RPME.PairMap.End
+      structure RPME: SumMapExtension
+      sharing A.SumMap.Start = RPME.SumMap.Start
+      sharing A.SumMap.End = B.SumMap.Start
+      sharing B.SumMap.End = RPME.SumMap.End
       sharing FstCM.A = A.FstMap
       sharing FstCM.B = B.FstMap
       sharing FstCM.Result = RPME.FstMap
@@ -20,9 +20,9 @@ functor PairComposeMap(X:
       
    end ): ComposeMap =
    struct
-      structure A =  X.A.PairMap
-      structure B =  X.B.PairMap
-      structure Result =  X.RPME.PairMap
+      structure A =  X.A.SumMap
+      structure B =  X.B.SumMap
+      structure Result =  X.RPME.SumMap
 
       fun compose (f_1, f_2)
          =  let

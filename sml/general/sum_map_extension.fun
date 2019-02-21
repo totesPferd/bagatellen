@@ -1,32 +1,35 @@
 use "general/map.sig";
-use "general/pair_type.sig";
-use "general/pair_map_extension.sig";
+use "general/sum_type.sig";
+use "general/sum_map_extension.sig";
 
-functor PairMapExtension(X:
+functor SumMapExtension(X:
    sig
-      structure Start: PairType
-      structure End: PairType
+      structure Start: SumType
+      structure End: SumType
       structure FstMap: Map
       structure SndMap: Map
       sharing Start.FstType = FstMap.Start
       sharing Start.SndType = SndMap.Start
       sharing End.FstType =  FstMap.End
       sharing End.SndType =  SndMap.End
-   end ): PairMapExtension =
+   end ): SumMapExtension =
    struct
       structure Start =  X.Start
       structure End =  X.End
       structure FstMap =  X.FstMap
       structure SndMap =  X.SndMap
 
-      structure PairMap =
+      structure SumMap =
          struct
             structure Start =  Start
             structure End =  End
       
             type T =  FstMap.T * SndMap.T
       
-            fun apply (f_1, f_2) p =  End.tuple(FstMap.apply f_1 (Start.fst p), SndMap.apply f_2 (Start.snd p))
+            fun apply (f_1, f_2)
+               =  Start.traverse (
+                     ( fn x => End.fst_inj (FstMap.apply f_1 x))
+                  ,  ( fn y => End.snd_inj (SndMap.apply f_2 y)) )
          end
 
       fun fst (f_1, f_2) =  f_1
