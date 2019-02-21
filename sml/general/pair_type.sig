@@ -1,6 +1,6 @@
 use "general/type.sig";
 
-signature Pair =
+signature PairType =
    sig
       structure FstType: Type
       structure SndType: Type

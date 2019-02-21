@@ -6,8 +6,8 @@ signature PairMapExtension =
       structure FstMap: Map
       structure SndMap: Map
       structure PairMap: Map
-      structure Start: Pair
-      structure End: Pair
+      structure Start: PairType
+      structure End: PairType
       sharing Start =  PairMap.Start
       sharing End =  PairMap.End
       sharing Start.FstType = FstMap.Start

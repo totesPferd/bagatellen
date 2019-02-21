@@ -4,8 +4,8 @@ use "general/pair_map_extension.sig";
 
 functor PairMapExtension(X:
    sig
-      structure Start: Pair
-      structure End: Pair
+      structure Start: PairType
+      structure End: PairType
       structure FstMap: Map
       structure SndMap: Map
       sharing Start.FstType = FstMap.Start

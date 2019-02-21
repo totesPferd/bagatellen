@@ -1,11 +1,11 @@
 use "general/pair_type.sig";
 use "general/type.sig";
 
-functor Pair(X:
+functor PairType(X:
    sig
       structure FstType: Type
       structure SndType: Type
-   end ): Pair =
+   end ): PairType =
    struct
       structure FstType =  X.FstType
       structure SndType =  X.SndType
