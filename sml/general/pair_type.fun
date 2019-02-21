@@ -1,4 +1,4 @@
-use "general/pair.sig";
+use "general/pair_type.sig";
 use "general/type.sig";
 
 functor Pair(X:

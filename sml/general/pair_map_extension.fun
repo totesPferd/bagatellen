@@ -1,5 +1,5 @@
 use "general/map.sig";
-use "general/pair.sig";
+use "general/pair_type.sig";
 use "general/pair_map_extension.sig";
 
 functor PairMapExtension(X:
