@@ -1,5 +1,5 @@
 use "general/eqs.sig";
-use "collections/sum_type.sig";
+use "general/sum_type.sig";
 
 functor SumType(X:
    sig
