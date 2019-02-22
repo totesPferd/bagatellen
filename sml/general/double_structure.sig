@@ -1,7 +1,9 @@
-use "general/structure.sig";
-
 signature DoubleStructure =
    sig
-      structure FstStruct: Structure
-      structure SndStruct: Structure
+      structure FstStruct:
+         sig
+         end
+      structure SndStruct:
+         sig
+         end
    end;

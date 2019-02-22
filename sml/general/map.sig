@@ -1,9 +1,11 @@
-use "general/structure.sig";
-
 signature Map =
    sig
-      structure Start: Structure
-      structure End: Structure
+      structure Start:
+         sig
+         end
+      structure End:
+         sig
+         end
 
       type T
 
