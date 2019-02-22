@@ -21,6 +21,9 @@ functor SumPointeredType(X:
       structure PointerType =  X.PointerSum
 
       val empty =  (X.FstPT.empty, X.SndPT.empty)
+      fun is_empty (c_1, c_2)
+         =  (X.FstPT.is_empty c_1) andalso (X.SndPT.is_empty c_2)
+
       fun select (p, (c_1, c_2))
          =  X.PointerSum.traverse (
                (fn fst_p =>  Option.map X.BaseSum.fst_inj (X.FstPT.select (fst_p, c_1)))
