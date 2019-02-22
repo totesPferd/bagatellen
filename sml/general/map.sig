@@ -1,12 +1,10 @@
-use "general/type.sig";
+use "general/structure.sig";
 
 signature Map =
    sig
-      structure Start: Type
-      structure End: Type
+      structure Start: Structure
+      structure End: Structure
 
       type T
-
-      val apply: T -> Start.T -> End.T
 
    end;
