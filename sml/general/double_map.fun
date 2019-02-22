@@ -1,11 +1,19 @@
+use "general/double_map.sig";
 use "general/map.sig";
+use "general/pair_type.sig";
 
 functor DoubleMap(X:
    sig
       structure FstMap: Map
       structure SndMap: Map
-   end ): Map =
+      structure Pair: PairType
+      sharing Pair.FstType = FstMap.Map
+      sharing Pair.SndType = SndMap.Map
+   end ): DoubleMap =
    struct
+      structure FstMap =  X.FstMap
+      structure SndMap =  X.SndMap
+      structure Pair =  X.Pair
       structure Start =
          struct
             structure FstStruct =  X.FstMap.Start
@@ -17,6 +25,6 @@ functor DoubleMap(X:
             structure SndStruct =  X.SndMap.End
          end
 
-      type T =  X.FstMap.T * X.SndMap.T
+      structure Map =  Pair
 
    end;

@@ -1,3 +1,5 @@
+use "general/type.sig";
+
 signature Map =
    sig
       structure Start:
@@ -7,6 +9,6 @@ signature Map =
          sig
          end
 
-      type T
+      structure Map: Type
 
    end;

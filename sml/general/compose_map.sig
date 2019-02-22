@@ -9,7 +9,7 @@ signature ComposeMap =
       sharing A.End = B.Start
       sharing B.End = Result.End
 
-      val compose: A.T * B.T -> Result.T
+      val compose: A.Map.T * B.Map.T -> Result.Map.T
 
    end;
 
