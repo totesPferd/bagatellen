@@ -6,7 +6,6 @@ signature PointeredType =
       structure BaseType: Type
       structure ContainerType: Type
       structure PointerType: Type
-      structure SelectMap: Map
       structure SingletonMap: Map
       sharing SingletonMap.Start = BaseType
       sharing SingletonMap.End = ContainerType
