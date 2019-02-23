@@ -1,3 +1,4 @@
+use "general/type.sig";
 use "general/type_map.sig";
 use "general/compose_map.sig";
 use "pointered_types/pointered_base_map.sig";
@@ -9,15 +10,18 @@ functor PointeredBaseComposeMap(X:
       structure A: TypeMap
       structure B: PointeredTypeMap
       structure Result: PointeredBaseMap
+      structure PointerType: Type
       sharing Result.Start = A.Start
       sharing A.End = B.Start
       sharing Result.End = B.End
-      sharing Result.PointerType = B.PointerType
+      sharing B.PointerType = PointerType
+      sharing Result.PointerType = PointerType
    end ): PointeredComposeMap =
    struct
       structure A =  X.A
       structure B =  X.B
       structure Result =  X.Result
+      structure PointerType =  X.PointerType
 
       fun compose (f_1, f_2)
          =  let
