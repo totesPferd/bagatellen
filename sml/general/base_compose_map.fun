@@ -1,10 +1,11 @@
 use "general/base_map.sig";
+use "general/type_map.sig";
 use "general/compose_map.sig";
 
 functor BaseComposeMap(X:
    sig
-      structure A: BaseMap
-      structure B: BaseMap
+      structure A: TypeMap
+      structure B: TypeMap
       structure Result: BaseMap
       sharing Result.Start = A.Start
       sharing A.End = B.Start
@@ -20,6 +21,6 @@ functor BaseComposeMap(X:
                val rf_1 =  A.apply f_1
                val rf_2 =  B.apply f_2
                val rr =  rf_2 o rf_1
-            in X.Result.get_map rr
+            in Result.get_map rr
             end
    end;
