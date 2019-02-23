@@ -37,6 +37,7 @@ functor DictSet(E: Eqs): DictSet =
                       a
             end
             fun adjoin(d_1, d_2) =  d_1 @ d_2
+            fun singleton(k, v) =  [ { key = k, value = v } ]
          end
 
       structure Sets =

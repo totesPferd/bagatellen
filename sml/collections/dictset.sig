@@ -14,6 +14,7 @@ signature DictSet =
             val all:              ('a -> bool) -> 'a dict -> bool
             val zip:              ('a dict) * ('b dict) -> ('a * 'b) dict
             val adjoin:           'a dict * 'a dict -> 'a dict
+            val singleton:        Eqs.T * 'a -> 'a dict
          end
 
       structure Sets:
