@@ -22,8 +22,6 @@ functor PointeredType(X:
       val all =                     X.PPT.all
       val all_zip =                 X.PPT.all_zip
 
-      val mapfold =                 X.PPT.mapfold
-
       val fe =                      X.PPT.fe
       val fop =                     X.PPT.p_fop X.B.eq
       val is_in =                   X.PPT.p_is_in X.B.eq

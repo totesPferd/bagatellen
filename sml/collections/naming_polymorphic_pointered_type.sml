@@ -39,20 +39,6 @@ structure NamingPolymorphicPointeredType =
              (fn ((n_1, x_1), (n_2, x_2)) => P(x_1, x_2))
              (ListPair.zip (c_1, c_2))
 
-      local
-         fun mapfold_item f g ((name_r: string Option.option ref, x: 'a), (v: 'a ContainerType.T, w))
-           = let
-                val x_item =  f x
-                val nx_item =  (ref (!name_r), x_item)
-                val next_v =  nx_item :: v
-                val next_w =  g(x, x_item, w)
-             in
-                (next_v, next_w)
-             end
-      in fun mapfold f g w0 c
-           = List.foldl (mapfold_item f g) (nil, w0) (c: 'a ContainerType.T)
-      end
-             
       fun filter P (c: 'a ContainerType.T)
          =  Acc.transition
             (   fn ((n, x: 'a), y)

@@ -1,5 +1,6 @@
 use "collections/dictset.fun";
 use "collections/pointered_type.sig";
+use "collections/dict_map.fun";
 use "logics/literals.sig";
 use "logics/variables.sig";
 use "logics/variable_contexts.sig";
@@ -27,20 +28,28 @@ functor VariableContexts(X:
             val filter_unbound_vars =  X.PT.filter (not o Variables.is_bound)
          end;
 
+      structure DictMap =  DictMap(
+         struct
+            structure DS = DictSet
+            structure End = Variables
+         end )
+
       type AlphaConverter = { ctxt: VariableContext.T, alpha: Variables.T Dicts.dict }
 
       val get_variable_context: AlphaConverter -> VariableContext.T =  #ctxt
 
       fun alpha_convert (vc: VariableContext.T)
         = let
-             val (vc', d)
-               = X.PT.mapfold
-                   (Variables.copy)
-                   (fn (old, new, a: Variables.T Dicts.dict) =>  Dicts.set(old, new, a))
-                   Dicts.empty
-                   vc
+             val var_dict
+                =  X.PT.transition
+                      (fn (v, d) => Option.SOME (Dicts.set(v, (Variables.copy v), d)))
+                      vc
+                      Dicts.empty
+             val dict_map =  DictMap.apply (DictMap.get_map var_dict)
+             val ctxt_map =  X.PT.map dict_map
+             val vc' =  ctxt_map vc
           in
-             { ctxt = vc', alpha = d }: AlphaConverter
+             { ctxt = vc', alpha = var_dict }: AlphaConverter
           end
 
       exception OutOfContext

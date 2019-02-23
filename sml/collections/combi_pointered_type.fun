@@ -54,13 +54,6 @@ functor CombiPointeredType(X:
             andalso
              (X.UPT.PointeredType.all_zip (fn (x, y) => phi(BaseType.snd_inj x, BaseType.snd_inj y)) (m_u_1, m_u_2))
 
-      fun mapfold m_phi f_phi b (m_n, m_u)
-         =  let
-               val (m_n', b_1) =  X.NPT.PointeredType.mapfold (fn x => non_functorial_a(m_phi(BaseType.fst_inj x))) (fn (x, y, b') => f_phi(BaseType.fst_inj x, BaseType.fst_inj y, b')) b m_n
-               val (m_u', b_2) =  X.UPT.PointeredType.mapfold (fn x => non_functorial_b(m_phi(BaseType.snd_inj x))) (fn (x, y, b') => f_phi(BaseType.snd_inj x, BaseType.snd_inj y, b')) b_1 m_u
-            in ((m_n', m_u'), b_2)
-            end
-
       fun fe b
          =  BaseType.traverse ((fn x => (X.NPT.PointeredType.fe x, X.UPT.PointeredType.empty)), (fn x => (X.NPT.PointeredType.empty, X.UPT.PointeredType.fe x))) b
 

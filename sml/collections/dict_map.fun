@@ -21,4 +21,6 @@ functor DictMap(X:
       fun apply f x
          =  Option.valOf (DictSet.Dicts.deref(x, f))
 
+      fun get_map d =  d
+
    end;

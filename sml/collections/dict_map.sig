@@ -1,4 +1,5 @@
 use "collections/dictset.sig";
+use "general/type.sig";
 use "general/type_map.sig";
 
 signature DictMap =
@@ -7,5 +8,7 @@ signature DictMap =
 
       structure DictSet: DictSet
       sharing DictSet.Eqs = Start
+
+      val get_map: End.T DictSet.Dicts.dict -> Map.T
 
    end;

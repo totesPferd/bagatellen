@@ -17,8 +17,6 @@ signature PolymorphicPointeredType =
       val all:        ('a -> bool) -> 'a ContainerType.T -> bool
       val all_zip:    ('a * 'a -> bool) -> ('a ContainerType.T * 'a ContainerType.T) -> bool
 
-      val mapfold:    ('b -> 'b) -> ('b * 'b * 'a -> 'a) -> 'a -> 'b ContainerType.T -> ('b ContainerType.T * 'a)
-
       val fe:         'a -> 'a ContainerType.T
       val p_fop:      ('a * 'a -> bool) -> ('a -> 'a ContainerType.T) -> 'a ContainerType.T -> 'a ContainerType.T
       val p_is_in:    ('a * 'a -> bool) -> 'a * 'a ContainerType.T -> bool

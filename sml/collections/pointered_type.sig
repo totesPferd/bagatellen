@@ -15,8 +15,6 @@ signature PointeredType =
       val all:        (BaseType.T -> bool) -> ContainerType.T -> bool
       val all_zip:    (BaseType.T * BaseType.T -> bool) -> (ContainerType.T * ContainerType.T) -> bool
 
-      val mapfold:    (BaseType.T -> BaseType.T) -> (BaseType.T * BaseType.T * 'b -> 'b) -> 'b -> ContainerType.T -> (ContainerType.T * 'b)
-
       val fe:         BaseType.T -> ContainerType.T
       val fop:        (BaseType.T -> ContainerType.T) -> ContainerType.T -> ContainerType.T
       val is_in:      BaseType.T * ContainerType.T -> bool
