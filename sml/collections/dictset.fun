@@ -36,6 +36,7 @@ functor DictSet(E: Eqs): DictSet =
                       (empty: ('a * 'b) dict)
                       a
             end
+            fun adjoin(d_1, d_2) =  d_1 @ d_2
          end
 
       structure Sets =
