@@ -30,18 +30,4 @@ functor SumPointeredType(X:
             ,  (fn snd_p =>  Option.map X.BaseSum.snd_inj (X.SndPT.select (snd_p, c_2))) )
                p
 
-      exception undefined_singleton
-      fun singleton(p, b)
-         =  X.PointerSum.traverse (
-               (fn fst_p
-               => X.BaseSum.traverse (
-                     (fn fst_b =>  (X.FstPT.singleton(fst_p, fst_b), X.SndPT.empty))
-                  ,  (fn snd_b =>  raise undefined_singleton) )
-                     b )
-            ,  (fn snd_p
-               => X.BaseSum.traverse (
-                     (fn fst_b =>  raise undefined_singleton)
-                  ,  (fn snd_b =>  (X.FstPT.empty, X.SndPT.singleton(snd_p, snd_b))) )
-                     b ))
-               p
    end;
