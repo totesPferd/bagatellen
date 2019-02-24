@@ -1,6 +1,3 @@
-use "collections/dictset.fun";
-use "collections/occurences.fun";
-use "collections/pointered_type.fun";
 use "collections/polymorphic_pointered_type.sig";
 use "logics/constructors.sig";
 use "logics/literals.sig";
@@ -24,11 +21,11 @@ functor Literals(X:
                   type T =  Construction
                end
             type T =  Base.T X.PV.Variable
-            val new =  X.PV.new ()
-            val eq =  X.PV.eq
-            val copy =  X.PV.copy
-            val get_val =  X.PV.get_val
-            val is_bound =  Option.isSome o X.PV.get_val
+            val new: T =  X.PV.new ()
+            val eq: T * T -> bool =  X.PV.eq
+            val copy: T -> T =  X.PV.copy
+            val get_val: T -> Base.T Option.option =  X.PV.get_val
+            val is_bound: T -> bool =  Option.isSome o X.PV.get_val
          end
 
       fun traverse (f_1, f_2, f_3, z_0) (Construction(c, xi))
@@ -46,29 +43,14 @@ functor Literals(X:
              Option.NONE => p
           |  Option.SOME k => get_val k
 
-      structure BaseType =
-         struct
-            type T =  Construction
-            fun eq(k, l)
-              = case ((get_val k), (get_val l)) of
-                  (Construction(c, xi), Construction(d, ypsilon))
-                  => X.C.eq(c, d) andalso multi_eq(xi, ypsilon)
-                | (Construction(c, xi), Variable y) => false
-                | (Variable x, Construction(d, ypsilon)) => false
-                | (Variable x, Variable y) =>  Variables.eq (x, y)
-            and multi_eq (xi, ypsilon) =  X.PPT.ContainerType.polymorphic_eq (eq) (xi, ypsilon)
-         end
-
-      structure PointeredType =  PointeredType(
-         struct
-            structure B =  BaseType
-            structure PPT =  X.PPT
-         end )
-
-      structure DictSet =  DictSet(Variables)
-      structure Occurences =  Occurences(DictSet)
-
-      structure PointerType =  PointeredType.PointerType
+      fun eq(k, l)
+        = case ((get_val k), (get_val l)) of
+            (Construction(c, xi), Construction(d, ypsilon))
+            => X.C.eq(c, d) andalso multi_eq(xi, ypsilon)
+          | (Construction(c, xi), Variable y) => false
+          | (Variable x, Construction(d, ypsilon)) => false
+          | (Variable x, Variable y) =>  Variables.eq (x, y)
+      and multi_eq (xi, ypsilon) =  X.PPT.ContainerType.polymorphic_eq (eq) (xi, ypsilon)
 
       fun equate(k, l)
         = case (get_val k, get_val l) of
@@ -81,7 +63,7 @@ functor Literals(X:
           |  (Construction(c, xi), Variable y) =>  false
           |  (Variable x, l)
           => X.PV.set_val l x
-      and multi_equate(xi, ypsilon) =  PointeredType.all_zip (equate) (xi, ypsilon)
+      and multi_equate(xi, ypsilon) =  X.PPT.all_zip (equate) (xi, ypsilon)
 
       fun vmap f (Construction(c, xi))
          =  Construction(c, multi_vmap f xi)
@@ -107,62 +89,40 @@ functor Literals(X:
                         () )
                   ;  Variable new_var )
             end
-      and multi_vmap f =  PointeredType.map (vmap f)
+      and multi_vmap f =  X.PPT.map (vmap f)
 
-      fun get_occurences (Construction(c, xi))
-         =  multi_get_occurences xi
-      |   get_occurences (Variable x)
-         =  Occurences.singleton(x)
-      and multi_get_occurences xi
-         = PointeredType.transition
-              (  fn (t, occ) => Option.SOME (Occurences.unif_occurences (get_occurences t, occ)) )
-              xi
-              Occurences.empty
+     val select =  X.PPT.select
+
+      val fe =  X.PPT.fe
+      val fop =  X.PPT.p_fop (eq)
+      val is_in  =  X.PPT.p_is_in (eq)
+
+      fun construct (c, m) =  Construction(c, m)
+      val transition =  X.PPT.transition
 
       structure Single =
          struct
-            structure BaseType =  BaseType
             structure Variables =  Variables
-
             type T =  Construction
-
-            fun variable v =  Variable v
-            val eq =  BaseType.eq
-
-            val equate =  equate
-            val vmap =  vmap
-
-            val get_occurences =  get_occurences
-
             val traverse =  traverse
+            val eq =  eq
+            val equate =  equate
+            val variable =  Variable
+            val vmap =  vmap
          end
-
       structure Multi =
          struct
             structure Variables =  Variables
-
-            type T =  PointeredType.ContainerType.T
-
-            val equate =  multi_equate
-            val eq =  BaseType.multi_eq
-            val empty =  PointeredType.empty
-            val is_empty =  PointeredType.is_empty
-            val subeq =  PointeredType.subeq
-
-            val vmap =  multi_vmap
-
-            val get_occurences =  multi_get_occurences
-
+            type T =  Construction X.PPT.ContainerType.T
             val traverse =  multi_traverse
+            val eq =  multi_eq
+            val equate =  multi_equate
+            val vmap =  multi_vmap
+            val empty =  X.PPT.empty ()
+            val is_empty =  X.PPT.is_empty
+            val subeq =  X.PPT.p_subeq (Single.eq)
+
          end
-
-      val select =  PointeredType.select
-
-      val fe =  PointeredType.fe
-      val fop =  PointeredType.fop
-      val is_in  =  PointeredType.is_in
-
-      fun construct (c, m) =  Construction(c, m)
-      val transition =  PointeredType.transition
+      structure PointerType =  X.PPT.PointerType
 
    end;

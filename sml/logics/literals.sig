@@ -1,46 +1,39 @@
 use "collections/occurences.sig";
-use "collections/pointered_type.sig";
 use "logics/constructors.sig";
 use "logics/variables.sig";
 
 signature Literals =
    sig
       structure Constructors: Constructors
-      structure Occurences: Occurences
-      structure PointeredType: PointeredType
       structure Variables: Variables
-      sharing Occurences.DictSet.Eqs = Variables
-      structure Multi:
-         sig
-            structure Variables:  Variables
-            type T
-            val equate:         T * T -> bool
-            val eq:             T * T -> bool
-            val empty:          T
-            val is_empty:       T -> bool
-            val subeq:          T * T -> bool
-            val vmap:           (Variables.T -> Variables.T) -> T -> T
-            val get_occurences: T -> Occurences.occurences
-            val traverse:       (Constructors.T * 'm -> 's) * (Variables.T -> 's) * ('s * 'm -> 'm Option.option) * 'm -> T -> 'm
-        end
       structure Single:
          sig
-            structure Variables:  Variables
+            structure Variables: Variables
             type T
-            val variable:       Variables.T -> T
+            val eq: T * T -> bool
             val equate:         T * T -> bool
-            val eq:             T * T -> bool
+            val traverse:      (Constructors.T * 'a -> 'b) * (Variables.T -> 'b) * ('b * 'a -> 'a Option.option) * 'a -> T -> 'b
+            val variable:       Variables.T -> T
             val vmap:           (Variables.T -> Variables.T) -> T -> T
-            val get_occurences: T -> Occurences.occurences
-            val traverse:       (Constructors.T * 'm -> 's) * (Variables.T -> 's) * ('s * 'm -> 'm Option.option) * 'm -> T -> 's
          end
-      structure PointerType:
+      structure Multi:
          sig
+            structure Variables: Variables
             type T
+            val eq: T * T -> bool
+            val equate:         T * T -> bool
+            val traverse:       (Constructors.T * 'a -> 'b) * (Variables.T -> 'b) * ('b * 'a -> 'a Option.option) * 'a -> T -> 'a
+            val empty:          T
+            val is_empty:       T -> bool
+            val vmap:           (Variables.T -> Variables.T) -> T -> T
+            val subeq:          T * T -> bool
          end
-      sharing Multi.Variables = Variables
-      sharing Single.Variables = Variables
+      structure PointerType: Eqs
       sharing Variables.Base =  Single
+      sharing Single.Variables =  Variables
+      sharing Multi.Variables =  Variables
+
+      val get_val: Single.T -> Single.T
 
       val select:     PointerType.T * Multi.T -> Single.T Option.option
 
@@ -51,4 +44,4 @@ signature Literals =
       val construct:  Constructors.T * Multi.T -> Single.T
       val transition: (Single.T * 'b -> 'b Option.option) -> Multi.T -> 'b -> 'b
 
-  end;
+   end;

@@ -29,7 +29,6 @@ functor Presentation(X:
       sharing CX.Literals = L
       sharing CX.VariableContexts = VC
       sharing L.Constructors = C
-      sharing L.PointeredType = UL.PointeredType
       sharing L.Variables = V
       sharing NM.PointeredType.BaseType = M
       sharing NQ.PointeredType.BaseType = Q

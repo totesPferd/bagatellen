@@ -1,16 +1,22 @@
+use "collections/occurences.sig";
 use "logics/contecteds.sig";
 use "logics/literals.sig";
+use "logics/literals_variable_occurences.sig";
 use "logics/variable_contexts.sig";
 
 functor Contecteds(X:
    sig
       structure Lit: Literals
       structure VarCtxt: VariableContexts
+      structure LVO: LiteralsVariableOccurences
       sharing Lit.Variables = VarCtxt.Variables
+      sharing LVO.Literals =  Lit
    end ): Contecteds  =
    struct
       structure Constructors =  X.Lit.Constructors
       structure Literals =  X.Lit
+      structure LiteralsVariableOccurences =  X.LVO
+      structure Occurences =  X.LVO.Occurences
       structure VariableContexts =  X.VarCtxt
       structure Variables =  X.Lit.Variables
 
@@ -41,7 +47,7 @@ functor Contecteds(X:
                       in
                          { context =  der_context, conclusion = der_conclusion }
                       end
-                  fun get_occurences (x:T) =  Literals.Single.get_occurences (#conclusion x)
+                  fun get_occurences (x:T) =  X.LVO.get_occurences (#conclusion x)
       
                   fun equate (c_1: T, c_2: T)
                     = Literals.Single.equate(#conclusion c_1, #conclusion c_2)
@@ -69,7 +75,7 @@ functor Contecteds(X:
                       in
                          { context =  der_context, antecedent = der_antecedent }
                       end
-                  fun get_occurences (x:T) =  Literals.Multi.get_occurences (#antecedent x)
+                  fun get_occurences (x:T) =  X.LVO.multi_get_occurences (#antecedent x)
       
                   fun empty ctxt =  { context = ctxt, antecedent = Literals.Multi.empty }
       
@@ -120,9 +126,9 @@ functor Contecteds(X:
                       end
 
                   fun get_occurences (x:T)
-                     =  Literals.Occurences.unif_occurences (
-                           Literals.Multi.get_occurences (#antecedent x)
-                        ,  Literals.Single.get_occurences (#conclusion x) )
+                     =  Occurences.unif_occurences (
+                           X.LVO.multi_get_occurences (#antecedent x)
+                        ,  X.LVO.get_occurences (#conclusion x) )
       
                   fun is_assumption(cl: T)
                     = Literals.is_in(#conclusion cl, #antecedent cl)
@@ -155,9 +161,9 @@ functor Contecteds(X:
                       end
 
                   fun get_occurences (x:T)
-                     =  Literals.Occurences.unif_occurences (
-                           Literals.Multi.get_occurences (#antecedent x)
-                        ,  Literals.Multi.get_occurences (#conclusion x) )
+                     =  Occurences.unif_occurences (
+                           X.LVO.multi_get_occurences (#antecedent x)
+                        ,  X.LVO.multi_get_occurences (#conclusion x) )
 
                   fun is_empty (mcl: T) =  Literals.Multi.is_empty(#conclusion mcl)
                   fun is_assumption(mcl: T)

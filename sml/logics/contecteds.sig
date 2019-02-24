@@ -1,16 +1,22 @@
+use "collections/occurences.sig";
 use "general/type.sig";
 use "logics/constructors.sig";
 use "logics/literals.sig";
-use "logics/variables.sig";
+use "logics/literals_variable_occurences.sig";
 use "logics/variable_contexts.sig";
+use "logics/variables.sig";
 
 signature Contecteds =
    sig
       structure Constructors: Constructors
+      structure LiteralsVariableOccurences: LiteralsVariableOccurences
+      structure Occurences: Occurences
       structure Literals: Literals
       structure VariableContexts: VariableContexts
       sharing Literals.Constructors =  Constructors
       sharing Literals.Variables = VariableContexts.Variables
+      sharing LiteralsVariableOccurences.Literals = Literals
+      sharing LiteralsVariableOccurences.Occurences = Occurences
       structure Clauses:
          sig
             structure Constructors: Constructors
@@ -28,7 +34,7 @@ signature Contecteds =
                   val get_conclusion: T -> Literals.Single.T
                   val construct: VariableContexts.VariableContext.T * Literals.Multi.T * Literals.Single.T  -> T
                   val apply_alpha_conversion: VariableContexts.AlphaConverter -> T -> T
-                  val get_occurences: T -> Literals.Occurences.occurences
+                  val get_occurences: T -> Occurences.occurences
       
                   val is_assumption: T -> bool
                end
@@ -44,7 +50,7 @@ signature Contecteds =
                   val get_conclusion: T -> Literals.Multi.T
                   val construct: VariableContexts.VariableContext.T * Literals.Multi.T * Literals.Multi.T  -> T
                   val apply_alpha_conversion: VariableContexts.AlphaConverter -> T -> T
-                  val get_occurences: T -> Literals.Occurences.occurences
+                  val get_occurences: T -> Occurences.occurences
       
                   val is_empty: T -> bool
                   val is_assumption: T -> bool
@@ -74,7 +80,7 @@ signature Contecteds =
                   val get_conclusion: T -> Literals.Single.T
                   val construct: VariableContexts.VariableContext.T * Literals.Single.T  -> T
                   val apply_alpha_conversion: VariableContexts.AlphaConverter -> T -> T
-                  val get_occurences: T -> Literals.Occurences.occurences
+                  val get_occurences: T -> Occurences.occurences
                   val equate: T * T -> bool
                end
             structure Multi:
@@ -88,7 +94,7 @@ signature Contecteds =
                   val get_antecedent: T -> Literals.Multi.T
                   val construct: VariableContexts.VariableContext.T * Literals.Multi.T -> T
                   val apply_alpha_conversion: VariableContexts.AlphaConverter -> T -> T
-                  val get_occurences: T -> Literals.Occurences.occurences
+                  val get_occurences: T -> Occurences.occurences
                   val empty: VariableContexts.VariableContext.T -> T
       
                   val is_empty: T -> bool
