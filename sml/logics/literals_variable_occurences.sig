@@ -1,5 +1,4 @@
 use "collections/occurences.sig";
-use "collections/pointered_type.sig";
 use "logics/literals.sig";
 use "logics/variables.sig";
 

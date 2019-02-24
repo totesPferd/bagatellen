@@ -4,7 +4,7 @@ use "logics/variables.sig";
 
 signature VariableContexts =
    sig
-      structure PointeredType: PointeredType
+      structure PointeredType2: PointeredType2
       structure Variables: Variables
       structure VariableContext:
          sig
@@ -16,8 +16,8 @@ signature VariableContexts =
             val filter_unbound_vars: T -> T
          end
       sharing VariableContext.Variables =  Variables
-      sharing PointeredType.BaseType =  Variables
-      sharing PointeredType.ContainerType =  VariableContext
+      sharing PointeredType2.BaseType =  Variables
+      sharing PointeredType2.ContainerType =  VariableContext
 
       type AlphaConverter
 

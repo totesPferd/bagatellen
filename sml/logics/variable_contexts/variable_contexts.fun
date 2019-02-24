@@ -8,7 +8,7 @@ use "logics/variables.sig";
 functor VariableContexts(X:
    sig
       structure Var: Variables
-      structure PT: PointeredType
+      structure PT: PointeredType2
       structure DM: DictMap
       structure DS: DictSet
       sharing PT.BaseType = Var
@@ -22,7 +22,7 @@ functor VariableContexts(X:
       structure DictMap = X.DM
 
       structure Variables =  X.Var
-      structure PointeredType =  X.PT
+      structure PointeredType2 =  X.PT
 
       structure VariableContext =
          struct

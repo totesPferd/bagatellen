@@ -7,7 +7,7 @@ functor NamingPointeredTypeExtension(B: Eqs): NamingPointeredTypeExtension =
    struct
       structure NamingPolymorphicPointeredType =  NamingPolymorphicPointeredType
       structure StringType =  NamingPolymorphicPointeredType.PointerType
-      structure PointeredType =  PointeredType(
+      structure PointeredType2 =  PointeredType2(
          struct
             structure B =  B
             structure PPT =  NamingPolymorphicPointeredType

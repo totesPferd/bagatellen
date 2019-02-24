@@ -6,8 +6,8 @@ use "collections/unit_type.sig";
 signature UnitPointeredTypeExtension =
    sig
      structure UnitType: UnitType
-     structure PointeredType: PointeredType
-     sharing PointeredType.PointerType =  UnitType
+     structure PointeredType2: PointeredType2
+     sharing PointeredType2.PointerType =  UnitType
 
    end;
 

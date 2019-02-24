@@ -1,7 +1,7 @@
 use "general/eqs.sig";
 use "general/type.sig";
 
-signature PointeredType =
+signature PointeredType2 =
    sig
       structure BaseType: Eqs
       structure ContainerType: Type

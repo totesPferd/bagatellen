@@ -7,7 +7,7 @@ functor UnitPointeredTypeExtension(B: Eqs): UnitPointeredTypeExtension =
    struct
       structure UnitPolymorphicPointeredType =  UnitPolymorphicPointeredType
       structure UnitType =  UnitPolymorphicPointeredType.PointerType
-      structure PointeredType =  PointeredType(
+      structure PointeredType2 =  PointeredType2(
          struct
             structure B =  B
             structure PPT =  UnitPolymorphicPointeredType

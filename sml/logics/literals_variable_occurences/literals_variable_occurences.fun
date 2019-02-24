@@ -10,7 +10,7 @@ functor LiteralsVariableOccurences(X:
       structure DS: DictSet
       structure Lit: Literals
       structure Occ: Occurences
-      structure PT: PointeredType
+      structure PT: PointeredType2
       sharing DS.Eqs = Lit.Variables
       sharing Occ.DictSet = DS
       sharing PT.BaseType = Lit.Single
