@@ -58,7 +58,4 @@ functor VariableContexts(X:
              Option.NONE => raise OutOfContext
           |  Option.SOME v => v
 
-      fun alpha_zip_all ((alpha: AlphaConverter), (beta: AlphaConverter)) P
-        = Dicts.all P (Dicts.zip ((#alpha alpha), (#alpha beta)))
-
    end;
