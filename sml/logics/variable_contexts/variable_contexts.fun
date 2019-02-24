@@ -1,19 +1,25 @@
-use "collections/dictset.fun";
+use "collections/dict_map.sig";
+use "collections/dictset.sig";
 use "collections/pointered_type.sig";
-use "collections/dict_map.fun";
 use "logics/literals.sig";
-use "logics/variables.sig";
 use "logics/variable_contexts.sig";
+use "logics/variables.sig";
 
 functor VariableContexts(X:
    sig
       structure Var: Variables
       structure PT: PointeredType
+      structure DM: DictMap
+      structure DS: DictSet
       sharing PT.BaseType = Var
+      sharing DM.DictSet = DS
+      sharing DM.Start = DS.Eqs
+      sharing DM.End = Var
+      sharing DS.Eqs = Var
    end) =
    struct
-      structure DictSet =  DictSet(X.Var)
-      structure Dicts =  DictSet.Dicts
+      structure Dicts =  X.DS.Dicts
+      structure DictMap = X.DM
 
       structure Variables =  X.Var
       structure PointeredType =  X.PT
@@ -27,12 +33,6 @@ functor VariableContexts(X:
             val filter_bound_vars =  X.PT.filter (Variables.is_bound)
             val filter_unbound_vars =  X.PT.filter (not o Variables.is_bound)
          end;
-
-      structure DictMap =  DictMap(
-         struct
-            structure DS = DictSet
-            structure End = Variables
-         end )
 
       type AlphaConverter = { ctxt: VariableContext.T, alpha: Variables.T Dicts.dict }
 
