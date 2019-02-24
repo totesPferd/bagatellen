@@ -13,7 +13,7 @@ functor VariableContexts(X:
       structure DS: DictSet
       sharing PT.BaseType = Var
       sharing DM.DictSet = DS
-      sharing DM.Start = DS.Eqs
+      sharing DM.Start = Var
       sharing DM.End = Var
       sharing DS.Eqs = Var
    end) =
