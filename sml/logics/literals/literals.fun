@@ -31,6 +31,15 @@ functor Literals(X:
             val is_bound =  Option.isSome o X.PV.get_val
          end
 
+      fun traverse (f_1, f_2, f_3, z_0) (Construction(c, xi))
+         =  f_1(c, multi_traverse(f_1, f_2, f_3, z_0) xi)
+      |   traverse (f_1, f_2, f_3, z_0) (Variable x)
+         =  f_2(x)
+      and multi_traverse (f_1, f_2, f_3, z_0) xi
+         = X.PPT.transition
+              (fn (s, r) =>  f_3(traverse(f_1, f_2, f_3, z_0) s, r))
+              xi z_0
+
       fun get_val (p as Construction(c, xi)) =  p
         | get_val (p as Variable x)
         = case (X.PV.get_val x) of
@@ -55,15 +64,6 @@ functor Literals(X:
             structure B =  BaseType
             structure PPT =  X.PPT
          end )
-
-      fun traverse (f_1, f_2, f_3, z_0) (Construction(c, xi))
-         =  f_1(c, multi_traverse(f_1, f_2, f_3, z_0) xi)
-      |   traverse (f_1, f_2, f_3, z_0) (Variable x)
-         =  f_2(x)
-      and multi_traverse (f_1, f_2, f_3, z_0) xi
-         = PointeredType.transition
-              (fn (s, r) =>  f_3(traverse(f_1, f_2, f_3, z_0) s, r))
-              xi z_0
 
       structure DictSet =  DictSet(Variables)
       structure Occurences =  Occurences(DictSet)
