@@ -4,10 +4,12 @@ use "collections/pointered_type.sig";
 use "logics/literals.sig";
 use "logics/variable_contexts.sig";
 use "logics/variables.sig";
+use "pointered_types/pointered_functor.sig";
 
 functor VariableContexts(X:
    sig
       structure Var: Variables
+      structure PF: PointeredFunctor
       structure PT: PointeredType2
       structure DM: DictMap
       structure DS: DictSet
@@ -16,10 +18,14 @@ functor VariableContexts(X:
       sharing DM.Start = Var
       sharing DM.End = Var
       sharing DS.Eqs = Var
+      sharing PF.Start = PT
+      sharing PF.End = PT
    end) =
    struct
       structure Dicts =  X.DS.Dicts
       structure DictMap = X.DM
+
+      structure Map = X.PF.Map
 
       structure Variables =  X.Var
       structure PointeredType2 =  X.PT
@@ -29,7 +35,7 @@ functor VariableContexts(X:
             structure Variables =  Variables
             type T =  X.PT.ContainerType.T
             val eq =  X.PT.all_zip (X.Var.eq)
-            val vmap =  X.PT.map
+            val vmap =  X.PF.map
             val filter_bound_vars =  X.PT.filter (Variables.is_bound)
             val filter_unbound_vars =  X.PT.filter (not o Variables.is_bound)
          end;
