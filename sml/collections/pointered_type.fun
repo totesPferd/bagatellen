@@ -16,7 +16,6 @@ functor PointeredType2(X:
          end
       val select =                  X.PPT.select
 
-      val map =                     X.PPT.map
       val empty: ContainerType.T =  X.PPT.empty ()
       val is_empty =                X.PPT.is_empty
       val all =                     X.PPT.all

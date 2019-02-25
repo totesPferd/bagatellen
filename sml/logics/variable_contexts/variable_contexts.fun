@@ -20,6 +20,7 @@ functor VariableContexts(X:
       sharing DS.Eqs = Var
       sharing PF.Start = PT
       sharing PF.End = PT
+      sharing PF.Map.Map = DM.Map
    end) =
    struct
       structure Dicts =  X.DS.Dicts
@@ -51,8 +52,8 @@ functor VariableContexts(X:
                       (fn (v, d) => Option.SOME (Dicts.set(v, (Variables.copy v), d)))
                       vc
                       Dicts.empty
-             val dict_map =  DictMap.apply (DictMap.get_map var_dict)
-             val ctxt_map =  X.PT.map dict_map
+             val dict_map =  DictMap.get_map var_dict
+             val ctxt_map =  X.PF.map dict_map
              val vc' =  ctxt_map vc
           in
              { ctxt = vc', alpha = var_dict }: AlphaConverter

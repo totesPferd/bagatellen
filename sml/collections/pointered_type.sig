@@ -9,7 +9,6 @@ signature PointeredType2 =
 
       val select:  PointerType.T * ContainerType.T -> BaseType.T Option.option
 
-      val map:        (BaseType.T -> BaseType.T) -> ContainerType.T -> ContainerType.T
       val empty:      ContainerType.T
       val is_empty:   ContainerType.T -> bool
       val all:        (BaseType.T -> bool) -> ContainerType.T -> bool

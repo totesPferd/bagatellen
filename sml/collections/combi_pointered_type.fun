@@ -27,19 +27,6 @@ functor CombiPointeredType2(X:
                ,  (fn () => Option.map BaseType.snd_inj (X.UPT.PointeredType2.select(X.UPT.UnitType.point, m_u))) )
                pointer
 
-      exception NonFunctorial
-      fun non_functorial_a x
-         =  BaseType.traverse ((fn x => x), (fn y => raise NonFunctorial)) x
-      fun non_functorial_b y
-         =  BaseType.traverse ((fn x => raise NonFunctorial), (fn y => y)) y
-      fun map phi (m_n, m_u)
-         =  let
-               val m'_n =  X.NPT.PointeredType2.map (fn (x) => non_functorial_a(phi(BaseType.fst_inj x))) m_n
-               val m'_u =  X.UPT.PointeredType2.map (fn (x) => non_functorial_b(phi(BaseType.snd_inj x))) m_u
-            in
-               (m'_n, m'_u)
-            end
-
       val empty =  (X.NPT.PointeredType2.empty, X.UPT.PointeredType2.empty)
 
       fun is_empty (m_n, m_u) =  (X.NPT.PointeredType2.is_empty m_n) andalso (X.UPT.PointeredType2.is_empty m_u)
