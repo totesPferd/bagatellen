@@ -55,4 +55,6 @@ structure UnitPolymorphicPointeredType =
  *
  *)
 
+      fun singleton (p, x) =  Option.SOME x
+
    end;

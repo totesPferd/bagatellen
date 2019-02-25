@@ -87,6 +87,13 @@ structure NamingPolymorphicPointeredType =
  *
  *)
 
+      fun singleton (p, x)
+         = [ (ref (Option.SOME p), x) ]
+
+(*
+ *
+ *)
+
       fun adjoin (str, x, c) =  (ref (Option.SOME str), x) :: c
 
       fun full_transition f (c: 'a ContainerType.T) =  Acc.transition (fn ((n, x: 'a), y) => f(!n, x, y)) c
