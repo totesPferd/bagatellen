@@ -1,7 +1,7 @@
 use "logics/constructors.sig";
 use "logics/variables.sig";
 
-signature LiteralsStructure =
+signature LiteralsConstruction =
    sig
       structure PolymorphicContainerType:
          sig

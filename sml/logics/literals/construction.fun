@@ -1,9 +1,9 @@
 use "logics/constructors.sig";
-use "logics/literals_structure.sig";
+use "logics/construction.sig";
 use "logics/polymorphic_variables.sig";
 use "logics/variables.sig";
 
-functor LiteralsStructure(X:
+functor LiteralsConstruction(X:
    sig
       structure C: Constructors
       structure PCT:
@@ -11,7 +11,7 @@ functor LiteralsStructure(X:
             type 'a T
          end
       structure PV: PolymorphicVariables
-   end ): LiteralsStructure =
+   end ): LiteralsConstruction =
    struct
       structure PolymorphicContainerType =  X.PCT
 
