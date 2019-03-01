@@ -11,7 +11,6 @@ signature LiteralsConstruction =
       structure Constructors: Constructors
       structure Variables: Variables
          
-      datatype Construction =  Construction of Constructors.T * MultiConstruction | Variable of Variables.T
-      and      MultiConstruction =  MultiConstruction of Construction PolymorphicContainerType.T
+      datatype Construction =  Construction of Constructors.T * Construction PolymorphicContainerType.T | Variable of Variables.T
 
    end;

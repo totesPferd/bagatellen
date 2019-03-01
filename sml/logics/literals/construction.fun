@@ -17,8 +17,7 @@ functor LiteralsConstruction(X:
 
       structure Constructors =  X.C
 
-      datatype Construction =  Construction of Constructors.T * MultiConstruction | Variable of Construction X.PV.Variable
-      and      MultiConstruction =  MultiConstruction of Construction PolymorphicContainerType.T
+      datatype Construction =  Construction of Constructors.T * Construction PolymorphicContainerType.T | Variable of Construction X.PV.Variable
 
       structure Variables =
          struct
