@@ -15,8 +15,8 @@ functor PPrintPPrintableLiterals(X:
       structure PP: PPrintPolymorphicPPrinting
       structure PS: PPrintPolymorphicSetalikes
       sharing Lit.Variables = VarCtxt.Variables
-      sharing NPT.PointeredType2.BaseType = VarCtxt.Variables
-      sharing NPT.PointeredType2 = VarCtxt.PointeredType2
+      sharing NPT.PointeredTypeExtended.BaseType = VarCtxt.Variables
+      sharing NPT.PointeredTypeExtended = VarCtxt.PointeredTypeExtended
       sharing PP.ContextType = PS.ContextType
       sharing PP.ContextType = VarCtxt.VariableContext
       sharing PP.PPrintIndentBase = PS.PPrintIndentBase
@@ -38,7 +38,7 @@ functor PPrintPPrintableLiterals(X:
          =  X.Lit.Single.traverse(
                   (Construction: X.Lit.Constructors.T * (Construction list) -> Construction)
                ,  (  fn (v: X.Lit.Variables.T)
-                     => if X.NPT.PointeredType2.is_in(v, ctxt)
+                     => if X.NPT.PointeredTypeExtended.is_in(v, ctxt)
                         then
                            Variable (Option.valOf (X.NPT.get_name v ctxt), v)
                         else

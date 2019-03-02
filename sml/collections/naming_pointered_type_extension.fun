@@ -8,7 +8,7 @@ functor NamingPointeredTypeExtension(B: Eqs): NamingPointeredTypeExtension =
    struct
       structure NamingPolymorphicPointeredType =  NamingPolymorphicPointeredType
       structure StringType =  NamingPolymorphicPointeredType.PointerType
-      structure PointeredType2 =  PointeredType2(
+      structure PointeredTypeExtended =  PointeredTypeExtended(
          struct
             structure B =  B
             structure PPT =  NamingPolymorphicPointeredType
@@ -16,12 +16,12 @@ functor NamingPointeredTypeExtension(B: Eqs): NamingPointeredTypeExtension =
 
       structure PointeredSingleton =
          struct
-            structure PointeredType =  PointeredType2
+            structure PointeredType =  PointeredTypeExtended
             structure PointeredMap: PointeredBaseMap =
                struct
-                  structure Start =  PointeredType2.BaseType
-                  structure End =  PointeredType2.ContainerType
-                  structure PointerType =  PointeredType2.PointerType
+                  structure Start =  PointeredTypeExtended.BaseType
+                  structure End =  PointeredTypeExtended.ContainerType
+                  structure PointerType =  PointeredTypeExtended.PointerType
                   structure Map =
                      struct
                         type T =  PointerType.T * Start.T -> End.T
@@ -29,7 +29,7 @@ functor NamingPointeredTypeExtension(B: Eqs): NamingPointeredTypeExtension =
                   fun apply f (p, x) =  f (p, x)
                   fun get_map f =  f
                end
-            structure PointerType =  PointeredType2.PointerType
+            structure PointerType =  PointeredTypeExtended.PointerType
             val singleton =  NamingPolymorphicPointeredType.singleton
          end
 

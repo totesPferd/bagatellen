@@ -30,13 +30,13 @@ functor Presentation(X:
       sharing CX.VariableContexts = VC
       sharing L.Constructors = C
       sharing L.Variables = V
-      sharing NM.PointeredType2.BaseType = M
-      sharing NQ.PointeredType2.BaseType = Q
+      sharing NM.PointeredTypeExtended.BaseType = M
+      sharing NQ.PointeredTypeExtended.BaseType = Q
       sharing C.Modules = M
       sharing P.Constructors = C
       sharing P.Contecteds =  CX
       sharing C.Qualifier = Q
-      sharing VC.PointeredType2 = UV.PointeredType2
+      sharing VC.PointeredTypeExtended = UV.PointeredTypeExtended
       sharing VC.Variables = V
 
    end ): Presentation =
@@ -54,21 +54,21 @@ functor Presentation(X:
 
       type state =  {
             equations: Proof.Multi.T
-         ,  modules: ModulesBag.PointeredType2.ContainerType.T
-         ,  qualifier: QualifierBag.PointeredType2.ContainerType.T
+         ,  modules: ModulesBag.PointeredTypeExtended.ContainerType.T
+         ,  qualifier: QualifierBag.PointeredTypeExtended.ContainerType.T
          ,  typecheck_info: Proof.Multi.T }
 
       fun get_typecheck_clause (state: state) (lit: Contecteds.ContectedLiterals.Single.T, d0: string, d1: string)
-        = case (ModulesBag.PointeredType2.select(ModulesBag.StringType.point d0, (#modules state))) of
+        = case (ModulesBag.PointeredTypeExtended.select(ModulesBag.StringType.point d0, (#modules state))) of
              Option.NONE => Option.NONE
           |  Option.SOME md0
-             => case (ModulesBag.PointeredType2.select(ModulesBag.StringType.point d1, (#modules state))) of
+             => case (ModulesBag.PointeredTypeExtended.select(ModulesBag.StringType.point d1, (#modules state))) of
                 Option.NONE => Option.NONE
              |  Option.SOME md1
                 => let
                       val (var_ctxt: X.VC.VariableContext.T) =  Contecteds.ContectedLiterals.Single.get_context lit
                    in
-                      case (X.VC.PointeredType2.select(X.UV.UnitType.point, var_ctxt)) of
+                      case (X.VC.PointeredTypeExtended.select(X.UV.UnitType.point, var_ctxt)) of
                          Option.NONE => Option.NONE
                       |  Option.SOME lit_var
                          => let
@@ -106,7 +106,7 @@ functor Presentation(X:
              val qual =  Qualifier.new()
              val new_bag =  QualifierBag.adjoin (str, qual, (#qualifier state))
              val new_var =  X.V.new
-             val new_var_ctxt =  X.VC.PointeredType2.fe new_var
+             val new_var_ctxt =  X.VC.PointeredTypeExtended.fe new_var
              val qual_lit =  Literals.construct(QLConstructors.qualifier qual, Literals.fe (Literals.Single.variable new_var))
              val ctxt_qual_lit =  Contecteds.ContectedLiterals.Single.construct(new_var_ctxt, qual_lit)
              val (clo: Contecteds.Clauses.Single.T Option.option) =  get_typecheck_clause state (ctxt_qual_lit, d0, d1)
@@ -125,11 +125,11 @@ functor Presentation(X:
       fun add_equation (var_ctxt: VariableContexts.VariableContext.T, lit_1: Literals.Single.T, lit_2: Literals.Single.T) (state: state)
         = let
              val qual_vars =
-                case (X.VC.PointeredType2.select(X.UV.UnitType.point, var_ctxt)) of
+                case (X.VC.PointeredTypeExtended.select(X.UV.UnitType.point, var_ctxt)) of
                    Option.NONE => Literals.Multi.empty
                 |  Option.SOME var => Literals.fe (Literals.Single.variable var)
              val qual =  Qualifier.new()
-             val new_qual_bag =  QualifierBag.sum (QualifierBag.PointeredType2.fe qual, #qualifier state)
+             val new_qual_bag =  QualifierBag.sum (QualifierBag.PointeredTypeExtended.fe qual, #qualifier state)
              val qual_lit =  Literals.construct(QLConstructors.qualifier qual, qual_vars)
              val antecedent =  Literals.fe qual_lit
              val cl_1 =  Contecteds.Clauses.Single.construct(var_ctxt, antecedent, lit_1)
@@ -166,7 +166,7 @@ functor Presentation(X:
         = let
              val var_ctxt_2 =  Contecteds.ContectedLiterals.Single.get_context clit_2
           in
-             case (X.VC.PointeredType2.select(X.UV.UnitType.point, var_ctxt_2)) of
+             case (X.VC.PointeredTypeExtended.select(X.UV.UnitType.point, var_ctxt_2)) of
                 Option.NONE => Option.NONE
              |  Option.SOME var =>
                  let

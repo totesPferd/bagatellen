@@ -1,28 +1,28 @@
 use "general/eqs.sig";
-use "collections/pointered_type.sig";
+use "collections/pointered_type_extended.sig";
 use "collections/string_type.sig";
 use "pointered_types/pointered_singleton.sig";
 
 signature NamingPointeredTypeExtension =
    sig
      structure StringType: StringType
-     structure PointeredType2: PointeredType2
-     sharing PointeredType2.PointerType =  StringType
+     structure PointeredTypeExtended: PointeredTypeExtended
+     sharing PointeredTypeExtended.PointerType =  StringType
 
      structure PointeredSingleton: PointeredSingleton
-     sharing PointeredSingleton.PointeredType =  PointeredType2
+     sharing PointeredSingleton.PointeredType =  PointeredTypeExtended
      sharing PointeredSingleton.PointerType =  StringType
 
-     val sum:        PointeredType2.ContainerType.T * PointeredType2.ContainerType.T -> PointeredType2.ContainerType.T
+     val sum:        PointeredTypeExtended.ContainerType.T * PointeredTypeExtended.ContainerType.T -> PointeredTypeExtended.ContainerType.T
 
-     val add:        PointeredType2.BaseType.T -> PointeredType2.ContainerType.T -> PointeredType2.ContainerType.T
-     val adjoin:     string * PointeredType2.BaseType.T * PointeredType2.ContainerType.T -> PointeredType2.ContainerType.T
-     val transition: (string Option.option * PointeredType2.BaseType.T * 'b -> 'b Option.option) -> PointeredType2.ContainerType.T -> 'b -> 'b
+     val add:        PointeredTypeExtended.BaseType.T -> PointeredTypeExtended.ContainerType.T -> PointeredTypeExtended.ContainerType.T
+     val adjoin:     string * PointeredTypeExtended.BaseType.T * PointeredTypeExtended.ContainerType.T -> PointeredTypeExtended.ContainerType.T
+     val transition: (string Option.option * PointeredTypeExtended.BaseType.T * 'b -> 'b Option.option) -> PointeredTypeExtended.ContainerType.T -> 'b -> 'b
 
-     val get_name :  PointeredType2.BaseType.T
-                     -> PointeredType2.ContainerType.T -> string option
-     val set_name :  string * PointeredType2.BaseType.T
-                     -> PointeredType2.ContainerType.T -> bool
-     val uniquize :  PointeredType2.ContainerType.T -> unit
+     val get_name :  PointeredTypeExtended.BaseType.T
+                     -> PointeredTypeExtended.ContainerType.T -> string option
+     val set_name :  string * PointeredTypeExtended.BaseType.T
+                     -> PointeredTypeExtended.ContainerType.T -> bool
+     val uniquize :  PointeredTypeExtended.ContainerType.T -> unit
    end;
 

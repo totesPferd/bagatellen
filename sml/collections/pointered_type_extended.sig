@@ -1,16 +1,11 @@
 use "general/eqs.sig";
 use "general/type.sig";
+use "pointered_types/pointered_type.sig";
 
-signature PointeredType2 =
+signature PointeredTypeExtended =
    sig
-      structure BaseType: Eqs
-      structure ContainerType: Type
-      structure PointerType: Eqs
+      include PointeredType
 
-      val select:  PointerType.T * ContainerType.T -> BaseType.T Option.option
-
-      val empty:      ContainerType.T
-      val is_empty:   ContainerType.T -> bool
       val all:        (BaseType.T -> bool) -> ContainerType.T -> bool
       val all_zip:    (BaseType.T * BaseType.T -> bool) -> (ContainerType.T * ContainerType.T) -> bool
 

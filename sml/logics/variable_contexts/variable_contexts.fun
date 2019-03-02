@@ -1,6 +1,6 @@
 use "collections/dict_map.sig";
 use "collections/dictset.sig";
-use "collections/pointered_type.sig";
+use "collections/pointered_type_extended.sig";
 use "logics/literals.sig";
 use "logics/variable_contexts.sig";
 use "logics/variables.sig";
@@ -10,7 +10,7 @@ functor VariableContexts(X:
    sig
       structure Var: Variables
       structure PF: PointeredFunctor
-      structure PT: PointeredType2
+      structure PT: PointeredTypeExtended
       structure DM: DictMap
       structure DS: DictSet
       sharing PT.BaseType = Var
@@ -29,7 +29,7 @@ functor VariableContexts(X:
       structure Map = X.PF.Map
 
       structure Variables =  X.Var
-      structure PointeredType2 =  X.PT
+      structure PointeredTypeExtended =  X.PT
 
       structure VariableContext =
          struct

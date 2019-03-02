@@ -1,12 +1,12 @@
 use "general/eqs.sig";
 use "general/map.sig";
-use "collections/pointered_type.sig";
+use "collections/pointered_type_extended.sig";
 use "logics/variables.sig";
 
 signature VariableContexts =
    sig
       structure Map: Map
-      structure PointeredType2: PointeredType2
+      structure PointeredTypeExtended: PointeredTypeExtended
       structure Variables: Variables
       structure VariableContext:
          sig
@@ -18,8 +18,8 @@ signature VariableContexts =
             val filter_unbound_vars: T -> T
          end
       sharing VariableContext.Variables =  Variables
-      sharing PointeredType2.BaseType =  Variables
-      sharing PointeredType2.ContainerType =  VariableContext
+      sharing PointeredTypeExtended.BaseType =  Variables
+      sharing PointeredTypeExtended.ContainerType =  VariableContext
       sharing Map.Start = Variables
       sharing Map.End = Variables
 

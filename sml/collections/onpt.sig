@@ -5,8 +5,8 @@ signature ONPT =
    sig
       structure NamingPointeredTypeExtension: NamingPointeredTypeExtension
       structure Occurences: Occurences
-      sharing NamingPointeredTypeExtension.PointeredType2.BaseType = Occurences.DictSet.Eqs
+      sharing NamingPointeredTypeExtension.PointeredTypeExtended.BaseType = Occurences.DictSet.Eqs
 
-      val add: Occurences.occurences -> NamingPointeredTypeExtension.PointeredType2.ContainerType.T -> NamingPointeredTypeExtension.PointeredType2.ContainerType.T
+      val add: Occurences.occurences -> NamingPointeredTypeExtension.PointeredTypeExtended.ContainerType.T -> NamingPointeredTypeExtension.PointeredTypeExtended.ContainerType.T
 
    end;

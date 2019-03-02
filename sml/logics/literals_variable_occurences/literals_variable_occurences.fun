@@ -1,6 +1,6 @@
 use "collections/dictset.sig";
 use "collections/occurences.sig";
-use "collections/pointered_type.sig";
+use "collections/pointered_type_extended.sig";
 use "logics/constructors.sig";
 use "logics/literals.sig";
 use "logics/literals_variable_occurences.sig";
@@ -10,7 +10,7 @@ functor LiteralsVariableOccurences(X:
       structure DS: DictSet
       structure Lit: Literals
       structure Occ: Occurences
-      structure PT: PointeredType2
+      structure PT: PointeredTypeExtended
       sharing DS.Eqs = Lit.Variables
       sharing Occ.DictSet = DS
       sharing PT.BaseType = Lit.Single

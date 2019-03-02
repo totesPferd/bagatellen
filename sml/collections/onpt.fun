@@ -6,7 +6,7 @@ functor ONPT(X:
    sig
       structure NamingPointeredTypeExtension: NamingPointeredTypeExtension
       structure Occurences: Occurences
-      sharing NamingPointeredTypeExtension.PointeredType2.BaseType = Occurences.DictSet.Eqs
+      sharing NamingPointeredTypeExtension.PointeredTypeExtended.BaseType = Occurences.DictSet.Eqs
    end ): ONPT =
    struct
       structure NamingPointeredTypeExtension =  X.NamingPointeredTypeExtension
