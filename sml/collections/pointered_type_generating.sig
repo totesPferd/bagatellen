@@ -1,4 +1,5 @@
 use "general/eqs.sig";
+use "general/type.sig";
 
 signature PointeredTypeGenerating =
    sig

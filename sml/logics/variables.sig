@@ -4,9 +4,12 @@ signature Variables =
    sig
       structure Base: Type
       type T
-      val new:      T
-      val eq:       T * T -> bool
-      val copy:     T -> T
-      val get_val:  T -> Base.T Option.option
-      val is_bound: T -> bool
+      val new:         T
+      val eq:          T * T -> bool
+      val copy:        T -> T
+      val get_val:     T -> Base.T Option.option
+      val is_bound:    T -> bool
+      val is_settable: T -> bool
+      val set_val:     Base.T -> T -> bool
+
    end;

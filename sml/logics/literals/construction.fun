@@ -30,6 +30,8 @@ functor LiteralsConstruction(X:
             val copy: T -> T =  X.PV.copy
             val get_val: T -> Base.T Option.option =  X.PV.get_val
             val is_bound: T -> bool =  Option.isSome o X.PV.get_val
+            val is_settable: T -> bool =  X.PV.is_settable
+            val set_val: Base.T -> T -> bool =  X.PV.set_val
          end
 
       type T =  Variables.Base.T

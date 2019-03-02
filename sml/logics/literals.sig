@@ -28,7 +28,7 @@ signature Literals =
             val vmap:           (Variables.T -> Variables.T) -> T -> T
             val subeq:          T * T -> bool
          end
-      structure PointerType: Eqs
+      structure PointerType: Type
       sharing Variables.Base =  Single
       sharing Single.Variables =  Variables
       sharing Multi.Variables =  Variables
