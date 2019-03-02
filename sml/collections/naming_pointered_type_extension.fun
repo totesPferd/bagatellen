@@ -1,25 +1,49 @@
 use "collections/naming_pointered_type_extension.sig";
-use "collections/naming_polymorphic_pointered_type.sml";
-use "collections/pointered_type.fun";
-use "general/eqs.sig";
+use "collections/naming_pointered_type_generating.sig";
+use "collections/pointered_type_extended.sig";
+use "collections/string_type.sig";
 
-functor NamingPointeredTypeExtension(B: Eqs): NamingPointeredTypeExtension =
+functor NamingPointeredTypeExtension(X: NamingPointeredTypeGenerating): NamingPointeredTypeExtension =
    struct
-      structure NamingPolymorphicPointeredType =  NamingPolymorphicPointeredType
-      structure StringType =  NamingPolymorphicPointeredType.PointerType
-      structure PointeredTypeExtended =  PointeredTypeExtended(
+      structure StringType: StringType =
          struct
-            structure B =  B
-            structure PPT =  NamingPolymorphicPointeredType
-         end )
+            type T =  string
+            fun point s =  s
+            fun eq(s, t) =  (s = t)
+         end
+      structure PointeredTypeExtended: PointeredTypeExtended =
+         struct
+            structure BaseType =  X.PointeredTypeExtended.BaseType
+            structure PointerType =  StringType
+            structure ContainerType =  X.PointeredTypeExtended.ContainerType
 
-      val sum =  NamingPolymorphicPointeredType.sum
+            fun select (p, c)
+               =  case(List.find (fn (m, x) => (!m = (Option.SOME p))) c) of
+                     Option.NONE =>  Option.NONE
+                  |  Option.SOME (k, v) =>  Option.SOME v
 
-      val add        =  NamingPolymorphicPointeredType.p_add B.eq
-      val adjoin     =  NamingPolymorphicPointeredType.adjoin
-      val transition =  NamingPolymorphicPointeredType.full_transition
-      val get_name   =  NamingPolymorphicPointeredType.p_get_name B.eq
-      val set_name   =  NamingPolymorphicPointeredType.p_set_name B.eq
-      val uniquize   =  NamingPolymorphicPointeredType.uniquize
+            val empty =  X.PointeredTypeExtended.empty
+            val is_empty =  X.PointeredTypeExtended.is_empty
+
+            val all =  X.PointeredTypeExtended.all
+            val all_zip =  X.PointeredTypeExtended.all_zip
+            val fe =  X.PointeredTypeExtended.fe
+            val fop =  X.PointeredTypeExtended.fop
+            val is_in =  X.PointeredTypeExtended.is_in
+            val subeq =  X.PointeredTypeExtended.subeq
+
+            val filter =  X.PointeredTypeExtended.filter
+            val transition =  X.PointeredTypeExtended.transition
+
+         end
+
+      val sum =  X.sum
+
+      val add        =  X.add
+      val adjoin     =  X.adjoin
+      val transition =  X.transition
+      val get_name   =  X.get_name
+      val set_name   =  X.set_name
+      val uniquize   =  X.uniquize
 
    end;
