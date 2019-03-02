@@ -9,22 +9,25 @@ functor UnitPointeredTypeGenerating(X:
    end ): UnitPointeredTypeGenerating =
    struct
       structure PolymorphicContainerType =  X.PolymorphicContainerType
-      structure BaseType =  X.BaseType
-      structure ContainerType =
+      structure PointeredType =
          struct
-            type T =  BaseType.T PolymorphicContainerType.T
-            fun eq(Option.NONE, Option.NONE) =  true
-            |   eq(Option.NONE, Option.SOME _) =  false
-            |   eq(Option.SOME _, Option.NONE) =  false
-            |   eq(Option.SOME x, Option.SOME y) =  BaseType.eq(x, y)
+            structure BaseType =  X.BaseType
+            structure ContainerType =
+               struct
+                  type T =  BaseType.T PolymorphicContainerType.T
+                  fun eq(Option.NONE, Option.NONE) =  true
+                  |   eq(Option.NONE, Option.SOME _) =  false
+                  |   eq(Option.SOME _, Option.NONE) =  false
+                  |   eq(Option.SOME x, Option.SOME y) =  BaseType.eq(x, y)
+               end
+            structure PointerType =
+               struct
+                  type T =  unit
+               end
+      
+            val empty         =  Option.NONE
+            val is_empty      =  not o Option.isSome
+            fun select (_, x) =  x
          end
-      structure PointerType =
-         struct
-            type T =  unit
-         end
-
-      val empty         =  Option.NONE
-      val is_empty      =  not o Option.isSome
-      fun select (_, x) =  x
 
    end;

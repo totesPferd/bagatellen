@@ -9,22 +9,25 @@ functor NamingPointeredTypeGenerating(X:
    end ): NamingPointeredTypeGenerating =
    struct
       structure PolymorphicContainerType =  X.PolymorphicContainerType
-      structure BaseType =  X.BaseType
-      structure ContainerType =
+      structure PointeredType =
          struct
-            type T =  BaseType.T PolymorphicContainerType.T
-            val eq = ListPair.all (fn ((m, x), (n, y)) => BaseType.eq (x, y))
+            structure BaseType =  X.BaseType
+            structure ContainerType =
+               struct
+                  type T =  BaseType.T PolymorphicContainerType.T
+                  val eq = ListPair.all (fn ((m, x), (n, y)) => BaseType.eq (x, y))
+               end
+            structure PointerType =
+               struct
+                  type T =  string
+               end
+      
+            val empty         =  List.nil
+            val is_empty      =  List.null
+            fun select (n, c)
+               =  case (List.find (fn (m, y) => (!m = Option.SOME n)) c) of
+                     Option.NONE =>  Option.NONE
+                  |  Option.SOME (k, v) => Option.SOME v
          end
-      structure PointerType =
-         struct
-            type T =  string
-         end
-
-      val empty         =  List.nil
-      val is_empty      =  List.null
-      fun select (n, c)
-         =  case (List.find (fn (m, y) => (!m = Option.SOME n)) c) of
-               Option.NONE =>  Option.NONE
-            |  Option.SOME (k, v) => Option.SOME v
 
    end;
