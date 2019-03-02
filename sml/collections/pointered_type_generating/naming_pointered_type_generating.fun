@@ -85,6 +85,56 @@ functor NamingPointeredTypeGenerating(X:
 
          end
 
-         fun singleton (p, x) =  [ (p, x) ]
+      fun singleton (p, x) =  [ (p, x) ]
 
+
+(*
+ *
+ *)
+
+      fun adjoin (str, x, c) =  (ref (Option.SOME str), x) :: c
+
+      fun sum (c_1, c_2) =  c_1 @ c_2
+
+      fun transition f c =  Acc.transition (fn ((n, x), y) => f(!n, x, y)) c
+
+      local
+          fun get_name_ref b container
+            = Option.map (fn (f, _) => f) (List.find (fn (_, w) => PointeredType.BaseType.eq(b, w)) (container))
+      in
+          fun get_name b container =  Option.join (Option.map ! (get_name_ref b container))
+          fun set_name (name, b) container =  Option.isSome (Option.map (fn (store) => store := Option.SOME name) (get_name_ref b container))
+      end
+
+      fun add x c
+         =  if PointeredType.is_in (x, c)
+            then
+               c
+            else
+               (ref Option.NONE, x) :: c
+
+      fun uniquize(container)
+        = let
+             fun rename(do_not_use_list, candidate)
+               = if (List.exists (fn (n) => (n = candidate)) do_not_use_list)
+                 then
+                    rename(do_not_use_list, candidate ^ "'")
+                 else
+                    candidate
+             fun get_candidate name_r
+               = (
+                    case (!name_r) of
+                       Option.NONE => "_"
+                    |  Option.SOME n => n )
+             fun get_next_do_not_use_list((name_r, b), do_not_use_list)
+               = let
+                    val new_name =  rename(do_not_use_list, get_candidate name_r)
+                 in
+                    (
+                       name_r := Option.SOME new_name;
+                       (new_name :: do_not_use_list) )
+                 end;
+          in
+             (List.foldl (get_next_do_not_use_list) nil container; ())
+          end
    end;
