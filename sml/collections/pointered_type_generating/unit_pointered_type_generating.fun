@@ -1,10 +1,10 @@
-use "general/type.sig";
+use "general/eqs.sig";
 use "collections/unit_pointered_type_generating.sig";
 use "collections/unit_polymorphic_container_type.sig";
 
 functor UnitPointeredTypeGenerating(X:
    sig
-      structure BaseType: Type
+      structure BaseType: Eqs
       structure PolymorphicContainerType: UnitPolymorphicContainerType
    end ): UnitPointeredTypeGenerating =
    struct
@@ -13,6 +13,10 @@ functor UnitPointeredTypeGenerating(X:
       structure ContainerType =
          struct
             type T =  BaseType.T PolymorphicContainerType.T
+            fun eq(Option.NONE, Option.NONE) =  true
+            |   eq(Option.NONE, Option.SOME _) =  false
+            |   eq(Option.SOME _, Option.NONE) =  false
+            |   eq(Option.SOME x, Option.SOME y) =  BaseType.eq(x, y)
          end
       structure PointerType =
          struct

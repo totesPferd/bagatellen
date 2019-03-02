@@ -1,4 +1,4 @@
-use "general/type.sig";
+use "general/eqs.sig";
 
 signature PointeredTypeGenerating =
    sig
@@ -6,10 +6,11 @@ signature PointeredTypeGenerating =
          sig
             type 'a T
          end
-      structure BaseType: Type
+      structure BaseType: Eqs
       structure ContainerType:
          sig
             type T =  BaseType.T PolymorphicContainerType.T
+            val eq: T * T -> bool
          end
       structure PointerType: Type
 

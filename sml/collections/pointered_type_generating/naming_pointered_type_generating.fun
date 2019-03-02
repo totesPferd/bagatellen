@@ -1,10 +1,10 @@
-use "general/type.sig";
+use "general/eqs.sig";
 use "collections/naming_pointered_type_generating.sig";
 use "collections/naming_polymorphic_container_type.sig";
 
 functor NamingPointeredTypeGenerating(X:
    sig
-      structure BaseType: Type
+      structure BaseType: Eqs
       structure PolymorphicContainerType: NamingPolymorphicContainerType
    end ): NamingPointeredTypeGenerating =
    struct
@@ -13,6 +13,7 @@ functor NamingPointeredTypeGenerating(X:
       structure ContainerType =
          struct
             type T =  BaseType.T PolymorphicContainerType.T
+            val eq = ListPair.all (fn ((m, x), (n, y)) => BaseType.eq (x, y))
          end
       structure PointerType =
          struct

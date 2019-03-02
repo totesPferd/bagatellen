@@ -1,4 +1,4 @@
-use "general/type.sig";
+use "general/eqs.sig";
 use "collections/unit_polymorphic_container_type.sig";
 
 signature UnitPointeredTypeGenerating =

@@ -1,10 +1,10 @@
-use "general/type.sig";
+use "general/eqs.sig";
 use "collections/naming_polymorphic_container_type.sig";
 
 signature NamingPointeredTypeGenerating =
    sig
       structure PolymorphicContainerType: NamingPolymorphicContainerType
-      structure BaseType: Type
+      structure BaseType: Eqs
       structure ContainerType:
          sig
             type T =  BaseType.T PolymorphicContainerType.T
