@@ -22,6 +22,8 @@ signature NamingPointeredTypeGenerating =
             val select: PointerType.T * ContainerType.T -> BaseType.T Option.option
 
       end
+ 
+      val singleton: PointeredType.PointerType.T * PointeredType.BaseType.T -> PointeredType.ContainerType.T
 
    end;
 

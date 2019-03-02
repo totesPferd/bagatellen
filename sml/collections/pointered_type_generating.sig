@@ -20,9 +20,9 @@ signature PointeredTypeGenerating =
          val is_empty: ContainerType.T -> bool
          val select: PointerType.T * ContainerType.T -> BaseType.T Option.option
 
-         val singleton: PointerType.T * BaseType.T -> ContainerType.T
-
       end
+
+      val singleton: PointeredType.PointerType.T * PointeredType.BaseType.T -> PointeredType.ContainerType.T
 
    end;
 

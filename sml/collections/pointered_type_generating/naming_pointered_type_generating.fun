@@ -29,8 +29,8 @@ functor NamingPointeredTypeGenerating(X:
                      Option.NONE =>  Option.NONE
                   |  Option.SOME (k, v) => Option.SOME v
 
-            fun singleton (p, x) =  [ (p, x) ]
-
          end
+
+         fun singleton (p, x) =  [ (p, x) ]
 
    end;
