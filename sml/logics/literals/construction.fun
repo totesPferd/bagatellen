@@ -17,13 +17,13 @@ functor LiteralsConstruction(X:
 
       structure Constructors =  X.C
 
-      datatype Construction =  Construction of Constructors.T * Construction PolymorphicContainerType.T | Variable of Construction X.PV.Variable
+      datatype T =  Construction of Constructors.T * T PolymorphicContainerType.T | Variable of T X.PV.Variable
 
       structure Variables =
          struct
             structure Base =
                struct
-                  type T =  Construction
+                  type T =  T
                end
             type T =  Base.T X.PV.Variable
             val new: T =  X.PV.new ()
