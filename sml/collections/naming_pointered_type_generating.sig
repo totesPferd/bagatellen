@@ -14,7 +14,7 @@ signature NamingPointeredTypeGenerating =
                end
             structure PointerType:
                sig
-                  type T =  string
+                  type T =  string Option.option ref
                end
       
             val empty: ContainerType.T

@@ -19,17 +19,17 @@ functor NamingPointeredTypeGenerating(X:
                end
             structure PointerType =
                struct
-                  type T =  string
+                  type T =  string Option.option ref
                end
       
             val empty         =  List.nil
             val is_empty      =  List.null
             fun select (n, c)
-               =  case (List.find (fn (m, y) => (!m = Option.SOME n)) c) of
+               =  case (List.find (fn (m, y) => (m = n)) c) of
                      Option.NONE =>  Option.NONE
                   |  Option.SOME (k, v) => Option.SOME v
 
-            fun singleton (p, x) =  [ (ref (Option.SOME p), x) ]
+            fun singleton (p, x) =  [ (p, x) ]
 
          end
 
