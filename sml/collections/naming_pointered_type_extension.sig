@@ -9,10 +9,6 @@ signature NamingPointeredTypeExtension =
      structure PointeredTypeExtended: PointeredTypeExtended
      sharing PointeredTypeExtended.PointerType =  StringType
 
-     structure PointeredSingleton: PointeredSingleton
-     sharing PointeredSingleton.PointeredType =  PointeredTypeExtended
-     sharing PointeredSingleton.PointerType =  StringType
-
      val sum:        PointeredTypeExtended.ContainerType.T * PointeredTypeExtended.ContainerType.T -> PointeredTypeExtended.ContainerType.T
 
      val add:        PointeredTypeExtended.BaseType.T -> PointeredTypeExtended.ContainerType.T -> PointeredTypeExtended.ContainerType.T
