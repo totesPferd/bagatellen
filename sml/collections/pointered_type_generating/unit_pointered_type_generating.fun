@@ -28,6 +28,9 @@ functor UnitPointeredTypeGenerating(X:
             val empty         =  Option.NONE
             val is_empty      =  not o Option.isSome
             fun select (_, x) =  x
+
+            fun singleton (_, x) =  Option.SOME x
+
          end
 
    end;

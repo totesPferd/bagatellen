@@ -28,6 +28,9 @@ functor NamingPointeredTypeGenerating(X:
                =  case (List.find (fn (m, y) => (!m = Option.SOME n)) c) of
                      Option.NONE =>  Option.NONE
                   |  Option.SOME (k, v) => Option.SOME v
+
+            fun singleton (p, x) =  [ (ref (Option.SOME p), x) ]
+
          end
 
    end;
