@@ -5,7 +5,7 @@ signature NamingPointeredTypeGenerating =
    sig
       structure PolymorphicContainerType: NamingPolymorphicContainerType
 
-      structure PointeredType:
+      structure PointeredTypeExtended:
          sig
             structure BaseType: Eqs
             structure ContainerType:
@@ -35,19 +35,19 @@ signature NamingPointeredTypeGenerating =
 
       end
  
-      val singleton: PointeredType.PointerType.T * PointeredType.BaseType.T -> PointeredType.ContainerType.T
+      val singleton: PointeredTypeExtended.PointerType.T * PointeredTypeExtended.BaseType.T -> PointeredTypeExtended.ContainerType.T
 
-      val sum:        PointeredType.ContainerType.T * PointeredType.ContainerType.T -> PointeredType.ContainerType.T
+      val sum:        PointeredTypeExtended.ContainerType.T * PointeredTypeExtended.ContainerType.T -> PointeredTypeExtended.ContainerType.T
  
-      val add:        PointeredType.BaseType.T -> PointeredType.ContainerType.T -> PointeredType.ContainerType.T
-      val adjoin:     string * PointeredType.BaseType.T * PointeredType.ContainerType.T -> PointeredType.ContainerType.T
-      val transition: (string Option.option * PointeredType.BaseType.T * 'b -> 'b Option.option) -> PointeredType.ContainerType.T -> 'b -> 'b
+      val add:        PointeredTypeExtended.BaseType.T -> PointeredTypeExtended.ContainerType.T -> PointeredTypeExtended.ContainerType.T
+      val adjoin:     string * PointeredTypeExtended.BaseType.T * PointeredTypeExtended.ContainerType.T -> PointeredTypeExtended.ContainerType.T
+      val transition: (string Option.option * PointeredTypeExtended.BaseType.T * 'b -> 'b Option.option) -> PointeredTypeExtended.ContainerType.T -> 'b -> 'b
  
-      val get_name :  PointeredType.BaseType.T
-                      -> PointeredType.ContainerType.T -> string option
-      val set_name :  string * PointeredType.BaseType.T
-                      -> PointeredType.ContainerType.T -> bool
-      val uniquize :  PointeredType.ContainerType.T -> unit
+      val get_name :  PointeredTypeExtended.BaseType.T
+                      -> PointeredTypeExtended.ContainerType.T -> string option
+      val set_name :  string * PointeredTypeExtended.BaseType.T
+                      -> PointeredTypeExtended.ContainerType.T -> bool
+      val uniquize :  PointeredTypeExtended.ContainerType.T -> unit
 
    end;
 

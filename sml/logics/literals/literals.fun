@@ -8,7 +8,7 @@ functor Literals(X:
       structure LiteralsConstruction: LiteralsConstruction
       structure PointeredTypeGenerating: PointeredTypeGenerating
       sharing LiteralsConstruction.PolymorphicContainerType = PointeredTypeGenerating.PolymorphicContainerType
-      sharing LiteralsConstruction.Variables.Base =  PointeredTypeGenerating.PointeredType.BaseType
+      sharing LiteralsConstruction.Variables.Base =  PointeredTypeGenerating.PointeredTypeExtended.BaseType
    end ): Literals =
    struct
       structure Constructors =  X.LiteralsConstruction.Constructors
@@ -19,7 +19,7 @@ functor Literals(X:
       |   traverse (f_1, f_2, f_3, z_0) (Variables.Base.Variable x)
          =  f_2(x)
       and multi_traverse (f_1, f_2, f_3, z_0) xi
-         = X.PointeredTypeGenerating.PointeredType.transition
+         = X.PointeredTypeGenerating.PointeredTypeExtended.transition
               (fn (s, r) =>  f_3(traverse(f_1, f_2, f_3, z_0) s, r))
               xi z_0
 
@@ -36,7 +36,7 @@ functor Literals(X:
           | (Variables.Base.Construction(c, xi), Variables.Base.Variable y) => false
           | (Variables.Base.Variable x, Variables.Base.Construction(d, ypsilon)) => false
           | (Variables.Base.Variable x, Variables.Base.Variable y) =>  Variables.eq (x, y)
-      and multi_eq (xi, ypsilon) =  X.PointeredTypeGenerating.PointeredType.ContainerType.eq (xi, ypsilon)
+      and multi_eq (xi, ypsilon) =  X.PointeredTypeGenerating.PointeredTypeExtended.ContainerType.eq (xi, ypsilon)
 
       fun equate(k, l)
         = case (get_val k, get_val l) of
@@ -49,7 +49,7 @@ functor Literals(X:
           |  (Variables.Base.Construction(c, xi), Variables.Base.Variable y) =>  false
           |  (Variables.Base.Variable x, l)
           => Variables.set_val l x
-      and multi_equate(xi, ypsilon) =  X.PointeredTypeGenerating.PointeredType.all_zip (equate) (xi, ypsilon)
+      and multi_equate(xi, ypsilon) =  X.PointeredTypeGenerating.PointeredTypeExtended.all_zip (equate) (xi, ypsilon)
 
       fun vmap f (Variables.Base.Construction(c, xi))
          =  Variables.Base.Construction(c, multi_vmap f xi)
@@ -75,16 +75,16 @@ functor Literals(X:
                         () )
                   ;  Variables.Base.Variable new_var )
             end
-      and multi_vmap f =  X.PointeredTypeGenerating.PointeredType.map (vmap f)
+      and multi_vmap f =  X.PointeredTypeGenerating.PointeredTypeExtended.map (vmap f)
 
-      val select =  X.PointeredTypeGenerating.PointeredType.select
+      val select =  X.PointeredTypeGenerating.PointeredTypeExtended.select
 
-      val fe =  X.PointeredTypeGenerating.PointeredType.fe
-      val fop =  X.PointeredTypeGenerating.PointeredType.fop
-      val is_in  =  X.PointeredTypeGenerating.PointeredType.is_in
+      val fe =  X.PointeredTypeGenerating.PointeredTypeExtended.fe
+      val fop =  X.PointeredTypeGenerating.PointeredTypeExtended.fop
+      val is_in  =  X.PointeredTypeGenerating.PointeredTypeExtended.is_in
 
       fun construct (c, m) =  Variables.Base.Construction(c, m)
-      val transition =  X.PointeredTypeGenerating.PointeredType.transition
+      val transition =  X.PointeredTypeGenerating.PointeredTypeExtended.transition
 
       structure Single =
          struct
@@ -99,17 +99,17 @@ functor Literals(X:
       structure Multi =
          struct
             structure Variables =  Variables
-            type T =  X.PointeredTypeGenerating.PointeredType.ContainerType.T
+            type T =  X.PointeredTypeGenerating.PointeredTypeExtended.ContainerType.T
             val traverse =  multi_traverse
             val eq =  multi_eq
             val equate =  multi_equate
             val vmap =  multi_vmap
-            val empty =  X.PointeredTypeGenerating.PointeredType.empty
-            val is_empty =  X.PointeredTypeGenerating.PointeredType.is_empty
-            val subeq =  X.PointeredTypeGenerating.PointeredType.subeq
+            val empty =  X.PointeredTypeGenerating.PointeredTypeExtended.empty
+            val is_empty =  X.PointeredTypeGenerating.PointeredTypeExtended.is_empty
+            val subeq =  X.PointeredTypeGenerating.PointeredTypeExtended.subeq
 
          end
 
-      structure PointerType =  X.PointeredTypeGenerating.PointeredType.PointerType
+      structure PointerType =  X.PointeredTypeGenerating.PointeredTypeExtended.PointerType
 
    end;

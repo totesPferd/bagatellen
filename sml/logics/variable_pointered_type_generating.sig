@@ -6,5 +6,5 @@ signature VariablePointeredTypeGenerating =
       structure LiteralsConstruction: LiteralsConstruction
       structure PointeredTypeGenerating: PointeredTypeGenerating
       sharing LiteralsConstruction.PolymorphicContainerType = PointeredTypeGenerating.PolymorphicContainerType
-      sharing LiteralsConstruction.Variables =  PointeredTypeGenerating.PointeredType.BaseType
+      sharing LiteralsConstruction.Variables =  PointeredTypeGenerating.PointeredTypeExtended.BaseType
    end;

@@ -9,7 +9,7 @@ functor UnitPointeredTypeGenerating(X:
    end ): UnitPointeredTypeGenerating =
    struct
       structure PolymorphicContainerType =  X.PolymorphicContainerType
-      structure PointeredType =
+      structure PointeredTypeExtended =
          struct
             structure BaseType =  X.BaseType
             structure ContainerType =

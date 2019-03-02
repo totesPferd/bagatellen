@@ -7,7 +7,7 @@ signature PointeredTypeGenerating =
          sig
             type 'a T
          end
-      structure PointeredType:
+      structure PointeredTypeExtended:
          sig
             structure BaseType: Eqs
             structure ContainerType:
@@ -35,7 +35,7 @@ signature PointeredTypeGenerating =
 
       end
 
-      val singleton: PointeredType.PointerType.T * PointeredType.BaseType.T -> PointeredType.ContainerType.T
+      val singleton: PointeredTypeExtended.PointerType.T * PointeredTypeExtended.BaseType.T -> PointeredTypeExtended.ContainerType.T
 
    end;
 

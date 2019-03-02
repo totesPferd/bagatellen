@@ -4,7 +4,7 @@ use "collections/unit_polymorphic_container_type.sig";
 signature UnitPointeredTypeGenerating =
    sig
       structure PolymorphicContainerType: UnitPolymorphicContainerType
-      structure PointeredType:
+      structure PointeredTypeExtended:
          sig
             structure BaseType: Eqs
             structure ContainerType:
@@ -35,7 +35,7 @@ signature UnitPointeredTypeGenerating =
 
          end
 
-         val singleton: PointeredType.PointerType.T * PointeredType.BaseType.T -> PointeredType.ContainerType.T
+         val singleton: PointeredTypeExtended.PointerType.T * PointeredTypeExtended.BaseType.T -> PointeredTypeExtended.ContainerType.T
 
    end;
 

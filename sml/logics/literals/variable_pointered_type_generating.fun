@@ -7,7 +7,7 @@ functor VariablePointeredTypeGenerating(X:
       structure LC: LiteralsConstruction
       structure PTG: PointeredTypeGenerating
       sharing LC.PolymorphicContainerType = PTG.PolymorphicContainerType
-      sharing LC.Variables =  PTG.PointeredType.BaseType
+      sharing LC.Variables =  PTG.PointeredTypeExtended.BaseType
    end ): VariablePointeredTypeGenerating =
    struct
       structure LiteralsConstruction =  X.LC

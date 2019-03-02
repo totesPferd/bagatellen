@@ -10,7 +10,7 @@ functor NamingPointeredTypeGenerating(X:
    end ): NamingPointeredTypeGenerating =
    struct
       structure PolymorphicContainerType =  X.PolymorphicContainerType
-      structure PointeredType =
+      structure PointeredTypeExtended =
          struct
             structure BaseType =  X.BaseType
             structure ContainerType =
@@ -100,14 +100,14 @@ functor NamingPointeredTypeGenerating(X:
 
       local
           fun get_name_ref b container
-            = Option.map (fn (f, _) => f) (List.find (fn (_, w) => PointeredType.BaseType.eq(b, w)) (container))
+            = Option.map (fn (f, _) => f) (List.find (fn (_, w) => PointeredTypeExtended.BaseType.eq(b, w)) (container))
       in
           fun get_name b container =  Option.join (Option.map ! (get_name_ref b container))
           fun set_name (name, b) container =  Option.isSome (Option.map (fn (store) => store := Option.SOME name) (get_name_ref b container))
       end
 
       fun add x c
-         =  if PointeredType.is_in (x, c)
+         =  if PointeredTypeExtended.is_in (x, c)
             then
                c
             else
