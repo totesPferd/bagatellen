@@ -17,13 +17,12 @@ functor LiteralsConstruction(X:
 
       structure Constructors =  X.C
 
-      datatype T =  Construction of Constructors.T * T PolymorphicContainerType.T | Variable of T X.PV.Variable
-
       structure Variables =
          struct
             structure Base =
                struct
-                  type T =  T
+                  datatype Construction =  Construction of X.C.T * Construction X.PCT.T | Variable of Construction X.PV.Variable
+                  type T =  Construction
                end
             type T =  Base.T X.PV.Variable
             val new: T =  X.PV.new ()
@@ -32,5 +31,7 @@ functor LiteralsConstruction(X:
             val get_val: T -> Base.T Option.option =  X.PV.get_val
             val is_bound: T -> bool =  Option.isSome o X.PV.get_val
          end
+
+      type T =  Variables.Base.T
 
    end;

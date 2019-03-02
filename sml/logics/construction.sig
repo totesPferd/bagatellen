@@ -9,8 +9,23 @@ signature LiteralsConstruction =
          end
 
       structure Constructors: Constructors
-      structure Variables: Variables
          
-      datatype T =  Construction of Constructors.T * T PolymorphicContainerType.T | Variable of Variables.T
+      structure Variables:
+         sig
+            type T
+            structure Base:
+               sig
+                  datatype Construction =  Construction of Constructors.T * Construction PolymorphicContainerType.T | Variable of T
+                  type T =  Construction
+               end
+
+            val new:      T
+            val eq:       T * T -> bool
+            val copy:     T -> T
+            val get_val:  T -> Base.T Option.option
+            val is_bound: T -> bool
+         end
+
+      type T =  Variables.Base.T
 
    end;
