@@ -1,16 +1,15 @@
-use "general/eqs.sig";
-use "collections/pointered_type.fun";
 use "collections/unit_pointered_type_extension.sig";
-use "collections/unit_polymorphic_pointered_type.sml";
+use "collections/unit_pointered_type_generating.sig";
+use "collections/unit_type.sig";
 
-functor UnitPointeredTypeExtension(B: Eqs): UnitPointeredTypeExtension =
+functor UnitPointeredTypeExtension(X: UnitPointeredTypeGenerating): UnitPointeredTypeExtension =
    struct
-      structure UnitPolymorphicPointeredType =  UnitPolymorphicPointeredType
-      structure UnitType =  UnitPolymorphicPointeredType.PointerType
-      structure PointeredTypeExtended =  PointeredTypeExtended(
+      structure UnitType: UnitType =
          struct
-            structure B =  B
-            structure PPT =  UnitPolymorphicPointeredType
-         end )
+            type T =  unit
+            val point =  ()
+            fun eq(x, y) =  true
+         end
+      structure PointeredTypeExtended =  X.PointeredTypeExtended
 
    end;
