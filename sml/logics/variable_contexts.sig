@@ -10,14 +10,12 @@ signature VariableContexts =
       structure Variables: Variables
       structure VariableContext:
          sig
-            structure Variables: Variables
             type T
             val eq:                  T * T -> bool
             val vmap:                Map.Map.T -> T -> T
             val filter_bound_vars:   T -> T
             val filter_unbound_vars: T -> T
          end
-      sharing VariableContext.Variables =  Variables
       sharing PointeredTypeExtended.BaseType =  Variables
       sharing PointeredTypeExtended.ContainerType =  VariableContext
       sharing Map.Start = Variables
