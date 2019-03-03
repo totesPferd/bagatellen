@@ -33,6 +33,7 @@ functor VariableContexts(X:
 
       structure VariableContext =
          struct
+            structure Map =  Map
             type T =  X.PT.ContainerType.T
             val eq =  X.PT.all_zip (X.Var.eq)
             val vmap =  X.PF.map
