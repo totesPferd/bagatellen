@@ -27,6 +27,7 @@ functor Literals(X:
    end ): Literals =
    struct
       structure Constructors =  X.LiteralsConstruction.Constructors
+      structure PointeredTypeExtended =  X.PointeredTypeGenerating.PointeredTypeExtended
       structure Variables =  X.LiteralsConstruction.Variables
 
       fun traverse (f_1, f_2, f_3, z_0) (Variables.Base.Construction(c, xi))

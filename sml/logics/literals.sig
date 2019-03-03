@@ -1,10 +1,12 @@
 use "collections/occurences.sig";
+use "collections/pointered_type_extended.sig";
 use "logics/constructors.sig";
 use "logics/variables.sig";
 
 signature Literals =
    sig
       structure Constructors: Constructors
+      structure PointeredTypeExtended: PointeredTypeExtended
       structure Variables: Variables
       structure Single:
          sig
@@ -29,6 +31,9 @@ signature Literals =
             val subeq:          T * T -> bool
          end
       structure PointerType: Type
+      sharing PointeredTypeExtended.BaseType =  Single
+      sharing PointeredTypeExtended.PointerType =  PointerType
+      sharing PointeredTypeExtended.ContainerType =  Multi
       sharing Variables.Base =  Single
       sharing Single.Variables =  Variables
       sharing Multi.Variables =  Variables
