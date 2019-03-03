@@ -1,14 +1,29 @@
 use "collections/pointered_type_generating.sig";
 use "collections/polymorphic_pointered_type.sig";
+use "general/base_map.sig";
 use "logics/construction.sig";
 use "logics/literals.sig";
+use "pointered_types/pointered_functor.sig";
 
 functor Literals(X:
    sig
+      structure BaseMap: BaseMap
       structure LiteralsConstruction: LiteralsConstruction
       structure PointeredTypeGenerating: PointeredTypeGenerating
+      structure PointeredFunctor: PointeredFunctor
+         where
+            type Start.ContainerType.T =  PointeredTypeGenerating.PointeredTypeExtended.ContainerType.T
+         and
+            type End.ContainerType.T =  PointeredTypeGenerating.PointeredTypeExtended.ContainerType.T
       sharing LiteralsConstruction.PolymorphicContainerType = PointeredTypeGenerating.PolymorphicContainerType
-      sharing LiteralsConstruction.Variables.Base =  PointeredTypeGenerating.PointeredTypeExtended.BaseType
+      sharing LiteralsConstruction.Variables.Base = PointeredTypeGenerating.PointeredTypeExtended.BaseType
+      sharing PointeredFunctor.Start.BaseType = PointeredTypeGenerating.PointeredTypeExtended.BaseType
+      sharing PointeredFunctor.Start.PointerType = PointeredTypeGenerating.PointeredTypeExtended.PointerType
+      sharing PointeredFunctor.End.BaseType = PointeredTypeGenerating.PointeredTypeExtended.BaseType
+      sharing PointeredFunctor.End.PointerType = PointeredTypeGenerating.PointeredTypeExtended.PointerType
+      sharing PointeredFunctor.Map = BaseMap
+      sharing BaseMap.Start = LiteralsConstruction.Variables.Base
+      sharing BaseMap.End = LiteralsConstruction.Variables.Base
    end ): Literals =
    struct
       structure Constructors =  X.LiteralsConstruction.Constructors
@@ -75,7 +90,7 @@ functor Literals(X:
                         () )
                   ;  Variables.Base.Variable new_var )
             end
-      and multi_vmap f =  X.PointeredTypeGenerating.PointeredTypeExtended.map (vmap f)
+      and multi_vmap f =  X.PointeredFunctor.map(X.BaseMap.get_map(vmap f))
 
       val select =  X.PointeredTypeGenerating.PointeredTypeExtended.select
 
