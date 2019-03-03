@@ -22,12 +22,10 @@ functor Contecteds(X:
 
       structure ContectedLiterals =
          struct
-            structure Constructors =  Constructors
             structure Literals =  Literals
             structure VariableContexts =  VariableContexts
             structure Single =
                struct
-                  structure Constructors =  Constructors
                   structure Literals =  Literals
                   structure VariableContexts =  VariableContexts
                   type T =  { context: VariableContexts.VariableContext.T, conclusion: Literals.Single.T }
@@ -55,7 +53,6 @@ functor Contecteds(X:
                end
             structure Multi =
                struct
-                  structure Constructors =  Constructors
                   structure Literals =  Literals
                   structure VariableContexts =  VariableContexts
                   type T =  { context: VariableContexts.VariableContext.T, antecedent: Literals.Multi.T }
@@ -97,12 +94,10 @@ functor Contecteds(X:
 
       structure Clauses =
          struct
-            structure Constructors =  Constructors
             structure Literals =  Literals
             structure VariableContexts =  VariableContexts
             structure Single =
                struct
-                  structure Constructors =  Constructors
                   structure Literals =  Literals
                   structure VariableContexts =  VariableContexts
                   type T =  { context: VariableContexts.VariableContext.T, antecedent: Literals.Multi.T, conclusion: Literals.Single.T }
@@ -137,7 +132,6 @@ functor Contecteds(X:
       
             structure Multi =
                struct
-                  structure Constructors =  Constructors
                   structure Literals =  Literals
                   structure VariableContexts =  VariableContexts
                   type T =  { context: VariableContexts.VariableContext.T, antecedent: Literals.Multi.T, conclusion: Literals.Multi.T }

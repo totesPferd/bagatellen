@@ -12,7 +12,7 @@ signature Literals =
             type T
             val eq: T * T -> bool
             val equate:         T * T -> bool
-            val traverse:      (Constructors.T * 'a -> 'b) * (Variables.T -> 'b) * ('b * 'a -> 'a Option.option) * 'a -> T -> 'b
+            val traverse:       (Constructors.T * 'a -> 'b) * (Variables.T -> 'b) * ('b * 'a -> 'a Option.option) * 'a -> T -> 'b
             val variable:       Variables.T -> T
             val vmap:           (Variables.T -> Variables.T) -> T -> T
          end

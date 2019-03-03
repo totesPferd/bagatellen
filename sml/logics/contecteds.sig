@@ -19,12 +19,10 @@ signature Contecteds =
       sharing LiteralsVariableOccurences.Occurences = Occurences
       structure Clauses:
          sig
-            structure Constructors: Constructors
             structure Literals: Literals
             structure VariableContexts: VariableContexts
             structure Single:
                sig
-                  structure Constructors: Constructors
                   structure Literals: Literals
                   structure VariableContexts: VariableContexts
                   type T
@@ -40,7 +38,6 @@ signature Contecteds =
                end
             structure Multi:
                sig
-                  structure Constructors: Constructors
                   structure Literals: Literals
                   structure VariableContexts: VariableContexts
                   type T
@@ -55,8 +52,6 @@ signature Contecteds =
                   val is_empty: T -> bool
                   val is_assumption: T -> bool
                end
-            sharing Single.Constructors =  Constructors
-            sharing Multi.Constructors =  Constructors
             sharing Single.Literals =  Literals
             sharing Multi.Literals =  Literals
             sharing Single.VariableContexts =  VariableContexts
@@ -66,12 +61,10 @@ signature Contecteds =
          end
       structure ContectedLiterals:
          sig
-            structure Constructors: Constructors
             structure Literals: Literals
             structure VariableContexts: VariableContexts
             structure Single:
                sig
-                  structure Constructors: Constructors
                   structure Literals: Literals
                   structure VariableContexts: VariableContexts
                   type T
@@ -85,7 +78,6 @@ signature Contecteds =
                end
             structure Multi:
                sig
-                  structure Constructors: Constructors
                   structure Literals: Literals
                   structure VariableContexts: VariableContexts
                   type T
@@ -99,8 +91,6 @@ signature Contecteds =
       
                   val is_empty: T -> bool
                end
-            sharing Single.Constructors =  Constructors
-            sharing Multi.Constructors =  Constructors
             sharing Single.Literals =  Literals
             sharing Multi.Literals =  Literals
             sharing Single.VariableContexts =  VariableContexts
@@ -108,8 +98,6 @@ signature Contecteds =
             val transition: (Single.T * 'b -> 'b Option.option) -> Multi.T -> 'b -> 'b
             val fe:  Single.T -> Multi.T
          end
-      sharing Clauses.Constructors =  Constructors
-      sharing ContectedLiterals.Constructors =  Constructors
       sharing Clauses.Literals =  Literals
       sharing ContectedLiterals.Literals =  Literals
       sharing Clauses.VariableContexts =  VariableContexts
