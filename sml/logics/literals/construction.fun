@@ -34,6 +34,4 @@ functor LiteralsConstruction(X:
             val set_val: Base.T -> T -> bool =  X.PV.set_val
          end
 
-      type T =  Variables.Base.T
-
    end;

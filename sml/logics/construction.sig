@@ -28,6 +28,4 @@ signature LiteralsConstruction =
             val set_val:     Base.T -> T -> bool
          end
 
-      type T =  Variables.Base.T
-
    end;
