@@ -69,12 +69,7 @@ functor NamingPointeredTypeGenerating(X:
             fun sum (c_1, c_2) =  c_1 @ c_2
       
             fun fe x =  [ (ref Option.NONE, x) ]
-            fun fop phi c
-              = transition (
-                      fn (x, c')
-                       => Option.SOME (union (phi x, c')) )
-                      c
-                      nil
+
             fun is_in (x, c)
               = List.exists
                    (fn (n, y) => BaseType.eq(x, y))

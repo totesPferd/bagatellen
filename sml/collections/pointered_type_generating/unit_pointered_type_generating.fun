@@ -53,7 +53,7 @@ functor UnitPointeredTypeGenerating(X:
                 |  Option.SOME c => c
       
             val fe =  Option.SOME
-            fun fop phi c =  Option.join (Option.map phi c)
+
             fun is_in (x, c)
               = Option.isSome (Option.map (fn (y) => BaseType.eq(x, y)) c)
       
