@@ -1,13 +1,30 @@
 use "collections/dictset.fun";
+use "general/type.sig";
 use "logics/contecteds.sig";
 use "logics/literals.sig";
 use "logics/proof.sig";
 use "logics/variable_contexts.sig";
+use "pointered_types/pointered_base_map.sig";
+use "pointered_types/pointered_generation.sig";
 
-functor Proof(X: Contecteds): Proof =
+functor Proof(X:
+   sig
+      structure Contecteds: Contecteds
+      structure PointeredBaseMap: PointeredBaseMap
+      structure PointerType: Type
+      structure PointeredGeneration: PointeredGeneration
+      sharing PointeredGeneration.Start =  Contecteds.Literals.PointeredTypeExtended
+      sharing PointeredGeneration.End =  Contecteds.Literals.PointeredTypeExtended
+      sharing PointeredGeneration.PointeredMap =  PointeredBaseMap
+      sharing PointeredBaseMap.Start =  Contecteds.Literals.PointeredTypeExtended.BaseType
+      sharing PointeredBaseMap.End =  Contecteds.Literals.PointeredTypeExtended.ContainerType
+      sharing PointeredBaseMap.PointerType =  PointerType
+      sharing Contecteds.Literals.PointeredTypeExtended.PointerType =  PointerType
+      sharing PointeredGeneration.Start.PointerType =  PointerType
+   end ): Proof =
    struct
-      structure Constructors =  X.Constructors
-      structure Contecteds =  X
+      structure Contecteds =  X.Contecteds
+      structure Constructors =  Contecteds.Constructors
       structure Single =  Contecteds.Clauses.Single
 
       structure ClauseDictSet =  DictSet(Single)
@@ -48,23 +65,22 @@ functor Proof(X: Contecteds): Proof =
                                 else
                                    Multi.drop(cl, proof)
                          in Option.SOME (
-                               (
-                                     Contecteds.Clauses.Multi.construct (
-                                           (Single.get_context goal)
-                                        ,  (Single.get_antecedent goal)
-                                        ,  (
-                                                 Contecteds.Literals.fop
-                                                    (
-                                                       fn (g: Contecteds.Literals.Single.T)
-                                                       => let
-                                                             val premis =  Single.construct (
-                                                                   (Single.get_context goal)
-                                                                ,  (Single.get_antecedent goal)
-                                                                ,  g )
-                                                          in
-                                                             Contecteds.Clauses.Multi.get_conclusion (apply_in_both_manners is_conventional proof' premis)
-                                                          end )
-                                                    (Single.get_antecedent der_cl) ))))
+                            Contecteds.Clauses.Multi.construct (
+                                  (Single.get_context goal)
+                               ,  (Single.get_antecedent goal)
+                               ,  (
+                                     X.PointeredGeneration.generate (
+                                        X.PointeredBaseMap.get_map (
+                                           fn (_, g: Contecteds.Literals.Single.T)
+                                           => let
+                                                 val premis =  Single.construct (
+                                                       (Single.get_context goal)
+                                                    ,  (Single.get_antecedent goal)
+                                                    ,  g )
+                                              in
+                                                 Contecteds.Clauses.Multi.get_conclusion (apply_in_both_manners is_conventional proof' premis)
+                                              end ))
+                                        (Single.get_antecedent der_cl) )))
                          end
             end
       and apply_in_both_manners is_conventional (proof: Multi.T) (goal: Single.T)
@@ -77,9 +93,9 @@ functor Proof(X: Contecteds): Proof =
                 (Contecteds.Clauses.Multi.get_context goal)
              ,  (Contecteds.Clauses.Multi.get_antecedent goal)
              ,  (
-                   Contecteds.Literals.fop
-                      (
-                         fn (g: Contecteds.Literals.Single.T)
+                   X.PointeredGeneration.generate (
+                      X.PointeredBaseMap.get_map (
+                         fn (_, g: Contecteds.Literals.Single.T)
                          => let
                                val premis
                                  = Single.construct (
@@ -88,8 +104,8 @@ functor Proof(X: Contecteds): Proof =
                                     ,  g )
                             in
                                Contecteds.Clauses.Multi.get_conclusion (apply_in_both_manners is_conventional proof premis)
-                            end )
-                   (Contecteds.Clauses.Multi.get_conclusion goal) ))
+                            end ))
+                      (Contecteds.Clauses.Multi.get_conclusion goal) ))
 
       val apply =  apply_in_both_manners false
       val multi_apply =  multi_apply_in_both_manners false
