@@ -96,7 +96,6 @@ functor Literals(X:
       val select =  X.PointeredTypeGenerating.PointeredTypeExtended.select
 
       val fe =  X.PointeredTypeGenerating.PointeredTypeExtended.fe
-      val fop =  X.PointeredTypeGenerating.PointeredTypeExtended.fop
       val is_in  =  X.PointeredTypeGenerating.PointeredTypeExtended.is_in
 
       fun construct (c, m) =  Variables.Base.Construction(c, m)
