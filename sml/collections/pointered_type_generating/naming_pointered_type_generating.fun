@@ -38,9 +38,6 @@ functor NamingPointeredTypeGenerating(X:
                    (fn ((n_1, x_1), (n_2, x_2)) => P(x_1, x_2))
                    (ListPair.zip (c_1, c_2))
       
-            fun map phi c
-              = (List.map (fn (n, x) => (n, phi x)) c)
-
             fun filter P c
                =  Acc.transition
                   (   fn ((n, x: 'a), y)
@@ -54,19 +51,6 @@ functor NamingPointeredTypeGenerating(X:
                    nil
       
             fun transition f c =  Acc.transition (fn ((n, x: 'a), y) => f(x, y)) c
-      
-            fun insert (t, nil) =  [ t ]
-              | insert ((m, x), ((n, y) :: tl))
-              = if BaseType.eq(x, y)
-                then
-                   (m, y) :: tl
-                else
-                   (n, y) :: (insert ((m, x), tl))
-      
-            fun union (c_1, c_2)
-              = List.foldl insert c_1 c_2
-      
-            fun sum (c_1, c_2) =  c_1 @ c_2
       
             fun fe x =  [ (ref Option.NONE, x) ]
 
@@ -89,7 +73,18 @@ functor NamingPointeredTypeGenerating(X:
 
       fun adjoin (str, x, c) =  (ref (Option.SOME str), x) :: c
 
+      fun insert (t, nil) =  [ t ]
+        | insert ((m, x), ((n, y) :: tl))
+        = if PointeredTypeExtended.BaseType.eq(x, y)
+          then
+             (m, y) :: tl
+          else
+             (n, y) :: (insert ((m, x), tl))
+      
       fun sum (c_1, c_2) =  c_1 @ c_2
+      fun union (c_1, c_2)
+        = List.foldl insert c_1 c_2
+      
 
       fun transition f c =  Acc.transition (fn ((n, x), y) => f(!n, x, y)) c
 

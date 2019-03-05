@@ -38,8 +38,6 @@ functor UnitPointeredTypeGenerating(X:
               | all_zip P (Option.NONE, Option.SOME x_2) =  raise ZipLengthsDoesNotAgree
               | all_zip P (Option.SOME x_1, Option.NONE) =  raise ZipLengthsDoesNotAgree
       
-            fun map f =  Option.map f
-
             fun filter P Option.NONE =  Option.NONE
             |   filter P (Option.SOME x)
                =  if P x

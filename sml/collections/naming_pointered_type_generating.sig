@@ -36,6 +36,7 @@ signature NamingPointeredTypeGenerating =
       val singleton: PointeredTypeExtended.PointerType.T * PointeredTypeExtended.BaseType.T -> PointeredTypeExtended.ContainerType.T
 
       val sum:        PointeredTypeExtended.ContainerType.T * PointeredTypeExtended.ContainerType.T -> PointeredTypeExtended.ContainerType.T
+      val union:      PointeredTypeExtended.ContainerType.T * PointeredTypeExtended.ContainerType.T -> PointeredTypeExtended.ContainerType.T
  
       val add:        PointeredTypeExtended.BaseType.T -> PointeredTypeExtended.ContainerType.T -> PointeredTypeExtended.ContainerType.T
       val adjoin:     string * PointeredTypeExtended.BaseType.T * PointeredTypeExtended.ContainerType.T -> PointeredTypeExtended.ContainerType.T
