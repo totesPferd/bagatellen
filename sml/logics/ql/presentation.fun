@@ -81,11 +81,11 @@ functor Presentation(X:
                             end
                    end
 
-      fun typecheck (state: state) data
+      fun typecheck pointer (state: state) data
         = let
              val (clo: Contecteds.Clauses.Single.T Option.option) =  get_typecheck_clause state data
           in
-             Option.map (Proof.apply_conventionally (#typecheck_info state)) clo
+             Option.map (Proof.apply_conventionally pointer (#typecheck_info state)) clo
           end
 
       fun add_module str (state: state)
@@ -144,20 +144,20 @@ functor Presentation(X:
              ,  typecheck_info = #typecheck_info state }: state
           end
 
-      fun get_normalform (state: state) (lit: Contecteds.ContectedLiterals.Single.T)
+      fun get_normalform pointer (state: state) (lit: Contecteds.ContectedLiterals.Single.T)
         = let
              val (cl: Contecteds.Clauses.Single.T) =  Contecteds.make_clause_from_conclusion lit
-             val (result: Contecteds.Clauses.Multi.T) =  Proof.apply (#equations state) cl
+             val (result: Contecteds.Clauses.Multi.T) =  Proof.apply pointer (#equations state) cl
           in
              result: Contecteds.Clauses.Multi.T
           end
 
-      fun ceq (state: state) (var_ctxt: VariableContexts.VariableContext.T, lit_1: Literals.Single.T, lit_2: Literals.Single.T)
+      fun ceq pointer (state: state) (var_ctxt: VariableContexts.VariableContext.T, lit_1: Literals.Single.T, lit_2: Literals.Single.T)
         = let
              val ctxt_lit_1 =  Contecteds.ContectedLiterals.Single.construct(var_ctxt, lit_1)
-             val nf_1 =  get_normalform state ctxt_lit_1
+             val nf_1 =  get_normalform pointer state ctxt_lit_1
              val ctxt_lit_2 =  Contecteds.ContectedLiterals.Single.construct(var_ctxt, lit_2)
-             val nf_2 =  get_normalform state ctxt_lit_2
+             val nf_2 =  get_normalform pointer state ctxt_lit_2
           in
              Contecteds.Clauses.Multi.eq(nf_1, nf_2)
           end

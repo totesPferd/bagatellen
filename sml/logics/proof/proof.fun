@@ -6,6 +6,7 @@ use "logics/proof.sig";
 use "logics/variable_contexts.sig";
 use "pointered_types/pointered_base_map.sig";
 use "pointered_types/pointered_generation.sig";
+use "pointered_types/pointered_singleton.sig";
 
 functor Proof(X:
    sig
@@ -13,6 +14,7 @@ functor Proof(X:
       structure PointeredBaseMap: PointeredBaseMap
       structure PointerType: Type
       structure PointeredGeneration: PointeredGeneration
+      structure PointeredSingleton: PointeredSingleton
       sharing PointeredGeneration.Start =  Contecteds.Literals.PointeredTypeExtended
       sharing PointeredGeneration.End =  Contecteds.Literals.PointeredTypeExtended
       sharing PointeredGeneration.PointeredMap =  PointeredBaseMap
@@ -21,6 +23,9 @@ functor Proof(X:
       sharing PointeredBaseMap.PointerType =  PointerType
       sharing Contecteds.Literals.PointeredTypeExtended.PointerType =  PointerType
       sharing PointeredGeneration.Start.PointerType =  PointerType
+      sharing PointeredSingleton.PointeredType =  Contecteds.Literals.PointeredTypeExtended
+      sharing PointeredSingleton.PointeredMap =  PointeredBaseMap
+      sharing PointeredSingleton.PointerType =  PointerType
    end ): Proof =
    struct
       structure Contecteds =  X.Contecteds
@@ -71,26 +76,26 @@ functor Proof(X:
                                ,  (
                                      X.PointeredGeneration.generate (
                                         X.PointeredBaseMap.get_map (
-                                           fn (_, g: Contecteds.Literals.Single.T)
+                                           fn (p, g: Contecteds.Literals.Single.T)
                                            => let
                                                  val premis =  Single.construct (
                                                        (Single.get_context goal)
                                                     ,  (Single.get_antecedent goal)
                                                     ,  g )
                                               in
-                                                 Contecteds.Clauses.Multi.get_conclusion (apply_in_both_manners is_conventional proof' premis)
+                                                 Contecteds.Clauses.Multi.get_conclusion (apply_in_both_manners is_conventional p proof' premis)
                                               end ))
                                         (Single.get_antecedent der_cl) )))
                          end
             end
-      and apply_in_both_manners is_conventional (proof: Multi.T) (goal: Single.T)
+      and apply_in_both_manners is_conventional pointer (proof: Multi.T) (goal: Single.T)
         = case(apply_telling_progress is_conventional proof goal) of
              Option.NONE
              => let
                    val var_ctxt =  Contecteds.Clauses.Single.get_context(goal)
                    val antecedent =  Contecteds.Clauses.Single.get_antecedent(goal)
                    val conclusion =  Contecteds.Clauses.Single.get_conclusion(goal)
-                   val multi_conclusion =  Contecteds.Literals.fe conclusion
+                   val multi_conclusion =  X.PointeredBaseMap.apply X.PointeredSingleton.singleton (pointer, conclusion)
                 in Contecteds.Clauses.Multi.construct(var_ctxt, antecedent, multi_conclusion)
                 end
           |  Option.SOME result =>  result
@@ -102,7 +107,7 @@ functor Proof(X:
              ,  (
                    X.PointeredGeneration.generate (
                       X.PointeredBaseMap.get_map (
-                         fn (_, g: Contecteds.Literals.Single.T)
+                         fn (p, g: Contecteds.Literals.Single.T)
                          => let
                                val premis
                                  = Single.construct (
@@ -110,7 +115,7 @@ functor Proof(X:
                                     ,  (Contecteds.Clauses.Multi.get_antecedent goal)
                                     ,  g )
                             in
-                               Contecteds.Clauses.Multi.get_conclusion (apply_in_both_manners is_conventional proof premis)
+                               Contecteds.Clauses.Multi.get_conclusion (apply_in_both_manners is_conventional p proof premis)
                             end ))
                       (Contecteds.Clauses.Multi.get_conclusion goal) ))
 
