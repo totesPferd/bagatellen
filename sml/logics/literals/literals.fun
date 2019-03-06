@@ -1,5 +1,4 @@
 use "collections/pointered_type_generating.sig";
-use "collections/polymorphic_pointered_type.sig";
 use "general/base_map.sig";
 use "logics/construction.sig";
 use "logics/literals.sig";
