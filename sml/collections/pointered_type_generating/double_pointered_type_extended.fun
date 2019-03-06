@@ -45,12 +45,6 @@ functor DoublePointeredTypeExtended(X:
             andalso
                 (SndType.all_zip (fn (x, y) => phi(BaseType.snd_inj x, BaseType.snd_inj y)) (ContainerType.snd c_1, ContainerType.snd c_2))
 
-      fun fe b
-         =   BaseType.traverse (
-                   (fn x => ContainerType.tuple(FstType.fe x, SndType.empty))
-                ,  (fn y => ContainerType.tuple(FstType.empty, SndType.fe y)) )
-                b
-
       fun is_in (b, c)
          =   BaseType.traverse (
                    (fn x => FstType.is_in (x, ContainerType.fst c))

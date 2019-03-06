@@ -50,8 +50,6 @@ functor UnitPointeredTypeGenerating(X:
                    Option.NONE =>  b
                 |  Option.SOME c => c
       
-            val fe =  Option.SOME
-
             fun is_in (x, c)
               = Option.isSome (Option.map (fn (y) => BaseType.eq(x, y)) c)
       

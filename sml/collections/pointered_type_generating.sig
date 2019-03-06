@@ -24,7 +24,6 @@ signature PointeredTypeGenerating =
          val all:        (BaseType.T -> bool) -> ContainerType.T -> bool
          val all_zip:    (BaseType.T * BaseType.T -> bool) -> (ContainerType.T * ContainerType.T) -> bool
    
-         val fe:         BaseType.T -> ContainerType.T
          val is_in:      BaseType.T * ContainerType.T -> bool
          val subeq:      ContainerType.T * ContainerType.T -> bool
    

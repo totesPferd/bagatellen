@@ -27,7 +27,6 @@ functor NamingPointeredTypeExtension(X: NamingPointeredTypeGenerating): NamingPo
 
             val all =  X.PointeredTypeExtended.all
             val all_zip =  X.PointeredTypeExtended.all_zip
-            val fe =  X.PointeredTypeExtended.fe
             val is_in =  X.PointeredTypeExtended.is_in
             val subeq =  X.PointeredTypeExtended.subeq
 

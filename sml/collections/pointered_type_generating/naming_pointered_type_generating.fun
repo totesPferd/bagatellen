@@ -52,8 +52,6 @@ functor NamingPointeredTypeGenerating(X:
       
             fun transition f c =  Acc.transition (fn ((n, x: 'a), y) => f(x, y)) c
       
-            fun fe x =  [ (ref Option.NONE, x) ]
-
             fun is_in (x, c)
               = List.exists
                    (fn (n, y) => BaseType.eq(x, y))

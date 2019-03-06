@@ -42,7 +42,6 @@ signature Literals =
 
       val select:     PointerType.T * Multi.T -> Single.T Option.option
 
-      val fe:         Single.T -> Multi.T
       val is_in:      Single.T * Multi.T -> bool
 
       val construct:  Constructors.T * Multi.T -> Single.T
