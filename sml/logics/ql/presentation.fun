@@ -9,6 +9,8 @@ use "logics/ql/presentation.sig";
 use "logics/ql/qualifier.sig";
 use "logics/variable_contexts.sig";
 use "logics/variables.sig";
+use "pointered_types/pointered_singleton.sig";
+use "pointered_types/pointered_type_map.sig";
 
 functor Presentation(X:
    sig
@@ -24,6 +26,8 @@ functor Presentation(X:
       structure UV: UnitPointeredTypeExtension
       structure V: Variables
       structure VC: VariableContexts
+      structure VCPTM: PointeredTypeMap
+      structure VCPS: PointeredSingleton
 
       sharing CX.Constructors = C
       sharing CX.Literals = L
@@ -38,6 +42,12 @@ functor Presentation(X:
       sharing C.Qualifier = Q
       sharing VC.PointeredTypeExtended = UV.PointeredTypeExtended
       sharing VC.Variables = V
+      sharing VCPS.PointeredType =  VC.PointeredTypeExtended
+      sharing VCPTM.Start =  VCPS.PointeredType.BaseType
+      sharing VCPTM.End =  VCPS.PointeredType.ContainerType
+      sharing VCPTM.PointerType =  VCPS.PointerType
+      sharing VCPTM.Map =  VCPS.PointeredMap
+      sharing VCPTM.Map =  VCPS.PointeredMap.Map
 
    end ): Presentation =
    struct
@@ -106,7 +116,7 @@ functor Presentation(X:
              val qual =  Qualifier.new()
              val new_bag =  QualifierBag.adjoin (str, qual, (#qualifier state))
              val new_var =  X.V.new
-             val new_var_ctxt =  X.VC.PointeredTypeExtended.fe new_var
+             val new_var_ctxt =  X.VCPTM.apply X.VCPS.singleton (X.UV.UnitType.point, new_var)
              val qual_lit =  Literals.construct(QLConstructors.qualifier qual, Literals.fe (Literals.Single.variable new_var))
              val ctxt_qual_lit =  Contecteds.ContectedLiterals.Single.construct(new_var_ctxt, qual_lit)
              val (clo: Contecteds.Clauses.Single.T Option.option) =  get_typecheck_clause state (ctxt_qual_lit, d0, d1)
