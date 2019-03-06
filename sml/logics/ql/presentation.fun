@@ -29,6 +29,8 @@ functor Presentation(X:
       structure VCPS: PointeredSingleton
       structure LPTM: PointeredTypeMap
       structure LPS: PointeredSingleton
+      structure QPTM: PointeredTypeMap
+      structure QPS: PointeredSingleton
 
       sharing CX.Constructors = C
       sharing CX.Literals = L
@@ -53,6 +55,11 @@ functor Presentation(X:
       sharing LPTM.End =  LPS.PointeredType.ContainerType
       sharing LPTM.PointerType =  LPS.PointerType
       sharing LPTM.Map =  LPS.PointeredMap.Map
+      sharing QPS.PointeredType =  NQ.PointeredTypeExtended
+      sharing QPTM.Start =  QPS.PointeredType.BaseType
+      sharing QPTM.End =  QPS.PointeredType.ContainerType
+      sharing QPTM.PointerType =  QPS.PointerType
+      sharing QPTM.Map =  QPS.PointeredMap.Map
 
    end ): Presentation =
    struct
@@ -66,6 +73,8 @@ functor Presentation(X:
 
       structure ModulesBag =  X.NM
       structure QualifierBag =  X.NQ
+
+      structure QualifierPointer =  QualifierBag.StringType
 
       type state =  {
             equations: Proof.Multi.T
@@ -147,14 +156,17 @@ functor Presentation(X:
                    ,  typecheck_info = nti }: state
           end
 
-      fun add_equation (pointer_1, pointer_2) (var_ctxt: VariableContexts.VariableContext.T, lit_1: Literals.Single.T, lit_2: Literals.Single.T) (state: state)
+      fun add_equation (pointer_1, pointer_2, q_pointer) (var_ctxt: VariableContexts.VariableContext.T, lit_1: Literals.Single.T, lit_2: Literals.Single.T) (state: state)
         = let
              val qual_vars =
                 case (X.VC.PointeredTypeExtended.select(X.UV.UnitType.point, var_ctxt)) of
                    Option.NONE => Literals.Multi.empty
                 |  Option.SOME var => X.LPTM.apply X.LPS.singleton (pointer_1, Literals.Single.variable var)
              val qual =  Qualifier.new()
-             val new_qual_bag =  QualifierBag.sum (QualifierBag.PointeredTypeExtended.fe qual, #qualifier state)
+             val new_qual_bag
+               =  QualifierBag.sum (
+                     X.QPTM.apply X.QPS.singleton (q_pointer, qual)
+                  ,  #qualifier state )
              val qual_lit =  Literals.construct(QLConstructors.qualifier qual, qual_vars)
              val antecedent =  X.LPTM.apply X.LPS.singleton (pointer_2, qual_lit)
              val cl_1 =  Contecteds.Clauses.Single.construct(var_ctxt, antecedent, lit_1)

@@ -1,3 +1,4 @@
+use "collections/string_type.sig";
 use "logics/contecteds.sig";
 use "logics/literals.sig";
 use "logics/proof.sig";
@@ -21,6 +22,8 @@ signature Presentation =
       sharing Proof.Constructors =  QLConstructors
       sharing Proof.Contecteds =  Contecteds
 
+      structure QualifierPointer: StringType
+
       type state
 
       val get_typecheck_clause:
@@ -40,7 +43,7 @@ signature Presentation =
          -> state
          -> state
       val add_equation:
-            Literals.PointerType.T * Literals.PointerType.T
+            Literals.PointerType.T * Literals.PointerType.T * QualifierPointer.T
          -> (VariableContexts.VariableContext.T * Literals.Single.T * Literals.Single.T)
          -> state
          -> state
