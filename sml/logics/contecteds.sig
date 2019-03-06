@@ -57,7 +57,6 @@ signature Contecteds =
             sharing Single.VariableContexts =  VariableContexts
             sharing Multi.VariableContexts =  VariableContexts
             val transition: (Single.T * 'b -> 'b Option.option) -> Multi.T -> 'b -> 'b
-            val fe:  Single.T -> Multi.T
          end
       structure ContectedLiterals:
          sig
@@ -96,7 +95,6 @@ signature Contecteds =
             sharing Single.VariableContexts =  VariableContexts
             sharing Multi.VariableContexts =  VariableContexts
             val transition: (Single.T * 'b -> 'b Option.option) -> Multi.T -> 'b -> 'b
-            val fe:  Single.T -> Multi.T
          end
       sharing Clauses.Literals =  Literals
       sharing ContectedLiterals.Literals =  Literals

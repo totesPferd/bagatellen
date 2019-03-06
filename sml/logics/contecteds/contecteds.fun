@@ -79,9 +79,6 @@ functor Contecteds(X:
                   fun is_empty (a: T) =  Literals.Multi.is_empty(#antecedent a)
                end
 
-            fun fe { context = ctxt, conclusion = c }
-              = { context = ctxt, antecedent = Literals.fe c }
-      
             fun transition phi (a: Multi.T)
               = let
                    fun psi (c: Literals.Single.T, b)
@@ -163,9 +160,6 @@ functor Contecteds(X:
                   fun is_assumption(mcl: T)
                     = Literals.Multi.subeq(#antecedent mcl, #conclusion mcl)
                end
-
-            fun fe { context = ctxt, antecedent = a, conclusion = c}
-              = { context = ctxt, antecedent = a, conclusion = Literals.fe c }
 
             fun transition phi (mcl: Multi.T)
               = let
