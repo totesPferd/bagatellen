@@ -27,6 +27,8 @@ functor Presentation(X:
       structure VC: VariableContexts
       structure VCPTM: PointeredTypeMap
       structure VCPS: PointeredSingleton
+      structure LPTM: PointeredTypeMap
+      structure LPS: PointeredSingleton
 
       sharing CX.Constructors = C
       sharing CX.Literals = L
@@ -45,8 +47,12 @@ functor Presentation(X:
       sharing VCPTM.Start =  VCPS.PointeredType.BaseType
       sharing VCPTM.End =  VCPS.PointeredType.ContainerType
       sharing VCPTM.PointerType =  VCPS.PointerType
-      sharing VCPTM.Map =  VCPS.PointeredMap
       sharing VCPTM.Map =  VCPS.PointeredMap.Map
+      sharing LPS.PointeredType =  L.PointeredTypeExtended
+      sharing LPTM.Start =  LPS.PointeredType.BaseType
+      sharing LPTM.End =  LPS.PointeredType.ContainerType
+      sharing LPTM.PointerType =  LPS.PointerType
+      sharing LPTM.Map =  LPS.PointeredMap.Map
 
    end ): Presentation =
    struct
@@ -67,7 +73,7 @@ functor Presentation(X:
          ,  qualifier: QualifierBag.PointeredTypeExtended.ContainerType.T
          ,  typecheck_info: Proof.Multi.T }
 
-      fun get_typecheck_clause (state: state) (lit: Contecteds.ContectedLiterals.Single.T, d0: string, d1: string)
+      fun get_typecheck_clause (pointer_1, pointer_2, pointer_3) (state: state) (lit: Contecteds.ContectedLiterals.Single.T, d0: string, d1: string)
         = case (ModulesBag.PointeredTypeExtended.select(ModulesBag.StringType.point d0, (#modules state))) of
              Option.NONE => Option.NONE
           |  Option.SOME md0
@@ -82,19 +88,26 @@ functor Presentation(X:
                       |  Option.SOME lit_var
                          => let
                                val lit_conclusion =  Contecteds.ContectedLiterals.Single.get_conclusion lit
-                               val new_conclusion =  Literals.construct(QLConstructors.module md1, Literals.fe lit_conclusion)
-                               val premis =  Literals.construct(QLConstructors.module md0, Literals.fe (Literals.Single.variable lit_var))
-                               val new_antecedent =  Literals.fe premis
+                               val new_conclusion
+                                  =  Literals.construct(
+                                        QLConstructors.module md1
+                                     ,  X.LPTM.apply X.LPS.singleton (pointer_1, lit_conclusion) )
+                               val premis
+                                  =  Literals.construct(
+                                        QLConstructors.module md0
+                                     ,  X.LPTM.apply X.LPS.singleton (pointer_2, Literals.Single.variable lit_var))
+                               val new_antecedent
+                                  =  X.LPTM.apply X.LPS.singleton (pointer_3, premis)
                             in
                                Option.SOME (Contecteds.Clauses.Single.construct (var_ctxt, new_antecedent, new_conclusion))
                             end
                    end
 
-      fun typecheck pointer (state: state) data
+      fun typecheck (pointer_1, pointer_2, pointer_3, pointer_4) (state: state) data
         = let
-             val (clo: Contecteds.Clauses.Single.T Option.option) =  get_typecheck_clause state data
+             val (clo: Contecteds.Clauses.Single.T Option.option) =  get_typecheck_clause (pointer_1, pointer_2, pointer_3) state data
           in
-             Option.map (Proof.apply_conventionally pointer (#typecheck_info state)) clo
+             Option.map (Proof.apply_conventionally pointer_4 (#typecheck_info state)) clo
           end
 
       fun add_module str (state: state)
@@ -110,15 +123,18 @@ functor Presentation(X:
           end
 
       exception ParanormalEffectHasOccured
-      fun add_qualifier (str: string, d0: string, d1: string) (state: state)
+      fun add_qualifier (pointer_1, pointer_2, pointer_3, pointer_4) (str: string, d0: string, d1: string) (state: state)
         = let
              val qual =  Qualifier.new()
              val new_bag =  QualifierBag.adjoin (str, qual, (#qualifier state))
              val new_var =  X.V.new
              val new_var_ctxt =  X.VCPTM.apply X.VCPS.singleton (X.UV.UnitType.point, new_var)
-             val qual_lit =  Literals.construct(QLConstructors.qualifier qual, Literals.fe (Literals.Single.variable new_var))
+             val qual_lit
+                =  Literals.construct(
+                      QLConstructors.qualifier qual
+                   ,  X.LPTM.apply X.LPS.singleton (pointer_4, Literals.Single.variable new_var))
              val ctxt_qual_lit =  Contecteds.ContectedLiterals.Single.construct(new_var_ctxt, qual_lit)
-             val (clo: Contecteds.Clauses.Single.T Option.option) =  get_typecheck_clause state (ctxt_qual_lit, d0, d1)
+             val (clo: Contecteds.Clauses.Single.T Option.option) =  get_typecheck_clause (pointer_1, pointer_2, pointer_3) state (ctxt_qual_lit, d0, d1)
              val new_tc_info =  Option.map (fn cl => Proof.add_clause_to_proof (cl, #typecheck_info state)) clo
           in
              case (new_tc_info) of
@@ -131,16 +147,16 @@ functor Presentation(X:
                    ,  typecheck_info = nti }: state
           end
 
-      fun add_equation (var_ctxt: VariableContexts.VariableContext.T, lit_1: Literals.Single.T, lit_2: Literals.Single.T) (state: state)
+      fun add_equation (pointer_1, pointer_2) (var_ctxt: VariableContexts.VariableContext.T, lit_1: Literals.Single.T, lit_2: Literals.Single.T) (state: state)
         = let
              val qual_vars =
                 case (X.VC.PointeredTypeExtended.select(X.UV.UnitType.point, var_ctxt)) of
                    Option.NONE => Literals.Multi.empty
-                |  Option.SOME var => Literals.fe (Literals.Single.variable var)
+                |  Option.SOME var => X.LPTM.apply X.LPS.singleton (pointer_1, Literals.Single.variable var)
              val qual =  Qualifier.new()
              val new_qual_bag =  QualifierBag.sum (QualifierBag.PointeredTypeExtended.fe qual, #qualifier state)
              val qual_lit =  Literals.construct(QLConstructors.qualifier qual, qual_vars)
-             val antecedent =  Literals.fe qual_lit
+             val antecedent =  X.LPTM.apply X.LPS.singleton (pointer_2, qual_lit)
              val cl_1 =  Contecteds.Clauses.Single.construct(var_ctxt, antecedent, lit_1)
              val cl_2 =  Contecteds.Clauses.Single.construct(var_ctxt, antecedent, lit_2)
              val new_eq_bag
