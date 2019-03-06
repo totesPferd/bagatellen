@@ -12,16 +12,20 @@ functor PointeredBasePredicate(X:
       sharing PointeredSingleton.PointeredMap = PointeredBaseMap
       sharing PointeredSingleton.PointeredType.BaseType = PointeredBaseMap.Start
       sharing PointeredSingleton.PointeredType.ContainerType = PointeredBaseMap.End
+
+      val predicate: PointeredSingleton.PointeredType.BaseType.T -> bool
+
    end ): PointeredPredicate =
    struct
       structure PointeredType =  X.PointeredSingleton.PointeredType
       structure PointeredMap =  X.PointeredBaseMap
       structure PointerType =  X.PointeredSingleton.PointerType
 
-      fun get_predicate pi
+      val predicate =  X.predicate
+      val predicate_map
          =  PointeredMap.get_map
                (fn (p, b)
-               => if (pi b)
+               => if (predicate b)
                   then
                      PointeredMap.apply X.PointeredSingleton.singleton (p, b)
                   else

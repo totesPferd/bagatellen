@@ -26,8 +26,11 @@ functor PointeredDoublePredicate(X:
       structure FstPredicate =  X.FstPredicate
       structure SndPredicate =  X.SndPredicate
 
-      fun get_predicate p =  PointeredMap.Pair.tuple(
-            (FstPredicate.get_predicate (p o PointeredType.BaseType.fst_inj))
-         ,  (SndPredicate.get_predicate (p o PointeredType.BaseType.snd_inj)) )
+      val predicate =  PointeredType.BaseType.traverse (
+            FstPredicate.predicate
+         ,  SndPredicate.predicate )
+      val predicate_map =  PointeredMap.Pair.tuple (
+            FstPredicate.predicate_map
+         ,  SndPredicate.predicate_map )
 
    end;

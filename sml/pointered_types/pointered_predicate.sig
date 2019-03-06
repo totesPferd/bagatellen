@@ -12,6 +12,7 @@ signature PointeredPredicate =
       sharing PointeredMap.PointerType = PointerType
       sharing PointeredType.PointerType = PointerType
 
-      val get_predicate: (PointeredType.BaseType.T -> bool) -> PointeredMap.Map.T
+      val predicate: PointeredType.BaseType.T -> bool
+      val predicate_map: PointeredMap.Map.T
 
    end;

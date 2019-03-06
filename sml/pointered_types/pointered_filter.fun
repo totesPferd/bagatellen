@@ -21,6 +21,6 @@ functor PointeredFilter(X:
    struct
       structure PointeredType =  X.PointeredType
 
-      val filter =  X.Generation.generate o X.PointeredPredicate.get_predicate
+      val filter =  X.Generation.generate X.PointeredPredicate.predicate_map
 
    end;

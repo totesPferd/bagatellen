@@ -5,6 +5,6 @@ signature PointeredFilter =
    sig
       structure PointeredType: PointeredType
 
-      val filter:  (PointeredType.BaseType.T -> bool) -> PointeredType.ContainerType.T -> PointeredType.ContainerType.T
+      val filter:  PointeredType.ContainerType.T -> PointeredType.ContainerType.T
 
    end;
