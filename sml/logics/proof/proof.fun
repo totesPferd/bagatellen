@@ -85,7 +85,14 @@ functor Proof(X:
             end
       and apply_in_both_manners is_conventional (proof: Multi.T) (goal: Single.T)
         = case(apply_telling_progress is_conventional proof goal) of
-             Option.NONE =>  (Contecteds.Clauses.fe goal)
+             Option.NONE
+             => let
+                   val var_ctxt =  Contecteds.Clauses.Single.get_context(goal)
+                   val antecedent =  Contecteds.Clauses.Single.get_antecedent(goal)
+                   val conclusion =  Contecteds.Clauses.Single.get_conclusion(goal)
+                   val multi_conclusion =  Contecteds.Literals.fe conclusion
+                in Contecteds.Clauses.Multi.construct(var_ctxt, antecedent, multi_conclusion)
+                end
           |  Option.SOME result =>  result
 
       fun multi_apply_in_both_manners is_conventional (proof: Multi.T) (goal: Contecteds.Clauses.Multi.T)
