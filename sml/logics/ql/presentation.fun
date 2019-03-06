@@ -22,7 +22,6 @@ functor Presentation(X:
       structure P: Proof
       structure C: QLConstructors
       structure Q: Qualifier
-      structure UL: UnitPointeredTypeExtension
       structure UV: UnitPointeredTypeExtension
       structure V: Variables
       structure VC: VariableContexts
