@@ -14,8 +14,6 @@ signature VariableContexts =
             type T
             val eq:                  T * T -> bool
             val vmap:                Map.Map.T -> T -> T
-            val filter_bound_vars:   T -> T
-            val filter_unbound_vars: T -> T
          end
       sharing Map.Start = Variables
       sharing Map.End = Variables
