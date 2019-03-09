@@ -43,12 +43,6 @@ functor UnitPointeredTypeGenerating(X:
               | all_zip P (Option.NONE, Option.SOME x_2) =  raise ZipLengthsDoesNotAgree
               | all_zip P (Option.SOME x_1, Option.NONE) =  raise ZipLengthsDoesNotAgree
       
-            fun filter P Option.NONE =  Option.NONE
-            |   filter P (Option.SOME x)
-               =  if P x
-                  then Option.SOME x
-                  else Option.NONE
-      
             fun transition phi Option.NONE b =  b
               | transition phi (Option.SOME x) b
               = case(phi (x, b)) of

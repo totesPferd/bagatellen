@@ -61,14 +61,6 @@ functor DoublePointeredTypeExtended(X:
             andalso
                SndType.subeq (ContainerType.snd c_1, ContainerType.snd c_2)
 
-
-      fun filter phi c
-         =  let
-               val v_1 =  FstType.filter (phi o BaseType.fst_inj) (ContainerType.fst c)
-               val v_2 =  SndType.filter (phi o BaseType.snd_inj) (ContainerType.snd c)
-            in ContainerType.tuple(v_1, v_2)
-            end
-
       fun transition phi c b
          =  let
                val v_1 =  FstType.transition (fn (x, b') => phi(BaseType.fst_inj x, b')) (ContainerType.fst c) b

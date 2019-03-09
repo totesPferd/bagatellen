@@ -31,7 +31,6 @@ functor NamingPointeredTypeExtension(X: NamingPointeredTypeGenerating): NamingPo
             val is_in =  X.PointeredTypeExtended.is_in
             val subeq =  X.PointeredTypeExtended.subeq
 
-            val filter =  X.PointeredTypeExtended.filter
             val transition =  X.PointeredTypeExtended.transition
 
          end

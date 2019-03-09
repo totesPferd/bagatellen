@@ -43,18 +43,6 @@ functor NamingPointeredTypeGenerating(X:
                    (fn ((n_1, x_1), (n_2, x_2)) => P(x_1, x_2))
                    (ListPair.zip (c_1, c_2))
       
-            fun filter P c
-               =  Acc.transition
-                  (   fn ((n, x: 'a), y)
-                      => Option.SOME (
-                            if P x
-                            then
-                               (n, x) :: y
-                            else
-                               y ))
-                   c
-                   nil
-      
             fun transition f c =  Acc.transition (fn ((n, x: 'a), y) => f(x, y)) c
       
             fun is_in (x, c)

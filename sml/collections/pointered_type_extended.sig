@@ -12,7 +12,6 @@ signature PointeredTypeExtended =
       val is_in:      BaseType.T * ContainerType.T -> bool
       val subeq:      ContainerType.T * ContainerType.T -> bool
 
-      val filter:     (BaseType.T -> bool) -> ContainerType.T -> ContainerType.T
       val transition: (BaseType.T * 'b -> 'b Option.option) -> ContainerType.T -> 'b -> 'b
 
    end;
