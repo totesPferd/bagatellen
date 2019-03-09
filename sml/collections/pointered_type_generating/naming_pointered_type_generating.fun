@@ -1,12 +1,16 @@
 use "collections/acc.sml";
+use "collections/all_zip.sig";
 use "collections/naming_pointered_type_generating.sig";
 use "collections/naming_polymorphic_container_type.sig";
 use "general/eqs.sig";
+use "general/type_binary_relation.sig";
 
 functor NamingPointeredTypeGenerating(X:
    sig
       structure BaseType: Eqs
+      structure BinaryRelation: TypeBinaryRelation
       structure PolymorphicContainerType: NamingPolymorphicContainerType
+      sharing BinaryRelation.Domain = BaseType
    end ): NamingPointeredTypeGenerating =
    struct
       structure PolymorphicContainerType =  X.PolymorphicContainerType
@@ -61,6 +65,16 @@ functor NamingPointeredTypeGenerating(X:
             fun subeq (c_1, c_2)
               = List.all (fn (n, x) => is_in (x, c_2)) c_1
 
+         end
+      structure AllZip: AllZip =
+         struct
+            structure BinaryRelation =  X.BinaryRelation
+            structure PointeredType =  PointeredTypeExtended
+
+            fun result r (c_1: PointeredType.ContainerType.T, c_2: PointeredType.ContainerType.T)
+               =  List.all
+                     (fn ((n_1, x_1), (n_2, x_2)) => X.BinaryRelation.apply r (x_1, x_2))
+                     (ListPair.zip (c_1, c_2))
          end
 
       fun singleton (p, x) =  [ (p, x) ]

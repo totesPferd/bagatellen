@@ -1,4 +1,5 @@
 use "general/eqs.sig";
+use "general/binary_relation.sig";
 use "general/type.sig";
 
 signature PointeredTypeGenerating =
@@ -33,6 +34,24 @@ signature PointeredTypeGenerating =
          val transition: (BaseType.T * 'b -> 'b Option.option) -> ContainerType.T -> 'b -> 'b
 
       end
+      structure AllZip:
+         sig
+            structure BinaryRelation: BinaryRelation
+            structure PointeredType:
+               sig
+                  structure BaseType: Eqs
+                  structure ContainerType:
+                     sig
+                        type T =  PointeredTypeExtended.ContainerType.T
+                     end
+                  structure PointerType: Type
+                  structure BaseStructure: Eqs
+                  sharing BaseStructure = BaseType
+               end
+         end
+      sharing AllZip.PointeredType.BaseType =  PointeredTypeExtended.BaseType
+      sharing AllZip.PointeredType.PointerType =  PointeredTypeExtended.PointerType
+      sharing AllZip.PointeredType.BaseStructure =  PointeredTypeExtended.BaseStructure
 
       val singleton: PointeredTypeExtended.PointerType.T * PointeredTypeExtended.BaseType.T -> PointeredTypeExtended.ContainerType.T
 
