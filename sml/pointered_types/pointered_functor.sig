@@ -6,8 +6,8 @@ signature PointeredFunctor =
       structure Start: PointeredType
       structure End: PointeredType
       structure Map: Map
-      sharing Map.Start = Start.BaseType
-      sharing Map.End = End.BaseType
+      sharing Map.Start = Start.BaseStructure
+      sharing Map.End = End.BaseStructure
 
       val map: Map.Map.T -> Start.ContainerType.T -> End.ContainerType.T
    end;
