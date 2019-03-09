@@ -34,6 +34,7 @@ signature Literals =
       sharing PointeredTypeExtended.BaseType =  Single
       sharing PointeredTypeExtended.PointerType =  PointerType
       sharing PointeredTypeExtended.ContainerType =  Multi
+      sharing PointeredTypeExtended.BaseStructure =  Single
       sharing Variables.Base =  Single
       sharing Single.Variables =  Variables
       sharing Multi.Variables =  Variables

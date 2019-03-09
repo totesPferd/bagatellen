@@ -24,6 +24,7 @@ functor UnitPointeredTypeGenerating(X:
                struct
                   type T =  unit
                end
+            structure BaseStructure =  BaseType
       
             val empty         =  Option.NONE
             val is_empty      =  not o Option.isSome

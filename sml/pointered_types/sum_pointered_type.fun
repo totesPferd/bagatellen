@@ -20,6 +20,11 @@ functor SumPointeredType(X:
       structure BaseType =  X.BaseSum
       structure ContainerType = X.ContainerPair
       structure PointerType =  X.PointerSum
+      structure BaseStructure =
+         struct
+            structure Fst =  X.FstPT.BaseStructure
+            structure Snd =  X.SndPT.BaseStructure
+         end
 
       val empty =  X.ContainerPair.tuple(X.FstPT.empty, X.SndPT.empty)
       fun is_empty c

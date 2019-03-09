@@ -16,6 +16,8 @@ signature NamingPointeredTypeGenerating =
                sig
                   type T =  string Option.option ref
                end
+            structure BaseStructure: Eqs
+            sharing BaseStructure = BaseType
       
             val empty: ContainerType.T
             val is_empty: ContainerType.T -> bool

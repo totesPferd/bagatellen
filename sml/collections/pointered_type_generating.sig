@@ -15,7 +15,9 @@ signature PointeredTypeGenerating =
                type T =  BaseType.T PolymorphicContainerType.T
                val eq: T * T -> bool
             end
-         structure PointerType: Type
+            structure PointerType: Type
+            structure BaseStructure: Eqs
+            sharing BaseStructure = BaseType
 
          val empty: ContainerType.T
          val is_empty: ContainerType.T -> bool

@@ -16,6 +16,8 @@ signature UnitPointeredTypeGenerating =
                sig
                   type T =  unit
                end
+            structure BaseStructure: Eqs
+            sharing BaseStructure = BaseType
       
             val empty: ContainerType.T
             val is_empty: ContainerType.T -> bool

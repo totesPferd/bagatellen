@@ -24,6 +24,11 @@ functor DoublePointeredType(X:
       structure BaseType =  X.BaseType
       structure ContainerType =  X.ContainerType
       structure PointerType =  X.PointerType
+      structure BaseStructure =
+         struct
+            structure Fst =  X.FstType.BaseStructure
+            structure Snd =  X.SndType.BaseStructure
+         end
 
       val empty =    ContainerType.tuple(FstType.empty, SndType.empty)
       fun is_empty c

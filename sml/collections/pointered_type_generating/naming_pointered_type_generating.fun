@@ -22,6 +22,7 @@ functor NamingPointeredTypeGenerating(X:
                struct
                   type T =  string Option.option ref
                end
+            structure BaseStructure =  BaseType
       
             val empty         =  List.nil
             val is_empty      =  List.null

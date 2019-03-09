@@ -16,6 +16,7 @@ functor NamingPointeredTypeExtension(X: NamingPointeredTypeGenerating): NamingPo
             structure BaseType =  X.PointeredTypeExtended.BaseType
             structure PointerType =  StringType
             structure ContainerType =  X.PointeredTypeExtended.ContainerType
+            structure BaseStructure =  BaseType
 
             fun select (p, c)
                =  case(List.find (fn (m, x) => (!m = (Option.SOME p))) c) of

@@ -29,6 +29,11 @@ functor DoublePointeredTypeExtended(X:
       structure BaseType =  X.BaseType
       structure ContainerType =  X.ContainerType
       structure PointerType =  X.PointerType
+      structure BaseStructure =
+         struct
+            structure Fst =  FstType.BaseStructure
+            structure Snd =  SndType.BaseStructure
+         end
 
       val select =  X.DoublePointeredType.select
       val empty =  X.DoublePointeredType.empty
