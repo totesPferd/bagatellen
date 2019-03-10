@@ -7,6 +7,7 @@ use "logics/variable_structure.sig";
 signature Literals =
    sig
       structure Constructors: Constructors
+      structure Occurences: Occurences
       structure PointeredTypeExtended: PointeredTypeExtended
       structure Variables: Variables
       structure VariableStructure: VariableStructure
@@ -16,6 +17,7 @@ signature Literals =
             type T
             val eq: T * T -> bool
             val equate:         T * T -> bool
+            val get_occurences: T -> Occurences.occurences
             val traverse:       (Constructors.T * 'a -> 'b) * (Variables.T -> 'b) * ('b * 'a -> 'a Option.option) * 'a -> T -> 'b
             val variable:       Variables.T -> T
             val vmap:           PointeredTypeExtended.BaseStructureMap.Map.T -> T -> T
@@ -26,6 +28,7 @@ signature Literals =
             type T
             val eq: T * T -> bool
             val equate:         T * T -> bool
+            val get_occurences: T -> Occurences.occurences
             val traverse:       (Constructors.T * 'a -> 'b) * (Variables.T -> 'b) * ('b * 'a -> 'a Option.option) * 'a -> T -> 'a
             val empty:          T
             val is_empty:       T -> bool

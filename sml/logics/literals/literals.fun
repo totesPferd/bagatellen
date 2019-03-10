@@ -1,3 +1,4 @@
+use "collections/occurences.sig";
 use "collections/pointered_type_generating.sig";
 use "general/base_map.sig";
 use "general/type_map.sig";
@@ -12,6 +13,7 @@ functor Literals(X:
       structure VarMap: TypeMap
       structure VariableStructure: VariableStructure
       structure LiteralsConstruction: LiteralsConstruction
+      structure Occ: Occurences
       structure PointeredTypeGenerating: PointeredTypeGenerating
       structure PointeredFunctor: PointeredFunctor
          where
@@ -31,9 +33,11 @@ functor Literals(X:
       sharing VarMap.End = LiteralsConstruction.Variables
       sharing VarMap.Map = PointeredTypeGenerating.PointeredTypeExtended.BaseStructureMap.Map
       sharing VariableStructure.Variables = LiteralsConstruction.Variables
+      sharing Occ.DictSet.Eqs =  LiteralsConstruction.Variables
    end ): Literals =
    struct
       structure Constructors =  X.LiteralsConstruction.Constructors
+      structure Occurences =  X.Occ
       structure PointeredTypeExtended =  X.PointeredTypeGenerating.PointeredTypeExtended
       structure Variables =  X.LiteralsConstruction.Variables
       structure VariableStructure =  X.VariableStructure
@@ -108,6 +112,14 @@ functor Literals(X:
       fun construct (c, m) =  Variables.Base.Construction(c, m)
       val transition =  X.PointeredTypeGenerating.PointeredTypeExtended.transition
 
+      fun get_occurences (X.LiteralsConstruction.Variables.Base.Construction(c, xi)) =  multi_get_occurences xi
+      |   get_occurences (X.LiteralsConstruction.Variables.Base.Variable x) =  X.Occ.singleton(x)
+      and multi_get_occurences xi
+         =  PointeredTypeExtended.transition
+              (  fn (t, occ) => Option.SOME (X.Occ.unif_occurences (get_occurences t, occ)))
+              xi
+              X.Occ.empty
+
       structure Single =
          struct
             structure Variables =  Variables
@@ -115,6 +127,7 @@ functor Literals(X:
             val traverse =  traverse
             val eq =  eq
             val equate =  equate
+            val get_occurences =  get_occurences
             val variable =  Variables.Base.Variable
             val vmap =  vmap
          end
@@ -125,6 +138,7 @@ functor Literals(X:
             val traverse =  multi_traverse
             val eq =  multi_eq
             val equate =  multi_equate
+            val get_occurences =  multi_get_occurences
             val vmap =  multi_vmap
             val empty =  X.PointeredTypeGenerating.PointeredTypeExtended.empty
             val is_empty =  X.PointeredTypeGenerating.PointeredTypeExtended.is_empty
