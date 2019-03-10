@@ -21,7 +21,7 @@ functor VariableContexts(X:
       sharing PF.Start = PT
       sharing PF.End = PT
       sharing PF.Map.Map = DM.Map
-   end) =
+   end): VariableContexts =
    struct
       structure Dicts =  X.DS.Dicts
       structure DictMap = X.DM
@@ -57,10 +57,6 @@ functor VariableContexts(X:
              { ctxt = vc', alpha = var_dict }: AlphaConverter
           end
 
-      exception OutOfContext
-      fun apply_alpha_converter (alpha: AlphaConverter) x
-        = case(Dicts.deref(x, #alpha alpha)) of
-             Option.NONE => raise OutOfContext
-          |  Option.SOME v => v
+      fun apply_alpha_converter (alpha: AlphaConverter) =  X.DM.get_map(#alpha alpha)
 
    end;

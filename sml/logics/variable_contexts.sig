@@ -25,6 +25,6 @@ signature VariableContexts =
 
       val alpha_convert:                 VariableContext.T -> AlphaConverter
       val get_variable_context:          AlphaConverter -> VariableContext.T
-      val apply_alpha_converter:         AlphaConverter -> Variables.T -> Variables.T
+      val apply_alpha_converter:         AlphaConverter -> Map.Map.T
 
    end;
