@@ -1,5 +1,6 @@
 use "collections/pointered_type_generating.sig";
 use "general/base_map.sig";
+use "general/type_map.sig";
 use "logics/construction.sig";
 use "logics/literals.sig";
 use "pointered_types/pointered_functor.sig";
@@ -7,6 +8,7 @@ use "pointered_types/pointered_functor.sig";
 functor Literals(X:
    sig
       structure BaseMap: BaseMap
+      structure VarMap: TypeMap
       structure LiteralsConstruction: LiteralsConstruction
       structure PointeredTypeGenerating: PointeredTypeGenerating
       structure PointeredFunctor: PointeredFunctor
@@ -23,6 +25,9 @@ functor Literals(X:
       sharing PointeredFunctor.Map = BaseMap
       sharing BaseMap.Start = LiteralsConstruction.Variables.Base
       sharing BaseMap.End = LiteralsConstruction.Variables.Base
+      sharing VarMap.Start = LiteralsConstruction.Variables
+      sharing VarMap.End = LiteralsConstruction.Variables
+      sharing VarMap.Map = PointeredTypeGenerating.PointeredTypeExtended.BaseStructureMap.Map
    end ): Literals =
    struct
       structure Constructors =  X.LiteralsConstruction.Constructors
@@ -70,7 +75,7 @@ functor Literals(X:
          =  Variables.Base.Construction(c, multi_vmap f xi)
       |   vmap f (Variables.Base.Variable x)
          =  let
-               val new_var =  f x
+               val new_var =  (X.VarMap.apply f) x
             in (  (  if (Variables.is_settable new_var)
                      then
                         let

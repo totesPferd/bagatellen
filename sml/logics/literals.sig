@@ -16,7 +16,7 @@ signature Literals =
             val equate:         T * T -> bool
             val traverse:       (Constructors.T * 'a -> 'b) * (Variables.T -> 'b) * ('b * 'a -> 'a Option.option) * 'a -> T -> 'b
             val variable:       Variables.T -> T
-            val vmap:           (Variables.T -> Variables.T) -> T -> T
+            val vmap:           PointeredTypeExtended.BaseStructureMap.Map.T -> T -> T
          end
       structure Multi:
          sig
@@ -27,7 +27,7 @@ signature Literals =
             val traverse:       (Constructors.T * 'a -> 'b) * (Variables.T -> 'b) * ('b * 'a -> 'a Option.option) * 'a -> T -> 'a
             val empty:          T
             val is_empty:       T -> bool
-            val vmap:           (Variables.T -> Variables.T) -> T -> T
+            val vmap:           PointeredTypeExtended.BaseStructureMap.Map.T -> T -> T
             val subeq:          T * T -> bool
          end
       structure PointerType: Type

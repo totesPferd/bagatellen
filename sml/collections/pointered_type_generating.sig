@@ -1,4 +1,5 @@
 use "general/eqs.sig";
+use "general/map.sig";
 use "general/binary_relation.sig";
 use "general/type.sig";
 
