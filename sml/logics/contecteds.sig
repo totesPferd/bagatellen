@@ -14,7 +14,7 @@ signature Contecteds =
       structure Literals: Literals
       structure VariableContexts: VariableContexts
       sharing Literals.Constructors =  Constructors
-      sharing Literals.Variables = VariableContexts.Variables
+      sharing Literals.VariableStructure = VariableContexts.VariableStructure
       sharing LiteralsVariableOccurences.Literals = Literals
       sharing LiteralsVariableOccurences.Occurences = Occurences
       structure Clauses:

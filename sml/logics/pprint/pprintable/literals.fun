@@ -14,9 +14,10 @@ functor PPrintPPrintableLiterals(X:
       structure VarCtxt: VariableContexts
       structure PP: PPrintPolymorphicPPrinting
       structure PS: PPrintPolymorphicSetalikes
-      sharing Lit.Variables = VarCtxt.Variables
-      sharing NPT.PointeredTypeExtended.BaseType = VarCtxt.Variables
+      sharing Lit.VariableStructure = VarCtxt.VariableStructure
+      sharing NPT.PointeredTypeExtended.BaseStructure = VarCtxt.VariableStructure
       sharing NPT.PointeredTypeExtended = VarCtxt.PointeredTypeExtended
+      sharing NPT.PointeredTypeExtended.BaseType = Lit.Variables
       sharing PP.ContextType = PS.ContextType
       sharing PP.ContextType = VarCtxt.VariableContext
       sharing PP.PPrintIndentBase = PS.PPrintIndentBase
@@ -30,6 +31,7 @@ functor PPrintPPrintableLiterals(X:
       structure NamingPointeredTypeExtension =  X.NPT
       structure PPrintIndentBase =  X.PP.PPrintIndentBase
       structure Variables =  Literals.Variables
+      structure VariableStructure =  X.VarCtxt.VariableStructure
       structure VariableContexts =  X.VarCtxt
 
       datatype Construction =  Construction of X.Lit.Constructors.T * (Construction list) | Variable of string * X.Lit.Variables.T

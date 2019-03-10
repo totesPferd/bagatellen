@@ -6,6 +6,7 @@ functor PPrintContext(X:
       structure PPrintPPrintableLiterals: PPrintPPrintableLiterals
       structure PPrintPPrinting: PPrintPPrinting
       sharing PPrintPPrinting.PPrintPPrintable =  PPrintPPrintableLiterals.Single
+      sharing PPrintPPrintableLiterals.NamingPointeredTypeExtension.PointeredTypeExtended.BaseType = PPrintPPrintableLiterals.Literals.Variables
    end ) =
    struct
 

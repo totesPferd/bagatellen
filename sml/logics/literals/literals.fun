@@ -3,12 +3,14 @@ use "general/base_map.sig";
 use "general/type_map.sig";
 use "logics/construction.sig";
 use "logics/literals.sig";
+use "logics/variable_structure.sig";
 use "pointered_types/pointered_functor.sig";
 
 functor Literals(X:
    sig
       structure BaseMap: BaseMap
       structure VarMap: TypeMap
+      structure VariableStructure: VariableStructure
       structure LiteralsConstruction: LiteralsConstruction
       structure PointeredTypeGenerating: PointeredTypeGenerating
       structure PointeredFunctor: PointeredFunctor
@@ -28,11 +30,13 @@ functor Literals(X:
       sharing VarMap.Start = LiteralsConstruction.Variables
       sharing VarMap.End = LiteralsConstruction.Variables
       sharing VarMap.Map = PointeredTypeGenerating.PointeredTypeExtended.BaseStructureMap.Map
+      sharing VariableStructure.Variables = LiteralsConstruction.Variables
    end ): Literals =
    struct
       structure Constructors =  X.LiteralsConstruction.Constructors
       structure PointeredTypeExtended =  X.PointeredTypeGenerating.PointeredTypeExtended
       structure Variables =  X.LiteralsConstruction.Variables
+      structure VariableStructure =  X.VariableStructure
 
       fun traverse (f_1, f_2, f_3, z_0) (Variables.Base.Construction(c, xi))
          =  f_1(c, multi_traverse(f_1, f_2, f_3, z_0) xi)

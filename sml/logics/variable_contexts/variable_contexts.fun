@@ -1,3 +1,4 @@
+use "collections/all_zip.sig";
 use "collections/dict_map.sig";
 use "collections/dictset.sig";
 use "collections/pointered_type_extended.sig";
@@ -8,16 +9,20 @@ use "pointered_types/pointered_functor.sig";
 
 functor VariableContexts(X:
    sig
-      structure Var: Variables
+      structure AZ: AllZip
       structure PF: PointeredFunctor
       structure PT: PointeredTypeExtended
       structure DM: DictMap
       structure DS: DictSet
-      sharing PT.BaseType = Var
+      structure VarStruct: VariableStructure
+      sharing AZ.BinaryRelation = VarStruct.BinaryRelation
+      sharing AZ.PointeredType =  PT
+      sharing PT.BaseStructure = VarStruct
+      sharing PT.BaseStructureMap = VarStruct.Map
       sharing DM.DictSet = DS
-      sharing DM.Start = Var
-      sharing DM.End = Var
-      sharing DS.Eqs = Var
+      sharing DM.Start = PT.BaseType
+      sharing DM.End = PT.BaseType
+      sharing DS.Eqs = PT.BaseType
       sharing PF.Start = PT
       sharing PF.End = PT
       sharing PF.Map.Map = DM.Map
@@ -28,26 +33,27 @@ functor VariableContexts(X:
 
       structure Map = X.PF.Map
 
-      structure Variables =  X.Var
+      structure VariableStructure =  X.VarStruct
       structure PointeredTypeExtended =  X.PT
 
       structure VariableContext =
          struct
             structure Map =  Map
             type T =  X.PT.ContainerType.T
-            val eq =  X.PT.all_zip (X.Var.eq)
+            val eq =  X.AZ.result (X.VarStruct.eq)
             val vmap =  X.PF.map
          end;
 
-      type AlphaConverter = { ctxt: VariableContext.T, alpha: Variables.T Dicts.dict }
+      type AlphaConverter = { ctxt: VariableContext.T, alpha: X.PT.BaseType.T Dicts.dict }
 
       val get_variable_context: AlphaConverter -> VariableContext.T =  #ctxt
 
       fun alpha_convert (vc: VariableContext.T)
         = let
+             val vcopy =  X.PT.base_map VariableStructure.copy
              val var_dict
                 =  X.PT.transition
-                      (fn (v, d) => Option.SOME (Dicts.set(v, (Variables.copy v), d)))
+                      (fn (v, d) => Option.SOME (Dicts.set(v, vcopy v, d)))
                       vc
                       Dicts.empty
              val dict_map =  DictMap.get_map var_dict

@@ -4,6 +4,7 @@ use "logics/literals.sig";
 use "logics/pprint/indent_base.sig";
 use "logics/pprint/pprintable.sig";
 use "logics/variable_contexts.sig";
+use "logics/variable_structure.sig";
 
 signature PPrintPPrintableLiterals =
    sig
@@ -12,18 +13,18 @@ signature PPrintPPrintableLiterals =
       structure NamingPointeredTypeExtension: NamingPointeredTypeExtension
       structure PPrintIndentBase: PPrintIndentBase
       structure VariableContexts: VariableContexts
-      structure Variables: Variables
+      structure VariableStructure: VariableStructure
       structure Single: PPrintPPrintable
       structure Multi: PPrintPPrintable
       sharing Single.ContextType = ContextType
       sharing Multi.ContextType = ContextType
       sharing Single.PPrintIndentBase =  PPrintIndentBase
       sharing Multi.PPrintIndentBase =  PPrintIndentBase
-      sharing NamingPointeredTypeExtension.PointeredTypeExtended.BaseType = VariableContexts.Variables
+      sharing NamingPointeredTypeExtension.PointeredTypeExtended.BaseStructure = VariableContexts.VariableStructure
       sharing NamingPointeredTypeExtension.PointeredTypeExtended = VariableContexts.PointeredTypeExtended
-      sharing Literals.Single =  Single
-      sharing Literals.Variables =  Variables
-      sharing VariableContexts.VariableContext =  ContextType
-      sharing VariableContexts.Variables =  Variables
+      sharing Literals.Single = Single
+      sharing Literals.VariableStructure = VariableStructure
+      sharing VariableContexts.VariableContext = ContextType
+      sharing VariableContexts.VariableStructure = VariableStructure
 
    end;

@@ -9,7 +9,7 @@ functor Contecteds(X:
       structure Lit: Literals
       structure VarCtxt: VariableContexts
       structure LVO: LiteralsVariableOccurences
-      sharing Lit.Variables = VarCtxt.Variables
+      sharing Lit.VariableStructure = VarCtxt.VariableStructure
       sharing LVO.Literals =  Lit
       sharing Lit.PointeredTypeExtended.BaseStructureMap.Map = VarCtxt.Map.Map
    end ): Contecteds  =

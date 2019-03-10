@@ -44,7 +44,7 @@ functor Presentation(X:
       sharing P.Contecteds =  CX
       sharing C.Qualifier = Q
       sharing VC.PointeredTypeExtended = UV.PointeredTypeExtended
-      sharing VC.Variables = V
+      sharing VC.PointeredTypeExtended.BaseType = V
       sharing VCPS.PointeredType =  VC.PointeredTypeExtended
       sharing VCPTM.Start =  VCPS.PointeredType.BaseType
       sharing VCPTM.End =  VCPS.PointeredType.ContainerType
