@@ -1,4 +1,5 @@
 use "general/binary_relation.sig";
+use "general/map.sig";
 
 signature VariableStructure =
    sig
@@ -6,7 +7,11 @@ signature VariableStructure =
          sig
          end
       structure BinaryRelation: BinaryRelation
-      sharing BinaryRelation.Domain =  Variables
+      structure Map: Map
+      sharing BinaryRelation.Domain = Variables
+      sharing Map.Start = Variables
+      sharing Map.End = Variables
 
-      val eq:  BinaryRelation.Relation.T
+      val copy: Map.Map.T
+      val eq:   BinaryRelation.Relation.T
    end;
