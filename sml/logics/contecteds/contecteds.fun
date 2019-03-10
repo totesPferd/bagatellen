@@ -1,4 +1,5 @@
 use "collections/occurences.sig";
+use "general/type_map.sig";
 use "logics/contecteds.sig";
 use "logics/literals.sig";
 use "logics/literals_variable_occurences.sig";
@@ -8,9 +9,13 @@ functor Contecteds(X:
    sig
       structure Lit: Literals
       structure VarCtxt: VariableContexts
+      structure Map: TypeMap
       structure LVO: LiteralsVariableOccurences
       sharing Lit.Variables = VarCtxt.Variables
       sharing LVO.Literals =  Lit
+      sharing VarCtxt.Map = Map
+      sharing VarCtxt.Variables = Map.Start
+      sharing VarCtxt.Variables = Map.End
    end ): Contecteds  =
    struct
       structure Constructors =  X.Lit.Constructors
@@ -41,7 +46,7 @@ functor Contecteds(X:
                     = let
                          val der_context =  VariableContexts.get_variable_context alpha
                          val phi =  VariableContexts.apply_alpha_converter alpha
-                         val der_conclusion =  Literals.Single.vmap phi c
+                         val der_conclusion =  Literals.Single.vmap (X.Map.apply phi) c
                       in
                          { context =  der_context, conclusion = der_conclusion }
                       end
@@ -68,7 +73,7 @@ functor Contecteds(X:
                     = let
                          val der_context =  VariableContexts.get_variable_context alpha
                          val phi =  VariableContexts.apply_alpha_converter alpha
-                         val der_antecedent =  Literals.Multi.vmap phi a
+                         val der_antecedent =  Literals.Multi.vmap (X.Map.apply phi) a
                       in
                          { context =  der_context, antecedent = der_antecedent }
                       end
@@ -111,8 +116,8 @@ functor Contecteds(X:
                     = let
                          val der_context =  VariableContexts.get_variable_context alpha
                          val phi =  VariableContexts.apply_alpha_converter alpha
-                         val der_antecedent =  Literals.Multi.vmap phi a
-                         val der_conclusion =  Literals.Single.vmap phi c
+                         val der_antecedent =  Literals.Multi.vmap (X.Map.apply phi) a
+                         val der_conclusion =  Literals.Single.vmap (X.Map.apply phi) c
                       in
                          { context =  der_context, antecedent = der_antecedent, conclusion = der_conclusion }
                       end
@@ -145,8 +150,8 @@ functor Contecteds(X:
                     = let
                          val der_context =  VariableContexts.get_variable_context alpha
                          val phi =  VariableContexts.apply_alpha_converter alpha
-                         val der_antecedent =  Literals.Multi.vmap phi a
-                         val der_conclusion =  Literals.Multi.vmap phi c
+                         val der_antecedent =  Literals.Multi.vmap (X.Map.apply phi) a
+                         val der_conclusion =  Literals.Multi.vmap (X.Map.apply phi) c
                       in
                          { context =  der_context, antecedent = der_antecedent, conclusion = der_conclusion }
                       end

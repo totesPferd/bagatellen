@@ -1,4 +1,5 @@
 use "general/eqs.sig";
+use "general/map.sig";
 use "collections/naming_polymorphic_container_type.sig";
 
 signature NamingPointeredTypeGenerating =
@@ -17,7 +18,10 @@ signature NamingPointeredTypeGenerating =
                   type T =  string Option.option ref
                end
             structure BaseStructure: Eqs
+            structure BaseStructureMap: Map
             sharing BaseStructure = BaseType
+            sharing BaseStructureMap.Start = BaseStructure
+            sharing BaseStructureMap.End = BaseStructure
       
             val empty: ContainerType.T
             val is_empty: ContainerType.T -> bool
@@ -28,7 +32,9 @@ signature NamingPointeredTypeGenerating =
       
             val is_in:      BaseType.T * ContainerType.T -> bool
             val subeq:      ContainerType.T * ContainerType.T -> bool
-      
+
+            val base_map:   BaseStructureMap.Map.T -> BaseType.T -> BaseType.T
+
             val transition: (BaseType.T * 'b -> 'b Option.option) -> ContainerType.T -> 'b -> 'b
 
       end

@@ -18,19 +18,24 @@ signature PointeredTypeGenerating =
             end
             structure PointerType: Type
             structure BaseStructure: Eqs
+            structure BaseStructureMap: Map
             sharing BaseStructure = BaseType
+            sharing BaseStructureMap.Start = BaseStructure
+            sharing BaseStructureMap.End = BaseStructure
 
-         val empty: ContainerType.T
-         val is_empty: ContainerType.T -> bool
-         val select: PointerType.T * ContainerType.T -> BaseType.T Option.option
-
-         val all:        (BaseType.T -> bool) -> ContainerType.T -> bool
-         val all_zip:    (BaseType.T * BaseType.T -> bool) -> (ContainerType.T * ContainerType.T) -> bool
+            val empty: ContainerType.T
+            val is_empty: ContainerType.T -> bool
+            val select: PointerType.T * ContainerType.T -> BaseType.T Option.option
    
-         val is_in:      BaseType.T * ContainerType.T -> bool
-         val subeq:      ContainerType.T * ContainerType.T -> bool
+            val all:        (BaseType.T -> bool) -> ContainerType.T -> bool
+            val all_zip:    (BaseType.T * BaseType.T -> bool) -> (ContainerType.T * ContainerType.T) -> bool
+      
+            val is_in:      BaseType.T * ContainerType.T -> bool
+            val subeq:      ContainerType.T * ContainerType.T -> bool
    
-         val transition: (BaseType.T * 'b -> 'b Option.option) -> ContainerType.T -> 'b -> 'b
+            val base_map:   BaseStructureMap.Map.T -> BaseType.T -> BaseType.T
+   
+            val transition: (BaseType.T * 'b -> 'b Option.option) -> ContainerType.T -> 'b -> 'b
 
       end
       structure AllZip:

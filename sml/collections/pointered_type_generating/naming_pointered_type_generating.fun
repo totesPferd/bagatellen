@@ -3,14 +3,18 @@ use "collections/all_zip.sig";
 use "collections/naming_pointered_type_generating.sig";
 use "collections/naming_polymorphic_container_type.sig";
 use "general/eqs.sig";
+use "general/type_map.sig";
 use "general/type_binary_relation.sig";
 
 functor NamingPointeredTypeGenerating(X:
    sig
       structure BaseType: Eqs
+      structure BaseStructureMap: TypeMap
       structure BinaryRelation: TypeBinaryRelation
       structure PolymorphicContainerType: NamingPolymorphicContainerType
       sharing BinaryRelation.Domain = BaseType
+      sharing BaseStructureMap.Start = BaseType
+      sharing BaseStructureMap.End = BaseType
    end ): NamingPointeredTypeGenerating =
    struct
       structure PolymorphicContainerType =  X.PolymorphicContainerType
@@ -27,6 +31,7 @@ functor NamingPointeredTypeGenerating(X:
                   type T =  string Option.option ref
                end
             structure BaseStructure =  BaseType
+            structure BaseStructureMap =  X.BaseStructureMap
       
             val empty         =  List.nil
             val is_empty      =  List.null
@@ -42,7 +47,9 @@ functor NamingPointeredTypeGenerating(X:
               = List.all
                    (fn ((n_1, x_1), (n_2, x_2)) => P(x_1, x_2))
                    (ListPair.zip (c_1, c_2))
-      
+
+            val base_map =  BaseStructureMap.apply
+
             fun transition f c =  Acc.transition (fn ((n, x: 'a), y) => f(x, y)) c
       
             fun is_in (x, c)

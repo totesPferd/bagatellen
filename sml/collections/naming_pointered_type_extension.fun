@@ -17,6 +17,7 @@ functor NamingPointeredTypeExtension(X: NamingPointeredTypeGenerating): NamingPo
             structure PointerType =  StringType
             structure ContainerType =  X.PointeredTypeExtended.ContainerType
             structure BaseStructure =  BaseType
+            structure BaseStructureMap =  X.PointeredTypeExtended.BaseStructureMap
 
             fun select (p, c)
                =  case(List.find (fn (m, x) => (!m = (Option.SOME p))) c) of
@@ -30,6 +31,8 @@ functor NamingPointeredTypeExtension(X: NamingPointeredTypeGenerating): NamingPo
             val all_zip =  X.PointeredTypeExtended.all_zip
             val is_in =  X.PointeredTypeExtended.is_in
             val subeq =  X.PointeredTypeExtended.subeq
+
+            val base_map =  X.PointeredTypeExtended.base_map
 
             val transition =  X.PointeredTypeExtended.transition
 
