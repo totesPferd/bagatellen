@@ -17,7 +17,7 @@ signature VariableContexts =
          end
       sharing Map.Start = VariableStructure
       sharing Map.End = VariableStructure
-      sharing PointeredTypeExtended.BaseType =  VariableStructure
+      sharing PointeredTypeExtended.BaseStructure =  VariableStructure
       sharing PointeredTypeExtended.ContainerType =  VariableContext
       sharing VariableContext.Map =  Map
 

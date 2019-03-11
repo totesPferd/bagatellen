@@ -1,4 +1,4 @@
-use "collections/naming_pointered_type_extension.sig";
+use "collections/naming_pointered_type_generating.sig";
 use "logics/literals.sig";
 use "logics/pprint/indent_base.sig";
 use "logics/pprint/polymorphic_pprinting.sig";
@@ -9,17 +9,20 @@ use "logics/variable_contexts.sig";
 
 functor PPrintPPrintableLiterals(X:
    sig
+      structure NPT: NamingPointeredTypeGenerating
       structure Lit: Literals
-      structure NPT: NamingPointeredTypeExtension
       structure VarCtxt: VariableContexts
+         where type PointeredTypeExtended.ContainerType.T = NPT.PointeredTypeExtended.ContainerType.T
+         and   type PointeredTypeExtended.PointerType.T = NPT.PointeredTypeExtended.PointerType.T
       structure PP: PPrintPolymorphicPPrinting
+         where type ContextType.T = VarCtxt.VariableContext.T
       structure PS: PPrintPolymorphicSetalikes
+         where type ContextType.T = VarCtxt.VariableContext.T
       sharing Lit.VariableStructure = VarCtxt.VariableStructure
       sharing NPT.PointeredTypeExtended.BaseStructure = VarCtxt.VariableStructure
-      sharing NPT.PointeredTypeExtended = VarCtxt.PointeredTypeExtended
+      sharing NPT.PointeredTypeExtended.BaseStructureMap = VarCtxt.PointeredTypeExtended.BaseStructureMap
+      sharing NPT.PointeredTypeExtended.BaseType = VarCtxt.PointeredTypeExtended.BaseType
       sharing NPT.PointeredTypeExtended.BaseType = Lit.Variables
-      sharing PP.ContextType = PS.ContextType
-      sharing PP.ContextType = VarCtxt.VariableContext
       sharing PP.PPrintIndentBase = PS.PPrintIndentBase
 
       val get_constructors_name: Lit.Constructors.T -> string
@@ -28,7 +31,7 @@ functor PPrintPPrintableLiterals(X:
 
       structure ContextType =  X.VarCtxt.VariableContext
       structure Literals =  X.Lit
-      structure NamingPointeredTypeExtension =  X.NPT
+      structure NamingPointeredTypeGenerating =  X.NPT
       structure PPrintIndentBase =  X.PP.PPrintIndentBase
       structure Variables =  Literals.Variables
       structure VariableStructure =  X.VarCtxt.VariableStructure
