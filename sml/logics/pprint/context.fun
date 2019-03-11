@@ -5,20 +5,22 @@ functor PPrintContext(X:
    sig
       structure PPrintPPrintableLiterals: PPrintPPrintableLiterals
       structure PPrintPPrinting: PPrintPPrinting
-      sharing PPrintPPrinting.PPrintPPrintable =  PPrintPPrintableLiterals.Single
-      sharing PPrintPPrintableLiterals.NamingPointeredTypeExtension.PointeredTypeExtended.BaseType = PPrintPPrintableLiterals.Literals.Variables
+         where type PPrintPPrintable.T =  PPrintPPrintableLiterals.Single.T
+         and   type PPrintPPrintable.ContextType.T =  PPrintPPrintableLiterals.Single.ContextType.T
+      sharing PPrintPPrinting.PPrintPPrintable.PPrintIndentBase =  PPrintPPrintableLiterals.Single.PPrintIndentBase
+      sharing PPrintPPrintableLiterals.NamingPointeredTypeGenerating.PointeredTypeExtended.BaseType = PPrintPPrintableLiterals.Literals.Variables
    end ) =
    struct
 
       structure PPrintPPrintableLiterals =  X.PPrintPPrintableLiterals
       structure ContextType =  PPrintPPrintableLiterals.ContextType
       structure Literals =  PPrintPPrintableLiterals.Literals
-      structure NamingPointeredTypeExtension =  PPrintPPrintableLiterals.NamingPointeredTypeExtension
+      structure NamingPointeredTypeGenerating =  PPrintPPrintableLiterals.NamingPointeredTypeGenerating
       structure PPrintIndentBase =  PPrintPPrintableLiterals.PPrintIndentBase
       structure Variables =  Literals.Variables
 
       fun multi_line (ctxt: ContextType.T) stream (indent, state)
-         =  NamingPointeredTypeExtension.transition
+         =  NamingPointeredTypeGenerating.transition
                (  fn (pn, v, state_1)
                      =>  case (pn) of
                             Option.NONE => Option.SOME state_1
