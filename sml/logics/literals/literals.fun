@@ -42,15 +42,6 @@ functor Literals(X:
       structure Variables =  X.LiteralsConstruction.Variables
       structure VariableStructure =  X.VariableStructure
 
-      fun traverse (f_1, f_2, f_3, z_0) (Variables.Base.Construction(c, xi))
-         =  f_1(c, multi_traverse(f_1, f_2, f_3, z_0) xi)
-      |   traverse (f_1, f_2, f_3, z_0) (Variables.Base.Variable x)
-         =  f_2(x)
-      and multi_traverse (f_1, f_2, f_3, z_0) xi
-         = X.PointeredTypeGenerating.PointeredTypeExtended.transition
-              (fn (s, r) =>  f_3(traverse(f_1, f_2, f_3, z_0) s, r))
-              xi z_0
-
       fun get_val (p as Variables.Base.Construction(c, xi)) =  p
         | get_val (p as Variables.Base.Variable x)
         = case (Variables.get_val x) of
@@ -124,7 +115,6 @@ functor Literals(X:
          struct
             structure Variables =  Variables
             type T =  Variables.Base.Construction
-            val traverse =  traverse
             val eq =  eq
             val equate =  equate
             val get_occurences =  get_occurences
@@ -135,7 +125,6 @@ functor Literals(X:
          struct
             structure Variables =  Variables
             type T =  X.PointeredTypeGenerating.PointeredTypeExtended.ContainerType.T
-            val traverse =  multi_traverse
             val eq =  multi_eq
             val equate =  multi_equate
             val get_occurences =  multi_get_occurences

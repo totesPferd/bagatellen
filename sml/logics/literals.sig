@@ -18,7 +18,6 @@ signature Literals =
             val eq: T * T -> bool
             val equate:         T * T -> bool
             val get_occurences: T -> Occurences.occurences
-            val traverse:       (Constructors.T * 'a -> 'b) * (Variables.T -> 'b) * ('b * 'a -> 'a Option.option) * 'a -> T -> 'b
             val variable:       Variables.T -> T
             val vmap:           PointeredTypeExtended.BaseStructureMap.Map.T -> T -> T
          end
@@ -29,7 +28,6 @@ signature Literals =
             val eq: T * T -> bool
             val equate:         T * T -> bool
             val get_occurences: T -> Occurences.occurences
-            val traverse:       (Constructors.T * 'a -> 'b) * (Variables.T -> 'b) * ('b * 'a -> 'a Option.option) * 'a -> T -> 'a
             val empty:          T
             val is_empty:       T -> bool
             val vmap:           PointeredTypeExtended.BaseStructureMap.Map.T -> T -> T
