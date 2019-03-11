@@ -1,4 +1,5 @@
 use "collections/naming_pointered_type_generating.sig";
+use "logics/construction.sig";
 use "logics/literals.sig";
 use "logics/pprint/indent_base.sig";
 use "logics/pprint/polymorphic_pprinting.sig";
@@ -10,14 +11,18 @@ use "logics/variable_contexts.sig";
 functor PPrintPPrintableLiterals(X:
    sig
       structure NPT: NamingPointeredTypeGenerating
+      structure Constr: LiteralsConstruction
       structure Lit: Literals
+         where type Multi.T =  Constr.Variables.Base.T Constr.PolymorphicContainerType.T
       structure VarCtxt: VariableContexts
-         where type PointeredTypeExtended.ContainerType.T = NPT.PointeredTypeExtended.ContainerType.T
-         and   type PointeredTypeExtended.PointerType.T = NPT.PointeredTypeExtended.PointerType.T
+         where type PointeredTypeExtended.ContainerType.T =  NPT.PointeredTypeExtended.ContainerType.T
+         and   type PointeredTypeExtended.PointerType.T =  NPT.PointeredTypeExtended.PointerType.T
       structure PP: PPrintPolymorphicPPrinting
-         where type ContextType.T = VarCtxt.VariableContext.T
+         where type ContextType.T =  VarCtxt.VariableContext.T
       structure PS: PPrintPolymorphicSetalikes
-         where type ContextType.T = VarCtxt.VariableContext.T
+         where type ContextType.T =  VarCtxt.VariableContext.T
+      sharing Constr.Constructors = Lit.Constructors
+      sharing Constr.Variables = Lit.Variables
       sharing Lit.VariableStructure = VarCtxt.VariableStructure
       sharing NPT.PointeredTypeExtended.BaseStructure = VarCtxt.VariableStructure
       sharing NPT.PointeredTypeExtended.BaseStructureMap = VarCtxt.PointeredTypeExtended.BaseStructureMap
@@ -37,42 +42,21 @@ functor PPrintPPrintableLiterals(X:
       structure VariableStructure =  X.VarCtxt.VariableStructure
       structure VariableContexts =  X.VarCtxt
 
-      datatype Construction =  Construction of X.Lit.Constructors.T * (Construction list) | Variable of string * X.Lit.Variables.T
-
-      fun reconstruct (ctxt: ContextType.T)
-         =  X.Lit.Single.traverse(
-                  (Construction: X.Lit.Constructors.T * (Construction list) -> Construction)
-               ,  (  fn (v: X.Lit.Variables.T)
-                     => if X.NPT.PointeredTypeExtended.is_in(v, ctxt)
-                        then
-                           Variable (Option.valOf (X.NPT.get_name v ctxt), v)
-                        else
-                           reconstruct ctxt (Option.valOf(X.Lit.Variables.get_val v)) )
-               ,  ((Option.SOME o op::): Construction * Construction list -> (Construction list) Option.option)
-               ,  (nil: Construction list) )
-      fun multi_reconstruct ctxt m
-         =  X.Lit.transition
-               (  fn (x, l) => Option.SOME ((reconstruct ctxt x) :: l) )
-               m
-               nil
-
-      fun transition phi nil b = b
-      |   transition phi (x::l) b
-         =  case (phi(x, b)) of
-               Option.NONE => b
-            |  Option.SOME b' => (transition phi l b')
-
-      fun l_single_line ctxt (Construction(c, xi))
+      fun l_single_line ctxt (X.Constr.Variables.Base.Construction(c, xi))
          =  (X.get_constructors_name c) ^ "(" ^ (multi_l_single_line ctxt xi) ^ ")"
-      |   l_single_line ctxt (Variable (name, v))
-         =  name
+      |   l_single_line ctxt (X.Constr.Variables.Base.Variable v)
+         =  if X.NPT.PointeredTypeExtended.is_in(v, ctxt)
+            then
+               Option.valOf (X.NPT.get_name v ctxt)
+            else
+               l_single_line ctxt (Option.valOf(X.Lit.Variables.get_val v))
       and multi_l_single_line ctxt
          =  X.PS.single_line
-               transition
+               X.Lit.transition
                l_single_line
                ctxt
 
-      fun l_multi_line ctxt ((stream: TextIO.outstream), Construction(c, xi), (rhs_indent: int)) (indent, state)
+      fun l_multi_line ctxt ((stream: TextIO.outstream), X.Constr.Variables.Base.Construction(c, xi), (rhs_indent: int)) (indent, state)
          =  let
                val state' =  PPrintIndentBase.print (stream, X.get_constructors_name c) state
                val state'' =  PPrintIndentBase.print_par (stream, "(") state'
@@ -81,12 +65,17 @@ functor PPrintPPrintableLiterals(X:
             in
                state''''
             end
-      |   l_multi_line ctxt ((stream: TextIO.outstream), Variable(name, v), (rhs_indent: int)) (indent, state)
-         =  let
-               val state' =  PPrintIndentBase.print (stream, name) state
-            in
-               state'
-            end
+      |   l_multi_line ctxt ((stream: TextIO.outstream), X.Constr.Variables.Base.Variable v, (rhs_indent: int)) (indent, state)
+         =  if X.NPT.PointeredTypeExtended.is_in(v, ctxt)
+            then
+               let
+                  val name =  Option.valOf (X.NPT.get_name v ctxt)
+                  val state' =  PPrintIndentBase.print (stream, name) state
+               in
+                  state'
+               end
+            else
+               l_multi_line ctxt (stream, Option.valOf(X.Lit.Variables.get_val v), rhs_indent) (indent, state)
       and l_pprint ctxt
          =  X.PP.pprint
                l_single_line
@@ -94,7 +83,7 @@ functor PPrintPPrintableLiterals(X:
                ctxt
       and multi_l_multi_line ctxt
          =  X.PS.multi_line
-               transition
+               X.Lit.transition
                l_pprint
                ctxt
 
@@ -103,18 +92,18 @@ functor PPrintPPrintableLiterals(X:
             structure ContextType =  ContextType
             structure PPrintIndentBase =  PPrintIndentBase
             type T =  X.Lit.Single.T
-            fun single_line ctxt =  (l_single_line ctxt) o (reconstruct ctxt)
+            fun single_line ctxt =  l_single_line ctxt
             fun multi_line ctxt (stream, mt, rhs_indent)
-               =  l_multi_line ctxt (stream, (reconstruct ctxt mt), rhs_indent)
+               =  l_multi_line ctxt (stream, mt, rhs_indent)
          end
       structure Multi: PPrintPPrintable =
          struct
             structure ContextType =  ContextType
             structure PPrintIndentBase =  PPrintIndentBase
             type T =  X.Lit.Multi.T
-            fun single_line ctxt =  (multi_l_single_line ctxt) o (multi_reconstruct ctxt)
+            fun single_line ctxt =  multi_l_single_line ctxt
             fun multi_line ctxt (stream, mmt, rhs_indent)
-               =  multi_l_multi_line ctxt (stream, (multi_reconstruct ctxt mmt), rhs_indent)
+               =  multi_l_multi_line ctxt (stream, mmt, rhs_indent)
          end
 
    end;
