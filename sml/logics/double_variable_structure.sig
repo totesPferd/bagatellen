@@ -1,5 +1,6 @@
 use "general/double_binary_relation.sig";
 use "general/double_map.sig";
+use "logics/variable_structure.sig";
 
 signature DoubleVariableStructure =
    sig
