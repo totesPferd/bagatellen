@@ -1,5 +1,6 @@
 use "general/double_binary_relation.sig";
 use "general/double_map.sig";
+use "logics/double_variable_structure.sig";
 use "logics/variable_structure.sig";
 
 functor DoubleVariableStructure(X:
@@ -12,7 +13,7 @@ functor DoubleVariableStructure(X:
       sharing BinaryRelation.SndRelation =  Snd.BinaryRelation
       sharing Map.FstMap = Fst.Map
       sharing Map.SndMap = Snd.Map
-   end ): VariableStructure =
+   end ): DoubleVariableStructure =
    struct
       structure Variables =
          struct
