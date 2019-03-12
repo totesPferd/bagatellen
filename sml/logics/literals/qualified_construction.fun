@@ -1,5 +1,5 @@
 use "logics/constructors.sig";
-use "logics/construction.sig";
+use "logics/literals.sig";
 use "logics/polymorphic_variables.sig";
 use "logics/qualified_construction.sig";
 use "logics/variables.sig";
@@ -11,7 +11,7 @@ functor QualifiedLiteralsConstruction(X:
          sig
             type 'a T
          end
-      structure Q: LiteralsConstruction
+      structure Q: Literals
       structure PV: PolymorphicVariables
    end ): QualifiedLiteralsConstruction =
    struct

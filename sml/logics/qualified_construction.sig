@@ -1,5 +1,5 @@
-use "logics/construction.sig";
 use "logics/constructors.sig";
+use "logics/literals.sig";
 use "logics/variables.sig";
 
 signature QualifiedLiteralsConstruction =
@@ -10,7 +10,7 @@ signature QualifiedLiteralsConstruction =
          end
 
       structure Constructors: Constructors
-      structure Qualifier: LiteralsConstruction
+      structure Qualifier: Literals
          
       structure Variables:
          sig
