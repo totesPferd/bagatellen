@@ -8,7 +8,8 @@ signature Proof =
       structure Contecteds: Contecteds
       structure Single: Type
       structure Multi: Type
-      sharing Contecteds.Clauses.Single =  Single
+      sharing Contecteds.Clauses.Single = Single
+      sharing Contecteds.Constructors = Constructors
 
       val apply:                      Contecteds.Literals.PointerType.T -> Multi.T -> Contecteds.Clauses.Single.T -> Contecteds.Clauses.Multi.T
       val multi_apply:                Multi.T -> Contecteds.Clauses.Multi.T -> Contecteds.Clauses.Multi.T
