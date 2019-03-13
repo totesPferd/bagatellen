@@ -97,10 +97,8 @@ functor Literals(X:
       and multi_vmap f =  X.PointeredFunctor.map(X.BaseMap.get_map(vmap f))
 
       val select =  X.PointeredTypeGenerating.PointeredTypeExtended.select
-
       val is_in  =  X.PointeredTypeGenerating.PointeredTypeExtended.is_in
 
-      fun construct (c, m) =  Variables.Base.Construction(c, m)
       val transition =  X.PointeredTypeGenerating.PointeredTypeExtended.transition
 
       fun get_occurences (X.LiteralsConstruction.Variables.Base.Construction(c, xi)) =  multi_get_occurences xi
@@ -118,7 +116,6 @@ functor Literals(X:
             val eq =  eq
             val equate =  equate
             val get_occurences =  get_occurences
-            val variable =  Variables.Base.Variable
             val vmap =  vmap
          end
       structure Multi =

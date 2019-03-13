@@ -18,7 +18,6 @@ signature Literals =
             val eq: T * T -> bool
             val equate:         T * T -> bool
             val get_occurences: T -> Occurences.occurences
-            val variable:       Variables.T -> T
             val vmap:           PointeredTypeExtended.BaseStructureMap.Map.T -> T -> T
          end
       structure Multi:
@@ -49,7 +48,6 @@ signature Literals =
 
       val is_in:      Single.T * Multi.T -> bool
 
-      val construct:  Constructors.T * Multi.T -> Single.T
       val transition: (Single.T * 'b -> 'b Option.option) -> Multi.T -> 'b -> 'b
 
    end;
