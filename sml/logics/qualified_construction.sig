@@ -17,7 +17,9 @@ signature QualifiedLiteralsConstruction =
             type T
             structure Base:
                sig
-                  datatype Construction =  Construction of Constructors.T * Qualifier.Variables.Base.T * Construction PolymorphicContainerType.T | Variable of T
+                  datatype Construction
+                     =  Construction of Constructors.T * Qualifier.PointeredTypeExtended.ContainerType.T * Construction PolymorphicContainerType.T
+                     |  Variable of T
                   type T =  Construction
                end
 

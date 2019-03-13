@@ -24,7 +24,9 @@ functor QualifiedLiteralsConstruction(X:
          struct
             structure Base =
                struct
-                  datatype Construction =  Construction of X.C.T * X.Q.Variables.Base.T * Construction X.PCT.T | Variable of Construction X.PV.Variable
+                  datatype Construction
+                     =  Construction of X.C.T * X.Q.PointeredTypeExtended.ContainerType.T * Construction X.PCT.T
+                     |  Variable of Construction X.PV.Variable
                   type T =  Construction
                end
             type T =  Base.T X.PV.Variable
