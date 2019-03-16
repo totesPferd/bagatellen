@@ -29,6 +29,7 @@ functor PPrintPPrintableLiterals(X:
       sharing NPT.PointeredTypeExtended.BaseType = VarCtxt.PointeredTypeExtended.BaseType
       sharing NPT.PointeredTypeExtended.BaseType = Lit.Variables
       sharing PP.PPrintIndentBase = PS.PPrintIndentBase
+      sharing Lit.Variables.Base = VarCtxt.VariableStructure.BaseType
 
       val get_constructors_name: Lit.Constructors.T -> string
    end ): PPrintPPrintableLiterals =

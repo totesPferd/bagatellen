@@ -8,6 +8,8 @@ functor PPrintContext(X:
          where type PPrintPPrintable.T =  PPrintPPrintableLiterals.Single.T
          and   type PPrintPPrintable.ContextType.T =  PPrintPPrintableLiterals.Single.ContextType.T
       sharing PPrintPPrinting.PPrintPPrintable.PPrintIndentBase =  PPrintPPrintableLiterals.Single.PPrintIndentBase
+      sharing PPrintPPrintableLiterals.NamingPointeredTypeGenerating.PointeredTypeExtended.BaseType = PPrintPPrintableLiterals.Literals.Variables.Base
+      sharing PPrintPPrintableLiterals.Literals.Variables.Base = PPrintPPrintableLiterals.Literals.VariableStructure.BaseType
       sharing PPrintPPrintableLiterals.NamingPointeredTypeGenerating.PointeredTypeExtended.BaseType = PPrintPPrintableLiterals.Literals.Variables
    end ) =
    struct

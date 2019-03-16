@@ -61,6 +61,7 @@ functor Presentation(X:
       sharing L.PointeredTypeExtended.BaseType = PTG.PointeredTypeExtended.BaseType
       sharing L.PointeredTypeExtended.PointerType = PTG.PointeredTypeExtended.PointerType
       sharing L.Variables = V
+      sharing L.VariableStructure.BaseType = V.Base
       sharing LC.Constructors = C
       sharing LC.PolymorphicContainerType = PTG.PolymorphicContainerType
       sharing LC.Variables = V

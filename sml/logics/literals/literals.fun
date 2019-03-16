@@ -36,6 +36,7 @@ functor Literals(X:
       sharing BaseMap.Map = PointeredTypeGenerating.PointeredTypeExtended.BaseStructureMap.Map
       sharing VarMap.Start = LiteralsConstruction.Variables
       sharing VarMap.End = LiteralsConstruction.Variables
+      sharing VariableStructure.BaseType =  LiteralsConstruction.Variables.Base
       sharing VariableStructure.Variables = LiteralsConstruction.Variables
       sharing VariableStructure.Map = VarMap
       sharing Occ.DictSet.Eqs =  LiteralsConstruction.Variables
