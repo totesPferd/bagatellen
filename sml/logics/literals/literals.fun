@@ -22,8 +22,12 @@ functor Literals(X:
             type End.ContainerType.T =  PointeredTypeGenerating.PointeredTypeExtended.ContainerType.T
       sharing LiteralsConstruction.PolymorphicContainerType = PointeredTypeGenerating.PolymorphicContainerType
       sharing LiteralsConstruction.Variables.Base = PointeredTypeGenerating.PointeredTypeExtended.BaseType
+      sharing PointeredFunctor.Start.BaseStructure = PointeredTypeGenerating.PointeredTypeExtended.BaseStructure
+      sharing PointeredFunctor.Start.BaseStructureMap = PointeredTypeGenerating.PointeredTypeExtended.BaseStructureMap
       sharing PointeredFunctor.Start.BaseType = PointeredTypeGenerating.PointeredTypeExtended.BaseType
       sharing PointeredFunctor.Start.PointerType = PointeredTypeGenerating.PointeredTypeExtended.PointerType
+      sharing PointeredFunctor.End.BaseStructure = PointeredTypeGenerating.PointeredTypeExtended.BaseStructure
+      sharing PointeredFunctor.End.BaseStructureMap = PointeredTypeGenerating.PointeredTypeExtended.BaseStructureMap
       sharing PointeredFunctor.End.BaseType = PointeredTypeGenerating.PointeredTypeExtended.BaseType
       sharing PointeredFunctor.End.PointerType = PointeredTypeGenerating.PointeredTypeExtended.PointerType
       sharing PointeredFunctor.Map = BaseMap
@@ -31,7 +35,7 @@ functor Literals(X:
       sharing BaseMap.End = LiteralsConstruction.Variables.Base
       sharing VarMap.Start = LiteralsConstruction.Variables
       sharing VarMap.End = LiteralsConstruction.Variables
-      sharing VarMap.Map = PointeredTypeGenerating.PointeredTypeExtended.BaseStructureMap.Map
+      sharing BaseMap.Map = PointeredTypeGenerating.PointeredTypeExtended.BaseStructureMap.Map
       sharing VariableStructure.Variables = LiteralsConstruction.Variables
       sharing Occ.DictSet.Eqs =  LiteralsConstruction.Variables
    end ): Literals =
@@ -41,6 +45,7 @@ functor Literals(X:
       structure PointeredTypeExtended =  X.PointeredTypeGenerating.PointeredTypeExtended
       structure Variables =  X.LiteralsConstruction.Variables
       structure VariableStructure =  X.VariableStructure
+      structure VarMap =  X.VarMap
 
       fun get_val (p as Variables.Base.Construction(c, xi)) =  p
         | get_val (p as Variables.Base.Variable x)

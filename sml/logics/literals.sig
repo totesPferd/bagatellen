@@ -1,5 +1,6 @@
 use "collections/occurences.sig";
 use "collections/pointered_type_extended.sig";
+use "general/map.sig";
 use "logics/constructors.sig";
 use "logics/variables.sig";
 use "logics/variable_structure.sig";
@@ -10,6 +11,7 @@ signature Literals =
       structure Occurences: Occurences
       structure PointeredTypeExtended: PointeredTypeExtended
       structure Variables: Variables
+      structure VarMap: Map
       structure VariableStructure: VariableStructure
       structure Single:
          sig
@@ -18,7 +20,7 @@ signature Literals =
             val eq: T * T -> bool
             val equate:         T * T -> bool
             val get_occurences: T -> Occurences.occurences
-            val vmap:           PointeredTypeExtended.BaseStructureMap.Map.T -> T -> T
+            val vmap:           VarMap.Map.T -> T -> T
          end
       structure Multi:
          sig
@@ -29,7 +31,7 @@ signature Literals =
             val get_occurences: T -> Occurences.occurences
             val empty:          T
             val is_empty:       T -> bool
-            val vmap:           PointeredTypeExtended.BaseStructureMap.Map.T -> T -> T
+            val vmap:           VarMap.Map.T -> T -> T
             val subeq:          T * T -> bool
          end
       structure PointerType: Type

@@ -1,5 +1,7 @@
 use "collections/pointered_type_extended.sig";
 use "collections/double_pointered_type_extended.sig";
+use "general/double_map.sig";
+use "general/double_structure.sig";
 use "general/sum_type.sig";
 use "pointered_types/double_pointered_type.sig";
 
@@ -7,6 +9,8 @@ functor DoublePointeredTypeExtended(X:
    sig
       structure FstType: PointeredTypeExtended
       structure SndType: PointeredTypeExtended
+      structure BaseStructure:  DoubleStructure
+      structure BaseStructureMap: DoubleMap
       structure BaseType:  SumType
       structure ContainerType: PairType
       structure PointerType: SumType
@@ -17,11 +21,17 @@ functor DoublePointeredTypeExtended(X:
       sharing ContainerType.SndType = SndType.ContainerType
       sharing PointerType.FstType = FstType.PointerType
       sharing PointerType.SndType = SndType.PointerType
-      sharing DoublePointeredType.FstType =  FstType
-      sharing DoublePointeredType.SndType =  SndType
-      sharing DoublePointeredType.BaseType =  BaseType
-      sharing DoublePointeredType.ContainerType =  ContainerType
-      sharing DoublePointeredType.PointerType =  PointerType
+      sharing DoublePointeredType.FstType = FstType
+      sharing DoublePointeredType.SndType = SndType
+      sharing DoublePointeredType.BaseType = BaseType
+      sharing DoublePointeredType.ContainerType = ContainerType
+      sharing DoublePointeredType.PointerType = PointerType
+      sharing BaseStructure.FstStruct = FstType.BaseStructure
+      sharing BaseStructure.SndStruct = SndType.BaseStructure
+      sharing BaseStructureMap.FstMap = FstType.BaseStructureMap
+      sharing BaseStructureMap.SndMap = SndType.BaseStructureMap
+      sharing BaseStructureMap.Start = BaseStructure
+      sharing BaseStructureMap.End = BaseStructure
    end ): DoublePointeredTypeExtended =
    struct
       structure FstType =  X.FstType
@@ -29,11 +39,8 @@ functor DoublePointeredTypeExtended(X:
       structure BaseType =  X.BaseType
       structure ContainerType =  X.ContainerType
       structure PointerType =  X.PointerType
-      structure BaseStructure =
-         struct
-            structure Fst =  FstType.BaseStructure
-            structure Snd =  SndType.BaseStructure
-         end
+      structure BaseStructure =  X.BaseStructure
+      structure BaseStructureMap =  X.BaseStructureMap
 
       val select =  X.DoublePointeredType.select
       val empty =  X.DoublePointeredType.empty
