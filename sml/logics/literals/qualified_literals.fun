@@ -29,6 +29,7 @@ functor QualifiedLiterals(X:
       sharing DoublePointeredTypeExtended.SndType.PointerType = PointeredTypeGenerating.PointeredTypeExtended.PointerType
       sharing DoublePointeredTypeExtended.SndType.BaseStructure = PointeredTypeGenerating.PointeredTypeExtended.BaseStructure
       sharing DoublePointeredTypeExtended.SndType.BaseStructureMap = PointeredTypeGenerating.PointeredTypeExtended.BaseStructureMap
+      sharing DoublePointeredTypeExtended.BaseType = DoubleVariableStructure.BaseType
       sharing DoubleVariableStructure.Variables.Fst = LiteralsConstruction.Qualifier.VariableStructure
       sharing DoubleVariableStructure.Variables.Snd = VariableStructure
       sharing VariableStructure.Variables = LiteralsConstruction.Variables
@@ -47,7 +48,7 @@ functor QualifiedLiterals(X:
       sharing VarMap.Start = LiteralsConstruction.Variables
       sharing VarMap.End = LiteralsConstruction.Variables
       sharing Occ.DictSet.Eqs =  LiteralsConstruction.Variables
-   end ) (*: Literals *) =
+   end ): Literals =
    struct
       structure Constructors =  X.LiteralsConstruction.Constructors
 

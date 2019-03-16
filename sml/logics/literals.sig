@@ -43,7 +43,7 @@ signature Literals =
       sharing Multi.Variables = Variables
       sharing VariableStructure.Variables = Variables
 
-      val get_val: Single.T -> Single.T
+      val get_val:    Variables.Base.T -> Variables.Base.T
 
       val select:     PointerType.T * Multi.T -> Single.T Option.option
 
