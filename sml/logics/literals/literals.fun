@@ -10,8 +10,8 @@ use "pointered_types/pointered_functor.sig";
 functor Literals(X:
    sig
       structure BaseMap: BaseMap
-      structure VarMap: TypeMap
       structure VariableStructure: VariableStructure
+      structure VarMap: TypeMap
       structure LiteralsConstruction: LiteralsConstruction
       structure Occ: Occurences
       structure PointeredTypeGenerating: PointeredTypeGenerating
@@ -33,10 +33,11 @@ functor Literals(X:
       sharing PointeredFunctor.Map = BaseMap
       sharing BaseMap.Start = LiteralsConstruction.Variables.Base
       sharing BaseMap.End = LiteralsConstruction.Variables.Base
+      sharing BaseMap.Map = PointeredTypeGenerating.PointeredTypeExtended.BaseStructureMap.Map
       sharing VarMap.Start = LiteralsConstruction.Variables
       sharing VarMap.End = LiteralsConstruction.Variables
-      sharing BaseMap.Map = PointeredTypeGenerating.PointeredTypeExtended.BaseStructureMap.Map
       sharing VariableStructure.Variables = LiteralsConstruction.Variables
+      sharing VariableStructure.Map = VarMap
       sharing Occ.DictSet.Eqs =  LiteralsConstruction.Variables
    end ): Literals =
    struct
@@ -45,7 +46,6 @@ functor Literals(X:
       structure PointeredTypeExtended =  X.PointeredTypeGenerating.PointeredTypeExtended
       structure Variables =  X.LiteralsConstruction.Variables
       structure VariableStructure =  X.VariableStructure
-      structure VarMap =  X.VarMap
 
       fun get_val (p as Variables.Base.Construction(c, xi)) =  p
         | get_val (p as Variables.Base.Variable x)

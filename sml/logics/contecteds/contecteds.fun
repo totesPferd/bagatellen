@@ -8,7 +8,7 @@ functor Contecteds(X:
       structure Lit: Literals
       structure VarCtxt: VariableContexts
       sharing Lit.VariableStructure = VarCtxt.VariableStructure
-      sharing Lit.VarMap = VarCtxt.Map
+      sharing Lit.VariableStructure.Map = VarCtxt.Map
    end ): Contecteds  =
    struct
       structure Constructors =  X.Lit.Constructors

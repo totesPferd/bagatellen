@@ -11,7 +11,6 @@ signature Literals =
       structure Occurences: Occurences
       structure PointeredTypeExtended: PointeredTypeExtended
       structure Variables: Variables
-      structure VarMap: Map
       structure VariableStructure: VariableStructure
       structure Single:
          sig
@@ -20,7 +19,7 @@ signature Literals =
             val eq: T * T -> bool
             val equate:         T * T -> bool
             val get_occurences: T -> Occurences.occurences
-            val vmap:           VarMap.Map.T -> T -> T
+            val vmap:           VariableStructure.Map.Map.T -> T -> T
          end
       structure Multi:
          sig
@@ -31,7 +30,7 @@ signature Literals =
             val get_occurences: T -> Occurences.occurences
             val empty:          T
             val is_empty:       T -> bool
-            val vmap:           VarMap.Map.T -> T -> T
+            val vmap:           VariableStructure.Map.Map.T -> T -> T
             val subeq:          T * T -> bool
          end
       structure PointerType: Type

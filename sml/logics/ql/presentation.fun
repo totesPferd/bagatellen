@@ -54,7 +54,6 @@ functor Presentation(X:
       sharing CX.Literals.Single = L.Single
       sharing CX.Literals.Variables = V
       sharing CX.Literals.VariableStructure = L.VariableStructure
-      sharing CX.Literals.VarMap =  L.VarMap
       sharing CX.VariableContexts = VC
       sharing L.Constructors = C
       sharing L.PointeredTypeExtended.BaseStructure = PTG.PointeredTypeExtended.BaseStructure
@@ -77,7 +76,6 @@ functor Presentation(X:
       sharing P.Contecteds.Literals.Single = L.Single
       sharing P.Contecteds.Literals.Variables = V
       sharing P.Contecteds.Literals.VariableStructure = L.VariableStructure
-      sharing P.Contecteds.Literals.VarMap = L.VarMap
       sharing P.Contecteds.VariableContexts = VC
       sharing C.Qualifier = Q
       sharing VC.PointeredTypeExtended = UV.PointeredTypeExtended
