@@ -7,7 +7,7 @@ signature VariableStructure =
       structure Variables:
          sig
          end
-      structure Type: Type
+      structure BaseType: Type
       structure BinaryRelation: BinaryRelation
       structure Map: Map
       sharing BinaryRelation.Domain = Variables
