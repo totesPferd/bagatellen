@@ -17,6 +17,7 @@ functor VariableAsStructure(X:
       structure Map =  X.Map
       structure Variables =  X.Variables
       structure BaseType =  X.Variables.Base
+      structure VarType =  X.Variables
 
       val copy =  Map.get_map(Variables.copy)
       val eq =  BinaryRelation.get_binary_relation(Variables.eq)

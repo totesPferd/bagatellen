@@ -11,12 +11,15 @@ functor DoubleVariableStructure(X:
       structure BinaryRelation: DoubleBinaryRelation
       structure Map: DoubleMap
       structure BaseType: SumType
+      structure VarType: SumType
       sharing BinaryRelation.FstRelation =  Fst.BinaryRelation
       sharing BinaryRelation.SndRelation =  Snd.BinaryRelation
       sharing Map.FstMap = Fst.Map
       sharing Map.SndMap = Snd.Map
       sharing BaseType.FstType = Fst.BaseType
       sharing BaseType.SndType = Snd.BaseType
+      sharing VarType.FstType = Fst.VarType
+      sharing VarType.SndType = Snd.VarType
    end ): DoubleVariableStructure =
    struct
       structure Variables =
@@ -27,6 +30,7 @@ functor DoubleVariableStructure(X:
       structure BinaryRelation =  X.BinaryRelation
       structure Map =  X.Map
       structure BaseType =  X.BaseType
+      structure VarType = X.VarType
 
       val copy =  X.Map.Pair.tuple (
             X.Fst.copy

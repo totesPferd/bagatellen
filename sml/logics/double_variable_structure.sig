@@ -13,6 +13,7 @@ signature DoubleVariableStructure =
       structure BaseType: SumType
       structure BinaryRelation: DoubleBinaryRelation
       structure Map: DoubleMap
+      structure VarType: SumType
       sharing BinaryRelation.Domain = Variables
       sharing BinaryRelation.FstRelation =  Variables.Fst.BinaryRelation
       sharing BinaryRelation.SndRelation =  Variables.Snd.BinaryRelation
@@ -22,6 +23,8 @@ signature DoubleVariableStructure =
       sharing Map.SndMap = Variables.Snd.Map
       sharing BaseType.FstType = Variables.Fst.BaseType
       sharing BaseType.SndType = Variables.Snd.BaseType
+      sharing VarType.FstType = Variables.Fst.VarType
+      sharing VarType.SndType = Variables.Snd.VarType
 
       val copy: Map.Map.T
       val eq:   BinaryRelation.Relation.T

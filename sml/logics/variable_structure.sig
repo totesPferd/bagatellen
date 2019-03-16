@@ -10,6 +10,7 @@ signature VariableStructure =
       structure BaseType: Type
       structure BinaryRelation: BinaryRelation
       structure Map: Map
+      structure VarType: Type
       sharing BinaryRelation.Domain = Variables
       sharing Map.Start = Variables
       sharing Map.End = Variables
