@@ -4,7 +4,7 @@ use "collections/pointered_type_generating.sig";
 use "general/base_map.sig";
 use "general/type_map.sig";
 use "logics/double_variable_structure.sig";
-use "logics/literals.sig";
+use "logics/qualified_literals.sig";
 use "logics/qualified_construction.sig";
 use "pointered_types/pointered_functor.sig";
 
@@ -48,7 +48,7 @@ functor QualifiedLiterals(X:
       sharing VarMap.Start = LiteralsConstruction.Variables
       sharing VarMap.End = LiteralsConstruction.Variables
       sharing Occ.DictSet.Eqs =  LiteralsConstruction.Variables
-   end ): Literals =
+   end ): QualifiedLiterals =
    struct
       structure Constructors =  X.LiteralsConstruction.Constructors
 
