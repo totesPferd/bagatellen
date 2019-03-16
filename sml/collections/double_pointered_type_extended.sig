@@ -38,4 +38,6 @@ signature DoublePointeredTypeExtended =
 
       val transition: (BaseType.T * 'b -> 'b Option.option) -> ContainerType.T -> 'b -> 'b
 
+      val base_map:   BaseStructureMap.Map.T -> BaseType.T -> BaseType.T
+
    end;

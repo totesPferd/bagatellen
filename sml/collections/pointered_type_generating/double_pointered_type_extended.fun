@@ -3,12 +3,15 @@ use "collections/double_pointered_type_extended.sig";
 use "general/double_map.sig";
 use "general/double_structure.sig";
 use "general/sum_type.sig";
+use "general/type_map.sig";
 use "pointered_types/double_pointered_type.sig";
 
 functor DoublePointeredTypeExtended(X:
    sig
       structure FstType: PointeredTypeExtended
       structure SndType: PointeredTypeExtended
+      structure FstMap: TypeMap
+      structure SndMap: TypeMap
       structure BaseStructure:  DoubleStructure
       structure BaseStructureMap: DoubleMap
       structure BaseType:  SumType
@@ -28,10 +31,16 @@ functor DoublePointeredTypeExtended(X:
       sharing DoublePointeredType.PointerType = PointerType
       sharing BaseStructure.FstStruct = FstType.BaseStructure
       sharing BaseStructure.SndStruct = SndType.BaseStructure
-      sharing BaseStructureMap.FstMap = FstType.BaseStructureMap
-      sharing BaseStructureMap.SndMap = SndType.BaseStructureMap
+      sharing BaseStructureMap.FstMap = FstMap
+      sharing BaseStructureMap.SndMap = SndMap
       sharing BaseStructureMap.Start = BaseStructure
       sharing BaseStructureMap.End = BaseStructure
+      sharing FstType.BaseStructureMap = FstMap
+      sharing SndType.BaseStructureMap = SndMap
+      sharing FstMap.Start = FstType.BaseType
+      sharing FstMap.End = FstType.BaseType
+      sharing SndMap.Start = SndType.BaseType
+      sharing SndMap.End = SndType.BaseType
    end ): DoublePointeredTypeExtended =
    struct
       structure FstType =  X.FstType
@@ -45,7 +54,6 @@ functor DoublePointeredTypeExtended(X:
       val select =  X.DoublePointeredType.select
       val empty =  X.DoublePointeredType.empty
       val is_empty =  X.DoublePointeredType.is_empty
-
 
       fun all phi c
          =      (FstType.all (phi o BaseType.fst_inj) (ContainerType.fst c))
@@ -75,6 +83,10 @@ functor DoublePointeredTypeExtended(X:
             in v_2
             end
 
+      fun base_map bm
+         =   X.BaseType.traverse (
+                   (X.BaseType.fst_inj o (X.FstMap.apply (BaseStructureMap.Pair.fst bm)))
+                ,  (X.BaseType.snd_inj o (X.SndMap.apply (BaseStructureMap.Pair.snd bm))) )
 
    end;
 
