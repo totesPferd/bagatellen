@@ -6,8 +6,6 @@ signature QualifiedLiterals =
 
       structure VSingle:
          sig
-            structure Variables: Variables
-
             type T
 
             val eq:     T * T -> bool

@@ -14,7 +14,6 @@ signature Literals =
       structure VariableStructure: VariableStructure
       structure Single:
          sig
-            structure Variables: Variables
             type T
             val eq: T * T -> bool
             val equate:         T * T -> bool
@@ -23,7 +22,6 @@ signature Literals =
          end
       structure Multi:
          sig
-            structure Variables: Variables
             type T
             val eq: T * T -> bool
             val equate:         T * T -> bool
@@ -39,8 +37,6 @@ signature Literals =
       sharing PointeredTypeExtended.ContainerType = Multi
       sharing PointeredTypeExtended.BaseStructure = Single
       sharing VariableStructure.BaseType = Single
-      sharing Single.Variables = Variables
-      sharing Multi.Variables = Variables
       sharing VariableStructure.Variables = Variables
 
       val get_val:    Variables.Base.T -> Variables.Base.T

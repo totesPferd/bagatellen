@@ -145,7 +145,6 @@ functor QualifiedLiterals(X:
 
       structure VSingle =
          struct
-            structure Variables =  Variables
             type T =  Variables.Base.Construction
             val eq =  eq
             val equate =  equate
@@ -154,7 +153,6 @@ functor QualifiedLiterals(X:
          end
       structure Single =
          struct
-            structure Variables =  Variables
             type T =  PointeredTypeExtended.BaseType.T
             val eq =  PointeredTypeExtended.BaseType.eq
             fun equate(ik, il)
@@ -184,7 +182,6 @@ functor QualifiedLiterals(X:
          end
       structure Multi =
          struct
-            structure Variables =  Variables
             type T =  PointeredTypeExtended.ContainerType.T
             local
                fun tf c =  (PointeredTypeExtended.ContainerType.fst c, PointeredTypeExtended.ContainerType.snd c)

@@ -13,12 +13,8 @@ signature Contecteds =
       sharing Literals.VariableStructure = VariableContexts.VariableStructure
       structure Clauses:
          sig
-            structure Literals: Literals
-            structure VariableContexts: VariableContexts
             structure Single:
                sig
-                  structure Literals: Literals
-                  structure VariableContexts: VariableContexts
                   type T
                   val eq: T * T -> bool
                   val get_context: T -> VariableContexts.VariableContext.T
@@ -32,8 +28,6 @@ signature Contecteds =
                end
             structure Multi:
                sig
-                  structure Literals: Literals
-                  structure VariableContexts: VariableContexts
                   type T
                   val eq: T * T -> bool
                   val get_context: T -> VariableContexts.VariableContext.T
@@ -46,20 +40,12 @@ signature Contecteds =
                   val is_empty: T -> bool
                   val is_assumption: T -> bool
                end
-            sharing Single.Literals =  Literals
-            sharing Multi.Literals =  Literals
-            sharing Single.VariableContexts =  VariableContexts
-            sharing Multi.VariableContexts =  VariableContexts
             val transition: (Single.T * 'b -> 'b Option.option) -> Multi.T -> 'b -> 'b
          end
       structure ContectedLiterals:
          sig
-            structure Literals: Literals
-            structure VariableContexts: VariableContexts
             structure Single:
                sig
-                  structure Literals: Literals
-                  structure VariableContexts: VariableContexts
                   type T
                   val eq: T * T -> bool
                   val get_context: T -> VariableContexts.VariableContext.T
@@ -71,8 +57,6 @@ signature Contecteds =
                end
             structure Multi:
                sig
-                  structure Literals: Literals
-                  structure VariableContexts: VariableContexts
                   type T
                   val eq: T * T -> bool
                   val get_context: T -> VariableContexts.VariableContext.T
@@ -84,16 +68,8 @@ signature Contecteds =
       
                   val is_empty: T -> bool
                end
-            sharing Single.Literals =  Literals
-            sharing Multi.Literals =  Literals
-            sharing Single.VariableContexts =  VariableContexts
-            sharing Multi.VariableContexts =  VariableContexts
             val transition: (Single.T * 'b -> 'b Option.option) -> Multi.T -> 'b -> 'b
          end
-      sharing Clauses.Literals =  Literals
-      sharing ContectedLiterals.Literals =  Literals
-      sharing Clauses.VariableContexts =  VariableContexts
-      sharing ContectedLiterals.VariableContexts =  VariableContexts
 
       val make_clause_from_conclusion: ContectedLiterals.Single.T -> Clauses.Single.T
       val make_multi_clause_from_antecedent: ContectedLiterals.Multi.T -> Clauses.Multi.T

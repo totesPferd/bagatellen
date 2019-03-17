@@ -18,12 +18,8 @@ functor Contecteds(X:
 
       structure ContectedLiterals =
          struct
-            structure Literals =  Literals
-            structure VariableContexts =  VariableContexts
             structure Single =
                struct
-                  structure Literals =  Literals
-                  structure VariableContexts =  VariableContexts
                   type T =  { context: VariableContexts.VariableContext.T, conclusion: Literals.Single.T }
       
                   fun eq ({ context = ctxt_1, conclusion = c_1}, { context = ctxt_2, conclusion = c_2 })
@@ -49,8 +45,6 @@ functor Contecteds(X:
                end
             structure Multi =
                struct
-                  structure Literals =  Literals
-                  structure VariableContexts =  VariableContexts
                   type T =  { context: VariableContexts.VariableContext.T, antecedent: Literals.Multi.T }
       
                   fun eq ({ context = ctxt_1, antecedent = a_1 }, { context = ctxt_2, antecedent = a_2 })
@@ -87,12 +81,8 @@ functor Contecteds(X:
 
       structure Clauses =
          struct
-            structure Literals =  Literals
-            structure VariableContexts =  VariableContexts
             structure Single =
                struct
-                  structure Literals =  Literals
-                  structure VariableContexts =  VariableContexts
                   type T =  { context: VariableContexts.VariableContext.T, antecedent: Literals.Multi.T, conclusion: Literals.Single.T }
       
                   fun eq ({ context = ctxt_1, antecedent = a_1, conclusion = c_1 }, { context = ctxt_2, antecedent = a_2, conclusion = c_2 })
@@ -125,8 +115,6 @@ functor Contecteds(X:
       
             structure Multi =
                struct
-                  structure Literals =  Literals
-                  structure VariableContexts =  VariableContexts
                   type T =  { context: VariableContexts.VariableContext.T, antecedent: Literals.Multi.T, conclusion: Literals.Multi.T }
       
                   fun eq ({ context = ctxt_1, antecedent = a_1, conclusion = c_1 }, { context = ctxt_2, antecedent = a_2, conclusion = c_2 })

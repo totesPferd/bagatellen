@@ -117,7 +117,6 @@ functor Literals(X:
 
       structure Single =
          struct
-            structure Variables =  Variables
             type T =  Variables.Base.Construction
             val eq =  eq
             val equate =  equate
@@ -126,7 +125,6 @@ functor Literals(X:
          end
       structure Multi =
          struct
-            structure Variables =  Variables
             type T =  X.PointeredTypeGenerating.PointeredTypeExtended.ContainerType.T
             val eq =  multi_eq
             val equate =  multi_equate
