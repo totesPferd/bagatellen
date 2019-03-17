@@ -1,11 +1,11 @@
 use "collections/double_pointered_type_extended.sig";
-use "collections/occurences.sig";
 use "collections/pointered_type_generating.sig";
+use "collections/qualified_occurences.sig";
 use "general/base_map.sig";
 use "general/type_map.sig";
 use "logics/double_variable_structure.sig";
-use "logics/qualified_literals.sig";
 use "logics/qualified_construction.sig";
+use "logics/qualified_literals.sig";
 use "pointered_types/pointered_functor.sig";
 
 functor QualifiedLiterals(X:
@@ -21,7 +21,7 @@ functor QualifiedLiterals(X:
       structure PointeredFunctor:  PointeredFunctor
          where type Start.ContainerType.T =  PointeredTypeGenerating.PointeredTypeExtended.ContainerType.T
          and   type End.ContainerType.T =  PointeredTypeGenerating.PointeredTypeExtended.ContainerType.T
-      structure Occ: Occurences
+      structure Occ: QualifiedOccurences
       sharing LiteralsConstruction.PolymorphicContainerType = PointeredTypeGenerating.PolymorphicContainerType
       sharing LiteralsConstruction.Variables.Base = PointeredTypeGenerating.PointeredTypeExtended.BaseType
       sharing DoublePointeredTypeExtended.FstType = LiteralsConstruction.Qualifier.PointeredTypeExtended
@@ -47,7 +47,9 @@ functor QualifiedLiterals(X:
       sharing BaseMap.End = LiteralsConstruction.Variables.Base
       sharing VarMap.Start = LiteralsConstruction.Variables
       sharing VarMap.End = LiteralsConstruction.Variables
-      sharing Occ.DictSet.Eqs =  LiteralsConstruction.Variables
+      sharing Occ.QualifiedBaseType = VariableStructure.VarType
+      sharing Occ.Qualifier = LiteralsConstruction.Qualifier.Occurences
+      sharing Occ.QualifiedBaseType.SndType = LiteralsConstruction.Variables
    end ): QualifiedLiterals =
    struct
       structure Constructors =  X.LiteralsConstruction.Constructors
@@ -127,12 +129,14 @@ functor QualifiedLiterals(X:
       val single_vmap =  vmap
 
       fun get_occurences (X.LiteralsConstruction.Variables.Base.Construction(c, alpha, xi)) =  multi_get_occurences (alpha, xi)
-      |   get_occurences (X.LiteralsConstruction.Variables.Base.Variable x) =  X.Occ.singleton(x)
+      |   get_occurences (X.LiteralsConstruction.Variables.Base.Variable x) =  X.Occ.core_singleton x
       and multi_get_occurences (alpha, xi)
          =  X.PointeredTypeGenerating.PointeredTypeExtended.transition
               (  fn (t, occ) => Option.SOME (X.Occ.unif_occurences (get_occurences t, occ)))
               xi
-              X.Occ.empty
+              (  X.Occ.import_qualifier
+                    (X.LiteralsConstruction.Qualifier.Multi.get_occurences alpha)
+                    X.Occ.empty )
 
       val select =  PointeredTypeExtended.select
       val is_in  =  PointeredTypeExtended.is_in
