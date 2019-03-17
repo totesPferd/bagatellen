@@ -168,10 +168,14 @@ functor QualifiedLiterals(X:
                             ,  (fn b => single_equate(y, b)) )
                             il ))
                       ik
-            exception NoOcc
             val get_occurences
                =   PointeredTypeExtended.BaseType.traverse (
-                         (fn x => raise NoOcc)
+                         (fn x
+                             => let
+                                   val q =  X.LiteralsConstruction.Qualifier.Single.get_occurences x
+                                   val occ =  Occurences.import_qualifier q Occurences.empty
+                                in occ
+                                end )
                       ,  (fn y => get_occurences y) )
             fun vmap f
                =   PointeredTypeExtended.BaseType.traverse (
