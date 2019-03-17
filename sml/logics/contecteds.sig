@@ -26,7 +26,7 @@ signature Contecteds =
                   val get_conclusion: T -> Literals.Single.T
                   val construct: VariableContexts.VariableContext.T * Literals.Multi.T * Literals.Single.T  -> T
                   val apply_alpha_conversion: VariableContexts.AlphaConverter -> T -> T
-                  val get_occurences: T -> Literals.Occurences.occurences
+                  val get_occurences: T -> Literals.Occurences.T
       
                   val is_assumption: T -> bool
                end
@@ -41,7 +41,7 @@ signature Contecteds =
                   val get_conclusion: T -> Literals.Multi.T
                   val construct: VariableContexts.VariableContext.T * Literals.Multi.T * Literals.Multi.T  -> T
                   val apply_alpha_conversion: VariableContexts.AlphaConverter -> T -> T
-                  val get_occurences: T -> Literals.Occurences.occurences
+                  val get_occurences: T -> Literals.Occurences.T
       
                   val is_empty: T -> bool
                   val is_assumption: T -> bool
@@ -66,7 +66,7 @@ signature Contecteds =
                   val get_conclusion: T -> Literals.Single.T
                   val construct: VariableContexts.VariableContext.T * Literals.Single.T  -> T
                   val apply_alpha_conversion: VariableContexts.AlphaConverter -> T -> T
-                  val get_occurences: T -> Literals.Occurences.occurences
+                  val get_occurences: T -> Literals.Occurences.T
                   val equate: T * T -> bool
                end
             structure Multi:
@@ -79,7 +79,7 @@ signature Contecteds =
                   val get_antecedent: T -> Literals.Multi.T
                   val construct: VariableContexts.VariableContext.T * Literals.Multi.T -> T
                   val apply_alpha_conversion: VariableContexts.AlphaConverter -> T -> T
-                  val get_occurences: T -> Literals.Occurences.occurences
+                  val get_occurences: T -> Literals.Occurences.T
                   val empty: VariableContexts.VariableContext.T -> T
       
                   val is_empty: T -> bool

@@ -18,7 +18,7 @@ signature Literals =
             type T
             val eq: T * T -> bool
             val equate:         T * T -> bool
-            val get_occurences: T -> Occurences.occurences
+            val get_occurences: T -> Occurences.T
             val vmap:           VariableStructure.Map.Map.T -> T -> T
          end
       structure Multi:
@@ -27,7 +27,7 @@ signature Literals =
             type T
             val eq: T * T -> bool
             val equate:         T * T -> bool
-            val get_occurences: T -> Occurences.occurences
+            val get_occurences: T -> Occurences.T
             val empty:          T
             val is_empty:       T -> bool
             val vmap:           VariableStructure.Map.Map.T -> T -> T

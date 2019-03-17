@@ -7,6 +7,6 @@ signature ONPT =
       structure Occurences: Occurences
       sharing NamingPointeredTypeGenerating.PointeredTypeExtended.BaseType = Occurences.DictSet.Eqs
 
-      val add: Occurences.occurences -> NamingPointeredTypeGenerating.PointeredTypeExtended.ContainerType.T -> NamingPointeredTypeGenerating.PointeredTypeExtended.ContainerType.T
+      val add: Occurences.T -> NamingPointeredTypeGenerating.PointeredTypeExtended.ContainerType.T -> NamingPointeredTypeGenerating.PointeredTypeExtended.ContainerType.T
 
    end;
