@@ -23,7 +23,7 @@ signature Contecteds =
                   val construct: VariableContexts.VariableContext.T * Literals.Multi.T * Literals.Single.T  -> T
                   val apply_alpha_conversion: VariableContexts.AlphaConverter -> T -> T
                   val get_occurences: T -> Literals.Occurences.T
-      
+
                   val is_assumption: T -> bool
                end
             structure Multi:
@@ -36,7 +36,7 @@ signature Contecteds =
                   val construct: VariableContexts.VariableContext.T * Literals.Multi.T * Literals.Multi.T  -> T
                   val apply_alpha_conversion: VariableContexts.AlphaConverter -> T -> T
                   val get_occurences: T -> Literals.Occurences.T
-      
+
                   val is_empty: T -> bool
                   val is_assumption: T -> bool
                end
@@ -65,7 +65,7 @@ signature Contecteds =
                   val apply_alpha_conversion: VariableContexts.AlphaConverter -> T -> T
                   val get_occurences: T -> Literals.Occurences.T
                   val empty: VariableContexts.VariableContext.T -> T
-      
+
                   val is_empty: T -> bool
                end
             val transition: (Single.T * 'b -> 'b Option.option) -> Multi.T -> 'b -> 'b

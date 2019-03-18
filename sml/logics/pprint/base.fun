@@ -80,5 +80,5 @@ functor PPrintBase(X: PPrintConfig): PPrintBase =
                   ntp (stream, pos) state'
                end
       end
-      
+
    end;

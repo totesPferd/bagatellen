@@ -21,14 +21,14 @@ functor Contecteds(X:
             structure Single =
                struct
                   type T =  { context: VariableContexts.VariableContext.T, conclusion: Literals.Single.T }
-      
+
                   fun eq ({ context = ctxt_1, conclusion = c_1}, { context = ctxt_2, conclusion = c_2 })
                     = VariableContexts.VariableContext.eq(ctxt_1, ctxt_2) andalso Literals.Single.eq(c_1, c_2)
-      
+
                   fun get_context (ctxt: T) =  #context ctxt
                   fun get_conclusion (cl: T) =  #conclusion cl
                   fun construct(ctxt, c) =  { context = ctxt, conclusion = c }: T
-      
+
                   fun apply_alpha_conversion (alpha: VariableContexts.AlphaConverter) ({ context = ctxt, conclusion = c }: T)
                     = let
                          val der_context =  VariableContexts.get_variable_context alpha
@@ -38,22 +38,22 @@ functor Contecteds(X:
                          { context =  der_context, conclusion = der_conclusion }
                       end
                   fun get_occurences (x:T) =  Literals.Single.get_occurences (#conclusion x)
-      
+
                   fun equate (c_1: T, c_2: T)
                     = Literals.Single.equate(#conclusion c_1, #conclusion c_2)
-      
+
                end
             structure Multi =
                struct
                   type T =  { context: VariableContexts.VariableContext.T, antecedent: Literals.Multi.T }
-      
+
                   fun eq ({ context = ctxt_1, antecedent = a_1 }, { context = ctxt_2, antecedent = a_2 })
                     = VariableContexts.VariableContext.eq(ctxt_1, ctxt_2) andalso Literals.Multi.eq(a_1, a_2)
-      
+
                   fun get_context (ctxt: T) =  #context ctxt
                   fun get_antecedent (cl: T) =  #antecedent cl
                   fun construct(ctxt, a) =  { context = ctxt, antecedent = a }: T
-      
+
                   fun apply_alpha_conversion (alpha: VariableContexts.AlphaConverter) ({ context = ctxt, antecedent = a }: T)
                     = let
                          val der_context =  VariableContexts.get_variable_context alpha
@@ -63,9 +63,9 @@ functor Contecteds(X:
                          { context =  der_context, antecedent = der_antecedent }
                       end
                   fun get_occurences (x:T) =  Literals.Multi.get_occurences (#antecedent x)
-      
+
                   fun empty ctxt =  { context = ctxt, antecedent = Literals.Multi.empty }
-      
+
                   fun is_empty (a: T) =  Literals.Multi.is_empty(#antecedent a)
                end
 
@@ -84,15 +84,15 @@ functor Contecteds(X:
             structure Single =
                struct
                   type T =  { context: VariableContexts.VariableContext.T, antecedent: Literals.Multi.T, conclusion: Literals.Single.T }
-      
+
                   fun eq ({ context = ctxt_1, antecedent = a_1, conclusion = c_1 }, { context = ctxt_2, antecedent = a_2, conclusion = c_2 })
                     = VariableContexts.VariableContext.eq(ctxt_1, ctxt_2) andalso Literals.Multi.eq(a_1, a_2) andalso Literals.Single.eq(c_1, c_2)
-      
+
                   fun get_context (cl: T) =  #context cl
                   fun get_antecedent (cl: T) =  #antecedent cl
                   fun get_conclusion (cl: T) =  #conclusion cl
                   fun construct(ctxt, a, c) =  { context = ctxt, antecedent = a, conclusion = c }: T
-      
+
                   fun apply_alpha_conversion (alpha: VariableContexts.AlphaConverter) ({ context = ctxt, antecedent = a, conclusion = c }: T)
                     = let
                          val der_context =  VariableContexts.get_variable_context alpha
@@ -107,24 +107,24 @@ functor Contecteds(X:
                      =  Literals.Occurences.unif_occurences (
                            Literals.Multi.get_occurences (#antecedent x)
                         ,  Literals.Single.get_occurences (#conclusion x) )
-      
+
                   fun is_assumption(cl: T)
                     = Literals.is_in(#conclusion cl, #antecedent cl)
 
                end
-      
+
             structure Multi =
                struct
                   type T =  { context: VariableContexts.VariableContext.T, antecedent: Literals.Multi.T, conclusion: Literals.Multi.T }
-      
+
                   fun eq ({ context = ctxt_1, antecedent = a_1, conclusion = c_1 }, { context = ctxt_2, antecedent = a_2, conclusion = c_2 })
                     = VariableContexts.VariableContext.eq(ctxt_1, ctxt_2) andalso Literals.Multi.eq(a_1, a_2) andalso Literals.Multi.eq(c_1, c_2)
-      
+
                   fun get_context (mcl: T) =  #context mcl
                   fun get_antecedent (cl: T) =  #antecedent cl
                   fun get_conclusion (cl: T) =  #conclusion cl
                   fun construct(ctxt, a, c) =  { context = ctxt, antecedent = a, conclusion = c }: T
-      
+
                   fun apply_alpha_conversion (alpha: VariableContexts.AlphaConverter) ({ context = ctxt, antecedent = a, conclusion = c }: T)
                     = let
                          val der_context =  VariableContexts.get_variable_context alpha

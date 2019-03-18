@@ -34,14 +34,14 @@ functor UnitPointeredTypeGenerating(X:
                end
             structure BaseStructure =  BaseType
             structure BaseStructureMap =  X.BaseStructureMap
-      
+
             val empty         =  Option.NONE
             val is_empty      =  not o Option.isSome
             fun select (_, x) =  x
 
             fun all P Option.NONE =  true
               | all P (Option.SOME x) = P x
-      
+
             exception ZipLengthsDoesNotAgree
             fun all_zip P (Option.NONE, Option.NONE) =  true
               | all_zip P (Option.SOME x_1, Option.SOME x_2) =  P(x_1, x_2)
@@ -55,15 +55,15 @@ functor UnitPointeredTypeGenerating(X:
               = case(phi (x, b)) of
                    Option.NONE =>  b
                 |  Option.SOME c => c
-      
+
             fun is_in (x, c)
               = Option.isSome (Option.map (fn (y) => BaseType.eq(x, y)) c)
-      
+
             fun subeq (c_1, c_2)
               = case(c_1) of
                    Option.NONE => true
                 |  Option.SOME x => is_in (x, c_2)
-      
+
          end
       structure AllZip: AllZip =
          struct

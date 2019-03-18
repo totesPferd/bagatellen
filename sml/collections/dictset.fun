@@ -81,15 +81,15 @@ functor DictSet(E: Eqs): DictSet =
                 end
             fun subseteq(s, t) =  List.all (fn (x) => is_in(x, t)) s
             fun eq(s, t) =  subseteq(s, t) andalso subseteq(t, s)
-        
+
             fun find P s =  List.find P s
-        
+
             fun ofind f nil =  Option.NONE
               | ofind f (hd :: tl)
               = case(f hd) of
                    Option.NONE => ofind f tl
                 |  Option.SOME y =>  Option.SOME y
-        
+
             fun fe b =  [ b ]
             fun transition phi s b =  Acc.transition phi s b
             fun fop phi s
@@ -98,6 +98,6 @@ functor DictSet(E: Eqs): DictSet =
                 s
                 nil
          end
-  
+
       fun keys (d: 'a Dicts.dict) =  (map #key d): Sets.T
    end;

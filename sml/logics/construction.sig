@@ -9,7 +9,7 @@ signature LiteralsConstruction =
          end
 
       structure Constructors: Constructors
-         
+
       structure Variables:
          sig
             type T

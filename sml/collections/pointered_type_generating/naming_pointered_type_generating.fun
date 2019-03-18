@@ -32,7 +32,7 @@ functor NamingPointeredTypeGenerating(X:
                end
             structure BaseStructure =  BaseType
             structure BaseStructureMap =  X.BaseStructureMap
-      
+
             val empty         =  List.nil
             val is_empty      =  List.null
             fun select (n, c)
@@ -42,7 +42,7 @@ functor NamingPointeredTypeGenerating(X:
 
             fun all P c
               = List.all (fn (n, x) => P x) c
-      
+
             fun all_zip P (c_1, c_2)
               = List.all
                    (fn ((n_1, x_1), (n_2, x_2)) => P(x_1, x_2))
@@ -51,12 +51,12 @@ functor NamingPointeredTypeGenerating(X:
             val base_map =  BaseStructureMap.apply
 
             fun transition f c =  Acc.transition (fn ((n, x: 'a), y) => f(x, y)) c
-      
+
             fun is_in (x, c)
               = List.exists
                    (fn (n, y) => BaseType.eq(x, y))
                    c
-      
+
             fun subeq (c_1, c_2)
               = List.all (fn (n, x) => is_in (x, c_2)) c_1
 
@@ -88,11 +88,11 @@ functor NamingPointeredTypeGenerating(X:
              (m, y) :: tl
           else
              (n, y) :: (insert ((m, x), tl))
-      
+
       fun sum (c_1, c_2) =  c_1 @ c_2
       fun union (c_1, c_2)
         = List.foldl insert c_1 c_2
-      
+
 
       fun transition f c =  Acc.transition (fn ((n, x), y) => f(!n, x, y)) c
 

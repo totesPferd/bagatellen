@@ -11,7 +11,7 @@ signature QualifiedLiteralsConstruction =
 
       structure Constructors: Constructors
       structure Qualifier: Literals
-         
+
       structure Variables:
          sig
             type T

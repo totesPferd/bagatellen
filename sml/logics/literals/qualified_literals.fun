@@ -76,7 +76,7 @@ functor QualifiedLiterals(X:
         =          X.LiteralsConstruction.Qualifier.Multi.eq (alpha, beta)
             andalso
                    X.PointeredTypeGenerating.PointeredTypeExtended.ContainerType.eq (xi, ypsilon)
-                   
+
       fun equate(k, l)
         = case (get_val k, get_val l) of
              (Variables.Base.Construction(c, alpha, xi), Variables.Base.Construction(d, beta, ypsilon))

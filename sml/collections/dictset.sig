@@ -35,11 +35,11 @@ signature DictSet =
             val intersect:        T * T -> T
             val subseteq:         T * T -> bool
             val eq:               T * T -> bool
-      
+
             val find:             (Eqs.T -> bool) -> T -> Eqs.T Option.option
-      
+
             val ofind:            (Eqs.T -> 'b Option.option) -> T -> 'b Option.option
-      
+
             val fe:               Eqs.T -> T
             val fop:              (Eqs.T -> T) -> T -> T
             val is_in:            Eqs.T * T -> bool

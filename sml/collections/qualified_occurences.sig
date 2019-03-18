@@ -14,5 +14,5 @@ signature QualifiedOccurences =
       val core_singleton:   QualifiedBaseType.SndType.T -> T
 
    end;
-      
+
 

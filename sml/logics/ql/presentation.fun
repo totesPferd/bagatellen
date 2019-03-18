@@ -166,7 +166,7 @@ functor Presentation(X:
                 equations = #equations state
              ,  modules = new_bag
              ,  qualifier = #qualifier state
-             ,  typecheck_info = #typecheck_info state }: state 
+             ,  typecheck_info = #typecheck_info state }: state
           end
 
       exception ParanormalEffectHasOccured
