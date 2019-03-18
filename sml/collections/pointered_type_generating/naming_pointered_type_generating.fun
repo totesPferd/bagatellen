@@ -24,7 +24,7 @@ functor NamingPointeredTypeGenerating(X:
             structure ContainerType =
                struct
                   type T =  BaseType.T PolymorphicContainerType.T
-                  val eq = ListPair.all (fn ((m, x), (n, y)) => BaseType.eq (x, y))
+                  val eq =  X.PolymorphicContainerType.cong BaseType.eq
                end
             structure PointerType =
                struct
