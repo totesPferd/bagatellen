@@ -39,10 +39,7 @@ signature Literals =
       sharing VariableStructure.BaseType = Single
       sharing VariableStructure.Variables = Variables
 
-      val get_val:    Variables.Base.T -> Variables.Base.T
-
       val select:     PointerType.T * Multi.T -> Single.T Option.option
-
       val is_in:      Single.T * Multi.T -> bool
 
       val transition: (Single.T * 'b -> 'b Option.option) -> Multi.T -> 'b -> 'b
