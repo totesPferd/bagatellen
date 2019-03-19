@@ -31,7 +31,7 @@ functor QualifiedLiteralsConstruction(X:
                     = case (X.PV.get_val x) of
                          Option.NONE => p
                       |  Option.SOME k => get_val k
-            
+
                   fun eq(k, l)
                     = case ((get_val k), (get_val l)) of
                         (Construction(c, alpha, xi), Construction(d, beta, ypsilon))
