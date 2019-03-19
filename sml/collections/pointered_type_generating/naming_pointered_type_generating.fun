@@ -43,17 +43,7 @@ functor NamingPointeredTypeGenerating(X:
             fun all P c
               = List.all (fn (n, x) => P x) c
 
-            fun all_zip P (c_1, c_2)
-              =  let
-                    fun aux (P, nil) (m, x) =  false
-                    |   aux (P, (n, y)::c) (m, x)
-                           =   if (m = n)
-                               then
-                                  P(x, y)
-                               else
-                                  aux (P, c) (m, x)
-                 in List.all (aux (P, c_2)) c_1
-                 end
+            val all_zip =  PolymorphicContainerType.all_zip
 
             val base_map =  BaseStructureMap.apply
 

@@ -3,14 +3,18 @@ use "collections/naming_polymorphic_container_type.sig";
 structure NamingPolymorphicContainerType: NamingPolymorphicContainerType =
    struct
       type 'a T =  (string Option.option ref * 'a) list
-      fun contains eq  (_, nil) =  false
-      |   contains eq  ((m, x), ((n, y)::c))
-             =  if (m = n)
-                then
-                   eq (x, y)
-                else
-                   contains eq ((m, x), c)
-      fun subeq eq (c_1, c_2)
-             =  List.all (fn (m, x) => contains eq ((m, x), c_2)) c_1
-      fun cong eq (c_1, c_2) =  subeq eq (c_1, c_2) andalso subeq eq (c_2, c_1)
+
+      fun all_zip P (c_1, c_2)
+        =  let
+              fun aux (P, nil) (m, x) =  false
+              |   aux (P, (n, y)::c) (m, x)
+                     =   if (m = n)
+                         then
+                            P(x, y)
+                         else
+                            aux (P, c) (m, x)
+           in List.all (aux (P, c_2)) c_1
+           end
+
+      fun cong eq (c_1, c_2) =  all_zip eq (c_1, c_2) andalso all_zip eq (c_2, c_1)
    end;
