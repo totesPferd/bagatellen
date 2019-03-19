@@ -21,7 +21,7 @@ functor Literals(X:
          and
             type End.ContainerType.T =  PointeredTypeGenerating.PointeredTypeExtended.ContainerType.T
       sharing LiteralsConstruction.PolymorphicContainerType = PointeredTypeGenerating.PolymorphicContainerType
-      sharing LiteralsConstruction.Variables.Base = PointeredTypeGenerating.PointeredTypeExtended.BaseType
+      sharing LiteralsConstruction.Variables.Base.Single = PointeredTypeGenerating.PointeredTypeExtended.BaseType
       sharing PointeredFunctor.Start.BaseStructure = PointeredTypeGenerating.PointeredTypeExtended.BaseStructure
       sharing PointeredFunctor.Start.BaseStructureMap = PointeredTypeGenerating.PointeredTypeExtended.BaseStructureMap
       sharing PointeredFunctor.Start.BaseType = PointeredTypeGenerating.PointeredTypeExtended.BaseType
@@ -31,12 +31,12 @@ functor Literals(X:
       sharing PointeredFunctor.End.BaseType = PointeredTypeGenerating.PointeredTypeExtended.BaseType
       sharing PointeredFunctor.End.PointerType = PointeredTypeGenerating.PointeredTypeExtended.PointerType
       sharing PointeredFunctor.Map = BaseMap
-      sharing BaseMap.Start = LiteralsConstruction.Variables.Base
-      sharing BaseMap.End = LiteralsConstruction.Variables.Base
+      sharing BaseMap.Start = LiteralsConstruction.Variables.Base.Single
+      sharing BaseMap.End = LiteralsConstruction.Variables.Base.Single
       sharing BaseMap.Map = PointeredTypeGenerating.PointeredTypeExtended.BaseStructureMap.Map
       sharing VarMap.Start = LiteralsConstruction.Variables
       sharing VarMap.End = LiteralsConstruction.Variables
-      sharing VariableStructure.BaseType =  LiteralsConstruction.Variables.Base
+      sharing VariableStructure.BaseType =  LiteralsConstruction.Variables.Base.Single
       sharing VariableStructure.Variables = LiteralsConstruction.Variables
       sharing VariableStructure.Map = VarMap
       sharing Occ.DictSet.Eqs =  LiteralsConstruction.Variables
@@ -53,15 +53,6 @@ functor Literals(X:
         = case (Variables.get_val x) of
              Option.NONE => p
           |  Option.SOME k => get_val k
-
-      fun eq(k, l)
-        = case ((get_val k), (get_val l)) of
-            (Variables.Base.Construction(c, xi), Variables.Base.Construction(d, ypsilon))
-            => Constructors.eq(c, d) andalso multi_eq(xi, ypsilon)
-          | (Variables.Base.Construction(c, xi), Variables.Base.Variable y) => false
-          | (Variables.Base.Variable x, Variables.Base.Construction(d, ypsilon)) => false
-          | (Variables.Base.Variable x, Variables.Base.Variable y) =>  Variables.eq (x, y)
-      and multi_eq (xi, ypsilon) =  X.PointeredTypeGenerating.PointeredTypeExtended.ContainerType.eq (xi, ypsilon)
 
       fun equate(k, l)
         = case (get_val k, get_val l) of
@@ -118,7 +109,7 @@ functor Literals(X:
       structure Single =
          struct
             type T =  Variables.Base.Construction
-            val eq =  eq
+            val eq =  X.LiteralsConstruction.Variables.Base.Single.eq
             val equate =  equate
             val get_occurences =  get_occurences
             val vmap =  vmap
@@ -126,7 +117,7 @@ functor Literals(X:
       structure Multi =
          struct
             type T =  X.PointeredTypeGenerating.PointeredTypeExtended.ContainerType.T
-            val eq =  multi_eq
+            val eq =  X.LiteralsConstruction.Variables.Base.Multi.eq
             val equate =  multi_equate
             val get_occurences =  multi_get_occurences
             val vmap =  multi_vmap

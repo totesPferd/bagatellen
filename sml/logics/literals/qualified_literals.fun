@@ -23,7 +23,7 @@ functor QualifiedLiterals(X:
          and   type End.ContainerType.T =  PointeredTypeGenerating.PointeredTypeExtended.ContainerType.T
       structure Occ: QualifiedOccurences
       sharing LiteralsConstruction.PolymorphicContainerType = PointeredTypeGenerating.PolymorphicContainerType
-      sharing LiteralsConstruction.Variables.Base = PointeredTypeGenerating.PointeredTypeExtended.BaseType
+      sharing LiteralsConstruction.Variables.Base.Single = PointeredTypeGenerating.PointeredTypeExtended.BaseType
       sharing DoublePointeredTypeExtended.FstType = LiteralsConstruction.Qualifier.PointeredTypeExtended
       sharing DoublePointeredTypeExtended.SndType.BaseType = PointeredTypeGenerating.PointeredTypeExtended.BaseType
       sharing DoublePointeredTypeExtended.SndType.PointerType = PointeredTypeGenerating.PointeredTypeExtended.PointerType
@@ -43,8 +43,8 @@ functor QualifiedLiterals(X:
       sharing PointeredFunctor.End.PointerType = PointeredTypeGenerating.PointeredTypeExtended.PointerType
       sharing PointeredFunctor.Map = BaseMap
       sharing VariableStructure.Map = VarMap
-      sharing BaseMap.Start = LiteralsConstruction.Variables.Base
-      sharing BaseMap.End = LiteralsConstruction.Variables.Base
+      sharing BaseMap.Start = LiteralsConstruction.Variables.Base.Single
+      sharing BaseMap.End = LiteralsConstruction.Variables.Base.Single
       sharing VarMap.Start = LiteralsConstruction.Variables
       sharing VarMap.End = LiteralsConstruction.Variables
       sharing Occ.QualifiedBaseType = VariableStructure.VarType
@@ -64,18 +64,6 @@ functor QualifiedLiterals(X:
         = case (Variables.get_val x) of
              Option.NONE => p
           |  Option.SOME k => get_val k
-
-      fun eq(k, l)
-        = case ((get_val k), (get_val l)) of
-            (Variables.Base.Construction(c, alpha, xi), Variables.Base.Construction(d, beta, ypsilon))
-            => Constructors.eq(c, d) andalso multi_eq((alpha, xi), (beta, ypsilon))
-          | (Variables.Base.Construction(c, alpha, xi), Variables.Base.Variable y) => false
-          | (Variables.Base.Variable x, Variables.Base.Construction(d, beta, ypsilon)) => false
-          | (Variables.Base.Variable x, Variables.Base.Variable y) =>  Variables.eq (x, y)
-      and multi_eq ((alpha, xi), (beta, ypsilon))
-        =          X.LiteralsConstruction.Qualifier.Multi.eq (alpha, beta)
-            andalso
-                   X.PointeredTypeGenerating.PointeredTypeExtended.ContainerType.eq (xi, ypsilon)
 
       fun equate(k, l)
         = case (get_val k, get_val l) of
@@ -146,7 +134,7 @@ functor QualifiedLiterals(X:
       structure VSingle =
          struct
             type T =  Variables.Base.Construction
-            val eq =  eq
+            val eq =  X.LiteralsConstruction.Variables.Base.Single.eq
             val equate =  equate
             val get_occurences =  get_occurences
             val vmap =  vmap
@@ -185,7 +173,7 @@ functor QualifiedLiterals(X:
             type T =  PointeredTypeExtended.ContainerType.T
             local
                fun tf c =  (PointeredTypeExtended.ContainerType.fst c, PointeredTypeExtended.ContainerType.snd c)
-            in fun eq (a, b) =  multi_eq (tf a, tf b)
+            in fun eq (a, b) =  X.LiteralsConstruction.Variables.Base.Multi.eq (tf a, tf b)
                fun equate (a, b) =  multi_equate (tf a, tf b)
                val get_occurences =  multi_get_occurences o tf
                fun vmap f =  PointeredTypeExtended.ContainerType.tuple o (multi_vmap f) o tf

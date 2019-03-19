@@ -13,7 +13,7 @@ functor PPrintPPrintableLiterals(X:
       structure NPT: NamingPointeredTypeGenerating
       structure Constr: LiteralsConstruction
       structure Lit: Literals
-         where type Multi.T =  Constr.Variables.Base.T Constr.PolymorphicContainerType.T
+         where type Multi.T =  Constr.Variables.Base.Single.T Constr.PolymorphicContainerType.T
       structure VarCtxt: VariableContexts
          where type PointeredTypeExtended.ContainerType.T =  NPT.PointeredTypeExtended.ContainerType.T
          and   type PointeredTypeExtended.PointerType.T =  NPT.PointeredTypeExtended.PointerType.T
@@ -29,7 +29,7 @@ functor PPrintPPrintableLiterals(X:
       sharing NPT.PointeredTypeExtended.BaseType = VarCtxt.PointeredTypeExtended.BaseType
       sharing NPT.PointeredTypeExtended.BaseType = Lit.Variables
       sharing PP.PPrintIndentBase = PS.PPrintIndentBase
-      sharing Lit.Variables.Base = VarCtxt.VariableStructure.BaseType
+      sharing Lit.Variables.Base.Single = VarCtxt.VariableStructure.BaseType
 
       val get_constructors_name: Lit.Constructors.T -> string
    end ): PPrintPPrintableLiterals =
