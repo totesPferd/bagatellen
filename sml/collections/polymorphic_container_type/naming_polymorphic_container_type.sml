@@ -16,5 +16,6 @@ structure NamingPolymorphicContainerType: NamingPolymorphicContainerType =
            in List.all (aux (P, c_2)) c_1
            end
 
-      fun cong eq (c_1, c_2) =  all_zip eq (c_1, c_2) andalso all_zip eq (c_2, c_1)
+      val cong =  all_zip
+
    end;
