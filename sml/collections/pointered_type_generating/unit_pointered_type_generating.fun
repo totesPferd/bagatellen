@@ -67,11 +67,7 @@ functor UnitPointeredTypeGenerating(X:
             structure BinaryRelation =  X.BinaryRelation
             structure PointeredType =  PointeredTypeExtended
 
-            exception ZipLengthsDoesNotAgree
-            fun result r (Option.NONE, Option.NONE) =  true
-            |   result r (Option.NONE, Option.SOME _) =  raise ZipLengthsDoesNotAgree
-            |   result r (Option.SOME _, Option.NONE) =  raise ZipLengthsDoesNotAgree
-            |   result r (Option.SOME x_1, Option.SOME x_2) =  X.BinaryRelation.apply r (x_1, x_2)
+            val result =  PointeredTypeExtended.all_zip o X.BinaryRelation.apply
 
          end
 

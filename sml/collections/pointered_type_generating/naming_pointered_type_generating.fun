@@ -66,10 +66,8 @@ functor NamingPointeredTypeGenerating(X:
             structure BinaryRelation =  X.BinaryRelation
             structure PointeredType =  PointeredTypeExtended
 
-            fun result r (c_1: PointeredType.ContainerType.T, c_2: PointeredType.ContainerType.T)
-               =  List.all
-                     (fn ((n_1, x_1), (n_2, x_2)) => X.BinaryRelation.apply r (x_1, x_2))
-                     (ListPair.zip (c_1, c_2))
+            val result =  PointeredTypeExtended.all_zip o X.BinaryRelation.apply
+
          end
 
       fun singleton (p, x) =  [ (p, x) ]
