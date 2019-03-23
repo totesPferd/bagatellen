@@ -1,0 +1,95 @@
+clang version 3.6.2 (tags/RELEASE_362/final)
+Target: i386-pc-linux-gnu
+Thread model: posix
+Found candidate GCC installation: /usr/bin/../lib/gcc/i686-pc-linux-gnu/5.2.0
+Found candidate GCC installation: /usr/lib/gcc/i686-pc-linux-gnu/5.2.0
+Selected GCC installation: /usr/bin/../lib/gcc/i686-pc-linux-gnu/5.2.0
+Candidate multilib: .;@m32
+Selected multilib: .;@m32
+ "/usr/bin/ld" --eh-frame-hdr -m elf_i386 -dynamic-linker /lib/ld-linux.so.2 -o probe /usr/bin/../lib/gcc/i686-pc-linux-gnu/5.2.0/../../../crt1.o /usr/bin/../lib/gcc/i686-pc-linux-gnu/5.2.0/../../../crti.o /usr/bin/../lib/gcc/i686-pc-linux-gnu/5.2.0/crtbegin.o -L/usr/lib -L/usr/bin/../lib/gcc/i686-pc-linux-gnu/5.2.0 -L/usr/bin/../lib/gcc/i686-pc-linux-gnu/5.2.0/../../.. -L/usr/bin/../lib -L/lib -L/usr/lib probe.o -lLLVMLTO -lLLVMObjCARCOpts -lLLVMLinker -lLLVMBitWriter -lLLVMIRReader -lLLVMAsmParser -lLLVMR600CodeGen -lLLVMipo -lLLVMVectorize -lLLVMR600AsmParser -lLLVMR600Desc -lLLVMR600Info -lLLVMR600AsmPrinter -lLLVMSystemZDisassembler -lLLVMSystemZCodeGen -lLLVMSystemZAsmParser -lLLVMSystemZDesc -lLLVMSystemZInfo -lLLVMSystemZAsmPrinter -lLLVMHexagonDisassembler -lLLVMHexagonCodeGen -lLLVMHexagonDesc -lLLVMHexagonInfo -lLLVMNVPTXCodeGen -lLLVMNVPTXDesc -lLLVMNVPTXInfo -lLLVMNVPTXAsmPrinter -lLLVMCppBackendCodeGen -lLLVMCppBackendInfo -lLLVMMSP430CodeGen -lLLVMMSP430Desc -lLLVMMSP430Info -lLLVMMSP430AsmPrinter -lLLVMXCoreDisassembler -lLLVMXCoreCodeGen -lLLVMXCoreDesc -lLLVMXCoreInfo -lLLVMXCoreAsmPrinter -lLLVMMipsDisassembler -lLLVMMipsCodeGen -lLLVMMipsAsmParser -lLLVMMipsDesc -lLLVMMipsInfo -lLLVMMipsAsmPrinter -lLLVMAArch64Disassembler -lLLVMAArch64CodeGen -lLLVMAArch64AsmParser -lLLVMAArch64Desc -lLLVMAArch64Info -lLLVMAArch64AsmPrinter -lLLVMAArch64Utils -lLLVMARMDisassembler -lLLVMARMCodeGen -lLLVMARMAsmParser -lLLVMARMDesc -lLLVMARMInfo -lLLVMARMAsmPrinter -lLLVMPowerPCDisassembler -lLLVMPowerPCCodeGen -lLLVMPowerPCAsmParser -lLLVMPowerPCDesc -lLLVMPowerPCInfo -lLLVMPowerPCAsmPrinter -lLLVMSparcDisassembler -lLLVMSparcCodeGen -lLLVMSparcAsmParser -lLLVMSparcDesc -lLLVMSparcInfo -lLLVMSparcAsmPrinter -lLLVMTableGen -lLLVMDebugInfo -lLLVMOption -lLLVMX86Disassembler -lLLVMX86AsmParser -lLLVMX86CodeGen -lLLVMSelectionDAG -lLLVMAsmPrinter -lLLVMX86Desc -lLLVMMCDisassembler -lLLVMX86Info -lLLVMX86AsmPrinter -lLLVMX86Utils -lLLVMMCJIT -lLLVMLineEditor -lLLVMInstrumentation -lLLVMInterpreter -lLLVMExecutionEngine -lLLVMRuntimeDyld -lLLVMCodeGen -lLLVMScalarOpts -lLLVMProfileData -lLLVMObject -lLLVMMCParser -lLLVMBitReader -lLLVMInstCombine -lLLVMTransformUtils -lLLVMipa -lLLVMAnalysis -lLLVMTarget -lLLVMMC -lLLVMCore -lLLVMSupport -lz -lpthread -lffi -ledit -lcurses -ldl -lm -lLLVM-3.6 -lLTO -lclang -lclangARCMigrate -lclangAST -lclangASTMatchers -lclangAnalysis -lclangBasic -lclangCodeGen -lclangDriver -lclangDynamicASTMatchers -lclangEdit -lclangFormat -lclangFrontend -lclangFrontendTool -lclangIndex -lclangLex -lclangParse -lclangRewrite -lclangRewriteFrontend -lclangSema -lclangSerialization -lclangStaticAnalyzerCheckers -lclangStaticAnalyzerCore -lclangStaticAnalyzerFrontend -lclangTooling -lclangToolingCore -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/bin/../lib/gcc/i686-pc-linux-gnu/5.2.0/crtend.o /usr/bin/../lib/gcc/i686-pc-linux-gnu/5.2.0/../../../crtn.o
+/usr/lib/libclangTooling.a(CompilationDatabase.o): In function `clang::tooling::UnusedInputDiagConsumer::~UnusedInputDiagConsumer()':
+(.text._ZN5clang7tooling23UnusedInputDiagConsumerD2Ev[_ZN5clang7tooling23UnusedInputDiagConsumerD5Ev]+0xbf): undefined reference to `clang::DiagnosticConsumer::~DiagnosticConsumer()'
+/usr/lib/libclangTooling.a(CompilationDatabase.o): In function `clang::tooling::UnusedInputDiagConsumer::~UnusedInputDiagConsumer()':
+(.text._ZN5clang7tooling23UnusedInputDiagConsumerD0Ev[_ZN5clang7tooling23UnusedInputDiagConsumerD5Ev]+0xbf): undefined reference to `clang::DiagnosticConsumer::~DiagnosticConsumer()'
+/usr/lib/libclangTooling.a(CompilationDatabase.o): In function `clang::tooling::stripPositionalArgs(std::vector<char const*, std::allocator<char const*> >, std::vector<std::string, std::allocator<std::string> >&) [clone .constprop.164]':
+(.text._ZN5clang7toolingL19stripPositionalArgsESt6vectorIPKcSaIS3_EERS1_ISsSaISsEE.constprop.164+0x13c): undefined reference to `clang::DiagnosticIDs::DiagnosticIDs()'
+/usr/lib/libclangTooling.a(CompilationDatabase.o): In function `clang::tooling::stripPositionalArgs(std::vector<char const*, std::allocator<char const*> >, std::vector<std::string, std::allocator<std::string> >&) [clone .constprop.164]':
+(.text._ZN5clang7toolingL19stripPositionalArgsESt6vectorIPKcSaIS3_EERS1_ISsSaISsEE.constprop.164+0x161): undefined reference to `clang::DiagnosticsEngine::DiagnosticsEngine(llvm::IntrusiveRefCntPtr<clang::DiagnosticIDs> const&, clang::DiagnosticOptions*, clang::DiagnosticConsumer*, bool)'
+/usr/lib/libclangTooling.a(CompilationDatabase.o): In function `clang::tooling::stripPositionalArgs(std::vector<char const*, std::allocator<char const*> >, std::vector<std::string, std::allocator<std::string> >&) [clone .constprop.164]':
+(.text._ZN5clang7toolingL19stripPositionalArgsESt6vectorIPKcSaIS3_EERS1_ISsSaISsEE.constprop.164+0x17a): undefined reference to `clang::DiagnosticIDs::~DiagnosticIDs()'
+/usr/lib/libclangTooling.a(CompilationDatabase.o): In function `clang::tooling::stripPositionalArgs(std::vector<char const*, std::allocator<char const*> >, std::vector<std::string, std::allocator<std::string> >&) [clone .constprop.164]':
+(.text._ZN5clang7toolingL19stripPositionalArgsESt6vectorIPKcSaIS3_EERS1_ISsSaISsEE.constprop.164+0x1d0): undefined reference to `clang::driver::Driver::Driver(llvm::StringRef, llvm::StringRef, clang::DiagnosticsEngine&)'
+/usr/lib/libclangTooling.a(CompilationDatabase.o): In function `clang::tooling::stripPositionalArgs(std::vector<char const*, std::allocator<char const*> >, std::vector<std::string, std::allocator<std::string> >&) [clone .constprop.164]':
+(.text._ZN5clang7toolingL19stripPositionalArgsESt6vectorIPKcSaIS3_EERS1_ISsSaISsEE.constprop.164+0x2d7): undefined reference to `clang::driver::Driver::BuildCompilation(llvm::ArrayRef<char const*>)'
+/usr/lib/libclangTooling.a(CompilationDatabase.o): In function `clang::tooling::stripPositionalArgs(std::vector<char const*, std::allocator<char const*> >, std::vector<std::string, std::allocator<std::string> >&) [clone .constprop.164]':
+(.text._ZN5clang7toolingL19stripPositionalArgsESt6vectorIPKcSaIS3_EERS1_ISsSaISsEE.constprop.164+0x51c): undefined reference to `clang::driver::Compilation::~Compilation()'
+/usr/lib/libclangTooling.a(CompilationDatabase.o): In function `clang::tooling::stripPositionalArgs(std::vector<char const*, std::allocator<char const*> >, std::vector<std::string, std::allocator<std::string> >&) [clone .constprop.164]':
+(.text._ZN5clang7toolingL19stripPositionalArgsESt6vectorIPKcSaIS3_EERS1_ISsSaISsEE.constprop.164+0x530): undefined reference to `clang::driver::Driver::~Driver()'
+/usr/lib/libclangTooling.a(CompilationDatabase.o): In function `clang::tooling::stripPositionalArgs(std::vector<char const*, std::allocator<char const*> >, std::vector<std::string, std::allocator<std::string> >&) [clone .constprop.164]':
+(.text._ZN5clang7toolingL19stripPositionalArgsESt6vectorIPKcSaIS3_EERS1_ISsSaISsEE.constprop.164+0x542): undefined reference to `clang::DiagnosticsEngine::~DiagnosticsEngine()'
+/usr/lib/libclangTooling.a(CompilationDatabase.o): In function `clang::tooling::stripPositionalArgs(std::vector<char const*, std::allocator<char const*> >, std::vector<std::string, std::allocator<std::string> >&) [clone .constprop.164]':
+(.text._ZN5clang7toolingL19stripPositionalArgsESt6vectorIPKcSaIS3_EERS1_ISsSaISsEE.constprop.164+0x5e3): undefined reference to `clang::DiagnosticConsumer::~DiagnosticConsumer()'
+/usr/lib/libclangTooling.a(CompilationDatabase.o):(.data.rel.ro._ZTIN5clang7tooling23UnusedInputDiagConsumerE[_ZTIN5clang7tooling23UnusedInputDiagConsumerE]+0x8): undefined reference to `typeinfo for clang::DiagnosticConsumer'
+/usr/lib/libclangTooling.a(CompilationDatabase.o):(.data.rel.ro._ZTVN5clang7tooling23UnusedInputDiagConsumerE[_ZTVN5clang7tooling23UnusedInputDiagConsumerE]+0x20): undefined reference to `clang::DiagnosticConsumer::IncludeInDiagnosticCounts() const'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::(anonymous namespace)::ASTBuilderAction::runInvocation(clang::CompilerInvocation*, clang::FileManager*, clang::DiagnosticConsumer*)':
+(.text._ZN5clang7tooling12_GLOBAL__N_116ASTBuilderAction13runInvocationEPNS_18CompilerInvocationEPNS_11FileManagerEPNS_18DiagnosticConsumerE+0x3a): undefined reference to `clang::CompilerInstance::createDiagnostics(clang::DiagnosticOptions*, clang::DiagnosticConsumer*, bool, clang::CodeGenOptions const*)'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::(anonymous namespace)::ASTBuilderAction::runInvocation(clang::CompilerInvocation*, clang::FileManager*, clang::DiagnosticConsumer*)':
+(.text._ZN5clang7tooling12_GLOBAL__N_116ASTBuilderAction13runInvocationEPNS_18CompilerInvocationEPNS_11FileManagerEPNS_18DiagnosticConsumerE+0x59): undefined reference to `clang::ASTUnit::LoadFromCompilerInvocation(clang::CompilerInvocation*, llvm::IntrusiveRefCntPtr<clang::DiagnosticsEngine>, bool, bool, bool, clang::TranslationUnitKind, bool, bool, bool)'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::(anonymous namespace)::ASTBuilderAction::runInvocation(clang::CompilerInvocation*, clang::FileManager*, clang::DiagnosticConsumer*)':
+(.text._ZN5clang7tooling12_GLOBAL__N_116ASTBuilderAction13runInvocationEPNS_18CompilerInvocationEPNS_11FileManagerEPNS_18DiagnosticConsumerE+0x72): undefined reference to `clang::DiagnosticsEngine::~DiagnosticsEngine()'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::ClangTool::~ClangTool()':
+(.text._ZN5clang7tooling9ClangToolD2Ev+0x5c): undefined reference to `clang::FileManager::~FileManager()'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::ClangTool::ClangTool(clang::tooling::CompilationDatabase const&, llvm::ArrayRef<std::string>)':
+(.text._ZN5clang7tooling9ClangToolC2ERKNS0_19CompilationDatabaseEN4llvm8ArrayRefISsEE+0xf7): undefined reference to `clang::FileManager::FileManager(clang::FileSystemOptions const&, llvm::IntrusiveRefCntPtr<clang::vfs::FileSystem>)'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::ToolInvocation::run()':
+(.text._ZN5clang7tooling14ToolInvocation3runEv+0x13e): undefined reference to `clang::TextDiagnosticPrinter::TextDiagnosticPrinter(llvm::raw_ostream&, clang::DiagnosticOptions*, bool)'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::ToolInvocation::run()':
+(.text._ZN5clang7tooling14ToolInvocation3runEv+0x15e): undefined reference to `clang::DiagnosticIDs::DiagnosticIDs()'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::ToolInvocation::run()':
+(.text._ZN5clang7tooling14ToolInvocation3runEv+0x191): undefined reference to `clang::DiagnosticsEngine::DiagnosticsEngine(llvm::IntrusiveRefCntPtr<clang::DiagnosticIDs> const&, clang::DiagnosticOptions*, clang::DiagnosticConsumer*, bool)'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::ToolInvocation::run()':
+(.text._ZN5clang7tooling14ToolInvocation3runEv+0x1ad): undefined reference to `clang::DiagnosticIDs::~DiagnosticIDs()'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::ToolInvocation::run()':
+(.text._ZN5clang7tooling14ToolInvocation3runEv+0x20f): undefined reference to `clang::driver::Driver::Driver(llvm::StringRef, llvm::StringRef, clang::DiagnosticsEngine&)'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::ToolInvocation::run()':
+(.text._ZN5clang7tooling14ToolInvocation3runEv+0x288): undefined reference to `clang::driver::Driver::BuildCompilation(llvm::ArrayRef<char const*>)'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::ToolInvocation::run()':
+(.text._ZN5clang7tooling14ToolInvocation3runEv+0x590): undefined reference to `clang::CompilerInvocationBase::CompilerInvocationBase()'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::ToolInvocation::run()':
+(.text._ZN5clang7tooling14ToolInvocation3runEv+0x697): undefined reference to `clang::CodeGenOptions::CodeGenOptions()'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::ToolInvocation::run()':
+(.text._ZN5clang7tooling14ToolInvocation3runEv+0x884): undefined reference to `clang::CompilerInvocation::CreateFromArgs(clang::CompilerInvocation&, char const* const*, char const* const*, clang::DiagnosticsEngine&)'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::ToolInvocation::run()':
+(.text._ZN5clang7tooling14ToolInvocation3runEv+0xc49): undefined reference to `clang::driver::Compilation::~Compilation()'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::ToolInvocation::run()':
+(.text._ZN5clang7tooling14ToolInvocation3runEv+0xc5d): undefined reference to `clang::driver::Driver::~Driver()'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::ToolInvocation::run()':
+(.text._ZN5clang7tooling14ToolInvocation3runEv+0xc6f): undefined reference to `clang::DiagnosticsEngine::~DiagnosticsEngine()'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::ToolInvocation::run()':
+(.text._ZN5clang7tooling14ToolInvocation3runEv+0xc79): undefined reference to `clang::TextDiagnosticPrinter::~TextDiagnosticPrinter()'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::ToolInvocation::run()':
+(.text._ZN5clang7tooling14ToolInvocation3runEv+0xf7f): undefined reference to `clang::DiagnosticsEngine::EmitCurrentDiagnostic(bool)'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::ToolInvocation::run()':
+(.text._ZN5clang7tooling14ToolInvocation3runEv+0x1146): undefined reference to `clang::DiagnosticsEngine::EmitCurrentDiagnostic(bool)'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::runToolOnCodeWithArgs(clang::FrontendAction*, llvm::Twine const&, std::vector<std::string, std::allocator<std::string> > const&, llvm::Twine const&, std::vector<std::pair<std::string, std::string>, std::allocator<std::pair<std::string, std::string> > > const&)':
+(.text._ZN5clang7tooling21runToolOnCodeWithArgsEPNS_14FrontendActionERKN4llvm5TwineERKSt6vectorISsSaISsEES6_RKS7_ISt4pairISsSsESaISD_EE+0xe3): undefined reference to `clang::FileManager::FileManager(clang::FileSystemOptions const&, llvm::IntrusiveRefCntPtr<clang::vfs::FileSystem>)'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::runToolOnCodeWithArgs(clang::FrontendAction*, llvm::Twine const&, std::vector<std::string, std::allocator<std::string> > const&, llvm::Twine const&, std::vector<std::pair<std::string, std::string>, std::allocator<std::pair<std::string, std::string> > > const&)':
+(.text._ZN5clang7tooling21runToolOnCodeWithArgsEPNS_14FrontendActionERKN4llvm5TwineERKSt6vectorISsSaISsEES6_RKS7_ISt4pairISsSsESaISD_EE+0x2bb): undefined reference to `clang::FileManager::~FileManager()'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::FrontendActionFactory::runInvocation(clang::CompilerInvocation*, clang::FileManager*, clang::DiagnosticConsumer*)':
+(.text._ZN5clang7tooling21FrontendActionFactory13runInvocationEPNS_18CompilerInvocationEPNS_11FileManagerEPNS_18DiagnosticConsumerE+0x50): undefined reference to `clang::CompilerInstance::CompilerInstance(bool)'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::FrontendActionFactory::runInvocation(clang::CompilerInvocation*, clang::FileManager*, clang::DiagnosticConsumer*)':
+(.text._ZN5clang7tooling21FrontendActionFactory13runInvocationEPNS_18CompilerInvocationEPNS_11FileManagerEPNS_18DiagnosticConsumerE+0x5d): undefined reference to `clang::CompilerInstance::setInvocation(clang::CompilerInvocation*)'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::FrontendActionFactory::runInvocation(clang::CompilerInvocation*, clang::FileManager*, clang::DiagnosticConsumer*)':
+(.text._ZN5clang7tooling21FrontendActionFactory13runInvocationEPNS_18CompilerInvocationEPNS_11FileManagerEPNS_18DiagnosticConsumerE+0x66): undefined reference to `clang::CompilerInstance::setFileManager(clang::FileManager*)'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::FrontendActionFactory::runInvocation(clang::CompilerInvocation*, clang::FileManager*, clang::DiagnosticConsumer*)':
+(.text._ZN5clang7tooling21FrontendActionFactory13runInvocationEPNS_18CompilerInvocationEPNS_11FileManagerEPNS_18DiagnosticConsumerE+0x8e): undefined reference to `clang::CompilerInstance::createDiagnostics(clang::DiagnosticConsumer*, bool)'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::FrontendActionFactory::runInvocation(clang::CompilerInvocation*, clang::FileManager*, clang::DiagnosticConsumer*)':
+(.text._ZN5clang7tooling21FrontendActionFactory13runInvocationEPNS_18CompilerInvocationEPNS_11FileManagerEPNS_18DiagnosticConsumerE+0xa8): undefined reference to `clang::CompilerInstance::createSourceManager(clang::FileManager&)'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::FrontendActionFactory::runInvocation(clang::CompilerInvocation*, clang::FileManager*, clang::DiagnosticConsumer*)':
+(.text._ZN5clang7tooling21FrontendActionFactory13runInvocationEPNS_18CompilerInvocationEPNS_11FileManagerEPNS_18DiagnosticConsumerE+0xb1): undefined reference to `clang::CompilerInstance::ExecuteAction(clang::FrontendAction&)'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::FrontendActionFactory::runInvocation(clang::CompilerInvocation*, clang::FileManager*, clang::DiagnosticConsumer*)':
+(.text._ZN5clang7tooling21FrontendActionFactory13runInvocationEPNS_18CompilerInvocationEPNS_11FileManagerEPNS_18DiagnosticConsumerE+0xbd): undefined reference to `clang::FileManager::clearStatCaches()'
+/usr/lib/libclangTooling.a(Tooling.o): In function `clang::tooling::FrontendActionFactory::runInvocation(clang::CompilerInvocation*, clang::FileManager*, clang::DiagnosticConsumer*)':
+(.text._ZN5clang7tooling21FrontendActionFactory13runInvocationEPNS_18CompilerInvocationEPNS_11FileManagerEPNS_18DiagnosticConsumerE+0xd9): undefined reference to `clang::CompilerInstance::~CompilerInstance()'
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+make: *** [probe] Fehler 1

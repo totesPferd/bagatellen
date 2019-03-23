@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/jfischer/work/clang/probe/1/loop-convert/LoopConvert.cpp
+clang/Frontend/FrontendActions.h
+/home/jfischer/work/clang/probe/1/loop-convert/clang/Frontend/FrontendActions.h
+clang/Tooling/CommonOptionsParser.h
+/home/jfischer/work/clang/probe/1/loop-convert/clang/Tooling/CommonOptionsParser.h
+clang/Tooling/Tooling.h
+/home/jfischer/work/clang/probe/1/loop-convert/clang/Tooling/Tooling.h
+llvm/Support/CommandLine.h
+/home/jfischer/work/clang/probe/1/loop-convert/llvm/Support/CommandLine.h
+
