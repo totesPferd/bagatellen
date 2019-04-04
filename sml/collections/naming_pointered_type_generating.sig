@@ -37,7 +37,7 @@ signature NamingPointeredTypeGenerating =
 
             val transition: (BaseType.T * 'b -> 'b Option.option) -> ContainerType.T -> 'b -> 'b
 
-      end
+         end
 
       val singleton: PointeredTypeExtended.PointerType.T * PointeredTypeExtended.BaseType.T -> PointeredTypeExtended.ContainerType.T
 
