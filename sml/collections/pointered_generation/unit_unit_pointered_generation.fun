@@ -1,13 +1,13 @@
 use "collections/unit_pointered_type_generating.sig";
 use "general/type.sig";
 use "pointered_types/pointered_base_map.sig";
-use "pointered_types/pointered_generation.sig";
+use "pointered_types/pointered_base_generation.sig";
 
 functor UnitUnitPointeredGeneration(X:
    sig
       structure From: UnitPointeredTypeGenerating
       structure To: UnitPointeredTypeGenerating
-   end ): PointeredGeneration =
+   end ): PointeredBaseGeneration =
    struct
       structure Start =  X.From.PointeredTypeExtended
       structure End =  X.To.PointeredTypeExtended
