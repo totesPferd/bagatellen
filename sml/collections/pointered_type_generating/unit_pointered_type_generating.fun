@@ -62,7 +62,7 @@ functor UnitPointeredTypeGenerating(X:
                 |  Option.SOME x => is_in (x, c_2)
 
          end
-      structure AllZip: AllZip =
+      structure AllZip =
          struct
             structure BinaryRelation =  X.BinaryRelation
             structure PointeredType =  PointeredTypeExtended
@@ -72,6 +72,6 @@ functor UnitPointeredTypeGenerating(X:
          end
 
 
-         fun singleton (_, x) =  Option.SOME x
+      fun singleton (_, x) =  Option.SOME x
 
    end;

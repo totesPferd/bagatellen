@@ -51,12 +51,16 @@ signature PointeredTypeGenerating =
                      end
                   structure PointerType: Type
                   structure BaseStructure: Eqs
+                  structure BaseStructureMap: Map
                   sharing BaseStructure = BaseType
+                  sharing BaseStructureMap.Start = BaseStructure
+                  sharing BaseStructureMap.End = BaseStructure
                end
          end
       sharing AllZip.PointeredType.BaseType =  PointeredTypeExtended.BaseType
       sharing AllZip.PointeredType.PointerType =  PointeredTypeExtended.PointerType
       sharing AllZip.PointeredType.BaseStructure =  PointeredTypeExtended.BaseStructure
+      sharing AllZip.PointeredType.BaseStructureMap =  PointeredTypeExtended.BaseStructureMap
 
       val singleton: PointeredTypeExtended.PointerType.T * PointeredTypeExtended.BaseType.T -> PointeredTypeExtended.ContainerType.T
 

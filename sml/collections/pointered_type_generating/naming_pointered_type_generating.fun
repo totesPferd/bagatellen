@@ -30,7 +30,7 @@ functor NamingPointeredTypeGenerating(X:
                struct
                   type T =  string Option.option ref
                end
-            structure BaseStructure =  BaseType
+            structure BaseStructure =  X.BaseType
             structure BaseStructureMap =  X.BaseStructureMap
 
             val empty         =  List.nil
@@ -58,7 +58,7 @@ functor NamingPointeredTypeGenerating(X:
               = List.all (fn (n, x) => is_in (x, c_2)) c_1
 
          end
-      structure AllZip: AllZip =
+      structure AllZip =
          struct
             structure BinaryRelation =  X.BinaryRelation
             structure PointeredType =  PointeredTypeExtended

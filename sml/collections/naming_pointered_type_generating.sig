@@ -1,5 +1,7 @@
+use "general/binary_relation.sig";
 use "general/eqs.sig";
 use "general/map.sig";
+use "collections/all_zip.sig";
 use "collections/naming_polymorphic_container_type.sig";
 
 signature NamingPointeredTypeGenerating =
@@ -38,6 +40,32 @@ signature NamingPointeredTypeGenerating =
             val transition: (BaseType.T * 'b -> 'b Option.option) -> ContainerType.T -> 'b -> 'b
 
          end
+
+      structure AllZip:
+         sig
+            structure BinaryRelation: BinaryRelation
+            structure PointeredType:
+               sig
+                  structure BaseType: Eqs
+                  structure ContainerType:
+                     sig
+                        type T =  PointeredTypeExtended.ContainerType.T
+                     end
+                  structure PointerType:
+                     sig
+                        type T =  string Option.option ref
+                     end
+
+                  structure BaseStructure: Eqs
+                  structure BaseStructureMap: Map
+                  sharing BaseStructure = BaseType
+                  sharing BaseStructureMap.Start = BaseStructure
+                  sharing BaseStructureMap.End = BaseStructure
+               end
+         end
+      sharing AllZip.PointeredType.BaseType =  PointeredTypeExtended.BaseType
+      sharing AllZip.PointeredType.BaseStructure =  PointeredTypeExtended.BaseStructure
+      sharing AllZip.PointeredType.BaseStructureMap =  PointeredTypeExtended.BaseStructureMap
 
       val singleton: PointeredTypeExtended.PointerType.T * PointeredTypeExtended.BaseType.T -> PointeredTypeExtended.ContainerType.T
 
