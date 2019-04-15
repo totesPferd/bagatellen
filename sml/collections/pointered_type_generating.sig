@@ -55,7 +55,17 @@ signature PointeredTypeGenerating =
                   sharing BaseStructure = BaseType
                   sharing BaseStructureMap.Start = BaseStructure
                   sharing BaseStructureMap.End = BaseStructure
+
+                  val empty:     ContainerType.T
+                  val is_empty:  ContainerType.T -> bool
+                  val select:    PointerType.T * ContainerType.T -> BaseType.T Option.option
+
+                  val base_map:  BaseStructureMap.Map.T -> BaseType.T -> BaseType.T
+
                end
+
+            val result: BinaryRelation.Relation.T -> PointeredType.ContainerType.T * PointeredType.ContainerType.T -> bool
+
          end
       sharing AllZip.PointeredType.BaseType =  PointeredTypeExtended.BaseType
       sharing AllZip.PointeredType.PointerType =  PointeredTypeExtended.PointerType
