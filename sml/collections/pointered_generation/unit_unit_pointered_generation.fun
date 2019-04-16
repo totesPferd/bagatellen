@@ -18,12 +18,12 @@ functor UnitUnitPointeredGeneration(X:
             structure End =  End.ContainerType
             structure Map =
                struct
-                  type T =  Start.T -> End.T
+                  type T =  PointerType.T * Start.T -> End.T
                end
             structure PointerType =  PointerType
 
-            fun apply f (_, m) =  f m
-            fun get_map f =  (fn x => f((), x))
+            fun apply f =  f
+            fun get_map f =  f
          end
-      fun generate f c =  Option.join(Option.map f c)
+      fun generate f c =  Option.join(Option.map (fn m => f((), m)) c)
    end;
