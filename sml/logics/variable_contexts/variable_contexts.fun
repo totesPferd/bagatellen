@@ -2,6 +2,7 @@ use "collections/all_zip.sig";
 use "collections/dict_map.sig";
 use "collections/dictset.sig";
 use "collections/pointered_type_extended.sig";
+use "general/base_map.sig";
 use "logics/literals.sig";
 use "logics/variable_contexts.sig";
 use "logics/variables.sig";
@@ -14,6 +15,7 @@ functor VariableContexts(X:
       structure PT: PointeredTypeExtended
       structure DM: DictMap
       structure DS: DictSet
+      structure VM: BaseMap
       structure VarStruct: VariableStructure
       sharing AZ.BinaryRelation = VarStruct.BinaryRelation
       sharing AZ.PointeredType =  PT
@@ -25,13 +27,15 @@ functor VariableContexts(X:
       sharing DS.Eqs = PT.BaseType
       sharing PF.Start = PT
       sharing PF.End = PT
-      sharing PF.Map.Map = DM.Map
+      sharing PF.Map = VM
+      sharing VM.Start = DM.Start
+      sharing VM.End = DM.End
    end): VariableContexts =
    struct
       structure Dicts =  X.DS.Dicts
       structure DictMap = X.DM
 
-      structure Map = X.PF.Map
+      structure Map = X.VM
 
       structure VariableStructure =  X.VarStruct
       structure PointeredTypeExtended =  X.PT
@@ -57,12 +61,14 @@ functor VariableContexts(X:
                       vc
                       Dicts.empty
              val dict_map =  DictMap.get_map var_dict
-             val ctxt_map =  X.PF.map dict_map
+             val fun_map =  DictMap.apply dict_map
+             val vm_map =  X.VM.get_map fun_map
+             val ctxt_map =  X.PF.map vm_map
              val vc' =  ctxt_map vc
           in
              { ctxt = vc', alpha = var_dict }: AlphaConverter
           end
 
-      fun apply_alpha_converter (alpha: AlphaConverter) =  X.DM.get_map(#alpha alpha)
+      fun apply_alpha_converter (alpha: AlphaConverter) =  X.VM.get_map(X.DM.apply(X.DM.get_map(#alpha alpha)))
 
    end;

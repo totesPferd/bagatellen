@@ -23,4 +23,9 @@ functor DictMap(X:
 
       fun get_map d =  d
 
+      structure FunMap =
+         struct
+            type T =  Start.T -> End.T
+         end
+
    end;

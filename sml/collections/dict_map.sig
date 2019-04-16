@@ -9,6 +9,8 @@ signature DictMap =
       structure DictSet: DictSet
       sharing DictSet.Eqs = Start
 
+      structure FunMap: Type
+
       val get_map: End.T DictSet.Dicts.dict -> Map.T
 
    end;
