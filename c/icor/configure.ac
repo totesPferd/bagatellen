@@ -1,0 +1,6 @@
+AC_INIT([gr icor], [0.1])
+AC_CONFIG_SRCDIR([main.c])
+AM_INIT_AUTOMAKE
+AC_PROG_CC
+PKG_CHECK_MODULES([ICOR], [fftw3 imlib2])
+AC_OUTPUT(Makefile)
