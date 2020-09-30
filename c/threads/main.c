@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <unistd.h>
+
 #include "flowctrl.h"
 #include "tsp.h"
 
