@@ -1,4 +1,10 @@
+#include <stdio.h>
+
 #include "tsp.h"
+
+
+pthread_mutex_t tsp_mutex;
+
 
 void
 tsp_init() {

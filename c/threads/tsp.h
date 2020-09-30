@@ -4,7 +4,7 @@
 #include <pthread.h>
 
 /* Globals. */
-pthread_mutex_t tsp_mutex;
+extern pthread_mutex_t tsp_mutex;
 
 void tsp_init();
 void tsp_tsp(const char *);
