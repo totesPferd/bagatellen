@@ -79,6 +79,14 @@ structure MyPELVariablesStructure =  VariableAsStructure(
       structure Map =  MyPELVariablesMap
    end );
 
+structure MyPELVariablesPointeredTypeGenerating =  NamingPointeredTypeGenerating(
+   struct
+      structure BaseType =  MyPELLiteralsConstruction.Variables
+      structure BaseStructureMap =  MyPELVariablesMap
+      structure BinaryRelation =  MyPELVariablesBinaryRelation
+      structure PolymorphicContainerType =  NamingPolymorphicContainerType
+   end );
+
 structure MyPELLiteralsPointeredGeneration =  NamingNamingPointeredGeneration(
    struct
       structure From =  MyPELLiteralsPointeredTypeGenerating
@@ -137,4 +145,75 @@ structure MyPELLiterals =  Literals(
       structure AllZip =  MyPELLiteralsPointeredTypeGenerating.AllZip
    end );
 
+structure MyPELVariablesPointeredGeneration =  NamingNamingPointeredGeneration(
+   struct
+      structure From =  MyPELVariablesPointeredTypeGenerating
+      structure To =  MyPELVariablesPointeredTypeGenerating
+   end );
+
+structure MyPELVariablesPointeredMap: PointeredBaseMap =
+   struct
+      structure PointerType =  MyPELVariablesPointeredTypeGenerating.PointeredTypeExtended.PointerType
+      structure Start =  MyPELVariablesPointeredTypeGenerating.PointeredTypeExtended.BaseType
+      structure End =  MyPELVariablesPointeredTypeGenerating.PointeredTypeExtended.ContainerType
+      structure Map =
+         struct
+            type T =  PointerType.T * Start.T -> End.T
+         end
+
+      fun apply f (p, x) =  f (p, x)
+      fun get_map f =  f
+
+   end;
+
+structure MyPELVariablesPointeredSingleton =  PointeredBaseSingleton(
+   struct
+      structure PointeredType =  MyPELVariablesPointeredTypeGenerating.PointeredTypeExtended
+      val singleton =  MyPELVariablesPointeredTypeGenerating.singleton
+   end );
+
+structure MyPELVariablesComposeMap =  PointeredBaseComposeMap(
+   struct
+      structure A =  MyPELVariablesMap
+      structure B =  MyPELVariablesPointeredSingleton.PointeredMap
+      structure Result =  MyPELVariablesPointeredGeneration.PointeredMap
+      structure PointerType =  MyPELVariablesPointeredTypeGenerating.PointeredTypeExtended.PointerType
+   end );
+
+structure MyPELVariablesPointeredFunctor =  PointeredFunctor(
+   struct
+      structure Start =  MyPELVariablesPointeredTypeGenerating.PointeredTypeExtended
+      structure End =  MyPELVariablesPointeredTypeGenerating.PointeredTypeExtended
+      structure Map =  MyPELVariablesMap
+      structure ComposeMap =  MyPELVariablesComposeMap
+      structure Generation =  MyPELVariablesPointeredGeneration
+      structure PointerType =  MyPELVariablesPointeredTypeGenerating.PointeredTypeExtended.PointerType
+      structure Singleton =  MyPELVariablesPointeredSingleton
+   end );
+
+structure MyPELVariableContexts =  VariableContexts(
+   struct
+      structure AZ =  MyPELVariablesPointeredTypeGenerating.AllZip
+      structure PF =  MyPELVariablesPointeredFunctor
+      structure PT =  MyPELVariablesPointeredTypeGenerating.PointeredTypeExtended
+      structure DM =  MyPELDictMap
+      structure DS =  MyPELDictMap.DictSet
+      structure VM =  MyPELVariablesMap
+      structure VarStruct =  MyPELVariablesStructure
+   end );
+
+structure MyPELContecteds =  Contecteds(
+   struct
+      structure Lit =  MyPELLiterals
+      structure VarCtxt =  MyPELVariableContexts
+   end );
+
+structure MyPELProof =  Proof(
+   struct
+      structure Contecteds =  MyPELContecteds
+      structure PointeredBaseMap =  MyPELLiteralsPointeredMap
+      structure PointerType =  PointeredBaseMap.PointerType
+      structure PointeredGeneration =  MyPELLiteralsPointeredGeneration
+      structure PointeredSingleton =  MyPELLiteralsPointeredSingleton
+   end );
 
