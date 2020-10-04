@@ -124,3 +124,17 @@ structure MyPELLiteralsPointeredFunctor =  PointeredFunctor(
       structure PointerType =  MyPELLiteralsPointeredTypeGenerating.PointeredTypeExtended.PointerType
       structure Singleton =  MyPELLiteralsPointeredSingleton
    end );
+
+structure MyPELLiterals =  Literals(
+   struct
+      structure BaseMap =  MyPELLiteralsMap
+      structure VarMap =  MyPELVariablesMap
+      structure VariableStructure =  MyPELVariablesStructure
+      structure Occ =  MyPELOccurences
+      structure LiteralsConstruction =  MyPELLiteralsConstruction
+      structure PointeredTypeGenerating =  MyPELLiteralsPointeredTypeGenerating
+      structure PointeredFunctor =  MyPELLiteralsPointeredFunctor
+      structure AllZip =  MyPELLiteralsPointeredTypeGenerating.AllZip
+   end );
+
+

@@ -14,6 +14,7 @@ signature NamingPointeredTypeGenerating =
             structure ContainerType:
                sig
                   type T =  BaseType.T PolymorphicContainerType.T
+                  val eq: T * T -> bool
                end
             structure PointerType:
                sig
