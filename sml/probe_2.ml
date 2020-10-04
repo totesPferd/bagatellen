@@ -1,21 +1,21 @@
 use "probe_1.ml";
 
-structure MyConstructors =  QLConstructors(
+structure MyQLConstructors =  QLConstructors(
    struct
       structure M =  Modules
       structure Q =  Qualifier
    end );
 
-structure MyLiteralsConstruction =  LiteralsConstruction(
+structure MyQLLiteralsConstruction =  LiteralsConstruction(
    struct
-      structure C =  MyConstructors
+      structure C =  MyQLConstructors
       structure PCT =  UnitPolymorphicContainerType
       structure PV =  PolymorphicVariables
    end );
 
-structure MyLiteralsBinaryRelation: BaseBinaryRelation =
+structure MyQLLiteralsBinaryRelation: BaseBinaryRelation =
    struct
-      structure Domain =  MyLiteralsConstruction.Variables.Base.Single
+      structure Domain =  MyQLLiteralsConstruction.Variables.Base.Single
       structure Relation =
          struct
             type T =  Domain.T * Domain.T -> bool
@@ -24,10 +24,10 @@ structure MyLiteralsBinaryRelation: BaseBinaryRelation =
       fun get_binary_relation f =  f
    end;
 
-structure MyLiteralsMap: BaseMap =
+structure MyQLLiteralsMap: BaseMap =
    struct
-      structure Start =  MyLiteralsConstruction.Variables.Base.Single
-      structure End =  MyLiteralsConstruction.Variables.Base.Single
+      structure Start =  MyQLLiteralsConstruction.Variables.Base.Single
+      structure End =  MyQLLiteralsConstruction.Variables.Base.Single
       structure Map =
          struct
             type T =  Start.T -> End.T
@@ -37,26 +37,26 @@ structure MyLiteralsMap: BaseMap =
       fun get_map f =  f
    end;
 
-structure MyLiteralsPointeredTypeGenerating =  UnitPointeredTypeGenerating(
+structure MyQLLiteralsPointeredTypeGenerating =  UnitPointeredTypeGenerating(
    struct
-      structure BaseType =  MyLiteralsConstruction.Variables.Base.Single
-      structure BaseStructureMap =  MyLiteralsMap
-      structure BinaryRelation =  MyLiteralsBinaryRelation
+      structure BaseType =  MyQLLiteralsConstruction.Variables.Base.Single
+      structure BaseStructureMap =  MyQLLiteralsMap
+      structure BinaryRelation =  MyQLLiteralsBinaryRelation
       structure PolymorphicContainerType =  UnitPolymorphicContainerType
    end );
 
-structure MyVariablesDictSet =  DictSet(MyLiteralsConstruction.Variables)
-structure MyOccurences =  Occurences(MyVariablesDictSet)
+structure MyQLVariablesDictSet =  DictSet(MyQLLiteralsConstruction.Variables)
+structure MyQLOccurences =  Occurences(MyQLVariablesDictSet)
 
-structure MyDictMap =  DictMap(
+structure MyQLDictMap =  DictMap(
    struct
-      structure DS =  MyVariablesDictSet
-      structure End =  MyLiteralsConstruction.Variables
+      structure DS =  MyQLVariablesDictSet
+      structure End =  MyQLLiteralsConstruction.Variables
    end );
 
-structure MyVariablesBinaryRelation: BaseBinaryRelation =
+structure MyQLVariablesBinaryRelation: BaseBinaryRelation =
    struct
-      structure Domain =  MyLiteralsConstruction.Variables
+      structure Domain =  MyQLLiteralsConstruction.Variables
       structure Relation =
          struct
             type T =  Domain.T * Domain.T -> bool
@@ -65,10 +65,10 @@ structure MyVariablesBinaryRelation: BaseBinaryRelation =
       fun get_binary_relation f =  f
    end;
 
-structure MyVariablesMap: BaseMap =
+structure MyQLVariablesMap: BaseMap =
    struct
-      structure Start =  MyLiteralsConstruction.Variables
-      structure End =  MyLiteralsConstruction.Variables
+      structure Start =  MyQLLiteralsConstruction.Variables
+      structure End =  MyQLLiteralsConstruction.Variables
       structure Map =
          struct
             type T =  Start.T -> End.T
@@ -78,32 +78,32 @@ structure MyVariablesMap: BaseMap =
       fun get_map f =  f
    end;
 
-structure MyVariablesStructure =  VariableAsStructure(
+structure MyQLVariablesStructure =  VariableAsStructure(
    struct
-      structure Variables =  MyLiteralsConstruction.Variables
-      structure BinaryRelation =  MyVariablesBinaryRelation
-      structure Map =  MyVariablesMap
+      structure Variables =  MyQLLiteralsConstruction.Variables
+      structure BinaryRelation =  MyQLVariablesBinaryRelation
+      structure Map =  MyQLVariablesMap
    end );
 
-structure MyVariablesPointeredTypeGenerating =  UnitPointeredTypeGenerating(
+structure MyQLVariablesPointeredTypeGenerating =  UnitPointeredTypeGenerating(
    struct
-      structure BaseType =  MyLiteralsConstruction.Variables
-      structure BaseStructureMap =  MyVariablesMap
-      structure BinaryRelation =  MyVariablesBinaryRelation
+      structure BaseType =  MyQLLiteralsConstruction.Variables
+      structure BaseStructureMap =  MyQLVariablesMap
+      structure BinaryRelation =  MyQLVariablesBinaryRelation
       structure PolymorphicContainerType =  UnitPolymorphicContainerType
    end );
 
-structure MyLiteralsPointeredGeneration =  UnitUnitPointeredGeneration(
+structure MyQLLiteralsPointeredGeneration =  UnitUnitPointeredGeneration(
    struct
-      structure From =  MyLiteralsPointeredTypeGenerating
-      structure To =  MyLiteralsPointeredTypeGenerating
+      structure From =  MyQLLiteralsPointeredTypeGenerating
+      structure To =  MyQLLiteralsPointeredTypeGenerating
    end );
 
-structure MyLiteralsPointeredMap: PointeredBaseMap =
+structure MyQLLiteralsPointeredMap: PointeredBaseMap =
    struct
-      structure PointerType =  MyLiteralsPointeredTypeGenerating.PointeredTypeExtended.PointerType
-      structure Start =  MyLiteralsPointeredTypeGenerating.PointeredTypeExtended.BaseType
-      structure End =  MyLiteralsPointeredTypeGenerating.PointeredTypeExtended.ContainerType
+      structure PointerType =  MyQLLiteralsPointeredTypeGenerating.PointeredTypeExtended.PointerType
+      structure Start =  MyQLLiteralsPointeredTypeGenerating.PointeredTypeExtended.BaseType
+      structure End =  MyQLLiteralsPointeredTypeGenerating.PointeredTypeExtended.ContainerType
       structure Map =
          struct
             type T =  PointerType.T * Start.T -> End.T
@@ -114,54 +114,54 @@ structure MyLiteralsPointeredMap: PointeredBaseMap =
 
    end;
 
-structure MyLiteralsPointeredSingleton =  PointeredBaseSingleton(
+structure MyQLLiteralsPointeredSingleton =  PointeredBaseSingleton(
    struct
-      structure PointeredType =  MyLiteralsPointeredTypeGenerating.PointeredTypeExtended
-      val singleton =  MyLiteralsPointeredTypeGenerating.singleton
+      structure PointeredType =  MyQLLiteralsPointeredTypeGenerating.PointeredTypeExtended
+      val singleton =  MyQLLiteralsPointeredTypeGenerating.singleton
    end );
 
-structure MyLiteralsComposeMap =  PointeredBaseComposeMap(
+structure MyQLLiteralsComposeMap =  PointeredBaseComposeMap(
    struct
-      structure A =  MyLiteralsMap
-      structure B =  MyLiteralsPointeredSingleton.PointeredMap
-      structure Result =  MyLiteralsPointeredGeneration.PointeredMap
-      structure PointerType =  MyLiteralsPointeredTypeGenerating.PointeredTypeExtended.PointerType
+      structure A =  MyQLLiteralsMap
+      structure B =  MyQLLiteralsPointeredSingleton.PointeredMap
+      structure Result =  MyQLLiteralsPointeredGeneration.PointeredMap
+      structure PointerType =  MyQLLiteralsPointeredTypeGenerating.PointeredTypeExtended.PointerType
    end );
 
-structure MyLiteralsPointeredFunctor =  PointeredFunctor(
+structure MyQLLiteralsPointeredFunctor =  PointeredFunctor(
    struct
-      structure Start =  MyLiteralsPointeredTypeGenerating.PointeredTypeExtended
-      structure End =  MyLiteralsPointeredTypeGenerating.PointeredTypeExtended
-      structure Map =  MyLiteralsMap
-      structure ComposeMap =  MyLiteralsComposeMap
-      structure Generation =  MyLiteralsPointeredGeneration
-      structure PointerType =  MyLiteralsPointeredTypeGenerating.PointeredTypeExtended.PointerType
-      structure Singleton =  MyLiteralsPointeredSingleton
+      structure Start =  MyQLLiteralsPointeredTypeGenerating.PointeredTypeExtended
+      structure End =  MyQLLiteralsPointeredTypeGenerating.PointeredTypeExtended
+      structure Map =  MyQLLiteralsMap
+      structure ComposeMap =  MyQLLiteralsComposeMap
+      structure Generation =  MyQLLiteralsPointeredGeneration
+      structure PointerType =  MyQLLiteralsPointeredTypeGenerating.PointeredTypeExtended.PointerType
+      structure Singleton =  MyQLLiteralsPointeredSingleton
    end );
 
-structure MyLiterals =  Literals(
+structure MyQLLiterals =  Literals(
    struct
-      structure BaseMap =  MyLiteralsMap
-      structure VarMap =  MyVariablesMap
-      structure VariableStructure =  MyVariablesStructure
-      structure Occ =  MyOccurences
-      structure LiteralsConstruction =  MyLiteralsConstruction
-      structure PointeredTypeGenerating =  MyLiteralsPointeredTypeGenerating
-      structure PointeredFunctor =  MyLiteralsPointeredFunctor
-      structure AllZip =  MyLiteralsPointeredTypeGenerating.AllZip
+      structure BaseMap =  MyQLLiteralsMap
+      structure VarMap =  MyQLVariablesMap
+      structure VariableStructure =  MyQLVariablesStructure
+      structure Occ =  MyQLOccurences
+      structure LiteralsConstruction =  MyQLLiteralsConstruction
+      structure PointeredTypeGenerating =  MyQLLiteralsPointeredTypeGenerating
+      structure PointeredFunctor =  MyQLLiteralsPointeredFunctor
+      structure AllZip =  MyQLLiteralsPointeredTypeGenerating.AllZip
    end );
 
-structure MyVariablesPointeredGeneration =  UnitUnitPointeredGeneration(
+structure MyQLVariablesPointeredGeneration =  UnitUnitPointeredGeneration(
    struct
-      structure From =  MyVariablesPointeredTypeGenerating
-      structure To =  MyVariablesPointeredTypeGenerating
+      structure From =  MyQLVariablesPointeredTypeGenerating
+      structure To =  MyQLVariablesPointeredTypeGenerating
    end );
 
-structure MyVariablesPointeredMap: PointeredBaseMap =
+structure MyQLVariablesPointeredMap: PointeredBaseMap =
    struct
-      structure PointerType =  MyVariablesPointeredTypeGenerating.PointeredTypeExtended.PointerType
-      structure Start =  MyVariablesPointeredTypeGenerating.PointeredTypeExtended.BaseType
-      structure End =  MyVariablesPointeredTypeGenerating.PointeredTypeExtended.ContainerType
+      structure PointerType =  MyQLVariablesPointeredTypeGenerating.PointeredTypeExtended.PointerType
+      structure Start =  MyQLVariablesPointeredTypeGenerating.PointeredTypeExtended.BaseType
+      structure End =  MyQLVariablesPointeredTypeGenerating.PointeredTypeExtended.ContainerType
       structure Map =
          struct
             type T =  PointerType.T * Start.T -> End.T
@@ -172,53 +172,53 @@ structure MyVariablesPointeredMap: PointeredBaseMap =
 
    end;
 
-structure MyVariablesPointeredSingleton =  PointeredBaseSingleton(
+structure MyQLVariablesPointeredSingleton =  PointeredBaseSingleton(
    struct
-      structure PointeredType =  MyVariablesPointeredTypeGenerating.PointeredTypeExtended
-      val singleton =  MyVariablesPointeredTypeGenerating.singleton
+      structure PointeredType =  MyQLVariablesPointeredTypeGenerating.PointeredTypeExtended
+      val singleton =  MyQLVariablesPointeredTypeGenerating.singleton
    end );
 
-structure MyVariablesComposeMap =  PointeredBaseComposeMap(
+structure MyQLVariablesComposeMap =  PointeredBaseComposeMap(
    struct
-      structure A =  MyVariablesMap
-      structure B =  MyVariablesPointeredSingleton.PointeredMap
-      structure Result =  MyVariablesPointeredGeneration.PointeredMap
-      structure PointerType =  MyVariablesPointeredTypeGenerating.PointeredTypeExtended.PointerType
+      structure A =  MyQLVariablesMap
+      structure B =  MyQLVariablesPointeredSingleton.PointeredMap
+      structure Result =  MyQLVariablesPointeredGeneration.PointeredMap
+      structure PointerType =  MyQLVariablesPointeredTypeGenerating.PointeredTypeExtended.PointerType
    end );
 
-structure MyVariablesPointeredFunctor =  PointeredFunctor(
+structure MyQLVariablesPointeredFunctor =  PointeredFunctor(
    struct
-      structure Start =  MyVariablesPointeredTypeGenerating.PointeredTypeExtended
-      structure End =  MyVariablesPointeredTypeGenerating.PointeredTypeExtended
-      structure Map =  MyVariablesMap
-      structure ComposeMap =  MyVariablesComposeMap
-      structure Generation =  MyVariablesPointeredGeneration
-      structure PointerType =  MyVariablesPointeredTypeGenerating.PointeredTypeExtended.PointerType
-      structure Singleton =  MyVariablesPointeredSingleton
+      structure Start =  MyQLVariablesPointeredTypeGenerating.PointeredTypeExtended
+      structure End =  MyQLVariablesPointeredTypeGenerating.PointeredTypeExtended
+      structure Map =  MyQLVariablesMap
+      structure ComposeMap =  MyQLVariablesComposeMap
+      structure Generation =  MyQLVariablesPointeredGeneration
+      structure PointerType =  MyQLVariablesPointeredTypeGenerating.PointeredTypeExtended.PointerType
+      structure Singleton =  MyQLVariablesPointeredSingleton
    end );
 
-structure MyVariableContexts =  VariableContexts(
+structure MyQLVariableContexts =  VariableContexts(
    struct
-      structure AZ =  MyVariablesPointeredTypeGenerating.AllZip
-      structure PF =  MyVariablesPointeredFunctor
-      structure PT =  MyVariablesPointeredTypeGenerating.PointeredTypeExtended
-      structure DM =  MyDictMap
-      structure DS =  MyDictMap.DictSet
-      structure VM =  MyVariablesMap
-      structure VarStruct =  MyVariablesStructure
+      structure AZ =  MyQLVariablesPointeredTypeGenerating.AllZip
+      structure PF =  MyQLVariablesPointeredFunctor
+      structure PT =  MyQLVariablesPointeredTypeGenerating.PointeredTypeExtended
+      structure DM =  MyQLDictMap
+      structure DS =  MyQLDictMap.DictSet
+      structure VM =  MyQLVariablesMap
+      structure VarStruct =  MyQLVariablesStructure
    end );
 
-structure MyContecteds =  Contecteds(
+structure MyQLContecteds =  Contecteds(
    struct
-      structure Lit =  MyLiterals
-      structure VarCtxt =  MyVariableContexts
+      structure Lit =  MyQLLiterals
+      structure VarCtxt =  MyQLVariableContexts
    end );
 
-structure MyProof =  Proof(
+structure MyQLProof =  Proof(
    struct
-      structure Contecteds =  MyContecteds
-      structure PointeredBaseMap =  MyLiteralsPointeredMap
+      structure Contecteds =  MyQLContecteds
+      structure PointeredBaseMap =  MyQLLiteralsPointeredMap
       structure PointerType =  PointeredBaseMap.PointerType
-      structure PointeredGeneration =  MyLiteralsPointeredGeneration
-      structure PointeredSingleton =  MyLiteralsPointeredSingleton
+      structure PointeredGeneration =  MyQLLiteralsPointeredGeneration
+      structure PointeredSingleton =  MyQLLiteralsPointeredSingleton
    end );
