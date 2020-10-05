@@ -88,4 +88,24 @@ structure MyDblVariablesMap: DoubleMap =  DoubleMap (
       structure Pair =  MyDblVariablesMapPair;
    end );
 
+structure MyDblVariablesBaseSum: SumType =  SumType (
+   struct
+      structure FstType =  MyQLLiteralsConstruction.Variables.Base.Single;
+      structure SndType =  MyPELLiteralsConstruction.Variables.Base.Single;
+   end );
 
+structure MyDblVariablesSum: SumType =  SumType (
+   struct
+      structure FstType =  MyQLLiteralsConstruction.Variables;
+      structure SndType =  MyPELLiteralsConstruction.Variables;
+   end );
+
+structure MyDblVariableStructure: DoubleVariableStructure =  DoubleVariableStructure (
+   struct
+      structure Fst =  MyQLVariablesStructure;
+      structure Snd =  MyPELVariablesStructure;
+      structure Map =  MyDblVariablesMap;
+      structure BinaryRelation =  MyDblVariablesBinaryRelation;
+      structure BaseType =  MyDblVariablesBaseSum;
+      structure VarType =  MyDblVariablesSum;
+   end );
