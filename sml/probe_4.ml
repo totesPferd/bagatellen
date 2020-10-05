@@ -6,7 +6,7 @@ structure MyDblLiteralsStructure: DoubleStructure =
       structure SndStruct =  MyPELLiteralsConstruction.Variables.Base.Single;
    end;
 
-structure MyLiteralsMapPair: PairType =  PairType (
+structure MyDblLiteralsMapPair: PairType =  PairType (
    struct
       structure FstType =  MyQLLiteralsMap.Map;
       structure SndType =  MyPELLiteralsMap.Map;
@@ -16,7 +16,7 @@ structure MyDblLiteralsMap: DoubleMap =  DoubleMap (
    struct
       structure FstMap =  MyQLLiteralsMap;
       structure SndMap =  MyPELLiteralsMap;
-      structure Pair =  MyLiteralsMapPair;
+      structure Pair =  MyDblLiteralsMapPair;
    end );
 
 structure MyDblLiteralsTypeSum: SumType =  SumType (
@@ -74,4 +74,18 @@ structure MyDblVariablesBinaryRelation: DoubleBinaryRelation =  DoubleBinaryRela
       structure SndRelation =  MyPELVariablesBinaryRelation;
       structure Pair =  MyDblVariablesBinaryRelationPair;
    end );
+
+structure MyDblVariablesMapPair: PairType =  PairType (
+   struct
+      structure FstType =  MyQLVariablesMap.Map;
+      structure SndType =  MyPELVariablesMap.Map;
+   end );
+
+structure MyDblVariablesMap: DoubleMap =  DoubleMap (
+   struct
+      structure FstMap =  MyQLVariablesMap;
+      structure SndMap =  MyPELVariablesMap;
+      structure Pair =  MyDblVariablesMapPair;
+   end );
+
 
