@@ -28,6 +28,7 @@ functor UnitPointeredTypeGenerating(X:
             structure PointerType =
                struct
                   type T =  unit
+                  fun eq (_, _) = true
                end
             structure BaseStructure =  BaseType
             structure BaseStructureMap =  X.BaseStructureMap

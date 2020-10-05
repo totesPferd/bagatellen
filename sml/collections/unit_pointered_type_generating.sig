@@ -18,6 +18,7 @@ signature UnitPointeredTypeGenerating =
             structure PointerType:
                sig
                   type T =  unit
+                  val eq: T * T -> bool
                end
             structure BaseStructure: Eqs
             structure BaseStructureMap: Map

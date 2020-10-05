@@ -29,6 +29,7 @@ functor NamingPointeredTypeGenerating(X:
             structure PointerType =
                struct
                   type T =  string Option.option ref
+                  fun eq(x, y) =  (x = y)
                end
             structure BaseStructure =  X.BaseType
             structure BaseStructureMap =  X.BaseStructureMap

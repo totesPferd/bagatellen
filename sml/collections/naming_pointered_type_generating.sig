@@ -19,6 +19,7 @@ signature NamingPointeredTypeGenerating =
             structure PointerType:
                sig
                   type T =  string Option.option ref
+                  val eq: T * T -> bool
                end
             structure BaseStructure: Eqs
             structure BaseStructureMap: Map
