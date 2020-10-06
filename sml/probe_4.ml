@@ -121,14 +121,14 @@ structure MyDblLiteralsPointeredMap: PointeredDoubleMap =  PointeredDoubleMap (
       structure FstPointeredMap =  MyQLLiteralsPointeredSingleton.PointeredMap;
       structure SndPointeredMap =  MyPELLiteralsPointeredSingleton.PointeredMap;
       structure Pair =  MyDblLiteralsMapPair;
-      structure PointerType =  MyDblLiteralsPointeredType.PointerType;
+      structure PointerType =  MyDblLiteralsPointerTypeSum;
    end );
 
 structure MyDblLiteralsPointeredSingleton: PointeredDoubleSingleton =  PointeredDoubleSingleton (
    struct
       structure PointeredType =  MyDblLiteralsPointeredType;
       structure PointeredMap =  MyDblLiteralsPointeredMap;
-      structure PointerType =  MyDblLiteralsPointeredType.PointerType;
+      structure PointerType =  MyDblLiteralsPointerTypeSum;
       structure FstSingleton =  MyQLLiteralsPointeredSingleton;
       structure SndSingleton =  MyPELLiteralsPointeredSingleton;
    end );
@@ -144,7 +144,7 @@ structure MyDblLiteralsPointeredComposeResult: PointeredDoubleMap =  PointeredDo
       structure FstPointeredMap =  MyQLLiteralsComposeMap.Result;
       structure SndPointeredMap =  MyPELLiteralsComposeMap.Result;
       structure Pair =  MyDblLiteralsPointeredComposeResultMapPair;
-      structure PointerType =  MyDblLiteralsPointeredType.PointerType;
+      structure PointerType =  MyDblLiteralsPointerTypeSum;
    end );
 
 structure MyDblLiteralsPointeredComposeMap: PointeredComposeMap =  PointeredDoubleComposeMap (
@@ -157,5 +157,64 @@ structure MyDblLiteralsPointeredComposeMap: PointeredComposeMap =  PointeredDoub
       structure Start =  MyDblLiteralsMap.DoubleStart;
       structure Middle =  MyDblLiteralsMap.DoubleEnd;
       structure End =  MyDblLiteralsPointeredSingleton.PointeredMap.DoubleEnd;
-      structure PointerType =  MyDblLiteralsPointeredType.PointerType;
+      structure PointerType =  MyDblLiteralsPointerTypeSum;
    end );
+
+structure MyDbLiteralsPointeredGenerationPointeredMapPair: PairType =  PairType (
+   struct
+      structure FstType =  MyQLLiteralsPointeredGeneration.PointeredMap.Map;
+      structure SndType =  MyPELLiteralsPointeredGeneration.PointeredMap.Map;
+   end );
+
+structure MyDblLiteralsPointeredGenerationPointeredMap: PointeredDoubleMap =  PointeredDoubleMap (
+   struct
+      structure FstPointeredMap =  MyQLLiteralsPointeredGeneration.PointeredMap;
+      structure SndPointeredMap =  MyPELLiteralsPointeredGeneration.PointeredMap;
+      structure Pair =  MyDbLiteralsPointeredGenerationPointeredMapPair;
+      structure PointerType =  MyDblLiteralsPointerTypeSum;
+   end );
+
+structure MyDblLiteralsPointeredGenerationStartContainerType: PairType =  PairType (
+   struct
+      structure FstType =  MyQLLiteralsPointeredGeneration.Start.ContainerType;
+      structure SndType =  MyPELLiteralsPointeredGeneration.Start.ContainerType;
+   end );
+
+(*
+structure MyDblLiteralsPointeredGenerationStartFstType: PointeredType =
+   struct
+      structure BaseType =  MyDblLiteralsPointeredGenerationPointeredMap.Start.FstType;
+      structure ContainerType =  MyQLLiteralsPointeredGeneration.Start.ContainerType;
+      structure PointerType =  MyDblLiteralsPointerTypeSum;
+   end;
+
+structure MyDblLiteralsPointeredGenerationStartSndType: PointeredType =
+   struct
+      structure BaseType =  MyDblLiteralsPointeredGenerationPointeredMap.Start.SndType;
+      structure ContainerType =  MyPELLiteralsPointeredGeneration.Start.ContainerType;
+      structure PointerType =  MyDblLiteralsPointerTypeSum;
+   end;
+
+structure MyDblLiteralsPointeredGenerationStart: DoublePointeredType =  DoublePointeredType (
+   struct
+      structure BaseType =  MyDblLiteralsPointeredGenerationPointeredMap.Start;
+      structure ContainerType =  MyDblLiteralsPointeredGenerationStartContainerType;
+      structure PointerType =  MyDblLiteralsPointerTypeSum;
+   end );
+
+structure MyDblLiteralsPointeredGenerationEnd: DoublePointeredType =  DoublePointeredType (
+   struct
+      structure ContainerType =  MyDblLiteralsPointeredGenerationPointeredMap.End;
+      structure PointerType =  MyDblLiteralsPointerTypeSum;
+   end );
+
+structure MyDblLiteralsPointeredGeneration: PointeredGeneration =  PointeredDoubleGeneration (
+   struct
+      structure PointeredMap =  MyDblLiteralsPointeredGenerationPointeredMap;
+      structure Start =  MyDblLiteralsPointeredGenerationStart;
+      structure End =  MyDblLiteralsPointeredGenerationEnd;
+      structure PointerType =  MyDblLiteralsPointerTypeSum;
+      structure FstPointeredGeneration =  MyQLLiteralsPointeredGeneration;
+      structure SndPointeredGeneration =  MyPELLiteralsPointeredGeneration;
+   end );
+*)
