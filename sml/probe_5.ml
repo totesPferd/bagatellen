@@ -8,20 +8,14 @@ structure MyQualifiedLiteralsConstruction =  QualifiedLiteralsConstruction (
       structure PV =  PolymorphicVariables;
    end );
 
-structure MyQualifiedBaseType: SumType =  SumType (
-   struct
-      structure FstType =  MyQLLiteralsConstruction.Variables;
-      structure SndType =  MyQualifiedLiteralsConstruction.Variables;
-   end );
-
-structure MyQualifiedIncludeDictSet =  DictSet(MyQualifiedBaseType)
+structure MyQualifiedIncludeDictSet =  DictSet(MyDblVariablesSum)
 structure MyQualifiedIncludeOccurences =  Occurences(MyQualifiedIncludeDictSet)
 
 structure MyQualifiedOccurences =  QualifiedOccurences (
    struct
       structure Include =  MyQualifiedIncludeOccurences;
       structure Qualifier =  MyQLLiterals.Occurences;
-      structure QualifiedBaseType =  MyQualifiedBaseType;
+      structure QualifiedBaseType =  MyDblVariablesSum;
    end );
 
 (*
