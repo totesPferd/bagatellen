@@ -62,6 +62,19 @@ structure MyDblLiteralsPointeredTypeExtended: DoublePointeredTypeExtended =  Dou
       structure DoublePointeredType =  MyDblLiteralsPointeredType;
    end );
 
+structure MyDblLiteralsBinaryRelationPair: PairType =  PairType (
+   struct
+      structure FstType =  MyQLLiteralsBinaryRelation.Relation;
+      structure SndType =  MyPELLiteralsBinaryRelation.Relation;
+   end );
+
+structure MyDblLiteralsBinaryRelation: DoubleBinaryRelation =  DoubleBinaryRelation (
+   struct
+      structure FstRelation =  MyQLLiteralsBinaryRelation;
+      structure SndRelation =  MyPELLiteralsBinaryRelation;
+      structure Pair =  MyDblLiteralsBinaryRelationPair;
+   end );
+
 structure MyDblVariablesBinaryRelationPair: PairType =  PairType (
    struct
       structure FstType =  MyQLVariablesBinaryRelation.Relation;
