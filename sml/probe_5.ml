@@ -20,7 +20,7 @@ structure MyQualifiedIncludeOccurences =  Occurences(MyQualifiedIncludeDictSet)
 structure MyQualifiedOccurences =  QualifiedOccurences (
    struct
       structure Include =  MyQualifiedIncludeOccurences;
-      structure Qualifier =  MyQLOccurences;
+      structure Qualifier =  MyQLLiterals.Occurences;
       structure QualifiedBaseType =  MyQualifiedBaseType;
    end );
 
