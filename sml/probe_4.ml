@@ -31,7 +31,7 @@ structure MyDblLiteralsContainerTypePair: PairType =  PairType (
       structure SndType =  MyPELLiteralsPointeredTypeGenerating.PointeredTypeExtended.ContainerType;
    end );
 
-structure MyDblLiteralsPointerTypeSum: SumType =  SumType (
+structure MyDblPointerType: SumType =  SumType (
    struct
       structure FstType =  MyQLLiteralsPointeredTypeGenerating.PointeredTypeExtended.PointerType;
       structure SndType =  MyPELLiteralsPointeredTypeGenerating.PointeredTypeExtended.PointerType;
@@ -45,7 +45,7 @@ structure MyDblLiteralsPointeredType: DoublePointeredType =  DoublePointeredType
       structure BaseType =  MyDblLiteralsTypeSum;
       structure ContainerType =  MyDblLiteralsContainerTypePair;
       structure BaseStructureMap =  MyDblLiteralsMap;
-      structure PointerType =  MyDblLiteralsPointerTypeSum;
+      structure PointerType =  MyDblPointerType;
    end );
 
 structure MyDblLiteralsPointeredTypeExtended: DoublePointeredTypeExtended =  DoublePointeredTypeExtended (
@@ -58,7 +58,7 @@ structure MyDblLiteralsPointeredTypeExtended: DoublePointeredTypeExtended =  Dou
       structure BaseStructureMap =  MyDblLiteralsMap;
       structure BaseType =  MyDblLiteralsTypeSum;
       structure ContainerType =  MyDblLiteralsContainerTypePair;
-      structure PointerType =  MyDblLiteralsPointerTypeSum;
+      structure PointerType =  MyDblPointerType;
       structure DoublePointeredType =  MyDblLiteralsPointeredType;
    end );
 
@@ -134,14 +134,14 @@ structure MyDblLiteralsPointeredMap: PointeredDoubleMap =  PointeredDoubleMap (
       structure FstPointeredMap =  MyQLLiteralsPointeredSingleton.PointeredMap;
       structure SndPointeredMap =  MyPELLiteralsPointeredSingleton.PointeredMap;
       structure Pair =  MyDblLiteralsMapPair;
-      structure PointerType =  MyDblLiteralsPointerTypeSum;
+      structure PointerType =  MyDblPointerType;
    end );
 
 structure MyDblLiteralsPointeredSingleton: PointeredDoubleSingleton =  PointeredDoubleSingleton (
    struct
       structure PointeredType =  MyDblLiteralsPointeredType;
       structure PointeredMap =  MyDblLiteralsPointeredMap;
-      structure PointerType =  MyDblLiteralsPointerTypeSum;
+      structure PointerType =  MyDblPointerType;
       structure FstSingleton =  MyQLLiteralsPointeredSingleton;
       structure SndSingleton =  MyPELLiteralsPointeredSingleton;
    end );
@@ -157,7 +157,7 @@ structure MyDblLiteralsPointeredComposeResult: PointeredDoubleMap =  PointeredDo
       structure FstPointeredMap =  MyQLLiteralsComposeMap.Result;
       structure SndPointeredMap =  MyPELLiteralsComposeMap.Result;
       structure Pair =  MyDblLiteralsPointeredComposeResultMapPair;
-      structure PointerType =  MyDblLiteralsPointerTypeSum;
+      structure PointerType =  MyDblPointerType;
    end );
 
 structure MyDblLiteralsPointeredComposeMap: PointeredComposeMap =  PointeredDoubleComposeMap (
@@ -170,7 +170,7 @@ structure MyDblLiteralsPointeredComposeMap: PointeredComposeMap =  PointeredDoub
       structure Start =  MyDblLiteralsMap.DoubleStart;
       structure Middle =  MyDblLiteralsMap.DoubleEnd;
       structure End =  MyDblLiteralsPointeredSingleton.PointeredMap.DoubleEnd;
-      structure PointerType =  MyDblLiteralsPointerTypeSum;
+      structure PointerType =  MyDblPointerType;
    end );
 
 structure MyDbLiteralsPointeredGenerationPointeredMapPair: PairType =  PairType (
@@ -184,7 +184,7 @@ structure MyDblLiteralsPointeredGenerationPointeredMap: PointeredDoubleMap =  Po
       structure FstPointeredMap =  MyQLLiteralsPointeredGeneration.PointeredMap;
       structure SndPointeredMap =  MyPELLiteralsPointeredGeneration.PointeredMap;
       structure Pair =  MyDbLiteralsPointeredGenerationPointeredMapPair;
-      structure PointerType =  MyDblLiteralsPointerTypeSum;
+      structure PointerType =  MyDblPointerType;
    end );
 
 structure MyDblLiteralsPointeredGeneration: PointeredGeneration =  PointeredDoubleGeneration (
@@ -192,7 +192,7 @@ structure MyDblLiteralsPointeredGeneration: PointeredGeneration =  PointeredDoub
       structure PointeredMap =  MyDblLiteralsPointeredGenerationPointeredMap;
       structure Start =  MyDblLiteralsPointeredType;
       structure End =  MyDblLiteralsPointeredType;
-      structure PointerType =  MyDblLiteralsPointerTypeSum;
+      structure PointerType =  MyDblPointerType;
       structure FstPointeredGeneration =  MyQLLiteralsPointeredGeneration;
       structure SndPointeredGeneration =  MyPELLiteralsPointeredGeneration;
    end );
@@ -205,7 +205,7 @@ structure MyDblLiteralsPointeredFunctor: PointeredFunctor =  PointeredFunctor (
       structure ComposeMap =  MyDblLiteralsPointeredComposeMap;
       structure Generation =  MyDblLiteralsPointeredGeneration;
       structure Singleton =  MyDblLiteralsPointeredSingleton;
-      structure PointerType =  MyDblLiteralsPointerTypeSum;
+      structure PointerType =  MyDblPointerType;
    end );
 
 structure MyDblLiteralsAllZipRelationPair: PairType =  PairType (
@@ -220,4 +220,18 @@ structure MyDblLiteralsAllZip =  DoubleAllZip (
       structure Snd =  MyPELLiteralsPointeredTypeGenerating.AllZip;
       structure RelationPair =  MyDblLiteralsAllZipRelationPair;
       structure DoublePointeredType =  MyDblLiteralsPointeredType;
+   end );
+
+structure MyDblVariablesMapPair: PairType =  PairType (
+   struct
+      structure FstType =  MyQLVariablesPointeredSingleton.PointeredMap.Map;
+      structure SndType =  MyPELVariablesPointeredSingleton.PointeredMap.Map;
+   end );
+
+structure MyDblVariablesPointeredMap: PointeredDoubleMap =  PointeredDoubleMap (
+   struct
+      structure FstPointeredMap =  MyQLVariablesPointeredSingleton.PointeredMap;
+      structure SndPointeredMap =  MyPELVariablesPointeredSingleton.PointeredMap;
+      structure Pair =  MyDblVariablesMapPair;
+      structure PointerType =  MyDblPointerType;
    end );
