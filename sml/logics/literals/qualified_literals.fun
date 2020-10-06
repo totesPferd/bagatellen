@@ -47,7 +47,7 @@ functor QualifiedLiterals(X:
       sharing BaseMap.End = LiteralsConstruction.Variables.Base.Single
       sharing VarMap.Start = LiteralsConstruction.Variables
       sharing VarMap.End = LiteralsConstruction.Variables
-      sharing Occ.QualifiedBaseType = VariableStructure.VarType
+      sharing Occ.QualifiedBaseType = DoubleVariableStructure.VarType
       sharing Occ.Qualifier = LiteralsConstruction.Qualifier.Occurences
       sharing Occ.QualifiedBaseType.SndType = LiteralsConstruction.Variables
    end ): QualifiedLiterals =
