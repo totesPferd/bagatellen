@@ -118,8 +118,8 @@ structure MyDblLiteralsMapPair: PairType =  PairType (
 
 structure MyDblLiteralsPointeredMap: PointeredDoubleMap =  PointeredDoubleMap (
    struct
-      structure FstMap =  MyQLLiteralsPointeredSingleton.PointeredMap;
-      structure SndMap =  MyPELLiteralsPointeredSingleton.PointeredMap;
+      structure FstPointeredMap =  MyQLLiteralsPointeredSingleton.PointeredMap;
+      structure SndPointeredMap =  MyPELLiteralsPointeredSingleton.PointeredMap;
       structure Pair =  MyDblLiteralsMapPair;
       structure PointerType =  MyDblLiteralsPointeredType.PointerType;
    end );

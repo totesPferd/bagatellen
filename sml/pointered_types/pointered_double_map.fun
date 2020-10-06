@@ -6,29 +6,31 @@ use "pointered_types/pointered_map.sig";
 
 functor PointeredDoubleMap(X:
    sig
-      structure FstMap: PointeredMap
-      structure SndMap: PointeredMap
+      structure FstPointeredMap: PointeredMap
+      structure SndPointeredMap: PointeredMap
       structure Pair: PairType
       structure PointerType: SumType
-      sharing Pair.FstType = FstMap.Map
-      sharing Pair.SndType = SndMap.Map
-      sharing FstMap.PointerType = PointerType.FstType
-      sharing SndMap.PointerType = PointerType.SndType
+      sharing Pair.FstType = FstPointeredMap.Map
+      sharing Pair.SndType = SndPointeredMap.Map
+      sharing FstPointeredMap.PointerType = PointerType.FstType
+      sharing SndPointeredMap.PointerType = PointerType.SndType
    end ): PointeredDoubleMap =
    struct
-      structure FstMap =  X.FstMap
-      structure SndMap =  X.SndMap
+      structure FstMap =  X.FstPointeredMap
+      structure SndMap =  X.SndPointeredMap
+      structure FstPointeredMap =  FstMap
+      structure SndPointeredMap =  SndMap
       structure Pair =  X.Pair
       structure PointerType =  X.PointerType
       structure Start =
          struct
-            structure FstStruct =  X.FstMap.Start
-            structure SndStruct =  X.SndMap.Start
+            structure FstStruct =  X.FstPointeredMap.Start
+            structure SndStruct =  X.SndPointeredMap.Start
          end
       structure End =
          struct
-            structure FstStruct =  X.FstMap.End
-            structure SndStruct =  X.SndMap.End
+            structure FstStruct =  X.FstPointeredMap.End
+            structure SndStruct =  X.SndPointeredMap.End
          end
 
       structure Map =  Pair
