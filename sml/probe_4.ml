@@ -109,3 +109,28 @@ structure MyDblVariableStructure: DoubleVariableStructure =  DoubleVariableStruc
       structure BaseType =  MyDblVariablesBaseSum;
       structure VarType =  MyDblVariablesSum;
    end );
+
+structure MyDblLiteralsMapPair: PairType =  PairType (
+   struct
+      structure FstType =  MyQLLiteralsPointeredSingleton.PointeredMap.Map;
+      structure SndType =  MyPELLiteralsPointeredSingleton.PointeredMap.Map;
+   end );
+
+(*
+structure MyDblLiteralsPointeredMap: PointeredDoubleMap =  PointeredDoubleMap (
+   struct
+      structure FstMap =  MyQLLiteralsPointeredSingleton.PointeredMap;
+      structure SndMap =  MyPELLiteralsPointeredSingleton.PointeredMap;
+      structure Pair =  MyDblLiteralsMapPair;
+      structure PointerType =  MyDblLiteralsPointeredType.PointerType;
+   end );
+
+structure MyDblLiteralsPointeredSingleton: PointeredDoubleSingleton =  PointeredDoubleSingleton (
+   struct
+      structure PointeredType =  MyDblLiteralsPointeredType;
+      structure PointeredMap =  MyDblLiteralsPointeredMap;
+      structure PointerType =  MyDblLiteralsPointeredType.PointerType;
+      structure FstSingleton =  MyQLLiteralsPointeredSingleton;
+      structure SndSingleton =  MyPELLiteralsPointeredSingleton;
+   end );
+*)
