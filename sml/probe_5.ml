@@ -11,7 +11,7 @@ structure MyQualifiedLiteralsConstruction =  QualifiedLiteralsConstruction (
 structure MyQualifiedBaseType: SumType =  SumType (
    struct
       structure FstType =  MyQLLiteralsConstruction.Variables;
-      structure SndType =  MyPELLiteralsConstruction.Variables;  (* ??? *)
+      structure SndType =  MyQualifiedLiteralsConstruction.Variables;
    end );
 
 structure MyQualifiedIncludeDictSet =  DictSet(MyQualifiedBaseType)
@@ -23,3 +23,13 @@ structure MyQualifiedOccurences =  QualifiedOccurences (
       structure Qualifier =  MyQLOccurences;
       structure QualifiedBaseType =  MyQualifiedBaseType;
    end );
+
+(*
+structure MyQualifiedLiterals =  QualifiedLiterals (
+   struct
+      structure LiteralsConstruction =  MyQualifiedLiteralsConstruction;
+      structure DoublePointeredTypeExtended =  MyDblLiteralsPointeredTypeExtended;
+      structure DoubleVariableStructure =  MyDblVariablesStructure;
+      structure Occ =  MyQualifiedOccurences;
+   end );
+*)
