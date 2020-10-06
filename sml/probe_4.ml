@@ -132,3 +132,30 @@ structure MyDblLiteralsPointeredSingleton: PointeredDoubleSingleton =  Pointered
       structure FstSingleton =  MyQLLiteralsPointeredSingleton;
       structure SndSingleton =  MyPELLiteralsPointeredSingleton;
    end );
+
+structure MyDblLiteralsPointeredComposeResultMapPair: PairType =  PairType (
+   struct
+      structure FstType =  MyQLLiteralsComposeMap.Result.Map;
+      structure SndType =  MyPELLiteralsComposeMap.Result.Map;
+   end );
+
+structure MyDblLiteralsPointeredComposeResult: PointeredDoubleMap =  PointeredDoubleMap (
+   struct
+      structure FstPointeredMap =  MyQLLiteralsComposeMap.Result;
+      structure SndPointeredMap =  MyPELLiteralsComposeMap.Result;
+      structure Pair =  MyDblLiteralsPointeredComposeResultMapPair;
+      structure PointerType =  MyDblLiteralsPointeredType.PointerType;
+   end );
+
+structure MyDblLiteralsPointeredComposeMap: PointeredComposeMap =  PointeredDoubleComposeMap (
+   struct
+      structure FstCM =  MyQLLiteralsComposeMap;
+      structure SndCM =  MyPELLiteralsComposeMap;
+      structure ADM =  MyDblLiteralsMap;
+      structure BDM =  MyDblLiteralsPointeredSingleton.PointeredMap;
+      structure Result =  MyDblLiteralsPointeredComposeResult;
+      structure Start =  MyDblLiteralsMap.DoubleStart;
+      structure Middle =  MyDblLiteralsMap.DoubleEnd;
+      structure End =  MyDblLiteralsPointeredSingleton.PointeredMap.DoubleEnd;
+      structure PointerType =  MyDblLiteralsPointeredType.PointerType;
+   end );

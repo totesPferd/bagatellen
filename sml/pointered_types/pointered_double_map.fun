@@ -22,16 +22,18 @@ functor PointeredDoubleMap(X:
       structure SndPointeredMap =  SndMap
       structure Pair =  X.Pair
       structure PointerType =  X.PointerType
-      structure Start =
+      structure DoubleStart =
          struct
             structure FstStruct =  X.FstPointeredMap.Start
             structure SndStruct =  X.SndPointeredMap.Start
          end
-      structure End =
+      structure DoubleEnd =
          struct
             structure FstStruct =  X.FstPointeredMap.End
             structure SndStruct =  X.SndPointeredMap.End
          end
+      structure Start =  DoubleStart
+      structure End =  DoubleEnd
 
       structure Map =  Pair
 

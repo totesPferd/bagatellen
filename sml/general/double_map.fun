@@ -14,16 +14,18 @@ functor DoubleMap(X:
       structure FstMap =  X.FstMap
       structure SndMap =  X.SndMap
       structure Pair =  X.Pair
-      structure Start =
+      structure DoubleStart =
          struct
             structure FstStruct =  X.FstMap.Start
             structure SndStruct =  X.SndMap.Start
          end
-      structure End =
+      structure DoubleEnd =
          struct
             structure FstStruct =  X.FstMap.End
             structure SndStruct =  X.SndMap.End
          end
+      structure Start =  DoubleStart
+      structure End =  DoubleEnd
 
       structure Map =  Pair
 
