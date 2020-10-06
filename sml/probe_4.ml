@@ -113,7 +113,7 @@ structure MyDblVariablesSum: SumType =  SumType (
       structure SndType =  MyPELLiteralsConstruction.Variables;
    end );
 
-structure MyDblVariableStructure: DoubleVariableStructure =  DoubleVariableStructure (
+structure MyDblVariablesStructure: DoubleVariableStructure =  DoubleVariableStructure (
    struct
       structure Fst =  MyQLVariablesStructure;
       structure Snd =  MyPELVariablesStructure;
