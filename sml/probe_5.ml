@@ -28,8 +28,13 @@ structure MyQualifiedOccurences =  QualifiedOccurences (
 structure MyQualifiedLiterals =  QualifiedLiterals (
    struct
       structure LiteralsConstruction =  MyQualifiedLiteralsConstruction;
+      structure PointeredTypeGenerating =  MyPELLiteralsPointeredTypeGenerating;
       structure DoublePointeredTypeExtended =  MyDblLiteralsPointeredTypeExtended;
       structure DoubleVariableStructure =  MyDblVariablesStructure;
+      structure VariableStructure =  MyPELVariablesStructure;
+      structure BaseMap =  MyDblLiteralsPointeredFunctor.Map;
+      structure VarMap =  MyPELVariablesStructure.Map;
+      structure PointeredFunctor =  MyDblLiteralsPointeredFunctor;
       structure Occ =  MyQualifiedOccurences;
    end );
 *)
