@@ -195,3 +195,16 @@ structure MyDblLiteralsPointeredFunctor: PointeredFunctor =  PointeredFunctor (
       structure PointerType =  MyDblLiteralsPointerTypeSum;
    end );
 
+structure MyDblLiteralsAllZipRelationPair: PairType =  PairType (
+   struct
+      structure FstType =  MyQLLiteralsPointeredTypeGenerating.AllZip.BinaryRelation.Relation;
+      structure SndType =  MyPELLiteralsPointeredTypeGenerating.AllZip.BinaryRelation.Relation;
+   end );
+
+structure MyDblLiteralsAllZip =  DoubleAllZip (
+   struct
+      structure Fst =  MyQLLiteralsPointeredTypeGenerating.AllZip;
+      structure Snd =  MyPELLiteralsPointeredTypeGenerating.AllZip;
+      structure RelationPair =  MyDblLiteralsAllZipRelationPair;
+      structure DoublePointeredType =  MyDblLiteralsPointeredType;
+   end );
