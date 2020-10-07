@@ -3,7 +3,7 @@ use "logics/pprint/delim_config.sig";
 use "logics/pprint/pprintable.sig";
 use "logics/pprint/polymorphic_setalikes.sig";
 
-functor PPrintSetalikes(X:
+functor PPrintPolymorphicSetalikes(X:
    sig
       structure ContextType: Type
       structure DelimConfig: PPrintDelimConfig

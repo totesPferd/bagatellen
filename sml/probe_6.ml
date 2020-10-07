@@ -57,14 +57,28 @@ structure MyDblPPrintPolymorphicPPrinting: PPrintPolymorphicPPrinting =  PPrintP
       structure PPrintIndentBase =  MyPPrintIndentBase
    end );
 
-(*
-structure MyDblPPrintPolymorphicSetalike: PPrintPolymorphicSetalikes =  PPrintSetalikes (
+structure MyQLPPrintPolymorphicSetalike: PPrintPolymorphicSetalikes =  PPrintPolymorphicSetalikes (
    struct
-      structure ContextType =  MyQualifiedPEL.MyPELVariableContexts.VariableContext
+      structure ContextType =  MyQLVariableContexts.VariableContext
       structure DelimConfig =  PPrintCommaDelim
       structure PPrintIndentBase =  MyPPrintIndentBase
    end );
 
+structure MyPELPPrintPolymorphicSetalike: PPrintPolymorphicSetalikes =  PPrintPolymorphicSetalikes (
+   struct
+      structure ContextType =  MyPEL.MyPELVariableContexts.VariableContext
+      structure DelimConfig =  PPrintCommaDelim
+      structure PPrintIndentBase =  MyPPrintIndentBase
+   end );
+
+structure MyQLPPrintPolymorphicSetalike: PPrintPolymorphicSetalikes =  PPrintPolymorphicSetalikes (
+   struct
+      structure ContextType =  MyPEL.MyPELVariableContexts.VariableContext
+      structure DelimConfig =  PPrintCommaDelim
+      structure PPrintIndentBase =  MyPPrintIndentBase
+   end );
+
+(*
 structure MyQLPPrintableLiterals =  PPrintableLiterals (
    struct
       structure NPT =
