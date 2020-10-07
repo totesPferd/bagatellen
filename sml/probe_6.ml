@@ -78,10 +78,28 @@ structure MyQLPPrintPolymorphicSetalike: PPrintPolymorphicSetalikes =  PPrintPol
       structure PPrintIndentBase =  MyPPrintIndentBase
    end );
 
-(*
-structure MyQLPPrintableLiterals =  PPrintableLiterals (
+structure MyQLBinaryRelation: TypeBinaryRelation =
    struct
-      structure NPT =
+      structure Domain =  MyQLLiterals.Variables;
+      structure Relation =
+         struct
+            type T =  Domain.T * Domain.T -> bool
+         end
+      fun apply r (a, b) =  r(a, b)
+   end;
+
+structure MyQLNPTG: NamingPointeredTypeGenerating =  NamingPointeredTypeGenerating (
+   struct
+      structure BaseType =  MyQLLiterals.Variables
+      structure BaseStructureMap =  MyQLVariablesMap
+      structure BinaryRelation =  MyQLBinaryRelation
+      structure PolymorphicContainerType =  NamingPolymorphicContainerType
+   end );
+
+(*
+structure MyQLPPrintableLiterals: PPrintPPrintableLiterals =  PPrintPPrintableLiterals (
+   struct
+      structure NPT =  MyQLNPTG
       structure Constr =  MyQLLiteralsConstruction
       structure Lit =  MyQLLiterals
       structure VarCtxt =  MyQLVariableContexts
