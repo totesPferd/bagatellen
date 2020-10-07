@@ -80,7 +80,7 @@ structure MyQLPPrintPolymorphicSetalike: PPrintPolymorphicSetalikes =  PPrintPol
 
 structure MyQLBinaryRelation: TypeBinaryRelation =
    struct
-      structure Domain =  MyQLLiterals.Variables;
+      structure Domain =  MyQLLiteralsConstruction.Variables
       structure Relation =
          struct
             type T =  Domain.T * Domain.T -> bool
@@ -90,7 +90,7 @@ structure MyQLBinaryRelation: TypeBinaryRelation =
 
 structure MyQLNPTG: NamingPointeredTypeGenerating =  NamingPointeredTypeGenerating (
    struct
-      structure BaseType =  MyQLLiterals.Variables
+      structure BaseType =  MyQLLiteralsConstruction.Variables
       structure BaseStructureMap =  MyQLVariablesMap
       structure BinaryRelation =  MyQLBinaryRelation
       structure PolymorphicContainerType =  NamingPolymorphicContainerType
