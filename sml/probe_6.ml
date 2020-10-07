@@ -96,6 +96,42 @@ structure MyQLNPTG: NamingPointeredTypeGenerating =  NamingPointeredTypeGenerati
       structure PolymorphicContainerType =  NamingPolymorphicContainerType
    end );
 
+structure MyPELBinaryRelation: TypeBinaryRelation =
+   struct
+      structure Domain =  MyPELLiteralsConstruction.Variables
+      structure Relation =
+         struct
+            type T =  Domain.T * Domain.T -> bool
+         end
+      fun apply r (a, b) =  r(a, b)
+   end;
+
+structure MyPELNPTG: NamingPointeredTypeGenerating =  NamingPointeredTypeGenerating (
+   struct
+      structure BaseType =  MyPELLiteralsConstruction.Variables
+      structure BaseStructureMap =  MyPEL.MyPELVariablesMap
+      structure BinaryRelation =  MyPELBinaryRelation
+      structure PolymorphicContainerType =  NamingPolymorphicContainerType
+   end );
+
+structure MyDblBinaryRelation: TypeBinaryRelation =
+   struct
+      structure Domain =  MyQualifiedLiteralsConstruction.Variables
+      structure Relation =
+         struct
+            type T =  Domain.T * Domain.T -> bool
+         end
+      fun apply r (a, b) =  r(a, b)
+   end;
+
+structure MyDblNPTG: NamingPointeredTypeGenerating =  NamingPointeredTypeGenerating (
+   struct
+      structure BaseType =  MyQualifiedLiteralsConstruction.Variables
+      structure BaseStructureMap =  MyQualifiedPEL.MyPELVariablesMap
+      structure BinaryRelation =  MyDblBinaryRelation
+      structure PolymorphicContainerType =  NamingPolymorphicContainerType
+   end );
+
 (*
 structure MyQLPPrintableLiterals: PPrintPPrintableLiterals =  PPrintPPrintableLiterals (
    struct
