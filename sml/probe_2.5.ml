@@ -315,12 +315,6 @@ functor MyPEL(MyPELLiteralsConstruction: AbstractLiteralsConstruction) =
             structure Pair =  MyDblVariablesMapPair;
          end );
       
-      structure MyDblVariablesBaseSum: SumType =  SumType (
-         struct
-            structure FstType =  MyQLLiteralsConstruction.Variables.Base.Single;
-            structure SndType =  MyPELLiteralsConstruction.Variables.Base.Single;
-         end );
-      
       structure MyDblVariablesSum: SumType =  SumType (
          struct
             structure FstType =  MyQLLiteralsConstruction.Variables;
@@ -333,7 +327,7 @@ functor MyPEL(MyPELLiteralsConstruction: AbstractLiteralsConstruction) =
             structure Snd =  MyPELVariablesStructure;
             structure Map =  MyDblVariablesMap;
             structure BinaryRelation =  MyDblVariablesBinaryRelation;
-            structure BaseType =  MyDblVariablesBaseSum;
+            structure BaseType =  MyDblLiteralsTypeSum;
             structure VarType =  MyDblVariablesSum;
          end );
       
