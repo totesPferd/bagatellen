@@ -20,7 +20,6 @@ structure MyQualifiedOccurences =  QualifiedOccurences (
       structure QualifiedBaseType =  MyQualifiedPEL.MyDblVariablesSum;
    end );
 
-(*
 structure MyQualifiedLiterals =  QualifiedLiterals (
    struct
       structure LiteralsConstruction =  MyQualifiedLiteralsConstruction;
@@ -28,9 +27,8 @@ structure MyQualifiedLiterals =  QualifiedLiterals (
       structure DoublePointeredTypeExtended =  MyQualifiedPEL.MyDblLiteralsPointeredTypeExtended;
       structure DoubleVariableStructure =  MyQualifiedPEL.MyDblVariablesStructure;
       structure VariableStructure =  MyQualifiedPEL.MyPELVariablesStructure;
-      structure BaseMap =  MyQualifiedPEL.MyDblLiteralsMap;
+      structure BaseMap =  MyQualifiedPEL.MyPELLiteralsMap;
       structure VarMap =  MyQualifiedPEL.MyPELVariablesMap;
-      structure PointeredFunctor =  MyQualifiedPEL.MyDblLiteralsPointeredFunctor;
+      structure PointeredFunctor =  MyQualifiedPEL.MyPELLiteralsPointeredFunctor;
       structure Occ =  MyQualifiedOccurences;
    end );
-*)
