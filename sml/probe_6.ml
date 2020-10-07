@@ -38,3 +38,40 @@ structure MyPPrintIndentBase: PPrintIndentBase =  PPrintIndentBase (
       structure B = MyPPrintBase
       structure C = MyPPrintConfig
    end );
+
+structure MyQLPPrintPolymorphicPPrinting: PPrintPolymorphicPPrinting =  PPrintPolymorphicPPrinting (
+   struct
+      structure ContextType =  MyQLVariableContexts.VariableContext
+      structure PPrintIndentBase =  MyPPrintIndentBase
+   end );
+
+structure MyPELPPrintPolymorphicPPrinting: PPrintPolymorphicPPrinting =  PPrintPolymorphicPPrinting (
+   struct
+      structure ContextType =  MyPEL.MyPELVariableContexts.VariableContext
+      structure PPrintIndentBase =  MyPPrintIndentBase
+   end );
+
+structure MyDblPPrintPolymorphicPPrinting: PPrintPolymorphicPPrinting =  PPrintPolymorphicPPrinting (
+   struct
+      structure ContextType =  MyQualifiedPEL.MyPELVariableContexts.VariableContext
+      structure PPrintIndentBase =  MyPPrintIndentBase
+   end );
+
+(*
+structure MyDblPPrintPolymorphicSetalike: PPrintPolymorphicSetalikes =  PPrintSetalikes (
+   struct
+      structure ContextType =  MyQualifiedPEL.MyPELVariableContexts.VariableContext
+      structure DelimConfig =  PPrintCommaDelim
+      structure PPrintIndentBase =  MyPPrintIndentBase
+   end );
+
+structure MyQLPPrintableLiterals =  PPrintableLiterals (
+   struct
+      structure NPT =
+      structure Constr =  MyQLLiteralsConstruction
+      structure Lit =  MyQLLiterals
+      structure VarCtxt =  MyQLVariableContexts
+      structure PP =  MyQLPPrintPolymorphicPPrinting
+      structure PS =  MyQLPPrintPolymorphicSetalike
+   end );
+*)
