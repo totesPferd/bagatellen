@@ -1,11 +1,11 @@
-use "general/dict_impl.sig";
+use "general/dict_set_simple/dict_impl.sig";
 use "general/eq_type.sig";
 
 functor DictSetSimpleDict(X:
    sig
       structure K: EqType
       type val_t
-   end ): Dict =
+   end ): DictSetSimpleDictImpl =
    struct
 
       type key_t =  X.K.T
