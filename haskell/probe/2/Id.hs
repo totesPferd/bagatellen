@@ -1,0 +1,1 @@
+class Id a where
