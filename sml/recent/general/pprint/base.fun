@@ -16,13 +16,13 @@ functor PPrintBase(X: PPrintConfig): PPrintBase =
       fun print_nl stream state
          = (   TextIO.output(stream, "\n")
             ;  { col = 1, is_need_ws = no_need_of_ws, outstanding_txt = NONE }: state )
-      fun print_directly (stream, str, ws_req) (state: state)
+      fun print_directly (stream, str) (state: state)
          = (
                case (#outstanding_txt state) of
                      NONE      =>  ()
                   |  SOME ostr =>  TextIO.output(stream, ostr)
             ;  TextIO.output(stream, str)
-            ;  { col = (#col state) + String.size(str), is_need_ws =  ws_req, outstanding_txt = NONE }: state )
+            ;  { col = (#col state) + String.size(str), is_need_ws =  need_of_ws, outstanding_txt = NONE }: state )
       fun print_ws (stream, str) (state: state)
          = let
             val outstanding_txt =  case (#outstanding_txt state) of
@@ -44,7 +44,7 @@ functor PPrintBase(X: PPrintConfig): PPrintBase =
                         print_ws (stream, " ") state'
                      else
                         state'
-            in print_directly (stream, str, no_need_of_ws) state''
+            in print_directly (stream, str) state''
             end
       fun print (stream, str) (state: state)
          =  let
@@ -60,7 +60,7 @@ functor PPrintBase(X: PPrintConfig): PPrintBase =
                         print_ws (stream, " ") state'
                      else
                         state'
-            in print_directly (stream, str, need_of_ws) state''
+            in print_directly (stream, str) state''
             end
       fun navigate_to_pos (stream, pos) (state: state)
          = let
