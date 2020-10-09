@@ -12,8 +12,10 @@ structure MyPrintBase =  PPrintBase(MyConfig)
 val state =  ref MyPrintBase.init;
 
 (
-   state := MyPrintBase.print_tok (TextIO.stdOut, "Hallo,") (!state);
-   state := MyPrintBase.print_tok (TextIO.stdOut, "Welt!") (!state);
+   state := MyPrintBase.print_tok (TextIO.stdOut, "Hallo") (!state);
+   state := MyPrintBase.print_par (TextIO.stdOut, ",") (!state);
+   state := MyPrintBase.print_tok (TextIO.stdOut, "Welt") (!state);
+   state := MyPrintBase.print_period (TextIO.stdOut, "!") (!state);
    state := MyPrintBase.print_ws (TextIO.stdOut, " ") (!state);
    state := MyPrintBase.print_par (TextIO.stdOut, "(") (!state);
    state := MyPrintBase.print_par (TextIO.stdOut, "(") (!state);

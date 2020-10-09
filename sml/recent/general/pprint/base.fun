@@ -3,7 +3,7 @@ use "general/pprint/config.sig";
 
 functor PPrintBase(X: PPrintConfig): PPrintBase =
    struct
-      datatype ws_req =  no_need_of_ws | need_of_ws | forced_need_of_ws;
+      datatype ws_req =  no_need_of_ws | need_of_ws of bool | forced_need_of_ws;
 
       type state =  {
             col: int
@@ -16,13 +16,6 @@ functor PPrintBase(X: PPrintConfig): PPrintBase =
       fun print_nl stream state
          = (   TextIO.output(stream, "\n")
             ;  { col = 1, is_need_ws = no_need_of_ws, outstanding_txt = NONE }: state )
-      fun print_directly (stream, str) (state: state)
-         = (
-               case (#outstanding_txt state) of
-                     NONE      =>  ()
-                  |  SOME ostr =>  TextIO.output(stream, ostr)
-            ;  TextIO.output(stream, str)
-            ;  { col = (#col state) + String.size(str), is_need_ws =  need_of_ws, outstanding_txt = NONE }: state )
       fun print_ws (stream, str) (state: state)
          = let
             val outstanding_txt =  case (#outstanding_txt state) of
@@ -31,9 +24,16 @@ functor PPrintBase(X: PPrintConfig): PPrintBase =
            in { col = (#col state) + String.size(str), is_need_ws =  no_need_of_ws, outstanding_txt = SOME outstanding_txt }: state
            end
       local
-         fun print_big_and_small_ws (stream, is_big) state
+         fun print_directly (stream, str, is_big_ws) (state: state)
+            = (
+                  case (#outstanding_txt state) of
+                        NONE      =>  ()
+                     |  SOME ostr =>  TextIO.output(stream, ostr)
+               ;  TextIO.output(stream, str)
+               ;  { col = (#col state) + String.size(str), is_need_ws =  need_of_ws is_big_ws, outstanding_txt = NONE }: state )
+         fun print_big_and_small_ws stream state
             =  let
-                  val ws =  if is_big
+                  val ws =  if (#is_need_ws state) = need_of_ws true
                   then
                      "  "
                   else
@@ -52,10 +52,10 @@ functor PPrintBase(X: PPrintConfig): PPrintBase =
                   val state''
                      =  if (#is_need_ws state') = forced_need_of_ws
                         then
-                           print_big_and_small_ws (stream, is_big) state'
+                           print_big_and_small_ws stream state'
                         else
                            state'
-               in print_directly (stream, str) state''
+               in print_directly (stream, str, is_big) state''
                end
          fun print_tok_with_big_and_small_ws is_big (stream, str) (state: state)
             =  let
@@ -63,10 +63,10 @@ functor PPrintBase(X: PPrintConfig): PPrintBase =
                   val state''
                      =  if not ((#is_need_ws state') = no_need_of_ws)
                         then
-                           print_big_and_small_ws (stream, is_big) state'
+                           print_big_and_small_ws stream state'
                         else
                            state'
-               in print_directly (stream, str) state''
+               in print_directly (stream, str, is_big) state''
                end
       in
          val print_par =  print_par_with_big_and_small_ws false

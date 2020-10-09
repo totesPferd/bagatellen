@@ -58,7 +58,7 @@ signature PPrintBase =
 (* Use it to place an assignment token as := or =.  Insert white spaces if necessary. *)
       val print_assign:    TextIO.outstream * string -> state -> state
 
-(* Use it to place period which ends sentences, i.e. . .  Insert white spaces if necessary. *)
+(* Use it to place period which ends sentences, i.e. . ! ? .  Insert white spaces if necessary. *)
       val print_period:    TextIO.outstream * string -> state -> state
 
 (* Place the cursor to the given column. *)
