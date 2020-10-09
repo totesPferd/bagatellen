@@ -12,20 +12,20 @@ structure MyPrintBase =  PPrintBase(MyConfig)
 val state =  ref MyPrintBase.init;
 
 (
-   state := MyPrintBase.print (TextIO.stdOut, "Hello") (!state);
+   state := MyPrintBase.print_tok (TextIO.stdOut, "Hello") (!state);
    state := MyPrintBase.print_par (TextIO.stdOut, ",") (!state);
-   state := MyPrintBase.print (TextIO.stdOut, "World!") (!state);
+   state := MyPrintBase.print_tok (TextIO.stdOut, "World!") (!state);
    state := MyPrintBase.print_ws (TextIO.stdOut, " ") (!state);
    state := MyPrintBase.print_par (TextIO.stdOut, "(") (!state);
    state := MyPrintBase.print_par (TextIO.stdOut, "(") (!state);
-   state := MyPrintBase.print (TextIO.stdOut, "inside parenthesises") (!state);
+   state := MyPrintBase.print_tok (TextIO.stdOut, "inside parenthesises") (!state);
    state := MyPrintBase.print_par (TextIO.stdOut, ")") (!state);
    state := MyPrintBase.print_par (TextIO.stdOut, ")") (!state);
    state := MyPrintBase.force_ws (!state);
    state := MyPrintBase.print_par (TextIO.stdOut, ")") (!state);
-   state := MyPrintBase.print (TextIO.stdOut, "at the end of all parenthesises") (!state);
+   state := MyPrintBase.print_tok (TextIO.stdOut, "at the end of all parenthesises") (!state);
    state := MyPrintBase.navigate_to_pos (TextIO.stdOut, 30) (!state);
-   state := MyPrintBase.print (TextIO.stdOut, "after setting to a new cursor position") (!state);
+   state := MyPrintBase.print_tok (TextIO.stdOut, "after setting to a new cursor position") (!state);
    state := MyPrintBase.print_nl(TextIO.stdOut) (!state) );
 
 )
@@ -52,8 +52,14 @@ signature PPrintBase =
 (* Use it to place white space like spaces, tabs. *)
       val print_ws:        TextIO.outstream * string -> state -> state
 
-(* Use it to place a token. Also use it for placing - sign. Insert white spaces if necessary. *)
-      val print:           TextIO.outstream * string -> state -> state
+(* Use it to place a token. Also use it for placing binary operational sign as + - * / == <> etc. Insert white spaces if necessary. *)
+      val print_tok:       TextIO.outstream * string -> state -> state
+
+(* Use it to place an assignment token as := or =.  Insert white spaces if necessary. *)
+      val print_assign:    TextIO.outstream * string -> state -> state
+
+(* Use it to place period which ends sentences, i.e. . .  Insert white spaces if necessary. *)
+      val print_period:    TextIO.outstream * string -> state -> state
 
 (* Place the cursor to the given column. *)
       val navigate_to_pos: TextIO.outstream * int -> state -> state

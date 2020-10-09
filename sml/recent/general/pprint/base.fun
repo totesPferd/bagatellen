@@ -30,38 +30,50 @@ functor PPrintBase(X: PPrintConfig): PPrintBase =
                |  SOME other => other ^ str
            in { col = (#col state) + String.size(str), is_need_ws =  no_need_of_ws, outstanding_txt = SOME outstanding_txt }: state
            end
-      fun print_par (stream, str) (state: state)
-         =  let
-               val state'
-                  =  if (#col state) + String.size(str) > (#page_width X.config)
-                     then
-                        print_nl stream state
-                     else
-                        state
-               val state''
-                  =  if (#is_need_ws state') = forced_need_of_ws
-                     then
-                        print_ws (stream, " ") state'
-                     else
-                        state'
-            in print_directly (stream, str) state''
-            end
-      fun print (stream, str) (state: state)
-         =  let
-               val state'
-                  =  if (#col state) + String.size(str) > (#page_width X.config)
-                     then
-                        print_nl stream state
-                     else
-                        state
-               val state''
-                  =  if not ((#is_need_ws state') = no_need_of_ws)
-                     then
-                        print_ws (stream, " ") state'
-                     else
-                        state'
-            in print_directly (stream, str) state''
-            end
+      local
+         fun print_big_and_small_ws (stream, is_big) state
+            =  let
+                  val ws =  if is_big
+                  then
+                     "  "
+                  else
+                     " "
+               in print_ws (stream, ws) state
+               end
+         fun check_line_exceed (stream, str) state
+            =  if (#col state) + String.size(str) > (#page_width X.config)
+               then
+                  print_nl stream state
+               else
+                  state
+         fun print_par_with_big_and_small_ws is_big (stream, str) (state: state)
+            =  let
+                  val state' =  check_line_exceed (stream, str) state
+                  val state''
+                     =  if (#is_need_ws state') = forced_need_of_ws
+                        then
+                           print_big_and_small_ws (stream, is_big) state'
+                        else
+                           state'
+               in print_directly (stream, str) state''
+               end
+         fun print_tok_with_big_and_small_ws is_big (stream, str) (state: state)
+            =  let
+                  val state' =  check_line_exceed (stream, str) state
+                  val state''
+                     =  if not ((#is_need_ws state') = no_need_of_ws)
+                        then
+                           print_big_and_small_ws (stream, is_big) state'
+                        else
+                           state'
+               in print_directly (stream, str) state''
+               end
+      in
+         val print_par =  print_par_with_big_and_small_ws false
+         val print_period =  print_par_with_big_and_small_ws true
+         val print_tok =  print_tok_with_big_and_small_ws false
+         val print_assign =  print_tok_with_big_and_small_ws true
+      end
       fun navigate_to_pos (stream, pos) (state: state)
          = let
             val state_ptr =  ref state
