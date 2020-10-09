@@ -41,7 +41,7 @@ functor PPrintBase(X: PPrintConfig): PPrintBase =
                val state''
                   =  if (#is_need_ws state') = forced_need_of_ws
                      then
-                        print_ws (stream, " ") state
+                        print_ws (stream, " ") state'
                      else
                         state'
             in print_directly (stream, str, no_need_of_ws) state''
@@ -57,7 +57,7 @@ functor PPrintBase(X: PPrintConfig): PPrintBase =
                val state''
                   =  if not ((#is_need_ws state') = no_need_of_ws)
                      then
-                        print_ws (stream, " ") state
+                        print_ws (stream, " ") state'
                      else
                         state'
             in print_directly (stream, str, need_of_ws) state''
