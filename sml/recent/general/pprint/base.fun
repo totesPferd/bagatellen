@@ -19,8 +19,8 @@ functor PPrintBase(X: PPrintConfig): PPrintBase =
       fun print_directly (stream, str, ws_req) (state: state)
          = (
                case (#outstanding_txt state) of
-                     NONE     =>  ()
-                  |  SOME str =>  TextIO.output(stream, str)
+                     NONE      =>  ()
+                  |  SOME ostr =>  TextIO.output(stream, ostr)
             ;  TextIO.output(stream, str)
             ;  { col = (#col state) + String.size(str), is_need_ws =  ws_req, outstanding_txt = NONE }: state )
       fun print_ws (stream, str) (state: state)
