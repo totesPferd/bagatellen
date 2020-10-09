@@ -14,6 +14,12 @@ val state =  ref MyPrintBase.init;
 (
    state := MyPrintBase.print (TextIO.stdOut, "Hallo,") (!state);
    state := MyPrintBase.print (TextIO.stdOut, "Welt!") (!state);
+   state := MyPrintBase.print_ws (TextIO.stdOut, " ") (!state);
+   state := MyPrintBase.print_par (TextIO.stdOut, "(") (!state);
+   state := MyPrintBase.print_par (TextIO.stdOut, "(") (!state);
+   state := MyPrintBase.print (TextIO.stdOut, "Daett faetzt!") (!state);
+   state := MyPrintBase.print_par (TextIO.stdOut, ")") (!state);
+   state := MyPrintBase.print_par (TextIO.stdOut, ")") (!state);
    state := MyPrintBase.navigate_to_pos (TextIO.stdOut, 30) (!state);
    state := MyPrintBase.print (TextIO.stdOut, "Welt") (!state);
    state := MyPrintBase.print_nl(TextIO.stdOut) (!state) );
