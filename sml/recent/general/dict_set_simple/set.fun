@@ -1,23 +1,19 @@
-use "general/aux/acc.sig";
+use "general/aux/acc.sml";
 use "general/dict_set_simple/set_impl.sig";
 use "general/eq_type.sig";
 
-functor DictSetSimpleSet(X:
-   sig
-      structure A: Acc
-      structure E: EqType
-   end ): DictSetSimpleSetImpl =
+functor DictSetSimpleSet(E: EqType): DictSetSimpleSetImpl =
    struct
-      type base_t =  X.E.T
+      type base_t =  E.T
       type T =  base_t list
       val empty =  nil
       val getItem =  List.getItem
       fun map f (s: T) =  map f s
       fun singleton x =  [ x ]
-      fun is_in(x, s) =  List.exists (fn (y) => X.E.eq(x, y)) s
+      fun is_in(x, s) =  List.exists (fn (y) => E.eq(x, y)) s
       val is_empty =  List.null
       fun adjunct(x, s) =  x :: s
-      fun drop(x, s) =  List.filter (fn (y) => not(X.E.eq(x, y))) s
+      fun drop(x, s) =  List.filter (fn (y) => not(E.eq(x, y))) s
       fun drop_if_exists(x, s)
         = if is_in(x, s)
           then
@@ -58,7 +54,7 @@ functor DictSetSimpleSet(X:
           |  Option.SOME y =>  Option.SOME y
 
       fun fe b =  [ b ]
-      fun transition phi s b =  X.A.transition phi s b
+      fun transition phi s b =  Acc.transition phi s b
       fun fop phi s
         = transition (
              fn (x, b) => Option.SOME (union (phi x, b)) )
