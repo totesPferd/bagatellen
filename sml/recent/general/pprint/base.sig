@@ -55,7 +55,7 @@ signature PPrintBase =
 (* Use it to place white space like spaces, tabs. *)
       val print_ws:        TextIO.outstream * string -> state -> state
 
-(* Use it to place a token. Also use it for placing binary operational sign as + - * / == <> etc. Insert white spaces if necessary. *)
+(* Use it to place a token.  Also use it for placing binary operational sign as + - * / == <> etc.  Insert white spaces if necessary. *)
       val print_tok:       TextIO.outstream * string -> state -> state
 
 (* Use it to place an assignment token as := or =.  Insert white spaces if necessary. *)
