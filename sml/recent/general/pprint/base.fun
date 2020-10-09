@@ -62,24 +62,18 @@ functor PPrintBase(X: PPrintConfig): PPrintBase =
                         state'
             in print_directly (stream, str, need_of_ws) state''
             end
-      local
-         fun ntp (stream, pos) (state: state)
-            =  if (#col state) >= pos
-               then
-                  state
-               else
-                  ntp (stream, pos) (print_ws(stream, " ") state)
-      in fun navigate_to_pos (stream, pos) (state: state)
-            =  let
-                  val state'
-                     =  if (#col state) > pos
-                        then
-                           print_nl stream state
-                        else
-                           state
-               in
-                  ntp (stream, pos) state'
-               end
-      end
+      fun navigate_to_pos (stream, pos) (state: state)
+         = let
+            val state_ptr =  ref state
+           in (
+                 while (#col (!state_ptr)) <> pos
+                 do state_ptr := (
+                       if (#col (!state_ptr)) > pos
+                       then
+                          print_nl stream (!state_ptr)
+                       else
+                          print_ws(stream, " ") (!state_ptr) )
+              ;  !state_ptr )
+           end
 
    end;
