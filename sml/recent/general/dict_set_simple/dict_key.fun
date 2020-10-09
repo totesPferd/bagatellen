@@ -12,5 +12,5 @@ functor DictSetSimpleDictKeys(X:
       structure From =  X.D
       structure To =  X.S
 
-      fun keys (d: X.D.T) =  (map #key d): X.S.T
+      fun keys (d: X.D.T) =  (List.map #key d): X.S.T
    end

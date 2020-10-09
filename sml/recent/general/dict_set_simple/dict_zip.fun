@@ -12,9 +12,7 @@ functor DictSetSimpleDictZip (X:
    end ): DictZip =
    struct
 
-      structure DictA =  X.DictA
-      structure DictB =  X.DictB
-      structure DictResult =  X.DictResult
+      open X
 
       exception ZipSrcDoesNotAgree
       local
