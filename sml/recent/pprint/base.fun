@@ -11,7 +11,7 @@ functor PPrintBase(X: PPrintConfig): PPrintBase =
          ,  indent: int
          ,  outstanding_txt: string option }
 
-      val init =  { col = 1, is_need_ws = no_need_of_ws, indent = 1, outstanding_txt = NONE }: state
+      val init =  { col = 1, is_need_ws = no_need_of_ws, indent = 0, outstanding_txt = NONE }: state
       fun force_ws (state: state)
          =  {  col = (#col state), is_need_ws = forced_need_of_ws, indent = (#indent state), outstanding_txt = (#outstanding_txt state) }
       fun print_nl stream state
