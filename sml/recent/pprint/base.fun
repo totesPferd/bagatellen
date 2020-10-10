@@ -1,5 +1,5 @@
-use "general/pprint/base.sig";
-use "general/pprint/config.sig";
+use "pprint/base.sig";
+use "pprint/config.sig";
 
 functor PPrintBase(X: PPrintConfig): PPrintBase =
    struct

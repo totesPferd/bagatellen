@@ -1,5 +1,5 @@
-use "general/pprint/base.fun";
-use "general/pprint/config.sig";
+use "pprint/base.fun";
+use "pprint/config.sig";
 
 structure MyConfig: PPrintConfig =
    struct
