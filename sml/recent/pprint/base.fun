@@ -113,4 +113,7 @@ functor PPrintBase(X: PPrintConfig): PPrintBase =
                      print_nl stream state
                   else
                      print_ws (stream, " ") state )
+      fun navigate_to_rel_pos (stream, pos) state
+         =  navigate_to_pos (stream, pos + (#indent (!state))) state
+
    end;
