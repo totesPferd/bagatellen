@@ -1,3 +1,4 @@
+use "general/string_utils.sml";
 use "pprint/base.fun";
 use "pprint/config.sig";
 
@@ -7,7 +8,11 @@ structure MyConfig: PPrintConfig =
       val config =  { indent = 3, page_width = 72 }
    end;
 
-structure MyPrintBase =  PPrintBase(MyConfig)
+structure MyPrintBase =  PPrintBase(
+   struct
+      structure Config =  MyConfig
+      structure StringUtils =  StringUtils
+   end )
 
 val state =  MyPrintBase.init;
 

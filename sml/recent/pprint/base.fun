@@ -1,7 +1,12 @@
+use "general/string_utils.sig";
 use "pprint/base.sig";
 use "pprint/config.sig";
 
-functor PPrintBase(X: PPrintConfig): PPrintBase =
+functor PPrintBase(X:
+   sig
+      structure StringUtils: StringUtils
+      structure Config: PPrintConfig
+   end ): PPrintBase =
    struct
       datatype ws_req =  no_need_of_ws | need_of_small_ws | need_of_big_ws | forced_need_of_ws;
 
@@ -16,13 +21,13 @@ functor PPrintBase(X: PPrintConfig): PPrintBase =
          =  state :=  {
                col = (#col (!state))
             ,  is_need_ws = (#is_need_ws (!state))
-            ,  indent = (#indent (!state)) + (#indent X.config)
+            ,  indent = (#indent (!state)) + (#indent X.Config.config)
             ,  outstanding_txt = (#outstanding_txt (!state)) }
       fun restore_indent state
          =  state :=  {
                col = (#col (!state))
             ,  is_need_ws = (#is_need_ws (!state))
-            ,  indent = (#indent (!state)) - (#indent X.config)
+            ,  indent = (#indent (!state)) - (#indent X.Config.config)
             ,  outstanding_txt = (#outstanding_txt (!state)) }
       fun force_ws (state: state)
          =  state :=  {
@@ -31,17 +36,13 @@ functor PPrintBase(X: PPrintConfig): PPrintBase =
             ,  indent = (#indent (!state))
             ,  outstanding_txt = (#outstanding_txt (!state)) }
       fun print_nl stream state
-         =  let
-               fun prefix_ws 0 =  ""
-                 | prefix_ws n =  prefix_ws (n - 1) ^ " "
-            in
-               (   TextIO.output(stream, "\n")
-                ;  state :=  {
-                      col = (#indent (!state))
-                   ,  is_need_ws = no_need_of_ws
-                   ,  indent = (#indent (!state))
-                   ,  outstanding_txt = SOME (prefix_ws (#indent (!state))) })
-            end
+         =
+            (   TextIO.output(stream, "\n")
+             ;  state :=  {
+                   col = (#indent (!state))
+                ,  is_need_ws = no_need_of_ws
+                ,  indent = (#indent (!state))
+                ,  outstanding_txt = SOME (X.StringUtils.rep (" ", (#indent (!state)))) })
       fun print_ws (stream, str) state
          = let
             val outstanding_txt =  case (#outstanding_txt (!state)) of
@@ -75,7 +76,7 @@ functor PPrintBase(X: PPrintConfig): PPrintBase =
                in print_ws (stream, ws) state
                end
          fun check_line_exceed (stream, str) state
-            =  if (#col (!state)) + String.size(str) > (#page_width X.config)
+            =  if (#col (!state)) + String.size(str) > (#page_width X.Config.config)
                then
                   print_nl stream state
                else
