@@ -12,6 +12,10 @@ functor PPrintBase(X: PPrintConfig): PPrintBase =
          ,  outstanding_txt: string option }
 
       val init =  { col = 1, is_need_ws = no_need_of_ws, indent = 0, outstanding_txt = NONE }: state
+      fun set_deeper_indent (state: state)
+         =  {  col = (#col state), is_need_ws = (#is_need_ws state), indent = (#indent state) + (#indent X.config), outstanding_txt = (#outstanding_txt state) }
+      fun restore_indent (state: state)
+         =  {  col = (#col state), is_need_ws = (#is_need_ws state), indent = (#indent state) - (#indent X.config), outstanding_txt = (#outstanding_txt state) }
       fun force_ws (state: state)
          =  {  col = (#col state), is_need_ws = forced_need_of_ws, indent = (#indent state), outstanding_txt = (#outstanding_txt state) }
       fun print_nl stream state
