@@ -53,11 +53,9 @@ if retval == "Error":
 raw_data =  sys.stdin.read()
 knowledge =  json.loads(raw_data)
 
-refused_to_be_a_bad_guy =  False
-refused_to_be_a_good_guy =  False
 score =  0
-used_words =  knowledge["used_by_bad_guys_only"] + knowledge["used_by_good_guys_only"] + [ word for word in knowledge["score"].keys() ]
 creatures =  set()
+used_words =  knowledge["score"].keys()
 for url in url_list["urls"]:
    fp =  feedparser.parse(url)
    for entry in fp["entries"]:
