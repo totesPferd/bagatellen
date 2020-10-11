@@ -1,17 +1,16 @@
+import dctbnbc.algorithm
 import dctbnbc.config_file
-import dctbnbc.get_authors
-import feedparser
+import dctbnbc.traverse_posts
 import getopt
 import json
 import sys
-
 
 def print_usage(file):
    file.write("USAGE:\n\n")
    file.write("%s [-h|--help]\n" % sys.argv[0])
    file.write("   write this usage information.\n\n")
    file.write("%s\n" % sys.argv[0])
-   file.write("   extract authors appearing in bad sites.\n")
+   file.write("   learn.\n")
 
 
 def interpret_cmdline():
@@ -57,18 +56,7 @@ if not dctbnbc.config_file.get_config_from_file(config_info):
    sys.stderr.write("problem in config file found.\n")
    sys.exit(2)
 
-authors_set =  set()
-for site in config_info["bad_sites"]:
-   if isinstance(site, dict) and "href" in site.keys():
-      url =  site["href"]
-      fp =  feedparser.parse(url)
-      dctbnbc.get_authors.get_authors_feed(authors_set, fp)
-   else:
-     sys.stderr.write("there are illformed items in bad_sites region in config file.\n")
-     sys.exit(2)
+algo =  dctbnbc.algorithm.Algorithm()
+dctbnbc.traverse_posts.traverse_posts(algo, config_info)
 
-authors_list =  list(authors_set)
-authors_list.sort()
-retval =  { "authors": authors_list }
-print(json.dumps(retval, indent = 3, sort_keys = True))
-
+print(json.dumps(algo.get_report(), indent = 3, sort_keys = True))
