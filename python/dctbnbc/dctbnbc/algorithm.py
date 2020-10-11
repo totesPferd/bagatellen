@@ -10,16 +10,15 @@ class Algorithm:
       self.used_by_good_guys =  {}
 
    def register_word(self, word_dict, word):
-      s =  len(word)
       if word in word_dict.keys():
-         word_dict[word] =  word_dict[word] + s
+         word_dict[word] =  word_dict[word] + 1
       else:
-         word_dict[word] =  s
+         word_dict[word] =  1
    
    def register_content(self, word_dict, content):
       size =  0
       for word in dctbnbc.tokenize.tokenize(content["content"]):
-         size =  size + len(word)
+         size =  size + 1
          self.register_word(word_dict, word)
       return size
    
