@@ -1,0 +1,839 @@
+{
+   "bad_guys": [
+       "Anti-Spiegel",
+       "BlauerBote",
+       "Claus  K\u00f6hnlein",
+       "Daniele Ganser",
+       "Dirk Pohlmann",
+       "Ernst Wolff",
+       "Harald Walach",
+       "Harald Wiesendanger",
+       "Hermann Ploppa",
+       "Jens Bernert",
+       "Nicolas  Riedl",
+       "Ped",
+       "Peter Frey",
+       "Tilo Gr\u00e4ser",
+       "Torsten  Engelbrecht",
+       "Ullrich Mies"
+   ],
+   "bad_sites": [
+      {
+         "href": "https://adalbertnaumann.wordpress.com/feed/",
+         "title": "Adalberts Meckerecke \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://alles-schallundrauch.blogspot.com/feeds/posts/default",
+         "title": "Alles Schall und Rauch - Atom",
+         "type": "application/atom+xml"
+      },
+      {
+         "href": "http://alpenparlament.tv/index.php?format=feed&type=rss",
+         "title": "RSS 2.0",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://anjamueller.livejournal.com/data/rss",
+         "title": "RSS",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.anti-spiegel.ru/feed/",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://attnang.info/feed/",
+         "title": "Attnang-Puchheim RSS Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://blauerbote.com/feed/",
+         "title": "Blauer Bote Magazin - Wissenschaft statt Propaganda \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://bleibejung.de/feed/",
+         "title": "bleibejung \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://buecherrebell.wordpress.com/feed/",
+         "title": "B\u00fccher Rebell Der Blog \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://cyberwaves.wordpress.com/feed/",
+         "title": "Cyberwaves's Blog \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://blog.danielschurter.net/feed/",
+         "title": "DanielSchurter.net \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://dokudokus.wordpress.com/feed/",
+         "title": " \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://dokumentarfilme.wordpress.com/feed/",
+         "title": "Dokumentarfilme online \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://deutsche-wirtschafts-nachrichten.de/feed/",
+         "title": "RSS Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://ef-magazin.de/feed/rss/",
+         "title": "News",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://eingeschenkt.tv/feed/",
+         "title": "EingeSCHENKt.tv \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://elsabir.wordpress.com/feed/",
+         "title": "ElSabir's Blog \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.epochtimes.de/?feed=rss",
+         "title": "Epoch Times Deutschland - Neue Artikel",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://daserwachendervalkyrjar.wordpress.com/feed/",
+         "title": "Das Erwachen der Valkyrjar \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://fastprogress.wordpress.com/feed/",
+         "title": "Fast Progress - Eine andere Welt ist n\u00f6tig! \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.everyday-feng-shui.de/feed/",
+         "title": "Everyday Feng Shui \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://faszinationmensch.com/feed/",
+         "title": "Der Mensch - das faszinierende Wesen \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://filmen.wordpress.com/feed/",
+         "title": "Online Filme \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.fuereinebesserewelt.info/feed/",
+         "title": "F\u00fcr eine bessere Welt \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.free21.org/feed/",
+         "title": "Free21 NewsONpaper \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://freidenkertv.wordpress.com/feed/",
+         "title": "freidenkertv \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.freizahn.de/feed/",
+         "title": "Freizahn \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.gegenfrage.com/feed/",
+         "title": "Gegenfrage.com \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://gmuender.me/feed/",
+         "title": "Andreas Gmuender \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.heise.de/tp/rss/news-xl.xml",
+         "title": "Telepolis/letzte 7 Tage",
+         "type": "application/atom+xml"
+      },
+      {
+         "href": "http://hinter-der-fichte.blogspot.com/feeds/posts/default",
+         "title": "Hinter der Fichte - Atom",
+         "type": "application/atom+xml"
+      },
+      {
+         "href": "https://haunebu7.wordpress.com/feed/",
+         "title": "Haunebu7's Blog \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://horicon.wordpress.com/feed/",
+         "title": "HoriconBlog \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://infowars.wordpress.com/feed/",
+         "title": "infowars-deutschland \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://le-bohemien.net/feed/",
+         "title": "le Boh\u00e9mien RSS Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://lotharf.wordpress.com/feed/",
+         "title": "Lothars Blog \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.hintergrund.de/feed/",
+         "title": "Hintergrund \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.lyrik-klinge.de/feed/",
+         "title": "RSS 2.0",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://itmedialaw.com/feed/",
+         "title": "ITMediaLaw - Rechtsanwalt Marian H\u00e4rtel \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://daskalteherz.blog/feed/",
+         "title": "Das kalte Herz \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://klagemauer.tv/rss.php?lang=de",
+         "title": "RSS",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://kenfm.de/feed/",
+         "title": "KenFM.de \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://kritisches-netzwerk.de/rss.xml",
+         "title": "Feed der Startseite",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.larsschall.com/feed/",
+         "title": "Lars Schall RSS Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://matha.wordpress.com/feed/",
+         "title": "- K\u00d6LSCHE LETTER - \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://medienblog.hypotheses.org/feed",
+         "title": "MEDIENREALIT\u00c4T \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://medienblog.hypotheses.org/category/publikationen/feed",
+         "title": "RSS Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://medienblog.hypotheses.org/category/rezensionen/feed",
+         "title": "RSS Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.meinezeitung24.com/feed/",
+         "title": "MeineZeitung24 \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://mfr.cc/feed/",
+         "title": "Michael Franz Reinisch \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://my-hardware.net/feed/",
+         "title": "P.E.A.C.E. \u00c2\u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://multipolar-magazin.de/atom.xml",
+         "title": "ATOM-Feed",
+         "type": "application/atom+xml"
+      },
+      {
+         "href": "https://murdeltas.wordpress.com/feed/",
+         "title": "murdelta \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://netzfrauen.org/feed/",
+         "title": "- netzfrauen \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://peds-ansichten.de/feed/",
+         "title": "Peds Ansichten \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://politikstube.com/feed/",
+         "title": "Politikstube \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.radio-utopie.de/feed/",
+         "title": "Radio Utopie \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://rfjfreistadt.wordpress.com/feed/",
+         "title": "Ring Freiheitlicher Jugend \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://deutsch.rt.com/feeds/news/",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.rationalgalerie.de/?format=feed&type=rss",
+         "title": "RSS 2.0",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://rotweinromantiker.wordpress.com/feed/",
+         "title": "rotweinromantiker's gedanken \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.rubikon.news/artikel.atom",
+         "title": "Rubikon Magazin",
+         "type": "application/atom+xml"
+      },
+      {
+         "href": "https://www.russland.capital/feed",
+         "title": "russland.CAPITAL \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.russlandkontrovers.com/feed",
+         "title": "Russlandkontrovers \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.russland.news/feed/",
+         "title": "russland.NEWS \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://sciencefiles.org/feed/",
+         "title": "ScienceFiles \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://serpentsembrace.wordpress.com/feed/",
+         "title": "Willkommen bei serpent's embrace \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://spiegelkabinett-blog.blogspot.com/feeds/posts/default",
+         "title": "Spiegelkabinett - Atom",
+         "type": "application/atom+xml"
+      },
+      {
+         "href": "http://satyagraha.fboits.com/feed/",
+         "title": "Satyagraha \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://sehrohr.wordpress.com/feed/",
+         "title": "Das Sehrohr \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://slavyangrad.de/feed/",
+         "title": "SLAVYANGRAD.de \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss",
+         "title": "SOTT Nachrichten",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_sottfocus",
+         "title": "SOTT Fokus",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/sott_talk_radio",
+         "title": "SOTT Radio Network",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_bestofweb",
+         "title": "Das Beste aus dem Web",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_cat/16-Puppenspieler",
+         "title": "Puppenspieler",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_cat/18-Das-Kind-der-Gesellschaft",
+         "title": "Das Kind der Gesellschaft",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_cat/19-Verborgene-Geschichte",
+         "title": "Verborgene Geschichte",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_cat/14-Wissenschaft-und-Technologie",
+         "title": "Wissenschaft und Technologie",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_cat/4-Erdveranderungen",
+         "title": "Erdver\u00e4nderungen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_cat/17-Feuer-am-Himmel",
+         "title": "Feuer am Himmel",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_cat/7-Gesundheit-Wohlbefinden",
+         "title": "Gesundheit & Wohlbefinden",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_cat/20-Die-Wissenschaft-des-Geistes",
+         "title": "Die Wissenschaft des Geistes",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_cat/8-Hochste-Fremdartigkeit",
+         "title": "H\u00f6chste Fremdartigkeit",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_cat/15-Keine-Panik-Nimms-leicht",
+         "title": "Keine Panik! Nimm's leicht!",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_topic/31-Kometen-und-Katastrophen-Artikel-Serie-von-Sott-net",
+         "title": "\"Kometen und Katastrophen\" Artikel-Serie von Sott.net",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_topic/11-9-11",
+         "title": "9/11",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_topic/26-Brande",
+         "title": "Br\u00e4nde",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_topic/32-Durren",
+         "title": "D\u00fcrren",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_topic/28-Erdbeben",
+         "title": "Erdbeben",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_topic/8-Erdfalle",
+         "title": "Erdf\u00e4lle",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_topic/36-Erdveranderungen-und-die-Mensch-Kosmos-Verbindung",
+         "title": "Erdver\u00e4nderungen und die Mensch-Kosmos Verbindung",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_topic/15-Ernteausfalle",
+         "title": "Ernteausf\u00e4lle",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_topic/33-Extreme-Temperaturen",
+         "title": "Extreme Temperaturen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_topic/2-Feuerballe",
+         "title": "Feuerb\u00e4lle",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_topic/13-Fluten",
+         "title": "Fluten",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_topic/18-Plagen",
+         "title": "Plagen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_topic/38-Psychopathie",
+         "title": "Psychopathie",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_topic/19-Seltsame-Gerausche",
+         "title": "Seltsame Ger\u00e4usche",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_topic/34-Seltsamer-Himmel",
+         "title": "Seltsamer Himmel",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_topic/37-SOTT-Radio-Network",
+         "title": "SOTT Radio Network",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_topic/35-SOTT-Zusammenfassung",
+         "title": "SOTT Zusammenfassung",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_topic/14-Sturme",
+         "title": "St\u00fcrme",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_topic/9-Tabak",
+         "title": "Tabak",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_topic/12-Tiere",
+         "title": "Tiere",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sott.net/xml_engine/signs_rss_topic/21-Vulkanaktivitat",
+         "title": "Vulkanaktivit\u00e4t",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://swprs.org/feed/",
+         "title": "Swiss Policy Research \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://de.sputniknews.com/export/rss2/archive/index.xml",
+         "title": "RSS",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://technikgedoens.de/feed",
+         "title": "Technikged\u00f6ns \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://tomswochenschau.wordpress.com/feed/",
+         "title": "TOMS WELLENL\u00c4NGE ~ \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://unbeantwortete-fragen.de/?feed=rss2",
+         "title": "Unbeantwortete Fragen \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://uncut-news.ch/feed/",
+         "title": "uncut-news.ch \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.unzensuriert.at/feed/",
+         "title": "Unzensuriert \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://videogold.de/feed/",
+         "title": "VideoGold.de \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.voltairenet.org/spip.php?page=backend&id_secteur=1110&lang=de",
+         "title": "Voltaire Netzwerk (Deutsch)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://volksruf.wordpress.com/feed/",
+         "title": "Volksruf \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.wahrheiten.org/blog/feed/",
+         "title": "Wahrheiten.org \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.watergate.tv/feed/",
+         "title": "Watergate.tv \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://williweise.wordpress.com/feed/",
+         "title": "Prof. Dr. Dr. Wolfgang Berger - Unabh\u00e4ngiger Direktkandidat f\u00fcr den Bundestag in der S\u00fcdpfalz \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://yoice.net/feed/",
+         "title": "yoice.net - Alternatives Webmagazin \u00bb Feed",
+         "type": "application/rss+xml"
+      }
+   ],
+   "good_sites": [
+      {
+         "href": "http://correctiv.org/feed/",
+         "type": "application/atom+xml"
+      },
+      {
+         "href": "http://www.faz.net/rss/aktuell/",
+         "title": "FAZ.NET",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://rss.focus.de/",
+         "title": "Startseite RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://rss.focus.de/politik/",
+         "title": "Politik RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://rss.focus.de/finanzen/",
+         "title": "Finanzen RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://rss.focus.de/gesundheit/",
+         "title": "Gesundheit RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://rss.focus.de/kultur/",
+         "title": "Kultur RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://rss.focus.de/panorama/",
+         "title": "Panorama RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://rss.focus.de/sport/",
+         "title": "Sport RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://rss.focus.de/auto/",
+         "title": "Auto RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://rss.focus.de/digital/",
+         "title": "Digital RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://rss.focus.de/reisen/",
+         "title": "Reisen RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://rss.focus.de/immobilien/",
+         "title": "Immobilien RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www1.wdr.de/daserste/monitor/indexmonitor100.feed",
+         "title": "RSS",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.zdf.de/rss/zdf/nachrichten",
+         "title": "RSS",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ndr.de/homepage985-rss2.xml",
+         "title": "NDR.de - Das Beste am Norden",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.spiegel.de/schlagzeilen/index.rss",
+         "title": "DER SPIEGEL | RSS Schlagzeilen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.spiegel.de/index.rss",
+         "title": "DER SPIEGEL | RSS Nachrichten",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/all/",
+         "title": "stern.de RSS-Feed - Alle Artikel",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/overview/",
+         "title": "stern.de RSS Feed - Der Tag im \u00dcberblick",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/alle-nachrichten/",
+         "title": "stern.de RSS Feed - Nachrichtenticker",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/video/",
+         "title": "stern.de RSS Feed - Alle Videos",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/panorama/",
+         "title": "stern.de RSS Feed - Alle Infos aus Panorama",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/politik/",
+         "title": "stern.de RSS Feed - Alle Infos aus Politik",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/kultur/",
+         "title": "stern.de RSS Feed - Alle Infos aus Kultur",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/lifestyle/",
+         "title": "stern.de RSS Feed - Alle Infos aus Lifestyle",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/digital/",
+         "title": "stern.de RSS Feed - Alle Infos aus Digital",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/wirtschaft/",
+         "title": "stern.de RSS Feed - Alle Infos aus Wirtschaft",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/sport/",
+         "title": "stern.de RSS Feed - Alle Infos aus Sport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/gesundheit/",
+         "title": "stern.de RSS Feed - Alle Infos aus Gesundheit",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/genuss/",
+         "title": "stern.de RSS Feed - Alle Infos aus Genuss",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/reise/",
+         "title": "stern.de RSS Feed - Alle Infos aus Reise",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/familie/",
+         "title": "stern.de RSS Feed - Alle Infos aus Familie",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/auto/",
+         "title": "stern.de RSS Feed - Alle Infos aus Auto",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/fotografie/",
+         "title": "stern.de RSS Feed - Alle Infos aus Fotografie",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://rss.sueddeutsche.de/rss/Topthemen",
+         "title": "sueddeutsche.de RSS Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.tagesschau.de/xml/rss2",
+         "title": "tagesschau.de RSS2-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.tagesspiegel.de/contentexport/feed/home",
+         "title": "RSS 2.0",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.t-online.de/themen/rss/",
+         "title": "t-online.de | RSS Feed Nachrichten",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://feeds.t-online.de/rss/politik",
+         "title": "t-online.de | RSS Feed Nachrichten | Politik",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://feeds.t-online.de/rss/panorama",
+         "title": "t-online.de | RSS Feed Nachrichten | Panorama",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://suche.t-online.de/editorial_news.xml",
+         "title": "t-online.de | RSS Feed Nachrichten | Editorial",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.watson.ch/api/1.0/rss/index.xml",
+         "type": "application/atom+xml"
+      },
+      {
+         "href": "https://newsfeed.zeit.de/index",
+         "type": "application/rss+xml"
+      }
+   ]
+}
