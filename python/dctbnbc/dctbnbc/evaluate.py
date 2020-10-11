@@ -23,9 +23,11 @@ def refused_to_be_a_good_guy(knowledge, content):
 
 def get_score(knowledge, content):
    retval =  0
-   word_list =  [ word for word in dctbnbc.tokenize.tokenize(content) ]
-   for word in knowledge["score"]:
-      if word in word_list:
-         retval =  retval + knowledge["score"][word]
+
+   token_list =  dctbnbc.tokenize.tokenize(content)
+   size =  len(content)
+   for word in knowledge["score"].keys():
+     if word not in token_list:
+        retval =  retval - knowledge["score"][word] * size / len(content)
 
    return retval
