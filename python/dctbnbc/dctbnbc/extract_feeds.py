@@ -21,8 +21,8 @@ def interpret_cmdline(result):
    try:
       optlist, args =  getopt.getopt(sys.argv[1:], "h", [ "help" ])
 
-      if "url" not in result.keys():
-         result["url"] =  []
+      if "urls" not in result.keys():
+         result["urls"] =  []
 
       for option, arg in optlist:
          if option in { "-h", "--help" }:
@@ -35,7 +35,7 @@ def interpret_cmdline(result):
             retval =  "Error"
    
       for arg in args:
-         result["url"].append(arg)
+         result["urls"].append(arg)
 
    except getopt.GetoptError as err:
       sys.stderr.write("%s\n\n" % str(err))
@@ -78,7 +78,7 @@ elif retval == "HelpMode":
    sys.exit(0)
 
 feed_list =  []
-for url in url_list["url"]:
+for url in url_list["urls"]:
    try:
       r =  requests.get(url)
       hp =  MyHTMLParser(url, feed_list)
