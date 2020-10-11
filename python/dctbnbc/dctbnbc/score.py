@@ -64,12 +64,10 @@ for url in url_list["urls"]:
       if "summary" in entry.keys():
          content =  entry["summary"]
          token_list =  dctbnbc.tokenize.tokenize(content)
-         refused_to_be_a_bad_guy =  refused_to_be_a_bad_guy or dctbnbc.evaluate.refused_to_be_a_bad_guy(knowledge, token_list)
-         refused_to_be_a_good_guy =  refused_to_be_a_good_guy or dctbnbc.evaluate.refused_to_be_a_good_guy(knowledge, token_list)
          score =  score + dctbnbc.evaluate.get_score(knowledge, token_list)
          creatures =  creatures | { token for token in token_list if token not in used_words }
 creatures_list =  list(creatures)
 creatures_list.sort()
 
-retval =  { "creatures": creatures_list, "refused_to_be_a_bad_guy": refused_to_be_a_bad_guy, "refused_to_be_a_good_guy": refused_to_be_a_good_guy, "score": score }
+retval =  { "creatures": creatures_list, "score": score }
 print(json.dumps(retval, indent = 3, sort_keys = True))
