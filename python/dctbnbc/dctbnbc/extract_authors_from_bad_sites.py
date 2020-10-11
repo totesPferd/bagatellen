@@ -62,7 +62,7 @@ for site in result["bad_sites"]:
    if isinstance(site, dict) and "href" in site.keys():
       url =  site["href"]
       fp =  feedparser.parse(url)
-      dctbnbc.get_authors.get_authors(authors_set, fp)
+      dctbnbc.get_authors.get_authors_feed(authors_set, fp)
    else:
      sys.stderr.write("there are illformed items in bad_sites region in config file.\n")
      sys.exit(2)

@@ -55,7 +55,7 @@ elif retval == "HelpMode":
 authors_set =  set()
 for url in url_list["urls"]:
    fp =  feedparser.parse(url)
-   dctbnbc.get_authors.get_authors(authors_set, fp)
+   dctbnbc.get_authors.get_authors_feed(authors_set, fp)
 authors_list =  list(authors_set)
 authors_list.sort()
 retval =  { "authors": authors_list }
