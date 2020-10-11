@@ -17,7 +17,7 @@ class Algorithm:
    
    def register_content(self, word_dict, content):
       size =  0
-      for word in dctbnbc.tokenize.tokenize(content):
+      for word in dctbnbc.tokenize.tokenize(content["content"]):
          size =  size + len(word)
          self.register_word(word_dict, word)
       return size

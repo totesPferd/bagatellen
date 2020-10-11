@@ -1,4 +1,4 @@
 import re
 
-def tokenize(content):
-   return re.findall(r'\w+', content)
+def tokenize(token):
+   return re.findall(r'\w+', token)
