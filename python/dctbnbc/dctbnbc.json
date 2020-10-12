@@ -416,6 +416,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://schillerinstitute.com/de/feed/",
+         "title": "Schiller-Institut \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://sehrohr.wordpress.com/feed/",
          "title": "Das Sehrohr \u00bb Feed",
          "type": "application/rss+xml"
