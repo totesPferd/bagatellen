@@ -1,10 +1,15 @@
+def add_author(result_set, data):
+   if isinstance(data, dict) and "name" in data.keys():
+      result_set.add(data["name"])
+   elif isinstance(data, str):
+      result_set.add(data)
+
 def get_authors_entry(result_set, entry):
    if "authors" in entry.keys():
       for author in entry["authors"]:
-         if "name" in author.keys():
-            result_set.add(author["name"])
+         add_author(result_set, author)
    elif "author" in entry.keys():
-      result_set.add(author)
+      add_author(result_set, author)
 
 
 def get_authors_feed(result_set, parsed_feed):
