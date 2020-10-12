@@ -11,6 +11,7 @@
        "Harald Wiesendanger",
        "Hermann Ploppa",
        "Jens Bernert",
+       "LHAdmin",
        "Nicolas  Riedl",
        "Ped",
        "Peter Frey",
@@ -189,6 +190,16 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.hintergrund.de/feed/",
+         "title": "Hintergrund \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://hirneise.de/feed/",
+         "title": "Lothar Hirneise \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://horicon.wordpress.com/feed/",
          "title": "HoriconBlog \u00bb Feed",
          "type": "application/rss+xml"
@@ -206,11 +217,6 @@
       {
          "href": "https://lotharf.wordpress.com/feed/",
          "title": "Lothars Blog \u00bb Feed",
-         "type": "application/rss+xml"
-      },
-      {
-         "href": "https://www.hintergrund.de/feed/",
-         "title": "Hintergrund \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
