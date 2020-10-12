@@ -1,7 +1,8 @@
 def get_authors_entry(result_set, entry):
    if "authors" in entry.keys():
       for author in entry["authors"]:
-         result_set.add(author["name"])
+         if "name" in author.keys():
+            result_set.add(author["name"])
    elif "author" in entry.keys():
       result_set.add(author)
 
