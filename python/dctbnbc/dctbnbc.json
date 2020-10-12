@@ -2,6 +2,7 @@
    "bad_guys": [
        "Anti-Spiegel",
        "BlauerBote",
+       "Christoph H\u00f6rstel",
        "Claus  K\u00f6hnlein",
        "Daniele Ganser",
        "Dirk Pohlmann",
@@ -60,6 +61,11 @@
       {
          "href": "https://buecherrebell.wordpress.com/feed/",
          "title": "B\u00fccher Rebell Der Blog \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://xn--christoph-hrstel-wwb.de/feed/",
+         "title": "Christoph H\u00f6rstel \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
@@ -265,6 +271,11 @@
       {
          "href": "https://mfr.cc/feed/",
          "title": "Michael Franz Reinisch \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://mmnews.de/?format=feed&type=rss",
+         "title": "RSS 2.0",
          "type": "application/rss+xml"
       },
       {
