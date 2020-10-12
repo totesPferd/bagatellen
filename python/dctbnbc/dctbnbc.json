@@ -347,12 +347,8 @@
          "type": "application/rss+xml"
       },
       {
-         "href": "https://rfjfreistadt.wordpress.com/feed/",
-         "title": "Ring Freiheitlicher Jugend \u00bb Feed",
-         "type": "application/rss+xml"
-      },
-      {
-         "href": "https://deutsch.rt.com/feeds/news/",
+         "href": "https://www.raphael-bonelli.com/feed/",
+         "title": "Raphael M. Bonelli \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
@@ -361,8 +357,22 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://rfjfreistadt.wordpress.com/feed/",
+         "title": "Ring Freiheitlicher Jugend \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://rpp-institut.org/feed/",
+         "title": "RPP-Institut \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://rotweinromantiker.wordpress.com/feed/",
          "title": "rotweinromantiker's gedanken \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://deutsch.rt.com/feeds/news/",
          "type": "application/rss+xml"
       },
       {
