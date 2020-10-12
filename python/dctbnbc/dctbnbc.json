@@ -154,6 +154,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.freitag.de/rss.xml",
+         "title": "der Freitag - RSS 2.0",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.freizahn.de/feed/",
          "title": "Freizahn \u00bb Feed",
          "type": "application/rss+xml"
@@ -216,6 +221,11 @@
       {
          "href": "https://itmedialaw.com/feed/",
          "title": "ITMediaLaw - Rechtsanwalt Marian H\u00e4rtel \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://jungefreiheit.de/feed/",
+         "title": "JUNGE FREIHEIT \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
@@ -642,6 +652,11 @@
       {
          "href": "http://correctiv.org/feed/",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "https://www.theeuropean.de/feed/",
+         "title": "The European \u00bb Feed",
+         "type": "application/rss+xml"
       },
       {
          "href": "http://www.faz.net/rss/aktuell/",
