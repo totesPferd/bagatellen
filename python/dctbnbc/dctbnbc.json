@@ -12,6 +12,8 @@
        "Helmut Pilhar",
        "Hermann Ploppa",
        "Jens Bernert",
+       "Joconrad",
+       "juergenelsaesser",
        "LHAdmin",
        "manuelcmittas",
        "Martin Lejeune",
@@ -51,6 +53,11 @@
       {
          "href": "http://attnang.info/feed/",
          "title": "Attnang-Puchheim RSS Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://bewusst.tv/feed/",
+         "title": "Bewusst.tv \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
@@ -216,6 +223,16 @@
       {
          "href": "https://infowars.wordpress.com/feed/",
          "title": "infowars-deutschland \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://joconrad.de/feed/",
+         "title": "Joconrad.de \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://juergenelsaesser.wordpress.com/feed/",
+         "title": "Els\u00e4ssers Blog \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
