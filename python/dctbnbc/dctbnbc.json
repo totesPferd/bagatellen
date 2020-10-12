@@ -650,6 +650,11 @@
    ],
    "good_sites": [
       {
+         "href": "https://www.belltower.news/feed/",
+         "title": "Belltower.News \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "http://correctiv.org/feed/",
          "type": "application/atom+xml"
       },
