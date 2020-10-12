@@ -12,6 +12,7 @@
        "Hermann Ploppa",
        "Jens Bernert",
        "LHAdmin",
+       "Martin Lejeune",
        "Nicolas  Riedl",
        "Ped",
        "Peter Frey",
@@ -257,6 +258,11 @@
       {
          "href": "https://www.larsschall.com/feed/",
          "title": "Lars Schall RSS Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.martinlejeune.de/feed/",
+         "title": "Martin Lejeune \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
