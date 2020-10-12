@@ -9,11 +9,13 @@
        "Ernst Wolff",
        "Harald Walach",
        "Harald Wiesendanger",
+       "Helmut Pilhar",
        "Hermann Ploppa",
        "Jens Bernert",
        "LHAdmin",
        "manuelcmittas",
        "Martin Lejeune",
+       "Naomi",
        "Nicolas  Riedl",
        "Ped",
        "Peter Frey",
@@ -172,6 +174,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://germanische-heilkunde.at/feed/",
+         "title": "Akademie f\u00fcr Germanische Heilkunde \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://gmuender.me/feed/",
          "title": "Andreas Gmuender \u00bb Feed",
          "type": "application/rss+xml"
@@ -319,6 +326,11 @@
       {
          "href": "https://murdeltas.wordpress.com/feed/",
          "title": "murdelta \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://naomiseibt.com/feed/",
+         "title": "Naomi Seibt \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
@@ -661,6 +673,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://derwaechter.net/feed",
+         "title": "Der W\u00e4chter \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.wahrheiten.org/blog/feed/",
          "title": "Wahrheiten.org \u00bb Feed",
          "type": "application/rss+xml"
@@ -769,6 +786,11 @@
       {
          "href": "https://www.ndr.de/homepage985-rss2.xml",
          "title": "NDR.de - Das Beste am Norden",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://netzpolitik.org/feed/",
+         "title": "netzpolitik.org \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
