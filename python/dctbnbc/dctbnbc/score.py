@@ -55,7 +55,7 @@ knowledge =  json.loads(raw_data)
 
 score =  0
 creatures =  set()
-used_words =  knowledge["score"].keys()
+used_words =  knowledge["scores"].keys()
 for url in url_list["urls"]:
    fp =  feedparser.parse(url)
    for entry in fp["entries"]:
