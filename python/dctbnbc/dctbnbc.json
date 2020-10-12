@@ -12,6 +12,7 @@
        "Hermann Ploppa",
        "Jens Bernert",
        "LHAdmin",
+       "manuelcmittas",
        "Martin Lejeune",
        "Nicolas  Riedl",
        "Ped",
@@ -258,6 +259,11 @@
       {
          "href": "https://www.larsschall.com/feed/",
          "title": "Lars Schall RSS Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://manuelcorneliusmittas.wordpress.com/feed/",
+         "title": "Manuel C. Mittas \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
@@ -858,6 +864,11 @@
       {
          "href": "https://www.tagesspiegel.de/contentexport/feed/home",
          "title": "RSS 2.0",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://taz.de/rss.xml",
+         "title": "taz.de - taz.de",
          "type": "application/rss+xml"
       },
       {
