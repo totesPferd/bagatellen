@@ -722,6 +722,16 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.bild.de/rss-feeds/rss-16725492,feed=home.bild.html",
+         "title": "Bild.de",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.blaetter.de/rss.xml",
+         "title": "",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "http://correctiv.org/feed/",
          "type": "application/atom+xml"
       },
@@ -788,6 +798,11 @@
       {
          "href": "https://rss.focus.de/immobilien/",
          "title": "Immobilien RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://handelsblatt.de/contentexport/feed/top-themen/",
+         "title": "Handelsblatt Online - RSS-Feed: Top-Themen",
          "type": "application/rss+xml"
       },
       {
