@@ -206,6 +206,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://hinter-den-schlagzeilen.de/feed",
+         "title": "HINTER DEN SCHLAGZEILEN \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.hintergrund.de/feed/atom/",
          "title": "Hintergrund \u00bb Feed",
          "type": "application/atom+xml"
@@ -366,6 +371,10 @@
          "href": "https://de.news-front.info/feed/atom/",
          "title": "DE.News Front - Aktuelle Nachrichten auf Deutsch. Online lesen \u00bb \u041b\u0435\u043d\u0442\u0430",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "http://www.nuoviso.tv/feed",
+         "type": "application/rss+xml"
       },
       {
          "href": "https://peds-ansichten.de/feed/atom/",
@@ -709,6 +718,10 @@
          "href": "https://www.watergate.tv/feed/atom/",
          "title": "Watergate.tv \u00bb Feed",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "https://weltnetz.tv/rss.xml",
+         "type": "application/rss+xml"
       },
       {
          "href": "https://williweise.wordpress.com/feed/atom/",
