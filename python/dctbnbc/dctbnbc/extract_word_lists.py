@@ -102,3 +102,10 @@ process_data =  {
       "nr": json_stdin_data["nr"]
    ,  "wl": { k: json_stdin_data["scores"] * json_stdin_data["nr"] for k in json_stdin_data["scores"] }
 }
+
+out_data =  {
+      "nr": process_data["nr"]
+   ,  "scores": { k: process_data["wl"] / process_data["nr"] for k in process_data["wl"] }
+}
+
+print(json.dumps(out_data, indent = 3, sort_keys = True))
