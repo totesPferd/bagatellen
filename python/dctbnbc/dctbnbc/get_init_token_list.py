@@ -60,9 +60,9 @@ elif retval == "HelpMode":
 out_data =  {
       "nr": 0
    ,  "abundance": {}
-   ,  "etags": [{
+   ,  "posts": [{
             "href": url
-         ,  "etags": [] } for url in cmdline_params["urls"] ]}
+         ,  "ids": [] } for url in cmdline_params["urls"] ]}
 
 for f in cmdline_params["files"]:
    try:
@@ -72,7 +72,7 @@ for f in cmdline_params["files"]:
          if "sites" in json_f_data and isinstance(json_f_data["sites"], list):
             for site in json_f_data["sites"]:
                if "href" in site:
-                  out_data["etags"].append({ "href": site["href"], "etags": [] })
+                  out_data["posts"].append({ "href": site["href"], "ids": [] })
                else:
                   sys.stderr.write("href key is missing in a element of list assigned to sites key in json file %s given in -f cmdline param.\n" % f)
          else:

@@ -60,31 +60,25 @@ except json.decoder.JSONDecodeError:
    sys.exit(2)
 
 retval =  0
-if "nr" not in json_stdin_data or not isinstance(json_stdin_data["nr"], int):
-   sys.stderr.write("json file from <stdin> does not contain a nr key assigned to an int.\n")
-   retval =  2
-
 if "abundance" not in json_stdin_data or not isinstance(json_stdin_data["abundance"], dict):
    sys.stderr.write("json file from <stdin> does not contain a abundance key assigned to a dict.\n")
+   retval =  2
+
+if "posts" not in json_stdin_data or not isinstance(json_stdin_data["posts"], list):
+   sys.stderr.write("json file from <stdin> does not contain a posts key assigned to a list.\n")
+   retval =  2
+
+if "nr" not in json_stdin_data or not isinstance(json_stdin_data["nr"], int):
+   sys.stderr.write("json file from <stdin> does not contain a nr key assigned to an int.\n")
    retval =  2
 
 if retval != 0:
    sys.exit(retval)
 
-process_data =  {
-      "nr": json_stdin_data["nr"]
-   ,  "tl": { k: json_stdin_data["abundance"] * json_stdin_data["nr"] for k in json_stdin_data["abundance"] }
-}
+for site in json_stdin_data["posts"]:
+   if "href" in site and isinstance(site["href"], string):
+      fp =  feedparser.parse(site["href"])
+   else:
+      sys.stderr.write("href key missing in some site in posts region in json file in <stdin>.\n")
 
-if "authors" in json_stdin_data and isinstance(json_stdin_data["authors"], list):
-   process_data["authors"] =  json_stdin_data["authors"]
-
-out_data =  {
-      "nr": process_data["nr"]
-   ,  "abundance": { k: process_data["tl"] / process_data["nr"] for k in process_data["tl"] }
-}
-
-if "authors" in json_stdin_data and isinstance(json_stdin_data["authors"], list):
-   out_data["authors"] =  json_stdin_data["authors"]
-
-print(json.dumps(out_data, indent = 3, sort_keys = True))
+print(json.dumps(json_stdin_data, indent = 3, sort_keys = True))
