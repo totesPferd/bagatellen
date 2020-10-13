@@ -7,7 +7,7 @@ import sys
 
 
 def print_usage(file):
-   file.write("USAGE:\n\n")
+   file.write("\nUSAGE:\n\n")
    file.write("%s [-h|--help]\n" % sys.argv[0])
    file.write("   write this usage information.\n\n")
    file.write("%s\n" % sys.argv[0])
@@ -28,18 +28,18 @@ def interpret_cmdline():
                retval =  "HelpMode"
          else:
             sys.stderr.write("option %s not permitted.\n\n" % option)
-            print_usage(sys.stderr)
             retval =  "Error"
 
       for arg in args:
          sys.stderr.write("no comdline arg permitted.\n\n")
-         print_usage(sys.stderr)
          retval =  "Error"
 
    except getopt.GetoptError as err:
       sys.stderr.write("%s\n\n" % str(err))
-      print_usage(sys.stderr)
       retval =  "Error"
+
+   if retval == "Error":
+      print_usage(sys.stderr)
 
    return retval
 
