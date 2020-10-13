@@ -27,9 +27,9 @@
    ],
    "bad_sites": [
       {
-         "href": "https://adalbertnaumann.wordpress.com/feed/",
+         "href": "https://adalbertnaumann.wordpress.com/feed/atom/",
          "title": "Adalberts Meckerecke \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
          "href": "http://alles-schallundrauch.blogspot.com/feeds/posts/default",
@@ -37,8 +37,7 @@
          "type": "application/atom+xml"
       },
       {
-         "href": "http://alpenparlament.tv/index.php?format=feed&type=rss",
-         "title": "RSS 2.0",
+         "href": "http://alpenparlament.tv/index.php?format=feed&type=atom",
          "type": "application/rss+xml"
       },
       {
@@ -47,33 +46,32 @@
          "type": "application/rss+xml"
       },
       {
-         "href": "https://www.anti-spiegel.ru/feed/",
-         "type": "application/rss+xml"
+         "href": "https://www.anti-spiegel.ru/feed/atom",
+         "type": "application/atom+xml"
       },
       {
-         "href": "http://attnang.info/feed/",
-         "title": "Attnang-Puchheim RSS Feed",
-         "type": "application/rss+xml"
+         "href": "http://attnang.info/feed/atom",
+         "type": "application/atom+xml"
       },
       {
-         "href": "http://bewusst.tv/feed/",
+         "href": "http://bewusst.tv/feed/atom/",
          "title": "Bewusst.tv \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "http://blauerbote.com/feed/",
+         "href": "http://blauerbote.com/feed/atom/",
          "title": "Blauer Bote Magazin - Wissenschaft statt Propaganda \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://bleibejung.de/feed/",
+         "href": "https://bleibejung.de/feed/atom/",
          "title": "bleibejung \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://buecherrebell.wordpress.com/feed/",
+         "href": "https://buecherrebell.wordpress.com/feed/atom/",
          "title": "B\u00fccher Rebell Der Blog \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
          "href": "https://xn--christoph-hrstel-wwb.de/feed/",
@@ -81,24 +79,24 @@
          "type": "application/rss+xml"
       },
       {
-         "href": "https://cyberwaves.wordpress.com/feed/",
+         "href": "https://cyberwaves.wordpress.com/feed/atom/",
          "title": "Cyberwaves's Blog \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://blog.danielschurter.net/feed/",
+         "href": "https://blog.danielschurter.net/feed/atom/",
          "title": "DanielSchurter.net \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://dokudokus.wordpress.com/feed/",
+         "href": "https://dokudokus.wordpress.com/feed/atom",
          "title": " \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://dokumentarfilme.wordpress.com/feed/",
+         "href": "https://dokumentarfilme.wordpress.com/feed/atom/",
          "title": "Dokumentarfilme online \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
          "href": "https://deutsche-wirtschafts-nachrichten.de/feed/",
@@ -111,59 +109,59 @@
          "type": "application/rss+xml"
       },
       {
-         "href": "https://eingeschenkt.tv/feed/",
+         "href": "https://eingeschenkt.tv/feed/atom/",
          "title": "EingeSCHENKt.tv \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://elsabir.wordpress.com/feed/",
+         "href": "https://elsabir.wordpress.com/feed/atom/",
          "title": "ElSabir's Blog \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://www.epochtimes.de/?feed=rss",
+         "href": "https://www.epochtimes.de/?feed=atom",
          "title": "Epoch Times Deutschland - Neue Artikel",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://daserwachendervalkyrjar.wordpress.com/feed/",
+         "href": "https://daserwachendervalkyrjar.wordpress.com/feed/atom/",
          "title": "Das Erwachen der Valkyrjar \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://fastprogress.wordpress.com/feed/",
+         "href": "https://fastprogress.wordpress.com/feed/atom/",
          "title": "Fast Progress - Eine andere Welt ist n\u00f6tig! \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://www.everyday-feng-shui.de/feed/",
+         "href": "https://www.everyday-feng-shui.de/feed/atom/",
          "title": "Everyday Feng Shui \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://faszinationmensch.com/feed/",
+         "href": "https://faszinationmensch.com/feed/atom/",
          "title": "Der Mensch - das faszinierende Wesen \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://filmen.wordpress.com/feed/",
+         "href": "https://filmen.wordpress.com/feed/atom/",
          "title": "Online Filme \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://www.fuereinebesserewelt.info/feed/",
+         "href": "https://www.fuereinebesserewelt.info/feed/atom/",
          "title": "F\u00fcr eine bessere Welt \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "http://www.free21.org/feed/",
+         "href": "http://www.free21.org/feed/atom/",
          "title": "Free21 NewsONpaper \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://freidenkertv.wordpress.com/feed/",
+         "href": "https://freidenkertv.wordpress.com/feed/atom/",
          "title": "freidenkertv \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
          "href": "https://www.freitag.de/rss.xml",
@@ -171,24 +169,24 @@
          "type": "application/rss+xml"
       },
       {
-         "href": "https://www.freizahn.de/feed/",
+         "href": "https://www.freizahn.de/feed/atom/",
          "title": "Freizahn \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://www.gegenfrage.com/feed/",
+         "href": "https://www.gegenfrage.com/feed/atom/",
          "title": "Gegenfrage.com \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://germanische-heilkunde.at/feed/",
+         "href": "https://germanische-heilkunde.at/feed/atom/",
          "title": "Akademie f\u00fcr Germanische Heilkunde \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://gmuender.me/feed/",
+         "href": "https://gmuender.me/feed/atom/",
          "title": "Andreas Gmuender \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
          "href": "http://www.heise.de/tp/rss/news-xl.xml",
@@ -201,69 +199,69 @@
          "type": "application/atom+xml"
       },
       {
-         "href": "https://haunebu7.wordpress.com/feed/",
+         "href": "https://haunebu7.wordpress.com/feed/atom/",
          "title": "Haunebu7's Blog \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
-         "href": "https://www.hintergrund.de/feed/",
+         "href": "https://www.hintergrund.de/feed/atom/",
          "title": "Hintergrund \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "http://hirneise.de/feed/",
+         "href": "http://hirneise.de/feed/atom/",
          "title": "Lothar Hirneise \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://horicon.wordpress.com/feed/",
+         "href": "https://horicon.wordpress.com/feed/atom/",
          "title": "HoriconBlog \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://infowars.wordpress.com/feed/",
+         "href": "https://infowars.wordpress.com/feed/atom/",
          "title": "infowars-deutschland \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "http://joconrad.de/feed/",
+         "href": "http://joconrad.de/feed/atom/",
          "title": "Joconrad.de \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://juergenelsaesser.wordpress.com/feed/",
+         "href": "https://juergenelsaesser.wordpress.com/feed/atom/",
          "title": "Els\u00e4ssers Blog \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://le-bohemien.net/feed/",
+         "href": "https://le-bohemien.net/feed/atom/",
          "title": "le Boh\u00e9mien RSS Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://lotharf.wordpress.com/feed/",
+         "href": "https://lotharf.wordpress.com/feed/atom/",
          "title": "Lothars Blog \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://www.lyrik-klinge.de/feed/",
+         "href": "https://www.lyrik-klinge.de/feed/atom/",
          "title": "RSS 2.0",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://itmedialaw.com/feed/",
+         "href": "https://itmedialaw.com/feed/atom/",
          "title": "ITMediaLaw - Rechtsanwalt Marian H\u00e4rtel \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://jungefreiheit.de/feed/",
+         "href": "https://jungefreiheit.de/feed/atom/",
          "title": "JUNGE FREIHEIT \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://daskalteherz.blog/feed/",
+         "href": "https://daskalteherz.blog/feed/atom/",
          "title": "Das kalte Herz \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
          "href": "http://klagemauer.tv/rss.php?lang=de",
@@ -271,9 +269,9 @@
          "type": "application/rss+xml"
       },
       {
-         "href": "https://kenfm.de/feed/",
+         "href": "https://kenfm.de/feed/atom",
          "title": "KenFM.de \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
          "href": "https://kritisches-netzwerk.de/rss.xml",
@@ -281,54 +279,51 @@
          "type": "application/rss+xml"
       },
       {
-         "href": "https://www.larsschall.com/feed/",
+         "href": "https://www.larsschall.com/feed/atom/",
          "title": "Lars Schall RSS Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://manuelcorneliusmittas.wordpress.com/feed/",
+         "href": "https://manuelcorneliusmittas.wordpress.com/feed/atom/",
          "title": "Manuel C. Mittas \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "http://www.martinlejeune.de/feed/",
+         "href": "http://www.martinlejeune.de/feed/atom/",
          "title": "Martin Lejeune \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
-         "href": "https://matha.wordpress.com/feed/",
+         "href": "https://matha.wordpress.com/feed/atom/",
          "title": "- K\u00d6LSCHE LETTER - \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://medienblog.hypotheses.org/feed",
+         "href": "https://medienblog.hypotheses.org/feed/atom/",
          "title": "MEDIENREALIT\u00c4T \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://medienblog.hypotheses.org/category/publikationen/feed",
-         "title": "RSS Feed",
-         "type": "application/rss+xml"
+         "href": "https://medienblog.hypotheses.org/category/publikationen/feed/atom/",
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://medienblog.hypotheses.org/category/rezensionen/feed",
-         "title": "RSS Feed",
-         "type": "application/rss+xml"
+         "href": "https://medienblog.hypotheses.org/category/rezensionen/feed/atom/",
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://www.meinezeitung24.com/feed/",
+         "href": "https://www.meinezeitung24.com/feed/atom/",
          "title": "MeineZeitung24 \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://mfr.cc/feed/",
+         "href": "https://mfr.cc/feed/atom/",
          "title": "Michael Franz Reinisch \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://mmnews.de/?format=feed&type=rss",
-         "title": "RSS 2.0",
-         "type": "application/rss+xml"
+         "href": "https://mmnews.de/?format=feed&type=atom",
+         "type": "application/atom+xml"
       },
       {
          "href": "http://my-hardware.net/feed/",
@@ -341,39 +336,39 @@
          "type": "application/atom+xml"
       },
       {
-         "href": "https://murdeltas.wordpress.com/feed/",
+         "href": "https://murdeltas.wordpress.com/feed/atom/",
          "title": "murdelta \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://naomiseibt.com/feed/",
+         "href": "https://naomiseibt.com/feed/atom/",
          "title": "Naomi Seibt \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://netzfrauen.org/feed/",
+         "href": "https://netzfrauen.org/feed/atom/",
          "title": "- netzfrauen \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
-         "href": "https://de.news-front.info/feed/",
+         "href": "https://de.news-front.info/feed/atom/",
          "title": "DE.News Front - Aktuelle Nachrichten auf Deutsch. Online lesen \u00bb \u041b\u0435\u043d\u0442\u0430",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://peds-ansichten.de/feed/",
+         "href": "https://peds-ansichten.de/feed/atom/",
          "title": "Peds Ansichten \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://politikstube.com/feed/",
+         "href": "https://politikstube.com/feed/atom/",
          "title": "Politikstube \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://www.radio-utopie.de/feed/",
+         "href": "https://www.radio-utopie.de/feed/atom/",
          "title": "Radio Utopie \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
          "href": "https://www.raphael-bonelli.com/feed/",
@@ -381,14 +376,13 @@
          "type": "application/rss+xml"
       },
       {
-         "href": "http://www.rationalgalerie.de/?format=feed&type=rss",
-         "title": "RSS 2.0",
-         "type": "application/rss+xml"
+         "href": "http://www.rationalgalerie.de/?format=feed&type=atom",
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://rfjfreistadt.wordpress.com/feed/",
+         "href": "https://rfjfreistadt.wordpress.com/feed/atom/",
          "title": "Ring Freiheitlicher Jugend \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
          "href": "https://rpp-institut.org/feed/",
@@ -396,9 +390,9 @@
          "type": "application/rss+xml"
       },
       {
-         "href": "https://rotweinromantiker.wordpress.com/feed/",
+         "href": "https://rotweinromantiker.wordpress.com/feed/atom/",
          "title": "rotweinromantiker's gedanken \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
          "href": "https://deutsch.rt.com/feeds/news/",
@@ -410,29 +404,29 @@
          "type": "application/atom+xml"
       },
       {
-         "href": "https://www.russland.capital/feed",
+         "href": "https://www.russland.capital/feed/atom/",
          "title": "russland.CAPITAL \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "http://www.russlandkontrovers.com/feed",
+         "href": "http://www.russlandkontrovers.com/feed/atom/",
          "title": "Russlandkontrovers \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "http://www.russland.news/feed/",
+         "href": "http://www.russland.news/feed/atom/",
          "title": "russland.NEWS \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://sciencefiles.org/feed/",
+         "href": "https://sciencefiles.org/feed/atom/",
          "title": "ScienceFiles \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
-         "href": "https://serpentsembrace.wordpress.com/feed/",
+         "href": "https://serpentsembrace.wordpress.com/feed/atom/",
          "title": "Willkommen bei serpent's embrace \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
          "href": "http://spiegelkabinett-blog.blogspot.com/feeds/posts/default",
@@ -440,14 +434,14 @@
          "type": "application/atom+xml"
       },
       {
-         "href": "http://satyagraha.fboits.com/feed/",
+         "href": "http://satyagraha.fboits.com/feed/atom/",
          "title": "Satyagraha \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://schillerinstitute.com/de/feed/",
+         "href": "https://schillerinstitute.com/de/feed/atom/",
          "title": "Schiller-Institut \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
          "href": "https://sehrohr.wordpress.com/feed/",
@@ -455,14 +449,14 @@
          "type": "application/rss+xml"
       },
       {
-         "href": "https://slavyangrad.de/feed/",
+         "href": "https://slavyangrad.de/feed/atom/",
          "title": "SLAVYANGRAD.de \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://de.southfront.org/feed/",
+         "href": "https://de.southfront.org/feed/atom/",
          "title": " \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
          "href": "https://de.sott.net/xml_engine/signs_rss",
@@ -640,9 +634,9 @@
          "type": "application/rss+xml"
       },
       {
-         "href": "https://swprs.org/feed/",
+         "href": "https://swprs.org/feed/atom/",
          "title": "Swiss Policy Research \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
          "href": "https://de.sputniknews.com/export/rss2/archive/index.xml",
@@ -650,34 +644,34 @@
          "type": "application/rss+xml"
       },
       {
-         "href": "https://technikgedoens.de/feed",
+         "href": "https://technikgedoens.de/feed/atom/",
          "title": "Technikged\u00f6ns \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://tomswochenschau.wordpress.com/feed/",
+         "href": "https://tomswochenschau.wordpress.com/feed/atom/",
          "title": "TOMS WELLENL\u00c4NGE ~ \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "http://unbeantwortete-fragen.de/?feed=rss2",
+         "href": "http://unbeantwortete-fragen.de/?feed=atom",
          "title": "Unbeantwortete Fragen \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://uncut-news.ch/feed/",
+         "href": "https://uncut-news.ch/feed/atom/",
          "title": "uncut-news.ch \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://www.unzensuriert.at/feed/",
+         "href": "https://www.unzensuriert.at/feed/atom/",
          "title": "Unzensuriert \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://videogold.de/feed/",
+         "href": "https://videogold.de/feed/atom/",
          "title": "VideoGold.de \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
          "href": "https://www.voltairenet.org/spip.php?page=backend&id_secteur=1110&lang=de",
@@ -685,29 +679,29 @@
          "type": "application/rss+xml"
       },
       {
-         "href": "https://volksruf.wordpress.com/feed/",
+         "href": "https://volksruf.wordpress.com/feed/atom/",
          "title": "Volksruf \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://derwaechter.net/feed",
+         "href": "https://derwaechter.net/feed/atom/",
          "title": "Der W\u00e4chter \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://www.wahrheiten.org/blog/feed/",
+         "href": "https://www.wahrheiten.org/blog/feed/atom/",
          "title": "Wahrheiten.org \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://www.watergate.tv/feed/",
+         "href": "https://www.watergate.tv/feed/atom/",
          "title": "Watergate.tv \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
-         "href": "https://williweise.wordpress.com/feed/",
+         "href": "https://williweise.wordpress.com/feed/atom/",
          "title": "Prof. Dr. Dr. Wolfgang Berger - Unabh\u00e4ngiger Direktkandidat f\u00fcr den Bundestag in der S\u00fcdpfalz \u00bb Feed",
-         "type": "application/rss+xml"
+         "type": "application/atom+xml"
       },
       {
          "href": "https://yoice.net/feed/",
