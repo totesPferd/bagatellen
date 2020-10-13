@@ -61,6 +61,10 @@ def interpret_cmdline(result):
    return retval
 
 
+def doit(json_a_data, json_b_data):
+   out =  { "scores": {} }
+
+
 # interprete cmdline.
 cmdline_params =  {}
 retval =  interpret_cmdline(cmdline_params)
@@ -70,4 +74,30 @@ elif retval == "HelpMode":
    sys.exit(0)
 
 
+retval =  0
+try:
+   with open(cmdline_params["minuend"]) as fda:
+      raw_a_data =  fda.read()
+      json_a_data =  json.loads(raw_a_data)
+      if "scores" not in json_a_data or not isinstance(json_a_data["scores"], dict):
+         sys.stderr.write("%s contains no json with scores key assigned to a dict.\n" % cmdline_params["minuend"])
+         retval =  2
+      else:
+         try:
+            with open(cmdline_params["subtrahend"]) as fdb:
+               raw_b_data =  fdb.read()
+               json_b_data =  json.loads(raw_b_data)
+         
+               if "scores" not in json_b_data or isinstance(json_b_data["scores"], dict):
+                  sys.stderr.write("%s contains no json with scores key assigned to a dict.\n" % cmdline_params["subtrahend"])
+                  retval =  2
+               else:
+                  doit(json_a_data, json_b_data)
+         except FileNotFoundError:
+            sys.stderr.write("file %s given in -b cmdline param  not found.\n" % cmdline_params["subtrahend"])
+            retval =  2
+except FileNotFoundError:
+   sys.stderr.write("file %s given in -a cmdline param not found.\n" % cmdline_params["minuend"])
+   retval =  2
 
+sys.exit(retval)
