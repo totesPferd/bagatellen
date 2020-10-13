@@ -64,6 +64,18 @@ def interpret_cmdline(result):
 def doit(json_a_data, json_b_data):
    out =  { "scores": {} }
 
+   for token in json_a_data["scores"]:
+      if token in json_b_data["scores"]:
+         out["scores"][token] =  json_a_data["scores"][token] - json_b_data["scores"][token]
+      else:
+         out["scores"][token] =  json_a_data["scores"][token]
+
+   for token in json_b_data["scores"]:
+      if token not in out["scores"]:
+         out["scores"] =  - json_b_data["scores"]
+
+   print(json.dumps(out, sort_keys = True, indent = 3))
+
 
 # interprete cmdline.
 cmdline_params =  {}
@@ -80,7 +92,7 @@ try:
       raw_a_data =  fda.read()
       json_a_data =  json.loads(raw_a_data)
       if "scores" not in json_a_data or not isinstance(json_a_data["scores"], dict):
-         sys.stderr.write("%s contains no json with scores key assigned to a dict.\n" % cmdline_params["minuend"])
+         sys.stderr.write("%s given in -a cmdline param contains no json with scores key assigned to a dict.\n" % cmdline_params["minuend"])
          retval =  2
       else:
          try:
@@ -88,8 +100,8 @@ try:
                raw_b_data =  fdb.read()
                json_b_data =  json.loads(raw_b_data)
          
-               if "scores" not in json_b_data or isinstance(json_b_data["scores"], dict):
-                  sys.stderr.write("%s contains no json with scores key assigned to a dict.\n" % cmdline_params["subtrahend"])
+               if "scores" not in json_b_data or not isinstance(json_b_data["scores"], dict):
+                  sys.stderr.write("%s given in -b cmdline param contains no json with scores key assigned to a dict.\n" % cmdline_params["subtrahend"])
                   retval =  2
                else:
                   doit(json_a_data, json_b_data)
