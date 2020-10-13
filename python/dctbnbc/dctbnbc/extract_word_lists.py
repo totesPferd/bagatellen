@@ -98,3 +98,7 @@ if "scores" not in json_stdin_data or not isinstance(json_stdin_data["scores"], 
 if retval != 0:
    sys.exit(retval)
 
+process_data =  {
+      "nr": json_stdin_data["nr"]
+   ,  "wl": { k: json_stdin_data["scores"] * json_stdin_data["nr"] for k in json_stdin_data["scores"] }
+}
