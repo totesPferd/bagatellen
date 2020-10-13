@@ -1,16 +1,16 @@
 def add_author(result_set, data):
-   if isinstance(data, dict) and "name" in data.keys():
+   if isinstance(data, dict) and "name" in data:
       result_set.add(data["name"])
    elif isinstance(data, str):
       result_set.add(data)
 
 def get_authors_entry(result_set, entry):
-   if "authors" in entry.keys():
+   if "authors" in entry:
       for author in entry["authors"]:
          add_author(result_set, author)
-   elif "author" in entry.keys():
+   elif "author" in entry:
       add_author(result_set, author)
-   elif "author_detail" in entry.keys():
+   elif "author_detail" in entry:
       add_author(result_set, author)
 
 

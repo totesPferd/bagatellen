@@ -1,4 +1,5 @@
 import dctbnbc.get_authors
+import dctbnbc.tokenize
 import feedparser
 import json
 import getopt
@@ -44,6 +45,16 @@ def interpret_cmdline(result):
 
    return retval
 
+def decide_according_to_authors(process_data, entry):
+   retval =  True
+
+   if "authors" in process_data and isinstance(process_data["authors"], list):
+      authors_set =  set()
+      dctbnbc.get_authors.get_authors_entry(authors_set, entry)
+      retval =  not set(process_data["authors"]).isdisjoint(authors_set)
+      
+   return retval
+
 # interprete cmdline.
 cmdline_params =  {}
 retval =  interpret_cmdline(cmdline_params)
@@ -76,8 +87,23 @@ if retval != 0:
    sys.exit(retval)
 
 for site in json_stdin_data["posts"]:
-   if "href" in site and isinstance(site["href"], string):
+   if "href" in site and isinstance(site["href"], str):
       fp =  feedparser.parse(site["href"])
+      ids =  []
+      for entry in fp["entries"]:
+         if decide_according_to_authors(json_stdin_data, entry):
+            if "ids" in site and isinstance(site["ids"], list):
+               if entry["id"] not in site["ids"]:
+                  for token in dctbnbc.tokenize.tokenize(entry["summary"]):
+                     json_stdin_data["nr"] =  json_stdin_data["nr"] + 1
+                     if token in json_stdin_data["abundance"]:
+                        json_stdin_data["abundance"][token] =  json_stdin_data["abundance"][token] + 1
+                     else:
+                        json_stdin_data["abundance"][token] =  1
+               ids.append(entry["id"])
+            else:
+               sys.stderr.write("ids key missing in some site in posts region in json file in <stdin>.\n")
+      site["ids"] =  ids
    else:
       sys.stderr.write("href key missing in some site in posts region in json file in <stdin>.\n")
 
