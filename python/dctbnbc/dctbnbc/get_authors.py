@@ -8,10 +8,12 @@ def get_authors_entry(result_set, entry):
    if "authors" in entry:
       for author in entry["authors"]:
          add_author(result_set, author)
-   elif "author" in entry:
-      add_author(result_set, author)
-   elif "author_detail" in entry:
-      add_author(result_set, author)
+
+   if "author" in entry:
+      add_author(result_set, entry["author"])
+
+   if "author_detail" in entry:
+      add_author(result_set, entry["author_detail"])
 
 
 def get_authors_feed(result_set, parsed_feed):
