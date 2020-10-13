@@ -72,7 +72,7 @@ def doit(json_a_data, json_b_data):
 
    for token in json_b_data["scores"]:
       if token not in out["scores"]:
-         out["scores"] =  - json_b_data["scores"]
+         out["scores"][token] =  - json_b_data["scores"][token]
 
    print(json.dumps(out, sort_keys = True, indent = 3))
 
