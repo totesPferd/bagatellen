@@ -55,6 +55,14 @@ def decide_according_to_authors(process_data, entry):
       
    return retval
 
+def get_id_key(entry):
+   retval =  "id"
+
+   if not "id" in entry:
+      retval =  "link"
+
+   return retval
+
 # interprete cmdline.
 cmdline_params =  {}
 retval =  interpret_cmdline(cmdline_params)
@@ -93,14 +101,15 @@ for site in json_stdin_data["posts"]:
       for entry in fp["entries"]:
          if decide_according_to_authors(json_stdin_data, entry):
             if "ids" in site and isinstance(site["ids"], list):
-               if entry["id"] not in site["ids"]:
+               id_key =  get_id_key(entry)
+               if entry[id_key] not in site["ids"]:
                   for token in dctbnbc.tokenize.tokenize(entry["summary"]):
                      json_stdin_data["nr"] =  json_stdin_data["nr"] + 1
                      if token in json_stdin_data["abundance"]:
                         json_stdin_data["abundance"][token] =  json_stdin_data["abundance"][token] + 1
                      else:
                         json_stdin_data["abundance"][token] =  1
-               ids.append(entry["id"])
+               ids.append(entry[id_key])
             else:
                sys.stderr.write("ids key missing in some site in posts region in json file in <stdin>.\n")
       site["ids"] =  ids
