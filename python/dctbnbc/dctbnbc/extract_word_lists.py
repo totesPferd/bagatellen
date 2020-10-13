@@ -13,7 +13,7 @@ def print_usage(file):
    file.write("   extract word list data appearing in <feed_url> or appearing in feed urls contained in <site_files>.\n")
    file.write("   program expects json file in <stdin> and outputs to <stdout>.\n")
    file.write("   <stdin> json file must have a <nr> key assigning to an int.\n")
-   file.write("   <stdin> json file also must have a list of site descriptions contained in a list assigned from a sites key.\n")
+   file.write("   <stdin> json file also must have a score key assigned to a dict representing word list data.\n")
    file.write("   <stdin> json file can contain a authors key assigned to a list of strings.  Only posts having these authors were considered.\n")
 
 
@@ -79,5 +79,22 @@ for f in cmdline_params["files"]:
       sys.stderr.write("%s given in a -f cmdline param not found.\n" % f)
       sys.exit(2)
 
+raw_stdin_data =  sys.stdin.read()
+try:
+   json_stdin_data =  json.loads(raw_stdin_data)
+except json.decoder.JSONDecodeError:
+   sys.stderr.write("<stdin> not a json file.\n")
+   sys.exit(2)
 
+retval =  0
+if "nr" not in json_stdin_data or not isinstance(json_stdin_data["nr"], int):
+   sys.stderr.write("json file from <stdin> does not contain a nr key assigned to an int.\n")
+   retval =  2
+
+if "scores" not in json_stdin_data or not isinstance(json_stdin_data["scores"], dict):
+   sys.stderr.write("json file from <stdin> does not contain a scores key assigned to a dict.\n")
+   retval =  2
+
+if retval != 0:
+   sys.exit(retval)
 
