@@ -10,10 +10,10 @@ def print_usage(file):
    file.write("%s [-h|--help]\n" % sys.argv[0])
    file.write("   write this usage information.\n\n")
    file.write("%s [{-f|--file} <site_files] ... [<feed_url>] ...\n" % sys.argv[0])
-   file.write("   extract word list data appearing in <feed_url> or appearing in feed urls contained in <site_files>.\n")
+   file.write("   extract token list data appearing in <feed_url> or appearing in feed urls contained in <site_files>.\n")
    file.write("   program expects json file in <stdin> and outputs to <stdout>.\n")
    file.write("   <stdin> json file must have a <nr> key assigning to an int.\n")
-   file.write("   <stdin> json file also must have a score key assigned to a dict representing word list data.\n")
+   file.write("   <stdin> json file also must have a score key assigned to a dict representing token list data.\n")
    file.write("   <stdin> json file can contain a authors key assigned to a list of strings.  Only posts having these authors were considered.\n")
 
 
@@ -100,12 +100,12 @@ if retval != 0:
 
 process_data =  {
       "nr": json_stdin_data["nr"]
-   ,  "wl": { k: json_stdin_data["scores"] * json_stdin_data["nr"] for k in json_stdin_data["scores"] }
+   ,  "tl": { k: json_stdin_data["scores"] * json_stdin_data["nr"] for k in json_stdin_data["scores"] }
 }
 
 out_data =  {
       "nr": process_data["nr"]
-   ,  "scores": { k: process_data["wl"] / process_data["nr"] for k in process_data["wl"] }
+   ,  "scores": { k: process_data["tl"] / process_data["nr"] for k in process_data["tl"] }
 }
 
 print(json.dumps(out_data, indent = 3, sort_keys = True))
