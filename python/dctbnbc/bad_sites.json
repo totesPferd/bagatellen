@@ -116,6 +116,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.eike-klima-energie.eu/feed/",
+         "title": "EIKE - Europ\u00e4isches Institut f\u00fcr Klima & Energie \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://eingeschenkt.tv/feed/atom/",
          "title": "EingeSCHENKt.tv \u00bb Feed",
          "type": "application/atom+xml"
