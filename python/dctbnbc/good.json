@@ -1,0 +1,264 @@
+{
+   "sites": [
+      {
+         "href": "https://www.belltower.news/feed/",
+         "title": "Belltower.News \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.bild.de/rss-feeds/rss-16725492,feed=home.bild.html",
+         "title": "Bild.de",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.blaetter.de/rss.xml",
+         "title": "",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://correctiv.org/feed/",
+         "type": "application/atom+xml"
+      },
+      {
+         "href": "https://www.theeuropean.de/feed/",
+         "title": "The European \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.faz.net/rss/aktuell/",
+         "title": "FAZ.NET",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://rss.focus.de/",
+         "title": "Startseite RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://rss.focus.de/politik/",
+         "title": "Politik RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://rss.focus.de/finanzen/",
+         "title": "Finanzen RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://rss.focus.de/gesundheit/",
+         "title": "Gesundheit RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://rss.focus.de/kultur/",
+         "title": "Kultur RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://rss.focus.de/panorama/",
+         "title": "Panorama RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://rss.focus.de/sport/",
+         "title": "Sport RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://rss.focus.de/auto/",
+         "title": "Auto RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://rss.focus.de/digital/",
+         "title": "Digital RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://rss.focus.de/reisen/",
+         "title": "Reisen RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://rss.focus.de/immobilien/",
+         "title": "Immobilien RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://handelsblatt.de/contentexport/feed/top-themen/",
+         "title": "Handelsblatt Online - RSS-Feed: Top-Themen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.juedische-allgemeine.de/rss",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://jungle.world/rss.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www1.wdr.de/daserste/monitor/indexmonitor100.feed",
+         "title": "RSS",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.zdf.de/rss/zdf/nachrichten",
+         "title": "RSS",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ndr.de/homepage985-rss2.xml",
+         "title": "NDR.de - Das Beste am Norden",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://netzpolitik.org/feed/",
+         "title": "netzpolitik.org \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.spiegel.de/schlagzeilen/index.rss",
+         "title": "DER SPIEGEL | RSS Schlagzeilen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.spiegel.de/index.rss",
+         "title": "DER SPIEGEL | RSS Nachrichten",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/all/",
+         "title": "stern.de RSS-Feed - Alle Artikel",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/overview/",
+         "title": "stern.de RSS Feed - Der Tag im \u00dcberblick",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/alle-nachrichten/",
+         "title": "stern.de RSS Feed - Nachrichtenticker",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/video/",
+         "title": "stern.de RSS Feed - Alle Videos",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/panorama/",
+         "title": "stern.de RSS Feed - Alle Infos aus Panorama",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/politik/",
+         "title": "stern.de RSS Feed - Alle Infos aus Politik",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/kultur/",
+         "title": "stern.de RSS Feed - Alle Infos aus Kultur",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/lifestyle/",
+         "title": "stern.de RSS Feed - Alle Infos aus Lifestyle",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/digital/",
+         "title": "stern.de RSS Feed - Alle Infos aus Digital",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/wirtschaft/",
+         "title": "stern.de RSS Feed - Alle Infos aus Wirtschaft",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/sport/",
+         "title": "stern.de RSS Feed - Alle Infos aus Sport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/gesundheit/",
+         "title": "stern.de RSS Feed - Alle Infos aus Gesundheit",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/genuss/",
+         "title": "stern.de RSS Feed - Alle Infos aus Genuss",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/reise/",
+         "title": "stern.de RSS Feed - Alle Infos aus Reise",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/familie/",
+         "title": "stern.de RSS Feed - Alle Infos aus Familie",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/auto/",
+         "title": "stern.de RSS Feed - Alle Infos aus Auto",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.stern.de/feed/standard/fotografie/",
+         "title": "stern.de RSS Feed - Alle Infos aus Fotografie",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://rss.sueddeutsche.de/rss/Topthemen",
+         "title": "sueddeutsche.de RSS Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.tagesschau.de/xml/rss2",
+         "title": "tagesschau.de RSS2-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.tagesspiegel.de/contentexport/feed/home",
+         "title": "RSS 2.0",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://taz.de/rss.xml",
+         "title": "taz.de - taz.de",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.t-online.de/themen/rss/",
+         "title": "t-online.de | RSS Feed Nachrichten",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://feeds.t-online.de/rss/politik",
+         "title": "t-online.de | RSS Feed Nachrichten | Politik",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://feeds.t-online.de/rss/panorama",
+         "title": "t-online.de | RSS Feed Nachrichten | Panorama",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://suche.t-online.de/editorial_news.xml",
+         "title": "t-online.de | RSS Feed Nachrichten | Editorial",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.watson.ch/api/1.0/rss/index.xml",
+         "type": "application/atom+xml"
+      },
+      {
+         "href": "https://newsfeed.zeit.de/index",
+         "type": "application/rss+xml"
+      }
+   ]
+}
