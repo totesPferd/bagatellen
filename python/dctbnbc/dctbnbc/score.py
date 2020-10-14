@@ -53,17 +53,20 @@ if retval == "Error":
 raw_data =  sys.stdin.read()
 knowledge =  json.loads(raw_data)
 
-score =  0
 creatures =  set()
 used_words =  knowledge["scores"].keys()
+tally_sheet =  {
+      "nr": 1
+   ,  "abundance": {} }
 for url in url_list["urls"]:
    fp =  feedparser.parse(url)
    for entry in fp["entries"]:
       if "summary" in entry.keys():
          content =  entry["summary"]
          token_list =  dctbnbc.tokenize.tokenize(content)
-         score =  score + dctbnbc.evaluate.get_score(knowledge, token_list)
+         dctbnbc.tokenize.tally_token_list(tally_sheet, token_list)
          creatures =  creatures | { token for token in token_list if token not in used_words }
+score =  dctbnbc.tokenize.score(tally_sheet, knowledge)
 creatures_list =  list(creatures)
 creatures_list.sort()
 

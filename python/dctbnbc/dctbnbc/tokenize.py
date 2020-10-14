@@ -21,9 +21,29 @@ def tokenize(text):
    return re.findall(r'\w+', r)
 
 
-def tally(process_data, token):
-   process_data["nr"] =  process_data["nr"] + 1
-   if token in process_data["abundance"]:
-      process_data["abundance"][token] =  process_data["abundance"][token] + 1
+def tally(tally_sheet, token):
+   tally_sheet["nr"] =  tally_sheet["nr"] + 1
+   if token in tally_sheet["abundance"]:
+      tally_sheet["abundance"][token] =  tally_sheet["abundance"][token] + 1
    else:
-      process_data["abundance"][token] =  1
+      tally_sheet["abundance"][token] =  1
+
+
+def tally_token_list(tally_sheet, token_list):
+   for token in token_list:
+      tally(tally_sheet, token)
+
+
+def score(tally_sheet, knowledge):
+
+   retval =  0
+   for token in knowledge["scores"]:
+
+      rel_abundance =  1
+      if token in tally_sheet["abundance"]:
+         rel_abundance =  tally_sheet["abundance"][token] / tally_sheet["nr"]
+
+      retval =  retval - knowledge["scores"][token] / rel_abundance
+
+   return retval
+

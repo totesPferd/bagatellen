@@ -81,13 +81,16 @@ for f in cmdline_params["files"]:
 
 result_list =  []
 for url in url_set:
-   score =  0
+   tally_sheet =  {
+         "nr": 1
+      ,  "abundance": {} }
    fp =  feedparser.parse(url)
    for entry in fp["entries"]:
       if "summary" in entry.keys():
          content =  entry["summary"]
          token_list =  dctbnbc.tokenize.tokenize(content)
-         score =  score + dctbnbc.evaluate.get_score(knowledge, token_list)
+         dctbnbc.tokenize.tally_token_list(tally_sheet, token_list)
+   score =  dctbnbc.tokenize.score(tally_sheet, knowledge)
    result_list.append((score, url))
 result_list.sort()
 
