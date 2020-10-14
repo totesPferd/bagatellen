@@ -227,6 +227,11 @@
          "type": "application/atom+xml"
       },
       {
+         "href": "https://www.gerald-huether.de/feed/",
+         "title": "Gerald H\u00fcther |\u00a0Offizielle Webseite \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://infowars.wordpress.com/feed/atom/",
          "title": "infowars-deutschland \u00bb Feed",
          "type": "application/atom+xml"
