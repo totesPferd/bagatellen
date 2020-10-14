@@ -19,3 +19,11 @@ def tokenize(text):
    p.feed(text)
    r =  p.get_result()
    return re.findall(r'\w+', r)
+
+
+def tally(process_data, token):
+   process_data["nr"] =  process_data["nr"] + 1
+   if token in process_data["abundance"]:
+      process_data["abundance"][token] =  process_data["abundance"][token] + 1
+   else:
+      process_data["abundance"][token] =  1

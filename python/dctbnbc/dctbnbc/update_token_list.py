@@ -104,11 +104,7 @@ for site in json_stdin_data["posts"]:
                id_key =  get_id_key(entry)
                if entry[id_key] not in site["ids"]:
                   for token in dctbnbc.tokenize.tokenize(entry["summary"]):
-                     json_stdin_data["nr"] =  json_stdin_data["nr"] + 1
-                     if token in json_stdin_data["abundance"]:
-                        json_stdin_data["abundance"][token] =  json_stdin_data["abundance"][token] + 1
-                     else:
-                        json_stdin_data["abundance"][token] =  1
+                     dctbnbc.tokenize.tally(json_stdin_data, token)
                ids.append(entry[id_key])
             else:
                sys.stderr.write("ids key missing in some site in posts region in json file in <stdin>.\n")
