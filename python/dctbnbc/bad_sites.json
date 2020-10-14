@@ -12,6 +12,7 @@
        "Harald Wiesendanger",
        "Helmut Pilhar",
        "Hermann Ploppa",
+       "Jan van Helsing",
        "Jens Bernert",
        "Jo",
        "Joconrad",
@@ -21,6 +22,7 @@
        "Martin Lejeune",
        "Naomi",
        "Nicolas  Riedl",
+       "Niki Vogt",
        "Ped",
        "Peter Frey",
        "Thierry Meyssan",
@@ -694,6 +696,11 @@
          "href": "http://unbeantwortete-fragen.de/?feed=atom",
          "title": "Unbeantwortete Fragen \u00bb Feed",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "https://dieunbestechlichen.com/feed/",
+         "title": "Die Unbestechlichen \u00bb Feed",
+         "type": "application/rss+xml"
       },
       {
          "href": "https://uncut-news.ch/feed/atom/",
