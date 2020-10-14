@@ -232,6 +232,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://impf-kongress.de/feed/",
+         "title": "Impf Kongress \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://infowars.wordpress.com/feed/atom/",
          "title": "infowars-deutschland \u00bb Feed",
          "type": "application/atom+xml"
