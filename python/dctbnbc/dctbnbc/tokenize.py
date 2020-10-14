@@ -39,11 +39,8 @@ def score(tally_sheet, knowledge):
    retval =  0
    for token in knowledge["scores"]:
 
-      rel_abundance =  1
-      if token in tally_sheet["abundance"]:
-         rel_abundance =  tally_sheet["abundance"][token] / tally_sheet["nr"]
+      if token not in tally_sheet["abundance"]:
+         retval =  retval - knowledge["scores"][token]
 
-      retval =  retval - knowledge["scores"][token] / rel_abundance
-
-   return retval
+   return retval * tally_sheet["nr"]
 
