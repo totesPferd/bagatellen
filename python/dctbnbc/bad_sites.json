@@ -237,6 +237,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "http://feeds2.feedburner.com/Impfkritik",
+         "title": "Impfkritik Pressespiegel",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://infowars.wordpress.com/feed/atom/",
          "title": "infowars-deutschland \u00bb Feed",
          "type": "application/atom+xml"
