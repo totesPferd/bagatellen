@@ -43,6 +43,12 @@ def interpret_cmdline(result):
 
    return retval
 
+def log_rel_abundance(process_data, token):
+   retval =  0
+   if process_data["nr"] != 0:
+      retval =  math.log(1 - process_data["abundance"][token] / process_data["nr"])
+   return retval
+
 # interprete cmdline.
 cmdline_params =  {}
 retval =  interpret_cmdline(cmdline_params)
@@ -69,6 +75,6 @@ if "abundance" not in json_stdin_data or not isinstance(json_stdin_data["abundan
 
 if retval != 0:
    sys.exit(retval)
-out_data =  {"scores": { token: math.log(1 - json_stdin_data["abundance"][token] / json_stdin_data["nr"]) for token in json_stdin_data["abundance"]}}
+out_data =  {"scores": { token: log_rel_abundance(json_stdin_data, token) for token in json_stdin_data["abundance"]}}
 
 print(json.dumps(out_data, indent = 3, sort_keys = True))
