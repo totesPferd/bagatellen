@@ -1,4 +1,3 @@
-import dctbnbc.evaluate
 import dctbnbc.tokenize
 import feedparser
 import getopt
