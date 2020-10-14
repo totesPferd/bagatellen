@@ -7,6 +7,7 @@
        "Claus  K\u00f6hnlein",
        "Daniele Ganser",
        "Dirk Pohlmann",
+       "Dok",
        "Ernst Wolff",
        "Harald Walach",
        "Harald Wiesendanger",
@@ -403,6 +404,11 @@
          "href": "https://politikstube.com/feed/atom/",
          "title": "Politikstube \u00bb Feed",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "https://propagandaschau.wordpress.com/feed/",
+         "title": "Die Propagandaschau \u00bb Feed",
+         "type": "application/rss+xml"
       },
       {
          "href": "https://www.radio-utopie.de/feed/atom/",
