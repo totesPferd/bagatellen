@@ -26,6 +26,7 @@
        "Niki Vogt",
        "Ped",
        "Peter Frey",
+       "Pravda-TV",
        "Thierry Meyssan",
        "Tilo Gr\u00e4ser",
        "Torsten  Engelbrecht",
@@ -404,6 +405,11 @@
          "href": "https://politikstube.com/feed/atom/",
          "title": "Politikstube \u00bb Feed",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "https://www.pravda-tv.com/feed/",
+         "title": "PRAVDA TV \u2013 Lebe die Rebellion \u00bb Feed",
+         "type": "application/rss+xml"
       },
       {
          "href": "https://propagandaschau.wordpress.com/feed/",
