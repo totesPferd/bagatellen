@@ -6,6 +6,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.berliner-zeitung.de/feed.xml",
+         "title": "RSS Feed Berliner Zeitung",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.bild.de/rss-feeds/rss-16725492,feed=home.bild.html",
          "title": "Bild.de",
          "type": "application/rss+xml"
