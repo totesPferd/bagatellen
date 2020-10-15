@@ -32,8 +32,17 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://exportabel.wordpress.com/feed/",
+         "title": "Exportabel \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "http://blog.fefe.de/rss.xml?html",
          "title": "HTML-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.german-foreign-policy.com/?type=9818",
          "type": "application/rss+xml"
       },
       {
