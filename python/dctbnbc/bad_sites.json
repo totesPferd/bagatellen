@@ -70,6 +70,10 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.anderweltonline.com/rss.xml",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://anjamueller.livejournal.com/data/rss",
          "title": "RSS",
          "type": "application/rss+xml"
