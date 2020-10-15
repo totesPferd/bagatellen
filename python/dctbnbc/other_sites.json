@@ -191,6 +191,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.mimikama.at/feed/",
+         "title": "Mimikama \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://netbitch1.twoday.net/index.rdf",
          "title": "RSS 1.0",
          "type": "application/rss+xml"
@@ -407,6 +412,10 @@
       {
          "href": "https://telegehirn.wordpress.com/feed/",
          "title": "Telegehirn \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.volksverpetzer.de/rss",
          "type": "application/rss+xml"
       },
       {

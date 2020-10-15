@@ -37,6 +37,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.merkur.de/rssfeed.rdf",
+         "title": "Startseite",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.noz.de/rss/ressort/Samtgemeinde%20Bersenbr%C3%BCck",
          "type": "application/rss+xml"
       },
@@ -294,6 +299,125 @@
       },
       {
          "href": "https://www.noz.de/rss/ressort/Ganderkesee",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ostsee-zeitung.de/rss/feed/oz_regionrostock",
+         "title": "ostsee-zeitung.de - Ressort Region Rostock",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ostsee-zeitung.de/rss/feed/oz_rostock",
+         "title": "ostsee-zeitung.de - Ressort Rostock",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ostsee-zeitung.de/rss/feed/oz_baddoberan",
+         "title": "ostsee-zeitung.de - Ressort Bad Doberan",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ostsee-zeitung.de/rss/feed/oz_guestrow",
+         "title": "ostsee-zeitung.de - Ressort G\u00fcstrow",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ostsee-zeitung.de/rss/feed/oz_ribnitzdamgarten",
+         "title": "ostsee-zeitung.de - Ressort Ribnitz-Damgarten",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ostsee-zeitung.de/rss/feed/oz_mecklenburg",
+         "title": "ostsee-zeitung.de - Ressort Mecklenburg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ostsee-zeitung.de/rss/feed/oz_wismar",
+         "title": "ostsee-zeitung.de - Ressort Wismar",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ostsee-zeitung.de/rss/feed/oz_grevesmuehlen",
+         "title": "ostsee-zeitung.de - Ressort Grevesm\u00fchlen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ostsee-zeitung.de/rss/feed/oz_suedwestmecklenburg",
+         "title": "ostsee-zeitung.de - Ressort S\u00fcdwestmecklenburg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ostsee-zeitung.de/rss/feed/oz_mittleresmecklenburg",
+         "title": "ostsee-zeitung.de - Ressort Mittleres Mecklenburg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ostsee-zeitung.de/rss/feed/oz_oestlichesmecklenburg",
+         "title": "ostsee-zeitung.de - Ressort \u00d6stliches Mecklenburg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ostsee-zeitung.de/rss/feed/oz_vorpommern",
+         "title": "ostsee-zeitung.de - Ressort Vorpommern",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ostsee-zeitung.de/rss/feed/oz_greifswald",
+         "title": "ostsee-zeitung.de - Ressort Greifswald",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ostsee-zeitung.de/rss/feed/oz_stralsund",
+         "title": "ostsee-zeitung.de - Ressort Stalsund",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ostsee-zeitung.de/rss/feed/oz_ruegen",
+         "title": "ostsee-zeitung.de - Ressort R\u00fcgen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ostsee-zeitung.de/rss/feed/oz_usedom",
+         "title": "ostsee-zeitung.de - Ressort Usedom",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ostsee-zeitung.de/rss/feed/oz_grimmen",
+         "title": "ostsee-zeitung.de - Ressort Grimmen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ostsee-zeitung.de/rss/feed/oz_suedvorpommern",
+         "title": "ostsee-zeitung.de - Ressort S\u00fcdvorpommern",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ostsee-zeitung.de/rss/feed/oz_mvaktuell",
+         "title": "ostsee-zeitung.de - Ressort MV aktuell",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ostsee-zeitung.de/rss/feed/oz_politik",
+         "title": "ostsee-zeitung.de - Ressort Politik",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ostsee-zeitung.de/rss/feed/oz_wirtschaft",
+         "title": "ostsee-zeitung.de - Ressort Wirtschaft",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ostsee-zeitung.de/rss/feed/oz_sport",
+         "title": "ostsee-zeitung.de - Ressort Sport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ostsee-zeitung.de/rss/feed/oz_kultur",
+         "title": "ostsee-zeitung.de - Ressort Kultur",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.thueringer-allgemeine.de/rss",
          "type": "application/rss+xml"
       }
    ]
