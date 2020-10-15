@@ -1,0 +1,300 @@
+{
+   "sites": [
+      {
+         "href": "https://www.freiepresse.de/rss/rss_chemnitz.php",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.freiepresse.de/rss/rss_erzgebirge.php",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.freiepresse.de/rss/rss_mittelsachsen.php",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.freiepresse.de/rss/rss_vogtland.php",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.freiepresse.de/rss/rss_zwickau.php",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.freiepresse.de/rss/rss_politik.php",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.freiepresse.de/rss/rss_wirtschaft.php",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.freiepresse.de/rss/rss_kultur.php",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.freiepresse.de/rss/rss_sport.php",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Samtgemeinde%20Bersenbr%C3%BCck",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Bramsche",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Fu%C3%9Fball",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Hasbergen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Meppen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Niedersachsen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Osnabr%C3%BCck",
+         "typ": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Politik",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Sport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Bohmte",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Bad%20Essen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Ostercappeln",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Lingen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Papenburg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Samtgemeinde%20Artland",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/S%C3%B6gel",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Herzlake",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Spelle",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Wirtschaft",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Kultur",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Hasel%C3%BCnne",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Belm",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Bissendorf",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Medien",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/SV%20Meppen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Samtgemeinde%20F%C3%BCrstenau",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Lotte",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Vermischtes",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/D%C3%B6rpen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Gut%20zu%20wissen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/EL-Sport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Hilter",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Melle",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Georgsmarienh%C3%BCtte",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Neuenkirchen-V%C3%B6rden",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Westerkappeln",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Lathen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Werlte",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Glandorf",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/OS-Sport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/VFL%20Osnabr%C3%BCck",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Wallenhorst",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Bad%20Laer",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Dissen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Artland%20Dragons",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Haren",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Hagen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Twist",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Lathen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Salzbergen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Freren",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Nordh%C3%BCmmling",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Bad%20Iburg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Samtgemeinde%20Neuenkirchen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Emsb%C3%BCren",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Nordrhein-Westfalen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Geeste",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Lengerich",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Rhede",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Bad%20Rothenfelde",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/SF%20Lotte",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Panthers",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Westoverledingen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Delmenhorst",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.noz.de/rss/ressort/Ganderkesee",
+         "type": "application/rss+xml"
+      }
+   ]
+}
