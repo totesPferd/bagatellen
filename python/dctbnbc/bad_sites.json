@@ -36,6 +36,7 @@
        "news-for-friends.com",
        "Nicolas  Riedl",
        "Niki Vogt",
+       "Oliver Janich",
        "Ped",
        "Peter Frey",
        "Pravda-TV",
@@ -436,6 +437,11 @@
          "type": "application/atom+xml"
       },
       {
+         "href": "https://www.nachrichtenspiegel.de/feed/",
+         "title": "RSS 2.0",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://naomiseibt.com/feed/atom/",
          "title": "Naomi Seibt \u00bb Feed",
          "type": "application/atom+xml"
@@ -461,11 +467,16 @@
          "type": "application/atom+xml"
       },
       {
+         "href": "https://19vierundachtzig.com/rss",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "http://www.nuoviso.tv/feed",
          "type": "application/rss+xml"
       },
       {
-         "href": "https://19vierundachtzig.com/rss",
+         "href": "https://www.oliverjanich.de/feed",
+         "title": "OLIVER JANICH INVESTIGATIV \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
