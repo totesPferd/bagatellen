@@ -27,6 +27,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.danisch.de/blog/feed/",
+         "title": "Danisch.de RSS Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://dudelsack.blogger.de/rss",
          "title": "RSS Feed",
          "type": "application/rss+xml"

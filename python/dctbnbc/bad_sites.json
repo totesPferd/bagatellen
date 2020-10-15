@@ -5,12 +5,16 @@
        "BlauerBote",
        "Christoph H\u00f6rstel",
        "Claus  K\u00f6hnlein",
+       "Contra Magazin Redaktion",
        "Daniele Ganser",
+       "David Berger",
        "Dirk Pohlmann",
        "Dok",
        "Ernst Wolff",
        "Eva Maria Griese",
        "ExoPolitik.org",
+       "Freeman",
+       "Freeman (noreply@blogger.com)",
        "Gruppe42",
        "GRUPPE 42",
        "Harald Walach",
@@ -28,6 +32,8 @@
        "Martin Lejeune",
        "MMnews",
        "Naomi",
+       "NEOPresse",
+       "news-for-friends.com",
        "Nicolas  Riedl",
        "Niki Vogt",
        "Ped",
@@ -105,6 +111,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.contra-magazin.com/feed/",
+         "title": "Contra Magazin \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://cyberwaves.wordpress.com/feed/atom/",
          "title": "Cyberwaves's Blog \u00bb Feed",
          "type": "application/atom+xml"
@@ -113,6 +124,11 @@
          "href": "https://blog.danielschurter.net/feed/atom/",
          "title": "DanielSchurter.net \u00bb Feed",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "https://philosophia-perennis.com/feed/",
+         "title": "Philosophia Perennis \u00bb Feed",
+         "type": "application/rss+xml"
       },
       {
          "href": "https://dokudokus.wordpress.com/feed/atom",
@@ -213,6 +229,10 @@
          "href": "https://germanische-heilkunde.at/feed/atom/",
          "title": "Akademie f\u00fcr Germanische Heilkunde \u00bb Feed",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "https://gloria.tv/feed/",
+         "type": "application/rss+xml"
       },
       {
          "href": "https://gmuender.me/feed/atom/",
@@ -412,8 +432,18 @@
          "type": "application/atom+xml"
       },
       {
+         "href": "https://www.neopresse.com/feed/",
+         "title": "NEOPresse - Unabh\u00e4ngige Nachrichten \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://netzfrauen.org/feed/atom/",
          "title": "- netzfrauen \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://news-for-friends.com/feed/",
+         "title": "news-for-friends.com \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
