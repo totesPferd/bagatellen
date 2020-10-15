@@ -77,6 +77,11 @@
          "type": "application/atom+xml"
       },
       {
+         "href": "https://arcadi-online.de/feed/",
+         "title": "Arcadi \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "http://attnang.info/feed/atom",
          "type": "application/atom+xml"
       },
