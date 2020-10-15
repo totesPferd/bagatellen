@@ -196,6 +196,10 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://moritzneumeier.de/rss",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://netbitch1.twoday.net/index.rdf",
          "title": "RSS 1.0",
          "type": "application/rss+xml"
