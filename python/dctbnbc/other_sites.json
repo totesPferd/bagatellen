@@ -1,0 +1,404 @@
+{
+   "sites":
+   [
+      {
+         "href": "https://www.akweb.de/feed/",
+         "title": "ak analyse & kritik",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://antjeschrupp.com/feed/",
+         "title": "Aus Liebe zur Freiheit \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://bersarin.wordpress.com/feed/",
+         "title": "AISTHESIS \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://blogbar.de/feed/",
+         "title": "RSS 2.0",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://che2001.blogger.de/rss",
+         "title": "RSS Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://dudelsack.blogger.de/rss",
+         "title": "RSS Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://blog.fefe.de/rss.xml?html",
+         "title": "HTML-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://hilfe.blogger.de/rss",
+         "title": "RSS Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.jungewelt.de/feeds/newsticker.rss",
+         "title": "junge Welt: Alle Hauptartikel",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.jungewelt.de/feeds/abgeschrieben.xml",
+         "title": "junge Welt: Abgeschrieben",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.jungewelt.de/feeds/aktion.xml",
+         "title": "junge Welt: Aktion",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.jungewelt.de/feeds/ansichten.xml",
+         "title": "junge Welt: Ansichten",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.jungewelt.de/feeds/antifa.xml",
+         "title": "junge Welt: Antifa",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.jungewelt.de/feeds/ausland.xml",
+         "title": "junge Welt: Ausland",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.jungewelt.de/feeds/betrieb_gewerkschaft.xml",
+         "title": "junge Welt: Betrieb & Gewerkschaft",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.jungewelt.de/feeds/feminismus.xml",
+         "title": "junge Welt: Feminismus",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.jungewelt.de/feeds/feuilleton.xml",
+         "title": "junge Welt: Feuilleton",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.jungewelt.de/feeds/fotoreportagen.xml",
+         "title": "junge Welt: Fotoreportagen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.jungewelt.de/feeds/geschichte.xml",
+         "title": "junge Welt: Geschichte",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.jungewelt.de/feeds/inland.xml",
+         "title": "junge Welt: Inland",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.jungewelt.de/feeds/kapital_arbeit.xml",
+         "title": "junge Welt: Kapital & Arbeit",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.jungewelt.de/feeds/politisches_buch.xml",
+         "title": "junge Welt: Politisches Buch",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.jungewelt.de/feeds/schwerpunkt.xml",
+         "title": "junge Welt: Schwerpunkt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.jungewelt.de/feeds/sport.xml",
+         "title": "junge Welt: Sport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.jungewelt.de/feeds/thema.xml",
+         "title": "junge Welt: Thema",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.jungewelt.de/feeds/titel.xml",
+         "title": "junge Welt: Titel",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.jungewelt.de/feeds/medien.xml",
+         "title": "junge Welt: Medien",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.jungewelt.de/feeds/wochenendbeilage.xml",
+         "title": "junge Welt: Wochenendbeilage",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.jungewelt.de/feed-schwarzer-kanal-audio.php",
+         "title": "Schwarzer Kanal: Audios",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.jungewelt.de/feed-schwarzer-kanal-video.php",
+         "title": "Schwarzer Kanal: Videos",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.konkret-magazin.de/?format=feed&type=rss",
+         "title": "RSS 2.0",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.kritiknetz.de/?format=feed&type=rss",
+         "title": "RSS 2.0",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://lizaswelt.net/feed/",
+         "title": "Lizas Welt \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://maedchenmannschaft.net/feed/",
+         "title": "M\u00e4dchenmannschaft \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://medienelite.de/feed/",
+         "title": "Medienelite \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://netbitch1.twoday.net/index.rdf",
+         "title": "RSS 1.0",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/neues-deutschland.xml",
+         "title": "nd-Tagesausgabe als RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/aktuell.php",
+         "title": "nd: Die neuesten Artikel",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/nd-commune.xml",
+         "title": "nd: nd-Commune (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/politik.xml",
+         "title": "nd: Politik (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/oxi.xml",
+         "title": "nd: OXI (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/wirtschaft-umwelt.xml",
+         "title": "nd: Wirtschaft und Umwelt (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/bewegung.xml",
+         "title": "nd: Bewegung (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/kommentare.xml",
+         "title": "nd: Kommentare (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/debatte.xml",
+         "title": "nd: Debatte (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/unten_links.xml",
+         "title": "nd: Unten links (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/berlin.xml",
+         "title": "nd: Berlin (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/brandenburg.xml",
+         "title": "nd: Brandenburg (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/kultur.xml",
+         "title": "nd: Kultur (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/wissen.xml",
+         "title": "nd: Wissen (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/sport.xml",
+         "title": "nd: Sport (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/reise.xml",
+         "title": "nd: Reise (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/gesund_leben.xml",
+         "title": "nd: Gesund leben (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/ratgeber.xml",
+         "title": "nd: Ratgeber (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/nordpolsuedpol.xml",
+         "title": "nd: Vom Nordpol zum S\u00fcdpol zu Fu\u00df (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/linkesklima.xml",
+         "title": "nd: Klima und Wandel (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/hausblog.xml",
+         "title": "nd: In eigener Sache (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/linksbuendig.xml",
+         "title": "nd: Linksb\u00fcndig (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/wort-und-wahn.xml",
+         "title": "nd: Wort und Wahn (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/in-bewegung.xml",
+         "title": "nd: In Bewegung (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/sonntagsschuss.xml",
+         "title": "nd: Sonntagsschuss (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/vleischeslust.xml",
+         "title": "nd: Vleischeslust (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/video.xml",
+         "title": "nd: Video (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/heppenheimer.xml",
+         "title": "nd: Der Heppenheimer Hiob (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/apolexikon.xml",
+         "title": "nd: Das APO-Lexikon (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/montagmorgen.xml",
+         "title": "nd: Montagmorgen (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/blogwoche.xml",
+         "title": "nd: Netzwoche (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/plattenbau.xml",
+         "title": "nd: Plattenbau (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/imgespraech.xml",
+         "title": "nd: Im Gespr\u00e4ch (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/paternoster.xml",
+         "title": "nd: \"1 Minute 24\" - Im Paternoster um die Welt (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/serienkiller.xml",
+         "title": "nd: Serienkiller (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/das-kann-weg.xml",
+         "title": "nd: Das kann weg (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.neues-deutschland.de/rss/die-andere-tuerkei.xml",
+         "title": "nd: Die andere T\u00fcrkei (RSS-Feed)",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.neulandrebellen.de/feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://neumondschein.blogspot.com/feeds/posts/default",
+         "title": "Mondschein - Atom",
+         "type": "application/atom+xml"
+      },
+      {
+         "href": "https://pestarzt.blog/feed/",
+         "title": "pestarzt \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://blog.psiram.com/feed/",
+         "title": "RSS 2.0 - Alle Artikel",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://stuetzendergesellschaft.wordpress.com/feed/",
+         "title": "St\u00fctzen der Gesellschaft \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://telegehirn.wordpress.com/feed/",
+         "title": "Telegehirn \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://wordpress.com/blog/feed/",
+         "title": "WordPress.com Blog",
+         "type": "application/rss+xml"
+      }
+   ]
+}

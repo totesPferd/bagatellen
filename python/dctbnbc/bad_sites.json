@@ -9,6 +9,10 @@
        "Dirk Pohlmann",
        "Dok",
        "Ernst Wolff",
+       "Eva Maria Griese",
+       "ExoPolitik.org",
+       "Gruppe42",
+       "GRUPPE 42",
        "Harald Walach",
        "Harald Wiesendanger",
        "Helmut Pilhar",
@@ -18,19 +22,27 @@
        "Jo",
        "Joconrad",
        "juergenelsaesser",
+       "klagemauerTV",
        "LHAdmin",
        "manuelcmittas",
        "Martin Lejeune",
+       "MMnews",
        "Naomi",
        "Nicolas  Riedl",
        "Niki Vogt",
        "Ped",
        "Peter Frey",
        "Pravda-TV",
+       "Sott.net",
+       "Swiss Policy Research",
        "Thierry Meyssan",
+       "Team KenFM",
        "Tilo Gr\u00e4ser",
        "Torsten  Engelbrecht",
-       "Ullrich Mies"
+       "Ullrich Mies",
+       "Ulrich Heyden",
+       "uncut-news.ch",
+       "Watergate Redaktion"
    ],
    "sites": [
       {
@@ -64,6 +76,11 @@
          "href": "http://bewusst.tv/feed/atom/",
          "title": "Bewusst.tv \u00bb Feed",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "https://www.blauenarzisse.de/feed/",
+         "title": "Blaue Narzisse \u00bb Feed",
+         "type": "application/rss+xml"
       },
       {
          "href": "http://blauerbote.com/feed/atom/",
@@ -199,6 +216,11 @@
          "href": "https://gmuender.me/feed/atom/",
          "title": "Andreas Gmuender \u00bb Feed",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "https://gruppe42.com/feed/",
+         "title": "Gruppe42 \u00bb Feed",
+         "type": "application/rss+xml"
       },
       {
          "href": "http://www.heise.de/tp/rss/news-xl.xml",
@@ -485,6 +507,11 @@
          "type": "application/atom+xml"
       },
       {
+         "href": "https://sezession.de/feed/",
+         "title": "Sezession im Netz \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "http://spiegelkabinett-blog.blogspot.com/feeds/posts/default",
          "title": "Spiegelkabinett - Atom",
          "type": "application/atom+xml"
@@ -703,6 +730,11 @@
          "href": "https://technikgedoens.de/feed/atom/",
          "title": "Technikged\u00f6ns \u00bb Feed",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "https://www.tichyseinblick.de/feed/",
+         "title": "Tichys Einblick \u00bb Feed",
+         "type": "application/rss+xml"
       },
       {
          "href": "https://tomswochenschau.wordpress.com/feed/atom/",
