@@ -63,11 +63,11 @@ def interpret_cmdline(result):
 
 
 def doit(json_a_data, json_b_data):
-   out =  { "logscore": {}, "scores": {} }
+   out =  { "logscores": {}, "scores": {} }
 
    for token in json_a_data["scores"]:
       if token in json_b_data["scores"]:
-         out["scores"][token] =  math.log(json_a_data["scores"][token]) - math.log(json_b_data["scores"][token])
+         out["logscores"][token] =  math.log(json_a_data["scores"][token]) - math.log(json_b_data["scores"][token])
          out["scores"][token] =  json_a_data["scores"][token] - json_b_data["scores"][token]
       else:
          out["scores"][token] =  json_a_data["scores"][token]
