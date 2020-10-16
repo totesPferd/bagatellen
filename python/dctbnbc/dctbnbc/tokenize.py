@@ -39,8 +39,11 @@ def score(tally_sheet, knowledge):
    retval =  0
    for token in knowledge["scores"]:
 
-      if token not in tally_sheet["abundance"]:
-         retval =  retval - knowledge["scores"][token]
+      if token not in tally_sheet["abundance"] or token in knowledge["logscores"]:
+         retval =  retval - knowledge["scores"][token] * tally_sheet["nr"]
 
-   return retval * tally_sheet["nr"]
+      if token in tally_sheet["abundance"] and token in knowledge["logscores"]:
+         retval =  retval + tally_sheet["abundance"][token] * knowledge["logscores"][token]
+
+   return retval
 
