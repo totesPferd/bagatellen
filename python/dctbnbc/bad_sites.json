@@ -39,6 +39,7 @@
        "J\u00fcrgen Els\u00e4sser",
        "klagemauerTV",
        "LHAdmin",
+       "Lisa Fitz",
        "manuelcmittas",
        "Martin Lejeune",
        "MMnews",
@@ -393,6 +394,11 @@
          "href": "https://le-bohemien.net/feed/atom/",
          "title": "le Boh\u00e9mien RSS Feed",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "https://www.lisa-fitz.de/feed/",
+         "title": "Lisa Fitz \u00bb Feed",
+         "type": "application/rss+xml"
       },
       {
          "href": "https://lotharf.wordpress.com/feed/atom/",
