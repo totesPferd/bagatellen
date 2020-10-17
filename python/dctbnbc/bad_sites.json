@@ -70,6 +70,11 @@
          "type": "application/atom+xml"
       },
       {
+         "href": "https://aegis.lu/feed/",
+         "title": "gesund ohne Impfung \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "http://alles-schallundrauch.blogspot.com/feeds/posts/default",
          "title": "Alles Schall und Rauch - Atom",
          "type": "application/atom+xml"
@@ -124,6 +129,11 @@
          "href": "https://buecherrebell.wordpress.com/feed/atom/",
          "title": "B\u00fccher Rebell Der Blog \u00bb Feed",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "https://bumibahagia.com/feed/",
+         "title": "bumi bahagia / Gl\u00fcckliche Erde \u00bb Feed",
+         "type": "application/rss+xml"
       },
       {
          "href": "https://xn--christoph-hrstel-wwb.de/feed/",
@@ -288,6 +298,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "http://gwup-skeptiker.blogspot.com/feeds/posts/default",
+         "title": "GWUP.WATCH - Atom",
+         "type": "application/atom+xml"
+      },
+      {
          "href": "http://www.heise.de/tp/rss/news-xl.xml",
          "title": "Telepolis/letzte 7 Tage",
          "type": "application/atom+xml"
@@ -400,6 +415,11 @@
          "href": "https://kenfm.de/feed/atom",
          "title": "KenFM.de \u00bb Feed",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "https://www.kritik-relativitaetstheorie.de/feed/",
+         "title": "Kritische Stimmen zur Relativit\u00e4tstheorie RSS Feed",
+         "type": "application/rss+xml"
       },
       {
          "href": "https://kritisches-netzwerk.de/rss.xml",
@@ -520,6 +540,11 @@
          "href": "https://peds-ansichten.de/feed/atom/",
          "title": "Peds Ansichten \u00bb Feed",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "https://www.philoclopedia.de/rss/blog",
+         "title": "Blog",
+         "type": "application/rss+xml"
       },
       {
          "href": "https://www.politaia.org/feed/",
