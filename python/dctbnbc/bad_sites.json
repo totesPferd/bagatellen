@@ -537,6 +537,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.pboehringer.de/feed/",
+         "title": "Peter Boehringer \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://peds-ansichten.de/feed/atom/",
          "title": "Peds Ansichten \u00bb Feed",
          "type": "application/atom+xml"
