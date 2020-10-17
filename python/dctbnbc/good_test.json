@@ -466,6 +466,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.nnn.de/rss",
+         "title": "NNN Feed - Home",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.noz.de/rss/ressort/Samtgemeinde%20Bersenbr%C3%BCck",
          "type": "application/rss+xml"
       },
@@ -894,6 +899,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.prignitzer.de/rss",
+         "title": "Prignitzer Feed - Home",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "http://rp-online.de/feed.rss",
          "title": "RSS Feed",
          "type": "application/rss+xml"
@@ -999,8 +1009,113 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.shz.de/rss",
+         "title": "SHZ Feed - Home",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.shz.de/deutschland-welt/wirtschaft/rss",
+         "title": "SHZ Feed - Wirtschaft",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.shz.de/lokales/eckernfoerder-zeitung/rss",
+         "title": "SHZ Feed - Eckernf\u00f6rder Zeitung",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.shz.de/lokales/elmshorner-nachrichten/rss",
+         "title": "SHZ Feed - Elmshorner Nachrichten",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.shz.de/lokales/flensburger-tageblatt/rss",
+         "title": "SHZ Feed - Flensburger Tageblatt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.shz.de/lokales/glueckstaedter-fortuna/rss",
+         "title": "SHZ Feed - Gl\u00fcckst\u00e4dter Fortuna",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.shz.de/lokales/holsteinischer-courier/rss",
+         "title": "SHZ Feed - Holsteinischer Courier",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.shz.de/lokales/husumer-nachrichten/rss",
+         "title": "SHZ Feed - Husumer Nachrichten",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.shz.de/lokales/insel-bote/rss",
+         "title": "SHZ Feed - Insel-Bote",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.shz.de/lokales/nordfriesland-tageblatt/rss",
+         "title": "SHZ Feed - Nordfriesland Tageblatt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.shz.de/lokales/ostholsteiner-anzeiger/rss",
+         "title": "SHZ Feed - Ostholsteiner Anzeiger",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.shz.de/lokales/pinneberger-tageblatt/rss",
+         "title": "SHZ Feed - Pinneberger Tageblatt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.shz.de/lokales/quickborner-tageblatt/rss",
+         "title": "SHZ Feed - Quickborner Tageblatt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.shz.de/lokales/schleibote/rss",
+         "title": "SHZ Feed - Schlei-Bote",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.shz.de/lokales/landeszeitung/rss",
+         "title": "SHZ Feed - Landeszeitung",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.shz.de/lokales/schleswiger-nachrichten/rss",
+         "title": "SHZ Feed - Schleswiger Nachrichten",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.shz.de/lokales/stormarner-tageblatt/rss",
+         "title": "SHZ Feed - Stormarner Tageblatt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.shz.de/lokales/sylter-rundschau/rss",
+         "title": "SHZ Feed - Sylter Rundschau",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.shz.de/lokales/uetersener-nachrichten/rss",
+         "title": "SHZ Feed - Uetersener Nachrichten",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.shz.de/lokales/wilstersche-zeitung/rss",
+         "title": "SHZ Feed - Wilstersche Zeitung",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.sn-online.de/rss/feed/sn_schlagzeilen",
          "title": "sn-online.de - Meldungen aus allen Ressorts",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.shz.de/lokales/wedel-schulauer-tageblatt/rss",
+         "title": "SHZ Feed - Wedel-Schulauer Tageblatt",
          "type": "application/rss+xml"
       },
       {
@@ -1011,6 +1126,11 @@
       {
          "href": "https://www.sn-online.de/rss/feed/sn_politik",
          "title": "sn-online.de - Alle Meldungen aus dem Ressort Politik",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.shz.de/lokales/schenefelder-tageblatt/rss",
+         "title": "SHZ Feed - Schenefelder Tageblatt",
          "type": "application/rss+xml"
       },
       {
@@ -1041,6 +1161,36 @@
       {
          "href": "https://www.sn-online.de/rss/feed/sn_hannover96",
          "title": "sn-online.de - Alle Meldungen aus dem Ressort Hannover96",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.svz.de/rss",
+         "title": "SVZ Feed - Home",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.svz.de/lokales/gadebusch-rehnaer-zeitung/rss",
+         "title": "SVZ Feed - Gadebusch-Rehnaer Zeitung",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.svz.de/lokales/guestrower-anzeiger/rss",
+         "title": "SVZ Feed - G\u00fcstrower Anzeiger",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.svz.de/lokales/hagenower-kreisblatt/rss",
+         "title": "SVZ Feed - Hagenower Kreisblatt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.svz.de/lokales/ludwigsluster-tageblatt/rss",
+         "title": "SVZ Feed - Ludwigsluster Tageblatt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.svz.de/lokales/parchimer-zeitung/rss",
+         "title": "SVZ Feed - Parchimer Zeitung",
          "type": "application/rss+xml"
       },
       {
