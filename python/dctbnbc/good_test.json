@@ -37,6 +37,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://dawo-dresden.de/feed/",
+         "title": "DAWO! - Dresden am Wochenende \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.dnn.de/rss/feed/dnn_nachrichten",
          "title": "dnn.de - Ressort Nachrichten",
          "type": "application/rss+xml"
@@ -1042,6 +1047,61 @@
          "href": "https://www.swr.de/~atom/index.xml",
          "title": "Seite als Atom-Feed",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "https://www.tag24.de/sitemap/rss",
+         "title": "TAG24 News Deutschland & Welt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.tag24.de/sitemap/rss/berlin",
+         "title": "TAG24 News Berlin",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.tag24.de/sitemap/rss/chemnitz",
+         "title": "TAG24 News Chemnitz",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.tag24.de/sitemap/rss/dresden",
+         "title": "TAG24 News Dresden",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.tag24.de/sitemap/rss/frankfurt",
+         "title": "TAG24 News Frankfurt/Main",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.tag24.de/sitemap/rss/hamburg",
+         "title": "TAG24 News Hamburg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.tag24.de/sitemap/rss/koeln",
+         "title": "TAG24 News K\u00f6ln",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.tag24.de/sitemap/rss/leipzig",
+         "title": "TAG24 News Leipzig",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.tag24.de/sitemap/rss/stuttgart",
+         "title": "TAG24 News Stuttgart",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.tag24.de/sitemap/rss/thueringen",
+         "title": "TAG24 News Th\u00fcringen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.tag24.de/sitemap/rss/muenchen",
+         "title": "TAG24 News M\u00fcnchen",
+         "type": "application/rss+xml"
       },
       {
          "href": "https://www.thueringer-allgemeine.de/rss",
