@@ -105,7 +105,227 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.goettinger-tageblatt.de/rss/feed/gtet_schlagzeilen",
+         "title": "goettinger-tageblatt.de - Meldungen aus allen Ressorts",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.goettinger-tageblatt.de/rss/feed/gtet_politik",
+         "title": "goettinger-tageblatt.de - Alle Meldungen aus dem Ressort Politik",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.goettinger-tageblatt.de/rss/feed/gtet_goettingen",
+         "title": "goettinger-tageblatt.de - Alle Meldungen aus dem Ressort Lokales G\u00f6ttingen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.goettinger-tageblatt.de/rss/feed/gtet_wirtschaft",
+         "title": "goettinger-tageblatt.de - Alle Meldungen aus dem Ressort Wirtschaft",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.goettinger-tageblatt.de/rss/feed/gtet_sport",
+         "title": "goettinger-tageblatt.de - Alle Meldungen aus dem Ressort Sport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.goettinger-tageblatt.de/rss/feed/gtet_meg",
+         "title": "goettinger-tageblatt.de - Alle Meldungen aus dem Ressort BG G\u00f6ttingen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.goettinger-tageblatt.de/rss/feed/gtet_kultur",
+         "title": "goettinger-tageblatt.de - Alle Meldungen aus dem Ressort Kultur",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.goettinger-tageblatt.de/rss/feed/gtet_panorama",
+         "title": "goettinger-tageblatt.de - Alle Meldungen aus dem Ressort Panorama",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.goettinger-tageblatt.de/rss/feed/gtet_medien",
+         "title": "goettinger-tageblatt.de - Alle Meldungen aus dem Ressort Medien",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.goettinger-tageblatt.de/rss/feed/gtet_wissenschaft",
+         "title": "goettinger-tageblatt.de - Alle Meldungen aus dem Ressort Wissenschaft",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.abendblatt.de/rss",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.haz.de/rss/feed/haz_schlagzeilen",
+         "title": "HAZ.de - Schlagzeilen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.haz.de/rss/feed/haz_hannoverregion",
+         "title": "HAZ.de - Ressort Hannover und Region RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.haz.de/rss/feed/haz_politik",
+         "title": "HAZ.de - Ressort Politik RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.haz.de/rss/feed/haz_wirtschaft",
+         "title": "HAZ.de - Ressort Wirtschaft RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.haz.de/rss/feed/haz_kultur",
+         "title": "HAZ.de - Ressort Kultur RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.haz.de/rss/feed/haz_sport",
+         "title": "HAZ.de - Ressort Sport RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.haz.de/rss/feed/haz_hannover96",
+         "title": "HAZ.de - Ressort Hannover96 RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.haz.de/rss/feed/haz_medien",
+         "title": "HAZ.de - Ressort Medien RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.haz.de/rss/feed/haz_wissen",
+         "title": "HAZ.de - Ressort Wissen RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.haz.de/rss/feed/haz_panorama",
+         "title": "HAZ.de - Ressort Panorama RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.haz.de/rss/feed/haz_zish",
+         "title": "HAZ.de - Ressort ZiSH RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.haz.de/rss/feed/haz_luettjelage",
+         "title": "HAZ.de - Podcast Lttje Lage RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.haz.de/rss/feed/haz_dasding",
+         "title": "HAZ.de - Podcast Das Ding RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.haz.de/rss/feed/haz_papierkorb",
+         "title": "HAZ.de - Podcast Aus meinem Papierkorb RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ln-online.de/rss/feed/ln_lokales",
+         "title": "LN-Online.de - Alle Meldungen aus dem Ressort Lokales",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ln-online.de/rss/feed/ln_luebeck",
+         "title": "LN-Online.de - Alle Meldungen aus dem Ressort L\u00fcbeck",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ln-online.de/rss/feed/ln_ostholstein",
+         "title": "LN-Online.de - Alle Meldungen aus dem Ressort Ostholstein",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ln-online.de/rss/feed/ln_badschwartau",
+         "title": "LN-Online.de - Alle Meldungen aus dem Ressort Bad Schwartau",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ln-online.de/rss/feed/ln_segeberg",
+         "title": "LN-Online.de - Alle Meldungen aus dem Ressort Segeberg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ln-online.de/rss/feed/ln_stormarn",
+         "title": "LN-Online.de - Alle Meldungen aus dem Ressort Stormarn",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ln-online.de/rss/feed/ln_lauenburg",
+         "title": "LN-Online.de - Alle Meldungen aus dem Ressort Lauenburg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ln-online.de/rss/feed/ln_nordwestmecklenburg",
+         "title": "LN-Online.de - Alle Meldungen aus dem Ressort Nordwestmecklenburg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ln-online.de/rss/feed/ln_politik",
+         "title": "LN-Online.de - Alle Meldungen aus dem Ressort Politik",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ln-online.de/rss/feed/ln_wirtschaft",
+         "title": "LN-Online.de - Alle Meldungen aus dem Ressort Wirtschaft",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ln-online.de/rss/feed/ln_sport",
+         "title": "LN-Online.de - Alle Meldungen aus dem Ressort Sport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ln-online.de/rss/feed/ln_kultur",
+         "title": "LN-Online.de - Alle Meldungen aus dem Ressort Kultur",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.lvz.de/rss/feed/lvz_nachrichten",
+         "title": "LVZ.de - Alle Meldungen aus dem Ressort Nachrichten",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.lvz.de/rss/feed/lvz_leipzig",
+         "title": "LVZ.de - Alle Meldungen aus dem Ressort Leipzig",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.lvz.de/rss/feed/lvz_region",
+         "title": "LVZ.de - Alle Meldungen aus dem Ressort Regiond",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.lvz.de/rss/feed/lvz_mitteldeutschland",
+         "title": "LVZ.de - Alle Meldungen aus dem Ressort Mitteldeutschland",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.lvz.de/rss/feed/lvz_kultur",
+         "title": "LVZ.de - Alle Meldungen aus dem Ressort Kultur",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.lvz.de/rss/feed/lvz_sport",
+         "title": "LVZ.de - Alle Meldungen aus dem Ressort Sport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.lvz.de/rss/feed/lvz_ratgeber",
+         "title": "LVZ.de - Alle Meldungen aus dem Ressort Ratgeber",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.lvz.de/rss/feed/lvz_reise",
+         "title": "LVZ.de - Alle Meldungen aus dem Ressort Reise",
          "type": "application/rss+xml"
       },
       {
@@ -176,6 +396,56 @@
       {
          "href": "https://www.ndr.de/homepage985-rss2.xml",
          "title": "NDR.de - Das Beste am Norden",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.neuepresse.de/rss/feed/np_schlagzeilen",
+         "title": "neuepresse.de - Schlagzeilen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.neuepresse.de/rss/feed/np_politik",
+         "title": "neuepresse.de - Ressort Politik RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.neuepresse.de/rss/feed/np_magazin",
+         "title": "neuepresse.de - Ressort Magazin RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.neuepresse.de/rss/feed/np_szene",
+         "title": "neuepresse.de - Ressort Szene RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.neuepresse.de/rss/feed/np_medien",
+         "title": "neuepresse.de - Ressort Medien RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.neuepresse.de/rss/feed/np_kultur",
+         "title": "neuepresse.de - Ressort Kultur RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.neuepresse.de/rss/feed/np_lifestyle",
+         "title": "neuepresse.de - Ressort Lifestyle RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.neuepresse.de/rss/feed/np_hannoverregion",
+         "title": "neuepresse.de - Ressort Hannover & Region RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.neuepresse.de/rss/feed/np_sport",
+         "title": "neuepresse.de - Ressort Sport RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.neuepresse.de/rss/feed/np_hannover96",
+         "title": "neuepresse.de - Ressort Hannover96 RSS-Feed",
          "type": "application/rss+xml"
       },
       {
@@ -554,8 +824,98 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.paz-online.de/rss/feed/paz_peinerland",
+         "title": "paz-online.de - Ressort Peiner Land",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.paz-online.de/rss/feed/paz_pazsport",
+         "title": "paz-online.de - Ressort PAZSport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.paz-online.de/rss/feed/paz_wirtschaft",
+         "title": "paz-online.de - Ressort Wirtschaft",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.paz-online.de/rss/feed/paz_politik",
+         "title": "paz-online.de - Ressort Politik",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.paz-online.de/rss/feed/paz_sport",
+         "title": "paz-online.de - Ressort Sport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.paz-online.de/rss/feed/paz_kultur",
+         "title": "paz-online.de - Ressort Kultur",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.paz-online.de/rss/feed/paz_wisp",
+         "title": "paz-online.de - Ressort Welt im Spiegel",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.paz-online.de/rss/feed/paz_medien",
+         "title": "paz-online.de - Ressort Medien",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.paz-online.de/rss/feed/paz_wissen",
+         "title": "paz-online.de - Ressort Wissen",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "http://rp-online.de/feed.rss",
          "title": "RSS Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.sn-online.de/rss/feed/sn_schlagzeilen",
+         "title": "sn-online.de - Meldungen aus allen Ressorts",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.sn-online.de/rss/feed/sn_schaumburg",
+         "title": "sn-online.de - Alle Meldungen aus dem Ressort Schaumburg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.sn-online.de/rss/feed/sn_politik",
+         "title": "sn-online.de - Alle Meldungen aus dem Ressort Politik",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.sn-online.de/rss/feed/sn_wirtschaft",
+         "title": "sn-online.de - Alle Meldungen aus dem Ressort Wirtschaft",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.sn-online.de/rss/feed/sn_sport",
+         "title": "sn-online.de - Alle Meldungen aus dem Ressort Sport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.sn-online.de/rss/feed/sn_kultur",
+         "title": "sn-online.de - Alle Meldungen aus dem Ressort Kultur",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.sn-online.de/rss/feed/sn_medien",
+         "title": "sn-online.de - Alle Meldungen aus dem Ressort Medien",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.sn-online.de/rss/feed/sn_wissen",
+         "title": "sn-online.de - Alle Meldungen aus dem Ressort Wissen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.sn-online.de/rss/feed/sn_hannover96",
+         "title": "sn-online.de - Alle Meldungen aus dem Ressort Hannover96",
          "type": "application/rss+xml"
       },
       {
@@ -569,6 +929,51 @@
       },
       {
          "href": "https://www.vice.com/de/rss",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.waz-online.de/rss/feed/waz_schlagzeilen",
+         "title": "waz-online.de - Schlagzeilen: Meldungen aus allen WAZ-Ressorts",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.waz-online.de/rss/feed/az_schlagzeilen",
+         "title": "waz-online.de - Schlagzeilen: Meldungen aus allen AZ-Ressorts",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.waz-online.de/rss/feed/azwaz_wirtschaft",
+         "title": "waz-online.de - Ressort Wirtschaft",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.waz-online.de/rss/feed/azwaz_sport",
+         "title": "waz-online.de - Ressort Sport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.waz-online.de/rss/feed/waz_vfl",
+         "title": "waz-online.de - Ressort VFL Wolfsburg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.waz-online.de/rss/feed/azwaz_kultur",
+         "title": "waz-online.de - Ressort Kultur",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.waz-online.de/rss/feed/azwaz_panorama",
+         "title": "waz-online.de - Ressort Panorama",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.waz-online.de/rss/feed/azwaz_medien",
+         "title": "waz-online.de - Ressort Medien",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.waz-online.de/rss/feed/azwaz_wissen",
+         "title": "waz-online.de - Ressort Wissen",
          "type": "application/rss+xml"
       },
       {
