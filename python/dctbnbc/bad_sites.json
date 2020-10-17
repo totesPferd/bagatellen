@@ -227,6 +227,11 @@
          "type": "application/atom+xml"
       },
       {
+         "href": "https://www.extremnews.com/feed/",
+         "title": "Extremnews",
+         "type": "application/atom+xml"
+      },
+      {
          "href": "https://fastprogress.wordpress.com/feed/atom/",
          "title": "Fast Progress - Eine andere Welt ist n\u00f6tig! \u00bb Feed",
          "type": "application/atom+xml"
@@ -412,6 +417,11 @@
          "href": "https://lotharf.wordpress.com/feed/atom/",
          "title": "Lothars Blog \u00bb Feed",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "https://lupocattivoblog.com/feed/",
+         "title": "lupo cattivo \u2013 gegen die Weltherrschaft \u00bb Feed",
+         "type": "application/rss+xml"
       },
       {
          "href": "https://www.lyrik-klinge.de/feed/atom/",
