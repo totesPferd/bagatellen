@@ -53,6 +53,7 @@
        "Pravda-TV",
        "Rubikons Mutmach-Redaktion",
        "Rubikons Weltredaktion",
+       "Siegfried Trebuch",
        "Sott.net",
        "Swiss Policy Research",
        "Thierry Meyssan",
@@ -909,6 +910,11 @@
          "href": "https://volksruf.wordpress.com/feed/atom/",
          "title": "Volksruf \u00bb Feed",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "https://www.vollendungderseele.com/feed/",
+         "title": "Vollendung der Seele \u00bb Feed",
+         "type": "application/rss+xml"
       },
       {
          "href": "https://derwaechter.net/feed/atom/",
