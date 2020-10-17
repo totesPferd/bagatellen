@@ -31,6 +31,7 @@
        "Harald Wiesendanger",
        "Helmut Pilhar",
        "Hermann Ploppa",
+       "infowars",
        "Jan van Helsing",
        "Jens Bernert",
        "Jo",
@@ -630,6 +631,11 @@
       {
          "href": "http://www.rationalgalerie.de/?format=feed&type=atom",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "http://recentr.com/feed/",
+         "title": "Recentr \u00bb Feed",
+         "type": "application/rss+xml"
       },
       {
          "href": "https://rfjfreistadt.wordpress.com/feed/atom/",
