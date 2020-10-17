@@ -15,8 +15,16 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.bergedorfer-zeitung.de/rss",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.berliner-kurier.de/feed.xml",
          "title": "RSS Feed Berliner Kurier",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.braunschweiger-zeitung.de/rss",
          "type": "application/rss+xml"
       },
       {
@@ -394,6 +402,10 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.morgenpost.de/rss",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.ndr.de/homepage985-rss2.xml",
          "title": "NDR.de - Das Beste am Norden",
          "type": "application/rss+xml"
@@ -709,6 +721,10 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.nrz.de/rss",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.ostsee-zeitung.de/rss/feed/oz_regionrostock",
          "title": "ostsee-zeitung.de - Ressort Region Rostock",
          "type": "application/rss+xml"
@@ -824,6 +840,10 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.otz.de/rss",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.paz-online.de/rss/feed/paz_peinerland",
          "title": "paz-online.de - Ressort Peiner Land",
          "type": "application/rss+xml"
@@ -932,6 +952,10 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.waz.de/rss",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.waz-online.de/rss/feed/waz_schlagzeilen",
          "title": "waz-online.de - Schlagzeilen: Meldungen aus allen WAZ-Ressorts",
          "type": "application/rss+xml"
@@ -979,6 +1003,10 @@
       {
          "href": "https://www.wdr.de/uebersicht-100.feed",
          "title": "RSS",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.wr.de/rss",
          "type": "application/rss+xml"
       },
       {
