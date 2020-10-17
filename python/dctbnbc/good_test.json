@@ -109,6 +109,61 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.maz-online.de/rss/feed/maz_brandenburg",
+         "title": "maz-online.de - Ressort Brandenburg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.maz-online.de/rss/feed/maz_potsdam",
+         "title": "maz-online.de - Ressort Potsdam",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.maz-online.de/ https:/www.maz-online.de/rss/feed/maz_brandenbh",
+         "title": "maz-online.de - Ressort Brandenb./H.",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.maz-online.de/rss/feed/maz_potsdam-mittelmark",
+         "title": "maz-online.de - Ressort Potsdam-Mittelmark",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.maz-online.de/rss/feed/maz_teltow-flaeming",
+         "title": "maz-online.de - Ressort Teltow-Fl\u00e4ming",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.maz-online.de/rss/feed/maz_dahme-spree",
+         "title": "maz-online.de - Alle Meldungen aus dem Ressort Dahme-Spree",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.maz-online.de/rss/feed/maz_havelland",
+         "title": "maz-online.de - Ressort Havelland",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.maz-online.de/rss/feed/maz_oberhavel",
+         "title": "maz-online.de - Ressort Oberhavel",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.maz-online.de/rss/feed/maz_ostprignitz-rup",
+         "title": "maz-online.de - Ressort Ostprignitz-Rupin",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.maz-online.de/rss/feed/maz_prignitz",
+         "title": "maz-online.de - Ressort Prignitz",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.maz-online.de/rss/feed/maz_studium_wissenschaft",
+         "title": "maz-online.de - Bildung & Wissenschaft",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.mdr.de/home/mdr-homepage-120-rss.xml",
          "title": "mdr.de \u2013 Radio, Fernsehen, Nachrichten f\u00fcr Mitteldeutschland",
          "type": "application/rss+xml"
