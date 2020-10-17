@@ -33,6 +33,7 @@
        "Jens Bernert",
        "Jo",
        "Joconrad",
+       "J\u00f6rg Spitz",
        "juergenelsaesser",
        "J\u00fcrgen Els\u00e4sser",
        "klagemauerTV",
@@ -845,14 +846,19 @@
          "type": "application/rss+xml"
       },
       {
-         "href": "https://swprs.org/feed/atom/",
-         "title": "Swiss Policy Research \u00bb Feed",
-         "type": "application/atom+xml"
+         "href": "https://spitzen-praevention.com/feed/",
+         "title": "Akademie f\u00fcr menschliche Medizin - AMM \u00bb Feed",
+         "type": "application/rss+xml"
       },
       {
          "href": "https://de.sputniknews.com/export/rss2/archive/index.xml",
          "title": "RSS",
          "type": "application/rss+xml"
+      },
+      {
+         "href": "https://swprs.org/feed/atom/",
+         "title": "Swiss Policy Research \u00bb Feed",
+         "type": "application/atom+xml"
       },
       {
          "href": "https://technikgedoens.de/feed/atom/",
