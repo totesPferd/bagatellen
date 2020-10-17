@@ -302,6 +302,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.lokale-wochenzeitungen.de/feed/",
+         "title": "Lokale Wochenzeitungen \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.lvz.de/rss/feed/lvz_nachrichten",
          "title": "LVZ.de - Alle Meldungen aus dem Ressort Nachrichten",
          "type": "application/rss+xml"
@@ -1191,6 +1196,11 @@
       {
          "href": "https://www.svz.de/lokales/parchimer-zeitung/rss",
          "title": "SVZ Feed - Parchimer Zeitung",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.svz.de/lokales/zeitung-fuer-goldberg-luebz-plau/rss",
+         "title": "SVZ Feed - Zeitung f\u00fcr L\u00fcbz, Goldberg, Plau",
          "type": "application/rss+xml"
       },
       {
