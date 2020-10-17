@@ -6,6 +6,7 @@
        "BlauerBote",
        "Christoph H\u00f6rstel",
        "Claus  K\u00f6hnlein",
+       "COMPACT-Magazin",
        "Contra Magazin Redaktion",
        "Daniel Neun",
        "Daniele Ganser",
@@ -31,6 +32,7 @@
        "Jo",
        "Joconrad",
        "juergenelsaesser",
+       "J\u00fcrgen Els\u00e4sser",
        "klagemauerTV",
        "LHAdmin",
        "manuelcmittas",
@@ -124,6 +126,10 @@
       {
          "href": "https://xn--christoph-hrstel-wwb.de/feed/",
          "title": "Christoph H\u00f6rstel \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.compact-online.de/feed",
          "type": "application/rss+xml"
       },
       {

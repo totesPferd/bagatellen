@@ -37,6 +37,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://eulenspiegel-zeitschrift.de/feed/",
+         "title": "Das Satiremagazin EULENSPIEGEL \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://exportabel.wordpress.com/feed/",
          "title": "Exportabel \u00bb Feed",
          "type": "application/rss+xml"
@@ -416,6 +421,31 @@
       {
          "href": "https://telegehirn.wordpress.com/feed/",
          "title": "Telegehirn \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.titanic-magazin.de/ich.war.bei.der.waffen.rss",
+         "title": "Titanic RSS - der endg\u00fcltige Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.titanic-magazin.de/badl.rss",
+         "title": "Titanic - Briefe an die Leser Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.titanic-magazin.de/vffk.rss",
+         "title": "Titanic - Vom Fachmann f\u00fcr Kenner Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.titanic-magazin.de/sc.rss",
+         "title": "Titanic - Startcartoon Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.titanic-magazin.de/dsda.rss",
+         "title": "Titanic - Das schreiben die anderen Feed",
          "type": "application/rss+xml"
       },
       {
