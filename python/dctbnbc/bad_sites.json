@@ -55,6 +55,7 @@
        "Pravda-TV",
        "Rubikons Mutmach-Redaktion",
        "Rubikons Weltredaktion",
+       "rstachowske",
        "Siegfried Trebuch",
        "Sott.net",
        "Swiss Policy Research",
@@ -354,6 +355,11 @@
          "href": "https://horicon.wordpress.com/feed/atom/",
          "title": "HoriconBlog \u00bb Feed",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "https://h0rusfalke.wordpress.com/feed/",
+         "title": "h0rusfalke \u00bb Feed",
+         "type": "application/rss+xml"
       },
       {
          "href": "https://impuls-magazin.info/feed/",
@@ -662,6 +668,11 @@
          "href": "http://www.russland.news/feed/atom/",
          "title": "russland.NEWS \u00bb Feed",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "https://ruthardstachowske.wordpress.com/feed/",
+         "title": "Prof. Dr. Ruthard Stachowske \u00bb Feed",
+         "type": "application/rss+xml"
       },
       {
          "href": "https://sciencefiles.org/feed/atom/",
