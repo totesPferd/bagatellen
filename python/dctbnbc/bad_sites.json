@@ -3,6 +3,7 @@
        "Alpenparlament",
        "Angelika M\u00fcller",
        "Anti-Spiegel",
+       "bertgartner",
        "Birgit St\u00f6ger",
        "BlauerBote",
        "Christoph H\u00f6rstel",
@@ -106,6 +107,11 @@
       {
          "href": "http://attnang.info/feed/atom",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "http://bertehgartner.com/?feed=rss2",
+         "title": " \u00bb Feed",
+         "type": "application/rss+xml"
       },
       {
          "href": "http://bewusst.tv/feed/atom/",
@@ -286,6 +292,11 @@
          "type": "application/atom+xml"
       },
       {
+         "href": "https://www.gesundheitlicheaufklaerung.de/feed/",
+         "title": "Gesundheitliche Aufkl\u00c3\u00a4rung \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://gloria.tv/feed/",
          "type": "application/rss+xml"
       },
@@ -392,6 +403,11 @@
          "href": "https://www.lyrik-klinge.de/feed/atom/",
          "title": "RSS 2.0",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "https://impfen-nein-danke.de/feed/",
+         "title": "Impfen? Nein, danke \u00bb Feed",
+         "type": "application/rss+xml"
       },
       {
          "href": "https://impfentscheid.ch/feed/",
