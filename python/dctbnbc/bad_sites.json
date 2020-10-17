@@ -394,6 +394,16 @@
          "type": "application/atom+xml"
       },
       {
+         "href": "https://impfentscheid.ch/feed/",
+         "title": "Netzwerk Impfentscheid \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://impfentscheid.info/feed/",
+         "title": "Netzwerk Impfentscheid \u00dcbersichtsseite \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://itmedialaw.com/feed/atom/",
          "title": "ITMediaLaw - Rechtsanwalt Marian H\u00e4rtel \u00bb Feed",
          "type": "application/atom+xml"
@@ -410,6 +420,11 @@
       },
       {
          "href": "http://klagemauer.tv/rss.php?lang=de",
+         "title": "RSS",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.kla.tv/rss.php?lang=de",
          "title": "RSS",
          "type": "application/rss+xml"
       },
