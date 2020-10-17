@@ -1,6 +1,7 @@
 {
    "authors": [
        "Alpenparlament",
+       "Angelika M\u00fcller",
        "Anti-Spiegel",
        "Birgit St\u00f6ger",
        "BlauerBote",
@@ -9,6 +10,7 @@
        "COMPACT-Magazin",
        "Contra Magazin Redaktion",
        "Daniel Neun",
+       "Daniel Trappitsch",
        "Daniele Ganser",
        "David Berger",
        "Dirk Pohlmann",
@@ -173,6 +175,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://efi-online.de/feed/",
+         "title": "Eltern f\u00fcr Impfaufkl\u00e4rung \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.eike-klima-energie.eu/feed/",
          "title": "EIKE - Europ\u00e4isches Institut f\u00fcr Klima & Energie \u00bb Feed",
          "type": "application/rss+xml"
@@ -248,6 +255,15 @@
          "type": "application/atom+xml"
       },
       {
+         "href": "https://www.gen-ethisches-netzwerk.de/rss.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.gerald-huether.de/feed/",
+         "title": "Gerald H\u00fcther |\u00a0Offizielle Webseite \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.wisnewski.ch/feed/",
          "title": "Gerhard Wisnewski \u00bb Feed",
          "type": "application/rss+xml"
@@ -282,6 +298,10 @@
          "type": "application/atom+xml"
       },
       {
+         "href": "http://hagengrell.de/rss",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://haunebu7.wordpress.com/feed/atom/",
          "title": "Haunebu7's Blog \u00bb Feed",
          "type": "application/rss+xml"
@@ -307,12 +327,8 @@
          "type": "application/atom+xml"
       },
       {
-         "href": "https://www.gerald-huether.de/feed/",
-         "title": "Gerald H\u00fcther |\u00a0Offizielle Webseite \u00bb Feed",
-         "type": "application/rss+xml"
-      },
-      {
-         "href": "http://hagengrell.de/rss",
+         "href": "https://impuls-magazin.info/feed/",
+         "title": "IMPULS \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
