@@ -894,6 +894,106 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://saechsische.de/rss/sachsen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.saechsische.de/rss/dynamo",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.saechsische.de/rss/politik",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.saechsische.de/rss/wirtschaft",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.saechsische.de/rss/feuilleton",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.saechsische.de/rss/sport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.saechsische.de/rss/deutschland-welt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.saechsische.de/rss/dresden",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.saechsische.de/rss/bautzen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.saechsische.de/rss/bischofswerda",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.saechsische.de/rss/dippoldiswalde",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.saechsische.de/rss/doebeln",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.saechsische.de/rss/freital",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.saechsische.de/rss/grossenhain",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.saechsische.de/rss/goerlitz",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.saechsische.de/rss/kamenz",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.saechsische.de/rss/loebau",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.saechsische.de/rss/meissen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.saechsische.de/rss/niesky",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.saechsische.de/rss/pirna",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.saechsische.de/rss/radeberg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.saechsische.de/rss/radebeul",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.saechsische.de/rss/riesa",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.saechsische.de/rss/sebnitz",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.saechsische.de/rss/zittau",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.sn-online.de/rss/feed/sn_schlagzeilen",
          "title": "sn-online.de - Meldungen aus allen Ressorts",
          "type": "application/rss+xml"
