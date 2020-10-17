@@ -1,7 +1,71 @@
 {
    "sites": [
       {
+         "href": "https://www.aachener-zeitung.de/feed.rss",
+         "title": "RSS Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.augsburger-allgemeine.de/rss",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://bnn.de/feed",
+         "title": "Badische Neueste Nachrichten \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.berliner-kurier.de/feed.xml",
+         "title": "RSS Feed Berliner Kurier",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.campus38.de/newsfeed.xml",
+         "title": "Campus38 - Der Ostfalia Newsroom",
+         "type": "application/atom+xml"
+      },
+      {
          "href": "https://www.cicero.de/rss.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.dnn.de/rss/feed/dnn_nachrichten",
+         "title": "dnn.de - Ressort Nachrichten",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.dnn.de/rss/feed/dnn_dresden",
+         "title": "dnn.de - Ressort Dresden",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.dnn.de/rss/feed/dnn_region",
+         "title": "dnn.de - Ressort Region",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.dnn.de/rss/feed/dnn_mitteldeutschland",
+         "title": "dnn.de - Ressort Mitteldeutschland",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.dnn.de/rss/feed/dnn_kultur",
+         "title": "dnn.de - Ressort Kultur",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.dnn.de/rss/feed/dnn_sport",
+         "title": "dnn.de - Ressort Sport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.dnn.de/rss/feed/dnn_ratgeber",
+         "title": "dnn.de - Ressort Ratgeber",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.dnn.de/rss/feed/dnn_reise",
+         "title": "dnn.de - Ressort Reise",
          "type": "application/rss+xml"
       },
       {
@@ -41,8 +105,22 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.abendblatt.de/rss",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.mdr.de/home/mdr-homepage-120-rss.xml",
+         "title": "mdr.de \u2013 Radio, Fernsehen, Nachrichten f\u00fcr Mitteldeutschland",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.merkur.de/rssfeed.rdf",
          "title": "Startseite",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ndr.de/homepage985-rss2.xml",
+         "title": "NDR.de - Das Beste am Norden",
          "type": "application/rss+xml"
       },
       {
@@ -426,11 +504,21 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.swr.de/~atom/index.xml",
+         "title": "Seite als Atom-Feed",
+         "type": "application/atom+xml"
+      },
+      {
          "href": "https://www.thueringer-allgemeine.de/rss",
          "type": "application/rss+xml"
       },
       {
          "href": "https://www.vice.com/de/rss",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.wdr.de/uebersicht-100.feed",
+         "title": "RSS",
          "type": "application/rss+xml"
       },
       {
