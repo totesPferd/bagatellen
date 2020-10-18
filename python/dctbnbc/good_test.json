@@ -4074,6 +4074,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.kreiszeitung.de/lokales/rotenburg/rssfeed.rdf",
+         "title": "Landkreis Rotenburg",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.ksta.de/feed/index.rss",
          "title": "RSS Feed",
          "type": "application/rss+xml"
@@ -4877,6 +4882,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://n-land.de/verlag/pegnitz-zeitung/feed",
+         "title": "N-LAND \u00bb Pegnitz Zeitung Verlag Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.nnn.de/rss",
          "title": "NNN Feed - Home",
          "type": "application/rss+xml"
@@ -4884,6 +4894,11 @@
       {
          "href": "https://www.nordbayern.de/cmlink/15.712?cid=2.264",
          "title": "Neumarkt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.nordbayern.de/cmlink/15.712?cid=2.216",
+         "title": "Schwabach",
          "type": "application/rss+xml"
       },
       {
@@ -5161,6 +5176,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.odw-journal.de/feed/",
+         "title": "Odenw\u00e4lder Journal \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.op-marburg.de/rss/feed/op_marburg",
          "title": "op-marburg.de - Ressort Marburg",
          "type": "application/rss+xml"
@@ -5183,6 +5203,16 @@
       {
          "href": "https://www.op-marburg.de/rss/feed/op_hinterland",
          "title": "op-marburg.de - Ressort Hinterland",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.op-online.de/rssfeed.rdf",
+         "title": "op-online.de",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://ost-friesland.de/feed/",
+         "title": "ost-friesland.de \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
@@ -5305,6 +5335,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.oz-online.de/news.rss",
+         "title": "Aktuelle News",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.paz-online.de/rss/feed/paz_peinerland",
          "title": "paz-online.de - Ressort Peiner Land",
          "type": "application/rss+xml"
@@ -5350,13 +5385,159 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.pbams.de/feed/",
+         "title": "Paderborn am Sonntag \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.prignitzer.de/rss",
          "title": "Prignitzer Feed - Home",
          "type": "application/rss+xml"
       },
       {
+         "href": "https://ratingerzeitung.de/feed",
+         "title": "Ratinger Zeitung Presse Ratingen ONLINE \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://feeds.feedburner.com/Rems-Zeitung-Lokalnachrichten",
+         "title": "Rems-Zeitung Lokalnachrichten",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://feeds.feedburner.com/Rems-Zeitung-Stadt",
+         "title": "Rems-Zeitung Schw\u00e4bisch Gm\u00fcnd",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://feeds.feedburner.com/Rems-Zeitung-Landkreis",
+         "title": "Rems-Zeitung Ostalb",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://feeds.feedburner.com/Rems-Zeitung-Rems-Murr",
+         "title": "Rems-Zeitung Rems-Murr",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://feeds.feedburner.com/Rems-Zeitung-Kultur",
+         "title": "Rems-Zeitung Kultur",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://feeds.feedburner.com/Rems-Zeitung-Sport",
+         "title": "Rems-Zeitung Sport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://feeds.feedburner.com/Rems-Zeitung-Blaulicht",
+         "title": "Rems-Zeitung Blaulicht",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.rga.de/rssfeed.rdf",
+         "title": "Remscheider General-Anzeiger",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.rheinische-anzeigenblaetter.de/feed/mein-blatt/koelner-wochenspiegel/index.rss",
          "title": "RSS Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.rhein-zeitung.de/feed/100-Rhein-Zeitung_Koblenz_und_Region.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.rhein-zeitung.de/feed/101-Rhein-Zeitung_Andernach_und_Mayen.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.rhein-zeitung.de/feed/102-Rhein-Zeitung_Kreis_Ahrweiler.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.rhein-zeitung.de/feed/103-Rhein-Zeitung_Kreis_Altenkirchen.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.rhein-zeitung.de/feed/104-Rhein-Zeitung_Kreis_Neuwied.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.rhein-zeitung.de/feed/105-Rhein-Zeitung_Kreis_Cochem-Zell.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.rhein-zeitung.de/feed/106-Westerwaelder_Zeitung.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.rhein-zeitung.de/feed/107-Rhein-Hunsrueck-Zeitung.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.rhein-zeitung.de/feed/108-Oeffentlicher_Anzeiger.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.rhein-zeitung.de/feed/109-Nahe-Zeitung.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.rhein-zeitung.de/feed/110-Rhein-Lahn-Zeitung_Diez.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.rhein-zeitung.de/feed/111-Rhein-Lahn-Zeitung_Bad_Ems.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.rhein-zeitung.de/feed/112-Rhein-Zeitung-Lokalsport_Koblenz_und_Region.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.rhein-zeitung.de/feed/113-Rhein-Zeitung-Lokalsport_Kreis_Neuwied.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.rhein-zeitung.de/feed/114-Rhein-Zeitung-Lokalsport_Andernach_und_Mayen.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.rhein-zeitung.de/feed/115-Rhein-Zeitung-Lokalsport_Kreis_Altenkirchen.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.rhein-zeitung.de/feed/116-Rhein-Zeitung-Lokalsport_Kreis_Ahrweiler.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.rhein-zeitung.de/feed/117-Rhein-Zeitung-Lokalsport_Kreis_Cochem-Zell.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.rhein-zeitung.de/feed/118-Nahe-Zeitung-Lokalsport.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.rhein-zeitung.de/feed/119-Oeffentlicher_Anzeiger-Lokalsport.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.rhein-zeitung.de/feed/120-Rhein-Hunsrueck-Zeitung-Lokalsport.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.rhein-zeitung.de/feed/121-Rhein-Lahn-Zeitung-Lokalsport.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.rhein-zeitung.de/feed/122-Westerwaelder-Zeitung-Lokalsport.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.rhein-zeitung.de/feed/123-topthemen-kurz.xml",
          "type": "application/rss+xml"
       },
       {
@@ -5470,6 +5651,16 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.schwaebische-post.de/rss/?startseite",
+         "title": "RSS-Feed der Schw\u00e4bischen Post",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.schwarzwaelder-bote.de/.rss.feed",
+         "title": "Schwarzw\u00e4lder Bote RSS Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.shz.de/rss",
          "title": "SHZ Feed - Home",
          "type": "application/rss+xml"
@@ -5580,6 +5771,16 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.shz.de/lokales/schenefelder-tageblatt/rss",
+         "title": "SHZ Feed - Schenefelder Tageblatt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.siegener-zeitung.de/rss",
+         "title": "Neueste Beitr\u00e4ge auf Siegener Zeitung",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.sn-online.de/rss/feed/sn_schaumburg",
          "title": "sn-online.de - Alle Meldungen aus dem Ressort Schaumburg",
          "type": "application/rss+xml"
@@ -5587,11 +5788,6 @@
       {
          "href": "https://www.sn-online.de/rss/feed/sn_politik",
          "title": "sn-online.de - Alle Meldungen aus dem Ressort Politik",
-         "type": "application/rss+xml"
-      },
-      {
-         "href": "https://www.shz.de/lokales/schenefelder-tageblatt/rss",
-         "title": "SHZ Feed - Schenefelder Tageblatt",
          "type": "application/rss+xml"
       },
       {
@@ -5636,6 +5832,16 @@
       },
       {
          "href": "https://www.stimme.de/storage/rss/rss/polizeiticker/polizei.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://stuttgart-journal.de/tp3/feed/",
+         "title": "Stuttgart Journal \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.suderburg-online.de/feed/",
+         "title": "suderburg-online \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
@@ -5734,7 +5940,17 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.tagespost-speyer.de/feed/",
+         "title": "Tagespost \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.thueringer-allgemeine.de/rss",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.tif-tuebingen.de/?feed=rss2",
+         "title": "T\u00fcbingen im Fokus \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
@@ -5967,6 +6183,10 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.vogtland-anzeiger.de/rss/rss.php",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.waz.de/rss",
          "type": "application/rss+xml"
       },
@@ -6021,6 +6241,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.weser-kurier.de/pagefeed/1001.xml",
+         "title": "Feed: Startseite",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.wochenanzeiger.de/rss/47.xml",
          "title": "RSS-Feed f\u00fcr Wochenanzeiger.de",
          "type": "application/rss+xml"
@@ -6037,6 +6262,11 @@
       },
       {
          "href": "https://www.wr.de/rss",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.zak.de/News/Balingen.rss",
+         "title": "",
          "type": "application/rss+xml"
       },
       {
