@@ -1850,6 +1850,61 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.badisches-tagblatt.de/News/LokalesBadenBaden.rss",
+         "title": "Baden-Baden",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.badisches-tagblatt.de/News/LokalesB\u00fchl.rss",
+         "title": "B\u00fchl",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.badisches-tagblatt.de/News/LokalesRastatt.rss",
+         "title": "Rastatt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.badisches-tagblatt.de/News/LokalesMurgtal.rss",
+         "title": "Murgtal",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.badisches-tagblatt.de/News/BlickInsLand.rss",
+         "title": "Blick ins Land",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.badisches-tagblatt.de/News/Kultur.rss",
+         "title": "Kultur",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.badisches-tagblatt.de/News/TopStorys.rss",
+         "title": "Top-Story",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.badisches-tagblatt.de/News/KulturRegional.rss",
+         "title": "Kultur Regional",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.badisches-tagblatt.de/News/SportRegional.rss",
+         "title": "Sport Regional",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.bautzenerbote.de/feed/",
+         "title": "Bautzener Bote \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.bbv-net.de/News/FITest.rss",
+         "title": "",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.bkz.de/nachrichten.rss",
          "type": "application/rss+xml"
       },
@@ -1869,6 +1924,11 @@
       },
       {
          "href": "https://www.braunschweiger-zeitung.de/rss",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.bz-berlin.de/feed",
+         "title": "RSS B.Z.",
          "type": "application/rss+xml"
       },
       {
