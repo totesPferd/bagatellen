@@ -37,6 +37,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://scienceblogs.de/diaxs-rake/feed/",
+         "title": "Diax's Rake \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://dudelsack.blogger.de/rss",
          "title": "RSS Feed",
          "type": "application/rss+xml"
@@ -63,6 +68,11 @@
       {
          "href": "https://florian-freistetter.de/feed/",
          "title": "Florian Freistetter - Astrodicticum Simplex \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://scienceblogs.de/frischer-wind/feed/",
+         "title": "Frischer Wind \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
@@ -514,6 +524,11 @@
       {
          "href": "https://wordpress.com/blog/feed/",
          "title": "WordPress.com Blog",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://scienceblogs.de/zoonpolitikon/feed/",
+         "title": "zoon politikon \u00bb Feed",
          "type": "application/rss+xml"
       }
    ]
