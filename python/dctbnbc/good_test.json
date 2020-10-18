@@ -4079,6 +4079,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.kurier.de/.rss.feed",
+         "title": "Nordbayerischer Kurier RSS Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.l-iz.de/feed",
          "title": "L-IZ.de \u00bb Feed",
          "type": "application/rss+xml"
@@ -4847,6 +4852,21 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.nez.de/feed/",
+         "title": "Niederelbe-Zeitung \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.niederlausitz-aktuell.de/rss.html?format=feed",
+         "title": "RSS Feed f\u00c3\u00bcr niederlausitz-aktuell.de",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.niederrheinzeitung.de/?format=feed&type=rss",
+         "title": "RSS 2.0",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://n-land.de/verlag/der-bote/feed",
          "title": "N-LAND \u00bb Der Bote Verlag Feed",
          "type": "application/rss+xml"
@@ -4859,6 +4879,11 @@
       {
          "href": "https://www.nnn.de/rss",
          "title": "NNN Feed - Home",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.nordbayern.de/cmlink/15.712?cid=2.264",
+         "title": "Neumarkt",
          "type": "application/rss+xml"
       },
       {
@@ -5122,7 +5147,42 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.nrwz.de/feed",
+         "title": "NRWZ.de \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.nrz.de/rss",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.ntz.de/rss/rss.xml",
+         "title": "RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.op-marburg.de/rss/feed/op_marburg",
+         "title": "op-marburg.de - Ressort Marburg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.op-marburg.de/rss/feed/op_ostkreis",
+         "title": "op-marburg.de - Ressort Ostkreis",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.op-marburg.de/rss/feed/op_nordkreis",
+         "title": "op-marburg.de - Ressort Nordkreis",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.op-marburg.de/rss/feed/op_s\u00fcdkreis",
+         "title": "op-marburg.de - Ressort S\u00fcdkreis",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.op-marburg.de/rss/feed/op_hinterland",
+         "title": "op-marburg.de - Ressort Hinterland",
          "type": "application/rss+xml"
       },
       {
@@ -5301,6 +5361,11 @@
       },
       {
          "href": "http://rp-online.de/feed.rss",
+         "title": "RSS Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://rp-online.de/nrw/staedte/neuss/feed.rss",
          "title": "RSS Feed",
          "type": "application/rss+xml"
       },
