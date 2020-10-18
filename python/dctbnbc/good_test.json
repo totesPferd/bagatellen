@@ -6,6 +6,1798 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/nachrichten-mainz",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/stadtteile-mainz",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/stadtteile-mainz/bretzenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/stadtteile-mainz/drais",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/stadtteile-mainz/ebersheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/stadtteile-mainz/finthen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/stadtteile-mainz/gonsenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/stadtteile-mainz/hartenberg-muenchfeld",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/stadtteile-mainz/hechtsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/stadtteile-mainz/laubenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/stadtteile-mainz/lerchenberg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/stadtteile-mainz/marienborn",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/stadtteile-mainz/mombach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/stadtteile-mainz/neustadt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/stadtteile-mainz/altstadt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/stadtteile-mainz/oberstadt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/stadtteile-mainz/weisenau",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/vg-bodenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/vg-bodenheim/vg-bodenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/vg-bodenheim/bodenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/vg-bodenheim/gau-bischofsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/vg-bodenheim/harxheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/vg-bodenheim/loerzweiler",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/vg-bodenheim/nackenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/vg-nieder-olm",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/vg-nieder-olm/vg-nieder-olm",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/vg-nieder-olm/nieder-olm",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/vg-nieder-olm/stadecken-elsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/vg-nieder-olm/ober-olm",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/vg-nieder-olm/soergenloch",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/vg-nieder-olm/essenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/vg-nieder-olm/klein-winterheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/vg-nieder-olm/zornheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/vg-nieder-olm/jugenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/budenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/amoeneburg-kostheim-kastel",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/mainz/hochheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/alzey",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-alzey-land",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-alzey-land/vg-alzey-land",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-alzey-land/albig",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-alzey-land/bechenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-alzey-land/bechtolsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-alzey-land/bermersheim-v-h-d",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-alzey-land/biebelnheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-alzey-land/bornheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-alzey-land/dintesheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-alzey-land/eppelsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-alzey-land/erbes-buedesheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-alzey-land/esselborn",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-alzey-land/flomborn",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-alzey-land/flonheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-alzey-land/framersheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-alzey-land/freimersheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-alzey-land/gau-heppenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-alzey-land/gau-odernheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-alzey-land/kettenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-alzey-land/lonsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-alzey-land/mauchenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-alzey-land/nack",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-alzey-land/nieder-wiesen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-alzey-land/ober-floersheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-alzey-land/offenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-alzey-land/wahlheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-woellstein",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-woellstein/vg-woellstein",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-woellstein/eckelsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-woellstein/gau-bickelheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-woellstein/gumbsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-woellstein/siefersheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-woellstein/stein-bockenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-woellstein/wendelsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-woellstein/woellstein",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-woellstein/wonsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-woerrstadt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-woerrstadt/vg-woerrstadt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-woerrstadt/armsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-woerrstadt/ensheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-woerrstadt/gabsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-woerrstadt/gau-weinheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-woerrstadt/partenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-woerrstadt/saulheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-woerrstadt/schornsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-woerrstadt/spiesheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-woerrstadt/sulzheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-woerrstadt/udenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-woerrstadt/vendersheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-woerrstadt/wallertheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-woerrstadt/woerrstadt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-wonnegau",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-wonnegau/vg-wonnegau",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-wonnegau/bechtheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-wonnegau/bermersheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-wonnegau/dittelsheim-hessloch",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-wonnegau/frettenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-wonnegau/gundersheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-wonnegau/gundheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-wonnegau/hangen-weisheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-wonnegau/hochborn",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-wonnegau/monzernheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-wonnegau/osthofen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/vg-wonnegau/westhofen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/alzey/landkreis-alzey-worms",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/oppenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/oppenheim/oppenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/oppenheim/vg-rhein-selz",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/oppenheim/vg-rhein-selz/vg-rhein-selz",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/oppenheim/vg-rhein-selz/dalheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/oppenheim/vg-rhein-selz/dexheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/oppenheim/vg-rhein-selz/dienheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/oppenheim/vg-rhein-selz/dolgesheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/oppenheim/vg-rhein-selz/dorn-duerkheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/oppenheim/vg-rhein-selz/eimsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/oppenheim/vg-rhein-selz/friesenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/oppenheim/vg-rhein-selz/guntersblum",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/oppenheim/vg-rhein-selz/hahnheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/oppenheim/vg-rhein-selz/hillesheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/oppenheim/vg-rhein-selz/koengernheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/oppenheim/vg-rhein-selz/ludwigshoehe",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/oppenheim/vg-rhein-selz/mommenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/oppenheim/vg-rhein-selz/nierstein",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/oppenheim/vg-rhein-selz/selzen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/oppenheim/vg-rhein-selz/uelversheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/oppenheim/vg-rhein-selz/undenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/oppenheim/vg-rhein-selz/wahlheimer-hof",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/oppenheim/vg-rhein-selz/weinolsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/oppenheim/vg-rhein-selz/wintersheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/bingen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-gau-algesheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-gau-algesheim/vg-gau-algesheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-gau-algesheim/appenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-gau-algesheim/bubenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-gau-algesheim/engelstadt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-gau-algesheim/gau-algesheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-gau-algesheim/nieder-hilbersheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-gau-algesheim/ober-hilbersheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-gau-algesheim/ockenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-gau-algesheim/schwabenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-sprendlingen-gensingen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-sprendlingen-gensingen/vg-sprendlingen-gensingen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-sprendlingen-gensingen/aspisheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-sprendlingen-gensingen/badenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-sprendlingen-gensingen/gensingen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-sprendlingen-gensingen/grolsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-sprendlingen-gensingen/horrweiler",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-sprendlingen-gensingen/sprendlingen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-sprendlingen-gensingen/st-johann",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-sprendlingen-gensingen/welgesheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-sprendlingen-gensingen/wolfsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-sprendlingen-gensingen/zotzenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-rhein-nahe",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-rhein-nahe/vg-rhein-nahe",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-rhein-nahe/bacharach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-rhein-nahe/breitscheid",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-rhein-nahe/manubach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-rhein-nahe/muenster-sarmsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-rhein-nahe/niederheimbach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-rhein-nahe/oberdiebach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-rhein-nahe/oberheimbach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-rhein-nahe/trechtingshausen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-rhein-nahe/waldalgesheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bingen/vg-rhein-nahe/weiler",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/ingelheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/ingelheim/ingelheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/ingelheim/landkreis-mainz-bingen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/stadt-bad-kreuznach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/landkreis-bad-kreuznach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/vg-ruedesheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/allenfeld",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/argenschwang",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/bockenau",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/boos",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/braunweiler",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/burgsponheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/dalberg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/duchroth",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/gebroth",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/gutenberg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/hargesheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/hergenfeld",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/hueffelsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/mandel",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/muenchwald",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/niederhausen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/norheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/oberhausen-nahe",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/oberstreit",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/roxheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/ruedesheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/sankt-katharinen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/schlossboeckelheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/sommerloch",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/spabruecken",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/spall",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/sponheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/traisen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/waldboeckelheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/wallhausen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/weinsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-ruedesheim/winterbach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-langenlonsheim-stromberg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-langenlonsheim-stromberg/vg-langenlonsheim-stromberg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-langenlonsheim-stromberg/bretzenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-langenlonsheim-stromberg/daxweiler",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-langenlonsheim-stromberg/doerrebach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-langenlonsheim-stromberg/dorsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-langenlonsheim-stromberg/eckenroth",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-langenlonsheim-stromberg/guldental",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-langenlonsheim-stromberg/langenlonsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-langenlonsheim-stromberg/laubenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-langenlonsheim-stromberg/roth",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-langenlonsheim-stromberg/ruemmelsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-langenlonsheim-stromberg/schoeneberg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-langenlonsheim-stromberg/schweppenhausen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-langenlonsheim-stromberg/seibersbach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-langenlonsheim-stromberg/stromberg-stadt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-langenlonsheim-stromberg/waldlaubersheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-langenlonsheim-stromberg/warmsroth",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-langenlonsheim-stromberg/windesheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-bad-kreuznach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-bad-kreuznach/vg-bad-kreuznach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-bad-kreuznach/altenbamberg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-bad-kreuznach/biebelsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-bad-kreuznach/feilbingert",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-bad-kreuznach/frei-laubersheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-bad-kreuznach/fuerfeld",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-bad-kreuznach/hackenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-bad-kreuznach/hallgarten",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-bad-kreuznach/hochstaetten",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-bad-kreuznach/neu-bamberg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-bad-kreuznach/pfaffen-schwabenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-bad-kreuznach/pleitersheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-bad-kreuznach/tiefenthal",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-kreuznach/vg-bad-kreuznach/volxheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-sobernheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-sobernheim/vg-bad-sobernheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-sobernheim/vg-bad-sobernheim/vg-bad-sobernheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-sobernheim/vg-bad-sobernheim/auen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-sobernheim/vg-bad-sobernheim/baerweiler",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-sobernheim/vg-bad-sobernheim/daubach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-sobernheim/vg-bad-sobernheim/ippenschied",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-sobernheim/vg-bad-sobernheim/kirschroth",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-sobernheim/vg-bad-sobernheim/langenthal",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-sobernheim/vg-bad-sobernheim/lauschied",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-sobernheim/vg-bad-sobernheim/martinstein",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-sobernheim/vg-bad-sobernheim/meddersheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-sobernheim/vg-bad-sobernheim/merxheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-sobernheim/vg-bad-sobernheim/monzingen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-sobernheim/vg-bad-sobernheim/nussbaum",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-sobernheim/vg-bad-sobernheim/odernheim-am-glan",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-sobernheim/vg-bad-sobernheim/rehbach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-sobernheim/vg-bad-sobernheim/seesbach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-sobernheim/vg-bad-sobernheim/sobernheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-sobernheim/vg-bad-sobernheim/staudernheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-sobernheim/vg-bad-sobernheim/weiler-b-monzingen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-sobernheim/vg-bad-sobernheim/winterburg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-sobernheim/meisenheim-idar-oberstein",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/kirn",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/kirn/kirn",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/kirn/vg-kirn-land",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/kirn/vg-kirn-land/vg-kirn-land",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/kirn/vg-kirn-land/baerenbach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/kirn/vg-kirn-land/becherbach-b-kirn",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/kirn/vg-kirn-land/brauweiler",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/kirn/vg-kirn-land/burschied",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/kirn/vg-kirn-land/hahnenbach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/kirn/vg-kirn-land/heimweiler",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/kirn/vg-kirn-land/heinzenberg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/kirn/vg-kirn-land/hennweiler",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/kirn/vg-kirn-land/hochstetten-dhaun",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/kirn/vg-kirn-land/horbach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/kirn/vg-kirn-land/kellenbach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/kirn/vg-kirn-land/koenigsau",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/kirn/vg-kirn-land/limbach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/kirn/vg-kirn-land/meckenbach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/kirn/vg-kirn-land/oberhausen-b-kirn",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/kirn/vg-kirn-land/otzweiler",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/kirn/vg-kirn-land/schwarzerden",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/kirn/vg-kirn-land/schneppenbach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/kirn/vg-kirn-land/simmertal",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/kirn/vg-kirn-land/weitersborn",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/bad-sobernheim/meisenheim-idar-oberstein",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/rheinhessen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/rhein-main",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/blogs",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/blogs/im-auto-mobil",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/blogs/kth-spielt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/blogs/anjas-lookbook",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/blogs/breidenbachs-woche",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/blogs/zeit-lupe",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/lokales/blogs/rehberg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/fussball",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/fussball/eintracht-frankfurt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/fussball/mainz-05",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/fussball/darmstadt98",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/fussball/fc-kaiserslautern",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/fussball/mainz",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/fussball/alzey",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/fussball/bad-kreuznach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/fussball/bingen-ingelheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/fussball/zweite-bundesliga",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/fussball/bundesliga",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/fussball/nationalmannschaft",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/fussball/frauen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/fussball/dfb-pokal",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/fussball/championsleague",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/fussball/europa-league",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/fussball/auslandsfussball",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/fussball/nachrichten",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/handball",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/handball/meenzer-dynamites",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/handball/mainz",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/handball/alzey",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/handball/bad-kreuznach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/handball/bingen-ingelheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/handball/dritte-bundesliga",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/handball/zweite-bundesliga",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/handball/bundesliga",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/handball/handball",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/basketball",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/basketball/mainz",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/basketball/alzey",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/basketball/bad-kreuznach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/basketball/bingen-ingelheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/basketball/basketball",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/boxen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/eishockey/eishockey",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/e-sport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/golf",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/hockey",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/hockey/mainz",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/hockey/alzey",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/hockey/bad-kreuznach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/hockey/bingen-ingelheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/leichtathletik",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/leichtathletik/mainz",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/leichtathletik/leichtathletik",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/motorsport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/motorsport/formel-1",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/motorsport/motorenmix",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/pferdesport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/radsport/radsport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/radsport/radsport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/ringen/mainz",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/schwimmen/mainz",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/tennis",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/tennis/mainz",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/tennis/alzey",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/tennis/bad-kreuznach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/tennis/bingen-ingelheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/tennis/tennis",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/tischtennis",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/tischtennis/mainz",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/tischtennis/alzey",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/tischtennis/bad-kreuznach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/tischtennis/bingen-ingelheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/us-sport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/us-sport/mainz",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/us-sport/wiesbaden",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/us-sport/us-sport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/volleyball",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/volleyball/mainz",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/volleyball/alzey",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/volleyball/bad-kreuznach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/volleyball/bingen-ingelheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/wintersport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/wintersport/skispringen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/wintersport/ski-alpin",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/wintersport/ski-nordisch",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/wintersport/biathlon",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/wintersport/bob",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/wintersport/schlitten",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/wintersport/weitere",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/weitere-sportarten",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/weitere-sportarten/mainz",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/weitere-sportarten/alzey",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/weitere-sportarten/bad-kreuznach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/weitere-sportarten/bingen-ingelheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/sport/weitere-sportarten/sportmix",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/politik",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/politik/thema-des-tages",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/politik/rheinland-pfalz",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/politik/hessen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/politik/deutschland",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/politik/ausland",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/wirtschaft",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/wirtschaft/wirtschaft-regional",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/wirtschaft/wirtschaft-ueberregional",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/wirtschaft/geld-und-recht",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/wirtschaft/geldmarkt-aktuell",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/wirtschaft/verbrauchertipps",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/panorama",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/panorama/leben-und-wissen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/panorama/aus-aller-welt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/freizeit",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/freizeit/kunst-und-kultur",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/freizeit/kunst-und-kultur/kulturnachrichten",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/freizeit/kunst-und-kultur/ausstellungen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/freizeit/kunst-und-kultur/literatur",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/freizeit/kunst-und-kultur/musik",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/freizeit/kunst-und-kultur/theater",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/freizeit/essen-trinken",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/freizeit/kino",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/auto-und-motorrad",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/auto-und-motorrad/kfz",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/auto-und-motorrad/motorraeder",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/auto-und-motorrad/oldtimer-und-gebrauchte",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/auto-und-motorrad/neue-modelle",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/auto-und-motorrad/autotests",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/auto-und-motorrad/recht-im-verkehr",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/internet-und-elektronik",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/internet-und-elektronik/digitales",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/internet-und-elektronik/games",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/internet-und-elektronik/technik-abc",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/internet-und-elektronik/recht-im-netz",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/bauen-und-wohnen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/bauen-und-wohnen/wohnen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/bauen-und-wohnen/garten",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/bauen-und-wohnen/mietrecht",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/bauen-und-wohnen/umwelt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/leben-und-geniessen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/leben-und-geniessen/familie",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/leben-und-geniessen/recht-im-familienleben",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/leben-und-geniessen/tier",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/leben-und-geniessen/ernaehrung",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/leben-und-geniessen/rezept-der-woche",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/gesundheit-und-wellness",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/gesundheit-und-wellness/gesundheit",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/gesundheit-und-wellness/wellness-und-fitness",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/gesundheit-und-wellness/recht-auf-gesundheit",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/ausbildung-und-beruf",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/ausbildung-und-beruf/beruf",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/ausbildung-und-beruf/ausbildung-und-studium",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/ausbildung-und-beruf/recht-im-beruf",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/reise",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/reise/reisen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/reise/reiseberichte",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/reise/deutschland-reise",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/reise/gesundheit-auf-reisen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.allgemeine-zeitung.de/rss/ratgeber/reise/recht-auf-reisen",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.augsburger-allgemeine.de/rss",
          "type": "application/rss+xml"
       },
