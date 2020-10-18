@@ -210,6 +210,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.markusgrill.eu/rss/blog",
+         "title": "Blog",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://medienelite.de/feed/",
          "title": "Medienelite \u00bb Feed",
          "type": "application/rss+xml"
@@ -440,6 +445,11 @@
       {
          "href": "https://blog.psiram.com/feed/",
          "title": "RSS 2.0 - Alle Artikel",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.rudolf-henke.de/feed/",
+         "title": "Rudolf Henke \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
