@@ -12,6 +12,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.aerzteblatt.de/rss/news.asp?_lnsXts=20200908134849",
+         "title": "Deutsches \u00c4rzteblatt - Aktuelles",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://bersarin.wordpress.com/feed/",
          "title": "AISTHESIS \u00bb Feed",
          "type": "application/rss+xml"
@@ -37,6 +42,10 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://edzardernst.com/feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://eulenspiegel-zeitschrift.de/feed/",
          "title": "Das Satiremagazin EULENSPIEGEL \u00bb Feed",
          "type": "application/rss+xml"
@@ -49,6 +58,11 @@
       {
          "href": "http://blog.fefe.de/rss.xml?html",
          "title": "HTML-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://florian-freistetter.de/feed/",
+         "title": "Florian Freistetter - Astrodicticum Simplex \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
@@ -178,6 +192,11 @@
       {
          "href": "http://www.kritiknetz.de/?format=feed&type=rss",
          "title": "RSS 2.0",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://fischblog.com/feed/",
+         "title": "Lars Fischer \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
@@ -404,8 +423,18 @@
          "type": "application/atom+xml"
       },
       {
+         "href": "https://blog.gwup.net/feed/",
+         "title": "gwup | die skeptiker \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://pestarzt.blog/feed/",
          "title": "pestarzt \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://scienceblogs.de/plazeboalarm/index.php/feed/",
+         "title": "Plazeboalarm \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
@@ -417,6 +446,16 @@
          "href": "https://www.rusfunker.com/feeds/posts/default",
          "title": "Russischer Funker - Atom",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "https://www.scheloske.net/feed/",
+         "title": "Marc Scheloske \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "http://www.spiegelblog.net/feed",
+         "title": "SPIEGELblog RSS Feed",
+         "type": "application/rss+xml"
       },
       {
          "href": "https://stuetzendergesellschaft.wordpress.com/feed/",
@@ -455,6 +494,11 @@
       },
       {
          "href": "https://www.volksverpetzer.de/rss",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://weitergen.de/feed/",
+         "title": "WeiterGen \u00bb Feed",
          "type": "application/rss+xml"
       },
       {

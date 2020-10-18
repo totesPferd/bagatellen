@@ -103,6 +103,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://sixtus.net/feed/",
+         "title": "Mario Sixtus \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www1.wdr.de/daserste/monitor/indexmonitor100.feed",
          "title": "RSS",
          "type": "application/rss+xml"

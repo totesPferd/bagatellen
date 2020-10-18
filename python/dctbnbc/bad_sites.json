@@ -36,6 +36,7 @@
        "Jens Bernert",
        "Jo",
        "Joconrad",
+       "Jocy",
        "J\u00f6rg Spitz",
        "juergenelsaesser",
        "J\u00fcrgen Els\u00e4sser",
@@ -68,6 +69,7 @@
        "Ullrich Mies",
        "Ulrich Heyden",
        "uncut-news.ch",
+       "volksbetrugpunktnet",
        "Watergate Redaktion"
    ],
    "sites": [
@@ -447,6 +449,11 @@
          "href": "https://itmedialaw.com/feed/atom/",
          "title": "ITMediaLaw - Rechtsanwalt Marian H\u00e4rtel \u00bb Feed",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "https://www.jocelyne-lopez.de/blog/feed/",
+         "title": "RSS 2.0",
+         "type": "application/rss+xml"
       },
       {
          "href": "https://jungefreiheit.de/feed/atom/",
@@ -967,8 +974,8 @@
          "type": "application/atom+xml"
       },
       {
-         "href": "https://www.voltairenet.org/spip.php?page=backend&id_secteur=1110&lang=de",
-         "title": "Voltaire Netzwerk (Deutsch)",
+         "href": "https://volksbetrugpunktnet.wordpress.com/feed/",
+         "title": "volksbetrug.net \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
@@ -979,6 +986,11 @@
       {
          "href": "https://www.vollendungderseele.com/feed/",
          "title": "Vollendung der Seele \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.voltairenet.org/spip.php?page=backend&id_secteur=1110&lang=de",
+         "title": "Voltaire Netzwerk (Deutsch)",
          "type": "application/rss+xml"
       },
       {
