@@ -10,6 +10,54 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.abendzeitung-muenchen.de/storage/rss/rss/alle-artikel-abendzeitung.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.abendzeitung-muenchen.de/storage/rss/rss/bayern-abendzeitung.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.abendzeitung-muenchen.de/storage/rss/rss/fc-bayern-news-abendzeitung.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.abendzeitung-muenchen.de/storage/rss/rss/kultur-news-abendzeitung.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.abendzeitung-muenchen.de/storage/rss/rss/muenchen-news-abendzeitung.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.abendzeitung-muenchen.de/storage/rss/rss/panorama-abendzeitung.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.abendzeitung-muenchen.de/storage/rss/rss/politik-abendzeitung.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.abendzeitung-muenchen.de/storage/rss/rss/promi-news-abendzeitung.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.abendzeitung-muenchen.de/storage/rss/rss/sport-abendzeitung.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.abendzeitung-muenchen.de/storage/rss/rss/top-news-abendzeitung.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.abendzeitung-muenchen.de/storage/rss/rss/tsv-1860-news-abendzeitung.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.abendzeitung-muenchen.de/storage/rss/rss/tv-abendzeitung.xml",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://bnn.de/feed",
          "title": "Badische Neueste Nachrichten \u00bb Feed",
          "type": "application/rss+xml"
