@@ -1850,6 +1850,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "http://diebadhonnefer.de/feed/",
+         "title": "HWZ \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.badisches-tagblatt.de/News/LokalesBadenBaden.rss",
          "title": "Baden-Baden",
          "type": "application/rss+xml"
@@ -1988,6 +1993,227 @@
       {
          "href": "https://www.dnn.de/rss/feed/dnn_reise",
          "title": "dnn.de - Ressort Reise",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/bayern.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/bayern.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/beilngries.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/beilngries.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/eichstaett.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/eichstaett.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/erc-berichte.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/erc-berichte.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/erc-bilder-videos.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/erc-bilder-videos.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/fci-berichte.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/fci-berichte.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/fci-bilder-videos.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/fci-bilder-videos.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/hilpoltstein.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/hilpoltstein.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/ingolstadt.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/ingolstadt.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/kultur.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/kultur.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/kurzmeldungen.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/kurzmeldungen.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/lokale-wirtschaft.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/lokale-wirtschaft.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/lokalsport-eih.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/lokalsport-eih.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/lokalsport-hip.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/lokalsport-hip.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/lokalsport-in.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/lokalsport-in.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/lokalsport-jugend.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/lokalsport-jugend.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/lokalsport-paf.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/lokalsport-paf.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/lokalsport-rid.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/lokalsport-rid.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/lokalsport-sob.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/lokalsport-sob.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/nachrichten.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/nachrichten.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/neuburg.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/neuburg.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/pfaffenhofen.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/pfaffenhofen.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/polizeimeldungen.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/polizeimeldungen.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/riedenburg.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/riedenburg.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/schrobenhausen.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/schrobenhausen.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/sport-football.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/sport-football.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/wirtschaft.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.donaukurier.de/storage/rss/rss/wirtschaft.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://dreieich-zeitung.de/feed/",
+         "title": "Dreieich Zeitung \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
@@ -2925,6 +3151,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.dieharke.de/News/Lokales.rss",
+         "title": "",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://harlinger.de/feed/",
          "title": "Anzeiger f\u00fcr Harlinger \u00bb Feed",
          "type": "application/rss+xml"
@@ -3231,6 +3462,11 @@
       {
          "href": "https://www.neuepresse.de/rss/feed/np_hannover96",
          "title": "neuepresse.de - Ressort Hannover96 RSS-Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://n-land.de/verlag/der-bote/feed",
+         "title": "N-LAND \u00bb Der Bote Verlag Feed",
          "type": "application/rss+xml"
       },
       {
@@ -3919,6 +4155,11 @@
       {
          "href": "https://www.sn-online.de/rss/feed/sn_medien",
          "title": "sn-online.de - Alle Meldungen aus dem Ressort Medien",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.sonntagsblatt.de/rss.xml",
+         "title": "Startseite",
          "type": "application/rss+xml"
       },
       {
