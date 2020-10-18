@@ -1936,6 +1936,16 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.cn-online.de/feed/",
+         "title": "Cuxhavener Nachrichten \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.cn-online.de/tageszeitung-fuer-die-stadt-cuxhaven/feed/",
+         "title": "Cuxhavener Nachrichten \u00bb Tageszeitung f\u00fcr die Stadt Cuxhaven Kommentar-Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://dawo-dresden.de/feed/",
          "title": "DAWO! - Dresden am Wochenende \u00bb Feed",
          "type": "application/rss+xml"
@@ -1978,6 +1988,850 @@
       {
          "href": "https://www.dnn.de/rss/feed/dnn_reise",
          "title": "dnn.de - Ressort Reise",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/darmstadt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/darmstadt-dieburg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/darmstadt-dieburg/kreis-darmstadt-dieburg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/darmstadt-dieburg/alsbach-haehnlein",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/darmstadt-dieburg/babenhausen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/darmstadt-dieburg/bickenbach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/darmstadt-dieburg/dieburg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/darmstadt-dieburg/eppertshausen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/darmstadt-dieburg/erzhausen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/darmstadt-dieburg/fischbachtal",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/darmstadt-dieburg/griesheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/darmstadt-dieburg/gross-bieberau",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/darmstadt-dieburg/gross-umstadt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/darmstadt-dieburg/gross-zimmern",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/darmstadt-dieburg/messel",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/darmstadt-dieburg/modautal",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/darmstadt-dieburg/muehltal",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/darmstadt-dieburg/muenster",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/darmstadt-dieburg/ober-ramstadt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/darmstadt-dieburg/otzberg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/darmstadt-dieburg/pfungstadt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/darmstadt-dieburg/reinheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/darmstadt-dieburg/rossdorf",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/darmstadt-dieburg/schaafheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/darmstadt-dieburg/seeheim-jugenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/darmstadt-dieburg/weiterstadt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/bergstrasse",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/bergstrasse/kreis-bergstrasse",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/bergstrasse/bensheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/bergstrasse/biblis",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/bergstrasse/birkenau",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/bergstrasse/buerstadt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/bergstrasse/einhausen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/bergstrasse/fuerth",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/bergstrasse/grasellenbach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/bergstrasse/gross-rohrheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/bergstrasse/heppenheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/bergstrasse/lampertheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/bergstrasse/lautertal",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/bergstrasse/lindenfels",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/bergstrasse/lorsch",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/bergstrasse/moerlenbach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/bergstrasse/rimbach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/bergstrasse/wald-michelbach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/bergstrasse/zwingenberg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/kreis-gross-gerau",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/kreis-gross-gerau/kreis-gross-gerau",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/kreis-gross-gerau/biebesheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/kreis-gross-gerau/bischofsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/kreis-gross-gerau/buettelborn",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/kreis-gross-gerau/gernsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/kreis-gross-gerau/ginsheim-gustavsburg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/kreis-gross-gerau/gross-gerau",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/kreis-gross-gerau/moerfelden-walldorf",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/kreis-gross-gerau/nauheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/kreis-gross-gerau/raunheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/kreis-gross-gerau/riedstadt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/kreis-gross-gerau/ruesselsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/kreis-gross-gerau/stockstadt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/kreis-gross-gerau/trebur",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/odenwaldkreis",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/odenwaldkreis/odenwaldkreis",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/odenwaldkreis/bad-koenig",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/odenwaldkreis/brensbach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/odenwaldkreis/breuberg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/odenwaldkreis/brombachtal",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/odenwaldkreis/erbach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/odenwaldkreis/fraenkisch-crumbach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/odenwaldkreis/hoechst-im-odenwald",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/odenwaldkreis/luetzelbach",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/odenwaldkreis/michelstadt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/odenwaldkreis/mossautal",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/odenwaldkreis/oberzent",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/odenwaldkreis/reichelsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/rhein-main",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/nachrichten-rhein-neckar",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/lokales/blogs",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/fussball",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/fussball/eintracht-frankfurt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/fussball/mainz-05",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/fussball/darmstadt98",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/fussball/fc-kaiserslautern",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/fussball/darmstadt-dieburg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/fussball/suedhessen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/fussball/grossgerau-ruesselsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/fussball/odenwald",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/fussball/verbandsliga",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/fussball/hessenliga",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/fussball/regionalliga",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/fussball/zweite-bundesliga",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/fussball/bundesliga",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/fussball/nationalmannschaft",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/fussball/frauen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/fussball/dfb-pokal",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/fussball/championsleague",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/fussball/europa-league",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/fussball/auslandsfussball",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/fussball/nachrichten",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/handball",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/handball/darmstadt-dieburg",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/handball/suedhessen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/handball/grossgerau-ruesselsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/handball/odenwald",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/handball/oberliga",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/handball/landesliga-sued",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/handball/dritte-bundesliga",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/handball/zweite-bundesliga",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/handball/bundesliga",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/handball/frauen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/handball/handball",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/basketball",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/basketball/suedhessen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/basketball/basketball",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/boxen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/eishockey/eishockey",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/e-sport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/golf",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/hockey/ruesselsheim",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/leichtathletik/leichtathletik",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/motorsport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/motorsport/formel-1",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/motorsport/motorenmix",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/pferdesport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/radsport/radsport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/radsport/radsport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/schwimmen/suedhessen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/tennis",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/tennis/suedhessen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/tennis/tennis",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/tischtennis/suedhessen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/tischtennis/suedhessen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/us-sport/us-sport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/us-sport/us-sport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/volleyball",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/volleyball/suedhessen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/wintersport",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/wintersport/skispringen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/wintersport/ski-alpin",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/wintersport/ski-nordisch",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/wintersport/biathlon",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/wintersport/bob",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/wintersport/schlitten",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/wintersport/weitere",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/weitere-sportarten",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/weitere-sportarten/suedhessen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/sport/weitere-sportarten/sportmix",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/politik",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/politik/thema-des-tages",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/politik/hessen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/politik/deutschland",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/politik/ausland",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/wirtschaft",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/wirtschaft/wirtschaft-regional",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/wirtschaft/wirtschaft-ueberregional",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/wirtschaft/geld-und-recht",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/wirtschaft/geldmarkt-aktuell",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/wirtschaft/verbrauchertipps",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/panorama",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/panorama/leben-und-wissen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/panorama/aus-aller-welt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/freizeit",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/freizeit/kunst-und-kultur",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/freizeit/kunst-und-kultur/kulturnachrichten",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/freizeit/kunst-und-kultur/ausstellungen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/freizeit/kunst-und-kultur/literatur",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/freizeit/kunst-und-kultur/musik",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/freizeit/kunst-und-kultur/theater",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/freizeit/essen-trinken",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/freizeit/essen-trinken/kneipenfuehrer",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/freizeit/kino",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/auto-und-motorrad",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/auto-und-motorrad/kfz",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/auto-und-motorrad/motorraeder",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/auto-und-motorrad/verkehrsmeldungen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/auto-und-motorrad/oldtimer-und-gebrauchte",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/auto-und-motorrad/neue-modelle",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/auto-und-motorrad/autotests",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/auto-und-motorrad/recht-im-verkehr",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/internet-und-elektronik",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/internet-und-elektronik/digitales",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/internet-und-elektronik/games",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/internet-und-elektronik/technik-abc",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/internet-und-elektronik/recht-im-netz",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/bauen-und-wohnen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/bauen-und-wohnen/wohnen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/bauen-und-wohnen/garten",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/bauen-und-wohnen/mietrecht",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/bauen-und-wohnen/umwelt",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/leben-und-geniessen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/leben-und-geniessen/familie",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/leben-und-geniessen/recht-im-familienleben",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/leben-und-geniessen/tier",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/leben-und-geniessen/ernaehrung",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/leben-und-geniessen/rezept-der-woche",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/gesundheit-und-wellness",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/gesundheit-und-wellness/gesundheit",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/gesundheit-und-wellness/wellness-und-fitness",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/gesundheit-und-wellness/recht-auf-gesundheit",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/ausbildung-und-beruf",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/ausbildung-und-beruf/beruf",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/ausbildung-und-beruf/ausbildung-und-studium",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/ausbildung-und-beruf/recht-im-beruf",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/reise",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/reise/reisen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/reise/reiseberichte",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/reise/deutschland-reise",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/reise/gesundheit-auf-reisen",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.echo-online.de/rss/ratgeber/reise/recht-auf-reisen",
          "type": "application/rss+xml"
       },
       {
@@ -2308,6 +3162,11 @@
       {
          "href": "https://www.mdr.de/home/mdr-homepage-120-rss.xml",
          "title": "mdr.de \u2013 Radio, Fernsehen, Nachrichten f\u00fcr Mitteldeutschland",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.meine-anzeigenzeitung.de/lokales/dachau/rssfeed.rdf",
+         "title": "Dachau",
          "type": "application/rss+xml"
       },
       {
