@@ -269,6 +269,11 @@
       {
          "href": "https://newsfeed.zeit.de/index",
          "type": "application/rss+xml"
+      },
+      {
+         "href": "https://tarnkappe.info/feed/",
+         "title": "Tarnkappe.info RSS Feed",
+         "type": "application/rss+xml"
       }
    ]
 }
