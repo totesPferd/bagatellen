@@ -78,8 +78,8 @@ for url in url_set:
          token_list =  dctbnbc.tokenize.tokenize(content)
          dctbnbc.tokenize.tally_token_list(tally_sheet, token_list)
    score =  dctbnbc.tokenize.score(tally_sheet, knowledge)
-   result_list.append((score, url))
+   result_list.append((score, tally_sheet["nr"], url))
 result_list.sort()
 
-for (v, k) in result_list:
-   print(k, v)
+for (v, n, k) in result_list:
+   print(k, v, n)

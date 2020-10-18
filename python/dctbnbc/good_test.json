@@ -28,11 +28,6 @@
          "type": "application/rss+xml"
       },
       {
-         "href": "https://www.campus38.de/newsfeed.xml",
-         "title": "Campus38 - Der Ostfalia Newsroom",
-         "type": "application/atom+xml"
-      },
-      {
          "href": "https://www.cicero.de/rss.xml",
          "type": "application/rss+xml"
       },
