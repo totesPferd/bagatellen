@@ -3061,6 +3061,28 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.eppsteiner-zeitung.de/rss.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.eppsteiner-zeitung.de/feeds/nachrichten.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.eppsteiner-zeitung.de/feeds/meineeppsteiner.xml",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.esslinger-zeitung.de/.rss.feed",
+         "title": "Esslinger Zeitung RSS Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.express.de/feed/index.rss",
+         "title": "RSS Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.freiepresse.de/rss/rss_chemnitz.php",
          "type": "application/rss+xml"
       },
