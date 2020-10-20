@@ -1,4 +1,5 @@
 import dctbnbc.get_authors
+import dctbnbc.tally
 import feedparser
 import json
 import getopt
@@ -83,10 +84,7 @@ if retval == "Error":
 elif retval == "HelpMode":
    sys.exit(0)
 
-out_data =  {
-      "nr": 0
-   ,  "abundance": {}
-   ,  "posts": [] }
+tally =  dctbnbc.tally.Tally()
 if cmdline_params["update_mode"]:
    raw_stdin_data =  sys.stdin.read()
    try:
@@ -97,12 +95,8 @@ if cmdline_params["update_mode"]:
 
    errval =  0
 
-   if "nr" not in out_data or not isinstance(out_data["nr"], int):
-      sys.stderr.write("<stdin> json file does not contain nr key assigning to int.\n")
-      errval =  2
-
-   if "abundance" not in out_data or not isinstance(out_data["abundance"], dict):
-      sys.stderr.write("<stdin> json file does not contain abundance key assigning to dict.\n")
+   if "absolute" not in out_data or not isinstance(out_data["absolute"], dict):
+      sys.stderr.write("<stdin> json file does not contain absolute key assigning to dict.\n")
       errval =  2
 
    if "posts" not in out_data or not isinstance(out_data["posts"], list):
@@ -111,6 +105,14 @@ if cmdline_params["update_mode"]:
 
    if errval != 0:
       sys.exit(2)
+
+   tally.load(out_data)
+
+else:
+   out_data =  { "posts": [] }
+   tally.init()
+   tally.save(out_data)
+   
 
 for url in cmdline_params["urls"]:
    add_post(out_data, url)

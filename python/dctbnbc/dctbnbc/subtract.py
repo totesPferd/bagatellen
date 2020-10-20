@@ -66,7 +66,7 @@ def doit(json_a_data, json_b_data):
    out =  { "logscores": {}, "scores": {} }
 
    for token in json_a_data["scores"]:
-      if token in json_b_data["scores"]:
+      if token in json_b_data["scores"] and json_a_data["scores"][token] > 0 and json_b_data["scores"][token] > 0:
          out["logscores"][token] =  math.log(json_a_data["scores"][token]) - math.log(json_b_data["scores"][token])
          out["scores"][token] =  json_a_data["scores"][token] - json_b_data["scores"][token]
       else:

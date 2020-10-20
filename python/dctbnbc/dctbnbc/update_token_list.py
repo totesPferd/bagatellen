@@ -1,4 +1,5 @@
 import dctbnbc.get_authors
+import dctbnbc.tally
 import dctbnbc.tokenize
 import feedparser
 import json
@@ -79,21 +80,19 @@ except json.decoder.JSONDecodeError:
    sys.exit(2)
 
 retval =  0
-if "abundance" not in json_stdin_data or not isinstance(json_stdin_data["abundance"], dict):
-   sys.stderr.write("json file from <stdin> does not contain a abundance key assigned to a dict.\n")
+if "absolute" not in json_stdin_data or not isinstance(json_stdin_data["absolute"], dict):
+   sys.stderr.write("json file from <stdin> does not contain a absolute key assigned to a dict.\n")
    retval =  2
 
 if "posts" not in json_stdin_data or not isinstance(json_stdin_data["posts"], list):
    sys.stderr.write("json file from <stdin> does not contain a posts key assigned to a list.\n")
    retval =  2
 
-if "nr" not in json_stdin_data or not isinstance(json_stdin_data["nr"], int):
-   sys.stderr.write("json file from <stdin> does not contain a nr key assigned to an int.\n")
-   retval =  2
-
 if retval != 0:
    sys.exit(retval)
 
+tally =  dctbnbc.tally.Tally()
+tally.load(json_stdin_data)
 for site in json_stdin_data["posts"]:
    if "href" in site and isinstance(site["href"], str):
       fp =  feedparser.parse(site["href"])
@@ -104,7 +103,7 @@ for site in json_stdin_data["posts"]:
                id_key =  get_id_key(entry)
                if entry[id_key] not in site["ids"]:
                   for token in dctbnbc.tokenize.tokenize(entry["summary"]):
-                     dctbnbc.tokenize.tally(json_stdin_data, token)
+                     tally.inc(token)
                ids.append(entry[id_key])
             else:
                sys.stderr.write("ids key missing in some site in posts region in json file in <stdin>.\n")

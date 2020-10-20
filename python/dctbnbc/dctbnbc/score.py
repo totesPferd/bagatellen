@@ -1,4 +1,5 @@
 import dctbnbc.base
+import dctbnbc.tally
 import dctbnbc.tokenize
 import feedparser
 import getopt
@@ -65,18 +66,18 @@ if retval != 0:
 
 creatures =  set()
 used_words =  knowledge["scores"].keys()
-tally_sheet =  {
-      "nr": 1
-   ,  "abundance": {} }
+tally =  dctbnbc.tally.Tally()
+tally.init()
 for url in url_set:
    fp =  feedparser.parse(url)
    for entry in fp["entries"]:
       if "summary" in entry.keys():
          content =  entry["summary"]
          token_list =  dctbnbc.tokenize.tokenize(content)
-         dctbnbc.tokenize.tally_token_list(tally_sheet, token_list)
+         for token in token_list:
+            tally.inc(token)
          creatures =  creatures | { token for token in token_list if token not in used_words }
-score =  dctbnbc.tokenize.score(tally_sheet, knowledge)
+score =  tally.total_score(knowledge)
 creatures_list =  list(creatures)
 creatures_list.sort()
 

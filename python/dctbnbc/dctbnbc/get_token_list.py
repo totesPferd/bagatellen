@@ -1,3 +1,4 @@
+import dctbnbc.tally
 import json
 import getopt
 import sys
@@ -58,16 +59,23 @@ except json.decoder.JSONDecodeError:
    sys.exit(2)
 
 retval =  0
-if "nr" not in json_stdin_data or not isinstance(json_stdin_data["nr"], int):
-   sys.stderr.write("json file from <stdin> does not contain a nr key assigned to an int.\n")
-   retval =  2
 
-if "abundance" not in json_stdin_data or not isinstance(json_stdin_data["abundance"], dict):
-   sys.stderr.write("json file from <stdin> does not contain a abundance key assigned to a dict.\n")
+if "absolute" not in json_stdin_data or not isinstance(json_stdin_data["absolute"], dict):
+   sys.stderr.write("json file from <stdin> does not contain a absolute key assigned to a dict.\n")
    retval =  2
 
 if retval != 0:
    sys.exit(retval)
-out_data =  {"scores": { token: json_stdin_data["abundance"][token] / json_stdin_data["nr"] for token in json_stdin_data["abundance"]}}
+
+tally =  dctbnbc.tally.Tally()
+tally.load(json_stdin_data)
+total =  tally.total()
+
+if total == 0:
+   sys.stderr.write("total is zero.  no output produced.\n")
+   sys.exit(2)
+
+out_data =  {}
+tally.save_scores(out_data)
 
 print(json.dumps(out_data, indent = 3, sort_keys = True))

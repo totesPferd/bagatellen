@@ -1,4 +1,5 @@
 import dctbnbc.base
+import dctbnbc.tally
 import dctbnbc.tokenize
 import feedparser
 import getopt
@@ -68,17 +69,17 @@ if retval != 0:
 
 result_list =  []
 for url in url_set:
-   tally_sheet =  {
-         "nr": 1
-      ,  "abundance": {} }
+   tally =  dctbnbc.tally.Tally()
+   tally.init()
    fp =  feedparser.parse(url)
    for entry in fp["entries"]:
       if "summary" in entry.keys():
          content =  entry["summary"]
          token_list =  dctbnbc.tokenize.tokenize(content)
-         dctbnbc.tokenize.tally_token_list(tally_sheet, token_list)
-   score =  dctbnbc.tokenize.score(tally_sheet, knowledge)
-   result_list.append((score, tally_sheet["nr"], url))
+         for token in token_list:
+            tally.inc(token)
+   score =  tally.total_score(knowledge)
+   result_list.append((score, tally.total(), url))
 result_list.sort()
 
 for (v, n, k) in result_list:
