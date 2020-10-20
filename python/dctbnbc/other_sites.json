@@ -532,6 +532,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://wortanfall.wordpress.com/feed/",
+         "title": "wortanfall \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://scienceblogs.de/zoonpolitikon/feed/",
          "title": "zoon politikon \u00bb Feed",
          "type": "application/rss+xml"
