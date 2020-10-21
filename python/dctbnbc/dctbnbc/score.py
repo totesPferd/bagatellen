@@ -60,9 +60,9 @@ raw_data =  sys.stdin.read()
 knowledge =  json.loads(raw_data)
 
 url_set =  set(cmdline_params["urls"])
-retval =  dctbnbc.base.interprete_feed_cmdline(url_set, cmdline_params)
-if retval != 0:
-   sys.exit(retval)
+errval =  dctbnbc.base.interprete_feed_cmdline(url_set, cmdline_params)
+if errval != 0:
+   sys.exit(errval)
 
 creatures =  set()
 used_words =  knowledge["scores"].keys()

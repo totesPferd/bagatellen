@@ -1,7 +1,6 @@
-import dctbnbc.get_authors
+import dctbnbc.content_grabber
+import dctbnbc.feed_grabber
 import dctbnbc.tally
-import dctbnbc.tokenize
-import feedparser
 import json
 import getopt
 import sys
@@ -46,16 +45,6 @@ def interpret_cmdline(result):
 
    return retval
 
-def decide_according_to_authors(process_data, entry):
-   retval =  True
-
-   if "authors" in process_data and isinstance(process_data["authors"], list):
-      authors_set =  set()
-      dctbnbc.get_authors.get_authors_entry(authors_set, entry)
-      retval =  not set(process_data["authors"]).isdisjoint(authors_set)
-      
-   return retval
-
 # interprete cmdline.
 cmdline_params =  {}
 retval =  interpret_cmdline(cmdline_params)
@@ -71,36 +60,25 @@ except json.decoder.JSONDecodeError:
    sys.stderr.write("<stdin> not a json file.\n")
    sys.exit(2)
 
+tally =  dctbnbc.tally.Tally()
+content_grabber =  dctbnbc.content_grabber.ContentGrabber()
+feed_grabber =  dctbnbc.feed_grabber.FeedGrabber()
+content_grabber.register_grabber(feed_grabber)
+
 errval =  0
 
-if "posts" not in json_stdin_data or not isinstance(json_stdin_data["posts"], list):
-   sys.stderr.write("json file from <stdin> does not contain a posts key assigned to a list.\n")
-   errval =  2
-
-tally =  dctbnbc.tally.Tally()
 if not tally.load(json_stdin_data):
    sys.stderr.write("json file from <stdin> does not contain a absolute key assigned to a dict.\n")
+   errval =  2
+
+if not content_grabber.load(json_stdin_data):
+   sys.stderr.write("json file from <stdin> does not satisfies schema.\n")
    errval =  2
 
 if errval != 0:
    sys.exit(errval)
 
-for site in json_stdin_data["posts"]:
-   if "href" in site and isinstance(site["href"], str):
-      fp =  feedparser.parse(site["href"])
-      ids =  []
-      for entry in fp["entries"]:
-         if decide_according_to_authors(json_stdin_data, entry):
-            if "ids" in site and isinstance(site["ids"], list):
-               id_key =  dctbnbc.get_authors.get_id_key(entry)
-               if entry[id_key] not in site["ids"]:
-                  for token in dctbnbc.tokenize.tokenize(entry["summary"]):
-                     tally.inc(token)
-               ids.append(entry[id_key])
-            else:
-               sys.stderr.write("ids key missing in some site in posts region in json file in <stdin>.\n")
-      site["ids"] =  ids
-   else:
-      sys.stderr.write("href key missing in some site in posts region in json file in <stdin>.\n")
+content_grabber.update(tally)
 
+content_grabber.commit()
 print(json.dumps(json_stdin_data, indent = 3, sort_keys = True))

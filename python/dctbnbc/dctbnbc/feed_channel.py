@@ -6,9 +6,10 @@ class FeedChannel:
 
    def __init__(self, authors):
       self.authors =  authors
+      self.out_data =  {}
 
    def __hash__(self):
-      return self.url.__hash__(url)
+      return hash(self.url)
 
    def __lt__(self, other):
       return self.url < other.url
@@ -38,14 +39,17 @@ class FeedChannel:
 
          self.url =  d["href"]
          self.ids =  set(d["ids"])
+         self.save(d)
 
       return retval
 
    def save(self, d):
       d["href"] =  self.url
-      idl =  list(self.ids)
-      idl.sort()
-      d["ids"] =  idl
+      self.out_data =  d
+
+   def commit(self):
+      self.out_data["ids"] =  list(self.ids)
+      self.out_data["ids"].sort()
 
    def is_url(self, url):
       return self.url == url
@@ -66,9 +70,10 @@ class FeedChannel:
       for entry in fp["entries"]:
          if self.decide_according_to_authors(entry):
             id_key =  dctbnbc.get_authors.get_id_key(entry)
-            if id_key not in self.ids:
+            id_val =  entry[id_key]
+            if id_val not in self.ids:
                for token in dctbnbc.tokenize.tokenize(entry["summary"]):
                   tally.inc(token)
-            ids.add(id_key)
+            ids.add(id_val)
       self.ids.clear()
       self.ids.update(ids)

@@ -22,6 +22,10 @@ class ContentGrabber:
       for grabber in self.grabbers:
          grabber.save(d)
 
+   def commit(self):
+      for grabber in self.grabbers:
+         grabber.commit()
+
    def load_from_sites_dict(self, d):
       grabbers =  self.grabbers.copy()
       for grabber in grabbers:

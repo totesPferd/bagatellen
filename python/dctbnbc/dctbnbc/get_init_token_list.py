@@ -1,6 +1,6 @@
-import dctbnbc.get_authors
+import dctbnbc.content_grabber
+import dctbnbc.feed_grabber
 import dctbnbc.tally
-import feedparser
 import json
 import getopt
 import sys
@@ -28,8 +28,8 @@ def interpret_cmdline(result):
       if "files" not in result.keys():
          result["files"] =  []
 
-      if "urls" not in result.keys():
-         result["urls"] =  []
+      if "sites" not in result.keys():
+         result["sites"] =  []
 
       for option, arg in optlist:
          if option in { "-h", "--help" }:
@@ -49,7 +49,7 @@ def interpret_cmdline(result):
             retval =  "Error"
 
       for arg in args:
-         result["urls"].append(arg)
+         result["sites"].append( { "href": arg })
 
    except getopt.GetoptError as err:
       sys.stderr.write("%s\n\n" % str(err))
@@ -61,21 +61,6 @@ def interpret_cmdline(result):
    return retval
 
 
-def add_post(out_data, url):
-   is_found =  False
-   for eurl in out_data["posts"]:
-      if "href" in eurl and isinstance(eurl["href"], str):
-         if eurl["href"] == url:
-            is_found = True
-            break
-      else:
-         sys.stderr.write("there are malformed posts in post region in json file.\n")
-   if not is_found:
-      out_data["posts"].append({
-            "href": url
-         ,  "ids": [] })
-         
-
 # interprete cmdline.
 cmdline_params =  {}
 retval =  interpret_cmdline(cmdline_params)
@@ -84,6 +69,9 @@ if retval == "Error":
 elif retval == "HelpMode":
    sys.exit(0)
 
+content_grabber =  dctbnbc.content_grabber.ContentGrabber()
+feed_grabber =  dctbnbc.feed_grabber.FeedGrabber()
+content_grabber.register_grabber(feed_grabber)
 tally =  dctbnbc.tally.Tally()
 if cmdline_params["update_mode"]:
    raw_stdin_data =  sys.stdin.read()
@@ -95,8 +83,8 @@ if cmdline_params["update_mode"]:
 
    errval =  0
 
-   if "posts" not in out_data or not isinstance(out_data["posts"], list):
-      sys.stderr.write("<stdin> json file does not contain posts key assigning to dict.\n")
+   if not content_grabber.load(out_data):
+      sys.stderr.write("json file in <stdin> file does not respect schema.\n")
       errval =  2
 
    if not tally.load(out_data):
@@ -106,37 +94,17 @@ if cmdline_params["update_mode"]:
    if errval != 0:
       sys.exit(errval)
 
-
 else:
-   out_data =  { "posts": [] }
+   out_data =  {}
+
+   content_grabber.init()
+   content_grabber.save(out_data)
+
    tally.init()
    tally.save(out_data)
    
+if not feed_grabber.load_from_cmdline(cmdline_params):
+   sys.exit(2)
 
-for url in cmdline_params["urls"]:
-   add_post(out_data, url)
-
-for f in cmdline_params["files"]:
-   try:
-      with open(f) as fd:
-         raw_f_data =  fd.read()
-         json_f_data =  json.loads(raw_f_data)
-         if "sites" in json_f_data and isinstance(json_f_data["sites"], list):
-            for site in json_f_data["sites"]:
-               if "href" in site:
-                  add_post(out_data, site["href"])
-               else:
-                  sys.stderr.write("href key is missing in a element of list assigned to sites key in json file %s given in -f cmdline param.\n" % f)
-         else:
-            sys.stderr.write("json file %s given in a -f cmdline param has no sites key assigned with a list of sites.\n" % f)
-         if "authors" in json_f_data and isinstance(json_f_data["authors"], list):
-            if "authors" in out_data:
-               out_data["authors"] =  list(set(out_data["authors"]) | set(json_f_data["authors"]))
-               out_data["authors"].sort()
-            else:
-               out_data["authors"] =  json_f_data["authors"]
-   except FileNotFoundError:
-      sys.stderr.write("%s given in a -f cmdline param not found.\n" % f)
-      sys.exit(2)
-
+content_grabber.commit()
 print(json.dumps(out_data, indent = 3, sort_keys = True))
