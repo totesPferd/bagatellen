@@ -58,17 +58,16 @@ except json.decoder.JSONDecodeError:
    sys.stderr.write("<stdin> not a json file.\n")
    sys.exit(2)
 
-retval =  0
-
-if "absolute" not in json_stdin_data or not isinstance(json_stdin_data["absolute"], dict):
-   sys.stderr.write("json file from <stdin> does not contain a absolute key assigned to a dict.\n")
-   retval =  2
-
-if retval != 0:
-   sys.exit(retval)
+errval =  0
 
 tally =  dctbnbc.tally.Tally()
-tally.load(json_stdin_data)
+if not tally.load(json_stdin_data):
+   sys.stderr.write("json file from <stdin> does not contain a absolute key assigned to a dict.\n")
+   errval =  2
+
+if errval != 0:
+   sys.exit(errval)
+
 total =  tally.total()
 
 if total == 0:

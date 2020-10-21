@@ -6,6 +6,10 @@ class ContentGrabber:
    def register_grabber(self, grabber):
       self.grabbers.append(grabber)
 
+   def init(self):
+      for grabber in self.grabbers:
+         grabber.init()
+
    def load(self, d):
       grabbers =  self.grabbers.copy()
       for grabber in grabbers:
@@ -25,3 +29,7 @@ class ContentGrabber:
          self.grabbers.remove(grabber)
 
       return True
+
+   def update(self, tally):
+      for grabber in self.grabbers:
+         grabber.update(tally)

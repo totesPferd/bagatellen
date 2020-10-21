@@ -95,18 +95,17 @@ if cmdline_params["update_mode"]:
 
    errval =  0
 
-   if "absolute" not in out_data or not isinstance(out_data["absolute"], dict):
-      sys.stderr.write("<stdin> json file does not contain absolute key assigning to dict.\n")
-      errval =  2
-
    if "posts" not in out_data or not isinstance(out_data["posts"], list):
       sys.stderr.write("<stdin> json file does not contain posts key assigning to dict.\n")
       errval =  2
 
-   if errval != 0:
-      sys.exit(2)
+   if not tally.load(out_data):
+      sys.stderr.write("<stdin> json file does not contain absolute key assigning to dict.\n")
+      errval =  2
 
-   tally.load(out_data)
+   if errval != 0:
+      sys.exit(errval)
+
 
 else:
    out_data =  { "posts": [] }

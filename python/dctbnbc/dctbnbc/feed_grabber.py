@@ -55,3 +55,7 @@ class FeedGrabber:
          self.config_feeds(d["sites"])
 
       return retval
+
+   def update(self, tally):
+      for feed in self.feeds:
+         feed.update(tally)

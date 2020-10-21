@@ -4,7 +4,7 @@ class Tally:
       self.absolute =  {}
 
    def load(self, d):
-      retval =  "absolute" in d
+      retval =  "absolute" in d and isinstance(d["absolute"], dict)
       if retval:
 
          self.absolute =  d["absolute"]
