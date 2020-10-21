@@ -15,8 +15,16 @@ def get_authors_entry(result_set, entry):
    if "author_detail" in entry:
       add_author(result_set, entry["author_detail"])
 
-
 def get_authors_feed(result_set, parsed_feed):
 
    for entry in parsed_feed["entries"]:
       get_authors_entry(result_set, entry)
+
+def get_id_key(entry):
+   retval =  "id"
+
+   if not "id" in entry:
+      retval =  "link"
+
+   return retval
+

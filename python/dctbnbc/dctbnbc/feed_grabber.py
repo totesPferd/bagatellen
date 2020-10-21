@@ -7,12 +7,17 @@ class FeedGrabber:
       self.feeds =  set()
 
    def load(self, d):
-      if "authors" in d:
-         self.authors =  set(d["authors"])
-      for f in d["feeds"]:
-         feed =  dctbnbc.feed_channel.FeedChannel(self.authors)
-         feed.load(f)
-         self.feeds.add(feed)
+      retval =  "feeds" in d and isinstance(d["feeds"], dict)
+      if retval:
+
+         if "authors" in d:
+            self.authors =  set(d["authors"])
+         for f in d["feeds"]:
+            feed =  dctbnbc.feed_channel.FeedChannel(self.authors)
+            feed.load(f)
+            self.feeds.add(feed)
+
+      return retval
 
    def save(self, d):
       if self.authors is not None:
@@ -39,9 +44,14 @@ class FeedGrabber:
             self.feeds.append(feed)
 
    def load_from_sites_dict(self, d):
-      if "authors" in d:
-         if self.authors is None:
-            self.authors =  set(d["authors"])
-         else:
-            self.authors =  self.authors | set(d["authors"])
-      self.config_feeds(d["sites"])
+      retval =  "sites" in d and isinstance(d["sites"], list)
+      if retval:
+
+         if "authors" in d:
+            if self.authors is None:
+               self.authors =  set(d["authors"])
+            else:
+               self.authors.update(set(d["authors"]))
+         self.config_feeds(d["sites"])
+
+      return retval

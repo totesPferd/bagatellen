@@ -4,7 +4,12 @@ class Tally:
       self.absolute =  {}
 
    def load(self, d):
-      self.absolute =  d["absolute"]
+      retval =  "absolute" in d
+      if retval:
+
+         self.absolute =  d["absolute"]
+
+      return retval
 
    def save(self, d):
       d["absolute"] =  self.absolute
