@@ -40,8 +40,5 @@ class FeedChannel:
       idl.sort()
       d["ids"] =  idl
 
-   def get_url(self):
-      return self.url
-
    def is_url(self, url):
       return self.url == url
