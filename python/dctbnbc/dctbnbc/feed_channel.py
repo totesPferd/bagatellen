@@ -40,4 +40,5 @@ class FeedChannel:
       idl.sort()
       d["ids"] =  idl
 
-
+   def get_url(self):
+      return self.url
