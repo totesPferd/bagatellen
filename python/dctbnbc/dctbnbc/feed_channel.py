@@ -42,3 +42,6 @@ class FeedChannel:
 
    def get_url(self):
       return self.url
+
+   def is_url(self, url):
+      return self.url == url
