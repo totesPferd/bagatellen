@@ -11,6 +11,13 @@ class MyHTMLParser(html.parser.HTMLParser):
    def handle_data(self, data):
       self.result =  self.result + data
 
+   def handle_charref(self, name):
+      if name.startswith('x'):
+          c = chr(int(name[1:], 16))
+      else:
+          c = chr(int(name))
+      self.result =  self.result + c
+
    def handle_entityref(self, name):
       self.result =  self.result + chr(html.entities.name2codepoint[name])
 
