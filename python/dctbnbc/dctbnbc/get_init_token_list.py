@@ -1,7 +1,4 @@
-import dctbnbc.content_grabber
-import dctbnbc.feed_grabber
-import dctbnbc.tally
-import json
+import dctbnbc.state
 import getopt
 import sys
 
@@ -10,8 +7,9 @@ def print_usage(file):
    file.write("\nUSAGE:\n\n")
    file.write("%s [-h|--help]\n" % sys.argv[0])
    file.write("   write this usage information.\n\n")
-   file.write("%s [-u|--update] [{-f|--file} <site_files] ... [<feed_url>] ...\n" % sys.argv[0])
-   file.write("   provide initial data to <stdout> which can be consumed by dctbnbc.update_token_list program.\n")
+   file.write("%s [-u|--update] [{-f|--file} <site_files] ... [{-s|--state} <state_file>] [<feed_url>] ...\n" % sys.argv[0])
+   file.write("   provide initial data to <state_file> which can be consumed by dctbnbc.update_token_list program.\n")
+   file.write("   default for -s is state.json.\n")
    file.write("   give -u switch for update mode: read from <stdin>.\n")
 
 
@@ -20,16 +18,19 @@ def interpret_cmdline(result):
    retval =  "OK"
 
    try:
-      optlist, args =  getopt.getopt(sys.argv[1:], "hf:u", [ "help", "file", "update" ])
+      optlist, args =  getopt.getopt(sys.argv[1:], "hf:s:u", [ "help", "file", "state", "update" ])
 
-      if "update_mode" not in result.keys():
+      if "update_mode" not in result:
          result["update_mode"] =  False
 
-      if "files" not in result.keys():
+      if "files" not in result:
          result["files"] =  []
 
-      if "sites" not in result.keys():
+      if "sites" not in result:
          result["sites"] =  []
+
+      if "state" not in result:
+         result["state"] =  "state.json"
 
       for option, arg in optlist:
          if option in { "-h", "--help" }:
@@ -38,6 +39,8 @@ def interpret_cmdline(result):
                retval =  "HelpMode"
          elif option in { "-f", "--file" }:
             result["files"].append(arg)
+         elif option in { "-s", "--state" }:
+            result["state"] =  arg
          elif option in { "-u", "--update" }:
             if result["update_mode"]:
                sys.stderr.write("give -u option once only!\n");
@@ -69,42 +72,19 @@ if retval == "Error":
 elif retval == "HelpMode":
    sys.exit(0)
 
-content_grabber =  dctbnbc.content_grabber.ContentGrabber()
-feed_grabber =  dctbnbc.feed_grabber.FeedGrabber()
-content_grabber.register_grabber(feed_grabber)
-tally =  dctbnbc.tally.Tally()
+state =  dctbnbc.state.State(cmdline_params["state"])
 if cmdline_params["update_mode"]:
-   raw_stdin_data =  sys.stdin.read()
-   try:
-      out_data =  json.loads(raw_stdin_data)
-   except json.decoder.JSONDecodeError:
-      sys.stderr.write("<stdin> not a json file.\n")
+   if not state.load():
+      sys.stderr.write("state file %s could not be opened.\n" % cmdline_params["state"])
+      sys.exit(2)
+else:
+   if not state.init():
+      sys.stderr.write("state file %s could not be inited.\n" % cmdline_params["state"])
       sys.exit(2)
 
-   errval =  0
-
-   if not content_grabber.load(out_data):
-      sys.stderr.write("json file in <stdin> file does not respect schema.\n")
-      errval =  2
-
-   if not tally.load(out_data):
-      sys.stderr.write("<stdin> json file does not contain absolute key assigning to dict.\n")
-      errval =  2
-
-   if errval != 0:
-      sys.exit(errval)
-
-else:
-   out_data =  {}
-
-   content_grabber.init()
-   content_grabber.save(out_data)
-
-   tally.init()
-   tally.save(out_data)
-   
-if not feed_grabber.load_from_cmdline(cmdline_params):
+if not state.load_from_cmdline(cmdline_params):
    sys.exit(2)
 
-content_grabber.commit()
-print(json.dumps(out_data, indent = 3, sort_keys = True))
+if not state.close():
+   sys.stderr.write("state file %s could not be closed.\n" % cmdline_params["state"])
+   sys.exit(2)

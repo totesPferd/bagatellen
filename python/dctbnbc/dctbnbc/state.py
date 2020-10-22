@@ -30,20 +30,20 @@ class State:
 
       try:
          with open(self.filename) as fd:
-            json_data =  json.load(fd)
+            self.out_data =  json.load(fd)
       except json.decoder.JSONDecodeError:
-         sys.stderr.write("<stdin> not a json file.\n")
+         sys.stderr.write("%s not a json file.\n" % self.filename)
          retval =  False
       except FileNotFoundError:
          sys.stderr.write("file %s not foound.\n" % self.filename)
          retval =  False
 
-      if not self.content_grabber.load(out_data):
-         sys.stderr.write("json file in <stdin> file does not respect schema.\n")
+      if not self.content_grabber.load(self.out_data):
+         sys.stderr.write("json file in %s file does not respect schema.\n" % self.filename)
          retval =  False
    
-      if not self.tally.load(out_data):
-         sys.stderr.write("<stdin> json file does not contain absolute key assigning to dict.\n")
+      if not self.tally.load(self.out_data):
+         sys.stderr.write("%s json file does not contain absolute key assigning to dict.\n" % self.filename)
          retval =  False
 
       return retval
@@ -60,7 +60,7 @@ class State:
       self.content_grabber.commit()
       try:
          with open(self.filename, "w") as fd:
-            json.dump(self.out_data, fd)
+            json.dump(self.out_data, fd, indent = 3, sort_keys = True)
       except:
          retval =  False
 
