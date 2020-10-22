@@ -60,9 +60,7 @@ if not state.load():
    sys.stderr.write("state file %s could not be opened.\n" % cmdline_params["state"])
    sys.exit(2)
 
-if not state.update():
-   sys.stderr.write("problem during updating state file %s.\n" % cmdline_params["state"])
-   sys.exit(2)
+state.update()
 
 if not state.close():
    sys.stderr.write("state file %s could not be closed.\n" % cmdline_params["state"])
