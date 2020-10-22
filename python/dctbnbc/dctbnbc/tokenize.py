@@ -1,3 +1,4 @@
+import html.entities
 import html.parser
 import re
 
@@ -9,6 +10,9 @@ class MyHTMLParser(html.parser.HTMLParser):
 
    def handle_data(self, data):
       self.result =  self.result + data
+
+   def handle_entityref(self, name):
+      self.result =  self.result + chr(html.entities.name2codepoint[name])
 
    def get_result(self):
       return self.result
