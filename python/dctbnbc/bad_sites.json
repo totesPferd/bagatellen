@@ -47,6 +47,7 @@
        "klagemauerTV",
        "LHAdmin",
        "Lisa Fitz",
+       "LZ",
        "manuelcmittas",
        "Markus Fiedler",
        "Martin Lejeune",
@@ -419,6 +420,11 @@
          "href": "https://le-bohemien.net/feed/atom/",
          "title": "le Boh\u00e9mien RSS Feed",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "https://linkezeitung.de/feed/",
+         "title": "Linke Zeitung \u00bb Feed",
+         "type": "application/rss+xml"
       },
       {
          "href": "https://www.lisa-fitz.de/feed/",
