@@ -65,7 +65,7 @@ if errval != 0:
    sys.exit(errval)
 
 creatures =  set()
-used_words =  knowledge["scores"].keys()
+used_words =  knowledge["logscores"].keys()
 tally =  dctbnbc.tally.Tally()
 tally.init()
 for url in url_set:

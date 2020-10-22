@@ -44,14 +44,10 @@ class Tally:
 
    def total_score(self, knowledge):
       retval =  0
-      for token in knowledge["scores"]:
+      for token in knowledge["logscores"]:
    
-         if self.val(token) == 0 or token in knowledge["logscores"]:
-            retval =  retval - knowledge["scores"][token]
-   
-         if self.val(token) != 0 and token in knowledge["logscores"]:
+         if self.val(token) != 0:
             retval =  retval + self.val(token) * knowledge["logscores"][token] / self.total()
    
       return retval
-
 
