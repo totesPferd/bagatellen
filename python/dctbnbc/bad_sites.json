@@ -48,6 +48,7 @@
        "LHAdmin",
        "Lisa Fitz",
        "manuelcmittas",
+       "Markus Fiedler",
        "Martin Lejeune",
        "MMnews",
        "Naomi",
@@ -506,6 +507,11 @@
          "href": "https://manuelcorneliusmittas.wordpress.com/feed/atom/",
          "title": "Manuel C. Mittas \u00bb Feed",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "https://markus-fiedler.de/feed/",
+         "title": "Markus Fiedler - Homepage \u00bb Feed",
+         "type": "application/rss+xml"
       },
       {
          "href": "http://www.martinlejeune.de/feed/atom/",
