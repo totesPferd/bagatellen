@@ -31,11 +31,11 @@ class Tally:
 
    def add_to(self, other):
       for k in self.absolute:
-         other.add(self.absolute[k])
+         other.add(k, self.absolute[k])
 
    def sub_to(self, other):
       for k in self.absolute:
-         other.add(- self.absolute[k])
+         other.add(k, - self.absolute[k])
 
    def save_scores(self, result):
       total =  self.total()
