@@ -50,6 +50,7 @@
        "manuelcmittas",
        "Markus Fiedler",
        "Martin Lejeune",
+       "Mathias Broeckers",
        "MMnews",
        "Naomi",
        "NEOPresse",
@@ -522,6 +523,11 @@
          "href": "https://matha.wordpress.com/feed/atom/",
          "title": "- K\u00d6LSCHE LETTER - \u00bb Feed",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "https://www.broeckers.com/feed/",
+         "title": "Mathias Broeckers \u00bb Feed",
+         "type": "application/rss+xml"
       },
       {
          "href": "https://medienblog.hypotheses.org/feed/atom/",
