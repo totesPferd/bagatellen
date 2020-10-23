@@ -79,7 +79,7 @@ signature PPrintBase =
 (* Call it to restore indent from deeper one. *)
       val restore_indent:            state -> unit
 
-(* Next call of print_par will preceed a leading white space. *)
+(* Next call of print_close_par will preceed a leading white space. *)
       val force_ws:                  state -> unit
 
 (* Set cursor to beginning of a new line. *)
