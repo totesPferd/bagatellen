@@ -56,13 +56,13 @@ except json.decoder.JSONDecodeError:
    sys.exit(2)
 
 errval =  0
-if "scores" not in json_stdin_data or not isinstance(json_stdin_data["scores"], dict):
-   sys.stderr.write("scores key assigning to a dict in <stdin> json file is missing.\n")
+if "logscores" not in json_stdin_data or not isinstance(json_stdin_data["logscores"], dict):
+   sys.stderr.write("logscores key assigning to a dict in <stdin> json file is missing.\n")
 
 if errval != 0:
    sys.exit(errval)
 
-listified_scores =  [ (json_stdin_data["scores"][k], k) for k in json_stdin_data["scores"] ]
+listified_scores =  [ (json_stdin_data["logscores"][k], k) for k in json_stdin_data["logscores"] ]
 listified_scores.sort()
 for (v, k) in listified_scores:
    print(k, v)
