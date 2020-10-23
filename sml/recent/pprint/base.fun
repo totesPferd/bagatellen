@@ -10,7 +10,7 @@ functor PPrintBase(X:
    struct
       datatype ws_req =  no_need_of_ws | need_of_small_ws | need_of_big_ws | forced_need_of_ws;
 
-      type state =  {
+      type state_t =  {
             col: int
          ,  is_need_ws: ws_req
          ,  indent: int
@@ -29,7 +29,7 @@ functor PPrintBase(X:
             ,  is_need_ws = (#is_need_ws (!state))
             ,  indent = (#indent (!state)) - (#indent X.Config.config)
             ,  outstanding_txt = (#outstanding_txt (!state)) }
-      fun force_ws (state: state)
+      fun force_ws (state: state_t)
          =  state :=  {
                col = (#col (!state))
             ,  is_need_ws = forced_need_of_ws

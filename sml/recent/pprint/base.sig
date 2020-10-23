@@ -6,8 +6,8 @@
    
    structure MyConfig: PPrintConfig =
       struct
-         type config = {indent: int, page_width: int}
-         val config =  { indent = 3, page_width = 72 }
+         type config_t =  {indent: int, page_width: int}
+         val  config   =  { indent = 3, page_width = 72 }
       end;
    
    structure MyPrintBase =  PPrintBase(
@@ -68,48 +68,48 @@
 
 signature PPrintBase =
    sig
-      type state
+      type state_t
 
 (* Call it first when using this structure !  In order to get the initial state. *)
-      val init:                      state
+      val init:                      state_t
 
 (* Call it to get deeper indent from the next line on. *)
-      val set_deeper_indent:         state -> unit
+      val set_deeper_indent:         state_t -> unit
 
 (* Call it to restore indent from deeper one. *)
-      val restore_indent:            state -> unit
+      val restore_indent:            state_t -> unit
 
 (* Next call of print_close_par will preceed a leading white space. *)
-      val force_ws:                  state -> unit
+      val force_ws:                  state_t -> unit
 
 (* Set cursor to beginning of a new line. *)
-      val print_nl:                  TextIO.outstream -> state -> unit
+      val print_nl:                  TextIO.outstream -> state_t -> unit
 
 (* Use it to place an opening parenthesis like ( [ {. *)
-      val print_open_par:            TextIO.outstream * string -> state -> unit
+      val print_open_par:            TextIO.outstream * string -> state_t -> unit
 
 (* Use it to place a closing parenthesis like ) ] } or also signs as , ;. *)
-      val print_close_par:           TextIO.outstream * string -> state -> unit
+      val print_close_par:           TextIO.outstream * string -> state_t -> unit
 
 (* Use it to place white space like spaces, tabs. *)
-      val print_ws:                  TextIO.outstream * string -> state -> unit
+      val print_ws:                  TextIO.outstream * string -> state_t -> unit
 
 (* Use it to place a token.  Also use it for placing binary operational sign as + - * / == <> etc.  This procedure will insert white spaces if necessary. *)
-      val print_tok:                 TextIO.outstream * string -> state -> unit
+      val print_tok:                 TextIO.outstream * string -> state_t -> unit
 
 (* Use it to place an assignment token as := or =.  This procedure will insert white spaces if necessary. *)
-      val print_assign:              TextIO.outstream * string -> state -> unit
+      val print_assign:              TextIO.outstream * string -> state_t -> unit
 
 (* Use it to place period which ends sentences, i.e. . ! ? .  This procedure will insert white spaces if necessary. *)
-      val print_period:              TextIO.outstream * string -> state -> unit
+      val print_period:              TextIO.outstream * string -> state_t -> unit
 
 (* Place the cursor to the given column. *)
-      val navigate_to_pos:           TextIO.outstream * int -> state -> unit
+      val navigate_to_pos:           TextIO.outstream * int -> state_t -> unit
 
 (* Place the cursor to the given column relative to the indent. *)
-      val navigate_to_rel_pos:       TextIO.outstream * int -> state -> unit
+      val navigate_to_rel_pos:       TextIO.outstream * int -> state_t -> unit
 
 (* yields remaining width on line after indent. *)
-      val get_remaining_line_width:  state -> int
+      val get_remaining_line_width:  state_t -> int
 
    end;

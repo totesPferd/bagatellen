@@ -1,7 +1,7 @@
 signature PPrintConfig =
    sig
-      type config =  {
+      type config_t =  {
             indent:     int
          ,  page_width: int }
-      val config: config
+      val config: config_t
    end;

@@ -4,8 +4,8 @@ use "pprint/config.sig";
 
 structure MyConfig: PPrintConfig =
    struct
-      type config = {indent: int, page_width: int}
-      val config =  { indent = 3, page_width = 72 }
+      type config_t =  {indent: int, page_width: int}
+      val  config   =  { indent = 3, page_width = 72 }
    end;
 
 structure MyPrintBase =  PPrintBase(
