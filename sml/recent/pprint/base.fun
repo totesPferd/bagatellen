@@ -116,5 +116,6 @@ functor PPrintBase(X:
                      print_ws (stream, " ") state )
       fun navigate_to_rel_pos (stream, pos) state
          =  navigate_to_pos (stream, pos + (#indent (!state))) state
+      fun get_remaining_line_width state =  (#page_width X.Config.config) - (#indent (!state))
 
    end;
