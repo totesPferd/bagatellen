@@ -1,7 +1,14 @@
-use "general/aux/acc.sig";
+use "general/transition_type.sig";
 
-structure Acc: Acc =
+functor TransitionTypeByList (X:
+   sig
+      type base_t
+   end ): TransitionType =
    struct
+      open X
+
+      type T =  base_t list
+
       fun transition phi nil b =  b
         | transition phi (hd :: tl) b
         = let

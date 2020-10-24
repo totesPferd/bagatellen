@@ -1,4 +1,4 @@
-use "general/aux/acc.sml";
+use "general/transition_type_by_list.fun";
 use "general/dict_set_simple/set_impl.sig";
 use "general/eq_type.sig";
 
@@ -54,6 +54,10 @@ functor DictSetSimpleSet(E: EqType): DictSetSimpleSetImpl =
           |  Option.SOME y =>  Option.SOME y
 
       fun fe b =  [ b ]
+      structure Acc =  TransitionTypeByList(
+         struct
+            type base_t =  base_t
+         end )
       fun transition phi s b =  Acc.transition phi s b
       fun fop phi s
         = transition (
