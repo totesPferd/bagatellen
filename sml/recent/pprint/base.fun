@@ -21,13 +21,13 @@ functor PPrintBase(X:
          =  state :=  {
                col = (#col (!state))
             ,  is_need_ws = (#is_need_ws (!state))
-            ,  indent = (#indent (!state)) + (#indent X.Config.config)
+            ,  indent = (#indent (!state)) + X.Config.indent
             ,  outstanding_txt = (#outstanding_txt (!state)) }
       fun restore_indent state
          =  state :=  {
                col = (#col (!state))
             ,  is_need_ws = (#is_need_ws (!state))
-            ,  indent = (#indent (!state)) - (#indent X.Config.config)
+            ,  indent = (#indent (!state)) - X.Config.indent
             ,  outstanding_txt = (#outstanding_txt (!state)) }
       fun force_ws (state: state_t)
          =  state :=  {
@@ -76,7 +76,7 @@ functor PPrintBase(X:
                in print_ws (stream, ws) state
                end
          fun check_line_exceed (stream, str) state
-            =  if (#col (!state)) + String.size(str) > (#page_width X.Config.config)
+            =  if (#col (!state)) + String.size(str) > X.Config.page_width
                then
                   print_nl stream state
                else
@@ -116,6 +116,6 @@ functor PPrintBase(X:
                      print_ws (stream, " ") state )
       fun navigate_to_rel_pos (stream, pos) state
          =  navigate_to_pos (stream, pos + (#indent (!state))) state
-      fun get_remaining_line_width state =  (#page_width X.Config.config) - (#indent (!state))
+      fun get_remaining_line_width state =  X.Config.page_width - (#indent (!state))
 
    end;

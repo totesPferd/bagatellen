@@ -44,7 +44,7 @@ functor PPrintConstructionAForTransitionType (X:
          ;  X.TransitionType.transition
                (  fn (b, is_last_item) =>  (
                         X.Base.set_deeper_indent state
-                     ;  X.Able.pprint(stream, ctxt, b)
+                     ;  X.Able.pprint(stream, ctxt, b) state
                      ;  X.Base.restore_indent state
                      ;  if is_last_item
                         then
