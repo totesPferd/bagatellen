@@ -24,6 +24,5 @@ functor PPrintAbleByConstructionA (X:
                X.ConstructionA.multi_line(stream, ctxt, data) state
             else
                   X.Base.print_tok(stream, check_single_line) state
-               ;  X.Base.force_ws state
          end
    end;

@@ -33,7 +33,7 @@ functor PPrintConstructionAForTransitionType (X:
                      then
                         Option.SOME bstr
                      else
-                        Option.SOME (str ^ X.delim ^ " " ^ bstr)
+                        Option.SOME (bstr ^ X.delim ^ " " ^ str)
                   end )
             t
             ""
@@ -43,18 +43,19 @@ functor PPrintConstructionAForTransitionType (X:
 
          ;  X.TransitionType.transition
                (  fn (b, is_last_item) =>  (
-                        X.Base.set_deeper_indent state
-                     ;  X.Able.pprint(stream, ctxt, b) state
-                     ;  X.Base.restore_indent state
-                     ;  if is_last_item
+                        if is_last_item
                         then
-                           X.Base.force_ws state
+                           ()
                         else
                            X.Base.print_close_par(stream, X.delim) state
+                     ;  X.Base.set_deeper_indent state
+                     ;  X.Able.pprint(stream, ctxt, b) state
+                     ;  X.Base.restore_indent state
                      ;  Option.SOME false ))
                t
                true
 
+         ;  X.Base.force_ws state
          ;  X.Base.restore_indent state )
 
    end ;
