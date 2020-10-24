@@ -15,7 +15,7 @@ functor PPrintConstructionAForTransitionType (X:
            and type T = Able.T
       structure TransitionType: TransitionType
          where type base_t =  Able.T
-   end ) =
+   end ): PPrintConstructionA =
    struct
 
       type context_t =  X.Able.context_t
