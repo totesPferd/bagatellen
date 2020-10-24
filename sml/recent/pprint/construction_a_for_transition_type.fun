@@ -40,6 +40,7 @@ functor PPrintConstructionAForTransitionType (X:
 
       fun multi_line (stream, ctxt, t) state =  (
             X.Base.set_deeper_indent state
+         ;  X.Base.navigate_to_rel_pos(stream, 0) state
 
          ;  X.TransitionType.transition
                (  fn (b, is_last_item) =>  (
@@ -49,6 +50,7 @@ functor PPrintConstructionAForTransitionType (X:
                         else
                            X.Base.print_close_par(stream, X.delim) state
                      ;  X.Base.set_deeper_indent state
+                     ;  X.Base.navigate_to_rel_pos(stream, 0) state
                      ;  X.Able.pprint(stream, ctxt, b) state
                      ;  X.Base.restore_indent state
                      ;  Option.SOME false ))
