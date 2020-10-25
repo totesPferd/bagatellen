@@ -64,4 +64,6 @@ functor DictSetSimpleSet(E: EqType): DictSetSimpleSetImpl =
              fn (x, b) => union (phi x, b()) )
           s
           nil
+      fun next nil =  Option.NONE
+        | next (hd::tl) =  Option.SOME (hd, tl)
    end

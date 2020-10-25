@@ -25,6 +25,7 @@ signature Set =
       val fe:               base_t -> T
       val fop:              (base_t -> T) -> T -> T
       val is_in:            base_t * T -> bool
+      val next:             T -> (base_t * T) Option.option
       val transition:       (base_t * (unit -> 'b) -> 'b) -> T -> 'b -> 'b
    end
 

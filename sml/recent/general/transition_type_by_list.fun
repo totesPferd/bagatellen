@@ -9,6 +9,8 @@ functor TransitionTypeByList (X:
 
       type T =  base_t list
 
+      fun next nil =  Option.NONE
+        | next (hd::tl) =  Option.SOME (hd, tl)
       fun transition phi nil b =  b
         | transition phi (hd :: tl) b
         = let

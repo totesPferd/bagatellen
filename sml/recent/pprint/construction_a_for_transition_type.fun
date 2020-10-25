@@ -43,20 +43,25 @@ functor PPrintConstructionAForTransitionType (X:
             X.Base.set_deeper_indent state
          ;  X.Base.navigate_to_rel_pos(stream, 0) state
 
-         ;  X.TransitionType.transition
-               (  fn (b, is_last_item_l) =>  (
-                        if is_last_item_l()
-                        then
-                           ()
-                        else
-                           X.Base.print_close_par(stream, X.delim) state
-                     ;  X.Base.set_deeper_indent state
-                     ;  X.Base.navigate_to_rel_pos(stream, 0) state
-                     ;  X.Able.pprint(stream, ctxt, b) state
-                     ;  X.Base.restore_indent state
-                     ;  false ))
-               t
-               true
+         ;  case (X.TransitionType.next t) of
+               Option.NONE =>  ()
+            |  Option.SOME (hd, tl) => (
+                     X.Base.set_deeper_indent state
+                  ;  X.Base.navigate_to_rel_pos(stream, 0) state
+                  ;  X.Able.pprint(stream, ctxt, hd) state
+                  ;  X.Base.restore_indent state
+
+                  ;  (  X.TransitionType.transition
+                           (  fn (b, prev_state_l) =>  (
+                                    X.Base.navigate_to_rel_pos(stream, 0) state
+                                 ;  X.Base.print_close_par(stream, X.delim) state
+                                 ;  X.Base.set_deeper_indent state
+                                 ;  X.Base.navigate_to_rel_pos(stream, 0) state
+                                 ;  X.Able.pprint(stream, ctxt, b) state
+                                 ;  X.Base.restore_indent state
+                                 ;  prev_state_l() ))
+                           tl
+                           () ))
 
          ;  X.Base.force_ws state
          ;  X.Base.restore_indent state )
