@@ -61,7 +61,7 @@ functor DictSetSimpleSet(E: EqType): DictSetSimpleSetImpl =
       fun transition phi s b =  Acc.transition phi s b
       fun fop phi s
         = transition (
-             fn (x, b) => Option.SOME (union (phi x, b)) )
+             fn (x, b) => union (phi x, b()) )
           s
           nil
    end

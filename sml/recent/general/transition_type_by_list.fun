@@ -12,9 +12,7 @@ functor TransitionTypeByList (X:
       fun transition phi nil b =  b
         | transition phi (hd :: tl) b
         = let
-             val prec_state =  transition phi tl b
-          in case(phi(hd, prec_state)) of
-                Option.NONE => prec_state
-             |  Option.SOME r => r
+             fun prec_state_l () =  transition phi tl b
+          in phi(hd, prec_state_l)
           end
    end;

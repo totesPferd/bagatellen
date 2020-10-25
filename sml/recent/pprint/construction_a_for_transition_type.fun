@@ -25,15 +25,16 @@ functor PPrintConstructionAForTransitionType (X:
 
       fun single_line (ctxt, t) =
          X.TransitionType.transition
-            (  fn (b, str) =>
+            (  fn (b, str_l) =>
                   let
                      val bstr =  X.ConstructionA.single_line (ctxt, b)
+                     val str =  str_l()
                   in
                      if str = ""
                      then
-                        Option.SOME bstr
+                        bstr
                      else
-                        Option.SOME (bstr ^ X.delim ^ " " ^ str)
+                        (bstr ^ X.delim ^ " " ^ str_l())
                   end )
             t
             ""
@@ -43,8 +44,8 @@ functor PPrintConstructionAForTransitionType (X:
          ;  X.Base.navigate_to_rel_pos(stream, 0) state
 
          ;  X.TransitionType.transition
-               (  fn (b, is_last_item) =>  (
-                        if is_last_item
+               (  fn (b, is_last_item_l) =>  (
+                        if is_last_item_l()
                         then
                            ()
                         else
@@ -53,7 +54,7 @@ functor PPrintConstructionAForTransitionType (X:
                      ;  X.Base.navigate_to_rel_pos(stream, 0) state
                      ;  X.Able.pprint(stream, ctxt, b) state
                      ;  X.Base.restore_indent state
-                     ;  Option.SOME false ))
+                     ;  false ))
                t
                true
 

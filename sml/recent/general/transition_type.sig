@@ -5,6 +5,6 @@ signature TransitionType =
 
       type T
 
-      val transition:       (base_t * 'b -> 'b Option.option) -> T -> 'b -> 'b
+      val transition:       (base_t * (unit -> 'b) -> 'b) -> T -> 'b -> 'b
 
    end;
