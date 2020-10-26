@@ -110,6 +110,9 @@ signature PPrintBase =
       val navigate_to_rel_pos:       TextIO.outstream * int -> state_t -> unit
 
 (* yields remaining width on line after indent. *)
+      val get_remaining_line_width_after_indent:  state_t -> int
+
+(* yields remaining width on line after recent column. *)
       val get_remaining_line_width:  state_t -> int
 
    end;
