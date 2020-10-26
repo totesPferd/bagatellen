@@ -8,4 +8,6 @@ signature TestResult =
       val is_passed: testresult_t -> bool
       val explain: TextIO.outstream * testresult_t -> state_t -> unit
 
+      val name_testresult: string -> testresult_t -> testresult_t
+
    end;
