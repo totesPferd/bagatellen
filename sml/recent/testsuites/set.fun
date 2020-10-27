@@ -61,5 +61,19 @@ functor Suite(X:
       val suite =  collect_testcases (
             "set"
          ,  [
+                  let
+                     val in_a =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben" ]
+                     val in_b =  "drei"
+                     val expected =  in_a
+                  in
+                     TestAssertEqForStringSet.assert ("adjunct #1", (), expected, X.Set.adjunct (in_b, in_a))
+                  end
+               ,  let
+                     val in_a =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben" ]
+                     val in_b =  "elf"
+                     val expected =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben", "elf" ]
+                  in
+                     TestAssertEqForStringSet.assert ("adjunct #2", (), expected, X.Set.adjunct (in_b, in_a))
+                  end
       ])
    end;
