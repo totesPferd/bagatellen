@@ -11,4 +11,8 @@ structure Suite =  Suite (
       structure Set = StringSet
    end );
 
-(#perform Suite.suite)()
+val state =  Base.init;
+
+case (#perform Suite.suite)() of
+      Option.NONE => ()
+   |  Option.SOME f => f(TextIO.stdErr, state);
