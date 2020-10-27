@@ -113,5 +113,12 @@ functor Suite(X:
                   in
                     TestAssert.assert ("is_empty #2", not (X.Set.is_empty(in_a)))
                   end
+               ,  let
+                     val in_a =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben" ]
+                     fun f s =  s ^ " Eier"
+                     val expected =  List.foldl X.Set.adjunct X.Set.empty [ "zwei Eier", "drei Eier", "fuenf Eier", "sieben Eier" ]
+                  in
+                    TestAssertEqForStringSet.assert ("map #1", (), expected, X.Set.map f in_a)
+                  end
       ])
    end;
