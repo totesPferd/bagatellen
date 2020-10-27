@@ -143,5 +143,37 @@ functor Suite(X:
                   in
                      TestAssert.assert ("subseteq #3", X.Set.subseteq(in_a, in_a))
                   end
+               ,  let
+                     val in_a =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben" ]
+                     val in_b =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben", "elf" ]
+                     val expected =  in_b
+                  in
+                    TestAssertEqForStringSet.assert ("union #1", (), expected, X.Set.union(in_a, in_b))
+                  end
+               ,  let
+                     val in_a =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "fuenf", "elf" ]
+                     val in_b =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf" ]
+                     val expected =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "elf" ]
+                  in
+                     TestAssertEqForStringSet.assert ("union #2", (), expected, X.Set.union (in_a, in_b))
+                  end
+               ,  let
+                     val in_a =  "zwei"
+                     val expected =  List.foldl X.Set.adjunct X.Set.empty [ "zwei" ]
+                  in
+                    TestAssertEqForStringSet.assert ("singleton #1", (), expected, X.Set.fe in_a)
+                  end
+               ,  let
+                     val in_a =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben" ]
+                     val in_b =  "drei"
+                  in
+                    TestAssert.assert ("is_in #1", X.Set.is_in(in_b, in_a))
+                  end
+               ,  let
+                     val in_a =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben" ]
+                     val in_b =  "elf"
+                  in
+                    TestAssert.assert ("is_in #2", not(X.Set.is_in(in_b, in_a)))
+                  end
       ])
    end;
