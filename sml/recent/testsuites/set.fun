@@ -50,6 +50,11 @@ functor Suite(X:
    struct
       open TestCase
       structure TestAssertEqForStringSet =  TestAssertEqForStringSet(X)
+      structure TestAssertEqForString =  TestAssertEqForString(
+         struct
+            type context_t =  X.context_t
+            structure Base = Base
+         end )
 
       val suite =  collect_testcases (
             "set"
