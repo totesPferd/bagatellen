@@ -2,6 +2,7 @@ use "general/contected_eq_type_for_eq_type.fun";
 use "general/eq_type_for_list.fun";
 use "general/transition_type_by_list.fun";
 use "pprint/able_by_construction_a.fun";
+use "pprint/construction_a_by_par.fun";
 use "pprint/construction_a_for_transition_type.fun";
 use "test/assert_eq.fun";
 use "test/case.fun";
@@ -17,7 +18,7 @@ functor ContectedEqTypeForList(X:
          structure EqType =  EqTypeForList(X)
       end );
 
-functor PPrintConstructionAForList(X:
+functor InnerPPrintConstructionAForList(X:
    sig
       structure Able: PPrintAble
       structure Base: PPrintBase
@@ -36,6 +37,24 @@ functor PPrintConstructionAForList(X:
                struct
                   type base_t =  X.Able.T
                end )
+      end );
+
+functor PPrintConstructionAForList(X:
+   sig
+      structure Able: PPrintAble
+      structure Base: PPrintBase
+         where type state_t =  Able.state_t
+      structure ConstructionA: PPrintConstructionA
+         where type context_t =  Able.context_t
+           and type state_t = Able.state_t
+           and type T = Able.T
+   end ): PPrintConstructionA =
+   PPrintConstructionAByPar(
+      struct
+         val open_par =  "["
+         val close_par =  "]"
+         structure Base =  X.Base
+         structure ConstructionA =  InnerPPrintConstructionAForList(X)
       end );
 
 functor PPrintAbleForList(X:
