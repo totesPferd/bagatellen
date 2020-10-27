@@ -8,7 +8,7 @@ functor DictSetSimpleSet(E: EqType): DictSetSimpleSetImpl =
       type T =  base_t list
       val empty =  nil
       val getItem =  List.getItem
-      fun map f (s: T) =  map f s
+      fun map f (s: T) =  List.map f s
       fun singleton x =  [ x ]
       fun is_in(x, s) =  List.exists (fn (y) => E.eq(x, y)) s
       val is_empty =  List.null

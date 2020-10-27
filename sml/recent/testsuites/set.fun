@@ -120,5 +120,28 @@ functor Suite(X:
                   in
                     TestAssertEqForStringSet.assert ("map #1", (), expected, X.Set.map f in_a)
                   end
+               ,  let
+                     val in_a =  "zwei"
+                     val expected =  List.foldl X.Set.adjunct X.Set.empty [ "zwei" ]
+                  in
+                    TestAssertEqForStringSet.assert ("singleton #1", (), expected, X.Set.singleton in_a)
+                  end
+               ,  let
+                     val in_a =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben" ]
+                     val in_b =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben", "elf" ]
+                  in
+                     TestAssert.assert ("subseteq #1", X.Set.subseteq(in_a, in_b))
+                  end
+               ,  let
+                     val in_a =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben", "elf" ]
+                     val in_b =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben" ]
+                  in
+                     TestAssert.assert ("subseteq #2", not(X.Set.subseteq(in_a, in_b)))
+                  end
+               ,  let
+                     val in_a =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben", "elf" ]
+                  in
+                     TestAssert.assert ("subseteq #3", X.Set.subseteq(in_a, in_a))
+                  end
       ])
    end;
