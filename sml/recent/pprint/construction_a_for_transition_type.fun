@@ -6,12 +6,12 @@ use "pprint/construction_a.sig";
 functor PPrintConstructionAForTransitionType (X:
    sig
       val delim: string
-      structure Able: PPrintAble
       structure Base: PPrintBase
-         where type state_t =  Able.state_t
+      structure Able: PPrintAble
+         where type state_t =  Base.state_t
       structure ConstructionA: PPrintConstructionA
          where type context_t =  Able.context_t
-           and type state_t = Able.state_t
+           and type state_t = Base.state_t
            and type T = Able.T
       structure TransitionType: TransitionType
          where type base_t =  Able.T
@@ -19,7 +19,7 @@ functor PPrintConstructionAForTransitionType (X:
    struct
 
       type context_t =  X.Able.context_t
-      type state_t =  X.Able.state_t
+      type state_t =  X.Base.state_t
 
       type T =  X.TransitionType.T
 
