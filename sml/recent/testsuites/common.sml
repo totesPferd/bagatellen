@@ -1,5 +1,7 @@
+use "pkg/base.sml";
 use "test/assert.fun";
 use "test/case.fun";
+use "test/suite.sig";
 
 type context_t =  unit;
 

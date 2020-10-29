@@ -1,10 +1,6 @@
-use "pkg/base.sml";
 use "pkg/set.sml";
 use "pkg/string.sml";
-use "test/assert.fun";
-use "test/case.fun";
 use "testsuites/common.sml";
-use "test/suite.sig";
 
 functor TestAssertEqForStringSet(X:
    sig
