@@ -3,20 +3,8 @@ use "pkg/set.sml";
 use "pkg/string.sml";
 use "test/assert.fun";
 use "test/case.fun";
+use "testsuites/common.sml";
 use "test/suite.sig";
-
-type context_t =  unit;
-
-structure TestCase =  TestCase(
-   struct
-      structure Base = Base
-   end );
-
-structure TestAssert =  TestAssert(
-   struct
-      structure Base = Base
-      structure Case = TestCase
-   end );
 
 functor TestAssertEqForStringSet(X:
    sig
@@ -43,7 +31,7 @@ functor TestAssertEqForStringSet(X:
          structure EqType =  EqTypeForString
       end );
 
-functor Suite(X:
+functor SetSuite(X:
    sig
       structure Set: Set
          where type base_t = string

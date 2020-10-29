@@ -3,7 +3,7 @@ use "testsuites/set.fun";
 
 structure StringSet =  DictSetSimpleSet(EqTypeForString);
 
-structure Suite =  Suite (
+structure Suite =  SetSuite (
    struct
       structure Set = StringSet
    end );
