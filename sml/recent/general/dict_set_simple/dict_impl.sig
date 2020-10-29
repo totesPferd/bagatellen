@@ -10,5 +10,7 @@ signature DictSetSimpleDictImpl =
       val empty:            T
       val set:              key_t * val_t * T -> T
       val singleton:        key_t * val_t -> T
+
+      val foldl:            (key_t * val_t * 'b -> 'b) -> 'b -> T -> 'b
    end
 

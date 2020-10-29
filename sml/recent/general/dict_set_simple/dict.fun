@@ -23,6 +23,7 @@ functor DictSetSimpleDict(X:
       fun all P = List.all (fn { key = _, value = v } => P v)
       fun adjoin(d_1, d_2) =  d_1 @ d_2
       fun singleton(k, v) =  [ { key = k, value = v } ]
+      fun foldl f =  List.foldl (fn ({ key = k, value = v }, s) => f(k, v, s))
 
    end
    
