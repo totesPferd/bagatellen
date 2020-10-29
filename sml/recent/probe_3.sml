@@ -20,6 +20,7 @@ structure Suite: TestSuite =
 
 val state =  Base.init;
 
+fun main() =
 case (#perform Suite.suite)() of
       Option.NONE => ()
    |  Option.SOME f => f(TextIO.stdErr, state);

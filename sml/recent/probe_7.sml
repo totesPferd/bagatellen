@@ -16,6 +16,7 @@ structure MyPrintBase =  PPrintBase(
 
 val state =  MyPrintBase.init;
 
+fun main() =
 (
    MyPrintBase.print_tok (TextIO.stdOut, "Hello") state;
    MyPrintBase.print_close_par (TextIO.stdOut, ",") state;
