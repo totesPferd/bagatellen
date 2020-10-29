@@ -3,10 +3,20 @@ use "testsuites/set.fun";
 
 structure StringSet =  DictSetSimpleSet(EqTypeForString);
 
-structure Suite =  SetSuite (
+structure SetSuite =  SetSuite (
    struct
       structure Set = StringSet
    end );
+
+structure Suite: TestSuite =  
+   struct
+      open TestCase
+
+      val suite =  collect_testcases (
+            "all"
+         ,  [
+                  SetSuite.suite ])
+   end
 
 val state =  Base.init;
 
