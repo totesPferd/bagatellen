@@ -7,7 +7,6 @@ signature DictSetSimpleSetImpl =
       val drop:             base_t * T -> T
       val drop_if_exists:   base_t * T -> T Option.option
       val empty:            T
-      val eq:               T * T -> bool
       val getItem:          T -> (base_t * T) Option.option
       val insert:           base_t * T -> T
       val intersect:        T * T -> T

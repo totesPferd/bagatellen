@@ -1,13 +1,31 @@
 use "general/contected_eq_type_for_eq_type.fun";
+use "general/eq_type_for_subseteq_type.fun";
 use "general/set.sig";
+use "pprint/able_by_construction_a.fun";
 use "pprint/able.sig";
 use "pprint/base.sig";
-use "pprint/able_by_construction_a.fun";
 use "pprint/construction_a_by_par.fun";
 use "pprint/construction_a_for_transition_type.fun";
 use "pprint/construction_a.sig";
 use "test/assert_eq.fun";
 use "test/case.fun";
+
+functor EqTypeForSet(X:
+   sig
+      structure SubseteqType: Set
+   end ): EqType =
+   EqTypeForSubseteqType(X);
+
+functor ContectedEqTypeForSet(X:
+   sig
+      type context_t
+      structure SubseteqType: Set
+   end ): ContectedEqType =
+   ContectedEqTypeForEqType(
+      struct
+         type context_t =  X.context_t
+         structure EqType =  EqTypeForSet(X)
+      end );
 
 functor InnerPPrintConstructionAForSet(X:
    sig
@@ -85,10 +103,10 @@ functor TestAssertEqForSet(X:
          structure Able = PPrintAbleForSet(X)
          structure Base =  X.Base
          structure CEq =
-            ContectedEqTypeForEqType(
+            ContectedEqTypeForSet(
                struct
                   type context_t =  X.Able.context_t
-                  structure EqType =  X.Set
+                  structure SubseteqType =  X.Set
                end )
          structure Case =
             TestCase(

@@ -43,7 +43,6 @@ functor DictSetSimpleSet(E: EqType): DictSetSimpleSetImpl =
                 tail
           end
       fun subseteq(s, t) =  List.all (fn (x) => is_in(x, t)) s
-      fun eq(s, t) =  subseteq(s, t) andalso subseteq(t, s)
 
       fun find P s =  List.find P s
 

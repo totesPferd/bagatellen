@@ -1,13 +1,13 @@
 use "general/dict_keys.sig";
 use "general/eq_type.sig";
-use "general/subset_eq_type.sig";
+use "general/subseteq_type.sig";
 
-functor SubsetEqTypeForDict(X:
+functor SubseteqTypeForDict(X:
    sig
       structure DictKeys: DictKeys
       structure ValEqType: EqType
          where type T =  DictKeys.From.val_t
-   end ): SubsetEqType =
+   end ): SubseteqType =
    struct
 
       type T =  X.DictKeys.From.T
