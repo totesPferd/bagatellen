@@ -1,31 +1,7 @@
 use "pkg/set.sml";
 use "pkg/string.sml";
 use "testsuites/common.sml";
-
-functor TestAssertEqForStringSet(X:
-   sig
-      structure Set: Set
-         where type base_t = string
-   end ): TestAssertEq =
-   TestAssertEqForSet(
-      struct
-         open X
-         type context_t =  context_t
-         structure Able =  
-            PPrintAbleForString(
-               struct
-                  type context_t =  context_t
-                  structure Base =  Base
-               end )
-         structure Base =  Base
-         structure ConstructionA =
-            PPrintConstructionAForString(
-               struct
-                  type context_t =  context_t
-                  structure Base =  Base
-               end )
-         structure EqType =  EqTypeForString
-      end );
+use "testsuites/test_assert_for_string_set.fun";
 
 functor SetSuite(X:
    sig
