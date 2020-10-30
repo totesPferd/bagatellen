@@ -85,7 +85,8 @@
        "Ulrich Heyden",
        "uncut-news.ch",
        "volksbetrugpunktnet",
-       "Watergate Redaktion"
+       "Watergate Redaktion",
+       "https://wissenschaft3000.wordpress.com/"
    ],
    "sites": [
       {
@@ -424,6 +425,11 @@
          "href": "https://juergenelsaesser.wordpress.com/feed/atom/",
          "title": "Els\u00e4ssers Blog \u00bb Feed",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "https://k7848.wordpress.com/feed/",
+         "title": "Kosmisch-Irdische Partnerschaften \u00bb Feed",
+         "type": "application/rss+xml"
       },
       {
          "href": "https://le-bohemien.net/feed/atom/",
@@ -1051,6 +1057,11 @@
          "href": "https://williweise.wordpress.com/feed/atom/",
          "title": "Prof. Dr. Dr. Wolfgang Berger - Unabh\u00e4ngiger Direktkandidat f\u00fcr den Bundestag in der S\u00fcdpfalz \u00bb Feed",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "https://wissenschaft3000.wordpress.com/feed/",
+         "title": "Wissenschaft3000 ~ science3000 \u00bb Feed",
+         "type": "application/rss+xml"
       },
       {
          "href": "https://yoice.net/feed/",

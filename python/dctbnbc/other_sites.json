@@ -7,6 +7,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://alexandrabader.wordpress.com/feed/",
+         "title": "Ceiberweiber \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://antjeschrupp.com/feed/",
          "title": "Aus Liebe zur Freiheit \u00bb Feed",
          "type": "application/rss+xml"
@@ -193,6 +198,11 @@
          "href": "http://www.jungewelt.de/feed-schwarzer-kanal-video.php",
          "title": "Schwarzer Kanal: Videos",
          "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.torial.com/katrin.roenicke.atom",
+         "title": "ATOM",
+         "type": "application/atom+xml"
       },
       {
          "href": "http://www.konkret-magazin.de/?format=feed&type=rss",
