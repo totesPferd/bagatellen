@@ -1,7 +1,9 @@
 use "general/dict_set_simple/dict.fun";
 use "general/dict_set_simple/dict_keys.fun";
+use "general/dict_set_simple/dict_map.fun";
 use "general/dict_set_simple/set.fun";
 use "testsuites/dict_keys.fun";
+use "testsuites/dict_map.fun";
 use "testsuites/set.fun";
 use "testsuites/test_assert_eq_for_string_set.fun";
 use "testsuites/test_assert_eq_for_string_string_dict.fun";
@@ -19,6 +21,11 @@ structure StringStringDictKeys =  DictSetSimpleDictKeys (
       structure D =  StringStringDict
       structure S =  StringSet
    end );
+structure StringStringDictMap =  DictSetSimpleDictMap (
+   struct
+      structure From =  StringStringDict
+      structure To =  StringStringDict
+   end );
 
 structure Common =
    struct
@@ -33,15 +40,22 @@ structure Common =
       structure Base = Base
       structure Case = TestCase
       structure DictKeys =  StringStringDictKeys
+      structure DictMap =  StringStringDictMap
       structure Set =  StringSet
    end;
 
+structure TestAssertEqForStringStringDict =  TestAssertEqForStringStringDict(Common)
 structure TestAssertEqForStringSet =  TestAssertEqForStringSet(Common)
 
 structure DictKeysSuite =  DictKeysSuite (
    struct
       open Common
       structure AssertEqForStringSet =  TestAssertEqForStringSet
+   end );
+structure DictMapSuite =  DictMapSuite (
+   struct
+      open Common
+      structure AssertEqForStringStringDict =  TestAssertEqForStringStringDict
    end );
 structure SetSuite =  SetSuite (
    struct
@@ -57,6 +71,7 @@ structure Suite: TestSuite =
             "all"
          ,  [
                   DictKeysSuite.suite
+               ,  DictMapSuite.suite
                ,  SetSuite.suite ])
    end
 
