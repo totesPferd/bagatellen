@@ -34,5 +34,11 @@ functor DictMapSuite(X:
       val suite =  collect_testcases (
             "dict_map"
          ,  [
-                  ])
+                  let
+                     val in_a =  ListPair.foldl X.DictMap.From.set X.DictMap.From.empty (["zwei", "drei", "fuenf"], ["2", "3", "5"])
+                     fun f s =  s ^ " Eier"
+                     val expected =  ListPair.foldl X.DictMap.To.set X.DictMap.To.empty (["zwei", "drei", "fuenf"], ["2 Eier", "3 Eier", "5 Eier"])
+                  in
+                     X.AssertEqForStringStringDict.assert ("map #1", (), expected, X.DictMap.map f in_a)
+                  end ])
    end;
