@@ -91,6 +91,8 @@ functor TestAssertEqForSet(X:
          where type T =  Set.base_t
       structure Base: PPrintBase
          where type state_t =  Able.state_t
+      structure Case: TestCase
+         where type state_t =  Base.state_t
       structure ConstructionA: PPrintConstructionA
          where type context_t =  Able.context_t
            and type state_t = Able.state_t
@@ -108,10 +110,6 @@ functor TestAssertEqForSet(X:
                   type context_t =  X.Able.context_t
                   structure SubseteqType =  X.Set
                end )
-         structure Case =
-            TestCase(
-               struct
-                  structure Base =  X.Base
-               end )
+         structure Case =  X.Case
       end );
 

@@ -19,11 +19,15 @@ structure StringStringDictKeys =  DictSetSimpleDictKeys (
 
 structure DictKeysSuite =  DictKeysSuite (
    struct
+      structure Base = Base
+      structure Case = TestCase
       structure DictKeys =  StringStringDictKeys
       structure Set = StringSet
    end );
 structure SetSuite =  SetSuite (
    struct
+      structure Base = Base
+      structure Case = TestCase
       structure Set = StringSet
    end );
 
