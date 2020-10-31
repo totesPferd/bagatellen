@@ -39,27 +39,35 @@ structure Common =
          end );
       structure Base = Base
       structure Case = TestCase
-      structure DictKeys =  StringStringDictKeys
-      structure DictMap =  StringStringDictMap
-      structure Set =  StringSet
    end;
 
-structure TestAssertEqForStringStringDict =  TestAssertEqForStringStringDict(Common)
-structure TestAssertEqForStringSet =  TestAssertEqForStringSet(Common)
+structure TestAssertEqForStringStringDict =  TestAssertEqForStringStringDict(
+   struct
+      open Common
+      structure DictKeys =  StringStringDictKeys
+   end );
+structure TestAssertEqForStringSet =  TestAssertEqForStringSet(
+   struct
+      open Common
+      structure Set =  StringSet
+   end );
 
 structure DictKeysSuite =  DictKeysSuite (
    struct
       open Common
+      structure DictKeys =  StringStringDictKeys
       structure AssertEqForStringSet =  TestAssertEqForStringSet
    end );
 structure DictMapSuite =  DictMapSuite (
    struct
       open Common
+      structure DictMap =  StringStringDictMap
       structure AssertEqForStringStringDict =  TestAssertEqForStringStringDict
    end );
 structure SetSuite =  SetSuite (
    struct
       open Common
+      structure Set =  StringSet
       structure AssertEqForStringSet =  TestAssertEqForStringSet
    end );
 
