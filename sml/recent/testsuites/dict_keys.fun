@@ -10,9 +10,7 @@ functor DictKeysSuite(X:
       structure Base: PPrintBase
       structure DictKeys: DictKeys
          where type From.key_t = string
-         where type From.val_t = string
-      structure Set: Set
-         where type base_t = string
+           and type From.val_t = string
       structure Case: TestCase
          where type state_t =  Base.state_t
       structure Assert: TestAssert
@@ -24,7 +22,7 @@ functor DictKeysSuite(X:
       structure AssertEqForStringSet: TestAssertEq
          where type context_t =  unit
            and type testcase_t =  Case.testcase_t
-           and type T =  Set.T
+           and type T =  DictKeys.To.T
    end ): TestSuite =
    struct
       open X.Case
@@ -34,5 +32,11 @@ functor DictKeysSuite(X:
       val suite =  collect_testcases (
             "dict_keys"
          ,  [
+                  let
+                     val in_a = X.DictKeys.From.empty
+                     val expected = X.DictKeys.To.empty
+                  in
+                     X.AssertEqForStringSet.assert("dict_key #1", (), expected, X.DictKeys.keys in_a)
+                  end
       ])
    end;
