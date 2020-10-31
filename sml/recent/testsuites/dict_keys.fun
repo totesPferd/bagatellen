@@ -24,7 +24,7 @@ functor DictKeysSuite(X:
          end )
 
       val suite =  collect_testcases (
-            "set"
+            "dict_keys"
          ,  [
       ])
    end;

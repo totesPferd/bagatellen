@@ -34,7 +34,8 @@ structure Suite: TestSuite =
       val suite =  collect_testcases (
             "all"
          ,  [
-                  SetSuite.suite ])
+                  DictKeysSuite.suite
+               ,  SetSuite.suite ])
    end
 
 val state =  Base.init;
