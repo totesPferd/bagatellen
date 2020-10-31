@@ -43,6 +43,5 @@ functor DictKeysSuite(X:
                      val expected = List.foldl X.DictKeys.To.adjunct X.DictKeys.To.empty [ "zwei", "drei", "fuenf" ]
                   in
                      X.AssertEqForStringSet.assert("dict_key #2", (), expected, X.DictKeys.keys in_a)
-                  end
-      ])
+                  end ])
    end;
