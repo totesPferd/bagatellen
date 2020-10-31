@@ -3,6 +3,7 @@ use "pkg/dict.sml";
 use "pkg/string.sml";
 use "pprint/base.sig";
 use "test/assert.sig";
+use "test/assert_eq.sig";
 use "test/case.sig";
 use "test/suite.sig";
 use "testsuites/test_assert_eq_for_string_set.fun";
@@ -14,6 +15,10 @@ functor DictKeysSuite(X:
          where type state_t =  Base.state_t
       structure Assert: TestAssert
          where type testcase_t =  Case.testcase_t
+      structure AssertEqForString: TestAssertEq
+         where type context_t =  context_t
+           and type testcase_t =  Case.testcase_t
+           and type T =  string
       structure DictKeys: DictKeys
          where type From.key_t = string
          where type From.val_t = string
@@ -25,12 +30,6 @@ functor DictKeysSuite(X:
 
       type context_t =  context_t
       structure TestAssertEqForStringSet =  TestAssertEqForStringSet(X)
-      structure TestAssertEqForString =  TestAssertEqForString(
-         struct
-            type context_t =  context_t
-            structure Base = X.Base
-            structure Case = X.Case
-         end )
 
       val suite =  collect_testcases (
             "dict_keys"
