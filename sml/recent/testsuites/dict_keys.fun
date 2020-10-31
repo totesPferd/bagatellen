@@ -1,6 +1,4 @@
 use "general/dict_keys.sig";
-use "pkg/dict.sml";
-use "pkg/string.sml";
 use "pprint/base.sig";
 use "test/assert.sig";
 use "test/assert_eq.sig";

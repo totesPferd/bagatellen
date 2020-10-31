@@ -1,5 +1,3 @@
-use "pkg/set.sml";
-use "pkg/string.sml";
 use "pprint/base.sig";
 use "test/assert.sig";
 use "test/assert_eq.sig";
