@@ -4,12 +4,18 @@ use "general/dict_set_simple/set.fun";
 use "testsuites/dict_keys.fun";
 use "testsuites/set.fun";
 
-structure TestAssertEqForString =  TestAssertEqForString(
+structure Common =
    struct
-      type context_t = context_t
-      structure Base =  Base
-      structure Case =  TestCase
-   end );
+      structure Assert = TestAssert
+      structure AssertEqForString =  TestAssertEqForString(
+         struct
+            type context_t = context_t
+            structure Base =  Base
+            structure Case =  TestCase
+         end );
+      structure Base = Base
+      structure Case = TestCase
+   end;
 
 structure StringSet =  DictSetSimpleSet(EqTypeForString);
 
@@ -26,19 +32,13 @@ structure StringStringDictKeys =  DictSetSimpleDictKeys (
 
 structure DictKeysSuite =  DictKeysSuite (
    struct
-      structure Assert = TestAssert
-      structure AssertEqForString =  TestAssertEqForString
-      structure Base = Base
-      structure Case = TestCase
+      open Common
       structure DictKeys =  StringStringDictKeys
       structure Set = StringSet
    end );
 structure SetSuite =  SetSuite (
    struct
-      structure Assert = TestAssert
-      structure AssertEqForString =  TestAssertEqForString
-      structure Base = Base
-      structure Case = TestCase
+      open Common
       structure Set = StringSet
    end );
 
