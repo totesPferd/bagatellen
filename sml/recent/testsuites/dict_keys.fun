@@ -2,8 +2,9 @@ use "general/dict_keys.sig";
 use "pkg/dict.sml";
 use "pkg/string.sml";
 use "pprint/base.sig";
-use "test/assert.sig";
+use "test/assert.fun";
 use "test/case.sig";
+use "test/suite.sig";
 use "testsuites/test_assert_eq_for_string_set.fun";
 
 functor DictKeysSuite(X:
