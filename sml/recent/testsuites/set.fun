@@ -15,7 +15,7 @@ functor SetSuite(X:
       structure Assert: TestAssert
          where type testcase_t =  Case.testcase_t
       structure AssertEqForString: TestAssertEq
-         where type context_t =  context_t
+         where type context_t =  unit
            and type testcase_t =  Case.testcase_t
            and type T =  string
       structure Set: Set
@@ -24,7 +24,7 @@ functor SetSuite(X:
    struct
       open X.Case
 
-      type context_t =  context_t
+      type context_t =  unit
       structure TestAssertEqForStringSet =  TestAssertEqForStringSet(X)
 
       val suite =  collect_testcases (
