@@ -8,6 +8,7 @@ use "testsuites/common.sml";
 
 functor TestAssertEqForStringSet(X:
    sig
+      type context_t
       structure Base: PPrintBase
       structure Case: TestCase
          where type state_t = Base.state_t
@@ -18,18 +19,18 @@ functor TestAssertEqForStringSet(X:
       struct
          structure Case =  X.Case
          structure Set =  X.Set
-         type context_t =  context_t
+         type context_t =  X.context_t
          structure Able =
             PPrintAbleForString(
                struct
-                  type context_t =  context_t
+                  type context_t =  X.context_t
                   structure Base =  X.Base
                end )
          structure Base =  X.Base
          structure ConstructionA =
             PPrintConstructionAForString(
                struct
-                  type context_t =  context_t
+                  type context_t =  X.context_t
                   structure Base =  X.Base
                end )
          structure EqType =  EqTypeForString

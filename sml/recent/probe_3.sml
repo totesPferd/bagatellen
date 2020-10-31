@@ -3,19 +3,9 @@ use "general/dict_set_simple/dict_keys.fun";
 use "general/dict_set_simple/set.fun";
 use "testsuites/dict_keys.fun";
 use "testsuites/set.fun";
+use "testsuites/test_assert_eq_for_string_set.fun";
+use "testsuites/test_assert_eq_for_string_string_dict.fun";
 
-structure Common =
-   struct
-      structure Assert = TestAssert
-      structure AssertEqForString =  TestAssertEqForString(
-         struct
-            type context_t = context_t
-            structure Base =  Base
-            structure Case =  TestCase
-         end );
-      structure Base = Base
-      structure Case = TestCase
-   end;
 
 structure StringSet =  DictSetSimpleSet(EqTypeForString);
 
@@ -30,16 +20,33 @@ structure StringStringDictKeys =  DictSetSimpleDictKeys (
       structure S =  StringSet
    end );
 
+structure Common =
+   struct
+      type context_t =  context_t
+      structure Assert = TestAssert
+      structure AssertEqForString =  TestAssertEqForString(
+         struct
+            type context_t = context_t
+            structure Base =  Base
+            structure Case =  TestCase
+         end );
+      structure Base = Base
+      structure Case = TestCase
+      structure DictKeys =  StringStringDictKeys
+      structure Set =  StringSet
+   end;
+
+structure TestAssertEqForStringSet =  TestAssertEqForStringSet(Common)
+
 structure DictKeysSuite =  DictKeysSuite (
    struct
       open Common
-      structure DictKeys =  StringStringDictKeys
-      structure Set = StringSet
+      structure AssertEqForStringSet =  TestAssertEqForStringSet
    end );
 structure SetSuite =  SetSuite (
    struct
       open Common
-      structure Set = StringSet
+      structure AssertEqForStringSet =  TestAssertEqForStringSet
    end );
 
 structure Suite: TestSuite =  

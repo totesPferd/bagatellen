@@ -6,11 +6,15 @@ use "test/assert.sig";
 use "test/assert_eq.sig";
 use "test/case.sig";
 use "test/suite.sig";
-use "testsuites/test_assert_eq_for_string_set.fun";
 
 functor DictKeysSuite(X:
    sig
       structure Base: PPrintBase
+      structure DictKeys: DictKeys
+         where type From.key_t = string
+         where type From.val_t = string
+      structure Set: Set
+         where type base_t = string
       structure Case: TestCase
          where type state_t =  Base.state_t
       structure Assert: TestAssert
@@ -19,17 +23,15 @@ functor DictKeysSuite(X:
          where type context_t =  unit
            and type testcase_t =  Case.testcase_t
            and type T =  string
-      structure DictKeys: DictKeys
-         where type From.key_t = string
-         where type From.val_t = string
-      structure Set: Set
-         where type base_t = string
+      structure AssertEqForStringSet: TestAssertEq
+         where type context_t =  unit
+           and type testcase_t =  Case.testcase_t
+           and type T =  Set.T
    end ): TestSuite =
    struct
       open X.Case
 
       type context_t =  unit
-      structure TestAssertEqForStringSet =  TestAssertEqForStringSet(X)
 
       val suite =  collect_testcases (
             "dict_keys"
