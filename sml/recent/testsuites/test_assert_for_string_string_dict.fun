@@ -10,7 +10,7 @@ functor TestAssertForStringStringDict(X:
    end ): TestAssertEq =
    TestAssertEqForDict(
       struct
-         open X
+         structure DictKeys =  X.DictKeys
          structure Base =  Base
          structure KeyAble =  PPrintAbleForString(
             struct

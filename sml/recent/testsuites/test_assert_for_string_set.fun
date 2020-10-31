@@ -11,7 +11,7 @@ functor TestAssertEqForStringSet(X:
    end ): TestAssertEq =
    TestAssertEqForSet(
       struct
-         open X
+         structure Set =  X.Set
          type context_t =  context_t
          structure Able =
             PPrintAbleForString(

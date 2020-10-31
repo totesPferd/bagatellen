@@ -9,7 +9,9 @@ functor SetSuite(X:
          where type base_t = string
    end ): TestSuite =
    struct
-      open TestCase
+      type testcase_t =  TestCase.testcase_t
+      val collect_testcases =  TestCase.collect_testcases
+
       type context_t =  context_t
       structure TestAssertEqForStringSet =  TestAssertEqForStringSet(X)
       structure TestAssertEqForString =  TestAssertEqForString(
