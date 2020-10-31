@@ -38,5 +38,11 @@ functor DictKeysSuite(X:
                   in
                      X.AssertEqForStringSet.assert("dict_key #1", (), expected, X.DictKeys.keys in_a)
                   end
+               ,  let
+                     val in_a = ListPair.foldl X.DictKeys.From.set X.DictKeys.From.empty ([ "zwei", "drei", "fuenf" ], [ "2", "3", "5" ])
+                     val expected = List.foldl X.DictKeys.To.adjunct X.DictKeys.To.empty [ "zwei", "drei", "fuenf" ]
+                  in
+                     X.AssertEqForStringSet.assert("dict_key #2", (), expected, X.DictKeys.keys in_a)
+                  end
       ])
    end;
