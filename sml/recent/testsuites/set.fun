@@ -135,6 +135,5 @@ functor SetSuite(X:
                      val in_b =  "elf"
                   in
                     TestAssert.assert ("is_in #2", not(X.Set.is_in(in_b, in_a)))
-                  end
-      ])
+                  end ])
    end;
