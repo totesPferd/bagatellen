@@ -2,7 +2,7 @@ use "general/dict_keys.sig";
 use "pkg/dict.sml";
 use "pkg/string.sml";
 use "testsuites/common.sml";
-use "testsuites/test_assert_for_string_set.fun";
+use "testsuites/test_assert_eq_for_string_set.fun";
 
 functor DictKeysSuite(X:
    sig

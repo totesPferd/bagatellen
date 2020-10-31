@@ -4,7 +4,7 @@ use "pkg/string.sml";
 use "test/assert_eq.sig";
 use "testsuites/common.sml";
 
-functor TestAssertForStringStringDict(X:
+functor TestAssertEqForStringStringDict(X:
    sig
       structure DictKeys: DictKeys
    end ): TestAssertEq =
