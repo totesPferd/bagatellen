@@ -19,6 +19,7 @@ structure StringStringDictKeys =  DictSetSimpleDictKeys (
 
 structure DictKeysSuite =  DictKeysSuite (
    struct
+      structure Assert = TestAssert
       structure Base = Base
       structure Case = TestCase
       structure DictKeys =  StringStringDictKeys
@@ -26,6 +27,7 @@ structure DictKeysSuite =  DictKeysSuite (
    end );
 structure SetSuite =  SetSuite (
    struct
+      structure Assert = TestAssert
       structure Base = Base
       structure Case = TestCase
       structure Set = StringSet

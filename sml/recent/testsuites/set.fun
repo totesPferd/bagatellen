@@ -1,7 +1,7 @@
 use "pkg/set.sml";
 use "pkg/string.sml";
 use "pprint/base.sig";
-use "test/assert.fun";
+use "test/assert.sig";
 use "test/case.sig";
 use "test/suite.sig";
 use "testsuites/test_assert_eq_for_string_set.fun";
@@ -11,6 +11,8 @@ functor SetSuite(X:
       structure Base: PPrintBase
       structure Case: TestCase
          where type state_t =  Base.state_t
+      structure Assert: TestAssert
+         where type testcase_t =  Case.testcase_t
       structure Set: Set
          where type base_t = string
    end ): TestSuite =
@@ -18,7 +20,6 @@ functor SetSuite(X:
       open X.Case
 
       type context_t =  context_t
-      structure TestAssert =  TestAssert(X)
       structure TestAssertEqForStringSet =  TestAssertEqForStringSet(X)
       structure TestAssertEqForString =  TestAssertEqForString(
          struct
@@ -75,12 +76,12 @@ functor SetSuite(X:
                ,  let
                      val in_a =  X.Set.empty
                   in
-                    TestAssert.assert ("is_empty #1", X.Set.is_empty(in_a))
+                    X.Assert.assert ("is_empty #1", X.Set.is_empty(in_a))
                   end
                ,  let
                      val in_a =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben" ]
                   in
-                    TestAssert.assert ("is_empty #2", not (X.Set.is_empty(in_a)))
+                    X.Assert.assert ("is_empty #2", not (X.Set.is_empty(in_a)))
                   end
                ,  let
                      val in_a =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben" ]
@@ -99,18 +100,18 @@ functor SetSuite(X:
                      val in_a =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben" ]
                      val in_b =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben", "elf" ]
                   in
-                     TestAssert.assert ("subseteq #1", X.Set.subseteq(in_a, in_b))
+                     X.Assert.assert ("subseteq #1", X.Set.subseteq(in_a, in_b))
                   end
                ,  let
                      val in_a =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben", "elf" ]
                      val in_b =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben" ]
                   in
-                     TestAssert.assert ("subseteq #2", not(X.Set.subseteq(in_a, in_b)))
+                     X.Assert.assert ("subseteq #2", not(X.Set.subseteq(in_a, in_b)))
                   end
                ,  let
                      val in_a =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben", "elf" ]
                   in
-                     TestAssert.assert ("subseteq #3", X.Set.subseteq(in_a, in_a))
+                     X.Assert.assert ("subseteq #3", X.Set.subseteq(in_a, in_a))
                   end
                ,  let
                      val in_a =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben" ]
@@ -136,12 +137,12 @@ functor SetSuite(X:
                      val in_a =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben" ]
                      val in_b =  "drei"
                   in
-                    TestAssert.assert ("is_in #1", X.Set.is_in(in_b, in_a))
+                    X.Assert.assert ("is_in #1", X.Set.is_in(in_b, in_a))
                   end
                ,  let
                      val in_a =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben" ]
                      val in_b =  "elf"
                   in
-                    TestAssert.assert ("is_in #2", not(X.Set.is_in(in_b, in_a)))
+                    X.Assert.assert ("is_in #2", not(X.Set.is_in(in_b, in_a)))
                   end ])
    end;

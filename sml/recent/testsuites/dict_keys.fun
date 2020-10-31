@@ -2,7 +2,7 @@ use "general/dict_keys.sig";
 use "pkg/dict.sml";
 use "pkg/string.sml";
 use "pprint/base.sig";
-use "test/assert.fun";
+use "test/assert.sig";
 use "test/case.sig";
 use "test/suite.sig";
 use "testsuites/test_assert_eq_for_string_set.fun";
@@ -12,6 +12,8 @@ functor DictKeysSuite(X:
       structure Base: PPrintBase
       structure Case: TestCase
          where type state_t =  Base.state_t
+      structure Assert: TestAssert
+         where type testcase_t =  Case.testcase_t
       structure DictKeys: DictKeys
          where type From.key_t = string
          where type From.val_t = string
@@ -22,7 +24,6 @@ functor DictKeysSuite(X:
       open X.Case
 
       type context_t =  context_t
-      structure TestAssert =  TestAssert(X)
       structure TestAssertEqForStringSet =  TestAssertEqForStringSet(X)
       structure TestAssertEqForString =  TestAssertEqForString(
          struct
