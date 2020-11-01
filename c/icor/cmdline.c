@@ -19,6 +19,8 @@ static void icor_set_filetype(icor_fileinfo_t *, const char *);
 
 static void print_help();
 
+static void print_version();
+
 int icor_cmdline_main(int argc, char **argv, icor_cmdline_t *pCmdline) {
   assert(argv);
   assert(pCmdline);
@@ -84,7 +86,7 @@ int icor_cmdline_main(int argc, char **argv, icor_cmdline_t *pCmdline) {
       }
       break;
     case 'V':
-      puts(PACKAGE_STRING "\n");
+      print_version();
       retval = -2;
       break;
     case 'x': {
@@ -209,3 +211,8 @@ void print_help() {
   puts("   -h, --help              ... print this help screen and exits");
   puts("   -V, --version           ... print version info and exits");
 }
+
+void print_version() {
+  puts(PACKAGE_STRING);
+}
+
