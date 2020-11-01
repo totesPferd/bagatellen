@@ -1,4 +1,5 @@
-AC_INIT([gr icor], [0.1])
+AC_INIT([icor], [0.1])
+AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_SRCDIR([main.c])
 AM_INIT_AUTOMAKE
 AC_PROG_CC

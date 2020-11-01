@@ -7,6 +7,7 @@
 #include <unistd.h>
 
 #include "cmdline.h"
+#include "config.h"
 
 static void icor_init_fileinfo(icor_fileinfo_t *);
 
@@ -28,11 +29,12 @@ int icor_cmdline_main(int argc, char **argv, icor_cmdline_t *pCmdline) {
 
   struct option long_options[] = {{"help", no_argument, 0, 'h'},
                                   {"input", required_argument, 0, 'i'},
-                                  {"iformat", required_argument, 0, 0},
                                   {"output", required_argument, 0, 'o'},
+                                  {"version", no_argument, 0, 'V'},
+                                  {"iformat", required_argument, 0, 0},
                                   {"oformat", required_argument, 0, 0},
                                   {0, 0, 0, 0}};
-  const char opt_string[] = "hi:o:x:y:";
+  const char opt_string[] = "hi:o:Vx:y:";
 
   int opt_idx;
   int opt;
@@ -80,6 +82,10 @@ int icor_cmdline_main(int argc, char **argv, icor_cmdline_t *pCmdline) {
       } else {
         icor_set_filename(&(pCmdline->output), optarg);
       }
+      break;
+    case 'V':
+      puts(PACKAGE_STRING "\n");
+      retval = -2;
       break;
     case 'x': {
       char *pEnd;
@@ -194,12 +200,12 @@ void print_help() {
   puts("Usage: icor <options>");
   puts("");
   puts("<options>:");
-  puts("-i/--input  <filename> ... input filename (mandatory)");
-  puts("-o/--output <filename> ... output filename (mandatory)");
-  puts("--iformat <image type> ... input image type");
-  puts("--oformat <image type> ... output image type");
-  puts("-x <number>            ... #pixels in x dim");
-  puts("-y <number>            ... #pixels in y dim");
-  puts("-h/--help              ... print this help screen and exits "
-       "immediately");
+  puts("   -i, --input  <filename> ... input filename (mandatory)");
+  puts("   -o, --output <filename> ... output filename (mandatory)");
+  puts("   --iformat <image type>  ... input image type");
+  puts("   --oformat <image type>  ... output image type");
+  puts("   -x <number>             ... #pixels in x dim");
+  puts("   -y <number>             ... #pixels in y dim");
+  puts("   -h, --help              ... print this help screen and exits");
+  puts("   -V, --version           ... print version info and exits");
 }
