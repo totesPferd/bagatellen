@@ -14,7 +14,6 @@
  *  @param pCmdline interpreted cmdline params
  *  @return exit code of icor
  */
-int
-icor_main(const icor_cmdline_t *pCmdline);
+int icor_main(const icor_cmdline_t *pCmdline);
 
 #endif
