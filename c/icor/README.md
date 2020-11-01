@@ -6,7 +6,7 @@
 
 ## Installation.
 
-Make sure you have installed [Imlib2 lib](https://docs.enlightenment.org/api/imlib2/html/) as well as [FFTW3 lib](http://www.fftw.org/) and [help2man util](https://www.gnu.org/software/help2man/).  Suppose `${SRC_DIR}` is the dir where source code were checked out.  Cd to a build dir and run:
+Make sure you have installed [Imlib2 lib](https://docs.enlightenment.org/api/imlib2/html/) as well as [FFTW3 lib](http://www.fftw.org/) and [help2man util](https://www.gnu.org/software/help2man/).  Suppose `${SRC_DIR}` were the dir where source code were checked out.  Cd to a build dir and run:
 
 	"${SRC_DIR}/configure"
 	make
