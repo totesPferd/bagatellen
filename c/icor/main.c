@@ -8,14 +8,17 @@
  *
  *  	icor -i OriginalPhoto.jpg -o ProcessedPhoto.png -x 512 -y 768
  *
- *  convert a JPEG file OriginalPhoto.jpg into a PNG image file with aspects 512
- * x 768. It converts a JPEG file into a PNG file because OriginalPhoto.jpg ends
- * in .jpg and ProcessedPhoto.png ends in png.  If you want other image type use
- * --iformat or
- *  --oformat switch, respectively, e.g.
+ * converts a JPEG file OriginalPhoto.jpg into a PNG image file with
+ * aspects 512 x 768. It converts a JPEG file into a PNG file because
+ * OriginalPhoto.jpg file name ends in .jpg and
+ * ProcessedPhoto.png file name ends in .png.
+ * If you want other image type use --iformat or --oformat switch,
+ * respectively, e.g.
  *
- *  	icor -i Photo.jpg.orig --iformat jpg -o Photo.png.processed --oformat
- * png -x 512 -y 768
+ *  	icor                                    \
+ *         -i Photo.jpg.orig --iformat jpg      \
+ *         -o Photo.png.processed --oformat png \
+ *         -x 512 -y 768
  *
  *  \attention `icor` does not preserve aspect ratio.
  *

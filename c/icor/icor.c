@@ -25,38 +25,38 @@ static void icor_transceive_buf(const double *, double *, long, long, long,
 /*
  * Main procedure - do the job of icor.
  *
- * let imlib2 load and convert image from disk, then let fftw3 lib resize it and
- * in a last step let imlib2 store another image to disk.
+ * Imlib2 lib loads and converts image from disk, then we resize it using
+ * FFTW3 lib and in a last step Imlib2 lib stores processed image to disk.
  *
  *
  * Main procedure works as follows:
  *
- * Assume x_in and y_in are the aspect dimension of input image
+ * Assume x_in and y_in are the aspect dimensions of input image
  * and x_out and y_out are the one of the output image.
  *
  * We use 4 buffers:
  * * in_buf, representing a table x_in * y_in, into which the picture
- *   is loaded by imlib2,
- * * fftw_in_buf, representing a table x_in * y_in, which is used by fftw3,
+ *   is loaded by Imlib2,
+ * * fftw_in_buf, representing a table x_in * y_in, which is used by FFTW3,
  * * fftw_out_buf, representing a table x_out * y_out, which is used by
- *   fftw3 too,
- * * out_buf, representing a table x_out * y_out, from which imlib2
+ *   FFTW3 too,
+ * * out_buf, representing a table x_out * y_out, from which Imlib2
  *   saves picture to disk.
  *
  * The following steps are performed by this procedure:
  * * loads picture into in_buf,
- * * for each of 4 channel a imlib2 supported picture is consisting in,
- *   R, G, B and A, do repeatedly the following tasks:
+ * * for each of 4 channels - R, G, B and A - a Imlib2 supported picture is
+ *   consisting in, do repeatedly the following tasks:
  *   + copy and convert respective 8bit data frm in_buf to double floating point
  *     content of fftw_in_buf,
  *   + apply DCT-III type fast fourier transformation in-place on these data,
  *   + transceive content of fftw_in_buf to fftw_out_buf.  Pad rows with 0.0
- *     on the right border if x_in < x_out or cut data on the right-hand side
- *     if x_in > x_out.  Pad 0.0 rows below the bottom if y_in < y_out or cut
+ *     on the right border if x_in < x_out or chop data on the right-hand side
+ *     if x_in > x_out.  Pad 0.0 rows below the bottom if y_in < y_out or chop
  *     bottom rows if y_in > y_out,
  *   + apply DCT-II type fast fourier transformation in-place on fftw_out_buf,
  *   + copy, scale and convert double floating point content of fftw_out_buf
- *     into the respective channel 8bit data buffer from which imlib2 will store
+ *     into the respective channel 8bit data buffer from which Imlib2 will store
  *     picture onto disk,
  * * saves picture from out_buf
  *
