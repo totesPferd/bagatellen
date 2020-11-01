@@ -39,14 +39,14 @@ static void icor_transceive_buf(const double *, double *, long, long, long,
  *   is loaded by Imlib2,
  * * fftw_in_buf, representing a table x_in * y_in, which is used by FFTW3,
  * * fftw_out_buf, representing a table x_out * y_out, which is used by
- *   FFTW3 too,
+ *   FFTW3, too,
  * * out_buf, representing a table x_out * y_out, from which Imlib2
  *   saves picture to disk.
  *
  * The following steps are performed by this procedure:
- * * loads picture into in_buf,
- * * for each of 4 channels - R, G, B and A - a Imlib2 supported picture is
- *   consisting in, do repeatedly the following tasks:
+ * * load picture into in_buf,
+ * * A picture which is supported by the Imlib2 lib consists in four channels:
+ *   R, G, B and A.  Perform for each of them the following tasks:
  *   + copy and convert respective 8bit data frm in_buf to double floating point
  *     content of fftw_in_buf,
  *   + apply DCT-III type fast fourier transformation in-place on these data,
