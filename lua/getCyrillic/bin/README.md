@@ -2,7 +2,7 @@
 
 `getCyrrilic` is a tiny lua unix filter program which transforms latin input to cyrillic output.
 
-Use it as follows:
+Use it as follows, e.g.:
 
 	echo "Ty ponimaeqsh po-russkij?" | lua -l getCyrillic
 
