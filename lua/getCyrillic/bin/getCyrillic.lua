@@ -1,5 +1,8 @@
 #!/usr/bin/env lua
 
+
+local xMode =  false
+
 for l in io.stdin:lines()
 do local capMode =  false
    local qMode =  false
