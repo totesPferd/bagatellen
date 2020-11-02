@@ -1,4 +1,4 @@
-#`getCyrillic` - produce Russian letters with latin keyboards
+# `getCyrillic` - produce Russian letters with latin keyboards
 
 `getCyrrilic` is a tiny lua unix filter program which transforms latin input to cyrillic output.
 
