@@ -12,6 +12,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://alternative-presseschau.com/feed/",
+         "title": "Alternative Presseschau \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://antjeschrupp.com/feed/",
          "title": "Aus Liebe zur Freiheit \u00bb Feed",
          "type": "application/rss+xml"
