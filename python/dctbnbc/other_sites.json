@@ -250,6 +250,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.metropolnews.info/feed",
+         "title": "Metropolnews.info \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.mimikama.at/feed/",
          "title": "Mimikama \u00bb Feed",
          "type": "application/rss+xml"
