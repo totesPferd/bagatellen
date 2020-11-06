@@ -1064,6 +1064,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.storl.de/feed/",
+         "title": "storl.de \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://yoice.net/feed/",
          "title": "yoice.net - Alternatives Webmagazin \u00bb Feed",
          "type": "application/rss+xml"
