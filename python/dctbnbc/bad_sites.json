@@ -171,6 +171,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://clemenskuby.com/feed/",
+         "title": "clemenskuby.com \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://www.compact-online.de/feed",
          "type": "application/rss+xml"
       },
