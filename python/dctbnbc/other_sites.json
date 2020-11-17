@@ -57,6 +57,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.dushanwegner.com/feed/",
+         "title": "Dushan Wegner \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://edzardernst.com/feed",
          "type": "application/rss+xml"
       },
