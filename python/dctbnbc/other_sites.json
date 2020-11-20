@@ -483,6 +483,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://rechtemedieninfo.blogspot.com/feeds/posts/default",
+         "title": "RechteMedienInfo - Atom",
+         "type": "application/atom+xml"
+      },
+      {
          "href": "https://scienceblogs.de/plazeboalarm/index.php/feed/",
          "title": "Plazeboalarm \u00bb Feed",
          "type": "application/rss+xml"
