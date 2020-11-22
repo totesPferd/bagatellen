@@ -99,18 +99,18 @@ functor SetSuite(X:
                      val in_a =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben" ]
                      val in_b =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben", "elf" ]
                   in
-                     X.Assert.assert ("subseteq #1", X.Set.subseteq(in_a, in_b))
+                     X.Assert.assert ("subeq #1", X.Set.subeq(in_a, in_b))
                   end
                ,  let
                      val in_a =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben", "elf" ]
                      val in_b =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben" ]
                   in
-                     X.Assert.assert ("subseteq #2", not(X.Set.subseteq(in_a, in_b)))
+                     X.Assert.assert ("subeq #2", not(X.Set.subeq(in_a, in_b)))
                   end
                ,  let
                      val in_a =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben", "elf" ]
                   in
-                     X.Assert.assert ("subseteq #3", X.Set.subseteq(in_a, in_a))
+                     X.Assert.assert ("subeq #3", X.Set.subeq(in_a, in_a))
                   end
                ,  let
                      val in_a =  List.foldl X.Set.adjunct X.Set.empty [ "zwei", "drei", "fuenf", "sieben" ]

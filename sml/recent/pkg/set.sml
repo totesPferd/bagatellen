@@ -1,5 +1,5 @@
 use "general/contected_eq_type_for_eq_type.fun";
-use "general/eq_type_for_subseteq_type.fun";
+use "general/eq_type_for_subeq_type.fun";
 use "general/set.sig";
 use "pprint/able_by_construction_a.fun";
 use "pprint/able.sig";
@@ -12,14 +12,14 @@ use "test/case.fun";
 
 functor EqTypeForSet(X:
    sig
-      structure SubseteqType: Set
+      structure SubeqType: Set
    end ): EqType =
-   EqTypeForSubseteqType(X);
+   EqTypeForSubeqType(X);
 
 functor ContectedEqTypeForSet(X:
    sig
       type context_t
-      structure SubseteqType: Set
+      structure SubeqType: Set
    end ): ContectedEqType =
    ContectedEqTypeForEqType(
       struct
@@ -108,7 +108,7 @@ functor TestAssertEqForSet(X:
             ContectedEqTypeForSet(
                struct
                   type context_t =  X.Able.context_t
-                  structure SubseteqType =  X.Set
+                  structure SubeqType =  X.Set
                end )
          structure Case =  X.Case
       end );

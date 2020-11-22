@@ -1,18 +1,18 @@
 use "general/dict_keys.sig";
 use "general/eq_type.sig";
-use "general/subseteq_type.sig";
+use "general/subeq_type.sig";
 
-functor SubseteqTypeForDict(X:
+functor SubeqTypeForDict(X:
    sig
       structure DictKeys: DictKeys
       structure ValEqType: EqType
          where type T =  DictKeys.From.val_t
-   end ): SubseteqType =
+   end ): SubeqType =
    struct
 
       type T =  X.DictKeys.From.T
 
-      fun subseteq(t_a, t_b) =
+      fun subeq(t_a, t_b) =
          let
             val keys =  X.DictKeys.keys t_a
          in

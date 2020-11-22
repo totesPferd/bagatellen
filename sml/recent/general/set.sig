@@ -13,7 +13,7 @@ signature Set =
       val is_empty:         T -> bool
       val map:              (base_t -> base_t) -> T -> T
       val singleton:        base_t -> T
-      val subseteq:         T * T -> bool
+      val subeq:            T * T -> bool
       val sum:              T * T -> T
       val union:            T * T -> T
 

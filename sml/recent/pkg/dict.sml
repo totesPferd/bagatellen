@@ -1,8 +1,8 @@
 use "general/contected_eq_type_for_eq_type.fun";
 use "general/dict.sig";
 use "general/dict_keys.sig";
-use "general/eq_type_for_subseteq_type.fun";
-use "general/subseteq_type_for_dict.fun";
+use "general/eq_type_for_subeq_type.fun";
+use "general/subeq_type_for_dict.fun";
 use "pprint/able_by_construction_a.fun";
 use "pprint/able.sig";
 use "pprint/base.sig";
@@ -19,9 +19,9 @@ functor EqTypeForDict(X:
       structure ValEqType: EqType
          where type T =  DictKeys.From.val_t
    end ): EqType =
-   EqTypeForSubseteqType(
+   EqTypeForSubeqType(
       struct
-         structure SubseteqType =  SubseteqTypeForDict(X)
+         structure SubeqType =  SubeqTypeForDict(X)
       end );
 
 functor ContectedEqTypeForDict(X:
