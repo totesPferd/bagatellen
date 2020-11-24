@@ -1,4 +1,4 @@
-signature PolymorphicVariables =
+signature PolymorphicVariable =
    sig
       eqtype 'a Variable
 

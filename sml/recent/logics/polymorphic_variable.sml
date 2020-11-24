@@ -1,6 +1,6 @@
-use "logics/polymorphic_variables.sig";
+use "logics/polymorphic_variable.sig";
 
-structure PolymorphicVariables: PolymorphicVariables =
+structure PolymorphicVariable: PolymorphicVariable =
    struct
       type 'a Variable =  'a Option.option ref
 
