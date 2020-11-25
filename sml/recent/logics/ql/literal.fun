@@ -27,17 +27,32 @@ functor QLLiteral (X:
              | (Variable x, Construction(d, ypsilon)) => false
              | (Variable x, Variable y) =>  X.PV.eq (x, y)
          and multi_eq (xi, ypsilon) =  X.PCT.cong eq (xi, ypsilon)
+         fun equate(k, l)
+           = case (get_val k, get_val l) of
+                (Construction(c, xi), Construction(d, ypsilon))
+             => if X.C.eq(c, d)
+                then
+                  multi_equate(xi, ypsilon)
+               else
+                  false
+             |  (Construction(c, xi), Variable y) =>  false
+             |  (Variable x, l)
+             => X.PV.set_val l x
+         and multi_equate(xi, ypsilon) =  X.PCT.cong (equate) (xi, ypsilon)
+
       end
 
       structure Single =
          struct
             type T =  Construction
             val eq =  eq
+            val equate =  equate
          end
       structure Multi =
          struct
             type T =  Construction X.PCT.T 
             val eq =  multi_eq
+            val equate =  multi_equate
          end
 
    end;
