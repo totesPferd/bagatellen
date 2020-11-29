@@ -81,6 +81,11 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://finanzmarktwelt.de/feed/",
+         "title": "finanzmarktwelt.de \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://florian-freistetter.de/feed/",
          "title": "Florian Freistetter - Astrodicticum Simplex \u00bb Feed",
          "type": "application/rss+xml"
@@ -88,6 +93,11 @@
       {
          "href": "https://scienceblogs.de/frischer-wind/feed/",
          "title": "Frischer Wind \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://www.geolitico.de/feed/",
+         "title": "GEOLITICO \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
@@ -493,8 +503,18 @@
          "type": "application/rss+xml"
       },
       {
+         "href": "https://www.prabelsblog.de/feed/",
+         "title": "Prabels Blog \u00bb Feed",
+         "type": "application/rss+xml"
+      },
+      {
          "href": "https://blog.psiram.com/feed/",
          "title": "RSS 2.0 - Alle Artikel",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://reisetopia.de/comments/feed/",
+         "title": "reisetopia \u00bb Kommentar-Feed",
          "type": "application/rss+xml"
       },
       {
