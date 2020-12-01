@@ -10,8 +10,8 @@ def print_usage(file):
    file.write("\nUSAGE:\n\n")
    file.write("%s [-h|--help]\n" % sys.argv[0])
    file.write("   write this usage information.\n\n")
-   file.write("%s [{-f|--file} <site_files] ... [<feed_url>] ...\n" % sys.argv[0])
-   file.write("   extract authors appearing in <feed_url> or appearing in feed urls contained in <site_files>.\n\n")
+   file.write("%s [{-f|--file} <site_file>] ... [<feed_url>] ...\n" % sys.argv[0])
+   file.write("   produce ranking of sites appearing in <feed_url> or appearing in feed urls contained in <site_file>.\n\n")
 
 
 def interpret_cmdline(result):
