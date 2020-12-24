@@ -53,6 +53,9 @@ functor QLLiteral (X:
             type T =  Construction X.PCT.T 
             val eq =  multi_eq
             val equate =  multi_equate
+
+            val empty =  X.PCT.empty
+            val is_empty =  X.PCT.is_empty
          end
 
    end;
