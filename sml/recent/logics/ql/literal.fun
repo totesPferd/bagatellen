@@ -1,4 +1,6 @@
 use "general/eq_type.sig";
+use "logics/literal_equate.sig";
+use "logics/multi_literal.sig";
 use "logics/polymorphic_container_type.sig";
 use "logics/polymorphic_variable.sig";
 
@@ -42,13 +44,13 @@ functor QLLiteral (X:
 
       end
 
-      structure Single =
+      structure Single: LiteralEquate =
          struct
             type T =  Construction
             val eq =  eq
             val equate =  equate
          end
-      structure Multi =
+      structure Multi: MultiLiteral =
          struct
             type T =  Construction X.PCT.T 
             val eq =  multi_eq

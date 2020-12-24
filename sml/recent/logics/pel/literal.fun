@@ -1,5 +1,6 @@
 use "general/eq_type.sig";
 use "logics/literal_equate.sig";
+use "logics/multi_literal.sig";
 use "logics/polymorphic_container_type.sig";
 use "logics/polymorphic_variable.sig";
 
@@ -24,38 +25,30 @@ functor PELLiteral (X:
          fun eq(k, l)
            = case ((get_val k), (get_val l)) of
                (Construction(c, alpha, xi), Construction(d, beta, ypsilon))
-               => X.C.eq(c, d) andalso multi_eq((alpha, xi), (beta, ypsilon))
+               => X.C.eq(c, d) andalso X.Q.eq (alpha, beta) andalso multi_eq(xi, ypsilon)
              | (Construction(c, alpha, xi), Variable y) => false
              | (Variable x, Construction(d, beta, ypsilon)) => false
              | (Variable x, Variable y) =>  X.PV.eq (x, y)
-         and multi_eq ((alpha, xi), (beta, ypsilon))
-           =          X.Q.eq (alpha, beta)
-               andalso
-                      X.PCT.cong eq (xi, ypsilon)
+         and multi_eq (xi, ypsilon)
+           = X.PCT.cong eq (xi, ypsilon)
          fun equate(k, l)
            = case (get_val k, get_val l) of
                 (Construction(c, alpha, xi), Construction(d, beta, ypsilon))
-             => if X.C.eq(c, d)
-                then
-                  multi_equate((alpha, xi), (beta, ypsilon))
-               else
-                  false
+             => X.C.eq(c, d) andalso X.Q.equate(alpha, beta) andalso multi_equate(xi, ypsilon)
              |  (Construction(c, alpha, xi), Variable y) =>  false
              |  (Variable x, l)
              => X.PV.set_val l x
-         and multi_equate((alpha, xi), (beta, ypsilon))
-            =        X.Q.equate (alpha, beta)
-               andalso
-                     X.PCT.cong equate (xi, ypsilon)
+         and multi_equate(xi, ypsilon)
+           = X.PCT.cong equate (xi, ypsilon)
       end
 
-      structure Single =
+      structure Single: LiteralEquate =
          struct
             type T =  Construction
             val eq =  eq
             val equate =  equate
          end
-      structure Multi =
+      structure Multi: MultiLiteral =
          struct
             type T =  Construction X.PCT.T 
             val eq =  multi_eq
