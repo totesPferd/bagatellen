@@ -16,4 +16,7 @@ structure PELPolymorphicContainerType: PolymorphicContainerType =
            in List.all (aux (P, c_2)) c_1
            end
 
+      val empty =  List.nil
+      val is_empty =  List.null
+
    end;
