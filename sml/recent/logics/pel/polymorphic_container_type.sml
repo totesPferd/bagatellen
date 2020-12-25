@@ -19,4 +19,7 @@ structure PELPolymorphicContainerType: PolymorphicContainerType =
       val empty =  List.nil
       val is_empty =  List.null
 
+      fun map f nil =  nil
+      |   map f ((n, a)::l) =  (n, f(a))::(map f l)
+
    end;

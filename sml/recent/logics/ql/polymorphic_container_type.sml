@@ -9,4 +9,5 @@ structure QLPolymorphicContainerType: PolymorphicContainerType =
       |   cong eq (Option.SOME x, Option.SOME y) =  eq (x, y)
       val empty =  Option.NONE
       fun is_empty a =  not(Option.isSome a)
+      val map =  Option.map 
    end;
