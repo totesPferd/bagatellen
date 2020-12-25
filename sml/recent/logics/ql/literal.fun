@@ -1,4 +1,5 @@
 use "general/eq_type.sig";
+use "logics/literal.sig";
 use "logics/literal_equate.sig";
 use "logics/multi_literal.sig";
 use "logics/polymorphic_container_type.sig";
@@ -9,7 +10,7 @@ functor QLLiteral (X:
       structure C: EqType
       structure PCT: PolymorphicContainerType
       structure PV:  PolymorphicVariable
-   end ) =
+   end ): Literal =
    struct
 
       datatype Construction =  Construction of X.C.T * Construction X.PCT.T | Variable of Construction X.PV.Variable

@@ -1,4 +1,5 @@
 use "general/eq_type.sig";
+use "logics/literal.sig";
 use "logics/literal_equate.sig";
 use "logics/multi_literal.sig";
 use "logics/polymorphic_container_type.sig";
@@ -7,13 +8,13 @@ use "logics/polymorphic_variable.sig";
 functor PELLiteral (X:
    sig
       structure C: EqType
-      structure Q: LiteralEquate
+      structure Q: Literal
       structure PCT: PolymorphicContainerType
       structure PV:  PolymorphicVariable
-   end ) =
+   end ): Literal =
    struct
 
-      datatype Construction =  Construction of X.C.T * X.Q.T * Construction X.PCT.T | Variable of Construction X.PV.Variable
+      datatype Construction =  Construction of X.C.T * X.Q.Single.T * Construction X.PCT.T | Variable of Construction X.PV.Variable
 
       local
          fun get_val (p as Construction(c, _, _)) =  p
@@ -25,7 +26,7 @@ functor PELLiteral (X:
          fun eq(k, l)
            = case ((get_val k), (get_val l)) of
                (Construction(c, alpha, xi), Construction(d, beta, ypsilon))
-               => X.C.eq(c, d) andalso X.Q.eq (alpha, beta) andalso multi_eq(xi, ypsilon)
+               => X.C.eq(c, d) andalso X.Q.Single.eq (alpha, beta) andalso multi_eq(xi, ypsilon)
              | (Construction(c, alpha, xi), Variable y) => false
              | (Variable x, Construction(d, beta, ypsilon)) => false
              | (Variable x, Variable y) =>  X.PV.eq (x, y)
@@ -34,7 +35,7 @@ functor PELLiteral (X:
          fun equate(k, l)
            = case (get_val k, get_val l) of
                 (Construction(c, alpha, xi), Construction(d, beta, ypsilon))
-             => X.C.eq(c, d) andalso X.Q.equate(alpha, beta) andalso multi_equate(xi, ypsilon)
+             => X.C.eq(c, d) andalso X.Q.Single.equate(alpha, beta) andalso multi_equate(xi, ypsilon)
              |  (Construction(c, alpha, xi), Variable y) =>  false
              |  (Variable x, l)
              => X.PV.set_val l x
@@ -50,8 +51,8 @@ functor PELLiteral (X:
 
             structure Variable: Variable =
                struct
-                  type T =  X.Q.Variable.T * Construction X.PV.Variable
-                  fun copy (q, x) =  (X.Q.Variable.copy q, X.PV.copy x)
+                  type T =  X.Q.Single.Variable.T * Construction X.PV.Variable
+                  fun copy (q, x) =  (X.Q.Single.Variable.copy q, X.PV.copy x)
                end
 
          end
@@ -63,8 +64,8 @@ functor PELLiteral (X:
 
             structure Variable: Variable =
                struct
-                  type T =  X.Q.Variable.T X.PCT.T * Single.Variable.T X.PCT.T
-                  fun copy (q, x) =  (X.PCT.map X.Q.Variable.copy q, X.PCT.map Single.Variable.copy x)
+                  type T =  X.Q.Multi.Variable.T * Single.Variable.T X.PCT.T
+                  fun copy (q, x) =  (X.Q.Multi.Variable.copy q, X.PCT.map Single.Variable.copy x)
                end
 
             val empty =  X.PCT.empty
