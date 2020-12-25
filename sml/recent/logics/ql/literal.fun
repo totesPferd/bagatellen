@@ -49,12 +49,25 @@ functor QLLiteral (X:
             type T =  Construction
             val eq =  eq
             val equate =  equate
+
+            structure Variable: Variable =
+               struct
+                  type T =  Construction X.PV.Variable
+                  val copy =  X.PV.copy
+               end
+
          end
       structure Multi: MultiLiteral =
          struct
             type T =  Construction X.PCT.T 
             val eq =  multi_eq
             val equate =  multi_equate
+
+            structure Variable: Variable =
+               struct
+                  type T =  Single.Variable.T X.PCT.T
+                  val copy =  X.PCT.map Single.Variable.copy
+               end
 
             val empty =  X.PCT.empty
             val is_empty =  X.PCT.is_empty
