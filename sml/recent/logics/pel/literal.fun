@@ -48,14 +48,6 @@ functor PELLiteral (X:
             type T =  Construction
             val eq =  eq
             val equate =  equate
-
-            structure Variable: Variable =
-               struct
-                  datatype T =  QualifierVariable of X.Q.Single.Variable.T | CoreVariable of Construction X.PV.Variable
-                  fun copy (QualifierVariable q) =  QualifierVariable (X.Q.Single.Variable.copy q)
-                    | copy (CoreVariable x) =  CoreVariable (X.PV.copy x)
-               end
-
          end
       structure Multi: MultiLiteral =
          struct
@@ -63,14 +55,16 @@ functor PELLiteral (X:
             val eq =  multi_eq
             val equate =  multi_equate
 
-            structure Variable: Variable =
-               struct
-                  type T =  X.Q.Multi.Variable.T * Construction X.PV.Variable X.PCT.T
-                  fun copy (q, x) =  (X.Q.Multi.Variable.copy q, X.PCT.map X.PV.copy x)
-               end
-
             val empty =  X.PCT.empty
             val is_empty =  X.PCT.is_empty
          end
+
+      type variableMap_t =  X.Q.variableMap_t * (Construction X.PV.Variable -> Construction X.PV.Variable)
+      type variableContext_t =  X.Q.variableContext_t * Construction X.PV.Variable X.PCT.T
+      val copy =  (X.Q.copy, X.PV.copy)
+      fun context_alpha_transform (fq, fx) (cq, cx) =  (X.Q.context_alpha_transform fq cq, X.PCT.map fx cx)
+      fun single_alpha_transform (fq, fx) (Construction (c, q, xi)) =  Construction (c, X.Q.single_alpha_transform fq q, multi_alpha_transform (fq, fx) xi)
+        | single_alpha_transform (fq, fx) (Variable x) =  Variable (fx x)
+      and multi_alpha_transform phi =  X.PCT.map (single_alpha_transform phi)
 
    end;
