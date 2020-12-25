@@ -54,8 +54,8 @@ functor VariableContexts(X:
 
       fun alpha_convert (vc: VariableContext.T)
         = let
-             val vcopy =  X.PT.base_map VariableStructure.copy
-             val var_dict
+             val vcopy: X.VM.End.T -> X.VM.End.T =  X.PT.base_map VariableStructure.copy
+             val var_dict: X.VM.End.T Dicts.dict
                 =  X.PT.transition
                       (fn (v, d) => Option.SOME (Dicts.set(v, vcopy v, d)))
                       vc
