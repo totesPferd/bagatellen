@@ -51,8 +51,9 @@ functor PELLiteral (X:
 
             structure Variable: Variable =
                struct
-                  type T =  X.Q.Single.Variable.T * Construction X.PV.Variable
-                  fun copy (q, x) =  (X.Q.Single.Variable.copy q, X.PV.copy x)
+                  datatype T =  QualifierVariable of X.Q.Single.Variable.T | CoreVariable of Construction X.PV.Variable
+                  fun copy (QualifierVariable q) =  QualifierVariable (X.Q.Single.Variable.copy q)
+                    | copy (CoreVariable x) =  CoreVariable (X.PV.copy x)
                end
 
          end
@@ -64,8 +65,8 @@ functor PELLiteral (X:
 
             structure Variable: Variable =
                struct
-                  type T =  X.Q.Multi.Variable.T * Single.Variable.T X.PCT.T
-                  fun copy (q, x) =  (X.Q.Multi.Variable.copy q, X.PCT.map Single.Variable.copy x)
+                  type T =  X.Q.Multi.Variable.T * Construction X.PV.Variable X.PCT.T
+                  fun copy (q, x) =  (X.Q.Multi.Variable.copy q, X.PCT.map X.PV.copy x)
                end
 
             val empty =  X.PCT.empty
