@@ -62,9 +62,9 @@ functor VariableContexts(X:
                       Dicts.empty
              val dict_map: DictMap.Map.T =  DictMap.get_map var_dict
              val fun_map: X.PT.BaseType.T -> X.PT.BaseType.T =  DictMap.apply dict_map
-             val vm_map =  X.VM.get_map fun_map
-             val ctxt_map =  X.PF.map vm_map
-             val vc' =  ctxt_map vc
+             val vm_map: Map.Map.T =  X.VM.get_map fun_map
+             val ctxt_map: VariableContext.T -> VariableContext.T =  X.PF.map vm_map
+             val vc': VariableContext.T =  ctxt_map vc
           in
              { ctxt = vc', alpha = var_dict }: AlphaConverter
           end
