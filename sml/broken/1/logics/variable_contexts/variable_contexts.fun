@@ -60,8 +60,8 @@ functor VariableContexts(X:
                       (fn (v, d) => Option.SOME (Dicts.set(v, vcopy v, d)))
                       vc
                       Dicts.empty
-             val dict_map =  DictMap.get_map var_dict
-             val fun_map =  DictMap.apply dict_map
+             val dict_map: DictMap.Map.T =  DictMap.get_map var_dict
+             val fun_map: X.PT.BaseType.T -> X.PT.BaseType.T =  DictMap.apply dict_map
              val vm_map =  X.VM.get_map fun_map
              val ctxt_map =  X.PF.map vm_map
              val vc' =  ctxt_map vc
