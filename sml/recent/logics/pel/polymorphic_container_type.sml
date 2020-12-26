@@ -22,4 +22,15 @@ structure PELPolymorphicContainerType: PolymorphicContainerType =
       fun map f nil =  nil
       |   map f ((n, a)::l) =  (n, f(a))::(map f l)
 
+      exception OutOfRange
+      exception ContainerTypeArgsDoNotSuit
+      fun get_alpha_transform (nil, nil) _ =  raise OutOfRange
+        | get_alpha_transform ((_, x)::lx, (_, y)::ly) z =
+            if (x = z)
+            then
+               y
+            else
+               get_alpha_transform (lx, ly) z
+        | get_alpha_transform _ _ =  raise ContainerTypeArgsDoNotSuit
+
    end;
