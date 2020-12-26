@@ -69,4 +69,8 @@ functor QLLiteral (X:
         | single_alpha_transform phi (Variable x) =  Variable (phi x)
       and multi_alpha_transform phi =  X.PCT.map (single_alpha_transform phi)
 
+      type alphaTransform_t =  variableContext_t * variableContext_t
+      fun make_alpha_transform (vc, vm) =  (vc, context_alpha_transform vm vc)
+      fun get_alpha_transform alpha =  X.PCT.get_alpha_transform X.PV.eq alpha
+
    end;

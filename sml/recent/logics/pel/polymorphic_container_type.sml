@@ -24,13 +24,13 @@ structure PELPolymorphicContainerType: PolymorphicContainerType =
 
       exception OutOfRange
       exception ContainerTypeArgsDoNotSuit
-      fun get_alpha_transform (nil, nil) _ =  raise OutOfRange
-        | get_alpha_transform ((_, x)::lx, (_, y)::ly) z =
-            if (x = z)
+      fun get_alpha_transform _ (nil, nil) _ =  raise OutOfRange
+        | get_alpha_transform eq ((_, x)::lx, (_, y)::ly) z =
+            if (eq(x, z))
             then
                y
             else
-               get_alpha_transform (lx, ly) z
-        | get_alpha_transform _ _ =  raise ContainerTypeArgsDoNotSuit
+               get_alpha_transform eq (lx, ly) z
+        | get_alpha_transform _ _ _ =  raise ContainerTypeArgsDoNotSuit
 
    end;

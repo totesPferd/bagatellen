@@ -67,4 +67,13 @@ functor PELLiteral (X:
         | single_alpha_transform (fq, fx) (Variable x) =  Variable (fx x)
       and multi_alpha_transform phi =  X.PCT.map (single_alpha_transform phi)
 
+      type alphaTransform_t =  X.Q.alphaTransform_t * Construction X.PV.Variable X.PCT.T * Construction X.PV.Variable X.PCT.T
+      fun make_alpha_transform ((vcq, vcx), (fq, mx)) =  (
+            X.Q.make_alpha_transform (vcq, fq)
+         ,  vcx
+         ,  X.PCT.map mx vcx )
+      fun get_alpha_transform (aq, vm_1, vm_2) =  (
+            X.Q.get_alpha_transform aq
+         ,  X.PCT.get_alpha_transform X.PV.eq (vm_1, vm_2) )
+
    end;

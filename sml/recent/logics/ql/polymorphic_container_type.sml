@@ -13,13 +13,13 @@ structure QLPolymorphicContainerType: PolymorphicContainerType =
 
       exception OutOfRange
       exception ContainerTypeArgsDoNotSuit
-      fun get_alpha_transform (Option.NONE, Option.NONE) _ =  raise OutOfRange
-        | get_alpha_transform (Option.SOME x, Option.SOME y) z =
-            if (x = z)
+      fun get_alpha_transform _ (Option.NONE, Option.NONE) _ =  raise OutOfRange
+        | get_alpha_transform eq (Option.SOME x, Option.SOME y) z =
+            if (eq(x, z))
             then
                y
             else
                raise OutOfRange
-        | get_alpha_transform _ _ =  raise ContainerTypeArgsDoNotSuit
+        | get_alpha_transform _ _ _ =  raise ContainerTypeArgsDoNotSuit
 
    end;
