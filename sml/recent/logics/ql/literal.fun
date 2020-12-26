@@ -61,15 +61,20 @@ functor QLLiteral (X:
             val is_empty =  X.PCT.is_empty
          end
 
+      structure VariableContext: EqType =
+         struct
+            type T =  Construction X.PV.Variable X.PCT.T
+            val eq =  X.PCT.cong X.PV.eq
+         end
+         
       type variableMap_t =  Construction X.PV.Variable -> Construction X.PV.Variable
-      type variableContext_t =  Construction X.PV.Variable X.PCT.T
       val copy =  X.PV.copy
       fun context_alpha_transform phi =  X.PCT.map phi
       fun single_alpha_transform phi (Construction (c, xi)) =  Construction (c, multi_alpha_transform phi xi)
         | single_alpha_transform phi (Variable x) =  Variable (phi x)
       and multi_alpha_transform phi =  X.PCT.map (single_alpha_transform phi)
 
-      type alphaTransform_t =  variableContext_t * variableContext_t
+      type alphaTransform_t =  VariableContext.T * VariableContext.T
       fun make_alpha_transform (vc, vm) =  (vc, context_alpha_transform vm vc)
       fun get_alpha_transform alpha =  X.PCT.get_alpha_transform X.PV.eq alpha
 

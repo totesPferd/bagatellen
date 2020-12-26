@@ -59,8 +59,12 @@ functor PELLiteral (X:
             val is_empty =  X.PCT.is_empty
          end
 
+      structure VariableContext: EqType =
+         struct
+            type T =  X.Q.VariableContext.T * Construction X.PV.Variable X.PCT.T
+            fun eq((q1, v1), (q2, v2)) =  X.Q.VariableContext.eq(q1, q2) andalso (X.PCT.cong X.PV.eq) (v1, v2)
+         end
       type variableMap_t =  X.Q.variableMap_t * (Construction X.PV.Variable -> Construction X.PV.Variable)
-      type variableContext_t =  X.Q.variableContext_t * Construction X.PV.Variable X.PCT.T
       val copy =  (X.Q.copy, X.PV.copy)
       fun context_alpha_transform (fq, fx) (cq, cx) =  (X.Q.context_alpha_transform fq cq, X.PCT.map fx cx)
       fun single_alpha_transform (fq, fx) (Construction (c, q, xi)) =  Construction (c, X.Q.single_alpha_transform fq q, multi_alpha_transform (fq, fx) xi)
