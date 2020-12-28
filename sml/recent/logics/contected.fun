@@ -7,7 +7,9 @@ functor Contected(X:
    end ): Contected =
    struct
 
-      structure Literal =
+      structure Literal =  X.Lit
+
+      structure ContectedLiteral =
          struct
             structure Single: ContectedSingleLiteral =
                struct
