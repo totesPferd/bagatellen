@@ -7,6 +7,9 @@ signature Literal =
       structure Single: LiteralEquate
       structure Multi: MultiLiteral
 
+      val is_in: Single.T * Multi.T -> bool
+      val subeq: Multi.T * Multi.T -> bool
+
       structure VariableContext: EqType
       type variableMap_t
       val copy: variableMap_t

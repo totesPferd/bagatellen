@@ -61,6 +61,9 @@ functor QLLiteral (X:
             val is_empty =  X.PCT.is_empty
          end
 
+      val is_in =  X.PCT.is_in Single.eq
+      val subeq =  X.PCT.subeq Single.eq
+
       structure VariableContext: EqType =
          struct
             type T =  Construction X.PV.Variable X.PCT.T
