@@ -7,6 +7,7 @@ signature PolymorphicContainerType =
       val is_empty: 'a T -> bool
 
       val is_in: ('a * 'a -> bool) -> 'a * 'a T -> bool
+      val subeq: ('a * 'a -> bool) -> 'a T * 'a T -> bool
 
       val map: ('a -> 'b) -> 'a T -> 'b T
 

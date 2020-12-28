@@ -11,7 +11,9 @@ structure QLPolymorphicContainerType: PolymorphicContainerType =
       fun is_empty a =  not(Option.isSome a)
 
       fun is_in eq (a, Option.NONE) =  false
-        | is_in eq (a, (Option.SOME b)) =  eq(a, b)
+        | is_in eq (a, Option.SOME b) =  eq(a, b)
+      fun subeq eq (Option.NONE, _) =  true
+        | subeq eq (Option.SOME a, d) =  is_in eq (a, d)
 
       val map =  Option.map 
 

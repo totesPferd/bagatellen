@@ -26,6 +26,11 @@ structure PELPolymorphicContainerType: PolymorphicContainerType =
              true
           else
              is_in eq (a, l)
+      fun subeq eq (List.nil, d) =  true
+        | subeq eq ((_, a)::l, d) =
+            is_in eq (a, d)
+      andalso
+            subeq eq (l, d)
 
       fun map f nil =  nil
       |   map f ((n, a)::l) =  (n, f(a))::(map f l)
