@@ -4,11 +4,15 @@ structure QLPolymorphicContainerType: PolymorphicContainerType =
    struct
       type 'a T =  'a Option.option
       fun cong eq (Option.NONE, Option.NONE) =  true
-      |   cong eq (Option.NONE, Option.SOME _) =  false
-      |   cong eq (Option.SOME _, Option.NONE) =  false
-      |   cong eq (Option.SOME x, Option.SOME y) =  eq (x, y)
+        | cong eq (Option.NONE, Option.SOME _) =  false
+        | cong eq (Option.SOME _, Option.NONE) =  false
+        | cong eq (Option.SOME x, Option.SOME y) =  eq (x, y)
       val empty =  Option.NONE
       fun is_empty a =  not(Option.isSome a)
+
+      fun is_in eq (a, Option.NONE) =  false
+        | is_in eq (a, (Option.SOME b)) =  eq(a, b)
+
       val map =  Option.map 
 
       exception OutOfRange

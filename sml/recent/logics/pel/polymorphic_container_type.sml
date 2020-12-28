@@ -19,6 +19,14 @@ structure PELPolymorphicContainerType: PolymorphicContainerType =
       val empty =  List.nil
       val is_empty =  List.null
 
+      fun is_in eq (a, List.nil) =  false
+        | is_in eq (a, ((_, b)::l)) =
+          if eq(a, b)
+          then
+             true
+          else
+             is_in eq (a, l)
+
       fun map f nil =  nil
       |   map f ((n, a)::l) =  (n, f(a))::(map f l)
 
