@@ -1,7 +1,4 @@
-use "logics/contected_multi_clause.sig";
-use "logics/contected_multi_literal.sig";
-use "logics/contected_single_clause.sig";
-use "logics/contected_single_literal.sig";
+use "general/eq_type.sig";
 use "logics/literal.sig";
 
 signature Contected =
@@ -10,13 +7,72 @@ signature Contected =
 
       structure ContectedLiteral:
          sig
-            structure Single: ContectedSingleLiteral
-            structure Multi: ContectedMultiLiteral
+            structure Single:
+               sig
+                  include EqType
+           
+                  val get_context: T -> Literal.VariableContext.T
+                  val alpha_transform: Literal.variableMap_t -> T -> T
+
+                  val equate: T * T -> bool
+
+                  val get_conclusion: T -> Literal.Single.T
+                  val construct: Literal.VariableContext.T * Literal.Single.T -> T
+
+               end
+
+            structure Multi:
+               sig
+                  include EqType
+           
+                  val get_context: T -> Literal.VariableContext.T
+                  val alpha_transform: Literal.variableMap_t -> T -> T
+
+                  val equate: T * T -> bool
+
+                  val get_antecedent: T -> Literal.Multi.T
+                  val construct: Literal.VariableContext.T * Literal.Multi.T -> T
+            
+                  val empty: Literal.VariableContext.T -> T
+                  val is_empty: T -> bool
+
+               end
+
          end
       structure Clause:
          sig
-            structure Single: ContectedSingleClause
-            structure Multi: ContectedMultiClause
+            structure Single:
+               sig
+                  include EqType
+           
+                  val get_context: T -> Literal.VariableContext.T
+                  val alpha_transform: Literal.variableMap_t -> T -> T
+
+                  val get_antecedent: T -> Literal.Multi.T
+                  val is_assumption: T -> bool
+
+                  val get_conclusion: T -> Literal.Single.T
+                  val construct: Literal.VariableContext.T * Literal.Multi.T * Literal.Single.T -> T
+
+               end
+
+            structure Multi:
+               sig
+                  include EqType
+           
+                  val get_context: T -> Literal.VariableContext.T
+                  val alpha_transform: Literal.variableMap_t -> T -> T
+
+                  val get_antecedent: T -> Literal.Multi.T
+                  val is_assumption: T -> bool
+
+                  val get_conclusion: T -> Literal.Multi.T
+                  val construct: Literal.VariableContext.T * Literal.Multi.T * Literal.Multi.T -> T
+            
+                  val is_empty: T -> bool
+
+               end
+
          end
 
       val make_clause_from_conclusion: ContectedLiteral.Single.T -> Clause.Single.T

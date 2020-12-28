@@ -11,9 +11,8 @@ functor Contected(X:
 
       structure ContectedLiteral =
          struct
-            structure Single: ContectedSingleLiteral =
+            structure Single =
                struct
-                  structure Literal =  X.Lit
 
                   type T =  { context: X.Lit.VariableContext.T, conclusion: X.Lit.Single.T }
       
@@ -36,9 +35,8 @@ functor Contected(X:
       
                end
 
-            structure Multi: ContectedMultiLiteral =
+            structure Multi =
                struct
-                  structure Literal =  X.Lit
 
                   type T =  { context: X.Lit.VariableContext.T, antecedent: X.Lit.Multi.T }
       
@@ -68,10 +66,9 @@ functor Contected(X:
 
       structure Clause =
          struct
-            structure Single: ContectedSingleClause =
+            structure Single =
 
                struct
-                  structure Literal =  X.Lit
 
                   type T =  {
                         context: X.Lit.VariableContext.T
@@ -108,10 +105,9 @@ functor Contected(X:
       
                end
 
-            structure Multi: ContectedMultiClause =
+            structure Multi =
 
                struct
-                  structure Literal =  X.Lit
 
                   type T =  {
                         context: X.Lit.VariableContext.T
