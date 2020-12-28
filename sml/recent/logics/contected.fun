@@ -6,7 +6,7 @@ functor Contected(X:
    end ) =
    struct
 
-      structure ContectedLiteral =
+      structure Literal =
          struct
             structure Single =
                struct
