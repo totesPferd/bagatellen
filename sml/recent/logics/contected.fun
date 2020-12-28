@@ -92,6 +92,9 @@ functor Contected(X:
                         context = (X.Lit.context_alpha_transform phi ctxt)
                      ,  antecedent = (X.Lit.multi_alpha_transform phi a)
                      ,  conclusion = (X.Lit.single_alpha_transform phi c) }
+
+                  fun is_assumption { context = ctxt, antecedent = a, conclusion = c } =
+                     X.Lit.is_in (a, c)
       
                end
 
@@ -128,6 +131,9 @@ functor Contected(X:
                      ,  conclusion = (X.Lit.multi_alpha_transform phi c) }
       
                   fun is_empty (a: T) =  X.Lit.Multi.is_empty (#conclusion a)
+
+                  fun is_assumption { context = ctxt, antecedent = a, conclusion = c } =
+                     X.Lit.subeq(a, c)
       
                end
 
