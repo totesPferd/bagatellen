@@ -1,15 +1,18 @@
+use "logics/contected.sig";
 use "logics/literal.sig";
 
 functor Contected(X:
    sig
       structure Lit: Literal
-   end ) =
+   end ): Contected =
    struct
 
       structure Literal =
          struct
-            structure Single =
+            structure Single: ContectedSingleLiteral =
                struct
+                  structure Literal =  X.Lit
+
                   type T =  { context: X.Lit.VariableContext.T, conclusion: X.Lit.Single.T }
       
                   fun eq ({ context = ctxt_1, conclusion = c_1 }, { context = ctxt_2, conclusion = c_2 }) =
@@ -31,8 +34,10 @@ functor Contected(X:
       
                end
 
-            structure Multi =
+            structure Multi: ContectedMultiLiteral =
                struct
+                  structure Literal =  X.Lit
+
                   type T =  { context: X.Lit.VariableContext.T, antecedent: X.Lit.Multi.T }
       
                   fun eq ({ context = ctxt_1, antecedent = a_1 }, { context = ctxt_2, antecedent = a_2 }) =
@@ -47,7 +52,7 @@ functor Contected(X:
                   fun alpha_transform phi { context = ctxt, antecedent = a } =
                      {
                         context = (X.Lit.context_alpha_transform phi ctxt)
-                     ,  conclusion = (X.Lit.multi_alpha_transform phi a) }
+                     ,  antecedent = (X.Lit.multi_alpha_transform phi a) }
       
                   fun equate (a_1: T, a_2: T)
                      = X.Lit.Multi.equate(#antecedent a_1, #antecedent a_2)
@@ -61,8 +66,11 @@ functor Contected(X:
 
       structure Clause =
          struct
-            structure Single =
+            structure Single: ContectedSingleClause =
+
                struct
+                  structure Literal =  X.Lit
+
                   type T =  {
                         context: X.Lit.VariableContext.T
                      ,  antecedent: X.Lit.Multi.T
@@ -94,12 +102,15 @@ functor Contected(X:
                      ,  conclusion = (X.Lit.single_alpha_transform phi c) }
 
                   fun is_assumption { context = ctxt, antecedent = a, conclusion = c } =
-                     X.Lit.is_in (a, c)
+                     X.Lit.is_in (c, a)
       
                end
 
-            structure Multi =
+            structure Multi: ContectedMultiClause =
+
                struct
+                  structure Literal =  X.Lit
+
                   type T =  {
                         context: X.Lit.VariableContext.T
                      ,  antecedent: X.Lit.Multi.T
@@ -133,7 +144,7 @@ functor Contected(X:
                   fun is_empty (a: T) =  X.Lit.Multi.is_empty (#conclusion a)
 
                   fun is_assumption { context = ctxt, antecedent = a, conclusion = c } =
-                     X.Lit.subeq(a, c)
+                     X.Lit.subeq(c, a)
       
                end
 
@@ -148,10 +159,10 @@ functor Contected(X:
       fun empty_multi_clause { context = ctxt, antecedent = a }
         = { context = ctxt, antecedent = a, conclusion = X.Lit.Multi.empty }
 
-      fun get_antecedent { context = ctxt, antecedent = a, conclusion = c }
+      fun single_get_antecedent { context = ctxt, antecedent = a, conclusion = c }
         = { context = ctxt, antecedent = a }
 
-      fun get_conclusion { context = ctxt, antecedent = a, conclusion = c }
+      fun single_get_conclusion { context = ctxt, antecedent = a, conclusion = c }
         = { context = ctxt, conclusion = c }
 
       fun multi_get_antecedent { context = ctxt, antecedent = a, conclusion = c }
