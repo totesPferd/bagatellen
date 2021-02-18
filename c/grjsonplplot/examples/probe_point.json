@@ -1,0 +1,36 @@
+{
+	"config": {
+		"xmin": 0.05,
+		"xmax": 0.95,
+		"ymin": 0.05,
+		"ymax": 0.95,
+		"xlog": true,
+		"ylog": true,
+		"xlabel": "x",
+		"ylabel": "y",
+		"tlabel": "probe"
+	},
+	"data": [
+		{
+			"type": "line",
+			"data": [
+				{
+					"x": 0.2,
+					"y": 0.15
+				},
+				{
+					"x": 0.3,
+					"y": 0.37
+				},
+				{
+					"x": 0.5,
+					"y": 0.07
+				},
+				{
+					"x": 0.7,
+					"y": 0.12
+				}
+			]
+		}
+	]
+}

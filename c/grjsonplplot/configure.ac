@@ -1,0 +1,7 @@
+AC_INIT([grjsonplplot], [0.1])
+AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_SRCDIR([main.c])
+AM_INIT_AUTOMAKE
+AC_PROG_CC
+PKG_CHECK_MODULES([GRJSONPLPLOT], [jansson plplot])
+AC_OUTPUT(Makefile)

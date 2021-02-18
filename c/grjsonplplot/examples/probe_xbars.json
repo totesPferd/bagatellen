@@ -1,0 +1,40 @@
+{
+	"config": {
+		"xmin": 0.05,
+		"xmax": 0.95,
+		"ymin": 0.05,
+		"ymax": 0.95,
+		"xlog": false,
+		"ylog": false,
+		"xlabel": "x",
+		"ylabel": "y",
+		"tlabel": "probe"
+	},
+	"data": [
+		{
+			"type": "xbars",
+			"data": [
+				{
+					"xmin": 0.2,
+					"xmax": 0.23,
+					"y": 0.15
+				},
+				{
+					"xmin": 0.3,
+					"xmax": 0.37,
+					"y": 0.37
+				},
+				{
+					"xmin": 0.5,
+					"xmax": 0.53,
+					"y": 0.07
+				},
+				{
+					"xmin": 0.7,
+					"xmax": 0.73,
+					"y": 0.12
+				}
+			]
+		}
+	]
+}
