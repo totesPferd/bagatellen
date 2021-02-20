@@ -75,6 +75,7 @@
        "Peter Frey",
        "Peter Haisenko",
        "Pravda-TV",
+       "Ralf Kollinger",
        "Redaktion KenFM",
        "Robert F. Kennedy jr.",
        "Robert Franz",
@@ -702,6 +703,11 @@
          "href": "https://www.radio-utopie.de/feed/atom/",
          "title": "Radio Utopie \u00bb Feed",
          "type": "application/atom+xml"
+      },
+      {
+         "href": "https://www.ralf-kollinger.de/wp/?feed=rss2",
+         "title": "Aspekte einer ganzheitlichen Medizin \u00bb Feed",
+         "type": "application/rss+xml"
       },
       {
          "href": "https://www.raphael-bonelli.com/feed/",
