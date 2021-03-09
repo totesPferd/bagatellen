@@ -47,10 +47,26 @@ functor Proof(X:
                           else
                              Multi.drop(cl, proof)
                       val antecedent =  Single.get_antecedent(der_cl)
-                   in X.C.Literal.lift
-                         (apply_to_literal_telling_progress is_conventional proof')
-                         antecedent
+                   in multi_apply_to_literal_telling_progress is_conventional proof' antecedent
                    end
+          end
+      and multi_apply_to_literal_telling_progress
+             is_conventional
+             proof
+             goals
+        = X.C.Literal.lift
+             (apply_to_literal_telling_progress is_conventional proof)
+             goals
+
+      fun apply_telling_progress is_conventional proof goal
+        = let
+             val goal_conclusion =  X.C.ContectedLiteral.Single.get_conclusion goal
+             val goal_context =  X.C.ContectedLiteral.Single.get_context goal
+             val result_conclusion
+               = apply_to_literal_telling_progress is_conventional proof goal_conclusion
+             val result
+               = X.C.ContectedLiteral.Multi.construct(goal_context, result_conclusion)
+          in result
           end
 
    end
