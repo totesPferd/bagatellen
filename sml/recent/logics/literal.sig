@@ -12,6 +12,7 @@ signature Literal =
 
       val singleton: Single.T -> Multi.T
       val lift: (Single.T -> Multi.T) -> Multi.T -> Multi.T
+      val transition: (Single.T * (unit -> 'b) -> 'b) -> Multi.T -> 'b -> 'b
 
       structure VariableContext: EqType
       type variableMap_t

@@ -66,6 +66,7 @@ functor QLLiteral (X:
 
       fun singleton x =  X.PCT.singleton x
       fun lift f =  X.PCT.lift f
+      val transition =  X.PCT.transition
 
       structure VariableContext: EqType =
          struct
