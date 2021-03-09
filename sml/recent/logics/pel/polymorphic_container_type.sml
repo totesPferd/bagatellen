@@ -38,6 +38,12 @@ structure PELPolymorphicContainerType: PolymorphicContainerType =
       fun singleton x =  [(ref Option.NONE, x)]
       fun lift f nil =  nil
         | lift f ((n, a)::l) =  List.concat[(f a), lift f l]
+      fun transition phi nil b =  b
+        | transition phi ((n, a) :: tl) b
+        = let
+             fun prec_state_l () =  transition phi tl b
+          in phi(a, prec_state_l)
+          end
 
       exception OutOfRange
       exception ContainerTypeArgsDoNotSuit

@@ -13,6 +13,7 @@ signature PolymorphicContainerType =
 
       val singleton: 'a -> 'a T
       val lift: ('a -> 'a T) -> 'a T -> 'a T
+      val transition:       ('a * (unit -> 'b) -> 'b) -> 'a T -> 'b -> 'b
 
       val get_alpha_transform: ('a * 'a -> bool) -> 'a T * 'b T -> 'a -> 'b
 

@@ -19,6 +19,13 @@ structure QLPolymorphicContainerType: PolymorphicContainerType =
 
       fun singleton x =  Option.SOME x
       fun lift f =  Option.join o Option.map f
+      fun transition phi Option.NONE b =  b
+        | transition phi (Option.SOME x) b
+        = let
+             fun prec_state_l () =  b
+          in phi(x, prec_state_l)
+          end
+
 
       exception OutOfRange
       exception ContainerTypeArgsDoNotSuit
