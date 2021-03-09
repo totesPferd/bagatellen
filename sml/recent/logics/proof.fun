@@ -58,7 +58,7 @@ functor Proof(X:
              (apply_to_literal_telling_progress is_conventional proof)
              goals
 
-      fun apply_telling_progress is_conventional proof goal
+      fun apply_to_contected_literal_telling_progress is_conventional proof goal
         = let
              val goal_conclusion =  X.C.ContectedLiteral.Single.get_conclusion goal
              val goal_context =  X.C.ContectedLiteral.Single.get_context goal
@@ -69,7 +69,7 @@ functor Proof(X:
           in result
           end
 
-      fun multi_apply_telling_progress is_conventional proof goals
+      fun multi_apply_to_contected_literal_telling_progress is_conventional proof goals
         = let
              val goals_conclusion =  X.C.ContectedLiteral.Multi.get_antecedent goals
              val goals_context =  X.C.ContectedLiteral.Multi.get_context goals
@@ -79,11 +79,6 @@ functor Proof(X:
                = X.C.ContectedLiteral.Multi.construct(goals_context, result_conclusion)
           in result
           end
-
-      val apply =  apply_telling_progress false
-      val multi_apply =  multi_apply_telling_progress false
-      val apply_conventionally =  apply_telling_progress true
-      val multi_apply_conventionally =  multi_apply_telling_progress true
 
       fun add_clause_to_proof clause proof =  Multi.insert(clause, proof)
 
