@@ -15,7 +15,7 @@ functor Proof(X:
       fun apply_to_literal_telling_progress
              is_conventional
              (proof: Multi.T)
-             (literal: X.C.ContectedLiteral.Single.T)
+             (literal: X.C.Literal.Single.T)
         = let
              fun omega (cl: Single.T)
                = let
@@ -26,8 +26,9 @@ functor Proof(X:
                            ,  X.C.Literal.copy )
                     val variableMap =  X.C.Literal.get_alpha_transform alphaTransform
                     val der_cl =  Single.alpha_transform variableMap cl
-                 in if X.C.ContectedLiteral.Single.equate(
-                          X.C.single_get_conclusion der_cl
+                    val der_cl_conclusion =  Single.get_conclusion der_cl
+                 in if X.C.Literal.Single.equate(
+                          der_cl_conclusion
                        ,  literal )
                     then
                        Option.SOME (cl, der_cl)
@@ -36,7 +37,7 @@ functor Proof(X:
                  end
              val psi =  Multi.ofind omega proof
           in case (psi) of
-                Option.NONE => Option.NONE
+                Option.NONE => X.C.Literal.singleton literal
              |  Option.SOME(cl, der_cl)
                 => let
                       val proof'
@@ -46,7 +47,9 @@ functor Proof(X:
                           else
                              Multi.drop(cl, proof)
                       val antecedent =  Single.get_antecedent(der_cl)
-                   in Option.NONE (* fertigprogrammieren! *)
+                   in X.C.Literal.lift
+                         (apply_to_literal_telling_progress is_conventional proof')
+                         antecedent
                    end
           end
 
