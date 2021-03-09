@@ -69,4 +69,24 @@ functor Proof(X:
           in result
           end
 
+      fun multi_apply_telling_progress is_conventional proof goals
+        = let
+             val goals_conclusion =  X.C.ContectedLiteral.Multi.get_antecedent goals
+             val goals_context =  X.C.ContectedLiteral.Multi.get_context goals
+             val result_conclusion
+               = multi_apply_to_literal_telling_progress is_conventional proof goals_conclusion
+             val result
+               = X.C.ContectedLiteral.Multi.construct(goals_context, result_conclusion)
+          in result
+          end
+
+      val apply =  apply_telling_progress false
+      val multi_apply =  multi_apply_telling_progress false
+      val apply_conventionally =  apply_telling_progress true
+      val multi_apply_conventionally =  multi_apply_telling_progress true
+
+      fun add_clause_to_proof clause proof =  Multi.insert(clause, proof)
+
+      val combine_proofs =  Multi.union
+
    end
