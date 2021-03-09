@@ -12,7 +12,7 @@ functor Proof(X:
       structure Single =  X.C.Clause.Single
       structure Multi =  X.S
 
-      fun apply_to_clause
+      fun apply_to_literal
              is_conventional
              (proof: Multi.T)
              (clause: Single.T)
@@ -57,10 +57,10 @@ functor Proof(X:
                                    ctxt
                                 ,  antecedent
                                 ,  Single.get_antecedent(der_cl) )
-                      in multi_apply_to_clauses is_conventional proof' clauses
+                      in multi_apply_to_literals is_conventional proof' clauses
                       end
              end
-      and multi_apply_to_clauses
+      and multi_apply_to_literals
              is_conventional
              proof
              (clauses: X.C.Clause.Multi.T)
@@ -71,13 +71,40 @@ functor Proof(X:
              fun f (l: X.C.Literal.Single.T)
                = let
                     val clause =  Single.construct(ctxt, premises, l)
-                 in apply_to_clause is_conventional proof clause
+                 in apply_to_literal is_conventional proof clause
                  end
           in X.C.Literal.lift f conclusions
           end
 
+      fun apply_to_clause is_conventional proof clause
+        = let
+             val ctxt =  X.C.Clause.Single.get_context clause
+             val antecedent =  X.C.Clause.Single.get_antecedent clause
+             val conclusion =  apply_to_literal is_conventional proof clause
+          in X.C.Clause.Multi.construct(ctxt, antecedent, conclusion)
+          end
+
+      fun multi_apply_to_clauses is_conventional proof clauses
+        = let
+             val ctxt =  X.C.Clause.Multi.get_context clauses
+             val antecedent =  X.C.Clause.Multi.get_antecedent clauses
+             val conclusion =  multi_apply_to_literals is_conventional proof clauses
+          in X.C.Clause.Multi.construct(ctxt, antecedent, conclusion)
+          end
+
+      val apply =  apply_to_clause false
+      val apply_conventional =  apply_to_clause true
+      val multi_apply =  multi_apply_to_clauses false
+      val multi_apply_conventional =  multi_apply_to_clauses true
+
       fun add_clause_to_proof clause proof =  Multi.insert(clause, proof)
 
       val combine_proofs =  Multi.union
+
+      val fe =  Multi.fe
+      val fop =  Multi.fop
+      val is_in =  Multi.is_in
+
+      val transition =  Multi.transition
 
    end
