@@ -11,6 +11,8 @@ signature PolymorphicContainerType =
 
       val map: ('a -> 'b) -> 'a T -> 'b T
 
+      val lift: ('a -> 'a T) -> 'a T -> 'a T
+
       val get_alpha_transform: ('a * 'a -> bool) -> 'a T * 'b T -> 'a -> 'b
 
    end;

@@ -10,6 +10,8 @@ signature Literal =
       val is_in: Single.T * Multi.T -> bool
       val subeq: Multi.T * Multi.T -> bool
 
+      val lift: (Single.T -> Multi.T) -> Multi.T -> Multi.T
+
       structure VariableContext: EqType
       type variableMap_t
       val copy: variableMap_t

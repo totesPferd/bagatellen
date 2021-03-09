@@ -62,6 +62,8 @@ functor PELLiteral (X:
       val is_in =  X.PCT.is_in Single.eq
       val subeq =  X.PCT.subeq Single.eq
 
+      fun lift f =  X.PCT.lift f
+
       structure VariableContext: EqType =
          struct
             type T =  X.Q.VariableContext.T * Construction X.PV.Variable X.PCT.T

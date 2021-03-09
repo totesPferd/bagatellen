@@ -17,6 +17,8 @@ structure QLPolymorphicContainerType: PolymorphicContainerType =
 
       val map =  Option.map 
 
+      fun lift f =  Option.join o Option.map f
+
       exception OutOfRange
       exception ContainerTypeArgsDoNotSuit
       fun get_alpha_transform _ (Option.NONE, Option.NONE) _ =  raise OutOfRange
