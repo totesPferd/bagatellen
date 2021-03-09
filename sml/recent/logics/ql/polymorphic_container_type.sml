@@ -17,6 +17,7 @@ structure QLPolymorphicContainerType: PolymorphicContainerType =
 
       val map =  Option.map 
 
+      fun singleton x =  Option.SOME x
       fun lift f =  Option.join o Option.map f
 
       exception OutOfRange

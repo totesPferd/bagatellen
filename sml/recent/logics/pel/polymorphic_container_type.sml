@@ -35,6 +35,7 @@ structure PELPolymorphicContainerType: PolymorphicContainerType =
       fun map f nil =  nil
       |   map f ((n, a)::l) =  (n, f(a))::(map f l)
 
+      fun singleton x =  [(ref Option.NONE, x)]
       fun lift f nil =  nil
         | lift f ((n, a)::l) =  List.concat[(f a), lift f l]
 
