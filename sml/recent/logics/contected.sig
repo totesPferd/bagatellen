@@ -83,4 +83,6 @@ signature Contected =
       val multi_get_antecedent: Clause.Multi.T -> ContectedLiteral.Multi.T
       val multi_get_conclusion: Clause.Multi.T -> ContectedLiteral.Multi.T
 
+      val singleton: ContectedLiteral.Single.T -> ContectedLiteral.Multi.T
+
    end

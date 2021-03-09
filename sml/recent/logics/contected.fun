@@ -169,4 +169,7 @@ functor Contected(X:
       fun multi_get_conclusion { context = ctxt, antecedent = a, conclusion = c }
         = { context = ctxt, antecedent = c }
 
+      fun singleton { context = ctxt, conclusion = c }
+        = { context = ctxt, antecedent = X.Lit.singleton c }
+
    end

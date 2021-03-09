@@ -64,6 +64,7 @@ functor QLLiteral (X:
       val is_in =  X.PCT.is_in Single.eq
       val subeq =  X.PCT.subeq Single.eq
 
+      fun singleton x =  X.PCT.singleton x
       fun lift f =  X.PCT.lift f
 
       structure VariableContext: EqType =
