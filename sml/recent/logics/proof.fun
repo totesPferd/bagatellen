@@ -98,6 +98,22 @@ functor Proof(X:
       val multi_apply_conventional =  multi_apply_to_clauses true
 
       fun add_clause_to_proof clause proof =  Multi.insert(clause, proof)
+      fun add_multi_clause_to_proof mcl proof
+        = let
+             val ctxt = X.C.Clause.Multi.get_context(mcl)
+             val antecedent =  X.C.Clause.Multi.get_antecedent(mcl)
+             val multi_literal =  X.C.Clause.Multi.get_conclusion(mcl)
+             fun f (l, bf)
+               = let
+                    val proof' =  bf()
+                    val clause =  X.C.Clause.Single.construct(
+                              ctxt
+                           ,  antecedent
+                           ,  l )
+                 in add_clause_to_proof clause proof'
+                 end
+          in X.C.Literal.transition f multi_literal proof
+          end
 
       val combine_proofs =  Multi.union
 
