@@ -12,13 +12,13 @@ functor Proof(X:
       structure Single =  X.C.Clause.Single
       structure Multi =  X.S
 
-      fun apply_to_literal
+      fun apply_to_literal_telling_progress
              is_conventional
              (proof: Multi.T)
              (clause: Single.T)
         = if Single.is_assumption clause
           then
-             X.C.Literal.Multi.empty
+             { result = X.C.Literal.Multi.empty, progress = true }
           else
              let
                 val ctxt =  Single.get_context clause
@@ -44,7 +44,9 @@ functor Proof(X:
                     end
                 val psi =  Multi.ofind omega proof
              in case (psi) of
-                   Option.NONE => X.C.Literal.singleton literal
+                   Option.NONE
+                   => { result = X.C.Literal.singleton literal,
+                        progress = false }
                 |  Option.SOME(cl, der_cl)
                    => let
                          val proof'
@@ -57,9 +59,21 @@ functor Proof(X:
                                    ctxt
                                 ,  antecedent
                                 ,  Single.get_antecedent(der_cl) )
-                      in multi_apply_to_literals is_conventional proof' clauses
+                      in { result = multi_apply_to_literals
+                              is_conventional
+                              proof'
+                              clauses,
+                           progress = true }
                       end
              end
+      and apply_to_literal
+             is_conventional
+             proof
+             (clause: X.C.Clause.Single.T)
+        = #result (apply_to_literal_telling_progress
+             is_conventional
+             proof
+             clause )
       and multi_apply_to_literals
              is_conventional
              proof
@@ -76,6 +90,20 @@ functor Proof(X:
           in X.C.Literal.lift f conclusions
           end
 
+      fun apply_to_clause_telling_process is_conventional proof clause
+        = let
+             val ctxt =  X.C.Clause.Single.get_context clause
+             val antecedent =  X.C.Clause.Single.get_antecedent clause
+             val conclusion =  apply_to_literal_telling_progress
+                    is_conventional
+                    proof
+                    clause
+          in { result =  X.C.Clause.Multi.construct(
+                     ctxt
+                  ,  antecedent
+                  ,  #result conclusion )
+             , progress =  #progress conclusion }
+          end
       fun apply_to_clause is_conventional proof clause
         = let
              val ctxt =  X.C.Clause.Single.get_context clause
@@ -83,7 +111,6 @@ functor Proof(X:
              val conclusion =  apply_to_literal is_conventional proof clause
           in X.C.Clause.Multi.construct(ctxt, antecedent, conclusion)
           end
-
       fun multi_apply_to_clauses is_conventional proof clauses
         = let
              val ctxt =  X.C.Clause.Multi.get_context clauses
