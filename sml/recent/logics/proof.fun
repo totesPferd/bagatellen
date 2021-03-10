@@ -1,39 +1,44 @@
 use "general/set.sig";
 use "logics/contected.sig";
+use "logics/proof.sig";
 
 functor Proof(X:
    sig
       structure C: Contected
       structure S: Set
          where type base_t =  C.Clause.Single.T
-   end ) =
+   end ): Proof =
    struct
 
-      structure Single =  X.C.Clause.Single
-      structure Multi =  X.S
+      type clause_t =  X.C.Clause.Single.T
+      type multi_clause_t =  X.C.Clause.Multi.T
+      type proof_t =  X.S.T
 
       fun apply_to_literal_telling_progress
              is_conventional
-             (proof: Multi.T)
-             (clause: Single.T)
-        = if Single.is_assumption clause
+             proof
+             clause
+        = if X.C.Clause.Single.is_assumption clause
           then
              { result = X.C.Literal.Multi.empty, progress = true }
           else
              let
-                val ctxt =  Single.get_context clause
-                val antecedent =  Single.get_antecedent clause
-                val literal =  Single.get_conclusion clause
-                fun omega (cl: Single.T)
+                val ctxt =  X.C.Clause.Single.get_context
+                       clause
+                val antecedent =  X.C.Clause.Single.get_antecedent
+                       clause
+                val literal =  X.C.Clause.Single.get_conclusion
+                       clause
+                fun omega cl
                   = let
-                       val ctxt =  Single.get_context cl
+                       val ctxt =  X.C.Clause.Single.get_context cl
                        val alphaTransform
                          = X.C.Literal.make_alpha_transform(
                                  ctxt
                               ,  X.C.Literal.copy )
                        val variableMap =  X.C.Literal.get_alpha_transform alphaTransform
-                       val der_cl =  Single.alpha_transform variableMap cl
-                       val der_cl_conclusion =  Single.get_conclusion der_cl
+                       val der_cl =  X.C.Clause.Single.alpha_transform variableMap cl
+                       val der_cl_conclusion =  X.C.Clause.Single.get_conclusion der_cl
                     in if X.C.Literal.Single.equate(
                              der_cl_conclusion
                           ,  literal )
@@ -42,7 +47,7 @@ functor Proof(X:
                        else
                           Option.NONE
                     end
-                val psi =  Multi.ofind omega proof
+                val psi =  X.S.ofind omega proof
              in case (psi) of
                    Option.NONE
                    => { result = X.C.Literal.singleton literal,
@@ -54,11 +59,12 @@ functor Proof(X:
                              then
                                 proof
                              else
-                                Multi.drop(cl, proof)
+                                X.S.drop(cl, proof)
                          val clauses =  X.C.Clause.Multi.construct(
                                    ctxt
                                 ,  antecedent
-                                ,  Single.get_antecedent(der_cl) )
+                                ,  X.C.Clause.Single.get_antecedent(
+                                         der_cl ))
                       in { result = multi_apply_to_literals
                               is_conventional
                               proof'
@@ -77,14 +83,17 @@ functor Proof(X:
       and multi_apply_to_literals
              is_conventional
              proof
-             (clauses: X.C.Clause.Multi.T)
+             clauses
         = let
              val ctxt =  X.C.Clause.Multi.get_context(clauses)
              val premises =  X.C.Clause.Multi.get_antecedent(clauses)
              val conclusions =  X.C.Clause.Multi.get_conclusion(clauses)
              fun f (l: X.C.Literal.Single.T)
                = let
-                    val clause =  Single.construct(ctxt, premises, l)
+                    val clause =  X.C.Clause.Single.construct(
+                          ctxt
+                       ,  premises
+                       ,  l )
                  in apply_to_literal is_conventional proof clause
                  end
           in X.C.Literal.lift f conclusions
@@ -124,7 +133,8 @@ functor Proof(X:
       val multi_apply =  multi_apply_to_clauses false
       val multi_apply_conventional =  multi_apply_to_clauses true
 
-      fun add_clause_to_proof clause proof =  Multi.insert(clause, proof)
+      fun add_clause_to_proof clause proof
+        = X.S.insert(clause, proof)
       fun add_multi_clause_to_proof mcl proof
         = let
              val ctxt = X.C.Clause.Multi.get_context(mcl)
@@ -142,12 +152,12 @@ functor Proof(X:
           in X.C.Literal.transition f multi_literal proof
           end
 
-      val combine_proofs =  Multi.union
+      val combine_proofs =  X.S.union
 
-      fun mini_complete (proof: Multi.T)
-        = case (Multi.getItem proof) of
+      fun mini_complete proof
+        = case (X.S.getItem proof) of
              Option.NONE =>  proof
-          |  Option.SOME (cl: Single.T, p_1: Multi.T)
+          |  Option.SOME (cl, p_1)
              => let
                    val p_2 =  mini_complete p_1
                    val r =  apply_to_clause_telling_progress
@@ -169,12 +179,12 @@ functor Proof(X:
                             mini_complete p_3
                          end
                    else
-                      Multi.adjunct(cl, p_2)
+                      X.S.adjunct(cl, p_2)
                 end
-      fun reduce_double_occurences (proof: Multi.T)
-        = case (Multi.getItem proof) of
+      fun reduce_double_occurences proof
+        = case (X.S.getItem proof) of
              Option.NONE =>  proof
-          |  Option.SOME (cl: Single.T, p_1: Multi.T)
+          |  Option.SOME (cl, p_1)
              => let
                    val p_2 =  reduce_double_occurences p_1
                    val r =  apply_to_clause_telling_progress
@@ -188,13 +198,13 @@ functor Proof(X:
                    then
                       p_2
                    else
-                      Multi.adjunct(cl, p_2)
+                      X.S.adjunct(cl, p_2)
                 end
 
-      val fe =  Multi.fe
-      val fop =  Multi.fop
-      val is_in =  Multi.is_in
+      val fe =  X.S.fe
+      val fop =  X.S.fop
+      val is_in =  X.S.is_in
 
-      val transition =  Multi.transition
+      val transition =  X.S.transition
 
    end
