@@ -155,20 +155,21 @@ functor Proof(X:
                           p_2
                           cl
                 in
-                   case (#progress r) of
-                      false =>  Multi.adjunct(cl, p_2)
-                   |  true
-                      => if (X.C.Clause.Multi.is_empty (#result r))
-                         then
-                            p_2
-                         else
-                            let
-                               val p_3 =  add_multi_clause_to_proof
-                                      (#result r)
-                                      p_2
-                            in
-                               mini_complete p_3
-                            end
+                   if (#progress r)
+                   then
+                      if (X.C.Clause.Multi.is_empty (#result r))
+                      then
+                         p_2
+                      else
+                         let
+                            val p_3 =  add_multi_clause_to_proof
+                                   (#result r)
+                                   p_2
+                         in
+                            mini_complete p_3
+                         end
+                   else
+                      Multi.adjunct(cl, p_2)
                 end
       fun reduce_double_occurences (proof: Multi.T)
         = case (Multi.getItem proof) of
@@ -181,15 +182,13 @@ functor Proof(X:
                           p_2
                           cl
                 in
-                   case (#progress r) of
-                      false =>  Multi.adjunct(cl, p_2)
-                   |  true
-                      => if (X.C.Clause.Multi.is_empty
-                            (#result r) )
-                         then
-                            p_2
-                         else
-                            Multi.adjunct(cl, p_2)
+                   if (
+                         (#progress r)
+                 andalso X.C.Clause.Multi.is_empty (#result r) )
+                   then
+                      p_2
+                   else
+                      Multi.adjunct(cl, p_2)
                 end
 
       val fe =  Multi.fe
