@@ -170,6 +170,27 @@ functor Proof(X:
                                mini_complete p_3
                             end
                 end
+      fun reduce_double_occurences (proof: Multi.T)
+        = case (Multi.getItem proof) of
+             Option.NONE =>  proof
+          |  Option.SOME (cl: Single.T, p_1: Multi.T)
+             => let
+                   val p_2 =  reduce_double_occurences p_1
+                   val r =  apply_to_clause_telling_progress
+                          false
+                          p_2
+                          cl
+                in
+                   case (#progress r) of
+                      false =>  Multi.adjunct(cl, p_2)
+                   |  true
+                      => if (X.C.Clause.Multi.is_empty
+                            (#result r) )
+                         then
+                            p_2
+                         else
+                            Multi.adjunct(cl, p_2)
+                end
 
       val fe =  Multi.fe
       val fop =  Multi.fop
