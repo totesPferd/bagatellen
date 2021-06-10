@@ -2,6 +2,7 @@
    "authors": [
        "AlexBenesch",
        "Alpenparlament",
+       "Alpenschau",
        "Angelika M\u00fcller",
        "Anselm  Lenz",
        "Anti-Spiegel",
@@ -130,6 +131,11 @@
       },
       {
          "href": "http://alpenparlament.tv/index.php?format=feed&type=atom",
+         "type": "application/rss+xml"
+      },
+      {
+         "href": "https://alpenschau.com/feed/",
+         "title": "Alpenschau.com \u00bb Feed",
          "type": "application/rss+xml"
       },
       {
