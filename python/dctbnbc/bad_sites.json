@@ -73,6 +73,8 @@
        "NEOPresse",
        "Netzfrauen",
        "news-for-friends.com",
+       "Nicola Steiner",
+       "Nicola Steiner (noreply@blogger.com)",
        "Nicolas  Riedl",
        "Niki Vogt",
        "Oliver Janich",
@@ -666,6 +668,11 @@
       {
          "href": "https://19vierundachtzig.com/rss",
          "type": "application/rss+xml"
+      },
+      {
+         "href": "https://nicola-steiner.blogspot.com/feeds/posts/default",
+         "title": "Nicola Steiner - Atom",
+         "type": "application/atom+xml"
       },
       {
          "href": "http://www.nuoviso.tv/feed",
