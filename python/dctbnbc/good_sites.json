@@ -30,11 +30,6 @@
          "type": "application/rss+xml"
       },
       {
-         "href": "http://www.faz.net/rss/aktuell/",
-         "title": "FAZ.NET",
-         "type": "application/rss+xml"
-      },
-      {
          "href": "https://rss.focus.de/",
          "title": "Startseite RSS-Feed",
          "type": "application/rss+xml"
@@ -130,11 +125,6 @@
       {
          "href": "https://www.spiegel.de/schlagzeilen/index.rss",
          "title": "DER SPIEGEL | RSS Schlagzeilen",
-         "type": "application/rss+xml"
-      },
-      {
-         "href": "https://www.spiegel.de/index.rss",
-         "title": "DER SPIEGEL | RSS Nachrichten",
          "type": "application/rss+xml"
       },
       {
