@@ -44,7 +44,9 @@ public class App
         try {
             Thread.sleep(20736);
         } catch (Exception e) {
-            System.err.println("Problem right before terminating ring buffer: " + e.getMessage());
+            System.err.println(
+                    "Problem right before terminating ring buffer: "
+                  + e.getMessage() );
         }
         RING_BUFFER.terminate();
         System.out.println( "Ring buffer has been terminated." );
@@ -55,7 +57,9 @@ public class App
             counterC.join();
             RING_BUFFER.joinSinks();
         } catch (Exception e) {
-            System.err.println("Problem right after terminating ring buffer: " + e.getMessage());
+            System.err.println(
+                    "Problem right after terminating ring buffer: "
+                  + e.getMessage() );
         }
 
         System.out.println("all threads joined.");

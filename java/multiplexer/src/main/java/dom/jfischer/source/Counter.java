@@ -35,7 +35,8 @@ public class Counter extends Source<String> {
             put(data);
         }
 
-        System.out.println("Counter(" + this.name + ") thread has reached its end.");
+        System.out.println(
+                "Counter(" + this.name + ") thread has reached its end." );
 
     }
 

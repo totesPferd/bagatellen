@@ -40,7 +40,8 @@ public class Sysout extends Sink<String> {
             }
         }
 
-        System.out.println("Sysout(" + this.name + ") thread has reached its end.");
+        System.out.println(
+                "Sysout(" + this.name + ") thread has reached its end." );
 
     }
 
