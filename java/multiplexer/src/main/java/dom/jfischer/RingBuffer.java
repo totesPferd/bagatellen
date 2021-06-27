@@ -9,10 +9,12 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * <p>RingBuffer class.</p>
+ * <p>
+ * RingBuffer class.</p>
  *
  * @author jfischer
  * @version $Id: $Id
+ * @param <T>
  */
 public class RingBuffer<T> {
 
@@ -28,7 +30,8 @@ public class RingBuffer<T> {
     private boolean hasTerminated = false;
 
     /**
-     * <p>Constructor for RingBuffer.</p>
+     * <p>
+     * Constructor for RingBuffer.</p>
      *
      * @param capacity a int.
      */
@@ -42,7 +45,8 @@ public class RingBuffer<T> {
     }
 
     /**
-     * <p>Getter for the field <code>capacity</code>.</p>
+     * <p>
+     * Getter for the field <code>capacity</code>.</p>
      *
      * @return a int.
      */
@@ -51,7 +55,8 @@ public class RingBuffer<T> {
     }
 
     /**
-     * <p>hasTerminated.</p>
+     * <p>
+     * hasTerminated.</p>
      *
      * @return a boolean.
      */
@@ -60,7 +65,8 @@ public class RingBuffer<T> {
     }
 
     /**
-     * <p>Getter for the field <code>lock</code>.</p>
+     * <p>
+     * Getter for the field <code>lock</code>.</p>
      *
      * @return a {@link java.util.concurrent.locks.Lock} object.
      */
@@ -69,17 +75,22 @@ public class RingBuffer<T> {
     }
 
     /**
-     * <p>terminate.</p>
+     * <p>
+     * terminate.</p>
      */
     public void terminate() {
         this.lock.lock();
-        this.hasTerminated = true;
-        this.readCondVar.signalAll();
-        this.lock.unlock();
+        try {
+            this.hasTerminated = true;
+            this.readCondVar.signalAll();
+        } finally {
+            this.lock.unlock();
+        }
     }
 
     /**
-     * <p>getItem.</p>
+     * <p>
+     * getItem.</p>
      *
      * @param sink a {@link dom.jfischer.Sink} object.
      * @return a T object.
@@ -96,20 +107,25 @@ public class RingBuffer<T> {
     }
 
     /**
-     * <p>setItem.</p>
+     * <p>
+     * setItem.</p>
      *
      * @param data a T object.
      */
     public void setItem(T data) {
         this.writePointerLock.lock();
-        this.buffer.set(this.writePointer.getValue(), data);
-        this.writePointer.increment();
-        this.writePointerLock.unlock();
+        try {
+            this.buffer.set(this.writePointer.getValue(), data);
+            this.writePointer.increment();
+        } finally {
+            this.writePointerLock.unlock();
+        }
         this.readCondVar.signalAll();
     }
 
     /**
-     * <p>addSink.</p>
+     * <p>
+     * addSink.</p>
      *
      * @param sink a {@link dom.jfischer.Sink} object.
      */
@@ -125,7 +141,8 @@ public class RingBuffer<T> {
     }
 
     /**
-     * <p>joinSinks.</p>
+     * <p>
+     * joinSinks.</p>
      *
      * @return a boolean.
      */
@@ -135,7 +152,7 @@ public class RingBuffer<T> {
         for (Sink sink : this.sinkSet) {
             try {
                 sink.join();
-            } catch (Exception e) {
+            } catch (InterruptedException e) {
                 retval = false;
             }
         }
@@ -147,19 +164,23 @@ public class RingBuffer<T> {
         boolean retval = false;
 
         this.writePointerLock.lock();
-        for (Sink sink : this.sinkSet) {
-            if (this.writePointer.equals(sink.getReadPointer())) {
-                retval = true;
-                break;
+        try {
+            for (Sink sink : this.sinkSet) {
+                if (this.writePointer.equals(sink.getReadPointer())) {
+                    retval = true;
+                    break;
+                }
             }
+        } finally {
+            this.writePointerLock.unlock();
         }
-        this.writePointerLock.unlock();
 
         return retval;
     }
 
     /**
-     * <p>waitTilItsNotFull.</p>
+     * <p>
+     * waitTilItsNotFull.</p>
      */
     public void waitTilItsNotFull() {
 
@@ -176,8 +197,12 @@ public class RingBuffer<T> {
     private boolean checkWhetherItsEmpty(Sink sink) {
         Pointer readPointer = sink.getReadPointer();
         this.writePointerLock.lock();
-        boolean retval = this.writePointer.isNextTo(readPointer);
-        this.writePointerLock.unlock();
+        boolean retval;
+        try {
+            retval = this.writePointer.isNextTo(readPointer);
+        } finally {
+            this.writePointerLock.unlock();
+        }
 
         if (!retval) {
             readPointer.increment();
@@ -187,7 +212,8 @@ public class RingBuffer<T> {
     }
 
     /**
-     * <p>waitTilItsNotEmpty.</p>
+     * <p>
+     * waitTilItsNotEmpty.</p>
      *
      * @param sink a {@link dom.jfischer.Sink} object.
      * @return a boolean.

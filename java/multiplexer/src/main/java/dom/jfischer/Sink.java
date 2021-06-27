@@ -3,7 +3,8 @@ package dom.jfischer;
 import java.util.concurrent.locks.Lock;
 
 /**
- * <p>Sink class.</p>
+ * <p>
+ * Sink class.</p>
  *
  * @author jfischer
  * @version $Id: $Id
@@ -15,17 +16,19 @@ public class Sink<T> extends Thread {
     private Pointer readPointer;
 
     /**
-     * <p>Constructor for Sink.</p>
+     * <p>
+     * Constructor for Sink.</p>
      *
      * @param ringBuffer a {@link dom.jfischer.RingBuffer} object.
      */
     public Sink(RingBuffer ringBuffer) {
-        this.ringBuffer =  ringBuffer;
-        this.readPointer =  new Pointer(ringBuffer.getCapacity());
+        this.ringBuffer = ringBuffer;
+        this.readPointer = new Pointer(ringBuffer.getCapacity());
     }
 
     /**
-     * <p>Getter for the field <code>readPointer</code>.</p>
+     * <p>
+     * Getter for the field <code>readPointer</code>.</p>
      *
      * @return a {@link dom.jfischer.Pointer} object.
      */
@@ -34,14 +37,15 @@ public class Sink<T> extends Thread {
     }
 
     /**
-     * <p>get.</p>
+     * <p>
+     * get.</p>
      *
      * @return a T object.
      */
     protected T get() {
-        Lock lock =  this.ringBuffer.getLock();
+        Lock lock = this.ringBuffer.getLock();
 
-        T retval =  null;
+        T retval = null;
 
         lock.lock();
         try {

@@ -4,32 +4,33 @@ import dom.jfischer.sink.Sysout;
 import dom.jfischer.source.Counter;
 
 /**
- * <p>App class.</p>
+ * <p>
+ * App class.</p>
  *
  * @author jfischer
  * @version $Id: $Id
  */
-public class App 
-{
-    private static final RingBuffer<String> RING_BUFFER =  new RingBuffer<>(12);
+public class App {
+
+    private static final RingBuffer<String> RING_BUFFER = new RingBuffer<>(12);
 
     /**
-     * <p>main.</p>
+     * <p>
+     * main.</p>
      *
      * @param args an array of {@link java.lang.String} objects.
      */
-    public static void main( String[] args )
-    {
+    public static void main(String[] args) {
         System.out.println("Ring buffer is running.");
 
-        Source<String> counterA =  new Counter(RING_BUFFER, "A");
-        Source<String> counterB =  new Counter(RING_BUFFER, "B");
-        Source<String> counterC =  new Counter(RING_BUFFER, "C");
-        Sink<String> sysoutA =  new Sysout(RING_BUFFER, "a");
-        Sink<String> sysoutB =  new Sysout(RING_BUFFER, "b");
-        Sink<String> sysoutC =  new Sysout(RING_BUFFER, "c");
-        Sink<String> sysoutD =  new Sysout(RING_BUFFER, "d");
-        Sink<String> sysoutE =  new Sysout(RING_BUFFER, "e");
+        Source<String> counterA = new Counter(RING_BUFFER, "A");
+        Source<String> counterB = new Counter(RING_BUFFER, "B");
+        Source<String> counterC = new Counter(RING_BUFFER, "C");
+        Sink<String> sysoutA = new Sysout(RING_BUFFER, "a");
+        Sink<String> sysoutB = new Sysout(RING_BUFFER, "b");
+        Sink<String> sysoutC = new Sysout(RING_BUFFER, "c");
+        Sink<String> sysoutD = new Sysout(RING_BUFFER, "d");
+        Sink<String> sysoutE = new Sysout(RING_BUFFER, "e");
 
         counterA.start();
         counterB.start();
@@ -46,10 +47,10 @@ public class App
         } catch (Exception e) {
             System.err.println(
                     "Problem right before terminating ring buffer: "
-                  + e.getMessage() );
+                    + e.getMessage());
         }
         RING_BUFFER.terminate();
-        System.out.println( "Ring buffer has been terminated." );
+        System.out.println("Ring buffer has been terminated.");
 
         try {
             counterA.join();
@@ -59,7 +60,7 @@ public class App
         } catch (Exception e) {
             System.err.println(
                     "Problem right after terminating ring buffer: "
-                  + e.getMessage() );
+                    + e.getMessage());
         }
 
         System.out.println("all threads joined.");
