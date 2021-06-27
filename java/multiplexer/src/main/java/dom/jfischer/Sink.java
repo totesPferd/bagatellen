@@ -8,12 +8,12 @@ import java.util.concurrent.locks.Lock;
  *
  * @author jfischer
  * @version $Id: $Id
+ * @param <T>
  */
 public class Sink<T> extends Thread {
 
     private final RingBuffer<T> ringBuffer;
-
-    private Pointer readPointer;
+    private final Pointer readPointer;
 
     /**
      * <p>

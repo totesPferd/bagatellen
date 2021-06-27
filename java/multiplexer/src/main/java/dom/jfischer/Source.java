@@ -8,6 +8,7 @@ import java.util.concurrent.locks.Lock;
  *
  * @author jfischer
  * @version $Id: $Id
+ * @param <T>
  */
 public class Source<T> extends Thread {
 

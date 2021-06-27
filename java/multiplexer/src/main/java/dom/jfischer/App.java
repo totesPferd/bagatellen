@@ -44,7 +44,7 @@ public class App {
 
         try {
             Thread.sleep(20736);
-        } catch (Exception e) {
+        } catch (InterruptedException e) {
             System.err.println(
                     "Problem right before terminating ring buffer: "
                     + e.getMessage());
@@ -57,9 +57,9 @@ public class App {
             counterB.join();
             counterC.join();
             RING_BUFFER.joinSinks();
-        } catch (Exception e) {
+        } catch (InterruptedException e) {
             System.err.println(
-                    "Problem right after terminating ring buffer: "
+                    "Interrupted right after terminating ring buffer: "
                     + e.getMessage());
         }
 
