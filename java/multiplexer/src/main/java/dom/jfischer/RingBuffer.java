@@ -171,6 +171,7 @@ public class RingBuffer<T> {
             for (Sink sink : this.sinkSet) {
                 if (this.writePointer.equals(sink.getReadPointer())) {
                     this.isFull =  true;
+                    sink.setIsEmpty(false);
                 } else if (this.writePointer.isNextTo(sink.getReadPointer())) {
                     isFull = true;
                 }
