@@ -1,9 +1,9 @@
 package dom.jfischer;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.Vector;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -37,7 +37,7 @@ public class RingBuffer<T> {
      */
     public RingBuffer(int capacity) {
         this.capacity = capacity;
-        this.buffer = new Vector<>(capacity);
+        this.buffer = new ArrayList<>(capacity);
         for (int i = 0; i < capacity; i++) {
             this.buffer.add(null);
         }
