@@ -15,6 +15,8 @@ public class Sink<T> extends Thread {
     private final RingBuffer<T> ringBuffer;
     private final Pointer readPointer;
 
+    private boolean isEmpty =  true;
+
     /**
      * <p>
      * Constructor for Sink.</p>
@@ -24,6 +26,14 @@ public class Sink<T> extends Thread {
     public Sink(RingBuffer ringBuffer) {
         this.ringBuffer = ringBuffer;
         this.readPointer = new Pointer(ringBuffer.getCapacity());
+    }
+
+    public boolean isEmpty() {
+       return this.isEmpty;
+    }
+
+    public void setIsEmpty(boolean value) {
+       this.isEmpty =  value;
     }
 
     /**

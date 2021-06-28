@@ -204,13 +204,14 @@ public class RingBuffer<T> {
         this.writePointerLock.lock();
         boolean retval;
         try {
-            retval = this.writePointer.isNextTo(readPointer);
+            retval = sink.isEmpty() && this.writePointer.isNextTo(readPointer);
+
+            if (!retval) {
+                 readPointer.increment();
+                 sink.setIsEmpty(this.writePointer.isNextTo(readPointer));
+            }
         } finally {
             this.writePointerLock.unlock();
-        }
-
-        if (!retval) {
-            readPointer.increment();
         }
 
         return retval;
