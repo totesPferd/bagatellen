@@ -28,6 +28,7 @@ public class RingBuffer<T> {
     private final Condition writeCondVar = this.lock.newCondition();
 
     private boolean hasTerminated = false;
+    private boolean isFull =  false;
 
     /**
      * <p>
@@ -164,13 +165,17 @@ public class RingBuffer<T> {
         boolean retval = false;
 
         this.writePointerLock.lock();
+        this.isFull =  false;
+        boolean isFull =  false;
         try {
             for (Sink sink : this.sinkSet) {
                 if (this.writePointer.equals(sink.getReadPointer())) {
-                    retval = true;
-                    break;
+                    this.isFull =  true;
+                } else if (this.writePointer.isNextTo(sink.getReadPointer())) {
+                    isFull = true;
                 }
             }
+            retval =  this.isFull && isFull;
         } finally {
             this.writePointerLock.unlock();
         }
