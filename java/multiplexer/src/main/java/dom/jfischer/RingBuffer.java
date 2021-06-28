@@ -165,18 +165,21 @@ public class RingBuffer<T> {
         boolean retval = false;
 
         this.writePointerLock.lock();
-        this.isFull =  false;
         boolean isFull =  false;
+        boolean sth =  false;
         try {
             for (Sink sink : this.sinkSet) {
                 if (this.writePointer.equals(sink.getReadPointer())) {
                     this.isFull =  true;
+                    sth =  true;
                     sink.setIsEmpty(false);
                 } else if (this.writePointer.isNextTo(sink.getReadPointer())) {
                     isFull = true;
+                    sth =  true;
                 }
             }
             retval =  this.isFull && isFull;
+            this.isFull = this.isFull && sth;
         } finally {
             this.writePointerLock.unlock();
         }
