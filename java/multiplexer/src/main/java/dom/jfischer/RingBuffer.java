@@ -136,6 +136,7 @@ public class RingBuffer<T> {
             sink.getReadPointer().transfer(this.writePointer);
             this.sinkSet.add(sink);
             sink.start();
+            debug("sink");
         } finally {
             this.writePointerLock.unlock();
         }
