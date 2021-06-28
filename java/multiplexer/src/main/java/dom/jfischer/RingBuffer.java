@@ -249,4 +249,14 @@ public class RingBuffer<T> {
 
         return retval;
     }
+
+   public void debug(String text) {
+      String out =  "debug " + text + " " + this.writePointer.getValue();
+      for (Sink sink: this.sinkSet) {
+         out += " " + sink.getReadPointer().getValue();
+      }
+      System.out.println(out);
+   }
+
+
 }

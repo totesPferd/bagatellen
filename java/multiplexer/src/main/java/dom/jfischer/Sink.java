@@ -62,6 +62,7 @@ public class Sink<T> extends Thread {
             if (!this.ringBuffer.waitTilItsNotEmpty(this)) {
                 retval = this.ringBuffer.getItem(this);
             }
+            this.ringBuffer.debug("get");
         } finally {
             lock.unlock();
         }

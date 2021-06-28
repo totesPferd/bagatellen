@@ -37,6 +37,7 @@ public class Source<T> extends Thread {
         try {
             this.ringBuffer.waitTilItsNotFull();
             this.ringBuffer.setItem(data);
+            this.ringBuffer.debug("put");
         } finally {
             lock.unlock();
         }
