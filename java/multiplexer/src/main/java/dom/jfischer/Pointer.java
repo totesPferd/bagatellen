@@ -44,7 +44,7 @@ public class Pointer {
     /**
      * <p>getTrueIndex.</p>
      *
-     * @return a int
+     * @return a int.
      */
     public int getTrueIndex() {
        return this.value % this.capacity;
@@ -69,8 +69,8 @@ public class Pointer {
     /**
      * <p>isExceedingCapacity.</p>
      *
-     * @param other a {@link dom.jfischer.Pointer} object
-     * @return a boolean
+     * @param other a {@link dom.jfischer.Pointer} object.
+     * @return a boolean.
      */
     public boolean isExceedingCapacity(Pointer other) {
        return (this.value - other.getValue() + this.module) % this.module
