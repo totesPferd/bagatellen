@@ -100,7 +100,7 @@ public class RingBuffer<T> {
 
         T retval;
 
-        retval = this.buffer.get(readPointer.getValue());
+        retval = this.buffer.get(readPointer.getTrueIndex());
         readPointer.increment();
         this.writeCondVar.signalAll();
 
@@ -116,7 +116,7 @@ public class RingBuffer<T> {
     public void setItem(T data) {
         this.writePointerLock.lock();
         try {
-            this.buffer.set(this.writePointer.getValue(), data);
+            this.buffer.set(this.writePointer.getTrueIndex(), data);
             this.writePointer.increment();
         } finally {
             this.writePointerLock.unlock();

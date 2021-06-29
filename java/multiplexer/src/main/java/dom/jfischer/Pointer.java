@@ -43,6 +43,10 @@ public class Pointer {
         return this.value == otherPointer.getValue();
     }
 
+    public int getTrueIndex() {
+       return this.value % this.capacity;
+    }
+
     /**
      *
      * @return
@@ -63,7 +67,8 @@ public class Pointer {
     }
 
     public boolean isExceedingCapacity(Pointer other) {
-       return (this.value - other.getValue() + this.module) % this.module > this.capacity;
+       return (this.value - other.getValue() + this.module) % this.module
+          >= this.capacity;
     }
 
     /**
