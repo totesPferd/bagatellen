@@ -10,6 +10,7 @@ package dom.jfischer;
 public class Pointer {
 
     private final int capacity;
+    private final int module;
     private int value = 0;
 
     /**
@@ -20,6 +21,7 @@ public class Pointer {
      */
     public Pointer(int capacity) {
         this.capacity = capacity;
+        this.module =  2 * capacity;
     }
 
     /**
@@ -30,26 +32,6 @@ public class Pointer {
      */
     public int getValue() {
         return this.value;
-    }
-
-    /**
-     * <p>
-     * getPrevValue.</p>
-     *
-     * @return a int.
-     */
-    public int getPrevValue() {
-        return (this.value + this.capacity - 1) % this.capacity;
-    }
-
-    /**
-     * <p>
-     * getNextValue.</p>
-     *
-     * @return a int.
-     */
-    public int getNextValue() {
-        return (this.value + 1) % this.capacity;
     }
 
     /**
@@ -74,21 +56,14 @@ public class Pointer {
 
     /**
      * <p>
-     * isNextTo.</p>
-     *
-     * @param other a {@link dom.jfischer.Pointer} object.
-     * @return a boolean.
-     */
-    public boolean isNextTo(Pointer other) {
-        return this.value == other.getNextValue();
-    }
-
-    /**
-     * <p>
      * increment.</p>
      */
     public void increment() {
         this.value = getNextValue();
+    }
+
+    public boolean isExceedingCapacity(Pointer other) {
+       return (this.value - other.getValue() + this.module) % this.module > this.capacity;
     }
 
     /**
@@ -98,7 +73,17 @@ public class Pointer {
      * @param other a {@link dom.jfischer.Pointer} object.
      */
     public void transfer(Pointer other) {
-        this.value = other.getPrevValue();
+        this.value = other.getValue();
+    }
+
+    /**
+     * <p>
+     * getNextValue.</p>
+     *
+     * @return a int.
+     */
+    private int getNextValue() {
+        return (this.value + 1) % this.module;
     }
 
 }

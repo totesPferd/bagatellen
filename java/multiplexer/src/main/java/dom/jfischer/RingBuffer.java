@@ -101,6 +101,7 @@ public class RingBuffer<T> {
         T retval;
 
         retval = this.buffer.get(readPointer.getValue());
+        readPointer.increment();
         this.writeCondVar.signalAll();
 
         return retval;
@@ -166,7 +167,7 @@ public class RingBuffer<T> {
         this.writePointerLock.lock();
         try {
             for (Sink sink : this.sinkSet) {
-                if (this.writePointer.equals(sink.getReadPointer())) {
+                if (this.writePointer.isExceedingCapacity(sink.getReadPointer())) {
                     retval = true;
                     break;
                 }
@@ -199,13 +200,9 @@ public class RingBuffer<T> {
         this.writePointerLock.lock();
         boolean retval;
         try {
-            retval = this.writePointer.isNextTo(readPointer);
+            retval = this.writePointer.equals(readPointer);
         } finally {
             this.writePointerLock.unlock();
-        }
-
-        if (!retval) {
-            readPointer.increment();
         }
 
         return retval;
