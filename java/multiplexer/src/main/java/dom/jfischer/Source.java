@@ -1,7 +1,5 @@
 package dom.jfischer;
 
-import java.util.concurrent.locks.Lock;
-
 /**
  * <p>
  * Source class.</p>
@@ -31,15 +29,7 @@ public class Source<T> extends Thread {
      * @param data a T object.
      */
     protected void put(T data) {
-        Lock lock = this.ringBuffer.getLock();
-
-        lock.lock();
-        try {
-            this.ringBuffer.waitTilItsNotFull();
-            this.ringBuffer.setItem(data);
-        } finally {
-            lock.unlock();
-        }
+        this.ringBuffer.put(data);
     }
 
     /**

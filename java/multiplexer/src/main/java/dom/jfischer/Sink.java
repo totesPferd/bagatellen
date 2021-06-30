@@ -1,7 +1,5 @@
 package dom.jfischer;
 
-import java.util.concurrent.locks.Lock;
-
 /**
  * <p>
  * Sink class.</p>
@@ -43,19 +41,7 @@ public class Sink<T> extends Thread {
      * @return a T object.
      */
     protected T get() {
-        Lock lock = this.ringBuffer.getLock();
-
-        T retval = null;
-
-        lock.lock();
-        try {
-            if (!this.ringBuffer.waitTilItsNotEmpty(this)) {
-                retval = this.ringBuffer.getItem(this);
-            }
-        } finally {
-            lock.unlock();
-        }
-        return retval;
+        return this.ringBuffer.get(this);
     }
 
 }

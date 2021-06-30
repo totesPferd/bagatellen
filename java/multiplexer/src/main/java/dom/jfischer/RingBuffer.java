@@ -66,12 +66,75 @@ public class RingBuffer<T> {
 
     /**
      * <p>
-     * Getter for the field <code>lock</code>.</p>
+     * addSink.</p>
      *
-     * @return a {@link java.util.concurrent.locks.Lock} object.
+     * @param sink a {@link dom.jfischer.Sink} object.
      */
-    public Lock getLock() {
-        return this.lock;
+    public void addSink(Sink sink) {
+        this.writePointerLock.lock();
+        try {
+            sink.getReadPointer().transfer(this.writePointer);
+            this.sinkSet.add(sink);
+            sink.start();
+        } finally {
+            this.writePointerLock.unlock();
+        }
+    }
+
+    /**
+     * <p>get.</p>
+     *
+     * @param sink a {@link dom.jfischer.Sink} object
+     * @return a T object
+     */
+    public T get(Sink sink) {
+        T retval = null;
+
+        this.lock.lock();
+        try {
+            if (!waitTilItsNotEmpty(sink)) {
+                retval = getItem(sink);
+            }
+        } finally {
+            this.lock.unlock();
+        }
+        return retval;
+    }
+
+    /**
+     * <p>
+     * joinSinks.</p>
+     *
+     * @return a boolean.
+     */
+    public boolean joinSinks() {
+        boolean retval = true;
+
+        for (Sink sink : this.sinkSet) {
+            try {
+                sink.join();
+            } catch (InterruptedException e) {
+                retval = false;
+            }
+        }
+
+        return retval;
+    }
+
+    /**
+     * <p>
+     * put.</p>
+     *
+     * @param data a T object.
+     */
+    public void put(T data) {
+        this.lock.lock();
+        try {
+            waitTilItsNotFull();
+            setItem(data);
+        } finally {
+            this.lock.unlock();
+        }
     }
 
     /**
@@ -95,7 +158,7 @@ public class RingBuffer<T> {
      * @param sink a {@link dom.jfischer.Sink} object.
      * @return a T object.
      */
-    public T getItem(Sink sink) {
+    private T getItem(Sink sink) {
         Pointer readPointer = sink.getReadPointer();
 
         T retval;
@@ -113,7 +176,7 @@ public class RingBuffer<T> {
      *
      * @param data a T object.
      */
-    public void setItem(T data) {
+    private void setItem(T data) {
         this.writePointerLock.lock();
         try {
             this.buffer.set(this.writePointer.getTrueIndex(), data);
@@ -122,77 +185,6 @@ public class RingBuffer<T> {
             this.writePointerLock.unlock();
         }
         this.readCondVar.signalAll();
-    }
-
-    /**
-     * <p>
-     * addSink.</p>
-     *
-     * @param sink a {@link dom.jfischer.Sink} object.
-     */
-    public void addSink(Sink sink) {
-        this.writePointerLock.lock();
-        try {
-            sink.getReadPointer().transfer(this.writePointer);
-            this.sinkSet.add(sink);
-            sink.start();
-        } finally {
-            this.writePointerLock.unlock();
-        }
-    }
-
-    /**
-     * <p>
-     * joinSinks.</p>
-     *
-     * @return a boolean.
-     */
-    public boolean joinSinks() {
-        boolean retval = true;
-
-        for (Sink sink : this.sinkSet) {
-            try {
-                sink.join();
-            } catch (InterruptedException e) {
-                retval = false;
-            }
-        }
-
-        return retval;
-    }
-
-    private boolean checkWhetherItsFull() {
-        boolean retval = false;
-
-        this.writePointerLock.lock();
-        try {
-            for (Sink sink : this.sinkSet) {
-                if (this.writePointer.isExceedingCapacity(sink.getReadPointer())) {
-                    retval = true;
-                    break;
-                }
-            }
-        } finally {
-            this.writePointerLock.unlock();
-        }
-
-        return retval;
-    }
-
-    /**
-     * <p>
-     * waitTilItsNotFull.</p>
-     */
-    public void waitTilItsNotFull() {
-
-        while (checkWhetherItsFull()) {
-            try {
-                this.writeCondVar.await();
-            } catch (InterruptedException e) {
-
-            }
-        }
-
     }
 
     private boolean checkWhetherItsEmpty(Sink sink) {
@@ -236,4 +228,39 @@ public class RingBuffer<T> {
 
         return retval;
     }
+
+    private boolean checkWhetherItsFull() {
+        boolean retval = false;
+
+        this.writePointerLock.lock();
+        try {
+            for (Sink sink : this.sinkSet) {
+                if (this.writePointer.isExceedingCapacity(sink.getReadPointer())) {
+                    retval = true;
+                    break;
+                }
+            }
+        } finally {
+            this.writePointerLock.unlock();
+        }
+
+        return retval;
+    }
+
+    /**
+     * <p>
+     * waitTilItsNotFull.</p>
+     */
+    public void waitTilItsNotFull() {
+
+        while (checkWhetherItsFull()) {
+            try {
+                this.writeCondVar.await();
+            } catch (InterruptedException e) {
+
+            }
+        }
+
+    }
+
 }

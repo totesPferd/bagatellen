@@ -34,23 +34,23 @@ public class Pointer {
         return this.value;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object other) {
         Pointer otherPointer = (Pointer) other;
         return this.value == otherPointer.getValue();
     }
 
+    /**
+     * <p>getTrueIndex.</p>
+     *
+     * @return a int
+     */
     public int getTrueIndex() {
        return this.value % this.capacity;
     }
 
-    /**
-     *
-     * @return
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -66,6 +66,12 @@ public class Pointer {
         this.value = getNextValue();
     }
 
+    /**
+     * <p>isExceedingCapacity.</p>
+     *
+     * @param other a {@link dom.jfischer.Pointer} object
+     * @return a boolean
+     */
     public boolean isExceedingCapacity(Pointer other) {
        return (this.value - other.getValue() + this.module) % this.module
           >= this.capacity;
