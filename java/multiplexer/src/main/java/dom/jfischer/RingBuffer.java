@@ -103,17 +103,17 @@ public class RingBuffer<T> {
      * @return a boolean.
      */
     public boolean joinSinks() {
-        boolean retval = true;
-
-        for (Sink sink : this.sinkSet) {
-            try {
-                sink.join();
-            } catch (InterruptedException e) {
-                retval = false;
-            }
-        }
-
-        return retval;
+        return this.sinkSet
+            .parallelStream()
+            .map(sink ->  {
+               boolean retval =  true;
+               try {
+                    sink.join();
+               } catch (InterruptedException e) {
+                    retval =  false;
+               }
+               return retval; })
+            .reduce(true, (p, q) -> p && q);
     }
 
     /**
@@ -229,12 +229,10 @@ public class RingBuffer<T> {
 
         this.writePointerLock.lock();
         try {
-            for (Sink sink : this.sinkSet) {
-                if (this.writePointer.isExceedingCapacity(sink.getReadPointer())) {
-                    retval = true;
-                    break;
-                }
-            }
+            retval =  this.sinkSet
+                .parallelStream()
+                .anyMatch(sink ->
+                    this.writePointer.isExceedingCapacity(sink.getReadPointer()) );
         } finally {
             this.writePointerLock.unlock();
         }
