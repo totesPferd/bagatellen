@@ -1,8 +1,6 @@
 package dom.jfischer;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -19,7 +17,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class RingBuffer<T> {
 
     private final int capacity;
-    private final List<T> buffer;
+    private final Object buffer[];
     private final Pointer writePointer;
     private final Set<Sink> sinkSet = new HashSet<>();
     private final Lock lock = new ReentrantLock();
@@ -37,10 +35,7 @@ public class RingBuffer<T> {
      */
     public RingBuffer(int capacity) {
         this.capacity = capacity;
-        this.buffer = new ArrayList<>(capacity);
-        for (int i = 0; i < capacity; i++) {
-            this.buffer.add(null);
-        }
+        this.buffer = new Object[capacity];
         this.writePointer = new Pointer(capacity);
     }
 
@@ -163,7 +158,7 @@ public class RingBuffer<T> {
 
         T retval;
 
-        retval = this.buffer.get(readPointer.getTrueIndex());
+        retval = (T) this.buffer[readPointer.getTrueIndex()];
         readPointer.increment();
         this.writeCondVar.signalAll();
 
@@ -179,7 +174,7 @@ public class RingBuffer<T> {
     private void setItem(T data) {
         this.writePointerLock.lock();
         try {
-            this.buffer.set(this.writePointer.getTrueIndex(), data);
+            this.buffer[this.writePointer.getTrueIndex()] =  data;
             this.writePointer.increment();
         } finally {
             this.writePointerLock.unlock();
