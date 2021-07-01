@@ -21,7 +21,7 @@ public class Pointer {
      */
     public Pointer(int capacity) {
         this.capacity = capacity;
-        this.module =  2 * capacity;
+        this.module = 2 * capacity;
     }
 
     /**
@@ -42,12 +42,13 @@ public class Pointer {
     }
 
     /**
-     * <p>getTrueIndex.</p>
+     * <p>
+     * getTrueIndex.</p>
      *
      * @return a int.
      */
     public int getTrueIndex() {
-       return this.value % this.capacity;
+        return this.value % this.capacity;
     }
 
     /** {@inheritDoc} */
@@ -67,14 +68,15 @@ public class Pointer {
     }
 
     /**
-     * <p>isExceedingCapacity.</p>
+     * <p>
+     * isExceedingCapacity.</p>
      *
      * @param other a {@link dom.jfischer.Pointer} object.
      * @return a boolean.
      */
     public boolean isExceedingCapacity(Pointer other) {
-       return (this.value - other.getValue() + this.module) % this.module
-          >= this.capacity;
+        return (this.value - other.getValue() + this.module) % this.module
+                >= this.capacity;
     }
 
     /**

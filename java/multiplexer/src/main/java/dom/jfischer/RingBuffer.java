@@ -77,7 +77,8 @@ public class RingBuffer<T> {
     }
 
     /**
-     * <p>get.</p>
+     * <p>
+     * get.</p>
      *
      * @param sink a {@link dom.jfischer.Sink} object
      * @return a T object
@@ -104,16 +105,17 @@ public class RingBuffer<T> {
      */
     public boolean joinSinks() {
         return this.sinkSet
-            .parallelStream()
-            .map(sink ->  {
-               boolean retval =  true;
-               try {
-                    sink.join();
-               } catch (InterruptedException e) {
-                    retval =  false;
-               }
-               return retval; })
-            .reduce(true, (p, q) -> p && q);
+                .parallelStream()
+                .map(sink -> {
+                    boolean retval = true;
+                    try {
+                        sink.join();
+                    } catch (InterruptedException e) {
+                        retval = false;
+                    }
+                    return retval;
+                })
+                .reduce(true, (p, q) -> p && q);
     }
 
     /**
@@ -174,7 +176,7 @@ public class RingBuffer<T> {
     private void setItem(T data) {
         this.writePointerLock.lock();
         try {
-            this.buffer[this.writePointer.getTrueIndex()] =  data;
+            this.buffer[this.writePointer.getTrueIndex()] = data;
             this.writePointer.increment();
         } finally {
             this.writePointerLock.unlock();
@@ -229,10 +231,10 @@ public class RingBuffer<T> {
 
         this.writePointerLock.lock();
         try {
-            retval =  this.sinkSet
-                .parallelStream()
-                .anyMatch(sink ->
-                    this.writePointer.isExceedingCapacity(sink.getReadPointer()) );
+            retval = this.sinkSet
+                    .parallelStream()
+                    .anyMatch(sink
+                            -> this.writePointer.isExceedingCapacity(sink.getReadPointer()));
         } finally {
             this.writePointerLock.unlock();
         }
