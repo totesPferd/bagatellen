@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-class Lagrange implements ILagrange {
+class Lagrange implements IInterpolator {
 
     private Set<double[]> knowledge = null;
 

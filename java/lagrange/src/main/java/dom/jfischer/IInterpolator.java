@@ -9,7 +9,7 @@ import java.util.Set;
  * @author jfischer
  * @version $Id: $Id
  */
-public interface ILagrange {
+public interface IInterpolator {
 
     /**
      * <p>
