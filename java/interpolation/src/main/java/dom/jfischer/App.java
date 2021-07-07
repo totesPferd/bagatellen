@@ -18,7 +18,7 @@ public class App {
      * @param args an array of {@link java.lang.String} objects.
      */
     public static void main(String[] args) {
-        IInterpolator interpolator = new Lagrange();
+        IInterpolator interpolator = new Newton();
 
         Set<double[]> points = new HashSet(2);
 
