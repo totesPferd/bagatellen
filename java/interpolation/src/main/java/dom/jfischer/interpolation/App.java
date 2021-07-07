@@ -36,8 +36,10 @@ public class App {
         System.out.println("y_1 = " + y_1 + ", y_2 = " + y_2);
 
         double[] p_3 = {5.0, 12.0};
+        double[] p_4 = {5.0, 13.0};
 
         points.add(p_3);
+        points.add(p_4);
 
         interpolator.learn(points);
 

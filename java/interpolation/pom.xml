@@ -55,7 +55,7 @@
                     <configuration>
                         <archive>
                             <manifest>
-                                <mainClass>dom.jfischer.App</mainClass>
+                                <mainClass>dom.jfischer.interpolation.App</mainClass>
                                 efix>
                             </manifest>
                         </archive>
