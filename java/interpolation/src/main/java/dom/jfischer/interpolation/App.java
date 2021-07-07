@@ -1,4 +1,4 @@
-package dom.jfischer;
+package dom.jfischer.interpolation;
 
 import java.util.HashSet;
 import java.util.Set;

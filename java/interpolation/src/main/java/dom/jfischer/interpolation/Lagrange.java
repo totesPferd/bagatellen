@@ -1,4 +1,4 @@
-package dom.jfischer;
+package dom.jfischer.interpolation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
