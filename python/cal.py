@@ -553,10 +553,10 @@ for month in range(1, 13):
    weekday_name = get_weekday_name(weekday)
    position     = add_R2(weekday_panel, coeff_R2(weekday, diff_day))
    canvas.drawString(position[0], position[1], weekday_name) 
- image = pyexiv2.Image(filename_in)
- image.readMetadata()
- if ('Exif.Photo.UserComment' in image.exifKeys()):
-  metadata = image['Exif.Photo.UserComment']
+ imageMetadata = pyexiv2.ImageMetadata(filename_in)
+ imageMetadata.read()
+ if ('Exif.Photo.UserComment' in imageMetadata.exif_keys):
+  metadata = imageMetadata['Exif.Photo.UserComment'].value
   canvas.setFont("Helvetica", 13)
   canvas.drawString(capt_place[0], capt_place[1], metadata)
  canvas.setFont("Helvetica", 25)
