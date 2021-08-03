@@ -46,7 +46,7 @@ grplot_input_buf_plot_point(grplot_input_buf_t *input_buf, double x, double y, d
          double double_pixelX =  (double) pixelX / (double) input_buf->nrCols - x;
 
          *(ptr++) +=
-            exp((- double_pixelX * double_pixelX - double_pixelY * double_pixelY) / input_buf->radius);
+            weight * exp((- double_pixelX * double_pixelX - double_pixelY * double_pixelY) / input_buf->radius);
 
       }
    }
