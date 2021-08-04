@@ -5,7 +5,7 @@
 #include "input_buf.h"
 
 int
-grplot_input_buf_init(grplot_input_buf_t *input_buf, int nrRows, int nrCols, double radius) {
+grplot_input_buf_init(grplot_input_buf_t *input_buf, unsigned nrRows, unsigned nrCols, double radius) {
    assert(input_buf);
 
    int retval =  0;
@@ -18,7 +18,7 @@ grplot_input_buf_init(grplot_input_buf_t *input_buf, int nrRows, int nrCols, dou
 
    input_buf->buf =  (double *) malloc(bufLen * sizeof(double));
 
-   for (int i =  0; i < bufLen; i++) {
+   for (unsigned i =  0; i < bufLen; i++) {
       input_buf->buf[i] =  0.0;
    }
 

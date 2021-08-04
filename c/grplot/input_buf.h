@@ -2,14 +2,14 @@
 #define INPUT_BUF
 
 typedef struct {
-   int nrRows;
-   int nrCols;
+   unsigned nrRows;
+   unsigned nrCols;
    double radius;
    double *buf;
 } grplot_input_buf_t;
 
 int
-grplot_input_buf_init(grplot_input_buf_t *, int, int, double);
+grplot_input_buf_init(grplot_input_buf_t *, unsigned, unsigned, double);
 
 int
 grplot_input_buf_plot_point(grplot_input_buf_t *, double, double, double);
