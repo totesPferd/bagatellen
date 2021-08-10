@@ -4,6 +4,7 @@
 typedef struct {
    unsigned nrRows;
    unsigned nrCols;
+   unsigned long bufLen;
    double radius;
    double *buf;
 } grplot_input_buf_t;

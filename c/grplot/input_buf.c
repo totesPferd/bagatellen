@@ -6,6 +6,7 @@
 int
 grplot_input_buf_init(grplot_input_buf_t *input_buf, double *buf, unsigned nrRows, unsigned nrCols, double radius) {
    assert(input_buf);
+   assert(buf);
 
    int retval =  0;
 
@@ -13,11 +14,11 @@ grplot_input_buf_init(grplot_input_buf_t *input_buf, double *buf, unsigned nrRow
    input_buf->nrCols =  nrCols;
    input_buf->radius =  radius;
 
-   long bufLen =  nrRows * nrCols;
+   input_buf->bufLen =  nrRows * nrCols;
 
    input_buf->buf =  buf;
 
-   for (unsigned i =  0; i < bufLen; i++) {
+   for (unsigned i =  0; i < input_buf->bufLen; i++) {
       input_buf->buf[i] =  0.0;
    }
 
