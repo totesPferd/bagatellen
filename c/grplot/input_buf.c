@@ -1,11 +1,10 @@
 #include <assert.h>
 #include <math.h>
-#include <stdlib.h>
 
 #include "input_buf.h"
 
 int
-grplot_input_buf_init(grplot_input_buf_t *input_buf, unsigned nrRows, unsigned nrCols, double radius) {
+grplot_input_buf_init(grplot_input_buf_t *input_buf, double *buf, unsigned nrRows, unsigned nrCols, double radius) {
    assert(input_buf);
 
    int retval =  0;
@@ -16,7 +15,7 @@ grplot_input_buf_init(grplot_input_buf_t *input_buf, unsigned nrRows, unsigned n
 
    long bufLen =  nrRows * nrCols;
 
-   input_buf->buf =  (double *) malloc(bufLen * sizeof(double));
+   input_buf->buf =  buf;
 
    for (unsigned i =  0; i < bufLen; i++) {
       input_buf->buf[i] =  0.0;
@@ -57,6 +56,4 @@ grplot_input_buf_plot_point(grplot_input_buf_t *input_buf, double x, double y, d
 void
 grplot_input_buf_destroy(grplot_input_buf_t *input_buf) {
    assert(input_buf);
-
-   free(input_buf -> buf);
 }

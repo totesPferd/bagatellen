@@ -9,7 +9,7 @@ typedef struct {
 } grplot_input_buf_t;
 
 int
-grplot_input_buf_init(grplot_input_buf_t *, unsigned, unsigned, double);
+grplot_input_buf_init(grplot_input_buf_t *, double *, unsigned, unsigned, double);
 
 int
 grplot_input_buf_plot_point(grplot_input_buf_t *, double, double, double);
