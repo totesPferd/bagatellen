@@ -4,21 +4,26 @@
 #include "input_buf.h"
 
 int
-grplot_input_buf_init(grplot_input_buf_t *input_buf, double *buf, unsigned nrRows, unsigned nrCols, double radius) {
+grplot_input_buf_init(
+      grplot_input_buf_t *input_buf
+   ,  unsigned long bufLen
+   ,  double *buf
+   ,  unsigned nrRows
+   ,  unsigned nrCols
+   ,  double radius ) {
    assert(input_buf);
    assert(buf);
+   assert(bufLen >= nrRows * nrCols);
 
    int retval =  0;
 
+   input_buf->bufLen =  bufLen;
+   input_buf->buf =  buf;
    input_buf->nrRows =  nrRows;
    input_buf->nrCols =  nrCols;
    input_buf->radius =  radius;
 
-   input_buf->bufLen =  nrRows * nrCols;
-
-   input_buf->buf =  buf;
-
-   for (unsigned i =  0; i < input_buf->bufLen; i++) {
+   for (unsigned i =  0; i < bufLen; i++) {
       input_buf->buf[i] =  0.0;
    }
 
