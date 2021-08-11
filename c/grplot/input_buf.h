@@ -15,6 +15,15 @@ grplot_input_buf_init(grplot_input_buf_t *, unsigned long, double *, unsigned, u
 int
 grplot_input_buf_plot_point(grplot_input_buf_t *, double, double, double);
 
+int
+grplot_input_buf_get_max(grplot_input_buf_t *, double *);
+
+int
+grplot_input_buf_get_min(grplot_input_buf_t *, double *);
+
+int
+grplot_input_buf_normalize(grplot_input_buf_t *, double, double);
+
 void
 grplot_input_buf_destroy(grplot_input_buf_t *);
 
