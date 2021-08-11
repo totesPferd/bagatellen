@@ -1,5 +1,5 @@
-#ifndef INPUT_BUF
-#define INPUT_BUF
+#ifndef GRPLOT_INPUT_BUF_H
+#define GRPLOT_INPUT_BUF_H
 
 typedef struct {
    unsigned nrRows;

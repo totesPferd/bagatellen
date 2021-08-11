@@ -13,7 +13,7 @@ grplot_input_buf_init(
    ,  double radius ) {
    assert(input_buf);
    assert(buf);
-   assert(bufLen >= nrRows * nrCols);
+   assert(bufLen == nrRows * nrCols);
 
    int retval =  0;
 
