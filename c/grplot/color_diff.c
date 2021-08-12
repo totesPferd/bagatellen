@@ -25,10 +25,10 @@ grplot_color_diff_decode(DATA32 *p_color, const double *p_in, DATA32 background_
    assert(p_in[1] >= - (double) ((p_color_channel_t) &background_pixel)[1]);
    assert(p_in[2] >= - (double) ((p_color_channel_t) &background_pixel)[2]);
    assert(p_in[3] >= - (double) ((p_color_channel_t) &background_pixel)[3]);
-   assert(p_in[0] < (double) (256 - (short) ((p_color_channel_t) &background_pixel)[0]));
-   assert(p_in[1] < (double) (256 - (short) ((p_color_channel_t) &background_pixel)[1]));
-   assert(p_in[2] < (double) (256 - (short) ((p_color_channel_t) &background_pixel)[2]));
-   assert(p_in[3] < (double) (256 - (short) ((p_color_channel_t) &background_pixel)[3]));
+   assert(p_in[0] + (double) ((p_color_channel_t) &background_pixel)[0] < 256.0);
+   assert(p_in[1] + (double) ((p_color_channel_t) &background_pixel)[1] < 256.0);
+   assert(p_in[2] + (double) ((p_color_channel_t) &background_pixel)[2] < 256.0);
+   assert(p_in[3] + (double) ((p_color_channel_t) &background_pixel)[3] < 256.0);
 
    int retval =  0;
 
