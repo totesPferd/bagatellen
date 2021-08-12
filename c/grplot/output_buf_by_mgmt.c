@@ -11,6 +11,7 @@ grplot_output_buf_by_mgmt_set_buf(
    ,  const grplot_input_buf_mgmt_t *p_input_buf_mgmt
    ,  unsigned originX
    ,  unsigned originY
+   ,  unsigned width
    ,  DATA32 backgroundColor ) {
    assert(p_out);
    assert(p_input_buf_mgmt);
@@ -19,7 +20,7 @@ grplot_output_buf_by_mgmt_set_buf(
    unsigned long idx =  0;
    for (unsigned row =  0; row < p_input_buf_mgmt->nrRows; row++)
    for (unsigned col =  0; col < p_input_buf_mgmt->nrCols; col++) {
-      DATA32 *p_out_ptr =  p_out + p_input_buf_mgmt->nrCols * (originY + row) + (originX + col);
+      DATA32 *p_out_ptr =  p_out + width * (originY + row) + (originX + col);
 
       double sumInpVal =  0.0;
       for (unsigned i =  0; i < p_input_buf_mgmt->nrInpBufs; i++) {

@@ -11,6 +11,7 @@ grplot_output_buf_by_mgmt_set_buf(
    ,  const grplot_input_buf_mgmt_t *
    ,  unsigned
    ,  unsigned
+   ,  unsigned
    ,  DATA32);
 
 #endif
