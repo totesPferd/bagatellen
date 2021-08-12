@@ -1,6 +1,5 @@
 #include <assert.h>
 #include <math.h>
-#include <stdlib.h>
 
 #include "input_buf.h"
 
@@ -43,7 +42,7 @@ grplot_input_buf_init_by_mgmt(
    int retval =  0;
 
    {
-      double *p_pixels =  NULL;
+      double *p_pixels;
       retval =  grplot_input_buf_mgmt_get_pixels(p_input_buf_mgmt, &p_pixels, index);
 
       grplot_input_buf_init(
