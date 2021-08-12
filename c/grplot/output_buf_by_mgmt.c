@@ -3,6 +3,8 @@
 #include "color_diff.h"
 #include "output_buf_by_mgmt.h"
 
+static const double nearZero =  +1.0E-12;
+
 int
 grplot_output_buf_by_mgmt_set_buf(
       DATA32 *p_out
@@ -31,7 +33,7 @@ grplot_output_buf_by_mgmt_set_buf(
          double *p_pixels;
          grplot_input_buf_mgmt_get_pixels(p_input_buf_mgmt, &p_pixels, i);
          const double relVal =  p_pixels[idx];
-         const double absVal =  relVal * relVal / sumInpVal;
+         const double absVal =  sumInpVal * sumInpVal < nearZero ? 0.0 : relVal * relVal / sumInpVal;
 
          double *p_colors;
          grplot_input_buf_mgmt_get_color(p_input_buf_mgmt, &p_colors, i);
