@@ -15,9 +15,6 @@ int
 grplot_input_buf_init(grplot_input_buf_t *, unsigned long, double *, unsigned, unsigned, double);
 
 int
-grplot_input_buf_init_by_mgmt(const grplot_input_buf_mgmt_t *, grplot_input_buf_t *, unsigned, double);
-
-int
 grplot_input_buf_plot_point(grplot_input_buf_t *, double, double, double);
 
 int
