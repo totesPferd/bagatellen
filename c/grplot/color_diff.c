@@ -33,7 +33,8 @@ grplot_color_diff_decode(DATA32 *p_color, const double *p_in, DATA32 background_
    int retval =  0;
 
    for (unsigned char i =  0; i < 4; i++) {
-      p_color[i] =  (unsigned char) ((short) p_in[i] + (short) ((p_color_channel_t) &background_pixel)[i]);
+      ((unsigned char *) p_color)[i]
+         =  (unsigned char) ((short) p_in[i] + (short) ((p_color_channel_t) &background_pixel)[i]);
    }
 
    return retval;
