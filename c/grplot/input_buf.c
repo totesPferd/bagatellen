@@ -42,11 +42,11 @@ grplot_input_buf_plot_point(grplot_input_buf_t *p_input_buf, double x, double y,
    int retval =  0;
 
    double *ptr =  p_input_buf->buf;
-   for (int pixelY =  0; pixelY < p_input_buf->nrRows; pixelY) {
+   for (int pixelY =  0; pixelY < p_input_buf->nrRows; pixelY++) {
 
       double double_pixelY =  (double) pixelY / (double) p_input_buf->nrRows - y;
 
-      for (int pixelX =  0; pixelX < p_input_buf->nrCols; pixelX) {
+      for (int pixelX =  0; pixelX < p_input_buf->nrCols; pixelX++) {
 
          double double_pixelX =  (double) pixelX / (double) p_input_buf->nrCols - x;
 
