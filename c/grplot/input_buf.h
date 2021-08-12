@@ -16,10 +16,10 @@ int
 grplot_input_buf_plot_point(grplot_input_buf_t *, double, double, double);
 
 int
-grplot_input_buf_get_max(grplot_input_buf_t *, double *);
+grplot_input_buf_get_max(const grplot_input_buf_t *, double *);
 
 int
-grplot_input_buf_get_min(grplot_input_buf_t *, double *);
+grplot_input_buf_get_min(const grplot_input_buf_t *, double *);
 
 int
 grplot_input_buf_normalize(grplot_input_buf_t *, double, double);

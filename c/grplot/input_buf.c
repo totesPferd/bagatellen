@@ -60,7 +60,7 @@ grplot_input_buf_plot_point(grplot_input_buf_t *p_input_buf, double x, double y,
 }
 
 int 
-grplot_input_buf_get_max(grplot_input_buf_t *p_input_buf, double *p_result) {
+grplot_input_buf_get_max(const grplot_input_buf_t *p_input_buf, double *p_result) {
    assert(p_input_buf);
    assert(p_result);
 
@@ -81,7 +81,7 @@ grplot_input_buf_get_max(grplot_input_buf_t *p_input_buf, double *p_result) {
 }
 
 int
-grplot_input_buf_get_min(grplot_input_buf_t *p_input_buf, double *p_result) {
+grplot_input_buf_get_min(const grplot_input_buf_t *p_input_buf, double *p_result) {
    assert(p_input_buf);
    assert(p_result);
 
