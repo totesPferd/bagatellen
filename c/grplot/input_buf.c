@@ -97,6 +97,7 @@ grplot_input_buf_get_min(const grplot_input_buf_t *p_input_buf, double *p_result
       } else if (*p_result > *p_buf_ptr) {
          *p_result =  *p_buf_ptr;
       }
+      p_buf_ptr++;
    }
 
    return retval;
