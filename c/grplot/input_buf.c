@@ -111,8 +111,8 @@ grplot_input_buf_normalize(grplot_input_buf_t *p_input_buf, double minVal, doubl
    double diffVal =  maxVal - minVal;
 
    for (unsigned long i =  0; i < p_input_buf->bufLen; i++) {
-      assert(p_input_buf->buf[i] >= minVal);
-      assert(p_input_buf->buf[i] <= maxVal);
+      assert(p_input_buf->buf[i] >= minVal - 1.0E-12);
+      assert(p_input_buf->buf[i] <= maxVal + 1.0E-12);
 
       p_input_buf->buf[i] =  (p_input_buf->buf[i] - minVal) / diffVal;
    }
