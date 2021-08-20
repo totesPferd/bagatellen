@@ -14,6 +14,17 @@ static int
 getStepWidth_logarithm(const grplot_axis_logarithm_step_t *, double *);
 
 int
+grplot_axis_getDistancePerPixel(const grplot_axis_t *pAxis, unsigned *pResult, double distance) {
+   assert(pAxis);
+
+   int retval =  0;
+
+   *pResult =  (unsigned) (distance * (double) pAxis->nrPixels);
+
+   return retval;
+}
+
+int
 grplot_axis_get_double(const grplot_axis_t *pAxis, double *pResult, grplot_axis_val_t val) {
    assert(pAxis);
 

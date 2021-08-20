@@ -56,6 +56,9 @@ typedef union {
    grplot_axis_time_step_t time; } grplot_axis_step_t;
 
 int
+grplot_axis_getDistancePerPixel(const grplot_axis_t *, unsigned *, double);
+
+int
 grplot_axis_get_double(const grplot_axis_t *, double *, grplot_axis_val_t);
 
 int
