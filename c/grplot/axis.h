@@ -24,10 +24,48 @@ typedef struct {
    grplot_axis_val_t min;
    grplot_axis_val_t max; } grplot_axis_t;
 
+typedef enum {
+      grplot_axis_linear_step_one
+   ,  grplot_axis_linear_step_two
+   ,  grplot_axis_linear_step_five } grplot_axis_linear_step_mantissa_t;
+
+typedef enum {
+      grplot_axis_logarithm_step_zero
+   ,  grplot_axis_logarithm_step_twelve
+   ,  grplot_axis_logarithm_step_six } grplot_axis_logarithm_step_mantissa_t;
+
+typedef enum {
+      grplot_axis_time_step_sec
+   ,  grplot_axis_time_step_min
+   ,  grplot_axis_time_step_hour
+   ,  grplot_axis_time_step_day
+   ,  grplot_axis_time_step_week
+   ,  grplot_axis_time_step_month
+   ,  grplot_axis_time_step_year } grplot_axis_time_step_t;
+
+typedef struct {
+   unsigned exponent;
+   grplot_axis_linear_step_mantissa_t mantissa; } grplot_axis_linear_step_t;
+
+typedef struct {
+   unsigned base;
+   grplot_axis_logarithm_step_mantissa_t mantissa; } grplot_axis_logarithm_step_t;
+
+typedef union {
+   grplot_axis_linear_step_t linear;
+   grplot_axis_logarithm_step_t logarithm;
+   grplot_axis_time_step_t time; } grplot_axis_step_t;
+
 int
 grplot_axis_get_double(grplot_axis_t *, double *, grplot_axis_val_t);
 
 int
 grplot_axis_get_string(grplot_axis_t *, char **, grplot_axis_val_t);
+
+int
+grplot_axis_step_init(grplot_axis_t *, grplot_axis_step_t *);
+
+int
+grplot_axis_step_next(grplot_axis_t *, grplot_axis_step_t *);
 
 #endif
