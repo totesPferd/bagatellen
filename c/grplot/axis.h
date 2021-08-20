@@ -56,15 +56,15 @@ typedef union {
    grplot_axis_time_step_t time; } grplot_axis_step_t;
 
 int
-grplot_axis_get_double(grplot_axis_t *, double *, grplot_axis_val_t);
+grplot_axis_get_double(const grplot_axis_t *, double *, grplot_axis_val_t);
 
 int
-grplot_axis_get_string(grplot_axis_t *, char **, grplot_axis_val_t);
+grplot_axis_get_string(const grplot_axis_t *, char **, grplot_axis_val_t);
 
 int
-grplot_axis_step_init(grplot_axis_t *, grplot_axis_step_t *);
+grplot_axis_step_init(const grplot_axis_t *, grplot_axis_step_t *);
 
 int
-grplot_axis_step_next(grplot_axis_t *, grplot_axis_step_t *);
+grplot_axis_step_next(const grplot_axis_t *, grplot_axis_step_t *);
 
 #endif

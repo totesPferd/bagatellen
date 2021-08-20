@@ -8,7 +8,7 @@
 static const unsigned nrCharDoubleString =  13;
 
 int
-grplot_axis_get_double(grplot_axis_t *pAxis, double *pResult, grplot_axis_val_t val) {
+grplot_axis_get_double(const grplot_axis_t *pAxis, double *pResult, grplot_axis_val_t val) {
    assert(pAxis);
 
    int retval =  0;
@@ -69,7 +69,7 @@ grplot_axis_get_double(grplot_axis_t *pAxis, double *pResult, grplot_axis_val_t 
 }
 
 int
-grplot_axis_get_string(grplot_axis_t *pAxis, char **ppResult, grplot_axis_val_t val) {
+grplot_axis_get_string(const grplot_axis_t *pAxis, char **ppResult, grplot_axis_val_t val) {
    assert(pAxis);
 
    int retval =  0;
@@ -97,7 +97,7 @@ grplot_axis_get_string(grplot_axis_t *pAxis, char **ppResult, grplot_axis_val_t 
 }
 
 int
-grplot_axis_step_init(grplot_axis_t *pAxis, grplot_axis_step_t *pStep) {
+grplot_axis_step_init(const grplot_axis_t *pAxis, grplot_axis_step_t *pStep) {
    assert(pAxis);
    assert(pStep);
 
@@ -130,7 +130,7 @@ grplot_axis_step_init(grplot_axis_t *pAxis, grplot_axis_step_t *pStep) {
 }
 
 int
-grplot_axis_step_next(grplot_axis_t *pAxis, grplot_axis_step_t *pStep) {
+grplot_axis_step_next(const grplot_axis_t *pAxis, grplot_axis_step_t *pStep) {
    assert(pAxis);
    assert(pStep);
 
