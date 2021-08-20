@@ -39,7 +39,6 @@ typedef enum {
    ,  grplot_axis_time_step_min
    ,  grplot_axis_time_step_hour
    ,  grplot_axis_time_step_day
-   ,  grplot_axis_time_step_week
    ,  grplot_axis_time_step_month
    ,  grplot_axis_time_step_year } grplot_axis_time_step_t;
 

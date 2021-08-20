@@ -205,11 +205,6 @@ grplot_axis_step_next(grplot_axis_t *pAxis, grplot_axis_step_t *pStep) {
             break;
 
             case (grplot_axis_time_step_day): {
-               (*pStep).time =  grplot_axis_time_step_week;
-            }
-            break;
-
-            case (grplot_axis_time_step_week): {
                (*pStep).time =  grplot_axis_time_step_month;
             }
             break;
