@@ -67,4 +67,7 @@ grplot_axis_step_init(const grplot_axis_t *, grplot_axis_step_t *);
 int
 grplot_axis_step_next(const grplot_axis_t *, grplot_axis_step_t *);
 
+int
+grplot_axis_next_val(const grplot_axis_t *, const grplot_axis_step_t *, grplot_axis_val_t *);
+
 #endif

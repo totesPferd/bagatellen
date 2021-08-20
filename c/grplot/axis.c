@@ -7,6 +7,12 @@
 
 static const unsigned nrCharDoubleString =  13;
 
+static int
+getStepWidth_linear(const grplot_axis_linear_step_t *, double *);
+
+static int
+getStepWidth_logarithm(const grplot_axis_logarithm_step_t *, double *);
+
 int
 grplot_axis_get_double(const grplot_axis_t *pAxis, double *pResult, grplot_axis_val_t val) {
    assert(pAxis);
@@ -233,3 +239,163 @@ grplot_axis_step_next(const grplot_axis_t *pAxis, grplot_axis_step_t *pStep) {
       
    return retval;
 }
+
+int
+grplot_axis_next_val(const grplot_axis_t *pAxis, const grplot_axis_step_t *pStep, grplot_axis_val_t *pVal) {
+   assert(pAxis);
+   assert(pStep);
+   assert(pVal);
+
+   int retval =  0;
+
+   switch(pAxis->scaleType) {
+
+      case grplot_axis_linear: {
+         double stepWidth;
+         getStepWidth_linear(&((*pStep).linear), &stepWidth);
+         double rem =  remainder((*pVal).numeric, stepWidth);
+         (*pVal).numeric += stepWidth - rem;
+      }
+      break;
+
+      case grplot_axis_logarithm: {
+         double stepWidth;
+         getStepWidth_logarithm(&((*pStep).logarithm), &stepWidth);
+         double realVal =  log10((*pVal).numeric);
+         double rem =  remainder(realVal, stepWidth);
+         realVal += stepWidth - rem;
+         (*pVal).numeric =  pow(10.0, realVal);
+      }
+      break;
+
+      case grplot_axis_time: {
+         struct tm *lt =  localtime(&((*pVal).time));
+
+         switch ((*pStep).time) {
+            case grplot_axis_time_step_year: {
+               lt->tm_mon =  0;
+            }
+            case grplot_axis_time_step_month: {
+               lt->tm_mday =  0;
+            }
+            case grplot_axis_time_step_day: {
+               lt->tm_hour =  0;
+            }
+            case grplot_axis_time_step_hour: {
+               lt->tm_min =  0;
+            }
+            case grplot_axis_time_step_min: {
+               lt->tm_sec =  0;
+            }
+            case grplot_axis_time_step_sec: {
+            }
+
+            default: {
+               retval =  2;
+            }
+         }
+         switch ((*pStep).time) {
+            case grplot_axis_time_step_year: {
+               lt->tm_year++;
+            }
+            break;
+
+            case grplot_axis_time_step_month: {
+               lt->tm_mon++;
+            }
+            break;
+
+            case grplot_axis_time_step_day: {
+               lt->tm_mday++;
+            }
+            break;
+
+            case grplot_axis_time_step_hour: {
+               lt->tm_hour++;
+            }
+            break;
+
+            case grplot_axis_time_step_min: {
+               lt->tm_min++;
+            }
+            break;
+
+            case grplot_axis_time_step_sec: {
+               lt->tm_sec++;
+            }
+            break;
+
+            default: {
+               retval =  2;
+            }
+         }
+
+         (*pVal).time =  mktime(lt);
+      }
+      break;
+
+      default: {
+         retval =  1;
+      }
+   }
+      
+   return retval;
+}
+
+static int
+getStepWidth_linear(const grplot_axis_linear_step_t *pStep, double *pResult) {
+   assert(pStep);
+   int retval =  0;
+
+   *pResult =  pow(10.0, (double) pStep->exponent);
+   switch (pStep->mantissa) {
+      case grplot_axis_linear_step_one:
+      break;
+
+      case grplot_axis_linear_step_two: {
+         *pResult *= 2.0;
+      }
+      break;
+
+      case grplot_axis_linear_step_five: {
+         *pResult *= 5.0;
+      }
+      break;
+
+      default: {
+         retval =  1;
+      }
+   }
+
+   return retval;
+}
+
+static int
+getStepWidth_logarithm(const grplot_axis_logarithm_step_t *pStep, double *pResult) {
+   assert(pStep);
+   int retval =  0;
+
+   *pResult =  (double) pStep->base;
+   switch (pStep->mantissa) {
+      case grplot_axis_logarithm_step_zero:
+      break;
+
+      case grplot_axis_logarithm_step_twelve: {
+         *pResult += 1.0 / 12.0;
+      }
+      break;
+
+      case grplot_axis_logarithm_step_six: {
+         *pResult += 1.0 / 6.0;
+      }
+      break;
+
+      default: {
+         retval =  1;
+      }
+   }
+
+   return retval;
+}
+
+
