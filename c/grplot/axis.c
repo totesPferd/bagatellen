@@ -5,7 +5,7 @@
 
 #include "axis.h"
 
-const unsigned nrCharDoubleString =  13;
+static const unsigned nrCharDoubleString =  13;
 
 int
 grplot_axis_get_double(grplot_axis_t *pAxis, double *pResult, grplot_axis_val_t val) {
