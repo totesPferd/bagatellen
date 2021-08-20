@@ -19,7 +19,8 @@ grplot_axis_getDistancePerPixel(const grplot_axis_t *pAxis, unsigned *pResult, d
 
    int retval =  0;
 
-   *pResult =  (unsigned) (distance * (double) pAxis->nrPixels);
+   double realDistance =  pAxis->axisType == grplot_axis_y_axis ? 1.0 - distance: distance;
+   *pResult =  (unsigned) (realDistance * (double) pAxis->nrPixels);
 
    return retval;
 }
