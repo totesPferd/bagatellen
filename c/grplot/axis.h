@@ -31,6 +31,7 @@ typedef enum {
 
 typedef enum {
       grplot_axis_logarithm_step_zero
+   ,  grplot_axis_logarithm_step_sixty
    ,  grplot_axis_logarithm_step_twelve
    ,  grplot_axis_logarithm_step_six } grplot_axis_logarithm_step_mantissa_t;
 

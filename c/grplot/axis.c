@@ -183,6 +183,11 @@ grplot_axis_step_next(const grplot_axis_t *pAxis, grplot_axis_step_t *pStep) {
       case grplot_axis_logarithm: {
          switch ((*pStep).logarithm.mantissa) {
             case (grplot_axis_logarithm_step_zero): {
+               (*pStep).logarithm.mantissa =  grplot_axis_logarithm_step_sixty;
+            }
+            break;
+
+            case (grplot_axis_logarithm_step_sixty): {
                (*pStep).logarithm.mantissa =  grplot_axis_logarithm_step_twelve;
             }
             break;
@@ -390,6 +395,11 @@ getStepWidth_logarithm(const grplot_axis_logarithm_step_t *pStep, double *pResul
    *pResult =  (double) pStep->base;
    switch (pStep->mantissa) {
       case grplot_axis_logarithm_step_zero:
+      break;
+
+      case grplot_axis_logarithm_step_sixty: {
+         *pResult += 1.0 / 60.0;
+      }
       break;
 
       case grplot_axis_logarithm_step_twelve: {
