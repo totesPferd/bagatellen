@@ -314,7 +314,7 @@ grplot_axis_next_val(const grplot_axis_t *pAxis, const grplot_axis_step_t *pStep
                lt->tm_mon =  0;
             }
             case grplot_axis_time_step_month: {
-               lt->tm_mday =  0;
+               lt->tm_mday =  1;
             }
             case grplot_axis_time_step_day: {
                lt->tm_hour =  0;
