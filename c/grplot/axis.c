@@ -140,19 +140,19 @@ grplot_axis_step_init(const grplot_axis_t *pAxis, grplot_axis_step_t *pStep) {
 
    switch(pAxis->scaleType) {
       case grplot_axis_linear: {
-         (*pStep).linear.exponent =  0;
-         (*pStep).linear.mantissa =  grplot_axis_linear_step_one;
+         pStep->linear.exponent =  0;
+         pStep->linear.mantissa =  grplot_axis_linear_step_one;
       }
       break;
 
       case grplot_axis_logarithm: {
-         (*pStep).logarithm.base =  0;
-         (*pStep).logarithm.mantissa =  grplot_axis_logarithm_step_zero;
+         pStep->logarithm.base =  0;
+         pStep->logarithm.mantissa =  grplot_axis_logarithm_step_zero;
       }
       break;
 
       case grplot_axis_time: {
-         (*pStep).time =  grplot_axis_time_step_sec;
+         pStep->time =  grplot_axis_time_step_sec;
       }
       break;
 
@@ -173,20 +173,20 @@ grplot_axis_step_next(const grplot_axis_t *pAxis, grplot_axis_step_t *pStep) {
 
    switch(pAxis->scaleType) {
       case grplot_axis_linear: {
-         switch ((*pStep).linear.mantissa) {
+         switch (pStep->linear.mantissa) {
             case (grplot_axis_linear_step_one): {
-               (*pStep).linear.mantissa =  grplot_axis_linear_step_two;
+               pStep->linear.mantissa =  grplot_axis_linear_step_two;
             }
             break;
 
             case (grplot_axis_linear_step_two): {
-               (*pStep).linear.mantissa =  grplot_axis_linear_step_five;
+               pStep->linear.mantissa =  grplot_axis_linear_step_five;
             }
             break;
 
             case (grplot_axis_linear_step_five): {
-               (*pStep).linear.exponent++;
-               (*pStep).linear.mantissa =  grplot_axis_linear_step_one;
+               pStep->linear.exponent++;
+               pStep->linear.mantissa =  grplot_axis_linear_step_one;
             }
             break;
 
@@ -198,25 +198,25 @@ grplot_axis_step_next(const grplot_axis_t *pAxis, grplot_axis_step_t *pStep) {
       break;
 
       case grplot_axis_logarithm: {
-         switch ((*pStep).logarithm.mantissa) {
+         switch (pStep->logarithm.mantissa) {
             case (grplot_axis_logarithm_step_zero): {
-               (*pStep).logarithm.mantissa =  grplot_axis_logarithm_step_sixty;
+               pStep->logarithm.mantissa =  grplot_axis_logarithm_step_sixty;
             }
             break;
 
             case (grplot_axis_logarithm_step_sixty): {
-               (*pStep).logarithm.mantissa =  grplot_axis_logarithm_step_twelve;
+               pStep->logarithm.mantissa =  grplot_axis_logarithm_step_twelve;
             }
             break;
 
             case (grplot_axis_logarithm_step_twelve): {
-               (*pStep).logarithm.mantissa =  grplot_axis_logarithm_step_six;
+               pStep->logarithm.mantissa =  grplot_axis_logarithm_step_six;
             }
             break;
 
             case (grplot_axis_logarithm_step_six): {
-               (*pStep).logarithm.base++;
-               (*pStep).logarithm.mantissa =  grplot_axis_logarithm_step_zero;
+               pStep->logarithm.base++;
+               pStep->logarithm.mantissa =  grplot_axis_logarithm_step_zero;
             }
             break;
 
@@ -228,29 +228,29 @@ grplot_axis_step_next(const grplot_axis_t *pAxis, grplot_axis_step_t *pStep) {
       break;
 
       case grplot_axis_time: {
-         switch ((*pStep).time) {
+         switch (pStep->time) {
             case (grplot_axis_time_step_sec): {
-               (*pStep).time =  grplot_axis_time_step_min;
+               pStep->time =  grplot_axis_time_step_min;
             }
             break;
 
             case (grplot_axis_time_step_min): {
-               (*pStep).time =  grplot_axis_time_step_hour;
+               pStep->time =  grplot_axis_time_step_hour;
             }
             break;
 
             case (grplot_axis_time_step_hour): {
-               (*pStep).time =  grplot_axis_time_step_day;
+               pStep->time =  grplot_axis_time_step_day;
             }
             break;
 
             case (grplot_axis_time_step_day): {
-               (*pStep).time =  grplot_axis_time_step_month;
+               pStep->time =  grplot_axis_time_step_month;
             }
             break;
 
             case (grplot_axis_time_step_month): {
-               (*pStep).time =  grplot_axis_time_step_year;
+               pStep->time =  grplot_axis_time_step_year;
             }
             break;
 
@@ -286,26 +286,26 @@ grplot_axis_next_val(const grplot_axis_t *pAxis, const grplot_axis_step_t *pStep
 
       case grplot_axis_linear: {
          double stepWidth;
-         getStepWidth_linear(&((*pStep).linear), &stepWidth);
-         double rem =  remainder((*pVal).numeric, stepWidth);
-         (*pVal).numeric += stepWidth - rem;
+         getStepWidth_linear(&(pStep->linear), &stepWidth);
+         double rem =  remainder(pVal->numeric, stepWidth);
+         pVal->numeric += stepWidth - rem;
       }
       break;
 
       case grplot_axis_logarithm: {
          double stepWidth;
-         getStepWidth_logarithm(&((*pStep).logarithm), &stepWidth);
-         double realVal =  log10((*pVal).numeric);
+         getStepWidth_logarithm(&(pStep->logarithm), &stepWidth);
+         double realVal =  log10(pVal->numeric);
          double rem =  remainder(realVal, stepWidth);
          realVal += stepWidth - rem;
-         (*pVal).numeric =  pow(10.0, realVal);
+         pVal->numeric =  pow(10.0, realVal);
       }
       break;
 
       case grplot_axis_time: {
-         struct tm *lt =  localtime(&((*pVal).time));
+         struct tm *lt =  localtime(&(pVal->time));
 
-         switch ((*pStep).time) {
+         switch (pStep->time) {
             case grplot_axis_time_step_year: {
                lt->tm_mon =  0;
             }
@@ -328,7 +328,7 @@ grplot_axis_next_val(const grplot_axis_t *pAxis, const grplot_axis_step_t *pStep
                retval =  2;
             }
          }
-         switch ((*pStep).time) {
+         switch (pStep->time) {
             case grplot_axis_time_step_year: {
                lt->tm_year++;
             }
@@ -364,7 +364,7 @@ grplot_axis_next_val(const grplot_axis_t *pAxis, const grplot_axis_step_t *pStep
             }
          }
 
-         (*pVal).time =  mktime(lt);
+         pVal->time =  mktime(lt);
       }
       break;
 
