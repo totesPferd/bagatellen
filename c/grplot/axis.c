@@ -147,7 +147,7 @@ grplot_axis_step_init(const grplot_axis_t *pAxis, grplot_axis_step_t *pStep) {
 
       case grplot_axis_logarithm: {
          pStep->logarithm.base =  0;
-         pStep->logarithm.mantissa =  grplot_axis_logarithm_step_zero;
+         pStep->logarithm.mantissa =  grplot_axis_logarithm_step_sixty;
       }
       break;
 
@@ -297,7 +297,11 @@ grplot_axis_next_val(const grplot_axis_t *pAxis, const grplot_axis_step_t *pStep
          getStepWidth_logarithm(&(pStep->logarithm), &stepWidth);
          double realVal =  log10(pVal->numeric);
          double rem =  fmod(realVal, stepWidth);
-         realVal += stepWidth - rem;
+         double step =  stepWidth - rem;
+         if (step < 1.0E-06) {
+            step =  stepWidth;
+         }
+         realVal += step;
          pVal->numeric =  pow(10.0, realVal);
       }
       break;
