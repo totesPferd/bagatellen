@@ -23,4 +23,17 @@ typedef struct {
 int
 grplot_axis_output_inscription_init(grplot_axis_output_inscription_t *, Imlib_Font, const char *);
 
+int
+grplot_axis_output_init(
+      grplot_axis_output_t *
+   ,  grplot_axis_type_t
+   ,  grplot_axis_scale_type_t
+   ,  Imlib_Font
+   ,  Imlib_Font
+   ,  unsigned
+   ,  grplot_axis_val_t
+   ,  grplot_axis_val_t
+   ,  const char * );
+
+
 #endif
