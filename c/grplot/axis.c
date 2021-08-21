@@ -287,7 +287,7 @@ grplot_axis_next_val(const grplot_axis_t *pAxis, const grplot_axis_step_t *pStep
       case grplot_axis_linear: {
          double stepWidth;
          getStepWidth_linear(&(pStep->linear), &stepWidth);
-         double rem =  remainder(pVal->numeric, stepWidth);
+         double rem =  fmod(pVal->numeric, stepWidth);
          pVal->numeric += stepWidth - rem;
       }
       break;
@@ -296,7 +296,7 @@ grplot_axis_next_val(const grplot_axis_t *pAxis, const grplot_axis_step_t *pStep
          double stepWidth;
          getStepWidth_logarithm(&(pStep->logarithm), &stepWidth);
          double realVal =  log10(pVal->numeric);
-         double rem =  remainder(realVal, stepWidth);
+         double rem =  fmod(realVal, stepWidth);
          realVal += stepWidth - rem;
          pVal->numeric =  pow(10.0, realVal);
       }
