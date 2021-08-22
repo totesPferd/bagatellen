@@ -45,7 +45,6 @@ grplot_axis_output_init(
 int
 grplot_axis_output_draw(
       grplot_axis_output_t *
-   ,  Imlib_Image *
    ,  unsigned
    ,  int
    ,  int );

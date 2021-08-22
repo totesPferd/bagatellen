@@ -105,12 +105,10 @@ grplot_axis_output_init(
 int
 grplot_axis_output_draw(
       grplot_axis_output_t *pAxisOutput
-   ,  Imlib_Image *pImage
    ,  unsigned width
    ,  int originX
    ,  int originY ) {
    assert(pAxisOutput);
-   assert(pImage);
    assert(originX <= width);
 
    int retval =  0;
