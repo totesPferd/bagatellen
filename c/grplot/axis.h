@@ -44,11 +44,11 @@ typedef enum {
    ,  grplot_axis_time_step_year } grplot_axis_time_step_t;
 
 typedef struct {
-   unsigned exponent;
+   int exponent;
    grplot_axis_linear_step_mantissa_t mantissa; } grplot_axis_linear_step_t;
 
 typedef struct {
-   unsigned base;
+   int base;
    grplot_axis_logarithm_step_mantissa_t mantissa; } grplot_axis_logarithm_step_t;
 
 typedef union {

@@ -128,13 +128,15 @@ grplot_axis_step_init(const grplot_axis_t *pAxis, grplot_axis_step_t *pStep) {
 
    switch(pAxis->scaleType) {
       case grplot_axis_linear: {
-         pStep->linear.exponent =  0;
+         pStep->linear.exponent =
+            (int) floor(log10(((pAxis->max).numeric - (pAxis->min).numeric) / (double) (pAxis->nrPixels)));
          pStep->linear.mantissa =  grplot_axis_linear_step_one;
       }
       break;
 
       case grplot_axis_logarithm: {
-         pStep->logarithm.base =  0;
+         pStep->logarithm.base =
+            (int) floor(log10((pAxis->max).numeric / (pAxis->min).numeric) / (double) (pAxis->nrPixels));
          pStep->logarithm.mantissa =  grplot_axis_logarithm_step_sixty;
       }
       break;
