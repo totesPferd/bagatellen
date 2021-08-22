@@ -45,10 +45,6 @@ grplot_axis_output_val_inscription_init(
    double distance;
    grplot_axis_get_double(pAxis, &distance, val);
    pValInscription->valPerPixel =  (unsigned) (distance * (double) pAxis->nrPixels);
-   pValInscription->realValPerPixel =
-         pAxis->axisType == grplot_axis_x_axis
-      ?  pValInscription->valPerPixel
-      :  pAxis->nrPixels - pValInscription->valPerPixel;
 
    return retval;
 }
@@ -89,13 +85,104 @@ grplot_axis_output_init(
       ,  inscriptionFont
       ,  min );
 
-   grplot_axis_output_val_inscription_init(
-         &(pAxisOutput->axisSpec)
-      ,  &(pAxisOutput->upperInscription)
-      ,  inscriptionFont
-      ,  max );
+   {
+      char *inscriptionText;
+      grplot_axis_get_string(
+            &(pAxisOutput->axisSpec)
+         ,  &inscriptionText
+         ,  max );
+      grplot_axis_output_inscription_init(
+            &(pAxisOutput->upperInscription)
+         ,  inscriptionFont
+         ,  inscriptionText );
+   }
 
    retval =  get_inscriptions(pAxisOutput);
+
+   return retval;
+}
+
+int
+grplot_axis_output_draw(
+      grplot_axis_output_t *pAxisOutput
+   ,  Imlib_Image *pImage
+   ,  unsigned width
+   ,  int originX
+   ,  int originY ) {
+   assert(pAxisOutput);
+   assert(pImage);
+   assert(originX <= width);
+
+   int retval =  0;
+
+   switch ((pAxisOutput->axisSpec).axisType) {
+
+      case grplot_axis_x_axis: {
+         {
+            int x =  originX + (pAxisOutput->axisSpec).nrPixels;
+            int y =  originY - (pAxisOutput->label).height;
+            imlib_context_set_font(pAxisOutput->labelFont);
+            imlib_context_set_direction(IMLIB_TEXT_TO_RIGHT);
+            imlib_text_draw(x, y, (pAxisOutput->label).text);
+         }
+         {
+            int x =
+                  originX
+               +  (pAxisOutput->axisSpec).nrPixels
+               +  (pAxisOutput->upperInscription).height >> 1;
+            int y =  originY;
+            imlib_context_set_font(pAxisOutput->inscriptionFont);
+            imlib_context_set_direction(IMLIB_TEXT_TO_DOWN);
+            imlib_text_draw(x, y, (pAxisOutput->upperInscription).text);
+         }
+         for (unsigned i =  0; i < pAxisOutput->nrInscriptions; i++) {
+            int x =
+                  originX
+               +  (pAxisOutput->inscriptions)[i].valPerPixel;
+               +  (pAxisOutput->inscriptions)[i].inscription.height >> 1;
+            int y =  originY;
+            imlib_context_set_font(pAxisOutput->inscriptionFont);
+            imlib_context_set_direction(IMLIB_TEXT_TO_DOWN);
+            imlib_text_draw(x, y, (pAxisOutput->inscriptions)[i].inscription.text);
+         }
+      }
+      break;
+
+      case grplot_axis_y_axis: {
+         {
+            int x =  originX + (pAxisOutput->label).height;
+            int y =  originY - (pAxisOutput->axisSpec).nrPixels - (pAxisOutput->label).width;
+            imlib_context_set_font(pAxisOutput->labelFont);
+            imlib_context_set_direction(IMLIB_TEXT_TO_DOWN);
+            imlib_text_draw(x, y, (pAxisOutput->label).text);
+         }
+         {
+            int x =  originX - (pAxisOutput->upperInscription).width;
+            int y =
+                  originY
+               -  (pAxisOutput->axisSpec).nrPixels
+               -  (pAxisOutput->upperInscription).height >> 1;
+            imlib_context_set_font(pAxisOutput->inscriptionFont);
+            imlib_context_set_direction(IMLIB_TEXT_TO_RIGHT);
+            imlib_text_draw(x, y, (pAxisOutput->upperInscription).text);
+         }
+         for (unsigned i =  0; i < pAxisOutput->nrInscriptions; i++) {
+            int x =  originX - (pAxisOutput->inscriptions)[i].inscription.width;
+            int y =
+                  originY
+               -  (pAxisOutput->inscriptions)[i].valPerPixel
+               -  (pAxisOutput->inscriptions)[i].inscription.height >> 1;
+            imlib_context_set_font(pAxisOutput->inscriptionFont);
+            imlib_context_set_direction(IMLIB_TEXT_TO_RIGHT);
+            imlib_text_draw(x, y, (pAxisOutput->inscriptions)[i].inscription.text);
+         }
+      }
+      break;
+
+      default: {
+         assert(0);
+      }
+   }
 
    return retval;
 }
@@ -135,7 +222,7 @@ get_inscriptions(
       get_inscription_sum(
             pAxisOutput
          ,  &space
-         ,  &((pAxisOutput->upperInscription).inscription)
+         ,  &(pAxisOutput->upperInscription)
          ,  &((pAxisOutput->inscriptions[pAxisOutput->nrInscriptions - 1]).inscription) );
 
       if (space < (pAxisOutput->axisSpec).nrPixels) {

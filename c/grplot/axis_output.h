@@ -13,7 +13,7 @@ typedef struct {
 
 typedef struct {
    grplot_axis_output_inscription_t inscription;
-   unsigned valPerPixel, realValPerPixel; } grplot_axis_output_val_inscription_t;
+   unsigned valPerPixel; } grplot_axis_output_val_inscription_t;
 
 typedef struct {
    grplot_axis_t axisSpec;
@@ -21,7 +21,7 @@ typedef struct {
    Imlib_Font labelFont;
    unsigned nrInscriptions; 
    grplot_axis_output_inscription_t label;
-   grplot_axis_output_val_inscription_t upperInscription;
+   grplot_axis_output_inscription_t upperInscription;
    grplot_axis_output_val_inscription_t inscriptions[MAX_NR_INSCRIPTIONS]; } grplot_axis_output_t;
 
 int
@@ -42,5 +42,12 @@ grplot_axis_output_init(
    ,  grplot_axis_val_t
    ,  const char * );
 
+int
+grplot_axis_output_draw(
+      grplot_axis_output_t *
+   ,  Imlib_Image *
+   ,  unsigned
+   ,  int
+   ,  int );
 
 #endif
