@@ -86,7 +86,7 @@ grplot_axis_get_double(const grplot_axis_t *pAxis, double *pResult, grplot_axis_
       break;
 
       default: {
-         retval =  1;
+         assert(0);
       }
    }
    if (!retval) {
@@ -124,7 +124,7 @@ grplot_axis_get_string(const grplot_axis_t *pAxis, char **ppResult, grplot_axis_
       break;
 
       default: {
-         retval =  1;
+         assert(0);
       }
    }
 
@@ -157,7 +157,7 @@ grplot_axis_step_init(const grplot_axis_t *pAxis, grplot_axis_step_t *pStep) {
       break;
 
       default: {
-         retval =  1;
+         assert(0);
       }
    }
       
@@ -191,7 +191,7 @@ grplot_axis_step_next(const grplot_axis_t *pAxis, grplot_axis_step_t *pStep) {
             break;
 
             default: {
-               retval =  1;
+               assert(0);
             }
          }
       }
@@ -221,7 +221,7 @@ grplot_axis_step_next(const grplot_axis_t *pAxis, grplot_axis_step_t *pStep) {
             break;
 
             default: {
-               retval =  1;
+               assert(0);
             }
          }
       }
@@ -260,14 +260,14 @@ grplot_axis_step_next(const grplot_axis_t *pAxis, grplot_axis_step_t *pStep) {
             break;
 
             default: {
-               retval =  1;
+               assert(0);
             }
          }
       }
       break;
 
       default: {
-         retval =  1;
+         assert(0);
       }
    }
       
@@ -373,7 +373,7 @@ grplot_axis_next_val(const grplot_axis_t *pAxis, const grplot_axis_step_t *pStep
       break;
 
       default: {
-         retval =  1;
+         assert(0);
       }
    }
       
@@ -401,7 +401,7 @@ getStepWidth_linear(const grplot_axis_linear_step_t *pStep, double *pResult) {
       break;
 
       default: {
-         retval =  1;
+         assert(0);
       }
    }
 
@@ -434,7 +434,7 @@ getStepWidth_logarithm(const grplot_axis_logarithm_step_t *pStep, double *pResul
       break;
 
       default: {
-         retval =  1;
+         assert(0);
       }
    }
 
