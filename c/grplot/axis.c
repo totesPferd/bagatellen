@@ -31,30 +31,6 @@ grplot_axis_init(
 }
 
 int
-grplot_axis_getRawDistancePerPixel(const grplot_axis_t *pAxis, unsigned *pResult, double distance) {
-   assert(pAxis);
-
-   int retval =  0;
-
-   *pResult =  (unsigned) (distance * (double) pAxis->nrPixels);
-
-   return retval;
-}
-
-int
-grplot_axis_getDistancePerPixel(const grplot_axis_t *pAxis, unsigned *pResult, double distance) {
-   assert(pAxis);
-
-   double realDistance =  pAxis->axisType == grplot_axis_y_axis ? 1.0 - distance: distance;
-   int retval =  grplot_axis_getRawDistancePerPixel(
-         pAxis
-      ,  pResult
-      ,  realDistance );
-
-   return retval;
-}
-
-int
 grplot_axis_get_double(const grplot_axis_t *pAxis, double *pResult, grplot_axis_val_t val) {
    assert(pAxis);
 

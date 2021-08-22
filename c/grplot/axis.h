@@ -60,12 +60,6 @@ int
 grplot_axis_init(grplot_axis_t *, grplot_axis_type_t, grplot_axis_scale_type_t, unsigned, grplot_axis_val_t, grplot_axis_val_t);
 
 int
-grplot_axis_getRawDistancePerPixel(const grplot_axis_t *, unsigned *, double);
-
-int
-grplot_axis_getDistancePerPixel(const grplot_axis_t *, unsigned *, double);
-
-int
 grplot_axis_get_double(const grplot_axis_t *, double *, grplot_axis_val_t);
 
 int

@@ -27,6 +27,33 @@ grplot_axis_output_inscription_init(grplot_axis_output_inscription_t *pOutputIns
 }
 
 int
+grplot_axis_output_val_inscription_init(
+      const grplot_axis_t *pAxis
+   ,  grplot_axis_output_val_inscription_t *pValInscription
+   ,  Imlib_Font font
+   ,  grplot_axis_val_t val) {
+   assert(pAxis);
+   assert(pValInscription);
+
+   char *text;
+   grplot_axis_get_string(pAxis, &text, val);
+   int retval =  grplot_axis_output_inscription_init(
+         &(pValInscription->inscription)
+      ,  font
+      ,  text );
+
+   double distance;
+   grplot_axis_get_double(pAxis, &distance, val);
+   pValInscription->valPerPixel =  (unsigned) (distance * (double) pAxis->nrPixels);
+   pValInscription->realValPerPixel =
+         pAxis->axisType == grplot_axis_x_axis
+      ?  pValInscription->valPerPixel
+      :  pAxis->nrPixels - pValInscription->valPerPixel;
+
+   return retval;
+}
+
+int
 grplot_axis_output_init(
       grplot_axis_output_t *pAxisOutput
    ,  grplot_axis_type_t axisType
@@ -56,31 +83,17 @@ grplot_axis_output_init(
       ,  labelFont
       ,  label );
 
-   {
-      char *inscriptionText;
-      grplot_axis_get_string(
-            &(pAxisOutput->axisSpec)
-         ,  &inscriptionText
-         ,  min );
-
-      grplot_axis_output_inscription_init(
-         pAxisOutput->inscriptions
+   grplot_axis_output_val_inscription_init(
+         &(pAxisOutput->axisSpec)
+      ,  pAxisOutput->inscriptions
       ,  inscriptionFont
-      ,  inscriptionText );
-   }
+      ,  min );
 
-   {
-      char *inscriptionText;
-      grplot_axis_get_string(
-            &(pAxisOutput->axisSpec)
-         ,  &inscriptionText
-         ,  max );
-
-      grplot_axis_output_inscription_init(
-         &(pAxisOutput->upperInscription)
+   grplot_axis_output_val_inscription_init(
+         &(pAxisOutput->axisSpec)
+      ,  &(pAxisOutput->upperInscription)
       ,  inscriptionFont
-      ,  inscriptionText );
-   }
+      ,  max );
 
    retval =  get_inscriptions(pAxisOutput);
 
@@ -122,8 +135,8 @@ get_inscriptions(
       get_inscription_sum(
             pAxisOutput
          ,  &space
-         ,  &(pAxisOutput->upperInscription)
-         ,  &(pAxisOutput->inscriptions[pAxisOutput->nrInscriptions - 1]) );
+         ,  &((pAxisOutput->upperInscription).inscription)
+         ,  &((pAxisOutput->inscriptions[pAxisOutput->nrInscriptions - 1]).inscription) );
 
       if (space < (pAxisOutput->axisSpec).nrPixels) {
          retval =  isFirstTime;
@@ -144,30 +157,18 @@ get_inscriptions(
                   &(pAxisOutput->axisSpec)
                ,  &step
                ,  &val );
-            char *inscriptionText;
-            grplot_axis_get_string(
+            grplot_axis_output_val_inscription_init(
                   &(pAxisOutput->axisSpec)
-               ,  &inscriptionText
-               ,  val );
-            grplot_axis_output_inscription_init(
-                  pAxisOutput->inscriptions + pAxisOutput->nrInscriptions
+               ,  pAxisOutput->inscriptions + pAxisOutput->nrInscriptions
                ,  pAxisOutput->inscriptionFont
-               ,  inscriptionText );
+               ,  val );
             unsigned innerSpace;
             get_inscription_sum(
                   pAxisOutput
                ,  &innerSpace
-               ,  &(pAxisOutput->inscriptions[pAxisOutput->nrInscriptions])
-               ,  &(pAxisOutput->inscriptions[pAxisOutput->nrInscriptions - 1]) );
-            double normalizedVal;
-            grplot_axis_get_double(
-                  &(pAxisOutput->axisSpec)
-               ,  &normalizedVal
-               ,  val );
-            grplot_axis_getRawDistancePerPixel(
-                  &(pAxisOutput->axisSpec)
-               ,  &height
-               ,  normalizedVal );
+               ,  &((pAxisOutput->inscriptions[pAxisOutput->nrInscriptions]).inscription)
+               ,  &((pAxisOutput->inscriptions[pAxisOutput->nrInscriptions - 1]).inscription) );
+            height =  pAxisOutput->inscriptions[pAxisOutput->nrInscriptions].valPerPixel;
             if (innerSpace >= height - currentHeight) {
                isInnerRunning =  0;
             } else {
