@@ -22,6 +22,15 @@ grplot_axis_init(
    ,  grplot_axis_val_t min
    ,  grplot_axis_val_t max ) {
    assert(pAxis);
+   assert(nrPixels > 0);
+   assert(
+         (
+               scaleType != grplot_axis_linear
+            && scaleType != grplot_axis_logarithm )
+      || min.numeric < max.numeric );
+   assert(
+         scaleType != grplot_axis_logarithm
+      || min.numeric > 0.0 );
 
    pAxis->axisType =  axisType;
    pAxis->scaleType =  scaleType;

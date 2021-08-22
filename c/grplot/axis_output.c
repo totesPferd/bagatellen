@@ -63,6 +63,15 @@ grplot_axis_output_init(
    ,  grplot_axis_val_t max
    ,  const char *label ) {
    assert(pAxisOutput);
+   assert(nrPixels > 0);
+   assert(
+         (
+               scaleType != grplot_axis_linear
+            && scaleType != grplot_axis_logarithm )
+      || min.numeric < max.numeric );
+   assert(
+         scaleType != grplot_axis_logarithm
+      || min.numeric > 0.0 );
 
    int retval =  0;
 
