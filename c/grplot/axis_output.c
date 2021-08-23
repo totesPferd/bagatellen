@@ -7,14 +7,14 @@ static int
 get_inscription_sum(
       int *
    ,  unsigned
-   ,  const grplot_axis_output_inscription_t *
-   ,  const grplot_axis_output_val_inscription_t * );
+   ,  const grplot_inscription_t *
+   ,  const grplot_inscription_positional_inscription_t * );
 
 static int
 get_inscriptions(grplot_axis_output_t *);
 
 int
-grplot_axis_output_inscription_init(grplot_axis_output_inscription_t *pOutputInscription, Imlib_Font font, char *text) {
+grplot_axis_output_inscription_init(grplot_inscription_t *pOutputInscription, Imlib_Font font, char *text) {
    assert(pOutputInscription);
    assert(text);
 
@@ -29,24 +29,24 @@ grplot_axis_output_inscription_init(grplot_axis_output_inscription_t *pOutputIns
 }
 
 int
-grplot_axis_output_val_inscription_init(
+grplot_axis_output_positional_inscription_init(
       const grplot_axis_t *pAxis
-   ,  grplot_axis_output_val_inscription_t *pValInscription
+   ,  grplot_inscription_positional_inscription_t *pPositionalInscription
    ,  Imlib_Font font
    ,  grplot_axis_val_t val) {
    assert(pAxis);
-   assert(pValInscription);
+   assert(pPositionalInscription);
 
    char *text;
    grplot_axis_get_string(pAxis, &text, val);
    int retval =  grplot_axis_output_inscription_init(
-         &(pValInscription->inscription)
+         &(pPositionalInscription->inscription)
       ,  font
       ,  text );
 
    double distance;
    grplot_axis_get_double(pAxis, &distance, val);
-   pValInscription->valPerPixel =  (unsigned) (distance * (double) pAxis->nrPixels);
+   pPositionalInscription->positionPerPixel =  (unsigned) (distance * (double) pAxis->nrPixels);
 
    return retval;
 }
@@ -98,7 +98,7 @@ grplot_axis_output_init(
       ,  labelFont
       ,  label );
 
-   grplot_axis_output_val_inscription_init(
+   grplot_axis_output_positional_inscription_init(
          &(pAxisOutput->axisSpec)
       ,  pAxisOutput->inscriptions
       ,  inscriptionFont
@@ -181,7 +181,7 @@ grplot_axis_output_draw(
             {
                int x =
                      originX
-                  +  (pAxisOutput->inscriptions)[i].valPerPixel;
+                  +  (pAxisOutput->inscriptions)[i].positionPerPixel;
                   +  ((pAxisOutput->inscriptions)[i].inscription.height >> 1);
                int y =  originY;
                imlib_context_set_color(
@@ -194,7 +194,7 @@ grplot_axis_output_draw(
             {
                int x =
                      originX
-                  +  (pAxisOutput->inscriptions)[i].valPerPixel;
+                  +  (pAxisOutput->inscriptions)[i].positionPerPixel;
                imlib_context_set_color(
                      ((unsigned char *) &(pAxisOutput->lineColor))[2]
                   ,  ((unsigned char *) &(pAxisOutput->lineColor))[1]
@@ -250,7 +250,7 @@ grplot_axis_output_draw(
                int x =  originX - (pAxisOutput->inscriptions)[i].inscription.width;
                int y =
                      originY
-                  -  (pAxisOutput->inscriptions)[i].valPerPixel
+                  -  (pAxisOutput->inscriptions)[i].positionPerPixel
                   -  ((pAxisOutput->inscriptions)[i].inscription.height >> 1);
                imlib_context_set_color(
                      ((unsigned char *) &(pAxisOutput->inscriptionColor))[2]
@@ -263,7 +263,7 @@ grplot_axis_output_draw(
             {
                int y =
                      originY
-                  -  (pAxisOutput->inscriptions)[i].valPerPixel;
+                  -  (pAxisOutput->inscriptions)[i].positionPerPixel;
                imlib_context_set_color(
                      ((unsigned char *) &(pAxisOutput->lineColor))[2]
                   ,  ((unsigned char *) &(pAxisOutput->lineColor))[1]
@@ -298,9 +298,9 @@ grplot_axis_output_draw(
 static int
 get_inscription_sum(
       int *pResult
-   ,  unsigned valPerPixel
-   ,  const grplot_axis_output_inscription_t *pA
-   ,  const grplot_axis_output_val_inscription_t *pVB) {
+   ,  unsigned positionPerPixel
+   ,  const grplot_inscription_t *pA
+   ,  const grplot_inscription_positional_inscription_t *pVB) {
    assert(pResult);
    assert(pA);
    assert(pVB);
@@ -308,8 +308,8 @@ get_inscription_sum(
    int retval =  0;
 
    *pResult =
-         valPerPixel
-      -  pVB->valPerPixel
+         positionPerPixel
+      -  pVB->positionPerPixel
       -  ((pA->height + (pVB->inscription).height) >> 1);
 
    return retval;
@@ -349,7 +349,7 @@ get_inscriptions(
                   &(pAxisOutput->axisSpec)
                ,  &step
                ,  &val );
-            grplot_axis_output_val_inscription_init(
+            grplot_axis_output_positional_inscription_init(
                   &(pAxisOutput->axisSpec)
                ,  pAxisOutput->inscriptions + pAxisOutput->nrInscriptions
                ,  pAxisOutput->inscriptionFont
@@ -357,7 +357,7 @@ get_inscriptions(
             int innerSpace;
             get_inscription_sum(
                   &innerSpace
-               ,  (pAxisOutput->inscriptions[pAxisOutput->nrInscriptions]).valPerPixel
+               ,  (pAxisOutput->inscriptions[pAxisOutput->nrInscriptions]).positionPerPixel
                ,  &((pAxisOutput->inscriptions[pAxisOutput->nrInscriptions]).inscription)
                ,  &((pAxisOutput->inscriptions[pAxisOutput->nrInscriptions - 1])) );
             if (innerSpace > 0) {

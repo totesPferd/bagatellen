@@ -4,16 +4,9 @@
 #include <Imlib2.h>
 
 #include "axis.h"
+#include "inscription.h"
 
 #define MAX_NR_INSCRIPTIONS 64
-
-typedef struct {
-   char *text;
-   int width, height; } grplot_axis_output_inscription_t;
-
-typedef struct {
-   grplot_axis_output_inscription_t inscription;
-   unsigned valPerPixel; } grplot_axis_output_val_inscription_t;
 
 typedef struct {
    grplot_axis_t axisSpec;
@@ -24,17 +17,17 @@ typedef struct {
    unsigned nrInscriptions; 
    DATA32 lineColor;
    unsigned maxExt;
-   grplot_axis_output_inscription_t label;
-   grplot_axis_output_inscription_t upperInscription;
-   grplot_axis_output_val_inscription_t inscriptions[MAX_NR_INSCRIPTIONS]; } grplot_axis_output_t;
+   grplot_inscription_t label;
+   grplot_inscription_t upperInscription;
+   grplot_inscription_positional_inscription_t inscriptions[MAX_NR_INSCRIPTIONS]; } grplot_axis_output_t;
 
 int
-grplot_axis_output_inscription_init(grplot_axis_output_inscription_t *, Imlib_Font, char *);
+grplot_axis_output_inscription_init(grplot_inscription_t *, Imlib_Font, char *);
 
 int
-grplot_axis_output_val_inscription_init(
+grplot_axis_output_positional_inscription_init(
       const grplot_axis_t *
-   ,  grplot_axis_output_val_inscription_t *
+   ,  grplot_inscription_positional_inscription_t *
    ,  Imlib_Font
    ,  grplot_axis_val_t );
 
