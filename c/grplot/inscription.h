@@ -14,5 +14,8 @@ typedef struct {
 int
 grplot_inscription_init(grplot_inscription_t *, Imlib_Font, char *);
 
+int
+grplot_inscription_set_color(DATA32);
+
 
 #endif

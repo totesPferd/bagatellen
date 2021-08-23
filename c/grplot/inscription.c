@@ -19,3 +19,15 @@ grplot_inscription_init(
 
    return retval;
 }
+
+int
+grplot_inscription_set_color(DATA32 color) {
+   int retval =  0;
+   imlib_context_set_color(
+         ((unsigned char *) &color)[2]
+      ,  ((unsigned char *) &color)[1]
+      ,  ((unsigned char *) &color)[0]
+      ,  ((unsigned char *) &color)[3] );
+
+   return retval;
+}
