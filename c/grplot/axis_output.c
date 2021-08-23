@@ -310,6 +310,7 @@ get_inscriptions(
             if (pAxisOutput->nrInscriptions > MAX_NR_INSCRIPTIONS) {
                retval =  2;
                isRunning =  0;
+               pAxisOutput->nrInscriptions =  MAX_NR_INSCRIPTIONS;
             }
          }
       }
