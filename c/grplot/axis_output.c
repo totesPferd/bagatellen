@@ -134,38 +134,24 @@ grplot_axis_output_draw(
             grplot_inscription_set_color(pAxisOutput->lineColor);
             imlib_image_draw_line(originX, originY, originX, pAxisOutput->maxExt, 0);
          }
-         {
-            int x =
-                  originX
-               +  (pAxisOutput->axisSpec).nrPixels
-               -  ((pAxisOutput->upperInscription).height >> 1);
-            int y =  originY;
-            grplot_inscription_draw_LB_vertical(
-                  &(pAxisOutput->upperInscription)
-               ,  pAxisOutput->inscriptionColor
-               ,  pAxisOutput->inscriptionFont
-               ,  x
-               ,  y );
-         }
+         grplot_inscription_draw_LC_vertical(
+               &(pAxisOutput->upperInscription)
+            ,  pAxisOutput->inscriptionColor
+            ,  pAxisOutput->inscriptionFont
+            ,  originX + (pAxisOutput->axisSpec).nrPixels
+            ,  originY );
          {
             int x =  originX + (pAxisOutput->axisSpec).nrPixels;
             grplot_inscription_set_color(pAxisOutput->lineColor);
             imlib_image_draw_line(x, originY, x, pAxisOutput->maxExt, 0);
          }
          for (unsigned i =  0; i < pAxisOutput->nrInscriptions; i++) {
-            {
-               int x =
-                     originX
-                  +  (pAxisOutput->inscriptions)[i].positionPerPixel;
-                  -  ((pAxisOutput->inscriptions)[i].inscription.height >> 1);
-               int y =  originY;
-               grplot_inscription_draw_LB_vertical(
-                     &((pAxisOutput->inscriptions)[i].inscription)
-                  ,  pAxisOutput->inscriptionColor
-                  ,  pAxisOutput->inscriptionFont
-                  ,  x
-                  ,  y );
-            }
+            grplot_inscription_draw_LC_vertical(
+                  &((pAxisOutput->inscriptions)[i].inscription)
+               ,  pAxisOutput->inscriptionColor
+               ,  pAxisOutput->inscriptionFont
+               ,  originX + (pAxisOutput->inscriptions)[i].positionPerPixel
+               ,  originY );
             {
                int x =
                      originX
@@ -184,6 +170,10 @@ grplot_axis_output_draw(
       break;
 
       case grplot_axis_y_axis: {
+         {
+            grplot_inscription_set_color(pAxisOutput->lineColor);
+            imlib_image_draw_line(originX, originY, pAxisOutput->maxExt, originY, 0);
+         }
          grplot_inscription_draw_RC_horizontal(
                &(pAxisOutput->upperInscription)
             ,  pAxisOutput->inscriptionColor
@@ -198,19 +188,12 @@ grplot_axis_output_draw(
             imlib_image_draw_line(originX, y, pAxisOutput->maxExt, y, 0);
          }
          for (unsigned i =  0; i < pAxisOutput->nrInscriptions; i++) {
-            {
-               int x =  originX - (pAxisOutput->inscriptions)[i].inscription.width;
-               int y =
-                     originY
-                  -  (pAxisOutput->inscriptions)[i].positionPerPixel
-                  -  ((pAxisOutput->inscriptions)[i].inscription.height >> 1);
-               grplot_inscription_draw_LT_horizontal(
-                     &((pAxisOutput->inscriptions)[i].inscription)
-                  ,  pAxisOutput->inscriptionColor
-                  ,  pAxisOutput->inscriptionFont
-                  ,  x
-                  ,  y );
-            }
+            grplot_inscription_draw_RC_horizontal(
+                  &((pAxisOutput->inscriptions)[i].inscription)
+               ,  pAxisOutput->inscriptionColor
+               ,  pAxisOutput->inscriptionFont
+               ,  originX
+               ,  originY - (pAxisOutput->inscriptions)[i].positionPerPixel );
             {
                int y =
                      originY

@@ -34,6 +34,14 @@ grplot_inscription_draw_LB_vertical(
    ,  int );
 
 int
+grplot_inscription_draw_LC_vertical(
+      const grplot_inscription_t *
+   ,  DATA32
+   ,  Imlib_Font
+   ,  int
+   ,  int );
+
+int
 grplot_inscription_draw_LT_horizontal(
       const grplot_inscription_t *
    ,  DATA32
