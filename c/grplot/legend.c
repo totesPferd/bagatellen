@@ -23,6 +23,7 @@ int
 grplot_legend_inscription_init(
       grplot_legend_t *pLegend
    ,  char *text
+   ,  DATA32 color
    ,  unsigned index ) {
    assert(pLegend);
    assert(text);
@@ -32,6 +33,7 @@ grplot_legend_inscription_init(
          &((pLegend->pBuf)[index].positionalInscription.inscription)
       ,  pLegend->font
       ,  text );
+   (pLegend->pBuf)[index].color =  color;
 
    return retval;
 }
@@ -84,7 +86,7 @@ grplot_legend_prepare(
 }
 
 int
-grplot_legend_draw_LT_horizontal(
+grplot_legend_draw_LB_horizontal(
       const grplot_legend_t *pLegend
    ,  int x
    ,  int y ) {
@@ -93,7 +95,7 @@ grplot_legend_draw_LT_horizontal(
    int retval =  0;
 
    for (unsigned i =  0; i < pLegend->nrItem; i++) {
-      grplot_inscription_draw_positional_LT_horizontal(
+      grplot_inscription_draw_positional_LB_horizontal(
             &((pLegend->pBuf)[i].positionalInscription)
          ,  (pLegend->pBuf)[i].color
          ,  pLegend->font

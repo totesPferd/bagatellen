@@ -179,7 +179,7 @@ grplot_axis_output_draw(
             ,  pAxisOutput->inscriptionColor
             ,  pAxisOutput->inscriptionFont
             ,  originX
-            ,  originY + (pAxisOutput->axisSpec).nrPixels );
+            ,  originY - (pAxisOutput->axisSpec).nrPixels );
          {
             int y =
                   originY

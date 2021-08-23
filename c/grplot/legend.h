@@ -22,6 +22,7 @@ int
 grplot_legend_inscription_init(
       grplot_legend_t *
    ,  char *
+   ,  DATA32
    ,  unsigned );
 
 int
@@ -41,7 +42,7 @@ grplot_legend_prepare(
       grplot_legend_t * );
 
 int
-grplot_legend_draw_LT_horizontal(
+grplot_legend_draw_LB_horizontal(
       const grplot_legend_t *
    ,  int
    ,  int );
