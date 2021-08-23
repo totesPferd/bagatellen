@@ -293,7 +293,7 @@ get_inscriptions(
                ,  (pAxisOutput->inscriptions[pAxisOutput->nrInscriptions]).valPerPixel
                ,  &((pAxisOutput->inscriptions[pAxisOutput->nrInscriptions]).inscription)
                ,  &((pAxisOutput->inscriptions[pAxisOutput->nrInscriptions - 1])) );
-            if (innerSpace < 0) {
+            if (innerSpace > 0) {
                isInnerRunning =  0;
             } else {
                int errorMode =  grplot_axis_step_next(&(pAxisOutput->axisSpec), &step);
