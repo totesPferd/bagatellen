@@ -22,6 +22,8 @@ typedef struct {
    Imlib_Font labelFont;
    DATA32 labelColor;
    unsigned nrInscriptions; 
+   DATA32 lineColor;
+   unsigned maxExt;
    grplot_axis_output_inscription_t label;
    grplot_axis_output_inscription_t upperInscription;
    grplot_axis_output_val_inscription_t inscriptions[MAX_NR_INSCRIPTIONS]; } grplot_axis_output_t;
@@ -44,6 +46,8 @@ grplot_axis_output_init(
    ,  Imlib_Font
    ,  DATA32
    ,  Imlib_Font
+   ,  DATA32
+   ,  unsigned
    ,  DATA32
    ,  unsigned
    ,  grplot_axis_val_t
