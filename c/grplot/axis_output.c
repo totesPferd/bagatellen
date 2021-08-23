@@ -14,21 +14,6 @@ static int
 get_inscriptions(grplot_axis_output_t *);
 
 int
-grplot_axis_output_inscription_init(grplot_inscription_t *pOutputInscription, Imlib_Font font, char *text) {
-   assert(pOutputInscription);
-   assert(text);
-
-   int retval =  0;
-
-   pOutputInscription->text =  text;
-
-   imlib_context_set_font(font);
-   imlib_get_text_size(text, &(pOutputInscription->width), &(pOutputInscription->height));
-
-   return retval;
-}
-
-int
 grplot_axis_output_positional_inscription_init(
       const grplot_axis_t *pAxis
    ,  grplot_inscription_positional_inscription_t *pPositionalInscription
@@ -39,7 +24,7 @@ grplot_axis_output_positional_inscription_init(
 
    char *text;
    grplot_axis_get_string(pAxis, &text, val);
-   int retval =  grplot_axis_output_inscription_init(
+   int retval =  grplot_inscription_init(
          &(pPositionalInscription->inscription)
       ,  font
       ,  text );
@@ -93,7 +78,7 @@ grplot_axis_output_init(
    pAxisOutput->lineColor =  lineColor;
    pAxisOutput->maxExt =  maxExt;
    pAxisOutput->nrInscriptions =  1;
-   grplot_axis_output_inscription_init(
+   grplot_inscription_init(
          &(pAxisOutput->label)
       ,  labelFont
       ,  label );
@@ -110,7 +95,7 @@ grplot_axis_output_init(
             &(pAxisOutput->axisSpec)
          ,  &inscriptionText
          ,  max );
-      grplot_axis_output_inscription_init(
+      grplot_inscription_init(
             &(pAxisOutput->upperInscription)
          ,  inscriptionFont
          ,  inscriptionText );
