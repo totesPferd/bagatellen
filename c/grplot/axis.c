@@ -49,7 +49,6 @@ grplot_axis_get_double(const grplot_axis_t *pAxis, double *pResult, grplot_axis_
 
    switch (pAxis->scaleType) {
       case grplot_axis_linear: {
-         assert((pAxis->max).numeric >= val.numeric);
          assert((pAxis->min).numeric <= val.numeric);
          assert((pAxis->max).numeric > (pAxis->min).numeric);
 
@@ -88,13 +87,8 @@ grplot_axis_get_double(const grplot_axis_t *pAxis, double *pResult, grplot_axis_
    }
    if (!retval) {
       assert(diffRange > 0.0);
-      assert(diffVal <= diffRange);
 
       *pResult =  diffVal / diffRange;
-
-      if (pAxis->axisType == grplot_axis_y_axis) {
-        *pResult =  1.0 - *pResult;
-      }
    }
 
    return retval;

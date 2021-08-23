@@ -5,7 +5,7 @@
 
 static int
 get_inscription_sum(
-      unsigned *
+      int *
    ,  unsigned
    ,  const grplot_axis_output_inscription_t *
    ,  const grplot_axis_output_val_inscription_t * );
@@ -230,7 +230,7 @@ grplot_axis_output_draw(
 
 static int
 get_inscription_sum(
-      unsigned *pResult
+      int *pResult
    ,  unsigned valPerPixel
    ,  const grplot_axis_output_inscription_t *pA
    ,  const grplot_axis_output_val_inscription_t *pVB) {
@@ -258,17 +258,16 @@ get_inscriptions(
    int isRunning =  1;
    int isFirstTime =  1;
    grplot_axis_val_t currentVal =  (pAxisOutput->axisSpec).min;
-   unsigned currentHeight =  0;
 
    while (isRunning) {
-      unsigned space;
+      int space;
       get_inscription_sum(
             &space
          ,  (pAxisOutput->axisSpec).nrPixels
          ,  &(pAxisOutput->upperInscription)
          ,  &((pAxisOutput->inscriptions[pAxisOutput->nrInscriptions - 1])) );
 
-      if (space < (pAxisOutput->axisSpec).nrPixels) {
+      if (space < 0) {
          retval =  isFirstTime;
          isRunning =  0;
       }
@@ -281,7 +280,6 @@ get_inscriptions(
    
          int isInnerRunning =  1;
          grplot_axis_val_t val =  currentVal;
-         unsigned height;
          while (isInnerRunning) {
             grplot_axis_next_val(
                   &(pAxisOutput->axisSpec)
@@ -292,31 +290,36 @@ get_inscriptions(
                ,  pAxisOutput->inscriptions + pAxisOutput->nrInscriptions
                ,  pAxisOutput->inscriptionFont
                ,  val );
-            unsigned innerSpace;
-            get_inscription_sum(
-                  &innerSpace
-               ,  (pAxisOutput->inscriptions[pAxisOutput->nrInscriptions]).valPerPixel
-               ,  &((pAxisOutput->inscriptions[pAxisOutput->nrInscriptions]).inscription)
-               ,  &((pAxisOutput->inscriptions[pAxisOutput->nrInscriptions - 1])) );
-            height =  pAxisOutput->inscriptions[pAxisOutput->nrInscriptions].valPerPixel;
-            if (innerSpace >= height - currentHeight) {
+            if (pAxisOutput->inscriptions[pAxisOutput->nrInscriptions].valPerPixel >= (pAxisOutput->axisSpec).nrPixels) {
                isInnerRunning =  0;
+               isRunning =  0;
             } else {
-               int errorMode =  grplot_axis_step_next(&(pAxisOutput->axisSpec), &step);
-               if (errorMode) {
-                  retval =  3;
+               int innerSpace;
+               get_inscription_sum(
+                     &innerSpace
+                  ,  (pAxisOutput->inscriptions[pAxisOutput->nrInscriptions]).valPerPixel
+                  ,  &((pAxisOutput->inscriptions[pAxisOutput->nrInscriptions]).inscription)
+                  ,  &((pAxisOutput->inscriptions[pAxisOutput->nrInscriptions - 1])) );
+               if (innerSpace < 0) {
                   isInnerRunning =  0;
-                  isRunning =  0;
+               } else {
+                  int errorMode =  grplot_axis_step_next(&(pAxisOutput->axisSpec), &step);
+                  if (errorMode) {
+                     retval =  3;
+                     isInnerRunning =  0;
+                     isRunning =  0;
+                  }
                }
             }
          }
          currentVal =  val;
-         currentHeight =  height;
 
-         pAxisOutput->nrInscriptions++;
-         if (pAxisOutput->nrInscriptions > MAX_NR_INSCRIPTIONS) {
-            retval =  2;
-            isRunning =  0;
+         if (isRunning) {
+            pAxisOutput->nrInscriptions++;
+            if (pAxisOutput->nrInscriptions > MAX_NR_INSCRIPTIONS) {
+               retval =  2;
+               isRunning =  0;
+            }
          }
       }
    }
