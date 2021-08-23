@@ -9,11 +9,19 @@ typedef struct {
 
 typedef struct {
    unsigned nrItem;
+   Imlib_Font font;
    grplot_legend_item_t *pBuf; } grplot_legend_t;
 
 int
 grplot_legend_init(
       grplot_legend_t *
+   ,  Imlib_Font
+   ,  unsigned );
+
+int
+grplot_legend_inscription_init(
+      grplot_legend_t *
+   ,  char *
    ,  unsigned );
 
 int
@@ -35,7 +43,6 @@ grplot_legend_prepare(
 int
 grplot_legend_draw_LT_horizontal(
       const grplot_legend_t *
-   ,  Imlib_Font
    ,  int
    ,  int );
 

@@ -6,16 +6,36 @@
 int
 grplot_legend_init(
       grplot_legend_t *pLegend
+   ,  Imlib_Font font
    ,  unsigned nrItem ) {
    assert(pLegend);
 
    int retval =  0;
 
+   pLegend->font =  font;
    pLegend->nrItem =  nrItem;
    pLegend->pBuf =  (grplot_legend_item_t *) malloc(sizeof(grplot_legend_item_t) * nrItem);
 
    return retval;
 }
+
+int
+grplot_legend_inscription_init(
+      grplot_legend_t *pLegend
+   ,  char *text
+   ,  unsigned index ) {
+   assert(pLegend);
+   assert(text);
+   assert(index < pLegend->nrItem);
+
+   int retval =  grplot_inscription_init(
+         &((pLegend->pBuf)[index].positionalInscription.inscription)
+      ,  pLegend->font
+      ,  text );
+
+   return retval;
+}
+
 
 int
 grplot_legend_get_color(
@@ -66,7 +86,6 @@ grplot_legend_prepare(
 int
 grplot_legend_draw_LT_horizontal(
       const grplot_legend_t *pLegend
-   ,  Imlib_Font font
    ,  int x
    ,  int y ) {
    assert(pLegend);
@@ -77,7 +96,7 @@ grplot_legend_draw_LT_horizontal(
       grplot_inscription_draw_positional_LT_horizontal(
             &((pLegend->pBuf)[i].positionalInscription)
          ,  (pLegend->pBuf)[i].color
-         ,  font
+         ,  pLegend->font
          ,  x
          ,  y );
    }
