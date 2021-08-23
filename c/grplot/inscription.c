@@ -31,3 +31,43 @@ grplot_inscription_set_color(DATA32 color) {
 
    return retval;
 }
+
+int
+grplot_inscription_draw_horizontal(
+      const grplot_inscription_t *pInscription
+   ,  DATA32 color
+   ,  Imlib_Font font
+   ,  int x
+   ,  int y ) {
+   assert(pInscription);
+
+   int retval =  0;
+
+   grplot_inscription_set_color(color);
+   imlib_context_set_direction(IMLIB_TEXT_TO_RIGHT);
+   imlib_context_set_font(font);
+   imlib_text_draw(x, y, pInscription->text);
+
+   return retval;
+}
+
+int
+grplot_inscription_draw_vertical(
+      const grplot_inscription_t *pInscription
+   ,  DATA32 color
+   ,  Imlib_Font font
+   ,  int x
+   ,  int y ) {
+   assert(pInscription);
+
+   int retval =  0;
+
+   grplot_inscription_set_color(color);
+   imlib_context_set_direction(IMLIB_TEXT_TO_DOWN);
+   imlib_context_set_font(font);
+   imlib_text_draw(x, y, pInscription->text);
+
+   return retval;
+}
+
+
