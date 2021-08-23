@@ -230,16 +230,12 @@ grplot_axis_output_draw(
                imlib_image_draw_line(originX, y, pAxisOutput->maxExt, y, 0);
             }
          }
-         {
-            int x =  originX;
-            int y =  originY - (pAxisOutput->axisSpec).nrPixels - (pAxisOutput->label).width;
-            grplot_inscription_draw_LB_vertical(
-                  &(pAxisOutput->label)
-               ,  pAxisOutput->labelColor
-               ,  pAxisOutput->labelFont
-               ,  x
-               ,  y );
-         }
+         grplot_inscription_draw_RB_vertical(
+               &(pAxisOutput->label)
+            ,  pAxisOutput->labelColor
+            ,  pAxisOutput->labelFont
+            ,  originX
+            ,  originY - (pAxisOutput->axisSpec).nrPixels );
       }
       break;
 

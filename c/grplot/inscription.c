@@ -69,3 +69,22 @@ grplot_inscription_draw_LB_vertical(
 
    return retval;
 }
+
+int
+grplot_inscription_draw_RB_vertical(
+      const grplot_inscription_t *pInscription
+   ,  DATA32 color
+   ,  Imlib_Font font
+   ,  int x
+   ,  int y ) {
+   assert(pInscription);
+
+   int retval =  grplot_inscription_draw_LB_vertical(
+         pInscription
+      ,  color
+      ,  font
+      ,  x
+      ,  y - pInscription->width );
+
+   return retval;
+}
