@@ -70,4 +70,43 @@ grplot_inscription_draw_vertical(
    return retval;
 }
 
+int
+grplot_inscription_draw_LT_horizontal(
+      const grplot_inscription_positional_inscription_t *pPositionalInscription
+   ,  DATA32 color
+   ,  Imlib_Font font
+   ,  int x
+   ,  int y ) {
+   assert(pPositionalInscription);
+
+   int retval =  grplot_inscription_draw_horizontal(
+         &(pPositionalInscription->inscription)
+      ,  color
+      ,  font
+      ,  x
+      ,  y );
+
+   return retval;
+}
+
+int
+grplot_inscription_draw_LB_vertical(
+      const grplot_inscription_positional_inscription_t *pPositionalInscription
+   ,  DATA32 color
+   ,  Imlib_Font font
+   ,  int x
+   ,  int y ) {
+   assert(pPositionalInscription);
+
+   int retval =  grplot_inscription_draw_vertical(
+         &(pPositionalInscription->inscription)
+      ,  color
+      ,  font
+      ,  x
+      ,  y );
+
+   return retval;
+}
+
+
 

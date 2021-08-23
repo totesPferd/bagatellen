@@ -159,8 +159,8 @@ grplot_axis_output_draw(
                   +  (pAxisOutput->inscriptions)[i].positionPerPixel;
                   -  ((pAxisOutput->inscriptions)[i].inscription.height >> 1);
                int y =  originY;
-               grplot_inscription_draw_vertical(
-                     &((pAxisOutput->inscriptions)[i].inscription)
+               grplot_inscription_draw_LB_vertical(
+                     &((pAxisOutput->inscriptions)[i])
                   ,  pAxisOutput->inscriptionColor
                   ,  pAxisOutput->inscriptionFont
                   ,  x
@@ -215,8 +215,8 @@ grplot_axis_output_draw(
                      originY
                   -  (pAxisOutput->inscriptions)[i].positionPerPixel
                   -  ((pAxisOutput->inscriptions)[i].inscription.height >> 1);
-               grplot_inscription_draw_horizontal(
-                     &((pAxisOutput->inscriptions)[i].inscription)
+               grplot_inscription_draw_LT_horizontal(
+                     &((pAxisOutput->inscriptions)[i])
                   ,  pAxisOutput->inscriptionColor
                   ,  pAxisOutput->inscriptionFont
                   ,  x
