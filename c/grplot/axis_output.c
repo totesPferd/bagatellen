@@ -310,12 +310,12 @@ get_inscriptions(
          }
          currentVal =  val;
          currentHeight =  height;
-      }
 
-      pAxisOutput->nrInscriptions++;
-      if (pAxisOutput->nrInscriptions > MAX_NR_INSCRIPTIONS) {
-         retval =  2;
-         isRunning =  0;
+         pAxisOutput->nrInscriptions++;
+         if (pAxisOutput->nrInscriptions > MAX_NR_INSCRIPTIONS) {
+            retval =  2;
+            isRunning =  0;
+         }
       }
    }
 
