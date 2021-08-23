@@ -145,10 +145,10 @@ grplot_axis_output_draw(
             int x =  originX + (pAxisOutput->axisSpec).nrPixels;
             int y =  originY - (pAxisOutput->label).height;
             imlib_context_set_color(
-                  ((unsigned char *) &(pAxisOutput->labelColor))[1]
-               ,  ((unsigned char *) &(pAxisOutput->labelColor))[2]
-               ,  ((unsigned char *) &(pAxisOutput->labelColor))[3]
-               ,  ((unsigned char *) &(pAxisOutput->labelColor))[0] );
+                  ((unsigned char *) &(pAxisOutput->labelColor))[2]
+               ,  ((unsigned char *) &(pAxisOutput->labelColor))[1]
+               ,  ((unsigned char *) &(pAxisOutput->labelColor))[0]
+               ,  ((unsigned char *) &(pAxisOutput->labelColor))[3] );
             imlib_context_set_font(pAxisOutput->labelFont);
             imlib_context_set_direction(IMLIB_TEXT_TO_RIGHT);
             imlib_text_draw(x, y, (pAxisOutput->label).text);
@@ -157,13 +157,13 @@ grplot_axis_output_draw(
             int x =
                   originX
                +  (pAxisOutput->axisSpec).nrPixels
-               +  (pAxisOutput->upperInscription).height >> 1;
+               +  ((pAxisOutput->upperInscription).height >> 1);
             int y =  originY;
             imlib_context_set_color(
-                  ((unsigned char *) &(pAxisOutput->inscriptionColor))[1]
-               ,  ((unsigned char *) &(pAxisOutput->inscriptionColor))[2]
-               ,  ((unsigned char *) &(pAxisOutput->inscriptionColor))[3]
-               ,  ((unsigned char *) &(pAxisOutput->inscriptionColor))[0] );
+                  ((unsigned char *) &(pAxisOutput->inscriptionColor))[2]
+               ,  ((unsigned char *) &(pAxisOutput->inscriptionColor))[1]
+               ,  ((unsigned char *) &(pAxisOutput->inscriptionColor))[0]
+               ,  ((unsigned char *) &(pAxisOutput->inscriptionColor))[3] );
             imlib_context_set_font(pAxisOutput->inscriptionFont);
             imlib_context_set_direction(IMLIB_TEXT_TO_DOWN);
             imlib_text_draw(x, y, (pAxisOutput->upperInscription).text);
@@ -172,7 +172,7 @@ grplot_axis_output_draw(
             int x =
                   originX
                +  (pAxisOutput->inscriptions)[i].valPerPixel;
-               +  (pAxisOutput->inscriptions)[i].inscription.height >> 1;
+               +  ((pAxisOutput->inscriptions)[i].inscription.height >> 1);
             int y =  originY;
             imlib_text_draw(x, y, (pAxisOutput->inscriptions)[i].inscription.text);
          }
@@ -184,10 +184,10 @@ grplot_axis_output_draw(
             int x =  originX + (pAxisOutput->label).height;
             int y =  originY - (pAxisOutput->axisSpec).nrPixels - (pAxisOutput->label).width;
             imlib_context_set_color(
-                  ((unsigned char *) &(pAxisOutput->labelColor))[1]
-               ,  ((unsigned char *) &(pAxisOutput->labelColor))[2]
-               ,  ((unsigned char *) &(pAxisOutput->labelColor))[3]
-               ,  ((unsigned char *) &(pAxisOutput->labelColor))[0] );
+                  ((unsigned char *) &(pAxisOutput->labelColor))[2]
+               ,  ((unsigned char *) &(pAxisOutput->labelColor))[1]
+               ,  ((unsigned char *) &(pAxisOutput->labelColor))[0]
+               ,  ((unsigned char *) &(pAxisOutput->labelColor))[3] );
             imlib_context_set_font(pAxisOutput->labelFont);
             imlib_context_set_direction(IMLIB_TEXT_TO_DOWN);
             imlib_text_draw(x, y, (pAxisOutput->label).text);
@@ -197,12 +197,12 @@ grplot_axis_output_draw(
             int y =
                   originY
                -  (pAxisOutput->axisSpec).nrPixels
-               -  (pAxisOutput->upperInscription).height >> 1;
+               -  ((pAxisOutput->upperInscription).height >> 1);
             imlib_context_set_color(
-                  ((unsigned char *) &(pAxisOutput->inscriptionColor))[1]
-               ,  ((unsigned char *) &(pAxisOutput->inscriptionColor))[2]
-               ,  ((unsigned char *) &(pAxisOutput->inscriptionColor))[3]
-               ,  ((unsigned char *) &(pAxisOutput->inscriptionColor))[0] );
+                  ((unsigned char *) &(pAxisOutput->inscriptionColor))[2]
+               ,  ((unsigned char *) &(pAxisOutput->inscriptionColor))[1]
+               ,  ((unsigned char *) &(pAxisOutput->inscriptionColor))[0]
+               ,  ((unsigned char *) &(pAxisOutput->inscriptionColor))[3] );
             imlib_context_set_font(pAxisOutput->inscriptionFont);
             imlib_context_set_direction(IMLIB_TEXT_TO_RIGHT);
             imlib_text_draw(x, y, (pAxisOutput->upperInscription).text);
@@ -212,7 +212,7 @@ grplot_axis_output_draw(
             int y =
                   originY
                -  (pAxisOutput->inscriptions)[i].valPerPixel
-               -  (pAxisOutput->inscriptions)[i].inscription.height >> 1;
+               -  ((pAxisOutput->inscriptions)[i].inscription.height >> 1);
             imlib_context_set_font(pAxisOutput->inscriptionFont);
             imlib_context_set_direction(IMLIB_TEXT_TO_RIGHT);
             imlib_text_draw(x, y, (pAxisOutput->inscriptions)[i].inscription.text);
@@ -243,7 +243,7 @@ get_inscription_sum(
    *pResult =
          valPerPixel
       -  pVB->valPerPixel
-      -  (pA->height + (pVB->inscription).height) >> 1;
+      -  ((pA->height + (pVB->inscription).height) >> 1);
 
    return retval;
 }
@@ -311,15 +311,12 @@ get_inscriptions(
                   }
                }
             }
+            currentVal =  val;
          }
-         currentVal =  val;
-
-         if (isRunning) {
-            pAxisOutput->nrInscriptions++;
-            if (pAxisOutput->nrInscriptions > MAX_NR_INSCRIPTIONS) {
-               retval =  2;
-               isRunning =  0;
-            }
+         pAxisOutput->nrInscriptions++;
+         if (pAxisOutput->nrInscriptions > MAX_NR_INSCRIPTIONS) {
+            retval =  2;
+            isRunning =  0;
          }
       }
    }
