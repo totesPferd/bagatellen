@@ -145,3 +145,60 @@ grplot_inscription_draw_RC_horizontal(
 
    return retval;
 }
+
+int
+grplot_inscription_draw_positional_LC_vertical(
+      const grplot_inscription_positional_inscription_t *pPositionalInscription
+   ,  DATA32 color
+   ,  Imlib_Font font
+   ,  int x
+   ,  int y ) {
+   assert(pPositionalInscription);
+
+   int retval =  grplot_inscription_draw_LC_vertical(
+         &(pPositionalInscription->inscription)
+      ,  color
+      ,  font
+      ,  x + pPositionalInscription->positionPerPixel
+      ,  y );
+
+   return retval;
+}
+
+int
+grplot_inscription_draw_positional_LB_horizontal(
+      const grplot_inscription_positional_inscription_t *pPositionalInscription
+   ,  DATA32 color
+   ,  Imlib_Font font
+   ,  int x
+   ,  int y ) {
+   assert(pPositionalInscription);
+
+   int retval =  grplot_inscription_draw_LB_horizontal(
+         &(pPositionalInscription->inscription)
+      ,  color
+      ,  font
+      ,  x
+      ,  y - pPositionalInscription->positionPerPixel );
+
+   return retval;
+}
+
+int
+grplot_inscription_draw_positional_RC_horizontal(
+      const grplot_inscription_positional_inscription_t *pPositionalInscription
+   ,  DATA32 color
+   ,  Imlib_Font font
+   ,  int x
+   ,  int y ) {
+   assert(pPositionalInscription);
+
+   int retval =  grplot_inscription_draw_RC_horizontal(
+         &(pPositionalInscription->inscription)
+      ,  color
+      ,  font
+      ,  x
+      ,  y - pPositionalInscription->positionPerPixel );
+
+   return retval;
+}
