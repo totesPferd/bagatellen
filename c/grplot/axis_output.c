@@ -256,7 +256,6 @@ get_inscriptions(
    int retval =  0;
 
    int isRunning =  1;
-   int isFirstTime =  1;
    grplot_axis_val_t currentVal =  (pAxisOutput->axisSpec).min;
 
    while (isRunning) {
@@ -268,13 +267,11 @@ get_inscriptions(
          ,  &((pAxisOutput->inscriptions[pAxisOutput->nrInscriptions - 1])) );
 
       if (space < 0) {
-         retval =  isFirstTime;
          isRunning =  0;
+         pAxisOutput->nrInscriptions--;
       }
 
       if (isRunning) {
-         isFirstTime =  0;
-
          grplot_axis_step_t step;
          grplot_axis_step_init(&(pAxisOutput->axisSpec), &step);
    
@@ -290,33 +287,30 @@ get_inscriptions(
                ,  pAxisOutput->inscriptions + pAxisOutput->nrInscriptions
                ,  pAxisOutput->inscriptionFont
                ,  val );
-            if (pAxisOutput->inscriptions[pAxisOutput->nrInscriptions].valPerPixel >= (pAxisOutput->axisSpec).nrPixels) {
+            int innerSpace;
+            get_inscription_sum(
+                  &innerSpace
+               ,  (pAxisOutput->inscriptions[pAxisOutput->nrInscriptions]).valPerPixel
+               ,  &((pAxisOutput->inscriptions[pAxisOutput->nrInscriptions]).inscription)
+               ,  &((pAxisOutput->inscriptions[pAxisOutput->nrInscriptions - 1])) );
+            if (innerSpace < 0) {
                isInnerRunning =  0;
-               isRunning =  0;
             } else {
-               int innerSpace;
-               get_inscription_sum(
-                     &innerSpace
-                  ,  (pAxisOutput->inscriptions[pAxisOutput->nrInscriptions]).valPerPixel
-                  ,  &((pAxisOutput->inscriptions[pAxisOutput->nrInscriptions]).inscription)
-                  ,  &((pAxisOutput->inscriptions[pAxisOutput->nrInscriptions - 1])) );
-               if (innerSpace < 0) {
+               int errorMode =  grplot_axis_step_next(&(pAxisOutput->axisSpec), &step);
+               if (errorMode) {
+                  retval =  3;
                   isInnerRunning =  0;
-               } else {
-                  int errorMode =  grplot_axis_step_next(&(pAxisOutput->axisSpec), &step);
-                  if (errorMode) {
-                     retval =  3;
-                     isInnerRunning =  0;
-                     isRunning =  0;
-                  }
+                  isRunning =  0;
                }
             }
             currentVal =  val;
          }
-         pAxisOutput->nrInscriptions++;
-         if (pAxisOutput->nrInscriptions > MAX_NR_INSCRIPTIONS) {
-            retval =  2;
-            isRunning =  0;
+         if (isRunning) {
+            pAxisOutput->nrInscriptions++;
+            if (pAxisOutput->nrInscriptions > MAX_NR_INSCRIPTIONS) {
+               retval =  2;
+               isRunning =  0;
+            }
          }
       }
    }
