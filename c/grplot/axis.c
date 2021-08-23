@@ -111,7 +111,7 @@ grplot_axis_get_string(const grplot_axis_t *pAxis, char **ppResult, grplot_axis_
       case grplot_axis_logarithm: {
          *ppResult =  (char *) malloc(sizeof(char) * nrCharDoubleString);
          snprintf(*ppResult, nrCharDoubleString - 1, "%.5G", val.numeric);
-         *ppResult[nrCharDoubleString - 1] =  '\0';
+         (*ppResult)[nrCharDoubleString - 1] =  '\0';
       }
       break;
 
