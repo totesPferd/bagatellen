@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <stdlib.h>
 
 #include "axis_output.h"
 
@@ -13,8 +14,9 @@ static int
 get_inscriptions(grplot_axis_output_t *);
 
 int
-grplot_axis_output_inscription_init(grplot_axis_output_inscription_t *pOutputInscription, Imlib_Font font, const char *text) {
+grplot_axis_output_inscription_init(grplot_axis_output_inscription_t *pOutputInscription, Imlib_Font font, char *text) {
    assert(pOutputInscription);
+   assert(text);
 
    int retval =  0;
 
@@ -61,7 +63,7 @@ grplot_axis_output_init(
    ,  unsigned nrPixels
    ,  grplot_axis_val_t min
    ,  grplot_axis_val_t max
-   ,  const char *label ) {
+   ,  char *label ) {
    assert(pAxisOutput);
    assert(nrPixels > 0);
    assert(
@@ -113,6 +115,16 @@ grplot_axis_output_init(
    retval =  get_inscriptions(pAxisOutput);
 
    return retval;
+}
+
+void
+grplot_axis_output_destroy(grplot_axis_output_t *pAxisOutput) {
+   assert(pAxisOutput);
+
+   free(pAxisOutput->upperInscription.text);
+   for (unsigned i =  0; i < pAxisOutput->nrInscriptions; i++) {
+      free((pAxisOutput->inscriptions)[i].inscription.text);
+   }
 }
 
 int
