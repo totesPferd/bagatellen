@@ -5,10 +5,10 @@
 
 static int
 get_inscription_sum(
-      const grplot_axis_output_t *
-   ,  unsigned *
+      unsigned *
+   ,  unsigned
    ,  const grplot_axis_output_inscription_t *
-   ,  const grplot_axis_output_inscription_t * );
+   ,  const grplot_axis_output_val_inscription_t * );
 
 static int
 get_inscriptions(grplot_axis_output_t *);
@@ -230,18 +230,20 @@ grplot_axis_output_draw(
 
 static int
 get_inscription_sum(
-      const grplot_axis_output_t *pAxisOutput
-   ,  unsigned *pResult
+      unsigned *pResult
+   ,  unsigned valPerPixel
    ,  const grplot_axis_output_inscription_t *pA
-   ,  const grplot_axis_output_inscription_t *pB) {
-   assert(pAxisOutput);
+   ,  const grplot_axis_output_val_inscription_t *pVB) {
    assert(pResult);
    assert(pA);
-   assert(pB);
+   assert(pVB);
 
    int retval =  0;
 
-   *pResult =  (pA->height + pB->height) >> 1;
+   *pResult =
+         valPerPixel
+      -  pVB->valPerPixel
+      -  (pA->height + (pVB->inscription).height) >> 1;
 
    return retval;
 }
@@ -261,10 +263,10 @@ get_inscriptions(
    while (isRunning) {
       unsigned space;
       get_inscription_sum(
-            pAxisOutput
-         ,  &space
+            &space
+         ,  (pAxisOutput->axisSpec).nrPixels
          ,  &(pAxisOutput->upperInscription)
-         ,  &((pAxisOutput->inscriptions[pAxisOutput->nrInscriptions - 1]).inscription) );
+         ,  &((pAxisOutput->inscriptions[pAxisOutput->nrInscriptions - 1])) );
 
       if (space < (pAxisOutput->axisSpec).nrPixels) {
          retval =  isFirstTime;
@@ -292,10 +294,10 @@ get_inscriptions(
                ,  val );
             unsigned innerSpace;
             get_inscription_sum(
-                  pAxisOutput
-               ,  &innerSpace
+                  &innerSpace
+               ,  (pAxisOutput->inscriptions[pAxisOutput->nrInscriptions]).valPerPixel
                ,  &((pAxisOutput->inscriptions[pAxisOutput->nrInscriptions]).inscription)
-               ,  &((pAxisOutput->inscriptions[pAxisOutput->nrInscriptions - 1]).inscription) );
+               ,  &((pAxisOutput->inscriptions[pAxisOutput->nrInscriptions - 1])) );
             height =  pAxisOutput->inscriptions[pAxisOutput->nrInscriptions].valPerPixel;
             if (innerSpace >= height - currentHeight) {
                isInnerRunning =  0;
