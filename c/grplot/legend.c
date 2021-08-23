@@ -47,6 +47,45 @@ grplot_legend_get_positional_inscription(
    return retval;
 }
 
+int
+grplot_legend_prepare(
+      grplot_legend_t *pLegend ) {
+   assert(pLegend);
+
+   int retval =  0;
+
+   unsigned accu =  0;
+   for (unsigned i =  0; i < pLegend->nrItem; i++) {
+      (pLegend->pBuf)[i].positionalInscription.positionPerPixel =  accu;
+      accu += (pLegend->pBuf)[i].positionalInscription.inscription.height;
+   }
+
+   return retval;
+}
+
+int
+grplot_legend_draw_LT_horizontal(
+      const grplot_legend_t *pLegend
+   ,  Imlib_Font font
+   ,  int x
+   ,  int y ) {
+   assert(pLegend);
+
+   int retval =  0;
+
+   for (unsigned i =  0; i < pLegend->nrItem; i++) {
+      grplot_inscription_draw_positional_LT_horizontal(
+            &((pLegend->pBuf)[i].positionalInscription)
+         ,  (pLegend->pBuf)[i].color
+         ,  font
+         ,  x
+         ,  y );
+   }
+
+   return retval;
+}
+
+
 void
 grplot_legend_destroy(
       grplot_legend_t *pLegend ) {

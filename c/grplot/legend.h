@@ -28,6 +28,17 @@ grplot_legend_get_positional_inscription(
    ,  grplot_inscription_positional_inscription_t **
    ,  unsigned );
 
+int
+grplot_legend_prepare(
+      grplot_legend_t * );
+
+int
+grplot_legend_draw_LT_horizontal(
+      const grplot_legend_t *
+   ,  Imlib_Font
+   ,  int
+   ,  int );
+
 void
 grplot_legend_destroy(
       grplot_legend_t *);
