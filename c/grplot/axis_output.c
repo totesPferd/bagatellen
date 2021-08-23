@@ -174,16 +174,12 @@ grplot_axis_output_draw(
                imlib_image_draw_line(x, originY, x, pAxisOutput->maxExt, 0);
             }
          }
-         {
-            int x =  originX + (pAxisOutput->axisSpec).nrPixels;
-            int y =  originY - (pAxisOutput->label).height;
-            grplot_inscription_draw_LT_horizontal(
-                  &(pAxisOutput->label)
-               ,  pAxisOutput->labelColor
-               ,  pAxisOutput->labelFont
-               ,  x
-               ,  y );
-         }
+         grplot_inscription_draw_LB_horizontal(
+               &(pAxisOutput->label)
+            ,  pAxisOutput->labelColor
+            ,  pAxisOutput->labelFont
+            ,  originX + (pAxisOutput->axisSpec).nrPixels
+            ,  originY );
       }
       break;
 

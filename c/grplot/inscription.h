@@ -18,6 +18,14 @@ int
 grplot_inscription_set_color(DATA32);
 
 int
+grplot_inscription_draw_LB_horizontal(
+      const grplot_inscription_t *
+   ,  DATA32
+   ,  Imlib_Font
+   ,  int
+   ,  int );
+
+int
 grplot_inscription_draw_LT_horizontal(
       const grplot_inscription_t *
    ,  DATA32

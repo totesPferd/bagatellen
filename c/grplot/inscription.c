@@ -33,6 +33,24 @@ grplot_inscription_set_color(DATA32 color) {
 }
 
 int
+grplot_inscription_draw_LB_horizontal(
+      const grplot_inscription_t *pInscription
+   ,  DATA32 color
+   ,  Imlib_Font font
+   ,  int x
+   ,  int y ) {
+   assert(pInscription);
+
+   int retval =  grplot_inscription_draw_LT_horizontal(
+         pInscription
+      ,  color
+      ,  font
+      ,  x
+      ,  y - pInscription->height );
+
+   return retval;
+}
+int
 grplot_inscription_draw_LT_horizontal(
       const grplot_inscription_t *pInscription
    ,  DATA32 color
