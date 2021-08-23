@@ -49,4 +49,12 @@ grplot_inscription_draw_RB_vertical(
    ,  int
    ,  int );
 
+int
+grplot_inscription_draw_RC_horizontal(
+      const grplot_inscription_t *
+   ,  DATA32
+   ,  Imlib_Font
+   ,  int
+   ,  int );
+
 #endif

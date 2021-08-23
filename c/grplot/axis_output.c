@@ -184,19 +184,12 @@ grplot_axis_output_draw(
       break;
 
       case grplot_axis_y_axis: {
-         {
-            int x =  originX - (pAxisOutput->upperInscription).width;
-            int y =
-                  originY
-               -  (pAxisOutput->axisSpec).nrPixels
-               -  ((pAxisOutput->upperInscription).height >> 1);
-            grplot_inscription_draw_LT_horizontal(
-                  &(pAxisOutput->upperInscription)
-               ,  pAxisOutput->inscriptionColor
-               ,  pAxisOutput->inscriptionFont
-               ,  x
-               ,  y );
-         }
+         grplot_inscription_draw_RC_horizontal(
+               &(pAxisOutput->upperInscription)
+            ,  pAxisOutput->inscriptionColor
+            ,  pAxisOutput->inscriptionFont
+            ,  originX
+            ,  originY + (pAxisOutput->axisSpec).nrPixels );
          {
             int y =
                   originY
