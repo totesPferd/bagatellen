@@ -2,6 +2,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "axis.h"
 
@@ -110,7 +111,9 @@ grplot_axis_get_string(const grplot_axis_t *pAxis, char **ppResult, grplot_axis_
       break;
 
       case grplot_axis_time: {
-         *ppResult =  ctime(&(val.time));
+         char *ctimeStr =  ctime(&(val.time));
+         *ppResult =  (char *) malloc(sizeof(char) * strlen(ctimeStr) + 1);
+         strcpy(*ppResult, ctimeStr);
       }
       break;
 
