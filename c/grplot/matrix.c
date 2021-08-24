@@ -53,7 +53,8 @@ grplot_matrix_init(
    ,  unsigned nrX
    ,  unsigned nrY
    ,  unsigned xDistance
-   ,  unsigned yDistance ) {
+   ,  unsigned yDistance
+   ,  DATA32 baseColor ) {
    assert(pMatrix);
 
    int retval =  0;
@@ -62,6 +63,7 @@ grplot_matrix_init(
    pMatrix->yDistance =  yDistance;
    pMatrix->nrX =  nrX;
    pMatrix->nrY =  nrY;
+   pMatrix->baseColor =  baseColor;
    pMatrix->nrAxis =  nrX + nrY;
    pMatrix->nrDiagram =  nrX * nrY;
 
@@ -256,6 +258,13 @@ grplot_matrix_prepare(
    updateMaxX(pMatrix);
    updateMaxY(pMatrix);
 
+   pMatrix->nrOutPixel =  pMatrix->xTotal * pMatrix->yTotal;
+   pMatrix->out_buf =  (DATA32 *) malloc (sizeof(DATA32) * (pMatrix->nrOutPixel));
+
+   for (unsigned i =  0; i < pMatrix->nrOutPixel; i++) {
+      (pMatrix->out_buf)[i] =  pMatrix->baseColor;
+   }
+
    return retval;
 }
 
@@ -271,6 +280,7 @@ grplot_matrix_destroy(
       grplot_diagram_destroy(&((pMatrix->pDiagramBuf)[i]));
    }
 
+   free(pMatrix->out_buf);
    free(pMatrix->pAxisBuf);
    free(pMatrix->pDiagramBuf);
 }
