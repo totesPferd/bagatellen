@@ -17,6 +17,7 @@ typedef struct {
    unsigned maxX, maxY;
    unsigned xDistance, yDistance;
    unsigned originX, originY;
+   unsigned xTotal, yTotal;
    grplot_matrix_positional_axis_t *pAxisBuf;
    grplot_diagram_t *pDiagramBuf; } grplot_matrix_t;
 
