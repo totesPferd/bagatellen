@@ -3,12 +3,12 @@
 
 #include <Imlib2.h>
 
-#include "axis.h"
+#include "axis_output.h"
 #include "input_buf_mgmt.h"
 #include "legend.h"
 
 typedef struct {
-   grplot_axis_t *pXAxis, *pYAxis;
+   grplot_axis_output_t *pXAxis, *pYAxis;
    DATA32 backgroundColor;
    unsigned height, width;
    grplot_input_buf_mgmt_t inputBufMgmt;
@@ -20,8 +20,8 @@ grplot_diagram_init(
    ,  DATA32
    ,  Imlib_Font
    ,  unsigned
-   ,  grplot_axis_t *
-   ,  grplot_axis_t * );
+   ,  grplot_axis_output_t *
+   ,  grplot_axis_output_t * );
 
 int
 grplot_diagram_item_init(

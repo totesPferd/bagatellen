@@ -14,8 +14,8 @@ grplot_diagram_init(
    ,  DATA32 color
    ,  Imlib_Font legendFont
    ,  unsigned nrItem
-   ,  grplot_axis_t *pXAxis
-   ,  grplot_axis_t *pYAxis ) {
+   ,  grplot_axis_output_t *pXAxis
+   ,  grplot_axis_output_t *pYAxis ) {
    assert(pDiagram);
 
    int retval =  0;
@@ -26,8 +26,8 @@ grplot_diagram_init(
 
    grplot_input_buf_mgmt_init(
          &(pDiagram->inputBufMgmt)
-      ,  pXAxis->nrPixels
-      ,  pYAxis->nrPixels
+      ,  (pXAxis->axisSpec).nrPixels
+      ,  (pYAxis->axisSpec).nrPixels
       ,  nrItem );
    grplot_legend_init(
          &(pDiagram->legend)
@@ -74,9 +74,9 @@ grplot_diagram_plot_point(
    int retval =  0;
 
    int isInRange;
-   grplot_axis_is_inRange(pDiagram->pXAxis, &isInRange, x);
+   grplot_axis_is_inRange(&(pDiagram->pXAxis->axisSpec), &isInRange, x);
    if (isInRange) {
-      grplot_axis_is_inRange(pDiagram->pYAxis, &isInRange, y);
+      grplot_axis_is_inRange(&(pDiagram->pYAxis->axisSpec), &isInRange, y);
    }
 
    if (isInRange) {
@@ -86,8 +86,8 @@ grplot_diagram_plot_point(
          ,  &inpBuf
          ,  index );
       double xDouble, yDouble;
-      grplot_axis_get_double(pDiagram->pXAxis, &xDouble, x);
-      grplot_axis_get_double(pDiagram->pYAxis, &yDouble, y);
+      grplot_axis_get_double(&(pDiagram->pXAxis->axisSpec), &xDouble, x);
+      grplot_axis_get_double(&(pDiagram->pYAxis->axisSpec), &yDouble, y);
       grplot_input_buf_plot_point(&inpBuf, xDouble, yDouble, w, radius);
    }
 
@@ -101,6 +101,22 @@ grplot_diagram_prepare(
    assert(pDiagram);
 
    int retval =  0;
+
+   normalize(&(pDiagram->inputBufMgmt));
+   grplot_legend_prepare(&(pDiagram->legend));
+
+   {
+      unsigned height =  (pDiagram->legend).height + (pDiagram->pYAxis->axisSpec).nrPixels;
+      unsigned width =  (pDiagram->legend).width + (pDiagram->pXAxis->axisSpec).nrPixels;
+      pDiagram->height =
+            pDiagram->pYAxis->length > height
+         ?  pDiagram->pYAxis->length
+         :  height;
+      pDiagram->width =
+            pDiagram->pXAxis->width > width
+         ?  pDiagram->pXAxis->width
+         :  width;
+   }
 
    return retval;
 }
