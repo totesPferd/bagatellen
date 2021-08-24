@@ -95,6 +95,10 @@ int
 grplot_matrix_prepare(
       grplot_matrix_t * );
 
+int
+grplot_matrix_draw(
+      grplot_matrix_t * );
+
 void
 grplot_matrix_destroy(
       grplot_matrix_t * );

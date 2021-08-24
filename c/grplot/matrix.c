@@ -268,6 +268,59 @@ grplot_matrix_prepare(
    return retval;
 }
 
+int
+grplot_matrix_draw(
+      grplot_matrix_t *pMatrix ) {
+   assert(pMatrix);
+
+   int retval =  0;
+
+   for (unsigned x =  0; x < pMatrix->nrX; x++)
+   for (unsigned y =  0; y < pMatrix->nrY; y++) {
+      grplot_matrix_positional_axis_t *pPositionalXAxis;
+      grplot_matrix_get_positional_x_axis(pMatrix, &pPositionalXAxis, x);
+   
+      grplot_matrix_positional_axis_t *pPositionalYAxis;
+      grplot_matrix_get_positional_y_axis(pMatrix, &pPositionalYAxis, y);
+   
+      grplot_diagram_t *pDiagram;
+      grplot_matrix_get_diagram(pMatrix, &pDiagram, x, y);
+
+      grplot_diagram_draw(
+            pDiagram
+         ,  pMatrix->out_buf
+         ,  pMatrix->xTotal
+         ,  pPositionalXAxis->positionPerPixel
+         ,  pPositionalYAxis->positionPerPixel );
+   }
+
+   for (unsigned x =  0; x < pMatrix->nrX; x++) {
+      grplot_matrix_positional_axis_t *pPositionalXAxis;
+      grplot_matrix_get_positional_x_axis(pMatrix, &pPositionalXAxis, x);
+   
+      grplot_axis_output_draw(
+            &(pPositionalXAxis->axis)
+         ,  pMatrix->xTotal
+         ,  pMatrix->maxY
+         ,  pPositionalXAxis->positionPerPixel
+         ,  pMatrix->originY );
+   }
+
+   for (unsigned y =  0; y < pMatrix->nrY; y++) {
+      grplot_matrix_positional_axis_t *pPositionalYAxis;
+      grplot_matrix_get_positional_y_axis(pMatrix, &pPositionalYAxis, y);
+   
+      grplot_axis_output_draw(
+            &(pPositionalYAxis->axis)
+         ,  pMatrix->xTotal
+         ,  pMatrix->maxX
+         ,  pMatrix->originX
+         ,  pPositionalYAxis->positionPerPixel );
+   }
+
+   return retval;
+}
+
 void
 grplot_matrix_destroy(
       grplot_matrix_t *pMatrix ) {
