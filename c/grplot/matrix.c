@@ -76,13 +76,13 @@ int
 grplot_matrix_get_positional_x_axis(
       const grplot_matrix_t *pMatrix
    ,  grplot_matrix_positional_axis_t **ppAxis
-   ,  unsigned nr ) {
+   ,  unsigned x ) {
    assert(pMatrix);
-   assert(nr < pMatrix->nrX);
+   assert(x < pMatrix->nrX);
 
    int retval =  0;
 
-   *ppAxis =  &((pMatrix->pAxisBuf)[nr]);
+   *ppAxis =  &((pMatrix->pAxisBuf)[x]);
 
    assert(((*ppAxis)->axis).axisSpec.axisType == grplot_axis_x_axis);
 
@@ -93,13 +93,13 @@ int
 grplot_matrix_get_positional_y_axis(
       const grplot_matrix_t *pMatrix
    ,  grplot_matrix_positional_axis_t **ppAxis
-   ,  unsigned nr ) {
+   ,  unsigned y ) {
    assert(pMatrix);
-   assert(nr < pMatrix->nrY);
+   assert(y < pMatrix->nrY);
 
    int retval =  0;
 
-   *ppAxis =  &((pMatrix->pAxisBuf)[nr + (pMatrix->nrX)]);
+   *ppAxis =  &((pMatrix->pAxisBuf)[y + (pMatrix->nrX)]);
 
    assert(((*ppAxis)->axis).axisSpec.axisType == grplot_axis_y_axis);
 
