@@ -84,8 +84,6 @@ grplot_matrix_get_positional_x_axis(
 
    *ppAxis =  &((pMatrix->pAxisBuf)[x]);
 
-   assert(((*ppAxis)->axis).axisSpec.axisType == grplot_axis_x_axis);
-
    return retval;
 }
 
@@ -100,8 +98,6 @@ grplot_matrix_get_positional_y_axis(
    int retval =  0;
 
    *ppAxis =  &((pMatrix->pAxisBuf)[y + (pMatrix->nrX)]);
-
-   assert(((*ppAxis)->axis).axisSpec.axisType == grplot_axis_y_axis);
 
    return retval;
 }
