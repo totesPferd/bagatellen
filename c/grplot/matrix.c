@@ -3,6 +3,14 @@
 
 #include "matrix.h"
 
+static int
+updateAllXLength(
+     grplot_matrix_t * );
+
+static int
+updateAllYLength(
+     grplot_matrix_t * );
+
 int
 grplot_matrix_init(
       grplot_matrix_t *pMatrix
@@ -188,6 +196,9 @@ grplot_matrix_prepare(
       grplot_diagram_prepare(&((pMatrix->pDiagramBuf)[i]));
    }
 
+   updateAllXLength(pMatrix);
+   updateAllYLength(pMatrix);
+
    return retval;
 }
 
@@ -205,4 +216,82 @@ grplot_matrix_destroy(
 
    free(pMatrix->pAxisBuf);
    free(pMatrix->pDiagramBuf);
+}
+
+static int
+updateXLength(
+     grplot_matrix_t *pMatrix
+  ,  unsigned x ) {
+
+   int retval =  0;
+
+   grplot_matrix_positional_axis_t *pPositionalXAxis;
+   grplot_matrix_get_positional_x_axis(pMatrix, &pPositionalXAxis, x);
+
+   for (int y =  0; y < pMatrix->nrY; y++) {
+      grplot_diagram_t *pDiagram;
+      grplot_matrix_get_diagram(pMatrix, &pDiagram, x, y);
+
+      if (pDiagram->width > (pPositionalXAxis->axis).length) {
+         (pPositionalXAxis->axis).length =  pDiagram->width;
+      }
+   }
+
+   if (x < pMatrix->nrX - 1) {
+      (pPositionalXAxis->axis).length += pMatrix->xDistance;
+   }
+
+   return retval;
+}
+
+static int
+updateYLength(
+     grplot_matrix_t *pMatrix
+  ,  unsigned y ) {
+
+   int retval =  0;
+
+   grplot_matrix_positional_axis_t *pPositionalYAxis;
+   grplot_matrix_get_positional_y_axis(pMatrix, &pPositionalYAxis, y);
+
+   for (int x =  0; x < pMatrix->nrX; x++) {
+      grplot_diagram_t *pDiagram;
+      grplot_matrix_get_diagram(pMatrix, &pDiagram, x, y);
+
+      if (pDiagram->width > (pPositionalYAxis->axis).length) {
+         (pPositionalYAxis->axis).length =  pDiagram->width;
+      }
+   }
+
+   if (y < pMatrix->nrY - 1) {
+      (pPositionalYAxis->axis).length += pMatrix->yDistance;
+   }
+
+   return retval;
+}
+
+static int
+updateAllXLength(
+      grplot_matrix_t *pMatrix ) {
+
+   int retval =  0;
+
+   for (int x =  0; x < pMatrix->nrX; x++) {
+      updateXLength(pMatrix, x);
+   }
+
+   return retval;
+}
+
+static int
+updateAllYLength(
+      grplot_matrix_t *pMatrix ) {
+
+   int retval =  0;
+
+   for (int y =  0; y < pMatrix->nrY; y++) {
+      updateYLength(pMatrix, y);
+   }
+
+   return retval;
 }
