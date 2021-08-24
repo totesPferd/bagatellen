@@ -46,6 +46,8 @@ grplot_diagram_prepare(
 int
 grplot_diagram_draw(
       grplot_diagram_t *
+   ,  DATA32 *
+   ,  unsigned
    ,  unsigned
    ,  unsigned );
 

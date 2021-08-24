@@ -3,6 +3,7 @@
 #include "color_diff.h"
 #include "diagram.h"
 #include "input_buf_by_mgmt.h"
+#include "output_buf_by_mgmt.h"
 
 static int
 normalize(
@@ -125,11 +126,26 @@ grplot_diagram_prepare(
 int
 grplot_diagram_draw(
       grplot_diagram_t *pDiagram
+   ,  DATA32 *out_buf
+   ,  unsigned width
    ,  unsigned originX
    ,  unsigned originY ) {
    assert(pDiagram);
 
    int retval =  0;
+
+   grplot_output_buf_by_mgmt_set_buf(
+         out_buf
+      ,  &(pDiagram->inputBufMgmt)
+      ,  originX
+      ,  originY
+      ,  width
+      ,  pDiagram->backgroundColor );
+   {
+      unsigned x =  originX + (pDiagram->pXAxis->axisSpec).nrPixels;
+      unsigned y =  originY - (pDiagram->pYAxis->axisSpec).nrPixels;
+      grplot_legend_draw_LB_horizontal(&(pDiagram->legend), x, y);
+   }
 
    return retval;
 }
