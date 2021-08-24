@@ -21,10 +21,6 @@ grplot_input_buf_init(
    p_input_buf->nrRows =  nrRows;
    p_input_buf->nrCols =  nrCols;
 
-   for (unsigned i =  0; i < bufLen; i++) {
-      p_input_buf->buf[i] =  0.0;
-   }
-
    return retval;
 }
 
