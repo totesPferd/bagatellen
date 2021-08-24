@@ -47,7 +47,6 @@ grplot_axis_output_init(
    ,  DATA32 labelColor
    ,  unsigned nrPixels
    ,  DATA32 lineColor
-   ,  unsigned maxExt
    ,  grplot_axis_val_t min
    ,  grplot_axis_val_t max
    ,  char *label ) {
@@ -76,7 +75,6 @@ grplot_axis_output_init(
    pAxisOutput->labelFont =  labelFont;
    pAxisOutput->labelColor =  labelColor;
    pAxisOutput->lineColor =  lineColor;
-   pAxisOutput->maxExt =  maxExt;
    pAxisOutput->nrInscriptions =  1;
    grplot_inscription_init(
          &(pAxisOutput->label)
@@ -120,6 +118,7 @@ int
 grplot_axis_output_draw(
       grplot_axis_output_t *pAxisOutput
    ,  unsigned width
+   ,  unsigned maxExt
    ,  int originX
    ,  int originY ) {
    assert(pAxisOutput);
@@ -132,7 +131,7 @@ grplot_axis_output_draw(
       case grplot_axis_x_axis: {
          {
             grplot_inscription_set_color(pAxisOutput->lineColor);
-            imlib_image_draw_line(originX, originY, originX, pAxisOutput->maxExt, 0);
+            imlib_image_draw_line(originX, originY, originX, maxExt, 0);
          }
          grplot_inscription_draw_LC_vertical(
                &(pAxisOutput->upperInscription)
@@ -143,7 +142,7 @@ grplot_axis_output_draw(
          {
             int x =  originX + (pAxisOutput->axisSpec).nrPixels;
             grplot_inscription_set_color(pAxisOutput->lineColor);
-            imlib_image_draw_line(x, originY, x, pAxisOutput->maxExt, 0);
+            imlib_image_draw_line(x, originY, x, maxExt, 0);
          }
          for (unsigned i =  0; i < pAxisOutput->nrInscriptions; i++) {
             grplot_inscription_draw_positional_LC_vertical(
@@ -157,7 +156,7 @@ grplot_axis_output_draw(
                      originX
                   +  (pAxisOutput->inscriptions)[i].positionPerPixel;
                grplot_inscription_set_color(pAxisOutput->lineColor);
-               imlib_image_draw_line(x, originY, x, pAxisOutput->maxExt, 0);
+               imlib_image_draw_line(x, originY, x, maxExt, 0);
             }
          }
          grplot_inscription_draw_LB_horizontal(
@@ -172,7 +171,7 @@ grplot_axis_output_draw(
       case grplot_axis_y_axis: {
          {
             grplot_inscription_set_color(pAxisOutput->lineColor);
-            imlib_image_draw_line(originX, originY, pAxisOutput->maxExt, originY, 0);
+            imlib_image_draw_line(originX, originY, maxExt, originY, 0);
          }
          grplot_inscription_draw_RC_horizontal(
                &(pAxisOutput->upperInscription)
@@ -185,7 +184,7 @@ grplot_axis_output_draw(
                   originY
                -  (pAxisOutput->axisSpec).nrPixels;
             grplot_inscription_set_color(pAxisOutput->lineColor);
-            imlib_image_draw_line(originX, y, pAxisOutput->maxExt, y, 0);
+            imlib_image_draw_line(originX, y, maxExt, y, 0);
          }
          for (unsigned i =  0; i < pAxisOutput->nrInscriptions; i++) {
             grplot_inscription_draw_positional_RC_horizontal(
@@ -199,7 +198,7 @@ grplot_axis_output_draw(
                      originY
                   -  (pAxisOutput->inscriptions)[i].positionPerPixel;
                grplot_inscription_set_color(pAxisOutput->lineColor);
-               imlib_image_draw_line(originX, y, pAxisOutput->maxExt, y, 0);
+               imlib_image_draw_line(originX, y, maxExt, y, 0);
             }
          }
          grplot_inscription_draw_RB_vertical(
