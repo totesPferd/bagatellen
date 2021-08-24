@@ -4,7 +4,7 @@
 #include <Imlib2.h>
 
 #include "axis.h"
-#include "input_buf_by_mgmt.h"
+#include "input_buf_mgmt.h"
 #include "legend.h"
 
 typedef struct {
@@ -33,10 +33,11 @@ grplot_diagram_item_init(
 int
 grplot_diagram_plot_point(
       grplot_diagram_t *
+   ,  grplot_axis_val_t
+   ,  grplot_axis_val_t
    ,  double
-   ,  double
-   ,  double
-   ,  unsigned );
+   ,  unsigned
+   ,  double );
 
 int
 grplot_diagram_prepare(

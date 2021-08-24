@@ -2,6 +2,7 @@
 
 #include "color_diff.h"
 #include "diagram.h"
+#include "input_buf_by_mgmt.h"
 
 int
 grplot_diagram_init(
@@ -59,13 +60,32 @@ grplot_diagram_item_init(
 int
 grplot_diagram_plot_point(
       grplot_diagram_t *pDiagram
-   ,  double x
-   ,  double y
+   ,  grplot_axis_val_t x
+   ,  grplot_axis_val_t y
    ,  double w
-   ,  unsigned index ) {
+   ,  unsigned index
+   ,  double radius ) {
    assert(pDiagram);
 
    int retval =  0;
+
+   int isInRange;
+   grplot_axis_is_inRange(pDiagram->pXAxis, &isInRange, x);
+   if (isInRange) {
+      grplot_axis_is_inRange(pDiagram->pYAxis, &isInRange, y);
+   }
+
+   if (isInRange) {
+      grplot_input_buf_t inpBuf;
+      grplot_input_buf_by_mgmt_init(
+            &(pDiagram->inputBufMgmt)
+         ,  &inpBuf
+         ,  index );
+      double xDouble, yDouble;
+      grplot_axis_get_double(pDiagram->pXAxis, &xDouble, x);
+      grplot_axis_get_double(pDiagram->pYAxis, &yDouble, y);
+      grplot_input_buf_plot_point(&inpBuf, xDouble, yDouble, w, radius);
+   }
 
    return retval;
 }
