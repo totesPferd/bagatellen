@@ -4,6 +4,10 @@
 #include "diagram.h"
 #include "input_buf_by_mgmt.h"
 
+static int
+normalize(
+      grplot_input_buf_mgmt_t * );
+
 int
 grplot_diagram_init(
       grplot_diagram_t *pDiagram
@@ -123,5 +127,30 @@ grplot_diagram_destroy(
    grplot_input_buf_mgmt_destroy(&(pDiagram->inputBufMgmt));
 }
 
+static int
+normalize(
+     grplot_input_buf_mgmt_t *pInpBufMgmt) {
+   assert(pInpBufMgmt);
 
+   int retval =  0;
+
+   for (unsigned index =  0;  index < pInpBufMgmt->nrInpBufs; index++) {
+      grplot_input_buf_t inpBuf;
+      grplot_input_buf_by_mgmt_init(
+            pInpBufMgmt
+         ,  &inpBuf
+         ,  index );
+      {
+         double minVal;
+         grplot_input_buf_get_min(&inpBuf, &minVal);
+   
+         double maxVal;
+         grplot_input_buf_get_max(&inpBuf, &maxVal);
+   
+         grplot_input_buf_normalize(&inpBuf, minVal, maxVal);
+      }
+   }
+
+   return retval;
+}
 
