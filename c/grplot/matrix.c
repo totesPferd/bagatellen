@@ -259,7 +259,7 @@ updateYLength(
       grplot_matrix_get_diagram(pMatrix, &pDiagram, x, y);
 
       if (pDiagram->width > (pPositionalYAxis->axis).length) {
-         (pPositionalYAxis->axis).length =  pDiagram->width;
+         (pPositionalYAxis->axis).length =  pDiagram->length;
       }
    }
 
