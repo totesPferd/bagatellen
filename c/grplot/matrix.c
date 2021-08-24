@@ -416,7 +416,7 @@ updateXWidth(
       grplot_matrix_positional_axis_t *pPositionalXAxis;
       grplot_matrix_get_positional_x_axis(pMatrix, &pPositionalXAxis, x);
 
-      if (*pResult > (pPositionalXAxis->axis).width) {
+      if (*pResult < (pPositionalXAxis->axis).width) {
          *pResult =  (pPositionalXAxis->axis).width;
       }
    }
@@ -435,7 +435,7 @@ updateYWidth(
       grplot_matrix_positional_axis_t *pPositionalYAxis;
       grplot_matrix_get_positional_y_axis(pMatrix, &pPositionalYAxis, y);
 
-      if (*pResult > (pPositionalYAxis->axis).width) {
+      if (*pResult < (pPositionalYAxis->axis).width) {
          *pResult =  (pPositionalYAxis->axis).width;
       }
    }
