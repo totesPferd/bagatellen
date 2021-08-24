@@ -1,5 +1,5 @@
 #ifndef GRPLOT_DIAGRAM_H
-#define GRPLOT_DIAGRAM
+#define GRPLOT_DIAGRAM_H
 
 #include <Imlib2.h>
 
