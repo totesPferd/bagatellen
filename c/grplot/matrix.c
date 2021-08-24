@@ -126,7 +126,7 @@ grplot_matrix_get_diagram(
 int
 grplot_matrix_x_axis_init(
       grplot_matrix_t *pMatrix
-   ,  unsigned nr
+   ,  unsigned x
    ,  grplot_axis_scale_type_t scaleType
    ,  Imlib_Font inscriptionFont
    ,  DATA32 inscriptionColor
@@ -138,10 +138,10 @@ grplot_matrix_x_axis_init(
    ,  grplot_axis_val_t max
    ,  char *label ) {
    assert(pMatrix);
-   assert(nr < pMatrix->nrX);
+   assert(x < pMatrix->nrX);
 
    grplot_matrix_positional_axis_t *pPositionalAxis;
-   grplot_matrix_get_positional_x_axis(pMatrix, &pPositionalAxis, nr);
+   grplot_matrix_get_positional_x_axis(pMatrix, &pPositionalAxis, x);
 
    return grplot_axis_output_init(
          &(pPositionalAxis->axis)
@@ -161,7 +161,7 @@ grplot_matrix_x_axis_init(
 int
 grplot_matrix_y_axis_init(
       grplot_matrix_t *pMatrix
-   ,  unsigned nr
+   ,  unsigned y
    ,  grplot_axis_scale_type_t scaleType
    ,  Imlib_Font inscriptionFont
    ,  DATA32 inscriptionColor
@@ -173,10 +173,10 @@ grplot_matrix_y_axis_init(
    ,  grplot_axis_val_t max
    ,  char *label ) {
    assert(pMatrix);
-   assert(nr < pMatrix->nrY);
+   assert(y < pMatrix->nrY);
 
    grplot_matrix_positional_axis_t *pPositionalAxis;
-   grplot_matrix_get_positional_y_axis(pMatrix, &pPositionalAxis, nr);
+   grplot_matrix_get_positional_y_axis(pMatrix, &pPositionalAxis, y);
 
    return grplot_axis_output_init(
          &(pPositionalAxis->axis)
