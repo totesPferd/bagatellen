@@ -60,6 +60,9 @@ int
 grplot_axis_init(grplot_axis_t *, grplot_axis_type_t, grplot_axis_scale_type_t, unsigned, grplot_axis_val_t, grplot_axis_val_t);
 
 int
+grplot_axis_is_inRange(const grplot_axis_t *, int *, grplot_axis_val_t);
+
+int
 grplot_axis_get_double(const grplot_axis_t *, double *, grplot_axis_val_t);
 
 int

@@ -41,6 +41,35 @@ grplot_axis_init(
 }
 
 int
+grplot_axis_is_inRange(const grplot_axis_t *pAxis, int *pStatus, grplot_axis_val_t val) {
+   assert(pAxis);
+   assert(pStatus);
+
+   int retval =  0;
+
+   switch (pAxis->scaleType) {
+
+      case grplot_axis_linear:
+      case grplot_axis_logarithm: {
+         *pStatus =  (pAxis->min).numeric <= val.numeric && val.numeric <= (pAxis->max).numeric;
+      }
+      break;
+
+      case grplot_axis_time: {
+         *pStatus =  (pAxis->min).time <= val.time && val.time <= (pAxis->max).time;
+      }
+      break;
+
+      default: {
+         assert(0);
+      }
+   }
+
+   return retval;
+}
+
+
+int
 grplot_axis_get_double(const grplot_axis_t *pAxis, double *pResult, grplot_axis_val_t val) {
    assert(pAxis);
 
