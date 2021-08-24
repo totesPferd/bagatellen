@@ -31,6 +31,22 @@ getYAxisTotal(
       grplot_matrix_t *
    ,  unsigned * );
 
+static int
+updateXPositions(
+      grplot_matrix_t * );
+
+static int
+updateYPositions(
+      grplot_matrix_t * );
+
+static int
+updateMaxX(
+      grplot_matrix_t * );
+
+static int
+updateMaxY(
+      grplot_matrix_t * );
+
 int
 grplot_matrix_init(
       grplot_matrix_t *pMatrix
@@ -235,6 +251,10 @@ grplot_matrix_prepare(
       pMatrix->yTotal =  total;
       pMatrix->originY =  total - width;
    }
+   updateXPositions(pMatrix);
+   updateYPositions(pMatrix);
+   updateMaxX(pMatrix);
+   updateMaxY(pMatrix);
 
    return retval;
 }
@@ -403,3 +423,77 @@ getYAxisTotal(
 
    return retval;
 }
+
+static int
+updateXPositions(
+      grplot_matrix_t *pMatrix ) {
+
+   int retval =  0;
+
+   unsigned accu =  pMatrix->originX;
+   for (unsigned x =  0; x < pMatrix->nrX; x++) {
+      grplot_matrix_positional_axis_t *pPositionalXAxis;
+      grplot_matrix_get_positional_x_axis(pMatrix, &pPositionalXAxis, x);
+
+      pPositionalXAxis->positionPerPixel =  accu;
+      accu +=  (pPositionalXAxis->axis).length;
+   }
+
+   return retval;
+}
+
+static int
+updateYPositions(
+      grplot_matrix_t *pMatrix ) {
+
+   int retval =  0;
+
+   unsigned accu =  pMatrix->originY;
+   for (unsigned y =  0; y < pMatrix->nrY; y++) {
+      grplot_matrix_positional_axis_t *pPositionalYAxis;
+      grplot_matrix_get_positional_y_axis(pMatrix, &pPositionalYAxis, y);
+
+      pPositionalYAxis->positionPerPixel =  accu;
+      accu -=  (pPositionalYAxis->axis).length;
+   }
+
+   return retval;
+}
+
+static int
+updateMaxX(
+      grplot_matrix_t *pMatrix ) {
+
+   int retval =  0;
+
+   if (pMatrix->nrX == 0) {
+      pMatrix->maxX =  pMatrix->originX;
+   } else {
+      grplot_matrix_positional_axis_t *pPositionalXAxis;
+      grplot_matrix_get_positional_x_axis(pMatrix, &pPositionalXAxis, pMatrix->nrX - 1);
+
+      pMatrix->maxX =  pPositionalXAxis->positionPerPixel + (pPositionalXAxis->axis).axisSpec.nrPixels;
+   }
+
+   return retval;
+}
+
+static int
+updateMaxY(
+      grplot_matrix_t *pMatrix ) {
+
+   int retval =  0;
+
+   if (pMatrix->nrY == 0) {
+      pMatrix->maxY =  pMatrix->originY;
+   } else {
+      grplot_matrix_positional_axis_t *pPositionalYAxis;
+      grplot_matrix_get_positional_y_axis(pMatrix, &pPositionalYAxis, pMatrix->nrY - 1);
+
+      pMatrix->maxY =  pPositionalYAxis->positionPerPixel - (pPositionalYAxis->axis).axisSpec.nrPixels;
+   }
+
+   return retval;
+}
+
+
