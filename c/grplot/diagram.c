@@ -49,10 +49,18 @@ grplot_diagram_item_init(
    int retval =  0;
 
    {
-      double *p_color;
-      grplot_input_buf_mgmt_get_color(&(pDiagram->inputBufMgmt), &p_color, index);
-      grplot_color_diff_encode(p_color, pDiagram->backgroundColor, color);
+      double *pColor;
+      grplot_input_buf_mgmt_get_color(&(pDiagram->inputBufMgmt), &pColor, index);
+      grplot_color_diff_encode(pColor, pDiagram->backgroundColor, color);
    }
+   {
+      double *pPixel;
+      grplot_input_buf_mgmt_get_pixels(&(pDiagram->inputBufMgmt), &pPixel, index);
+      for (unsigned long i =  0; i < (pDiagram->inputBufMgmt).bufLen; i++) {
+         (pDiagram->inputBufMgmt).buf[i] =  0.0;
+      }
+   }
+
    grplot_legend_inscription_init(
          &(pDiagram->legend)
       ,  text
