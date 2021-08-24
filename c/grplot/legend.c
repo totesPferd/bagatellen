@@ -80,12 +80,11 @@ grplot_legend_prepare(
 
    int retval =  0;
 
-   unsigned accu =  0;
+   pLegend->height =  0;
    for (unsigned i =  0; i < pLegend->nrItem; i++) {
-      (pLegend->pBuf)[i].positionalInscription.positionPerPixel =  accu;
-      accu += (pLegend->pBuf)[i].positionalInscription.inscription.height;
+      (pLegend->pBuf)[i].positionalInscription.positionPerPixel =  pLegend->height;
+      pLegend->height += (pLegend->pBuf)[i].positionalInscription.inscription.height;
    }
-   pLegend->height =  accu;
    get_width(pLegend);
 
    return retval;
