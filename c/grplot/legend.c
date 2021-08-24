@@ -3,6 +3,10 @@
 
 #include "legend.h"
 
+static int
+get_width(
+      grplot_legend_t * );
+
 int
 grplot_legend_init(
       grplot_legend_t *pLegend
@@ -81,6 +85,8 @@ grplot_legend_prepare(
       (pLegend->pBuf)[i].positionalInscription.positionPerPixel =  accu;
       accu += (pLegend->pBuf)[i].positionalInscription.inscription.height;
    }
+   pLegend->height =  accu;
+   get_width(pLegend);
 
    return retval;
 }
@@ -115,4 +121,21 @@ grplot_legend_destroy(
    free(pLegend->pBuf);
 }
 
+static int
+get_width(
+      grplot_legend_t *pLegend ) {
+   assert(pLegend);
+
+   int retval =  0;
+
+   pLegend->width =  0;
+   for (unsigned i =  0;  i < pLegend->nrItem; i++) {
+      unsigned width =  (pLegend->pBuf)[i].positionalInscription.inscription.width;
+      if (width > pLegend->width) {
+         pLegend->width =  width;
+      }
+   }
+
+   return retval;
+}
 

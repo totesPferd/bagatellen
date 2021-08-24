@@ -10,6 +10,7 @@ typedef struct {
 typedef struct {
    unsigned nrItem;
    Imlib_Font font;
+   int height, width;
    grplot_legend_item_t *pBuf; } grplot_legend_t;
 
 int
