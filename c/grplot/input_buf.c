@@ -9,8 +9,7 @@ grplot_input_buf_init(
    ,  unsigned long bufLen
    ,  double *buf
    ,  unsigned nrRows
-   ,  unsigned nrCols
-   ,  double radius ) {
+   ,  unsigned nrCols ) {
    assert(p_input_buf);
    assert(buf);
    assert(bufLen == nrRows * nrCols);
@@ -21,7 +20,6 @@ grplot_input_buf_init(
    p_input_buf->buf =  buf;
    p_input_buf->nrRows =  nrRows;
    p_input_buf->nrCols =  nrCols;
-   p_input_buf->radius =  radius;
 
    for (unsigned i =  0; i < bufLen; i++) {
       p_input_buf->buf[i] =  0.0;
@@ -31,7 +29,7 @@ grplot_input_buf_init(
 }
 
 int
-grplot_input_buf_plot_point(grplot_input_buf_t *p_input_buf, double x, double y, double weight) {
+grplot_input_buf_plot_point(grplot_input_buf_t *p_input_buf, double x, double y, double weight, double radius) {
    assert(p_input_buf);
    assert(p_input_buf->buf);
    assert(x <= 1.0);
@@ -51,7 +49,7 @@ grplot_input_buf_plot_point(grplot_input_buf_t *p_input_buf, double x, double y,
          double double_pixelX =  (double) pixelX / (double) p_input_buf->nrCols - x;
 
          *(ptr++) +=
-            weight * exp((- double_pixelX * double_pixelX - double_pixelY * double_pixelY) / p_input_buf->radius);
+            weight * exp((- double_pixelX * double_pixelX - double_pixelY * double_pixelY) / radius);
 
       }
    }

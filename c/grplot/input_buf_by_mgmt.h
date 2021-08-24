@@ -5,6 +5,6 @@
 #include "input_buf_mgmt.h"
 
 int
-grplot_input_buf_by_mgmt_init(const grplot_input_buf_mgmt_t *, grplot_input_buf_t *, unsigned, double);
+grplot_input_buf_by_mgmt_init(const grplot_input_buf_mgmt_t *, grplot_input_buf_t *, unsigned);
 
 #endif

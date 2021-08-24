@@ -7,15 +7,14 @@ typedef struct {
    unsigned nrRows;
    unsigned nrCols;
    unsigned long bufLen;
-   double radius;
    double *buf;
 } grplot_input_buf_t;
 
 int
-grplot_input_buf_init(grplot_input_buf_t *, unsigned long, double *, unsigned, unsigned, double);
+grplot_input_buf_init(grplot_input_buf_t *, unsigned long, double *, unsigned, unsigned);
 
 int
-grplot_input_buf_plot_point(grplot_input_buf_t *, double, double, double);
+grplot_input_buf_plot_point(grplot_input_buf_t *, double, double, double, double);
 
 int
 grplot_input_buf_get_max(const grplot_input_buf_t *, double *);
