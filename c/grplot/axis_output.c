@@ -11,6 +11,14 @@ get_inscription_sum(
    ,  const grplot_inscription_positional_inscription_t * );
 
 static int
+get_length(
+      grplot_axis_output_t *);
+
+static int
+get_width(
+      grplot_axis_output_t *);
+
+static int
 get_inscriptions(grplot_axis_output_t *);
 
 int
@@ -100,6 +108,8 @@ grplot_axis_output_init(
    }
 
    retval =  get_inscriptions(pAxisOutput);
+   get_length(pAxisOutput);
+   get_width(pAxisOutput);
 
    return retval;
 }
@@ -234,6 +244,36 @@ get_inscription_sum(
          positionPerPixel
       -  pVB->positionPerPixel
       -  ((pA->height + (pVB->inscription).height) >> 1);
+
+   return retval;
+}
+
+static int
+get_length(
+      grplot_axis_output_t *pAxisOutput ) {
+   assert(pAxisOutput);
+
+   int retval =  0;
+
+   pAxisOutput->length =  (pAxisOutput->axisSpec).nrPixels + (pAxisOutput->label).width;
+
+   return retval;
+}
+
+static int
+get_width(
+      grplot_axis_output_t *pAxisOutput ) {
+   assert(pAxisOutput);
+
+   int retval =  0;
+
+   pAxisOutput->width =  (pAxisOutput->upperInscription).width;
+   for (unsigned int i =  0; i < pAxisOutput->nrInscriptions; i++) {
+      unsigned width =  (pAxisOutput->inscriptions)[i].inscription.width;
+      if (width > pAxisOutput->width) {
+         pAxisOutput->width =  width;
+      }
+   }
 
    return retval;
 }

@@ -16,6 +16,7 @@ typedef struct {
    DATA32 labelColor;
    unsigned nrInscriptions; 
    DATA32 lineColor;
+   unsigned length, width;
    grplot_inscription_t label;
    grplot_inscription_t upperInscription;
    grplot_inscription_positional_inscription_t inscriptions[MAX_NR_INSCRIPTIONS]; } grplot_axis_output_t;
