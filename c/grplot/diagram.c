@@ -57,7 +57,7 @@ grplot_diagram_item_init(
       double *pPixel;
       grplot_input_buf_mgmt_get_pixels(&(pDiagram->inputBufMgmt), &pPixel, index);
       for (unsigned long i =  0; i < (pDiagram->inputBufMgmt).bufLen; i++) {
-         (pDiagram->inputBufMgmt).buf[i] =  0.0;
+         pPixel[i] =  0.0;
       }
    }
 
