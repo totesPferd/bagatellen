@@ -3,4 +3,5 @@ args "-C"
 option "font-path" - "dir where ttf fonts are located" string typestr="dirname" multiple
 option "oformat" - "image format (jpg, png); default: derived from --output param" optional
 option "output" o "output file" string typestr="filename" required
+option "schema" s "diagram schema" string typestr="jsonFile" required
 option "pfile" T "file containing cmdline params" string typestr="filename" optional
