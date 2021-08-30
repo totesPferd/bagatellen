@@ -2,7 +2,7 @@
 
 #include "inscription.h"
 
-int
+grplot_inscription_status_t
 grplot_inscription_init(
       grplot_inscription_t *pInscription
    ,  Imlib_Font font
@@ -10,7 +10,7 @@ grplot_inscription_init(
    assert(pInscription);
    assert(text);
 
-   int retval =  0;
+   grplot_inscription_status_t retval =  grplot_inscription_ok;
 
    pInscription->text =  text;
 
@@ -20,9 +20,11 @@ grplot_inscription_init(
    return retval;
 }
 
-int
+grplot_inscription_status_t
 grplot_inscription_set_color(DATA32 color) {
-   int retval =  0;
+
+   grplot_inscription_status_t retval =  grplot_inscription_ok;
+
    imlib_context_set_color(
          ((unsigned char *) &color)[2]
       ,  ((unsigned char *) &color)[1]
@@ -32,7 +34,7 @@ grplot_inscription_set_color(DATA32 color) {
    return retval;
 }
 
-int
+grplot_inscription_status_t
 grplot_inscription_draw_LB_horizontal(
       const grplot_inscription_t *pInscription
    ,  DATA32 color
@@ -41,7 +43,7 @@ grplot_inscription_draw_LB_horizontal(
    ,  int y ) {
    assert(pInscription);
 
-   int retval =  grplot_inscription_draw_LT_horizontal(
+   grplot_inscription_status_t retval =  grplot_inscription_draw_LT_horizontal(
          pInscription
       ,  color
       ,  font
@@ -51,7 +53,7 @@ grplot_inscription_draw_LB_horizontal(
    return retval;
 }
 
-int
+grplot_inscription_status_t
 grplot_inscription_draw_LB_vertical(
       const grplot_inscription_t *pInscription
    ,  DATA32 color
@@ -60,7 +62,7 @@ grplot_inscription_draw_LB_vertical(
    ,  int y ) {
    assert(pInscription);
 
-   int retval =  0;
+   grplot_inscription_status_t retval =  grplot_inscription_ok;
 
    grplot_inscription_set_color(color);
    imlib_context_set_direction(IMLIB_TEXT_TO_DOWN);
@@ -70,7 +72,7 @@ grplot_inscription_draw_LB_vertical(
    return retval;
 }
 
-int
+grplot_inscription_status_t
 grplot_inscription_draw_LC_vertical(
       const grplot_inscription_t *pInscription
    ,  DATA32 color
@@ -79,7 +81,7 @@ grplot_inscription_draw_LC_vertical(
    ,  int y ) {
    assert(pInscription);
 
-   int retval =  grplot_inscription_draw_LB_vertical(
+   grplot_inscription_status_t retval =  grplot_inscription_draw_LB_vertical(
          pInscription
       ,  color
       ,  font
@@ -89,7 +91,7 @@ grplot_inscription_draw_LC_vertical(
    return retval;
 }
 
-int
+grplot_inscription_status_t
 grplot_inscription_draw_LT_horizontal(
       const grplot_inscription_t *pInscription
    ,  DATA32 color
@@ -98,7 +100,7 @@ grplot_inscription_draw_LT_horizontal(
    ,  int y ) {
    assert(pInscription);
 
-   int retval =  0;
+   grplot_inscription_status_t retval =  grplot_inscription_ok;
 
    grplot_inscription_set_color(color);
    imlib_context_set_direction(IMLIB_TEXT_TO_RIGHT);
@@ -108,7 +110,7 @@ grplot_inscription_draw_LT_horizontal(
    return retval;
 }
 
-int
+grplot_inscription_status_t
 grplot_inscription_draw_RB_vertical(
       const grplot_inscription_t *pInscription
    ,  DATA32 color
@@ -117,7 +119,7 @@ grplot_inscription_draw_RB_vertical(
    ,  int y ) {
    assert(pInscription);
 
-   int retval =  grplot_inscription_draw_LB_vertical(
+   grplot_inscription_status_t retval =  grplot_inscription_draw_LB_vertical(
          pInscription
       ,  color
       ,  font
@@ -127,7 +129,7 @@ grplot_inscription_draw_RB_vertical(
    return retval;
 }
 
-int
+grplot_inscription_status_t
 grplot_inscription_draw_RC_horizontal(
       const grplot_inscription_t *pInscription
    ,  DATA32 color
@@ -136,7 +138,7 @@ grplot_inscription_draw_RC_horizontal(
    ,  int y ) {
    assert(pInscription);
 
-   int retval =  grplot_inscription_draw_LT_horizontal(
+   grplot_inscription_status_t retval =  grplot_inscription_draw_LT_horizontal(
          pInscription
       ,  color
       ,  font
@@ -146,7 +148,7 @@ grplot_inscription_draw_RC_horizontal(
    return retval;
 }
 
-int
+grplot_inscription_status_t
 grplot_inscription_draw_positional_LC_vertical(
       const grplot_inscription_positional_inscription_t *pPositionalInscription
    ,  DATA32 color
@@ -155,7 +157,7 @@ grplot_inscription_draw_positional_LC_vertical(
    ,  int y ) {
    assert(pPositionalInscription);
 
-   int retval =  grplot_inscription_draw_LC_vertical(
+   grplot_inscription_status_t retval =  grplot_inscription_draw_LC_vertical(
          &(pPositionalInscription->inscription)
       ,  color
       ,  font
@@ -165,7 +167,7 @@ grplot_inscription_draw_positional_LC_vertical(
    return retval;
 }
 
-int
+grplot_inscription_status_t
 grplot_inscription_draw_positional_LB_horizontal(
       const grplot_inscription_positional_inscription_t *pPositionalInscription
    ,  DATA32 color
@@ -174,7 +176,7 @@ grplot_inscription_draw_positional_LB_horizontal(
    ,  int y ) {
    assert(pPositionalInscription);
 
-   int retval =  grplot_inscription_draw_LB_horizontal(
+   grplot_inscription_status_t retval =  grplot_inscription_draw_LB_horizontal(
          &(pPositionalInscription->inscription)
       ,  color
       ,  font
@@ -184,7 +186,7 @@ grplot_inscription_draw_positional_LB_horizontal(
    return retval;
 }
 
-int
+grplot_inscription_status_t
 grplot_inscription_draw_positional_LT_horizontal(
       const grplot_inscription_positional_inscription_t *pPositionalInscription
    ,  DATA32 color
@@ -193,7 +195,7 @@ grplot_inscription_draw_positional_LT_horizontal(
    ,  int y ) {
    assert(pPositionalInscription);
 
-   int retval =  grplot_inscription_draw_LT_horizontal(
+   grplot_inscription_status_t retval =  grplot_inscription_draw_LT_horizontal(
          &(pPositionalInscription->inscription)
       ,  color
       ,  font
@@ -203,7 +205,7 @@ grplot_inscription_draw_positional_LT_horizontal(
    return retval;
 }
 
-int
+grplot_inscription_status_t
 grplot_inscription_draw_positional_RC_horizontal(
       const grplot_inscription_positional_inscription_t *pPositionalInscription
    ,  DATA32 color
@@ -212,7 +214,7 @@ grplot_inscription_draw_positional_RC_horizontal(
    ,  int y ) {
    assert(pPositionalInscription);
 
-   int retval =  grplot_inscription_draw_RC_horizontal(
+   grplot_inscription_status_t retval =  grplot_inscription_draw_RC_horizontal(
          &(pPositionalInscription->inscription)
       ,  color
       ,  font
