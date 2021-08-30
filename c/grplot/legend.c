@@ -3,18 +3,18 @@
 
 #include "legend.h"
 
-static int
+static grplot_legend_status_t
 get_width(
       grplot_legend_t * );
 
-int
+grplot_legend_status_t
 grplot_legend_init(
       grplot_legend_t *pLegend
    ,  Imlib_Font font
    ,  unsigned nrItem ) {
    assert(pLegend);
 
-   int retval =  0;
+   grplot_legend_status_t retval =  grplot_legend_ok;
 
    pLegend->font =  font;
    pLegend->nrItem =  nrItem;
@@ -23,7 +23,7 @@ grplot_legend_init(
    return retval;
 }
 
-int
+grplot_legend_status_t
 grplot_legend_inscription_init(
       grplot_legend_t *pLegend
    ,  char *text
@@ -33,7 +33,8 @@ grplot_legend_inscription_init(
    assert(text);
    assert(index < pLegend->nrItem);
 
-   int retval =  grplot_inscription_init(
+   grplot_legend_status_t retval =  grplot_legend_ok;
+   grplot_inscription_init(
          &((pLegend->pBuf)[index].positionalInscription.inscription)
       ,  pLegend->font
       ,  text );
@@ -42,8 +43,7 @@ grplot_legend_inscription_init(
    return retval;
 }
 
-
-int
+grplot_legend_status_t
 grplot_legend_get_color(
       const grplot_legend_t *pLegend
    ,  DATA32 **ppColor
@@ -51,14 +51,14 @@ grplot_legend_get_color(
    assert(pLegend);
    assert(index < pLegend->nrItem);
 
-   int retval =  0;
+   grplot_legend_status_t retval =  grplot_legend_ok;
 
    *ppColor =  &((pLegend->pBuf)[index].color);
 
    return retval;
 }
 
-int
+grplot_legend_status_t
 grplot_legend_get_positional_inscription(
       const grplot_legend_t *pLegend
    ,  grplot_inscription_positional_inscription_t **ppPositionalInscription
@@ -66,19 +66,19 @@ grplot_legend_get_positional_inscription(
    assert(pLegend);
    assert(index < pLegend->nrItem);
 
-   int retval =  0;
+   grplot_legend_status_t retval =  grplot_legend_ok;
 
    *ppPositionalInscription =  &((pLegend->pBuf)[index].positionalInscription);
 
    return retval;
 }
 
-int
+grplot_legend_status_t
 grplot_legend_prepare(
       grplot_legend_t *pLegend ) {
    assert(pLegend);
 
-   int retval =  0;
+   grplot_legend_status_t retval =  grplot_legend_ok;
 
    pLegend->height =  0;
    for (unsigned i =  0; i < pLegend->nrItem; i++) {
@@ -90,14 +90,14 @@ grplot_legend_prepare(
    return retval;
 }
 
-int
+grplot_legend_status_t
 grplot_legend_draw_LB_horizontal(
       const grplot_legend_t *pLegend
    ,  int x
    ,  int y ) {
    assert(pLegend);
 
-   int retval =  0;
+   grplot_legend_status_t retval =  grplot_legend_ok;
 
    for (unsigned i =  0; i < pLegend->nrItem; i++) {
       grplot_inscription_draw_positional_LB_horizontal(
@@ -120,12 +120,12 @@ grplot_legend_destroy(
    free(pLegend->pBuf);
 }
 
-static int
+static grplot_legend_status_t
 get_width(
       grplot_legend_t *pLegend ) {
    assert(pLegend);
 
-   int retval =  0;
+   grplot_legend_status_t retval =  grplot_legend_ok;
 
    pLegend->width =  0;
    for (unsigned i =  0;  i < pLegend->nrItem; i++) {
