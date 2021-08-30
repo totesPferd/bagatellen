@@ -2,7 +2,7 @@
 
 #include "input_buf_by_mgmt.h"
 
-int
+grplot_input_buf_mgmt_status_t
 grplot_input_buf_by_mgmt_init(
       const grplot_input_buf_mgmt_t *p_input_buf_mgmt
    ,  grplot_input_buf_t *p_input_buf
@@ -10,7 +10,7 @@ grplot_input_buf_by_mgmt_init(
    assert(p_input_buf_mgmt);
    assert(p_input_buf);
    assert(index < p_input_buf_mgmt->nrInpBufs);
-   int retval =  0;
+   grplot_input_buf_mgmt_status_t retval =  grplot_input_buf_mgmt_ok;
 
    {
       double *p_pixels;
