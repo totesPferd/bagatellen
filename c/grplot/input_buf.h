@@ -3,6 +3,11 @@
 
 #include "input_buf_mgmt.h"
 
+typedef enum {
+      grplot_input_buf_ok = 0
+   ,  grplot_input_buf_empty_buf
+   ,  grplot_input_buf_zero_range } grplot_input_buf_status_t;
+
 typedef struct {
    unsigned nrRows;
    unsigned nrCols;
@@ -10,19 +15,19 @@ typedef struct {
    double *buf;
 } grplot_input_buf_t;
 
-int
+grplot_input_buf_status_t
 grplot_input_buf_init(grplot_input_buf_t *, unsigned long, double *, unsigned, unsigned);
 
-int
+grplot_input_buf_status_t
 grplot_input_buf_plot_point(grplot_input_buf_t *, double, double, double, double);
 
-int
+grplot_input_buf_status_t
 grplot_input_buf_get_max(const grplot_input_buf_t *, double *);
 
-int
+grplot_input_buf_status_t
 grplot_input_buf_get_min(const grplot_input_buf_t *, double *);
 
-int
+grplot_input_buf_status_t
 grplot_input_buf_normalize(grplot_input_buf_t *, double, double);
 
 void

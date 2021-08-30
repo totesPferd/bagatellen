@@ -3,7 +3,7 @@
 
 #include "input_buf.h"
 
-int
+grplot_input_buf_status_t
 grplot_input_buf_init(
       grplot_input_buf_t *p_input_buf
    ,  unsigned long bufLen
@@ -14,7 +14,7 @@ grplot_input_buf_init(
    assert(buf);
    assert(bufLen == nrRows * nrCols);
 
-   int retval =  0;
+   grplot_input_buf_status_t retval =  grplot_input_buf_ok;
 
    p_input_buf->bufLen =  bufLen;
    p_input_buf->buf =  buf;
@@ -24,16 +24,17 @@ grplot_input_buf_init(
    return retval;
 }
 
-int
+grplot_input_buf_status_t
 grplot_input_buf_plot_point(grplot_input_buf_t *p_input_buf, double x, double y, double weight, double radius) {
    assert(p_input_buf);
    assert(p_input_buf->buf);
+   assert(radius >= 0.0);
    assert(x <= 1.0);
    assert(x >= 0.0);
    assert(y <= 1.0);
    assert(y >= 0.0);
 
-   int retval =  0;
+   grplot_input_buf_status_t retval =  grplot_input_buf_ok;
 
    double *ptr =  p_input_buf->buf;
    for (int pixelY =  0; pixelY < p_input_buf->nrRows; pixelY++) {
@@ -53,19 +54,19 @@ grplot_input_buf_plot_point(grplot_input_buf_t *p_input_buf, double x, double y,
    return retval;
 }
 
-int 
+grplot_input_buf_status_t
 grplot_input_buf_get_max(const grplot_input_buf_t *p_input_buf, double *p_result) {
    assert(p_input_buf);
    assert(p_result);
 
-   int retval =  1;
+   grplot_input_buf_status_t retval =  grplot_input_buf_empty_buf;
 
    double *p_buf_ptr =  p_input_buf->buf;
 
    for (unsigned long i =  0; i < p_input_buf->bufLen; i++) {
       if (retval) {
          *p_result =  *p_buf_ptr;
-         retval =  0;
+         retval =  grplot_input_buf_ok;
       } else if (*p_result < *p_buf_ptr) {
          *p_result =  *p_buf_ptr;
       }
@@ -75,19 +76,19 @@ grplot_input_buf_get_max(const grplot_input_buf_t *p_input_buf, double *p_result
    return retval;
 }
 
-int
+grplot_input_buf_status_t
 grplot_input_buf_get_min(const grplot_input_buf_t *p_input_buf, double *p_result) {
    assert(p_input_buf);
    assert(p_result);
 
-   int retval =  1;
+   grplot_input_buf_status_t retval =  grplot_input_buf_empty_buf;
 
    double *p_buf_ptr =  p_input_buf->buf;
 
    for (unsigned long i =  0; i < p_input_buf->bufLen; i++) {
       if (retval) {
          *p_result =  *p_buf_ptr;
-         retval =  0;
+         retval =  grplot_input_buf_ok;
       } else if (*p_result > *p_buf_ptr) {
          *p_result =  *p_buf_ptr;
       }
@@ -97,19 +98,23 @@ grplot_input_buf_get_min(const grplot_input_buf_t *p_input_buf, double *p_result
    return retval;
 }
 
-int
+grplot_input_buf_status_t
 grplot_input_buf_normalize(grplot_input_buf_t *p_input_buf, double minVal, double maxVal) {
    assert(p_input_buf);
    assert(maxVal > minVal);
-   int retval =  0;
+   grplot_input_buf_status_t retval =  grplot_input_buf_ok;
 
    double diffVal =  maxVal - minVal;
 
-   for (unsigned long i =  0; i < p_input_buf->bufLen; i++) {
-      assert(p_input_buf->buf[i] >= minVal - 1.0E-12);
-      assert(p_input_buf->buf[i] <= maxVal + 1.0E-12);
-
-      p_input_buf->buf[i] =  (p_input_buf->buf[i] - minVal) / diffVal;
+   if (diffVal > 0.0) {
+      for (unsigned long i =  0; i < p_input_buf->bufLen; i++) {
+         assert(p_input_buf->buf[i] >= minVal - 1.0E-12);
+         assert(p_input_buf->buf[i] <= maxVal + 1.0E-12);
+   
+         p_input_buf->buf[i] =  (p_input_buf->buf[i] - minVal) / diffVal;
+      }
+   } else {
+      retval =  grplot_input_buf_zero_range;
    }
 
    return retval;
