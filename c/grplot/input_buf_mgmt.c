@@ -3,10 +3,10 @@
 
 #include "input_buf_mgmt.h"
 
-int
+grplot_input_buf_mgmt_status_t
 grplot_input_buf_mgmt_init(grplot_input_buf_mgmt_t *p_input_buf_mgmt, unsigned nrRows, unsigned nrCols, unsigned nrInpBufs) {
    assert(p_input_buf_mgmt);
-   int retval =  0;
+   grplot_input_buf_mgmt_status_t retval =  grplot_input_buf_mgmt_ok;
 
    p_input_buf_mgmt->nrRows =  nrRows;
    p_input_buf_mgmt->nrCols =  nrCols;
@@ -19,11 +19,11 @@ grplot_input_buf_mgmt_init(grplot_input_buf_mgmt_t *p_input_buf_mgmt, unsigned n
    return retval;
 }
 
-int
+grplot_input_buf_mgmt_status_t
 grplot_input_buf_mgmt_get_color(const grplot_input_buf_mgmt_t *p_input_buf_mgmt, double **pp_color, unsigned index) {
    assert(p_input_buf_mgmt);
    assert(index < p_input_buf_mgmt->nrInpBufs);
-   int retval =  0;
+   grplot_input_buf_mgmt_status_t retval =  grplot_input_buf_mgmt_ok;
 
    const unsigned mgmtIndex =  p_input_buf_mgmt->elemLen * index;
    *pp_color =  p_input_buf_mgmt->buf + mgmtIndex;
@@ -31,14 +31,14 @@ grplot_input_buf_mgmt_get_color(const grplot_input_buf_mgmt_t *p_input_buf_mgmt,
    return retval;
 }
 
-int
+grplot_input_buf_mgmt_status_t
 grplot_input_buf_mgmt_get_pixels(
       const grplot_input_buf_mgmt_t *p_input_buf_mgmt
    ,  double **pp_pixels
    ,  unsigned index ) {
    assert(p_input_buf_mgmt);
    assert(index < p_input_buf_mgmt->nrInpBufs);
-   int retval =  0;
+   grplot_input_buf_mgmt_status_t retval =  grplot_input_buf_mgmt_ok;
 
    const unsigned mgmtIndex =  p_input_buf_mgmt->elemLen * index + 4;
    *pp_pixels =  p_input_buf_mgmt->buf + mgmtIndex;
