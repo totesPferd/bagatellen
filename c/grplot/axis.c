@@ -114,7 +114,7 @@ grplot_axis_get_double(const grplot_axis_t *pAxis, double *pResult, grplot_axis_
          assert(0);
       }
    }
-   if (diffVal > 0.0) {
+   if (diffRange > 0.0) {
       *pResult =  diffVal / diffRange;
    } else {
       retval =  grplot_axis_zero_range;
