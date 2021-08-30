@@ -180,16 +180,23 @@ normalize(
       {
          double minVal;
          if (retval == grplot_diagram_ok) {
-            retval =  grplot_input_buf_get_min(&inpBuf, &minVal);
+            grplot_input_buf_status_t errorMode =  grplot_input_buf_get_min(&inpBuf, &minVal);
+            if (errorMode == grplot_input_buf_empty_buf) {
+               retval =  grplot_diagram_empty_buf;
+            }
          }
    
          double maxVal;
          if (retval == grplot_diagram_ok) {
-            retval =  grplot_input_buf_get_max(&inpBuf, &maxVal);
+            grplot_input_buf_status_t errorMode =  grplot_input_buf_get_max(&inpBuf, &maxVal);
+            assert(errorMode != grplot_input_buf_empty_buf);
          }
    
          if (retval == grplot_diagram_ok) {
-            retval =  grplot_input_buf_normalize(&inpBuf, minVal, maxVal);
+            grplot_input_buf_status_t errorMode =  grplot_input_buf_normalize(&inpBuf, minVal, maxVal);
+            if (errorMode == grplot_input_buf_zero_range) {
+               retval =  grplot_diagram_zero_range;
+            }
          }
       }
    }
