@@ -27,7 +27,8 @@ typedef struct {
    grplot_axis_scale_type_t scaleType;
    unsigned nrPixels;
    grplot_axis_val_t min;
-   grplot_axis_val_t max; } grplot_axis_t;
+   grplot_axis_val_t max;
+   double diffRange; } grplot_axis_t;
 
 typedef enum {
       grplot_axis_linear_step_one

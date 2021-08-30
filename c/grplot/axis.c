@@ -14,6 +14,9 @@ getStepWidth_linear(const grplot_axis_linear_step_t *, double *);
 static grplot_axis_status_t
 getStepWidth_logarithm(const grplot_axis_logarithm_step_t *, double *);
 
+static grplot_axis_status_t
+diffRange_init(grplot_axis_t *);
+
 grplot_axis_status_t
 grplot_axis_init(
       grplot_axis_t *pAxis
@@ -38,6 +41,8 @@ grplot_axis_init(
    pAxis->nrPixels =  nrPixels;
    pAxis->min =  min;
    pAxis->max =  max;
+
+   return diffRange_init(pAxis);
 }
 
 grplot_axis_status_t
@@ -74,14 +79,12 @@ grplot_axis_get_double(const grplot_axis_t *pAxis, double *pResult, grplot_axis_
 
    grplot_axis_status_t retval =  grplot_axis_ok;
 
-   double diffRange, diffVal;
+   double diffVal;
 
    switch (pAxis->scaleType) {
       case grplot_axis_linear: {
          assert((pAxis->min).numeric <= val.numeric);
-         assert((pAxis->max).numeric > (pAxis->min).numeric);
 
-         diffRange =  (pAxis->max).numeric - (pAxis->min).numeric;
          diffVal =  val.numeric - (pAxis -> min).numeric;
       }
       break;
@@ -89,22 +92,17 @@ grplot_axis_get_double(const grplot_axis_t *pAxis, double *pResult, grplot_axis_
       case grplot_axis_logarithm: {
          assert((pAxis->max).numeric >= val.numeric);
          assert((pAxis->min).numeric <= val.numeric);
-         assert((pAxis->max).numeric > (pAxis->min).numeric);
-         assert((pAxis->max).numeric > 0);
          assert((pAxis->min).numeric > 0);
          assert(val.numeric > 0);
 
-         double max =  log10((pAxis->max).numeric);
          double min =  log10((pAxis->min).numeric);
          double realVal =  log10(val.numeric);
 
-         diffRange =  max - min;
          diffVal = realVal - min;
       }
       break;
 
       case grplot_axis_time: {
-         diffRange =  difftime((pAxis->max).time, (pAxis->min).time);
          diffVal = difftime(val.time, (pAxis->min).time);
 
       }
@@ -114,11 +112,7 @@ grplot_axis_get_double(const grplot_axis_t *pAxis, double *pResult, grplot_axis_
          assert(0);
       }
    }
-   if (diffRange > 0.0) {
-      *pResult =  diffVal / diffRange;
-   } else {
-      retval =  grplot_axis_zero_range;
-   }
+   *pResult =  diffVal / pAxis->diffRange;
 
    return retval;
 }
@@ -466,4 +460,46 @@ getStepWidth_logarithm(const grplot_axis_logarithm_step_t *pStep, double *pResul
    return retval;
 }
 
+static grplot_axis_status_t
+diffRange_init(grplot_axis_t *pAxis) {
+   assert(pAxis);
+
+   grplot_axis_status_t retval =  grplot_axis_ok;
+
+   switch (pAxis->scaleType) {
+      case grplot_axis_linear: {
+         assert((pAxis->max).numeric > (pAxis->min).numeric);
+
+         pAxis->diffRange =  (pAxis->max).numeric - (pAxis->min).numeric;
+      }
+      break;
+
+      case grplot_axis_logarithm: {
+         assert((pAxis->max).numeric > (pAxis->min).numeric);
+         assert((pAxis->max).numeric > 0);
+         assert((pAxis->min).numeric > 0);
+
+         double max =  log10((pAxis->max).numeric);
+         double min =  log10((pAxis->min).numeric);
+
+         pAxis->diffRange =  max - min;
+      }
+      break;
+
+      case grplot_axis_time: {
+         pAxis->diffRange =  difftime((pAxis->max).time, (pAxis->min).time);
+      }
+      break;
+
+      default: {
+         assert(0);
+      }
+   }
+
+   if (pAxis->diffRange <= 0.0) {
+      retval =  grplot_axis_zero_range;
+   }
+
+   return retval;
+}
 

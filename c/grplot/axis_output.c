@@ -40,12 +40,8 @@ grplot_axis_output_positional_inscription_init(
       ,  text );
 
    double distance;
-   grplot_axis_status_t errorMode =  grplot_axis_get_double(pAxis, &distance, val);
-   if (errorMode == grplot_axis_ok) {
-      pPositionalInscription->positionPerPixel =  (unsigned) (distance * (double) pAxis->nrPixels);
-   } else if (errorMode == grplot_axis_zero_range) {
-      retval =  grplot_axis_output_zero_range;
-   }
+   grplot_axis_get_double(pAxis, &distance, val);
+   pPositionalInscription->positionPerPixel =  (unsigned) (distance * (double) pAxis->nrPixels);
 
    return retval;
 }
@@ -77,13 +73,19 @@ grplot_axis_output_init(
 
    grplot_axis_output_status_t retval =  grplot_axis_output_ok;
 
-   grplot_axis_init(
-         &(pAxisOutput->axisSpec)
-      ,  axisType
-      ,  scaleType
-      ,  nrPixels
-      ,  min
-      ,  max );
+   {
+      grplot_axis_status_t errorMode =  grplot_axis_init(
+            &(pAxisOutput->axisSpec)
+         ,  axisType
+         ,  scaleType
+         ,  nrPixels
+         ,  min
+         ,  max );
+      if (errorMode == grplot_axis_zero_range) {
+         retval =  grplot_axis_output_zero_range;
+      }
+   }
+      
    pAxisOutput->inscriptionFont =  inscriptionFont;
    pAxisOutput->inscriptionColor =  inscriptionColor;
    pAxisOutput->labelFont =  labelFont;
