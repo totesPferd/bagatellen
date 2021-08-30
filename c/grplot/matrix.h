@@ -12,16 +12,22 @@ typedef struct {
    unsigned positionPerPixel; } grplot_matrix_positional_axis_t;
 
 typedef struct {
+   grplot_matrix_positional_axis_t positionalAxis;
+   grplot_axis_output_status_t status; } grplot_matrix_positional_axis_with_status_t;
+
+typedef struct {
+   grplot_diagram_t diagram;
+   grplot_diagram_status_t status; } grplot_matrix_diagram_with_status_t;
+
+typedef struct {
    unsigned nrX, nrY;
    unsigned nrAxis, nrDiagram;
    unsigned maxX, maxY;
    unsigned xDistance, yDistance;
    unsigned originX, originY;
    unsigned xTotal, yTotal;
-   grplot_matrix_positional_axis_t *pAxisBuf;
-   grplot_axis_output_status_t *pAxisStatusBuf;
-   grplot_diagram_t *pDiagramBuf;
-   grplot_diagram_status_t *pDiagramStatusBuf;
+   grplot_matrix_positional_axis_with_status_t *pAxisBuf;
+   grplot_matrix_diagram_with_status_t *pDiagramBuf;
    DATA32 baseColor;
    unsigned nrOutPixel; } grplot_matrix_t;
 

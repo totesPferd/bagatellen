@@ -65,13 +65,8 @@ grplot_matrix_init(
    pMatrix->nrAxis =  nrX + nrY;
    pMatrix->nrDiagram =  nrX * nrY;
 
-   pMatrix->pAxisBuf =  (grplot_matrix_positional_axis_t *) malloc(sizeof(grplot_matrix_positional_axis_t) *
-      (pMatrix->nrAxis));
-   pMatrix->pDiagramBuf =  (grplot_diagram_t *) malloc(sizeof(grplot_diagram_t) * (pMatrix->nrDiagram));
-
-   pMatrix->pAxisStatusBuf =  (grplot_axis_output_status_t *) malloc(sizeof(grplot_axis_output_status_t) *
-      (pMatrix->nrAxis));
-   pMatrix->pDiagramStatusBuf =  (grplot_diagram_status_t *) malloc(sizeof(grplot_diagram_status_t) * (pMatrix->nrDiagram));
+   pMatrix->pAxisBuf =  malloc(sizeof(grplot_matrix_positional_axis_with_status_t) * (pMatrix->nrAxis));
+   pMatrix->pDiagramBuf =  malloc(sizeof(grplot_matrix_diagram_with_status_t) * (pMatrix->nrDiagram));
 
    return retval;
 }
@@ -86,7 +81,7 @@ grplot_matrix_get_positional_x_axis(
 
    int retval =  0;
 
-   *ppAxis =  &((pMatrix->pAxisBuf)[x]);
+   *ppAxis =  &((pMatrix->pAxisBuf)[x].positionalAxis);
 
    return retval;
 }
@@ -101,7 +96,7 @@ grplot_matrix_get_positional_y_axis(
 
    int retval =  0;
 
-   *ppAxis =  &((pMatrix->pAxisBuf)[y + (pMatrix->nrX)]);
+   *ppAxis =  &((pMatrix->pAxisBuf)[y + (pMatrix->nrX)].positionalAxis);
 
    return retval;
 }
@@ -116,7 +111,7 @@ grplot_matrix_get_diagram(
    assert(x < pMatrix->nrX);
    assert(y < pMatrix->nrY);
 
-   *ppDiagram =  &((pMatrix->pDiagramBuf)[x + y * (pMatrix->nrX)]);
+   *ppDiagram =  &((pMatrix->pDiagramBuf)[x + y * (pMatrix->nrX)].diagram);
 
    int retval =  0;
 
@@ -133,7 +128,7 @@ grplot_matrix_get_x_axis_status(
 
    int retval =  0;
 
-   *ppAxisStatus =  &((pMatrix->pAxisStatusBuf)[x]);
+   *ppAxisStatus =  &((pMatrix->pAxisBuf)[x].status);
 
    return retval;
 }
@@ -148,7 +143,7 @@ grplot_matrix_get_y_axis_status(
 
    int retval =  0;
 
-   *ppAxisStatus =  &((pMatrix->pAxisStatusBuf)[y + (pMatrix->nrX)]);
+   *ppAxisStatus =  &((pMatrix->pAxisBuf)[y + (pMatrix->nrX)].status);
 
    return retval;
 }
@@ -163,7 +158,7 @@ grplot_matrix_get_diagram_status(
    assert(x < pMatrix->nrX);
    assert(y < pMatrix->nrY);
 
-   *ppDiagramStatus =  &((pMatrix->pDiagramStatusBuf)[x + y * (pMatrix->nrX)]);
+   *ppDiagramStatus =  &((pMatrix->pDiagramBuf)[x + y * (pMatrix->nrX)].status);
 
    int retval =  0;
 
@@ -300,7 +295,7 @@ grplot_matrix_prepare(
    int retval =  0;
 
    for (unsigned i =  0; i < pMatrix->nrDiagram; i++) {
-      grplot_diagram_prepare(&((pMatrix->pDiagramBuf)[i]));
+      grplot_diagram_prepare(&((pMatrix->pDiagramBuf)[i].diagram));
    }
 
    updateAllXLength(pMatrix);
@@ -392,17 +387,14 @@ grplot_matrix_destroy(
    assert(pMatrix);
 
    for (unsigned i =  0; i < pMatrix->nrAxis; i++) {
-      grplot_axis_output_destroy(&((pMatrix->pAxisBuf)[i].axis));
+      grplot_axis_output_destroy(&((pMatrix->pAxisBuf)[i].positionalAxis.axis));
    }
    for (unsigned i =  0; i < pMatrix->nrDiagram; i++) {
-      grplot_diagram_destroy(&((pMatrix->pDiagramBuf)[i]));
+      grplot_diagram_destroy(&((pMatrix->pDiagramBuf)[i].diagram));
    }
 
    free(pMatrix->pAxisBuf);
    free(pMatrix->pDiagramBuf);
-
-   free(pMatrix->pAxisStatusBuf);
-   free(pMatrix->pDiagramStatusBuf);
 }
 
 static int
