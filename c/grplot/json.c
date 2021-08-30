@@ -16,10 +16,10 @@ grplot_json_color(json_t *pJson, DATA32 *pResult) {
             if (red >= 0 && red < 256) {
                ((unsigned char *) pResult)[2] =  red;
             } else {
-               retval |=   32;
+               retval |=   grplot_json_error_red_range;
             }
          } else {
-            retval |=   2;
+            retval |=   grplot_json_error_red_integer;
          }
       }
       {
@@ -29,10 +29,10 @@ grplot_json_color(json_t *pJson, DATA32 *pResult) {
             if (green >= 0 && green < 256) {
                ((unsigned char *) pResult)[1] =  green;
             } else {
-               retval |=   64;
+               retval |=   grplot_json_error_green_range;;
             }
          } else {
-            retval |=   4;
+            retval |=   grplot_json_error_green_integer;
          }
       }
       {
@@ -42,10 +42,10 @@ grplot_json_color(json_t *pJson, DATA32 *pResult) {
             if (blue >= 0 && blue < 256) {
                ((unsigned char *) pResult)[0] =  blue;
             } else {
-               retval |=   128;
+               retval |=   grplot_json_error_blue_range;
             }
          } else {
-            retval |=   8;
+            retval |=   grplot_json_error_blue_integer;
          }
       }
       {
@@ -55,10 +55,10 @@ grplot_json_color(json_t *pJson, DATA32 *pResult) {
             if (alpha >= 0 && alpha < 256) {
                ((unsigned char *) pResult)[3] =  alpha;
             } else {
-               retval |=   256;
+               retval |=   grplot_json_error_alpha_range;
             }
          } else {
-            retval |=   16;
+            retval |=   grplot_json_error_alpha_integer;
          }
       }
    } else {
