@@ -62,7 +62,7 @@ grplot_json_color(json_t *pJson, DATA32 *pResult) {
          }
       }
    } else {
-      retval |=  1;
+      retval |=  grplot_json_error_color_object;
    }
 
    return retval;
