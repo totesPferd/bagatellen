@@ -19,7 +19,9 @@ typedef struct {
    unsigned originX, originY;
    unsigned xTotal, yTotal;
    grplot_matrix_positional_axis_t *pAxisBuf;
+   grplot_axis_output_status_t *pAxisStatusBuf;
    grplot_diagram_t *pDiagramBuf;
+   grplot_diagram_status_t *pDiagramStatusBuf;
    DATA32 baseColor;
    unsigned nrOutPixel; } grplot_matrix_t;
 
@@ -47,6 +49,25 @@ int
 grplot_matrix_get_diagram(
       const grplot_matrix_t *
    ,  grplot_diagram_t **
+   ,  unsigned
+   ,  unsigned );
+
+int
+grplot_matrix_get_x_axis_status(
+      const grplot_matrix_t *
+   ,  grplot_axis_output_status_t **
+   ,  unsigned );
+
+int
+grplot_matrix_get_y_axis_status(
+      const grplot_matrix_t *
+   ,  grplot_axis_output_status_t **
+   ,  unsigned );
+
+int
+grplot_matrix_get_diagram_status(
+      const grplot_matrix_t *
+   ,  grplot_diagram_status_t **
    ,  unsigned
    ,  unsigned );
 
