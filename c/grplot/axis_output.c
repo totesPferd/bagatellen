@@ -3,25 +3,25 @@
 
 #include "axis_output.h"
 
-static int
+static grplot_axis_output_status_t
 get_inscription_sum(
       int *
    ,  unsigned
    ,  const grplot_inscription_t *
    ,  const grplot_inscription_positional_inscription_t * );
 
-static int
+static grplot_axis_output_status_t
 get_length(
       grplot_axis_output_t *);
 
-static int
+static grplot_axis_output_status_t
 get_width(
       grplot_axis_output_t *);
 
-static int
+static grplot_axis_output_status_t
 get_inscriptions(grplot_axis_output_t *);
 
-int
+grplot_axis_output_status_t
 grplot_axis_output_positional_inscription_init(
       const grplot_axis_t *pAxis
    ,  grplot_inscription_positional_inscription_t *pPositionalInscription
@@ -30,21 +30,27 @@ grplot_axis_output_positional_inscription_init(
    assert(pAxis);
    assert(pPositionalInscription);
 
+   grplot_axis_output_status_t retval =  grplot_axis_output_ok;
+
    char *text;
    grplot_axis_get_string(pAxis, &text, val);
-   int retval =  grplot_inscription_init(
+   grplot_inscription_init(
          &(pPositionalInscription->inscription)
       ,  font
       ,  text );
 
    double distance;
-   grplot_axis_get_double(pAxis, &distance, val);
-   pPositionalInscription->positionPerPixel =  (unsigned) (distance * (double) pAxis->nrPixels);
+   grplot_axis_status_t errorMode =  grplot_axis_get_double(pAxis, &distance, val);
+   if (errorMode == grplot_axis_ok) {
+      pPositionalInscription->positionPerPixel =  (unsigned) (distance * (double) pAxis->nrPixels);
+   } else if (errorMode == grplot_axis_zero_range) {
+      retval =  grplot_axis_output_zero_range;
+   }
 
    return retval;
 }
 
-int
+grplot_axis_output_status_t
 grplot_axis_output_init(
       grplot_axis_output_t *pAxisOutput
    ,  grplot_axis_type_t axisType
@@ -69,7 +75,7 @@ grplot_axis_output_init(
          scaleType != grplot_axis_logarithm
       || min.numeric > 0.0 );
 
-   int retval =  0;
+   grplot_axis_output_status_t retval =  grplot_axis_output_ok;
 
    grplot_axis_init(
          &(pAxisOutput->axisSpec)
@@ -124,7 +130,7 @@ grplot_axis_output_destroy(grplot_axis_output_t *pAxisOutput) {
    }
 }
 
-int
+grplot_axis_output_status_t
 grplot_axis_output_draw(
       grplot_axis_output_t *pAxisOutput
    ,  unsigned width
@@ -134,7 +140,7 @@ grplot_axis_output_draw(
    assert(pAxisOutput);
    assert(originX <= width);
 
-   int retval =  0;
+   grplot_axis_output_status_t retval =  grplot_axis_output_ok;
 
    switch ((pAxisOutput->axisSpec).axisType) {
 
@@ -228,7 +234,7 @@ grplot_axis_output_draw(
    return retval;
 }
 
-static int
+static grplot_axis_output_status_t
 get_inscription_sum(
       int *pResult
    ,  unsigned positionPerPixel
@@ -238,7 +244,7 @@ get_inscription_sum(
    assert(pA);
    assert(pVB);
 
-   int retval =  0;
+   grplot_axis_output_status_t retval =  grplot_axis_output_ok;
 
    *pResult =
          positionPerPixel
@@ -248,24 +254,24 @@ get_inscription_sum(
    return retval;
 }
 
-static int
+static grplot_axis_output_status_t
 get_length(
       grplot_axis_output_t *pAxisOutput ) {
    assert(pAxisOutput);
 
-   int retval =  0;
+   grplot_axis_output_status_t retval =  grplot_axis_output_ok;
 
    pAxisOutput->length =  (pAxisOutput->axisSpec).nrPixels + (pAxisOutput->label).width;
 
    return retval;
 }
 
-static int
+static grplot_axis_output_status_t
 get_width(
       grplot_axis_output_t *pAxisOutput ) {
    assert(pAxisOutput);
 
-   int retval =  0;
+   grplot_axis_output_status_t retval =  grplot_axis_output_ok;
 
    pAxisOutput->width =  (pAxisOutput->upperInscription).width;
    for (unsigned int i =  0; i < pAxisOutput->nrInscriptions; i++) {
@@ -278,12 +284,12 @@ get_width(
    return retval;
 }
 
-static int
+static grplot_axis_output_status_t
 get_inscriptions(
       grplot_axis_output_t *pAxisOutput ) {
    assert(pAxisOutput);
 
-   int retval =  0;
+   grplot_axis_output_status_t retval =  grplot_axis_output_ok;
 
    int isRunning =  1;
    grplot_axis_val_t currentVal =  (pAxisOutput->axisSpec).min;
@@ -326,9 +332,9 @@ get_inscriptions(
             if (innerSpace > 0) {
                isInnerRunning =  0;
             } else {
-               int errorMode =  grplot_axis_step_next(&(pAxisOutput->axisSpec), &step);
-               if (errorMode) {
-                  retval =  3;
+               grplot_axis_status_t errorMode =  grplot_axis_step_next(&(pAxisOutput->axisSpec), &step);
+               if (errorMode == grplot_axis_time_overflow) {
+                  retval =  grplot_axis_output_time_overflow;
                   isInnerRunning =  0;
                   isRunning =  0;
                }
@@ -338,7 +344,7 @@ get_inscriptions(
          if (isRunning) {
             pAxisOutput->nrInscriptions++;
             if (pAxisOutput->nrInscriptions > MAX_NR_INSCRIPTIONS) {
-               retval =  2;
+               retval =  grplot_axis_output_inscription_buf_exceeded;
                isRunning =  0;
                pAxisOutput->nrInscriptions =  MAX_NR_INSCRIPTIONS;
             }
