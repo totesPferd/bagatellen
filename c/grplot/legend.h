@@ -4,8 +4,7 @@
 #include "inscription.h"
 
 typedef enum {
-      grplot_legend_ok = 0
-} grplot_legend_status_t;
+      grplot_legend_ok = 0 } grplot_legend_status_t;
 
 typedef struct {
    grplot_inscription_positional_inscription_t positionalInscription;

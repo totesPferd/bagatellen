@@ -4,8 +4,7 @@
 #include <Imlib2.h>
 
 typedef enum {
-      grplot_color_diff_ok = 0
-} grplot_color_diff_status_t;
+      grplot_color_diff_ok = 0 } grplot_color_diff_status_t;
 
 grplot_color_diff_status_t
 grplot_color_diff_encode(double *, DATA32, DATA32);
