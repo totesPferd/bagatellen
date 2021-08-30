@@ -5,7 +5,11 @@
 
 #include "input_buf_mgmt.h"
 
-int
+typedef enum {
+      grplot_output_buf_by_mgmt_ok = 0
+} grplot_output_buf_by_mgmt_status_t;
+
+grplot_output_buf_by_mgmt_status_t
 grplot_output_buf_by_mgmt_set_buf(
       DATA32 *
    ,  const grplot_input_buf_mgmt_t *

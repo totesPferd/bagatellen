@@ -5,7 +5,7 @@
 
 static const double nearZero =  +1.0E-12;
 
-int
+grplot_output_buf_by_mgmt_status_t
 grplot_output_buf_by_mgmt_set_buf(
       DATA32 *p_out
    ,  const grplot_input_buf_mgmt_t *p_input_buf_mgmt
@@ -15,7 +15,7 @@ grplot_output_buf_by_mgmt_set_buf(
    ,  DATA32 backgroundColor ) {
    assert(p_out);
    assert(p_input_buf_mgmt);
-   int retval =  0;
+   grplot_output_buf_by_mgmt_status_t retval =  grplot_output_buf_by_mgmt_ok;
 
    unsigned long idx =  0;
    for (unsigned row =  0; row < p_input_buf_mgmt->nrRows; row++)
