@@ -7,6 +7,11 @@
 #include "input_buf_mgmt.h"
 #include "legend.h"
 
+typedef enum {
+      grplot_diagram_ok = 0
+   ,  grplot_diagram_empty_buf
+   ,  grplot_diagram_zero_range } grplot_diagram_status_t;
+
 typedef struct {
    grplot_axis_output_t *pXAxis, *pYAxis;
    DATA32 backgroundColor;
@@ -14,7 +19,7 @@ typedef struct {
    grplot_input_buf_mgmt_t inputBufMgmt;
    grplot_legend_t legend; } grplot_diagram_t;
 
-int
+grplot_diagram_status_t
 grplot_diagram_init(
       grplot_diagram_t *
    ,  DATA32
@@ -23,14 +28,14 @@ grplot_diagram_init(
    ,  grplot_axis_output_t *
    ,  grplot_axis_output_t * );
 
-int
+grplot_diagram_status_t
 grplot_diagram_item_init(
       grplot_diagram_t *
    ,  DATA32
    ,  char *
    ,  unsigned );
 
-int
+grplot_diagram_status_t
 grplot_diagram_plot_point(
       grplot_diagram_t *
    ,  grplot_axis_val_t
@@ -39,11 +44,11 @@ grplot_diagram_plot_point(
    ,  unsigned
    ,  double );
 
-int
+grplot_diagram_status_t
 grplot_diagram_prepare(
       grplot_diagram_t * );
 
-int
+grplot_diagram_status_t
 grplot_diagram_draw(
       grplot_diagram_t *
    ,  DATA32 *

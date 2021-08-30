@@ -5,11 +5,11 @@
 #include "input_buf_by_mgmt.h"
 #include "output_buf_by_mgmt.h"
 
-static int
+static grplot_diagram_status_t
 normalize(
       grplot_input_buf_mgmt_t * );
 
-int
+grplot_diagram_status_t
 grplot_diagram_init(
       grplot_diagram_t *pDiagram
    ,  DATA32 color
@@ -19,7 +19,7 @@ grplot_diagram_init(
    ,  grplot_axis_output_t *pYAxis ) {
    assert(pDiagram);
 
-   int retval =  0;
+   grplot_diagram_status_t retval =  grplot_diagram_ok;
 
    pDiagram->pXAxis =  pXAxis;
    pDiagram->pYAxis =  pYAxis;
@@ -38,7 +38,7 @@ grplot_diagram_init(
    return retval;
 }
 
-int
+grplot_diagram_status_t
 grplot_diagram_item_init(
       grplot_diagram_t *pDiagram
    ,  DATA32 color
@@ -46,7 +46,7 @@ grplot_diagram_item_init(
    ,  unsigned index ) {
    assert(pDiagram);
 
-   int retval =  0;
+   grplot_diagram_status_t retval =  grplot_diagram_ok;
 
    {
       double *pColor;
@@ -70,7 +70,7 @@ grplot_diagram_item_init(
    return retval;
 }
 
-int
+grplot_diagram_status_t
 grplot_diagram_plot_point(
       grplot_diagram_t *pDiagram
    ,  grplot_axis_val_t x
@@ -80,7 +80,7 @@ grplot_diagram_plot_point(
    ,  double radius ) {
    assert(pDiagram);
 
-   int retval =  0;
+   grplot_diagram_status_t retval =  grplot_diagram_ok;
 
    int isInRange;
    grplot_axis_is_inRange(&(pDiagram->pXAxis->axisSpec), &isInRange, x);
@@ -103,15 +103,12 @@ grplot_diagram_plot_point(
    return retval;
 }
 
-
-int
+grplot_diagram_status_t
 grplot_diagram_prepare(
       grplot_diagram_t *pDiagram ) {
    assert(pDiagram);
 
-   int retval =  0;
-
-   normalize(&(pDiagram->inputBufMgmt));
+   grplot_diagram_status_t retval =  normalize(&(pDiagram->inputBufMgmt));
    grplot_legend_prepare(&(pDiagram->legend));
 
    {
@@ -131,7 +128,7 @@ grplot_diagram_prepare(
 }
 
 
-int
+grplot_diagram_status_t
 grplot_diagram_draw(
       grplot_diagram_t *pDiagram
    ,  DATA32 *out_buf
@@ -140,7 +137,7 @@ grplot_diagram_draw(
    ,  unsigned originY ) {
    assert(pDiagram);
 
-   int retval =  0;
+   grplot_diagram_status_t retval =  grplot_diagram_ok;
 
    grplot_output_buf_by_mgmt_set_buf(
          out_buf
@@ -167,12 +164,12 @@ grplot_diagram_destroy(
    grplot_input_buf_mgmt_destroy(&(pDiagram->inputBufMgmt));
 }
 
-static int
+static grplot_diagram_status_t
 normalize(
      grplot_input_buf_mgmt_t *pInpBufMgmt) {
    assert(pInpBufMgmt);
 
-   int retval =  0;
+   grplot_diagram_status_t retval =  grplot_diagram_ok;
 
    for (unsigned index =  0;  index < pInpBufMgmt->nrInpBufs; index++) {
       grplot_input_buf_t inpBuf;
@@ -182,12 +179,18 @@ normalize(
          ,  index );
       {
          double minVal;
-         grplot_input_buf_get_min(&inpBuf, &minVal);
+         if (retval == grplot_diagram_ok) {
+            retval =  grplot_input_buf_get_min(&inpBuf, &minVal);
+         }
    
          double maxVal;
-         grplot_input_buf_get_max(&inpBuf, &maxVal);
+         if (retval == grplot_diagram_ok) {
+            retval =  grplot_input_buf_get_max(&inpBuf, &maxVal);
+         }
    
-         grplot_input_buf_normalize(&inpBuf, minVal, maxVal);
+         if (retval == grplot_diagram_ok) {
+            retval =  grplot_input_buf_normalize(&inpBuf, minVal, maxVal);
+         }
       }
    }
 
