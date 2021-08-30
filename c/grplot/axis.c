@@ -8,13 +8,13 @@
 
 static const unsigned nrCharDoubleString =  13;
 
-static int
+static grplot_axis_status_t
 getStepWidth_linear(const grplot_axis_linear_step_t *, double *);
 
-static int
+static grplot_axis_status_t
 getStepWidth_logarithm(const grplot_axis_logarithm_step_t *, double *);
 
-int
+grplot_axis_status_t
 grplot_axis_init(
       grplot_axis_t *pAxis
    ,  grplot_axis_type_t axisType
@@ -40,12 +40,12 @@ grplot_axis_init(
    pAxis->max =  max;
 }
 
-int
+grplot_axis_status_t
 grplot_axis_is_inRange(const grplot_axis_t *pAxis, int *pStatus, grplot_axis_val_t val) {
    assert(pAxis);
    assert(pStatus);
 
-   int retval =  0;
+   grplot_axis_status_t retval =  grplot_axis_ok;
 
    switch (pAxis->scaleType) {
 
@@ -68,12 +68,11 @@ grplot_axis_is_inRange(const grplot_axis_t *pAxis, int *pStatus, grplot_axis_val
    return retval;
 }
 
-
-int
+grplot_axis_status_t
 grplot_axis_get_double(const grplot_axis_t *pAxis, double *pResult, grplot_axis_val_t val) {
    assert(pAxis);
 
-   int retval =  0;
+   grplot_axis_status_t retval =  grplot_axis_ok;
 
    double diffRange, diffVal;
 
@@ -115,20 +114,20 @@ grplot_axis_get_double(const grplot_axis_t *pAxis, double *pResult, grplot_axis_
          assert(0);
       }
    }
-   if (!retval) {
-      assert(diffRange > 0.0);
-
+   if (diffVal > 0.0) {
       *pResult =  diffVal / diffRange;
+   } else {
+      retval =  grplot_axis_zero_range;
    }
 
    return retval;
 }
 
-int
+grplot_axis_status_t
 grplot_axis_get_string(const grplot_axis_t *pAxis, char **ppResult, grplot_axis_val_t val) {
    assert(pAxis);
 
-   int retval =  0;
+   grplot_axis_status_t retval =  grplot_axis_ok;
 
    switch(pAxis->scaleType) {
       case grplot_axis_linear:
@@ -154,12 +153,12 @@ grplot_axis_get_string(const grplot_axis_t *pAxis, char **ppResult, grplot_axis_
    return retval;
 }
 
-int
+grplot_axis_status_t
 grplot_axis_step_init(const grplot_axis_t *pAxis, grplot_axis_step_t *pStep) {
    assert(pAxis);
    assert(pStep);
 
-   int retval =  0;
+   grplot_axis_status_t retval =  grplot_axis_ok;
 
    switch(pAxis->scaleType) {
       case grplot_axis_linear: {
@@ -189,12 +188,12 @@ grplot_axis_step_init(const grplot_axis_t *pAxis, grplot_axis_step_t *pStep) {
    return retval;
 }
 
-int
+grplot_axis_status_t
 grplot_axis_step_next(const grplot_axis_t *pAxis, grplot_axis_step_t *pStep) {
    assert(pAxis);
    assert(pStep);
 
-   int retval =  0;
+   grplot_axis_status_t retval =  grplot_axis_ok;
 
    switch(pAxis->scaleType) {
       case grplot_axis_linear: {
@@ -280,7 +279,7 @@ grplot_axis_step_next(const grplot_axis_t *pAxis, grplot_axis_step_t *pStep) {
             break;
 
             case (grplot_axis_time_step_year): {
-               retval =  2;
+               retval =  grplot_axis_time_overflow;
             }
             break;
 
@@ -299,13 +298,13 @@ grplot_axis_step_next(const grplot_axis_t *pAxis, grplot_axis_step_t *pStep) {
    return retval;
 }
 
-int
+grplot_axis_status_t
 grplot_axis_next_val(const grplot_axis_t *pAxis, const grplot_axis_step_t *pStep, grplot_axis_val_t *pVal) {
    assert(pAxis);
    assert(pStep);
    assert(pVal);
 
-   int retval =  0;
+   grplot_axis_status_t retval =  grplot_axis_ok;
 
    switch(pAxis->scaleType) {
 
@@ -354,7 +353,7 @@ grplot_axis_next_val(const grplot_axis_t *pAxis, const grplot_axis_step_t *pStep
             }
 
             default: {
-               retval =  2;
+               assert(0);
             }
          }
          switch (pStep->time) {
@@ -389,7 +388,7 @@ grplot_axis_next_val(const grplot_axis_t *pAxis, const grplot_axis_step_t *pStep
             break;
 
             default: {
-               retval =  2;
+               assert(0);
             }
          }
 
@@ -405,10 +404,11 @@ grplot_axis_next_val(const grplot_axis_t *pAxis, const grplot_axis_step_t *pStep
    return retval;
 }
 
-static int
+static grplot_axis_status_t
 getStepWidth_linear(const grplot_axis_linear_step_t *pStep, double *pResult) {
    assert(pStep);
-   int retval =  0;
+
+   grplot_axis_status_t retval =  grplot_axis_ok;
 
    *pResult =  pow(10.0, (double) pStep->exponent);
    switch (pStep->mantissa) {
@@ -433,10 +433,10 @@ getStepWidth_linear(const grplot_axis_linear_step_t *pStep, double *pResult) {
    return retval;
 }
 
-static int
+static grplot_axis_status_t
 getStepWidth_logarithm(const grplot_axis_logarithm_step_t *pStep, double *pResult) {
    assert(pStep);
-   int retval =  0;
+   grplot_axis_status_t retval =  grplot_axis_ok;
 
    *pResult =  (double) pStep->base;
    switch (pStep->mantissa) {

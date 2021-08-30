@@ -5,6 +5,11 @@
 #include <time.h>
 
 typedef enum {
+      grplot_axis_ok =  0
+   ,  grplot_axis_zero_range
+   ,  grplot_axis_time_overflow } grplot_axis_status_t;
+
+typedef enum {
       grplot_axis_x_axis
    ,  grplot_axis_y_axis } grplot_axis_type_t;
 
@@ -56,25 +61,25 @@ typedef union {
    grplot_axis_logarithm_step_t logarithm;
    grplot_axis_time_step_t time; } grplot_axis_step_t;
 
-int
+grplot_axis_status_t
 grplot_axis_init(grplot_axis_t *, grplot_axis_type_t, grplot_axis_scale_type_t, unsigned, grplot_axis_val_t, grplot_axis_val_t);
 
-int
+grplot_axis_status_t
 grplot_axis_is_inRange(const grplot_axis_t *, int *, grplot_axis_val_t);
 
-int
+grplot_axis_status_t
 grplot_axis_get_double(const grplot_axis_t *, double *, grplot_axis_val_t);
 
-int
+grplot_axis_status_t
 grplot_axis_get_string(const grplot_axis_t *, char **, grplot_axis_val_t);
 
-int
+grplot_axis_status_t
 grplot_axis_step_init(const grplot_axis_t *, grplot_axis_step_t *);
 
-int
+grplot_axis_status_t
 grplot_axis_step_next(const grplot_axis_t *, grplot_axis_step_t *);
 
-int
+grplot_axis_status_t
 grplot_axis_next_val(const grplot_axis_t *, const grplot_axis_step_t *, grplot_axis_val_t *);
 
 #endif
