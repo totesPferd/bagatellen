@@ -115,7 +115,10 @@ grplot_axis_output_init(
          ,  inscriptionText );
    }
 
-   retval =  get_inscriptions(pAxisOutput);
+   if (retval == grplot_axis_output_ok) {
+      retval =  get_inscriptions(pAxisOutput);
+   }
+
    get_length(pAxisOutput);
    get_width(pAxisOutput);
 
