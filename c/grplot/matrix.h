@@ -12,22 +12,14 @@ typedef struct {
    unsigned positionPerPixel; } grplot_matrix_positional_axis_t;
 
 typedef struct {
-   grplot_matrix_positional_axis_t positionalAxis;
-   grplot_axis_output_status_t status; } grplot_matrix_positional_axis_with_status_t;
-
-typedef struct {
-   grplot_diagram_t diagram;
-   grplot_diagram_status_t status; } grplot_matrix_diagram_with_status_t;
-
-typedef struct {
    unsigned nrX, nrY;
    unsigned nrAxis, nrDiagram;
    unsigned maxX, maxY;
    unsigned xDistance, yDistance;
    unsigned originX, originY;
    unsigned xTotal, yTotal;
-   grplot_matrix_positional_axis_with_status_t *pAxisBuf;
-   grplot_matrix_diagram_with_status_t *pDiagramBuf;
+   grplot_matrix_positional_axis_t *pAxisBuf;
+   grplot_diagram_t *pDiagramBuf;
    DATA32 baseColor;
    unsigned nrOutPixel; } grplot_matrix_t;
 
@@ -58,26 +50,7 @@ grplot_matrix_get_diagram(
    ,  unsigned
    ,  unsigned );
 
-int
-grplot_matrix_get_x_axis_status(
-      const grplot_matrix_t *
-   ,  grplot_axis_output_status_t **
-   ,  unsigned );
-
-int
-grplot_matrix_get_y_axis_status(
-      const grplot_matrix_t *
-   ,  grplot_axis_output_status_t **
-   ,  unsigned );
-
-int
-grplot_matrix_get_diagram_status(
-      const grplot_matrix_t *
-   ,  grplot_diagram_status_t **
-   ,  unsigned
-   ,  unsigned );
-
-int
+grplot_axis_output_status_t
 grplot_matrix_x_axis_init(
       grplot_matrix_t *
    ,  unsigned
@@ -92,7 +65,7 @@ grplot_matrix_x_axis_init(
    ,  grplot_axis_val_t
    ,  char * );
 
-int
+grplot_axis_output_status_t
 grplot_matrix_y_axis_init(
       grplot_matrix_t *
    ,  unsigned
@@ -107,7 +80,7 @@ grplot_matrix_y_axis_init(
    ,  grplot_axis_val_t
    ,  char * );
 
-int
+grplot_diagram_status_t
 grplot_matrix_diagram_init(
       grplot_matrix_t *
    ,  DATA32

@@ -48,21 +48,21 @@ updateMaxY(
       grplot_matrix_t * );
 
 static void
-getPositionalXAxisWithStatus(
+getPositionalXAxis(
       const grplot_matrix_t *
-   ,  grplot_matrix_positional_axis_with_status_t **
+   ,  grplot_matrix_positional_axis_t **
    ,  unsigned );
 
 static void
-getPositionalYAxisWithStatus(
+getPositionalYAxis(
       const grplot_matrix_t *
-   ,  grplot_matrix_positional_axis_with_status_t **
+   ,  grplot_matrix_positional_axis_t **
    ,  unsigned );
 
 static void
-getDiagramWithStatus(
+getDiagram(
       const grplot_matrix_t *
-   ,  grplot_matrix_diagram_with_status_t **
+   ,  grplot_diagram_t **
    ,  unsigned
    ,  unsigned );
 
@@ -84,8 +84,8 @@ grplot_matrix_init(
    pMatrix->nrAxis =  nrX + nrY;
    pMatrix->nrDiagram =  nrX * nrY;
 
-   pMatrix->pAxisBuf =  malloc(sizeof(grplot_matrix_positional_axis_with_status_t) * (pMatrix->nrAxis));
-   pMatrix->pDiagramBuf =  malloc(sizeof(grplot_matrix_diagram_with_status_t) * (pMatrix->nrDiagram));
+   pMatrix->pAxisBuf =  malloc(sizeof(grplot_matrix_positional_axis_t) * (pMatrix->nrAxis));
+   pMatrix->pDiagramBuf =  malloc(sizeof(grplot_diagram_t) * (pMatrix->nrDiagram));
 
    return retval;
 }
@@ -100,10 +100,7 @@ grplot_matrix_get_positional_x_axis(
 
    int retval =  0;
 
-   grplot_matrix_positional_axis_with_status_t *pPositionalAxisWithStatus;
-   getPositionalXAxisWithStatus(pMatrix, &pPositionalAxisWithStatus, x);
-
-   *ppAxis =  &(pPositionalAxisWithStatus->positionalAxis);
+   getPositionalXAxis(pMatrix, ppAxis, x);
 
    return retval;
 }
@@ -118,10 +115,7 @@ grplot_matrix_get_positional_y_axis(
 
    int retval =  0;
 
-   grplot_matrix_positional_axis_with_status_t *pPositionalAxisWithStatus;
-   getPositionalYAxisWithStatus(pMatrix, &pPositionalAxisWithStatus, y);
-
-   *ppAxis =  &(pPositionalAxisWithStatus->positionalAxis);
+   getPositionalYAxis(pMatrix, ppAxis, y);
 
    return retval;
 }
@@ -138,71 +132,12 @@ grplot_matrix_get_diagram(
 
    int retval =  0;
 
-   grplot_matrix_diagram_with_status_t *pDiagramWithStatus;
-   getDiagramWithStatus(pMatrix, &pDiagramWithStatus, x, y);
-
-   *ppDiagram =  &(pDiagramWithStatus->diagram);
+   getDiagram(pMatrix, ppDiagram, x, y);
 
    return retval;
 }
 
-int
-grplot_matrix_get_x_axis_status(
-      const grplot_matrix_t *pMatrix
-   ,  grplot_axis_output_status_t **ppAxisStatus
-   ,  unsigned x ) {
-   assert(pMatrix);
-   assert(x < pMatrix->nrX);
-
-   int retval =  0;
-
-   grplot_matrix_positional_axis_with_status_t *pPositionalAxisWithStatus;
-   getPositionalXAxisWithStatus(pMatrix, &pPositionalAxisWithStatus, x);
-
-   *ppAxisStatus =  &(pPositionalAxisWithStatus->status);
-
-   return retval;
-}
-
-int 
-grplot_matrix_get_y_axis_status(
-      const grplot_matrix_t *pMatrix
-   ,  grplot_axis_output_status_t **ppAxisStatus
-   ,  unsigned y ) {
-   assert(pMatrix);
-   assert(y < pMatrix->nrY);
-
-   int retval =  0;
-
-   grplot_matrix_positional_axis_with_status_t *pPositionalAxisWithStatus;
-   getPositionalYAxisWithStatus(pMatrix, &pPositionalAxisWithStatus, y);
-
-   *ppAxisStatus =  &(pPositionalAxisWithStatus->status);
-
-   return retval;
-}
-
-int
-grplot_matrix_get_diagram_status(
-      const grplot_matrix_t *pMatrix
-   ,  grplot_diagram_status_t **ppDiagramStatus
-   ,  unsigned x
-   ,  unsigned y ) {
-   assert(pMatrix);
-   assert(x < pMatrix->nrX);
-   assert(y < pMatrix->nrY);
-
-   int retval =  0;
-
-   grplot_matrix_diagram_with_status_t *pDiagramWithStatus;
-   getDiagramWithStatus(pMatrix, &pDiagramWithStatus, x, y);
-
-   *ppDiagramStatus =  &(pDiagramWithStatus->status);
-
-   return retval;
-}
-
-int
+grplot_axis_output_status_t
 grplot_matrix_x_axis_init(
       grplot_matrix_t *pMatrix
    ,  unsigned x
@@ -219,11 +154,11 @@ grplot_matrix_x_axis_init(
    assert(pMatrix);
    assert(x < pMatrix->nrX);
 
-   grplot_matrix_positional_axis_with_status_t *pPositionalAxisWithStatus;
-   getPositionalXAxisWithStatus(pMatrix, &pPositionalAxisWithStatus, x);
+   grplot_matrix_positional_axis_t *pPositionalAxis;
+   getPositionalXAxis(pMatrix, &pPositionalAxis, x);
 
-   pPositionalAxisWithStatus->status =  grplot_axis_output_init(
-         &((pPositionalAxisWithStatus->positionalAxis).axis)
+   return grplot_axis_output_init(
+         &(pPositionalAxis->axis)
       ,  grplot_axis_x_axis
       ,  scaleType
       ,  inscriptionFont
@@ -235,14 +170,9 @@ grplot_matrix_x_axis_init(
       ,  min
       ,  max
       ,  label );
-
-   return
-         pPositionalAxisWithStatus == grplot_axis_output_ok
-      ?  0
-      :  1;
 }
 
-int
+grplot_axis_output_status_t
 grplot_matrix_y_axis_init(
       grplot_matrix_t *pMatrix
    ,  unsigned y
@@ -259,11 +189,11 @@ grplot_matrix_y_axis_init(
    assert(pMatrix);
    assert(y < pMatrix->nrY);
 
-   grplot_matrix_positional_axis_with_status_t *pPositionalAxisWithStatus;
-   getPositionalYAxisWithStatus(pMatrix, &pPositionalAxisWithStatus, y);
+   grplot_matrix_positional_axis_t *pPositionalAxis;
+   getPositionalYAxis(pMatrix, &pPositionalAxis, y);
 
-   pPositionalAxisWithStatus->status =  grplot_axis_output_init(
-         &((pPositionalAxisWithStatus->positionalAxis).axis)
+   return grplot_axis_output_init(
+         &(pPositionalAxis->axis)
       ,  grplot_axis_y_axis
       ,  scaleType
       ,  inscriptionFont
@@ -275,14 +205,9 @@ grplot_matrix_y_axis_init(
       ,  min
       ,  max
       ,  label );
-
-   return
-         pPositionalAxisWithStatus->status == grplot_axis_output_ok
-      ?  0
-      :  1;
 }
 
-int
+grplot_diagram_status_t
 grplot_matrix_diagram_init(
       grplot_matrix_t *pMatrix
    ,  DATA32 color
@@ -298,21 +223,16 @@ grplot_matrix_diagram_init(
    grplot_matrix_positional_axis_t *pPositionalYAxis;
    grplot_matrix_get_positional_y_axis(pMatrix, &pPositionalYAxis, y);
 
-   grplot_matrix_diagram_with_status_t *pDiagramWithStatus;
-   getDiagramWithStatus(pMatrix, &pDiagramWithStatus, x, y);
+   grplot_diagram_t *pDiagram;
+   getDiagram(pMatrix, &pDiagram, x, y);
 
-   pDiagramWithStatus->status =  grplot_diagram_init(
-         &(pDiagramWithStatus->diagram)
+   return grplot_diagram_init(
+         pDiagram
       ,  color
       ,  legendFont
       ,  nrItem
       ,  &(pPositionalXAxis->axis)
       ,  &(pPositionalYAxis->axis) );
-
-   return
-         pDiagramWithStatus->status == grplot_diagram_ok
-      ?  0
-      :  1;
 }
 
 int
@@ -323,7 +243,7 @@ grplot_matrix_prepare(
    int retval =  0;
 
    for (unsigned i =  0; i < pMatrix->nrDiagram; i++) {
-      grplot_diagram_prepare(&((pMatrix->pDiagramBuf)[i].diagram));
+      grplot_diagram_prepare(&((pMatrix->pDiagramBuf)[i]));
    }
 
    updateAllXLength(pMatrix);
@@ -415,10 +335,10 @@ grplot_matrix_destroy(
    assert(pMatrix);
 
    for (unsigned i =  0; i < pMatrix->nrAxis; i++) {
-      grplot_axis_output_destroy(&((pMatrix->pAxisBuf)[i].positionalAxis.axis));
+      grplot_axis_output_destroy(&((pMatrix->pAxisBuf)[i].axis));
    }
    for (unsigned i =  0; i < pMatrix->nrDiagram; i++) {
-      grplot_diagram_destroy(&((pMatrix->pDiagramBuf)[i].diagram));
+      grplot_diagram_destroy(&((pMatrix->pDiagramBuf)[i]));
    }
 
    free(pMatrix->pAxisBuf);
@@ -647,25 +567,25 @@ updateMaxY(
 }
 
 static void
-getPositionalXAxisWithStatus(
+getPositionalXAxis(
       const grplot_matrix_t *pMatrix
-   ,  grplot_matrix_positional_axis_with_status_t **ppResult
+   ,  grplot_matrix_positional_axis_t **ppResult
    ,  unsigned x ) {
    *ppResult =  &((pMatrix->pAxisBuf)[x]);
 }
 
 static void
-getPositionalYAxisWithStatus(
+getPositionalYAxis(
       const grplot_matrix_t *pMatrix
-   ,  grplot_matrix_positional_axis_with_status_t **ppResult
+   ,  grplot_matrix_positional_axis_t **ppResult
    ,  unsigned y ) {
    *ppResult =  &((pMatrix->pAxisBuf)[y + (pMatrix->nrX)]);
 }
 
 static void
-getDiagramWithStatus(
+getDiagram(
       const grplot_matrix_t *pMatrix
-   ,  grplot_matrix_diagram_with_status_t **ppResult
+   ,  grplot_diagram_t **ppResult
    ,  unsigned x
    ,  unsigned y ) {
    *ppResult =  &((pMatrix->pDiagramBuf)[x + y * (pMatrix->nrX)]);
