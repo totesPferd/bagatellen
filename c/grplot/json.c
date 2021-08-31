@@ -78,6 +78,20 @@ grplot_json_printColorErrMsg(
 }
 
 void
+grplot_json_printFontErrMsg(
+      const grplot_json_schema_location_t *pLocation
+   ,  const char *fontDest
+   ,  int errCode ) {
+   assert(pLocation);
+   assert(fontDest);
+
+   if (errCode & grplot_json_error_font_string) {
+      printColorErrMsgIntro(pLocation, fontDest);
+      fprintf(stderr, "must be json string\n");
+   }
+}
+
+void
 grplot_json_printAxisErrMsg(
       const grplot_json_schema_location_t *pLocation
    ,  grplot_axis_output_status_t status ) {
@@ -211,6 +225,20 @@ grplot_json_color(json_t *pJson, DATA32 *pResult) {
 
    return retval;
 }
+
+int
+grplot_json_font(json_t *pJson, const char **pResult) {
+   int retval =  0;
+
+   if (json_is_string(pJson)) {
+      *pResult =  json_string_value(pJson);
+   } else {
+      retval |=  grplot_json_error_font_string;
+   }
+
+   return retval;
+}
+
 
 static void
 printErrMsgIntro(

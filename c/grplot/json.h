@@ -49,6 +49,12 @@ grplot_json_printColorErrMsg(
    ,  int );
 
 void
+grplot_json_printFontErrMsg(
+      const grplot_json_schema_location_t *
+   ,  const char *
+   ,  int );
+
+void
 grplot_json_printAxisErrMsg(
       const grplot_json_schema_location_t *
    ,  grplot_axis_output_status_t );
@@ -69,5 +75,9 @@ const int grplot_json_error_alpha_range =  128;
 const int grplot_json_error_color_object =  256;
 int
 grplot_json_color(json_t *, DATA32 *);
+
+const int grplot_json_error_font_string =  256;
+int
+grplot_json_font(json_t *, const char **);
 
 #endif
