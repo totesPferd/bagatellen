@@ -37,6 +37,10 @@ typedef struct {
    grplot_json_schema_location_type_t locationType;
    grplot_json_schema_variant_t variant; } grplot_json_schema_location_t;
 
+typedef struct {
+   DATA32 color;
+   Imlib_Font font; } grplot_json_schema_inscription_style_t;
+
 void
 grplot_json_printErrMsg(
       const grplot_json_schema_location_t *
@@ -63,6 +67,11 @@ void
 grplot_json_printDiagramErrMsg(
       const grplot_json_schema_location_t *
    ,  grplot_diagram_status_t );
+
+void
+grplot_json_printMissingItemsInInstructionStyle(
+      const grplot_json_schema_location_t *
+   ,  const grplot_json_schema_inscription_style_t * );
 
 const int grplot_json_error_red_integer =  1;
 const int grplot_json_error_green_integer =  2;
@@ -95,5 +104,17 @@ grplot_json_font_elem(
    ,  const char *
    ,  const Imlib_Font *
    ,  Imlib_Font * );
+
+int
+grplot_json_inscription_stlyle_elem(
+      const grplot_json_schema_location_t *
+   ,  json_t *
+   ,  const char *
+   ,  const grplot_json_schema_inscription_style_t *
+   ,  grplot_json_schema_inscription_style_t *);
+
+void
+grplot_json_init_inscription_style_elem(
+      grplot_json_schema_inscription_style_t *);
 
 #endif

@@ -12,6 +12,9 @@ printColorErrMsgIntro(const grplot_json_schema_location_t *, const char *);
 static void
 printFontErrMsgIntro(const grplot_json_schema_location_t *, const char *);
 
+static void
+printInscriptionStyleErrMsgIntro(const grplot_json_schema_location_t *, const char *);
+
 void
 grplot_json_printErrMsg(
       const grplot_json_schema_location_t *pLocation
@@ -160,6 +163,20 @@ grplot_json_printDiagramErrMsg(
    }
 }
 
+void
+grplot_json_printMissingItemsInInstructionStyle(
+      const grplot_json_schema_location_t *pLocation
+   ,  const grplot_json_schema_inscription_style_t *pOut ) {
+   assert(pLocation);
+   assert(pOut);
+
+   if (!pOut->font) {
+      grplot_json_printErrMsg(
+            pLocation
+         ,  "missing font." );
+   }
+}
+
 int
 grplot_json_color(json_t *pJson, DATA32 *pResult) {
    int retval =  0;
@@ -254,16 +271,20 @@ grplot_json_color_elem(
       *pOut =  *pDefault;
    }
 
-   json_t *pElem =  json_object_get(pJson, "color");
-   int errCode =  grplot_json_color(
-         pJson
-      ,  pOut );
-   grplot_json_printColorErrMsg(pLocation, dest, errCode);
+   int retval =  0;
 
-   return
-         errCode
-      ?  1
-      :  0;
+   json_t *pElem =  json_object_get(pJson, "color");
+   if (pElem) {
+      int errCode =  grplot_json_color(
+            pJson
+         ,  pOut );
+      grplot_json_printColorErrMsg(pLocation, dest, errCode);
+      if (errCode) {
+         retval =  1;
+      }
+   }
+
+   return retval;
 }
 
 int
@@ -281,27 +302,86 @@ grplot_json_font_elem(
       *pOut =  *pDefault;
    }
 
-   const char *fontName;
+   int retval =  0;
+
    json_t *pElem =  json_object_get(pJson, "font");
-   int errCode =  grplot_json_font(
-         pJson
-      ,  &fontName );
-   grplot_json_printFontErrMsg(pLocation, dest, errCode);
+   if (pElem) {
+      const char *fontName;
+      int errCode =  grplot_json_font(
+            pJson
+         ,  &fontName );
+      grplot_json_printFontErrMsg(pLocation, dest, errCode);
+   
+      if (errCode) {
+         retval =  1;
+      } else {
+         *pOut =  imlib_load_font(fontName);
+         if (!pOut) {
+            printFontErrMsgIntro(pLocation, dest);
+            fprintf(stderr, " %s font could not be loaded.\n", fontName);
+            retval =  1;
+         }
+      }
+   }
+
+   return retval;
+}
+
+int
+grplot_json_inscription_stlyle_elem(
+      const grplot_json_schema_location_t *pLocation
+   ,  json_t *pJson
+   ,  const char *dest
+   ,  const grplot_json_schema_inscription_style_t *pDefault
+   ,  grplot_json_schema_inscription_style_t *pOut ) {
+   assert(pLocation);
+   assert(dest);
+   assert(pOut);
 
    int retval =  0;
 
-   if (errCode) {
-      retval =  1;
-   } else {
-      *pOut =  imlib_load_font(fontName);
-      if (!pOut) {
-         printFontErrMsgIntro(pLocation, dest);
-         fprintf(stderr, " %s font could not be loaded.\n", fontName);
+   json_t *pElem =  json_object_get(pJson, dest);
+   if (pElem) {
+      if (json_is_object(pElem)) {
+         {
+            int errMode =  grplot_json_color_elem(
+                  pLocation
+               ,  pElem
+               ,  dest
+               ,  &(pDefault->color)
+               ,  &(pOut->color) );
+            if (errMode) {
+               retval =  1;
+            }
+         }
+         {
+            int errMode =  grplot_json_font_elem(
+                  pLocation
+               ,  pElem
+               ,  dest
+               ,  &(pDefault->font)
+               ,  &(pOut->font) );
+            if (errMode) {
+               retval =  1;
+            }
+         }
+      } else {
+         printInscriptionStyleErrMsgIntro(pLocation, dest);
+         fprintf(stderr, " must be json object.\n");
          retval =  1;
       }
    }
 
    return retval;
+}
+
+void
+grplot_json_init_inscription_style_elem(
+      grplot_json_schema_inscription_style_t *pOut ) {
+   assert(pOut);
+
+   pOut->color =  0;
+   pOut->font =  NULL;
 }
 
 static void
@@ -378,4 +458,15 @@ printFontErrMsgIntro(
 
    printErrMsgIntro(pLocation);
    fprintf(stderr, " (%s font): ", dest);
+}
+
+static void
+printInscriptionStyleErrMsgIntro(
+      const grplot_json_schema_location_t *pLocation
+   ,  const char *dest ) {
+   assert(pLocation);
+   assert(dest);
+
+   printErrMsgIntro(pLocation);
+   fprintf(stderr, " (%s style): ", dest);
 }
