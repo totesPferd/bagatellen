@@ -177,6 +177,39 @@ grplot_json_printMissingItemsInInstructionStyle(
    }
 }
 
+void
+grplot_json_printMissingItemsInAxisInstructionStyle(
+      const grplot_json_schema_location_t *pLocation
+   ,  const grplot_json_schema_axis_inscription_style_t *pOut ) {
+   assert(pLocation);
+   assert(pOut);
+
+   if (!(pOut->inscription).font) {
+      grplot_json_printErrMsg(
+            pLocation
+         ,  "missing font in inscription part." );
+   }
+   if (!(pOut->label).font) {
+      grplot_json_printErrMsg(
+            pLocation
+         ,  "missing font in label part." );
+   }
+}
+
+void
+grplot_json_printMissingItemsInDiagramInstructionStyle(
+      const grplot_json_schema_location_t *pLocation
+   ,  const grplot_json_schema_diagram_inscription_style_t *pOut ) {
+   assert(pLocation);
+   assert(pOut);
+
+   if (!(pOut->legend).font) {
+      grplot_json_printErrMsg(
+            pLocation
+         ,  "missing font in legend part." );
+   }
+}
+
 int
 grplot_json_color(json_t *pJson, DATA32 *pResult) {
    int retval =  0;
@@ -328,7 +361,7 @@ grplot_json_font_elem(
 }
 
 int
-grplot_json_inscription_stlyle_elem(
+grplot_json_inscription_style_elem(
       const grplot_json_schema_location_t *pLocation
    ,  json_t *pJson
    ,  const char *dest
@@ -385,6 +418,85 @@ grplot_json_inscription_stlyle_elem(
    return retval;
 }
 
+int
+grplot_json_axis_inscription_style_elem(
+      const grplot_json_schema_location_t *pLocation
+   ,  json_t *pJson
+   ,  const grplot_json_schema_axis_inscription_style_t *pDefault
+   ,  grplot_json_schema_axis_inscription_style_t *pOut ) {
+   assert(pLocation);
+   assert(pOut);
+
+   int retval =  0;
+
+   grplot_json_init_axis_inscription_style_elem(pOut);
+
+   {
+      const grplot_json_schema_inscription_style_t *pInscriptionStyle =
+            pDefault
+         ?  &(pDefault->inscription)
+         :  NULL;
+      int errMode =  grplot_json_inscription_style_elem(
+            pLocation
+         ,  pJson
+         ,  "inscription"
+         ,  pInscriptionStyle
+         ,  &(pOut->inscription) );
+      if (errMode) {
+         retval =  1;
+      }
+   }
+   {
+      const grplot_json_schema_inscription_style_t *pLabelStyle =
+            pDefault
+         ?  &(pDefault->label)
+         :  NULL;
+      int errMode =  grplot_json_inscription_style_elem(
+            pLocation
+         ,  pJson
+         ,  "label"
+         ,  pLabelStyle
+         ,  &(pOut->label) );
+      if (errMode) {
+         retval =  1;
+      }
+   }
+
+
+   return retval;
+}
+
+int
+grplot_json_diagram_inscription_style_elem(
+      const grplot_json_schema_location_t *pLocation
+   ,  json_t *pJson
+   ,  const grplot_json_schema_diagram_inscription_style_t *pDefault
+   ,  grplot_json_schema_diagram_inscription_style_t *pOut ) {
+   assert(pLocation);
+   assert(pOut);
+
+   int retval =  0;
+
+   grplot_json_init_diagram_inscription_style_elem(pOut);
+
+   {
+      const grplot_json_schema_inscription_style_t *pLegendStyle =
+            pDefault
+         ?  &(pDefault->legend)
+         :  NULL;
+      int errMode =  grplot_json_inscription_style_elem(
+            pLocation
+         ,  pJson
+         ,  "legend"
+         ,  pLegendStyle
+         ,  &(pOut->legend) );
+      if (errMode) {
+         retval =  1;
+      }
+   }
+   return retval;
+}
+
 void
 grplot_json_init_inscription_style_elem(
       grplot_json_schema_inscription_style_t *pOut ) {
@@ -392,6 +504,23 @@ grplot_json_init_inscription_style_elem(
 
    pOut->color =  0;
    pOut->font =  NULL;
+}
+
+void
+grplot_json_init_axis_inscription_style_elem(
+      grplot_json_schema_axis_inscription_style_t *pOut ) {
+   assert(pOut);
+
+   grplot_json_init_inscription_style_elem(&(pOut->inscription));
+   grplot_json_init_inscription_style_elem(&(pOut->label));
+}
+
+void
+grplot_json_init_diagram_inscription_style_elem(
+      grplot_json_schema_diagram_inscription_style_t *pOut ) {
+   assert(pOut);
+
+   grplot_json_init_inscription_style_elem(&(pOut->legend));
 }
 
 static void
