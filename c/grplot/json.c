@@ -53,22 +53,27 @@ grplot_json_printColorErrMsg(
 
    if (errCode & grplot_json_error_red_range) {
       printColorErrMsgIntro(pLocation, colorDest);
-      fprintf(stderr, "red component: admitted range 0..255\n");
+      fprintf(stderr, "red component: permitted range 0..255\n");
    }
 
    if (errCode & grplot_json_error_green_range) {
       printColorErrMsgIntro(pLocation, colorDest);
-      fprintf(stderr, "green component: admitted range 0..255\n");
+      fprintf(stderr, "green component: permitted range 0..255\n");
    }
 
    if (errCode & grplot_json_error_blue_range) {
       printColorErrMsgIntro(pLocation, colorDest);
-      fprintf(stderr, "blue component: admitted range 0.255\n");
+      fprintf(stderr, "blue component: permitted range 0.255\n");
    }
 
    if (errCode & grplot_json_error_alpha_range) {
       printColorErrMsgIntro(pLocation, colorDest);
-      fprintf(stderr, "alpha component: admitted range 0.255\n");
+      fprintf(stderr, "alpha component: permitted range 0.255\n");
+   }
+
+   if (errCode & grplot_json_error_color_object) {
+      printColorErrMsgIntro(pLocation, colorDest);
+      fprintf(stderr, "must be json object\n");
    }
 }
 
