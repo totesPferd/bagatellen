@@ -43,7 +43,8 @@ typedef struct {
 
 typedef struct {
    grplot_json_schema_inscription_style_t inscription;
-   grplot_json_schema_inscription_style_t label; } grplot_json_schema_axis_inscription_style_t;
+   grplot_json_schema_inscription_style_t label;
+   DATA32 color; } grplot_json_schema_axis_inscription_style_t;
 
 typedef struct {
    grplot_json_schema_inscription_style_t legend; } grplot_json_schema_diagram_inscription_style_t;

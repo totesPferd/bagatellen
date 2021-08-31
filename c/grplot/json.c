@@ -461,7 +461,21 @@ grplot_json_axis_inscription_style_elem(
          retval =  1;
       }
    }
-
+   {
+      const DATA32 *pColor =
+            pDefault
+         ?  &(pDefault->color)
+         :  NULL;
+      int errMode =  grplot_json_color_elem(
+            pLocation
+         ,  pJson
+         ,  "line"
+         ,  pColor
+         ,  &(pOut->color) );
+      if (errMode) {
+         retval =  1;
+      }
+   }
 
    return retval;
 }
@@ -513,6 +527,7 @@ grplot_json_init_axis_inscription_style_elem(
 
    grplot_json_init_inscription_style_elem(&(pOut->inscription));
    grplot_json_init_inscription_style_elem(&(pOut->label));
+   pOut->color =  0;
 }
 
 void
