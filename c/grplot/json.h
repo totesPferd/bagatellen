@@ -44,6 +44,7 @@ typedef struct {
 typedef struct {
    grplot_json_schema_inscription_style_t inscription;
    grplot_json_schema_inscription_style_t label;
+   grplot_axis_scale_type_t scaleType;
    DATA32 color; } grplot_json_schema_axis_inscription_style_t;
 
 typedef struct {
@@ -64,6 +65,11 @@ void
 grplot_json_printFontErrMsg(
       const grplot_json_schema_location_t *
    ,  const char *
+   ,  int );
+
+void
+grplot_json_printScaleErrMsg(
+      const grplot_json_schema_location_t *
    ,  int );
 
 void
@@ -107,6 +113,11 @@ const int grplot_json_error_font_string =  256;
 int
 grplot_json_font(json_t *, const char **);
 
+const int grplot_json_error_scale_range =  16;
+const int grplot_json_error_scale_string =  256;
+int
+grplot_json_scale(json_t *, grplot_axis_scale_type_t *);
+
 int
 grplot_json_color_elem(
       const grplot_json_schema_location_t *
@@ -122,6 +133,13 @@ grplot_json_font_elem(
    ,  const char *
    ,  const Imlib_Font *
    ,  Imlib_Font * );
+
+int
+grplot_json_scale_elem(
+      const grplot_json_schema_location_t *
+   ,  json_t *
+   ,  const grplot_axis_scale_type_t *
+   ,  grplot_axis_scale_type_t * );
 
 int
 grplot_json_inscription_style_elem(

@@ -1,5 +1,6 @@
 #include <assert.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "json.h"
 
@@ -93,6 +94,22 @@ grplot_json_printFontErrMsg(
       fprintf(stderr, "must be json string\n");
    }
 }
+
+void
+grplot_json_printScaleErrMsg(
+      const grplot_json_schema_location_t *pLocation
+   ,  int errCode ) {
+   assert(pLocation);
+
+   if (errCode & grplot_json_error_scale_range) {
+      grplot_json_printErrMsg(pLocation, "must be one of linear, logarithm, time");
+   }
+
+   if (errCode & grplot_json_error_scale_string) {
+      grplot_json_printErrMsg(pLocation, "must be json string");
+   }
+}
+
 
 void
 grplot_json_printAxisErrMsg(
@@ -212,6 +229,9 @@ grplot_json_printMissingItemsInDiagramInstructionStyle(
 
 int
 grplot_json_color(json_t *pJson, DATA32 *pResult) {
+   assert(pJson);
+   assert(pResult);
+
    int retval =  0;
 
    *pResult =  0;
@@ -278,12 +298,40 @@ grplot_json_color(json_t *pJson, DATA32 *pResult) {
 
 int
 grplot_json_font(json_t *pJson, const char **pResult) {
+   assert(pJson);
+   assert(pResult);
+
    int retval =  0;
 
    if (json_is_string(pJson)) {
       *pResult =  json_string_value(pJson);
    } else {
       retval |=  grplot_json_error_font_string;
+   }
+
+   return retval;
+}
+
+int
+grplot_json_scale(json_t *pJson, grplot_axis_scale_type_t *pResult) {
+   assert(pJson);
+   assert(pResult);
+
+   int retval =  0;
+
+   if (json_is_string(pJson)) {
+      const char *item =  json_string_value(pJson);
+      if (!strcmp(item, "linear")) {
+         *pResult =  grplot_axis_linear;
+      } else if (!strcmp(item, "logarithm")) {
+         *pResult =  grplot_axis_logarithm;
+      } else if (!strcmp(item, "time")) {
+         *pResult =  grplot_axis_time;
+      } else {
+         retval =  grplot_json_error_scale_range;
+      }
+   } else {
+      retval |= grplot_json_error_scale_string;
    }
 
    return retval;
@@ -354,6 +402,33 @@ grplot_json_font_elem(
             fprintf(stderr, " %s font could not be loaded.\n", fontName);
             retval =  1;
          }
+      }
+   }
+
+   return retval;
+}
+
+int
+grplot_json_scale_elem(
+      const grplot_json_schema_location_t *pLocation
+   ,  json_t *pJson
+   ,  const grplot_axis_scale_type_t *pDefault
+   ,  grplot_axis_scale_type_t *pOut ) {
+   assert(pLocation);
+   assert(pOut);
+
+   if (pDefault) {
+      *pOut =  *pDefault;
+   }
+
+   int retval =  0;
+
+   json_t *pElem =  json_object_get(pJson, "scale");
+   if (pElem) {
+      int errCode =  grplot_json_scale(pJson, pOut);
+      grplot_json_printScaleErrMsg(pLocation, errCode);
+      if (errCode) {
+         retval =  1;
       }
    }
 
@@ -462,6 +537,20 @@ grplot_json_axis_inscription_style_elem(
       }
    }
    {
+      const grplot_axis_scale_type_t *pScaleType =
+            pDefault
+         ?  &(pDefault->scaleType)
+         :  NULL;
+      int errMode =  grplot_json_scale_elem(
+            pLocation
+         ,  pJson
+         ,  pScaleType
+         ,  &(pOut->scaleType) );
+      if (errMode) {
+         retval =  1;
+      }
+   }
+   {
       const DATA32 *pColor =
             pDefault
          ?  &(pDefault->color)
@@ -527,6 +616,7 @@ grplot_json_init_axis_inscription_style_elem(
 
    grplot_json_init_inscription_style_elem(&(pOut->inscription));
    grplot_json_init_inscription_style_elem(&(pOut->label));
+   pOut->scaleType =  grplot_axis_linear;
    pOut->color =  0;
 }
 
