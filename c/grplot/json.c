@@ -340,26 +340,36 @@ grplot_json_inscription_stlyle_elem(
 
    int retval =  0;
 
+   grplot_json_init_inscription_style_elem(pOut);
+
    json_t *pElem =  json_object_get(pJson, dest);
    if (pElem) {
       if (json_is_object(pElem)) {
          {
+            const DATA32 *pItem =
+                  pDefault
+               ?  &(pDefault->color)
+               :  NULL;
             int errMode =  grplot_json_color_elem(
                   pLocation
                ,  pElem
                ,  dest
-               ,  &(pDefault->color)
+               ,  pItem
                ,  &(pOut->color) );
             if (errMode) {
                retval =  1;
             }
          }
          {
+            const Imlib_Font *pItem =
+                  pDefault
+               ?  &(pDefault->font)
+               :  NULL;
             int errMode =  grplot_json_font_elem(
                   pLocation
                ,  pElem
                ,  dest
-               ,  &(pDefault->font)
+               ,  pItem
                ,  &(pOut->font) );
             if (errMode) {
                retval =  1;
