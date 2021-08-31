@@ -5,6 +5,9 @@
 #include <jansson.h>
 
 #include "axis.h"
+#include "axis_output.h"
+#include "diagram.h"
+#include "matrix.h"
 
 typedef enum {
       grplot_json_schema_base
@@ -44,6 +47,16 @@ grplot_json_printColorErrMsg(
       const grplot_json_schema_location_t *
    ,  const char *
    ,  int );
+
+void
+grplot_json_printAxisErrMsg(
+      const grplot_json_schema_location_t *
+   ,  grplot_axis_output_status_t );
+
+void
+grplot_json_printDiagramErrMsg(
+      const grplot_json_schema_location_t *
+   ,  grplot_diagram_status_t );
 
 const int grplot_json_error_red_integer =  1;
 const int grplot_json_error_green_integer =  2;

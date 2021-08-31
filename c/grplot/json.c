@@ -72,6 +72,75 @@ grplot_json_printColorErrMsg(
    }
 }
 
+void
+grplot_json_printAxisErrMsg(
+      const grplot_json_schema_location_t *pLocation
+   ,  grplot_axis_output_status_t status ) {
+   assert(pLocation);
+
+   switch (status) {
+
+      case grplot_axis_output_ok:
+      break;
+
+      case grplot_axis_output_zero_range: {
+         grplot_json_printErrMsg(
+               pLocation
+            ,  "max must be greater than min" );
+      }
+      break;
+
+      case grplot_axis_output_time_overflow: {
+         grplot_json_printErrMsg(
+               pLocation
+            ,  "no greater time interval available" );
+      }
+      break;
+
+      case grplot_axis_output_inscription_buf_exceeded: {
+         grplot_json_printErrMsg(
+               pLocation
+            ,  "too many inscriptions at axis" );
+      }
+      break;
+
+      default: {
+         assert(0);
+      }
+   }
+}
+
+void
+grplot_json_printDiagramErrMsg(
+      const grplot_json_schema_location_t *pLocation
+   ,  grplot_diagram_status_t status ) {
+   assert(pLocation);
+
+   switch (status) {
+
+      case grplot_diagram_ok:
+      break;
+
+      case grplot_diagram_empty_buf: {
+         grplot_json_printErrMsg(
+               pLocation
+            ,  "empty input buf" );
+      }
+      break;
+
+      case grplot_diagram_zero_range: {
+         grplot_json_printErrMsg(
+               pLocation
+            ,  "max must be greater than min" );
+      }
+      break;
+
+      default: {
+         assert(0);
+      }
+   }
+}
+
 int
 grplot_json_color(json_t *pJson, DATA32 *pResult) {
    int retval =  0;
