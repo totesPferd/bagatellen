@@ -1,6 +1,64 @@
 #include <assert.h>
+#include <stdio.h>
 
 #include "json.h"
+
+void
+grplot_json_printErrMsg(
+      const grplot_json_schema_location_t *pLocation
+   ,  const char *text ) {
+   assert(pLocation);
+
+   switch (pLocation->locationType) {
+
+      case grplot_json_schema_base: {
+         fprintf(stderr, "in base: %s\n", text);
+      }
+      break;
+
+      case grplot_json_schema_axis: {
+
+         switch ((pLocation->variant).axis.axisType) {
+
+            case grplot_axis_x_axis: {
+               fprintf(stderr, "in x axis #%d: %s\n", (pLocation->variant).axis.nr, text);
+            }
+            break;
+
+            case grplot_axis_y_axis: {
+               fprintf(stderr, "in y axis #%d: %s\n", (pLocation->variant).axis.nr, text);
+            }
+            break;
+
+            default: {
+               assert(0);
+            }
+         }
+      }
+      break;
+
+      case grplot_json_schema_diagram_base: {
+         fprintf(stderr, "in diagram base #(%d, %d): %s\n"
+            ,  (pLocation->variant).diagramBase.x
+            ,  (pLocation->variant).diagramBase.y
+            ,  text );
+      }
+      break;
+
+      case grplot_json_schema_diagram: {
+         fprintf(stderr, "in diagram #(%d, %d, %d): %s\n"
+            ,  (pLocation->variant).diagram.base.x
+            ,  (pLocation->variant).diagram.base.y
+            ,  (pLocation->variant).diagram.nr
+            ,  text );
+      }
+      break;
+
+      default: {
+         assert(0);
+      }
+   }
+}
 
 int
 grplot_json_color(json_t *pJson, DATA32 *pResult) {
