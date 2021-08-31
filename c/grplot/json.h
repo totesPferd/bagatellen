@@ -39,6 +39,12 @@ grplot_json_printErrMsg(
       const grplot_json_schema_location_t *
    ,  const char * );
 
+void
+grplot_json_printColorErrMsg(
+      const grplot_json_schema_location_t *
+   ,  const char *
+   ,  int );
+
 const int grplot_json_error_red_integer =  1;
 const int grplot_json_error_green_integer =  2;
 const int grplot_json_error_blue_integer =  4;

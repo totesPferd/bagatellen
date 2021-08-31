@@ -3,60 +3,72 @@
 
 #include "json.h"
 
+static void
+printErrMsgIntro(const grplot_json_schema_location_t *);
+
+static void
+printColorErrMsgIntro(const grplot_json_schema_location_t *, const char *);
+
+static void
+printFontErrMsgIntro(const grplot_json_schema_location_t *, const char *);
+
 void
 grplot_json_printErrMsg(
       const grplot_json_schema_location_t *pLocation
    ,  const char *text ) {
    assert(pLocation);
+   assert(text);
 
-   switch (pLocation->locationType) {
+   printErrMsgIntro(pLocation);
+   fprintf(stderr, ": %s\n", text);
+}
 
-      case grplot_json_schema_base: {
-         fprintf(stderr, "in base: %s\n", text);
-      }
-      break;
+void
+grplot_json_printColorErrMsg(
+      const grplot_json_schema_location_t *pLocation
+   ,  const char *colorDest
+   ,  int errCode ) {
+   assert(pLocation);
+   assert(colorDest);
 
-      case grplot_json_schema_axis: {
+   if (errCode & grplot_json_error_red_integer) {
+      printColorErrMsgIntro(pLocation, colorDest);
+      fprintf(stderr, "red component must be integer\n");
+   }
 
-         switch ((pLocation->variant).axis.axisType) {
+   if (errCode & grplot_json_error_green_integer) {
+      printColorErrMsgIntro(pLocation, colorDest);
+      fprintf(stderr, "green component must be integer\n");
+   }
 
-            case grplot_axis_x_axis: {
-               fprintf(stderr, "in x axis #%d: %s\n", (pLocation->variant).axis.nr, text);
-            }
-            break;
+   if (errCode & grplot_json_error_blue_integer) {
+      printColorErrMsgIntro(pLocation, colorDest);
+      fprintf(stderr, "blue component must be integer\n");
+   }
 
-            case grplot_axis_y_axis: {
-               fprintf(stderr, "in y axis #%d: %s\n", (pLocation->variant).axis.nr, text);
-            }
-            break;
+   if (errCode & grplot_json_error_alpha_integer) {
+      printColorErrMsgIntro(pLocation, colorDest);
+      fprintf(stderr, "alpha component must be integer\n");
+   }
 
-            default: {
-               assert(0);
-            }
-         }
-      }
-      break;
+   if (errCode & grplot_json_error_red_range) {
+      printColorErrMsgIntro(pLocation, colorDest);
+      fprintf(stderr, "red component: admitted range 0..255\n");
+   }
 
-      case grplot_json_schema_diagram_base: {
-         fprintf(stderr, "in diagram base #(%d, %d): %s\n"
-            ,  (pLocation->variant).diagramBase.x
-            ,  (pLocation->variant).diagramBase.y
-            ,  text );
-      }
-      break;
+   if (errCode & grplot_json_error_green_range) {
+      printColorErrMsgIntro(pLocation, colorDest);
+      fprintf(stderr, "green component: admitted range 0..255\n");
+   }
 
-      case grplot_json_schema_diagram: {
-         fprintf(stderr, "in diagram #(%d, %d, %d): %s\n"
-            ,  (pLocation->variant).diagram.base.x
-            ,  (pLocation->variant).diagram.base.y
-            ,  (pLocation->variant).diagram.nr
-            ,  text );
-      }
-      break;
+   if (errCode & grplot_json_error_blue_range) {
+      printColorErrMsgIntro(pLocation, colorDest);
+      fprintf(stderr, "blue component: admitted range 0.255\n");
+   }
 
-      default: {
-         assert(0);
-      }
+   if (errCode & grplot_json_error_alpha_range) {
+      printColorErrMsgIntro(pLocation, colorDest);
+      fprintf(stderr, "alpha component: admitted range 0.255\n");
    }
 }
 
@@ -124,4 +136,80 @@ grplot_json_color(json_t *pJson, DATA32 *pResult) {
    }
 
    return retval;
+}
+
+static void
+printErrMsgIntro(
+      const grplot_json_schema_location_t *pLocation ) {
+   assert(pLocation);
+
+   switch (pLocation->locationType) {
+
+      case grplot_json_schema_base: {
+         fprintf(stderr, "in base");
+      }
+      break;
+
+      case grplot_json_schema_axis: {
+
+         switch ((pLocation->variant).axis.axisType) {
+
+            case grplot_axis_x_axis: {
+               fprintf(stderr, "in x axis #%d", (pLocation->variant).axis.nr);
+            }
+            break;
+
+            case grplot_axis_y_axis: {
+               fprintf(stderr, "in y axis #%d", (pLocation->variant).axis.nr);
+            }
+            break;
+
+            default: {
+               assert(0);
+            }
+         }
+      }
+      break;
+
+      case grplot_json_schema_diagram_base: {
+         fprintf(stderr, "in diagram base #(%d, %d)"
+            ,  (pLocation->variant).diagramBase.x
+            ,  (pLocation->variant).diagramBase.y );
+      }
+      break;
+
+      case grplot_json_schema_diagram: {
+         fprintf(stderr, "in diagram #(%d, %d, %d)"
+            ,  (pLocation->variant).diagram.base.x
+            ,  (pLocation->variant).diagram.base.y
+            ,  (pLocation->variant).diagram.nr );
+      }
+      break;
+
+      default: {
+         assert(0);
+      }
+   }
+}
+
+static void
+printColorErrMsgIntro(
+      const grplot_json_schema_location_t *pLocation
+   ,  const char *dest ) {
+   assert(pLocation);
+   assert(dest);
+
+   printErrMsgIntro(pLocation);
+   fprintf(stderr, " (%s color): ", dest);
+}
+
+static void
+printFontErrMsgIntro(
+      const grplot_json_schema_location_t *pLocation
+   ,  const char *dest ) {
+   assert(pLocation);
+   assert(dest);
+
+   printErrMsgIntro(pLocation);
+   fprintf(stderr, " (%s font): ", dest);
 }
