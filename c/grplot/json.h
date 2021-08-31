@@ -80,4 +80,20 @@ const int grplot_json_error_font_string =  256;
 int
 grplot_json_font(json_t *, const char **);
 
+int
+grplot_json_color_elem(
+      const grplot_json_schema_location_t *
+   ,  json_t *
+   ,  const char *
+   ,  const DATA32 *
+   ,  DATA32 * );
+
+int
+grplot_json_font_elem(
+      const grplot_json_schema_location_t *
+   ,  json_t *
+   ,  const char *
+   ,  const Imlib_Font *
+   ,  Imlib_Font * );
+
 #endif

@@ -239,6 +239,70 @@ grplot_json_font(json_t *pJson, const char **pResult) {
    return retval;
 }
 
+int
+grplot_json_color_elem(
+      const grplot_json_schema_location_t *pLocation
+   ,  json_t *pJson
+   ,  const char *dest
+   ,  const DATA32 *pDefault
+   ,  DATA32 *pOut ) {
+   assert(pLocation);
+   assert(dest);
+   assert(pOut);
+
+   if (pDefault) {
+      *pOut =  *pDefault;
+   }
+
+   json_t *pElem =  json_object_get(pJson, "color");
+   int errCode =  grplot_json_color(
+         pJson
+      ,  pOut );
+   grplot_json_printColorErrMsg(pLocation, dest, errCode);
+
+   return
+         errCode
+      ?  1
+      :  0;
+}
+
+int
+grplot_json_font_elem(
+      const grplot_json_schema_location_t *pLocation
+   ,  json_t *pJson
+   ,  const char *dest
+   ,  const Imlib_Font *pDefault
+   ,  Imlib_Font *pOut ) {
+   assert(pLocation);
+   assert(dest);
+   assert(pOut);
+
+   if (pDefault) {
+      *pOut =  *pDefault;
+   }
+
+   const char *fontName;
+   json_t *pElem =  json_object_get(pJson, "font");
+   int errCode =  grplot_json_font(
+         pJson
+      ,  &fontName );
+   grplot_json_printFontErrMsg(pLocation, dest, errCode);
+
+   int retval =  0;
+
+   if (errCode) {
+      retval =  1;
+   } else {
+      *pOut =  imlib_load_font(fontName);
+      if (!pOut) {
+         printFontErrMsgIntro(pLocation, dest);
+         fprintf(stderr, " %s font could not be loaded.\n", fontName);
+         retval =  1;
+      }
+   }
+
+   return retval;
+}
 
 static void
 printErrMsgIntro(
