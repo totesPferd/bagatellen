@@ -1,6 +1,8 @@
+#define _XOPEN_SOURCE
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 
 #include "json.h"
 
@@ -102,14 +104,40 @@ grplot_json_printScaleErrMsg(
    assert(pLocation);
 
    if (errCode & grplot_json_error_scale_range) {
-      grplot_json_printErrMsg(pLocation, "must be one of linear, logarithm, time");
+      grplot_json_printErrMsg(pLocation, "scale must be one of linear, logarithm, time");
    }
 
    if (errCode & grplot_json_error_scale_string) {
-      grplot_json_printErrMsg(pLocation, "must be json string");
+      grplot_json_printErrMsg(pLocation, "scale must be json string");
    }
 }
 
+void
+grplot_json_printValErrMsg(
+      const grplot_json_schema_location_t *pLocation
+   ,  int errCode ) {
+   assert(pLocation);
+
+   if (errCode & grplot_json_error_val_gt_zero) {
+      grplot_json_printErrMsg(pLocation, "val must be greater than 0.0 if using logarithmic scales");
+   }
+
+   if (errCode & grplot_json_error_val_timespec) {
+      grplot_json_printErrMsg(pLocation, "val could not be parsed as time data");
+   }
+
+   if (errCode & grplot_json_error_val_junk) {
+      grplot_json_printErrMsg(pLocation, "val contains junk after time data");
+   }
+
+   if (errCode & grplot_json_error_val_string) {
+      grplot_json_printErrMsg(pLocation, "val must be string containing time data");
+   }
+
+   if (errCode & grplot_json_error_val_double) {
+      grplot_json_printErrMsg(pLocation, "val must be floating point number");
+   }
+}
 
 void
 grplot_json_printAxisErrMsg(
@@ -338,6 +366,73 @@ grplot_json_scale(json_t *pJson, grplot_axis_scale_type_t *pResult) {
 }
 
 int
+grplot_json_val(
+      json_t *pJson
+   ,  grplot_axis_scale_type_t scaleType
+   ,  grplot_axis_val_t *pResult ) {
+   assert(pJson);
+   assert(pResult);
+
+   int retval =  0;
+
+   switch (scaleType) {
+
+      case grplot_axis_linear: {
+         if (json_is_real(pJson)) {
+            pResult->numeric =  json_real_value(pJson);
+         } else {
+            retval |= grplot_json_error_val_double;
+         }
+      }
+      break;
+
+      case grplot_axis_logarithm: {
+         if (json_is_real(pJson)) {
+            pResult->numeric =  json_real_value(pJson);
+            if (pResult->numeric <= 0.0) {
+               retval |= grplot_json_error_val_gt_zero;
+            }
+         } else {
+            retval |= grplot_json_error_val_double;
+         }
+      }
+      break;
+
+      case grplot_axis_time: {
+         if (json_is_string(pJson)) {
+            const char *timeStr =  json_string_value(pJson);
+            struct tm time;
+            time.tm_year =  0;
+            time.tm_mon =  0;
+            time.tm_mday =  1;
+            time.tm_hour =  0;
+            time.tm_min =  0;
+            time.tm_sec =  0;
+            const char *t =  strptime(timeStr, "%Y-%m-%d%n%H:%M:%S", &time);
+            if (t) {
+              if (*t) {
+                 retval |= grplot_json_error_val_junk;
+              } else {
+                 pResult->time =  mktime(&time);
+              }
+            } else {
+               retval |= grplot_json_error_val_timespec;
+            }
+         } else {
+            retval |= grplot_json_error_val_string;
+         }
+      }
+      break;
+
+      default: {
+         assert(0);
+      }
+   }
+
+   return retval;
+}
+
+int
 grplot_json_color_elem(
       const grplot_json_schema_location_t *pLocation
    ,  json_t *pJson
@@ -427,6 +522,35 @@ grplot_json_scale_elem(
    if (pElem) {
       int errCode =  grplot_json_scale(pJson, pOut);
       grplot_json_printScaleErrMsg(pLocation, errCode);
+      if (errCode) {
+         retval =  1;
+      }
+   }
+
+   return retval;
+}
+
+int
+grplot_json_val_elem(
+      const grplot_json_schema_location_t *pLocation
+   ,  json_t *pJson
+   ,  grplot_axis_scale_type_t scaleType
+   ,  const char *key
+   ,  const grplot_axis_val_t *pDefault
+   ,  grplot_axis_val_t *pOut ) {
+   assert(pLocation);
+   assert(pOut);
+
+   if (pDefault) {
+      *pOut =  *pDefault;
+   }
+
+   int retval =  0;
+
+   json_t *pElem =  json_object_get(pJson, key);
+   if (pElem) {
+      int errCode =  grplot_json_val(pJson, scaleType, pOut);
+      grplot_json_printValErrMsg(pLocation, errCode);
       if (errCode) {
          retval =  1;
       }

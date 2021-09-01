@@ -73,6 +73,11 @@ grplot_json_printScaleErrMsg(
    ,  int );
 
 void
+grplot_json_printValErrMsg(
+      const grplot_json_schema_location_t *
+   ,  int );
+
+void
 grplot_json_printAxisErrMsg(
       const grplot_json_schema_location_t *
    ,  grplot_axis_output_status_t );
@@ -118,6 +123,14 @@ const int grplot_json_error_scale_string =  256;
 int
 grplot_json_scale(json_t *, grplot_axis_scale_type_t *);
 
+const int grplot_json_error_val_gt_zero =  1;
+const int grplot_json_error_val_timespec =  2;
+const int grplot_json_error_val_junk =  4;
+const int grplot_json_error_val_string =  256;
+const int grplot_json_error_val_double =  512;
+int
+grplot_json_val(json_t *, grplot_axis_scale_type_t, grplot_axis_val_t *);
+
 int
 grplot_json_color_elem(
       const grplot_json_schema_location_t *
@@ -140,6 +153,15 @@ grplot_json_scale_elem(
    ,  json_t *
    ,  const grplot_axis_scale_type_t *
    ,  grplot_axis_scale_type_t * );
+
+int
+grplot_json_val_elem(
+      const grplot_json_schema_location_t *
+   ,  json_t *
+   ,  grplot_axis_scale_type_t
+   ,  const char *
+   ,  const grplot_axis_val_t *
+   ,  grplot_axis_val_t *);
 
 int
 grplot_json_inscription_style_elem(
