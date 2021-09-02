@@ -689,6 +689,22 @@ grplot_json_axis_inscription_style_elem(
          retval =  1;
       }
    }
+   {
+      const grplot_axis_val_t *pVal =
+            pDefault
+         ?  &(pDefault->min)
+         :  NULL;
+      int errMode =  grplot_json_val_elem(
+            pLocation
+         ,  pJson
+         ,  pOut->scaleType
+         ,  "min"
+         ,  pVal
+         ,  &(pOut->min) );
+      if (errMode) {
+         retval =  1;
+      }
+   }
 
    return retval;
 }
@@ -742,6 +758,8 @@ grplot_json_init_axis_inscription_style_elem(
    grplot_json_init_inscription_style_elem(&(pOut->label));
    pOut->scaleType =  grplot_axis_linear;
    pOut->color =  0;
+   (pOut->min).numeric =  0.0;
+   (pOut->max).numeric =  1.0;
 }
 
 void

@@ -45,7 +45,9 @@ typedef struct {
    grplot_json_schema_inscription_style_t inscription;
    grplot_json_schema_inscription_style_t label;
    grplot_axis_scale_type_t scaleType;
-   DATA32 color; } grplot_json_schema_axis_inscription_style_t;
+   DATA32 color;
+   grplot_axis_val_t min;
+   grplot_axis_val_t max; } grplot_json_schema_axis_inscription_style_t;
 
 typedef struct {
    grplot_json_schema_inscription_style_t legend; } grplot_json_schema_diagram_inscription_style_t;
