@@ -95,17 +95,17 @@ grplot_json_printDiagramErrMsg(
       const grplot_json_schema_location_t *
    ,  grplot_diagram_status_t );
 
-void
+int
 grplot_json_printMissingItemsInInstructionStyle(
       const grplot_json_schema_location_t *
    ,  const grplot_json_schema_inscription_style_t * );
 
-void
+int
 grplot_json_printMissingItemsInAxisInstructionStyle(
       const grplot_json_schema_location_t *
    ,  const grplot_json_schema_axis_inscription_style_t * );
 
-void
+int
 grplot_json_printMissingItemsInDiagramInstructionStyle(
       const grplot_json_schema_location_t *
    ,  const grplot_json_schema_diagram_inscription_style_t * );

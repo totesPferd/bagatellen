@@ -219,56 +219,73 @@ grplot_json_printDiagramErrMsg(
    }
 }
 
-void
+int
 grplot_json_printMissingItemsInInstructionStyle(
       const grplot_json_schema_location_t *pLocation
    ,  const grplot_json_schema_inscription_style_t *pOut ) {
    assert(pLocation);
    assert(pOut);
 
+   int retval =  0;
+
    if (!pOut->font) {
+      retval =  1;
       grplot_json_printErrMsg(
             pLocation
          ,  "missing font." );
    }
+
+   return retval;
 }
 
-void
+int
 grplot_json_printMissingItemsInAxisInstructionStyle(
       const grplot_json_schema_location_t *pLocation
    ,  const grplot_json_schema_axis_inscription_style_t *pOut ) {
    assert(pLocation);
    assert(pOut);
 
+   int retval =  0;
+
    if (!(pOut->inscription).font) {
+      retval =  1;
       grplot_json_printErrMsg(
             pLocation
          ,  "missing font in inscription part" );
    }
    if (!(pOut->label).font) {
+      retval =  1;
       grplot_json_printErrMsg(
             pLocation
          ,  "missing font in label part" );
    }
    if (!(pOut->text)) {
+      retval =  1;
       grplot_json_printErrMsg(
             pLocation
          ,  "missing label text" );
    }
+
+   return retval;
 }
 
-void
+int
 grplot_json_printMissingItemsInDiagramInstructionStyle(
       const grplot_json_schema_location_t *pLocation
    ,  const grplot_json_schema_diagram_inscription_style_t *pOut ) {
    assert(pLocation);
    assert(pOut);
 
+   int retval =  0;
+
    if (!(pOut->legend).font) {
+      retval =  1;
       grplot_json_printErrMsg(
             pLocation
          ,  "missing font in legend part." );
    }
+
+   return retval;
 }
 
 int
