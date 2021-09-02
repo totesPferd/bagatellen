@@ -46,6 +46,7 @@ typedef struct {
    grplot_json_schema_inscription_style_t label;
    grplot_axis_scale_type_t scaleType;
    DATA32 color;
+   const char *text;
    grplot_axis_val_t min;
    grplot_axis_val_t max; } grplot_json_schema_axis_inscription_style_t;
 
@@ -71,6 +72,11 @@ grplot_json_printFontErrMsg(
 
 void
 grplot_json_printScaleErrMsg(
+      const grplot_json_schema_location_t *
+   ,  int );
+
+void
+grplot_json_printTextErrMsg(
       const grplot_json_schema_location_t *
    ,  int );
 
@@ -124,6 +130,10 @@ const int grplot_json_error_scale_range =  16;
 const int grplot_json_error_scale_string =  256;
 int
 grplot_json_scale(json_t *, grplot_axis_scale_type_t *);
+
+const int grplot_json_error_text_string =  256;
+int
+grplot_json_text(json_t *, const char **);
 
 const int grplot_json_error_val_gt_zero =  1;
 const int grplot_json_error_val_timespec =  2;

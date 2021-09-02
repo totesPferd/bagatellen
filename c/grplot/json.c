@@ -113,6 +113,17 @@ grplot_json_printScaleErrMsg(
 }
 
 void
+grplot_json_printTextErrMsg(
+      const grplot_json_schema_location_t *pLocation
+   ,  int errCode ) {
+   assert(pLocation);
+
+   if (errCode & grplot_json_error_text_string) {
+      grplot_json_printErrMsg(pLocation, "label text must be json string");
+   }
+}
+
+void
 grplot_json_printValErrMsg(
       const grplot_json_schema_location_t *pLocation
    ,  int errCode ) {
@@ -232,12 +243,17 @@ grplot_json_printMissingItemsInAxisInstructionStyle(
    if (!(pOut->inscription).font) {
       grplot_json_printErrMsg(
             pLocation
-         ,  "missing font in inscription part." );
+         ,  "missing font in inscription part" );
    }
    if (!(pOut->label).font) {
       grplot_json_printErrMsg(
             pLocation
-         ,  "missing font in label part." );
+         ,  "missing font in label part" );
+   }
+   if (!(pOut->text)) {
+      grplot_json_printErrMsg(
+            pLocation
+         ,  "missing label text" );
    }
 }
 
@@ -360,6 +376,22 @@ grplot_json_scale(json_t *pJson, grplot_axis_scale_type_t *pResult) {
       }
    } else {
       retval |= grplot_json_error_scale_string;
+   }
+
+   return retval;
+}
+
+int
+grplot_json_text(json_t *pJson, const char **pResult) {
+   assert(pJson);
+   assert(pResult);
+
+   int retval =  0;
+
+   if (json_is_string(pJson)) {
+      *pResult =  json_string_value(pJson);
+   } else {
+      retval |= grplot_json_error_text_string;
    }
 
    return retval;
@@ -776,6 +808,7 @@ grplot_json_init_axis_inscription_style_elem(
    pOut->color =  0;
    (pOut->min).numeric =  0.0;
    (pOut->max).numeric =  1.0;
+   pOut->text =  NULL;
 }
 
 void
