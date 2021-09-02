@@ -705,6 +705,22 @@ grplot_json_axis_inscription_style_elem(
          retval =  1;
       }
    }
+   {
+      const grplot_axis_val_t *pVal =
+            pDefault
+         ?  &(pDefault->max)
+         :  NULL;
+      int errMode =  grplot_json_val_elem(
+            pLocation
+         ,  pJson
+         ,  pOut->scaleType
+         ,  "max"
+         ,  pVal
+         ,  &(pOut->max) );
+      if (errMode) {
+         retval =  1;
+      }
+   }
 
    return retval;
 }
