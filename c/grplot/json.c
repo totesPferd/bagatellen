@@ -869,10 +869,29 @@ printErrMsgIntro(
       }
       break;
 
-      case grplot_json_schema_diagram_base: {
-         fprintf(stderr, "in diagram base #(%d, %d)"
-            ,  (pLocation->variant).diagramBase.x
-            ,  (pLocation->variant).diagramBase.y );
+      case grplot_json_schema_axis_default: {
+
+         switch ((pLocation->variant).axisDefault) {
+
+            case grplot_axis_x_axis: {
+               fprintf(stderr, "in x axis (default)");
+            }
+            break;
+
+            case grplot_axis_y_axis: {
+               fprintf(stderr, "in y axis (default)");
+            }
+            break;
+
+            default: {
+               assert(0);
+            }
+         }
+      }
+      break;
+
+      case grplot_json_schema_axis_default_general: {
+         fprintf(stderr, "in axis (default)");
       }
       break;
 
@@ -881,6 +900,18 @@ printErrMsgIntro(
             ,  (pLocation->variant).diagram.base.x
             ,  (pLocation->variant).diagram.base.y
             ,  (pLocation->variant).diagram.nr );
+      }
+      break;
+
+      case grplot_json_schema_diagram_base: {
+         fprintf(stderr, "in diagram base #(%d, %d)"
+            ,  (pLocation->variant).diagramBase.x
+            ,  (pLocation->variant).diagramBase.y );
+      }
+      break;
+
+      case grplot_json_schema_diagram_default: {
+         fprintf(stderr, "in diagram (default)");
       }
       break;
 

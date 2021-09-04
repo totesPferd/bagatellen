@@ -12,8 +12,11 @@
 typedef enum {
       grplot_json_schema_base
    ,  grplot_json_schema_axis
+   ,  grplot_json_schema_axis_default
+   ,  grplot_json_schema_axis_default_general
    ,  grplot_json_schema_diagram_base
-   ,  grplot_json_schema_diagram } grplot_json_schema_location_type_t;
+   ,  grplot_json_schema_diagram
+   ,  grplot_json_schema_diagram_default } grplot_json_schema_location_type_t;
 
 typedef struct {
    grplot_axis_type_t axisType;
@@ -29,6 +32,7 @@ typedef struct {
 
 typedef union {
    int base;
+   grplot_axis_type_t axisDefault;
    grplot_json_schema_axis_t axis;
    grplot_json_schema_diagram_base_t diagramBase;
    grplot_json_schema_diagram_t diagram; } grplot_json_schema_variant_t;
