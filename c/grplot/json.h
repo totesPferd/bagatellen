@@ -131,6 +131,11 @@ const int grplot_json_error_font_string =  256;
 int
 grplot_json_font(json_t *, const char **);
 
+const int grplot_json_error_nr_gt_zero =  1;
+const int grplot_json_error_nr_int =  128;
+int
+grplot_json_nr(json_t *, unsigned *);
+
 const int grplot_json_error_scale_range =  16;
 const int grplot_json_error_scale_string =  256;
 int

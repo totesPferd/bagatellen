@@ -98,6 +98,21 @@ grplot_json_printFontErrMsg(
 }
 
 void
+grplot_json_printNrErrMsg(
+      const grplot_json_schema_location_t *pLocation
+   ,  int errCode ) {
+   assert(pLocation);
+
+   if (errCode & grplot_json_error_nr_gt_zero) {
+      grplot_json_printErrMsg(pLocation, "nr must be greater than zero");
+   }
+
+   if (errCode & grplot_json_error_nr_int) {
+      grplot_json_printErrMsg(pLocation, "nr must be integer");
+   }
+}
+
+void
 grplot_json_printScaleErrMsg(
       const grplot_json_schema_location_t *pLocation
    ,  int errCode ) {
@@ -368,6 +383,27 @@ grplot_json_font(json_t *pJson, const char **pResult) {
       *pResult =  json_string_value(pJson);
    } else {
       retval |=  grplot_json_error_font_string;
+   }
+
+   return retval;
+}
+
+int
+grplot_json_nr(json_t *pJson, unsigned *pResult) {
+   assert(pJson);
+   assert(pResult);
+
+   int retval =  0;
+
+   if (json_is_integer(pJson)) {
+      int val =  json_integer_value(pJson);
+      if (val >= 0) {
+         *pResult =  val;
+      } else {
+         retval |= grplot_json_error_nr_gt_zero;
+      }
+   } else {
+      retval |= grplot_json_error_nr_int;
    }
 
    return retval;
