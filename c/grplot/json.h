@@ -195,7 +195,7 @@ grplot_json_val_elem(
    ,  grplot_axis_scale_type_t
    ,  const char *
    ,  const grplot_axis_val_t *
-   ,  grplot_axis_val_t *);
+   ,  grplot_axis_val_t * );
 
 int
 grplot_json_inscription_style_elem(
@@ -203,38 +203,49 @@ grplot_json_inscription_style_elem(
    ,  json_t *
    ,  const char *
    ,  const grplot_json_schema_inscription_style_t *
-   ,  grplot_json_schema_inscription_style_t *);
+   ,  grplot_json_schema_inscription_style_t * );
 
 int
 grplot_json_axis_inscription_style_elem(
       const grplot_json_schema_location_t *
    ,  json_t *
    ,  const grplot_json_schema_axis_inscription_style_t *
-   ,  grplot_json_schema_axis_inscription_style_t *);
+   ,  grplot_json_schema_axis_inscription_style_t * );
 
 int
 grplot_json_diagram_inscription_style_elem(
       const grplot_json_schema_location_t *
    ,  json_t *
    ,  const grplot_json_schema_diagram_inscription_style_t *
-   ,  grplot_json_schema_diagram_inscription_style_t *);
+   ,  grplot_json_schema_diagram_inscription_style_t * );
 
 void
 grplot_json_init_inscription_style_elem(
-      grplot_json_schema_inscription_style_t *);
+      grplot_json_schema_inscription_style_t * );
 
 void
 grplot_json_init_axis_inscription_style_elem(
-      grplot_json_schema_axis_inscription_style_t *);
+      grplot_json_schema_axis_inscription_style_t * );
 
 void
 grplot_json_init_diagram_inscription_style_elem(
-      grplot_json_schema_diagram_inscription_style_t *);
+      grplot_json_schema_diagram_inscription_style_t * );
+
+int
+grplot_json_axis_default_general(
+      json_t *
+   ,  grplot_json_schema_axis_inscription_style_t * );
+
+int
+grplot_json_axis_default(
+      json_t *
+   ,  const grplot_json_schema_axis_inscription_style_t *
+   ,  grplot_json_schema_axis_inscription_style_t * );
 
 grplot_axis_output_status_t
 grplot_json_matrix_init_axis(
       grplot_matrix_t *
    ,  grplot_json_schema_axis_inscription_style_t *
-   ,  grplot_json_schema_location_t *);
+   ,  grplot_json_schema_location_t * );
 
 #endif

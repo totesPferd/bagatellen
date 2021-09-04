@@ -922,6 +922,46 @@ grplot_json_init_diagram_inscription_style_elem(
    grplot_json_init_inscription_style_elem(&(pOut->legend));
 }
 
+int
+grplot_json_axis_default_general(
+      json_t *pJson
+   ,  grplot_json_schema_axis_inscription_style_t *pOut ) {
+   assert(pJson);
+   assert(pOut);
+
+   return grplot_json_axis_default(
+         pJson
+      ,  NULL
+      ,  pOut );
+}
+
+int
+grplot_json_axis_default(
+      json_t *pJson
+   ,  const grplot_json_schema_axis_inscription_style_t *pDefault
+   ,  grplot_json_schema_axis_inscription_style_t *pOut ) {
+   assert(pJson);
+   assert(pOut);
+
+   int retval =  0;
+
+   grplot_json_init_axis_inscription_style_elem(pOut);
+
+   grplot_json_schema_location_t location;
+   location.locationType =  grplot_json_schema_axis_default;
+
+   json_t *pInnerJson =  json_object_get(pJson, "default");
+   if (pInnerJson) {
+      int status =  grplot_json_axis_inscription_style_elem(
+            &location
+         ,  pInnerJson
+         ,  pDefault
+         ,  pOut );
+   }
+
+   return retval;
+}
+
 grplot_axis_output_status_t
 grplot_json_matrix_init_axis(
       grplot_matrix_t *pMatrix
