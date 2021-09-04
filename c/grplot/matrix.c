@@ -150,7 +150,7 @@ grplot_matrix_x_axis_init(
    ,  DATA32 lineColor
    ,  grplot_axis_val_t min
    ,  grplot_axis_val_t max
-   ,  char *label ) {
+   ,  const char *label ) {
    assert(pMatrix);
    assert(x < pMatrix->nrX);
 
@@ -185,7 +185,7 @@ grplot_matrix_y_axis_init(
    ,  DATA32 lineColor
    ,  grplot_axis_val_t min
    ,  grplot_axis_val_t max
-   ,  char *label ) {
+   ,  const char *label ) {
    assert(pMatrix);
    assert(y < pMatrix->nrY);
 

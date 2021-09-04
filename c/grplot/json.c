@@ -836,6 +836,61 @@ grplot_json_init_diagram_inscription_style_elem(
    grplot_json_init_inscription_style_elem(&(pOut->legend));
 }
 
+grplot_axis_output_status_t
+grplot_json_matrix_init_axis(
+      grplot_matrix_t *pMatrix
+   ,  grplot_json_schema_axis_inscription_style_t *pAxisInscriptionStyle
+   ,  grplot_json_schema_location_t *pLocation ) {
+   assert(pMatrix);
+   assert(pAxisInscriptionStyle);
+   assert(pLocation);
+
+   grplot_axis_output_status_t retval;
+
+   switch ((pLocation->variant).axis.axisType) {
+
+      case (grplot_axis_x_axis): {
+         retval =  grplot_matrix_x_axis_init(
+               pMatrix
+            ,  (pLocation->variant).axis.nr
+            ,  pAxisInscriptionStyle->scaleType
+            ,  (pAxisInscriptionStyle->inscription).font
+            ,  (pAxisInscriptionStyle->inscription).color
+            ,  (pAxisInscriptionStyle->label).font
+            ,  (pAxisInscriptionStyle->label).color
+            ,  pAxisInscriptionStyle->nrPixels
+            ,  pAxisInscriptionStyle->color
+            ,  pAxisInscriptionStyle->min
+            ,  pAxisInscriptionStyle->max
+            ,  pAxisInscriptionStyle->text );
+      }
+      break;
+
+      case (grplot_axis_y_axis): {
+         retval =  grplot_matrix_y_axis_init(
+               pMatrix
+            ,  (pLocation->variant).axis.nr
+            ,  pAxisInscriptionStyle->scaleType
+            ,  (pAxisInscriptionStyle->inscription).font
+            ,  (pAxisInscriptionStyle->inscription).color
+            ,  (pAxisInscriptionStyle->label).font
+            ,  (pAxisInscriptionStyle->label).color
+            ,  pAxisInscriptionStyle->nrPixels
+            ,  pAxisInscriptionStyle->color
+            ,  pAxisInscriptionStyle->min
+            ,  pAxisInscriptionStyle->max
+            ,  pAxisInscriptionStyle->text );
+      }
+      break;
+
+      default: {
+         assert(0);
+      }
+   }
+
+   return retval;
+}
+
 static void
 printErrMsgIntro(
       const grplot_json_schema_location_t *pLocation ) {

@@ -51,6 +51,7 @@ typedef struct {
    grplot_axis_scale_type_t scaleType;
    DATA32 color;
    const char *text;
+   unsigned nrPixels;
    grplot_axis_val_t min;
    grplot_axis_val_t max; } grplot_json_schema_axis_inscription_style_t;
 
@@ -212,5 +213,11 @@ grplot_json_init_axis_inscription_style_elem(
 void
 grplot_json_init_diagram_inscription_style_elem(
       grplot_json_schema_diagram_inscription_style_t *);
+
+grplot_axis_output_status_t
+grplot_json_matrix_init_axis(
+      grplot_matrix_t *
+   ,  grplot_json_schema_axis_inscription_style_t *
+   ,  grplot_json_schema_location_t *);
 
 #endif

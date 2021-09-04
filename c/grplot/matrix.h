@@ -63,7 +63,7 @@ grplot_matrix_x_axis_init(
    ,  DATA32
    ,  grplot_axis_val_t
    ,  grplot_axis_val_t
-   ,  char * );
+   ,  const char * );
 
 grplot_axis_output_status_t
 grplot_matrix_y_axis_init(
@@ -78,7 +78,7 @@ grplot_matrix_y_axis_init(
    ,  DATA32
    ,  grplot_axis_val_t
    ,  grplot_axis_val_t
-   ,  char * );
+   ,  const char * );
 
 grplot_diagram_status_t
 grplot_matrix_diagram_init(
