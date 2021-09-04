@@ -930,10 +930,23 @@ grplot_json_axis_default_general(
    assert(pJson);
    assert(pOut);
 
-   return grplot_json_axis_default(
-         pJson
-      ,  NULL
-      ,  pOut );
+   int retval =  0;
+
+   grplot_json_init_axis_inscription_style_elem(pOut);
+
+   grplot_json_schema_location_t location;
+   location.locationType =  grplot_json_schema_axis_default_general;
+
+   json_t *pInnerJson =  json_object_get(pJson, "default");
+   if (pInnerJson) {
+      retval =  grplot_json_axis_inscription_style_elem(
+            &location
+         ,  pInnerJson
+         ,  NULL
+         ,  pOut );
+   }
+
+   return retval;
 }
 
 int
@@ -942,6 +955,7 @@ grplot_json_axis_default(
    ,  const grplot_json_schema_axis_inscription_style_t *pDefault
    ,  grplot_json_schema_axis_inscription_style_t *pOut ) {
    assert(pJson);
+   assert(pDefault);
    assert(pOut);
 
    int retval =  0;
@@ -953,7 +967,7 @@ grplot_json_axis_default(
 
    json_t *pInnerJson =  json_object_get(pJson, "default");
    if (pInnerJson) {
-      int status =  grplot_json_axis_inscription_style_elem(
+      retval =  grplot_json_axis_inscription_style_elem(
             &location
          ,  pInnerJson
          ,  pDefault
