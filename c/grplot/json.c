@@ -738,114 +738,118 @@ grplot_json_axis_inscription_style_elem(
    assert(pLocation);
    assert(pOut);
 
-   int retval =  0;
+   int retval =  json_is_object(pJson);
 
-   grplot_json_init_axis_inscription_style_elem(pOut);
-
-   {
-      const grplot_json_schema_inscription_style_t *pInscriptionStyle =
-            pDefault
-         ?  &(pDefault->inscription)
-         :  NULL;
-      int errMode =  grplot_json_inscription_style_elem(
-            pLocation
-         ,  pJson
-         ,  "inscription"
-         ,  pInscriptionStyle
-         ,  &(pOut->inscription) );
-      if (errMode) {
-         retval =  1;
+   if (!retval) {
+      grplot_json_init_axis_inscription_style_elem(pOut);
+   
+      {
+         const grplot_json_schema_inscription_style_t *pInscriptionStyle =
+               pDefault
+            ?  &(pDefault->inscription)
+            :  NULL;
+         int errMode =  grplot_json_inscription_style_elem(
+               pLocation
+            ,  pJson
+            ,  "inscription"
+            ,  pInscriptionStyle
+            ,  &(pOut->inscription) );
+         if (errMode) {
+            retval =  1;
+         }
       }
-   }
-   {
-      const grplot_json_schema_inscription_style_t *pLabelStyle =
-            pDefault
-         ?  &(pDefault->label)
-         :  NULL;
-      int errMode =  grplot_json_inscription_style_elem(
-            pLocation
-         ,  pJson
-         ,  "label"
-         ,  pLabelStyle
-         ,  &(pOut->label) );
-      if (errMode) {
-         retval =  1;
+      {
+         const grplot_json_schema_inscription_style_t *pLabelStyle =
+               pDefault
+            ?  &(pDefault->label)
+            :  NULL;
+         int errMode =  grplot_json_inscription_style_elem(
+               pLocation
+            ,  pJson
+            ,  "label"
+            ,  pLabelStyle
+            ,  &(pOut->label) );
+         if (errMode) {
+            retval =  1;
+         }
       }
-   }
-   {
-      const unsigned *pNrPixels =
-            pDefault
-         ?  &(pDefault->nrPixels)
-         :  NULL;
-      int errMode =  grplot_json_nr_elem(
-            pLocation
-         ,  pJson
-         ,  pNrPixels
-         ,  &(pOut->nrPixels) );
-      if (errMode) {
-         retval =  1;
+      {
+         const unsigned *pNrPixels =
+               pDefault
+            ?  &(pDefault->nrPixels)
+            :  NULL;
+         int errMode =  grplot_json_nr_elem(
+               pLocation
+            ,  pJson
+            ,  pNrPixels
+            ,  &(pOut->nrPixels) );
+         if (errMode) {
+            retval =  1;
+         }
       }
-   }
-   {
-      const grplot_axis_scale_type_t *pScaleType =
-            pDefault
-         ?  &(pDefault->scaleType)
-         :  NULL;
-      int errMode =  grplot_json_scale_elem(
-            pLocation
-         ,  pJson
-         ,  pScaleType
-         ,  &(pOut->scaleType) );
-      if (errMode) {
-         retval =  1;
+      {
+         const grplot_axis_scale_type_t *pScaleType =
+               pDefault
+            ?  &(pDefault->scaleType)
+            :  NULL;
+         int errMode =  grplot_json_scale_elem(
+               pLocation
+            ,  pJson
+            ,  pScaleType
+            ,  &(pOut->scaleType) );
+         if (errMode) {
+            retval =  1;
+         }
       }
-   }
-   {
-      const DATA32 *pColor =
-            pDefault
-         ?  &(pDefault->color)
-         :  NULL;
-      int errMode =  grplot_json_color_elem(
-            pLocation
-         ,  pJson
-         ,  "line"
-         ,  pColor
-         ,  &(pOut->color) );
-      if (errMode) {
-         retval =  1;
+      {
+         const DATA32 *pColor =
+               pDefault
+            ?  &(pDefault->color)
+            :  NULL;
+         int errMode =  grplot_json_color_elem(
+               pLocation
+            ,  pJson
+            ,  "line"
+            ,  pColor
+            ,  &(pOut->color) );
+         if (errMode) {
+            retval =  1;
+         }
       }
-   }
-   {
-      const grplot_axis_val_t *pVal =
-            pDefault
-         ?  &(pDefault->min)
-         :  NULL;
-      int errMode =  grplot_json_val_elem(
-            pLocation
-         ,  pJson
-         ,  pOut->scaleType
-         ,  "min"
-         ,  pVal
-         ,  &(pOut->min) );
-      if (errMode) {
-         retval =  1;
+      {
+         const grplot_axis_val_t *pVal =
+               pDefault
+            ?  &(pDefault->min)
+            :  NULL;
+         int errMode =  grplot_json_val_elem(
+               pLocation
+            ,  pJson
+            ,  pOut->scaleType
+            ,  "min"
+            ,  pVal
+            ,  &(pOut->min) );
+         if (errMode) {
+            retval =  1;
+         }
       }
-   }
-   {
-      const grplot_axis_val_t *pVal =
-            pDefault
-         ?  &(pDefault->max)
-         :  NULL;
-      int errMode =  grplot_json_val_elem(
-            pLocation
-         ,  pJson
-         ,  pOut->scaleType
-         ,  "max"
-         ,  pVal
-         ,  &(pOut->max) );
-      if (errMode) {
-         retval =  1;
+      {
+         const grplot_axis_val_t *pVal =
+               pDefault
+            ?  &(pDefault->max)
+            :  NULL;
+         int errMode =  grplot_json_val_elem(
+               pLocation
+            ,  pJson
+            ,  pOut->scaleType
+            ,  "max"
+            ,  pVal
+            ,  &(pOut->max) );
+         if (errMode) {
+            retval =  1;
+         }
       }
+   } else {
+      grplot_json_printErrMsg(pLocation, "axis must be json object");
    }
 
    return retval;
@@ -860,25 +864,30 @@ grplot_json_diagram_inscription_style_elem(
    assert(pLocation);
    assert(pOut);
 
-   int retval =  0;
+   int retval =  json_is_object(pJson);
 
-   grplot_json_init_diagram_inscription_style_elem(pOut);
-
-   {
-      const grplot_json_schema_inscription_style_t *pLegendStyle =
-            pDefault
-         ?  &(pDefault->legend)
-         :  NULL;
-      int errMode =  grplot_json_inscription_style_elem(
-            pLocation
-         ,  pJson
-         ,  "legend"
-         ,  pLegendStyle
-         ,  &(pOut->legend) );
-      if (errMode) {
-         retval =  1;
+   if (!retval) {
+      grplot_json_init_diagram_inscription_style_elem(pOut);
+   
+      {
+         const grplot_json_schema_inscription_style_t *pLegendStyle =
+               pDefault
+            ?  &(pDefault->legend)
+            :  NULL;
+         int errMode =  grplot_json_inscription_style_elem(
+               pLocation
+            ,  pJson
+            ,  "legend"
+            ,  pLegendStyle
+            ,  &(pOut->legend) );
+         if (errMode) {
+            retval =  1;
+         }
       }
+   } else {
+      grplot_json_printErrMsg(pLocation, "diagram must be json object");
    }
+
    return retval;
 }
 
