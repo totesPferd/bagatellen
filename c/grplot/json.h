@@ -242,7 +242,7 @@ grplot_json_axis_default(
    ,  const grplot_json_schema_axis_inscription_style_t *
    ,  grplot_json_schema_axis_inscription_style_t * );
 
-grplot_axis_output_status_t
+int
 grplot_json_matrix_init_axis(
       grplot_matrix_t *
    ,  grplot_json_schema_axis_inscription_style_t *

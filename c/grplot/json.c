@@ -977,7 +977,7 @@ grplot_json_axis_default(
    return retval;
 }
 
-grplot_axis_output_status_t
+int
 grplot_json_matrix_init_axis(
       grplot_matrix_t *pMatrix
    ,  grplot_json_schema_axis_inscription_style_t *pAxisInscriptionStyle
@@ -986,46 +986,56 @@ grplot_json_matrix_init_axis(
    assert(pAxisInscriptionStyle);
    assert(pLocation);
 
-   grplot_axis_output_status_t retval;
-
-   switch ((pLocation->variant).axis.axisType) {
-
-      case (grplot_axis_x_axis): {
-         retval =  grplot_matrix_x_axis_init(
-               pMatrix
-            ,  (pLocation->variant).axis.nr
-            ,  pAxisInscriptionStyle->scaleType
-            ,  (pAxisInscriptionStyle->inscription).font
-            ,  (pAxisInscriptionStyle->inscription).color
-            ,  (pAxisInscriptionStyle->label).font
-            ,  (pAxisInscriptionStyle->label).color
-            ,  pAxisInscriptionStyle->nrPixels
-            ,  pAxisInscriptionStyle->color
-            ,  pAxisInscriptionStyle->min
-            ,  pAxisInscriptionStyle->max
-            ,  pAxisInscriptionStyle->text );
+   int retval =  grplot_json_printMissingItemsInAxisInstructionStyle(
+         pLocation
+      ,  pAxisInscriptionStyle );
+   if (!retval) {
+      grplot_axis_output_status_t statusCode =  grplot_axis_output_ok;
+   
+      switch ((pLocation->variant).axis.axisType) {
+   
+         case (grplot_axis_x_axis): {
+            statusCode =  grplot_matrix_x_axis_init(
+                  pMatrix
+               ,  (pLocation->variant).axis.nr
+               ,  pAxisInscriptionStyle->scaleType
+               ,  (pAxisInscriptionStyle->inscription).font
+               ,  (pAxisInscriptionStyle->inscription).color
+               ,  (pAxisInscriptionStyle->label).font
+               ,  (pAxisInscriptionStyle->label).color
+               ,  pAxisInscriptionStyle->nrPixels
+               ,  pAxisInscriptionStyle->color
+               ,  pAxisInscriptionStyle->min
+               ,  pAxisInscriptionStyle->max
+               ,  pAxisInscriptionStyle->text );
+         }
+         break;
+   
+         case (grplot_axis_y_axis): {
+            statusCode =  grplot_matrix_y_axis_init(
+                  pMatrix
+               ,  (pLocation->variant).axis.nr
+               ,  pAxisInscriptionStyle->scaleType
+               ,  (pAxisInscriptionStyle->inscription).font
+               ,  (pAxisInscriptionStyle->inscription).color
+               ,  (pAxisInscriptionStyle->label).font
+               ,  (pAxisInscriptionStyle->label).color
+               ,  pAxisInscriptionStyle->nrPixels
+               ,  pAxisInscriptionStyle->color
+               ,  pAxisInscriptionStyle->min
+               ,  pAxisInscriptionStyle->max
+               ,  pAxisInscriptionStyle->text );
+         }
+         break;
+   
+         default: {
+            assert(0);
+         }
       }
-      break;
 
-      case (grplot_axis_y_axis): {
-         retval =  grplot_matrix_y_axis_init(
-               pMatrix
-            ,  (pLocation->variant).axis.nr
-            ,  pAxisInscriptionStyle->scaleType
-            ,  (pAxisInscriptionStyle->inscription).font
-            ,  (pAxisInscriptionStyle->inscription).color
-            ,  (pAxisInscriptionStyle->label).font
-            ,  (pAxisInscriptionStyle->label).color
-            ,  pAxisInscriptionStyle->nrPixels
-            ,  pAxisInscriptionStyle->color
-            ,  pAxisInscriptionStyle->min
-            ,  pAxisInscriptionStyle->max
-            ,  pAxisInscriptionStyle->text );
-      }
-      break;
-
-      default: {
-         assert(0);
+      if (statusCode != grplot_axis_output_ok) {
+         grplot_json_printAxisErrMsg(pLocation, statusCode);
+         retval =  1;
       }
    }
 
