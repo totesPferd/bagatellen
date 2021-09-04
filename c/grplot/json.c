@@ -909,6 +909,7 @@ grplot_json_init_axis_inscription_style_elem(
    grplot_json_init_inscription_style_elem(&(pOut->label));
    pOut->scaleType =  grplot_axis_linear;
    pOut->color =  0;
+   pOut->nrPixels =  1024;
    (pOut->min).numeric =  0.0;
    (pOut->max).numeric =  1.0;
    pOut->text =  NULL;
