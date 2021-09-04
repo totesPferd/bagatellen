@@ -589,6 +589,33 @@ grplot_json_font_elem(
 }
 
 int
+grplot_json_nr_elem(
+      const grplot_json_schema_location_t *pLocation
+   ,  json_t *pJson
+   ,  const unsigned *pDefault
+   ,  unsigned *pOut ) {
+   assert(pLocation);
+   assert(pOut);
+
+   int retval =  0;
+
+   if (pDefault) {
+      *pOut =  *pDefault;
+   }
+
+   json_t *pElem =  json_object_get(pJson, "nr");
+   if (pElem) {
+      int errCode =  grplot_json_nr(pJson, pOut);
+      grplot_json_printNrErrMsg(pLocation, errCode);
+      if (errCode) {
+         retval =  1;
+      }
+   }
+
+   return retval;
+}
+
+int
 grplot_json_scale_elem(
       const grplot_json_schema_location_t *pLocation
    ,  json_t *pJson
@@ -741,6 +768,20 @@ grplot_json_axis_inscription_style_elem(
          ,  "label"
          ,  pLabelStyle
          ,  &(pOut->label) );
+      if (errMode) {
+         retval =  1;
+      }
+   }
+   {
+      const unsigned *pNrPixels =
+            pDefault
+         ?  &(pDefault->nrPixels)
+         :  NULL;
+      int errMode =  grplot_json_nr_elem(
+            pLocation
+         ,  pJson
+         ,  pNrPixels
+         ,  &(pOut->nrPixels) );
       if (errMode) {
          retval =  1;
       }

@@ -76,6 +76,11 @@ grplot_json_printFontErrMsg(
    ,  int );
 
 void
+grplot_json_printNrErrMsg(
+      const grplot_json_schema_location_t *
+   ,  int );
+
+void
 grplot_json_printScaleErrMsg(
       const grplot_json_schema_location_t *
    ,  int );
@@ -168,6 +173,13 @@ grplot_json_font_elem(
    ,  const char *
    ,  const Imlib_Font *
    ,  Imlib_Font * );
+
+int
+grplot_json_nr_elem(
+      const grplot_json_schema_location_t *
+   ,  json_t *
+   ,  const unsigned *
+   ,  unsigned * );
 
 int
 grplot_json_scale_elem(
