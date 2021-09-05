@@ -304,6 +304,25 @@ grplot_json_printMissingItemsInDiagramInstructionStyle(
 }
 
 int
+grplot_json_printMissingItemsInDiagramItemInstructionStyle(
+      const grplot_json_schema_location_t *pLocation
+   ,  const grplot_json_schema_diagram_item_inscription_style_t *pOut ) {
+   assert(pLocation);
+   assert(pOut);
+
+   int retval =  0;
+
+   if (!(pOut->text)) {
+      retval =  1;
+      grplot_json_printErrMsg(
+            pLocation
+         ,  "missing text in diagram item." );
+   }
+
+   return retval;
+}
+
+int
 grplot_json_color(json_t *pJson, DATA32 *pResult) {
    assert(pJson);
    assert(pResult);
@@ -921,6 +940,14 @@ grplot_json_init_diagram_inscription_style_elem(
    assert(pOut);
 
    grplot_json_init_inscription_style_elem(&(pOut->legend));
+}
+
+void
+grplot_json_init_diagram_item_inscription_style_elem(
+      grplot_json_schema_diagram_item_inscription_style_t *pOut ) {
+   assert(pOut);
+
+   pOut->text =  NULL;
 }
 
 int

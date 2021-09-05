@@ -58,6 +58,10 @@ typedef struct {
 typedef struct {
    grplot_json_schema_inscription_style_t legend; } grplot_json_schema_diagram_inscription_style_t;
 
+typedef struct {
+   DATA32 color;
+   const char *text; } grplot_json_schema_diagram_item_inscription_style_t;
+
 void
 grplot_json_printErrMsg(
       const grplot_json_schema_location_t *
@@ -119,6 +123,11 @@ int
 grplot_json_printMissingItemsInDiagramInstructionStyle(
       const grplot_json_schema_location_t *
    ,  const grplot_json_schema_diagram_inscription_style_t * );
+
+int
+grplot_json_printMissingItemsInDiagramItemInstructionStyle(
+      const grplot_json_schema_location_t *
+   ,  const grplot_json_schema_diagram_item_inscription_style_t * );
 
 const int grplot_json_error_red_integer =  1;
 const int grplot_json_error_green_integer =  2;
@@ -230,6 +239,10 @@ grplot_json_init_axis_inscription_style_elem(
 void
 grplot_json_init_diagram_inscription_style_elem(
       grplot_json_schema_diagram_inscription_style_t * );
+
+void
+grplot_json_init_diagram_item_inscription_style_elem(
+      grplot_json_schema_diagram_item_inscription_style_t * );
 
 int
 grplot_json_axis_default_general(
