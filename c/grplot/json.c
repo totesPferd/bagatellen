@@ -1163,6 +1163,34 @@ grplot_json_matrix_init_axis(
    return retval;
 }
 
+int
+grplot_json_diagram_init_item(
+      grplot_diagram_t *pDiagram
+   ,  grplot_json_schema_diagram_item_inscription_style_t *pDiagramItemInscriptionStyle
+   ,  grplot_json_schema_location_t *pLocation ) {
+   assert(pDiagram);
+   assert(pDiagramItemInscriptionStyle);
+   assert(pLocation);
+
+   int retval =  grplot_json_printMissingItemsInDiagramItemInstructionStyle(
+         pLocation
+      ,  pDiagramItemInscriptionStyle );
+   if (!retval) {
+      grplot_diagram_status_t statusCode =  grplot_diagram_item_init(
+            pDiagram
+         ,  pDiagramItemInscriptionStyle->color
+         ,  pDiagramItemInscriptionStyle->text
+         ,  (pLocation->variant).diagram.nr );
+
+      if (statusCode != grplot_diagram_ok) {
+         grplot_json_printDiagramErrMsg(pLocation, statusCode);
+         retval =  1;
+      }
+   }
+   
+   return retval;
+}
+
 static void
 printErrMsgIntro(
       const grplot_json_schema_location_t *pLocation ) {

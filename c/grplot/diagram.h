@@ -32,7 +32,7 @@ grplot_diagram_status_t
 grplot_diagram_item_init(
       grplot_diagram_t *
    ,  DATA32
-   ,  char *
+   ,  const char *
    ,  unsigned );
 
 grplot_diagram_status_t

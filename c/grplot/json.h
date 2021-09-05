@@ -275,4 +275,10 @@ grplot_json_matrix_init_axis(
    ,  grplot_json_schema_axis_inscription_style_t *
    ,  grplot_json_schema_location_t * );
 
+int
+grplot_json_diagram_init_item(
+      grplot_diagram_t *
+   ,  grplot_json_schema_diagram_item_inscription_style_t *
+   ,  grplot_json_schema_location_t * );
+
 #endif

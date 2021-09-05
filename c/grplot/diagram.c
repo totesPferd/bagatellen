@@ -42,7 +42,7 @@ grplot_diagram_status_t
 grplot_diagram_item_init(
       grplot_diagram_t *pDiagram
    ,  DATA32 color
-   ,  char *text
+   ,  const char *text
    ,  unsigned index ) {
    assert(pDiagram);
 
