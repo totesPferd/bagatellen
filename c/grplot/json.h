@@ -56,7 +56,8 @@ typedef struct {
    grplot_axis_val_t max; } grplot_json_schema_axis_inscription_style_t;
 
 typedef struct {
-   grplot_json_schema_inscription_style_t legend; } grplot_json_schema_diagram_inscription_style_t;
+   DATA32 color;
+   Imlib_Font font; } grplot_json_schema_diagram_inscription_style_t;
 
 typedef struct {
    DATA32 color;

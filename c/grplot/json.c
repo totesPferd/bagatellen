@@ -293,11 +293,11 @@ grplot_json_printMissingItemsInDiagramInstructionStyle(
 
    int retval =  0;
 
-   if (!(pOut->legend).font) {
+   if (!(pOut->font)) {
       retval =  1;
       grplot_json_printErrMsg(
             pLocation
-         ,  "missing font in legend part." );
+         ,  "missing font." );
    }
 
    return retval;
@@ -932,16 +932,31 @@ grplot_json_diagram_inscription_style_elem(
       grplot_json_init_diagram_inscription_style_elem(pOut);
    
       {
-         const grplot_json_schema_inscription_style_t *pLegendStyle =
+         const DATA32 *pElem =
                pDefault
-            ?  &(pDefault->legend)
+            ?  &(pDefault->color)
             :  NULL;
-         int errMode =  grplot_json_inscription_style_elem(
+         int errMode =  grplot_json_color_elem(
                pLocation
             ,  pJson
-            ,  "legend"
-            ,  pLegendStyle
-            ,  &(pOut->legend) );
+            ,  "diagramColor"
+            ,  pElem
+            ,  &(pOut->color) );
+         if (errMode) {
+            retval =  1;
+         }
+      }
+      {
+         const Imlib_Font *pElem =
+               pDefault
+            ?  &(pDefault->font)
+            :  NULL;
+         int errMode =  grplot_json_font_elem(
+               pLocation
+            ,  pJson
+            ,  "legendFont"
+            ,  pElem
+            ,  &(pOut->font) );
          if (errMode) {
             retval =  1;
          }
@@ -1033,7 +1048,8 @@ grplot_json_init_diagram_inscription_style_elem(
       grplot_json_schema_diagram_inscription_style_t *pOut ) {
    assert(pOut);
 
-   grplot_json_init_inscription_style_elem(&(pOut->legend));
+   pOut->color =  0;
+   pOut->font =  NULL;
 }
 
 void
