@@ -662,6 +662,35 @@ grplot_json_scale_elem(
 }
 
 int
+grplot_json_text_elem(
+      const grplot_json_schema_location_t *pLocation
+   ,  json_t *pJson
+   ,  const char *sDefault
+   ,  const char **pOut ) {
+   assert(pLocation);
+   assert(pJson);
+   assert(sDefault);
+   assert(pOut);
+
+   if (sDefault) {
+      *pOut =  sDefault;
+   }
+
+   int retval =  0;
+
+   json_t *pElem =  json_object_get(pJson, "text");
+   if (pElem) {
+      int errCode =  grplot_json_text(pJson, pOut);
+      grplot_json_printTextErrMsg(pLocation, errCode);
+      if (errCode) {
+         retval =  1;
+      }
+   }
+
+   return retval;
+}
+
+int
 grplot_json_val_elem(
       const grplot_json_schema_location_t *pLocation
    ,  json_t *pJson
@@ -793,6 +822,20 @@ grplot_json_axis_inscription_style_elem(
          }
       }
       {
+         const char *text =
+               pDefault
+            ?  pDefault->text
+            :  NULL;
+         int errMode =  grplot_json_text_elem(
+               pLocation
+            ,  pJson
+            ,  text
+            ,  &(pOut->text) );
+         if (errMode) {
+            retval =  1;
+         }
+      }
+      {
          const unsigned *pNrPixels =
                pDefault
             ?  &(pDefault->nrPixels)
@@ -905,6 +948,57 @@ grplot_json_diagram_inscription_style_elem(
       }
    } else {
       grplot_json_printErrMsg(pLocation, "diagram must be json object");
+   }
+
+   return retval;
+}
+
+int
+grplot_json_diagram_item_inscription_style_elem(
+      const grplot_json_schema_location_t *pLocation
+   ,  json_t *pJson
+   ,  const grplot_json_schema_diagram_item_inscription_style_t *pDefault
+   ,  grplot_json_schema_diagram_item_inscription_style_t *pOut ) {
+   assert(pLocation);
+   assert(pOut);
+
+   int retval =  json_is_object(pJson);
+
+   if (!retval) {
+      grplot_json_init_diagram_item_inscription_style_elem(pOut);
+
+      {
+         const DATA32 *pVal =  
+               pDefault
+            ?  &(pDefault->color)
+            :  NULL;
+         int errMode =  grplot_json_color_elem(
+               pLocation
+            ,  pJson
+            ,  "diagramItem"
+            ,  pVal
+            ,  &(pOut->color) );
+         if (errMode) {
+            retval =  1;
+         }
+      }
+      {
+         const char *text =  
+               pDefault
+            ?  pDefault->text
+            :  NULL;
+         int errMode =  grplot_json_text_elem(
+               pLocation
+            ,  pJson
+            ,  text
+            ,  &(pOut->text) );
+         if (errMode) {
+            retval =  1;
+         }
+      }
+
+   } else {
+      grplot_json_printErrMsg(pLocation, "diagram item must be json object");
    }
 
    return retval;

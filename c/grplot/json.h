@@ -198,6 +198,13 @@ grplot_json_scale_elem(
    ,  grplot_axis_scale_type_t * );
 
 int
+grplot_json_text_elem(
+      const grplot_json_schema_location_t *
+   ,  json_t *
+   ,  const char *
+   ,  const char ** );
+
+int
 grplot_json_val_elem(
       const grplot_json_schema_location_t *
    ,  json_t *
@@ -227,6 +234,13 @@ grplot_json_diagram_inscription_style_elem(
    ,  json_t *
    ,  const grplot_json_schema_diagram_inscription_style_t *
    ,  grplot_json_schema_diagram_inscription_style_t * );
+
+int
+grplot_json_diagram_item_inscription_style_elem(
+      const grplot_json_schema_location_t *
+   ,  json_t *
+   ,  const grplot_json_schema_diagram_item_inscription_style_t *
+   ,  grplot_json_schema_diagram_item_inscription_style_t * );
 
 void
 grplot_json_init_inscription_style_elem(
