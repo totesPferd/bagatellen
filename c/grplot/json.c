@@ -1115,6 +1115,34 @@ grplot_json_axis_default(
 }
 
 int
+grplot_json_diagram_base(
+      json_t *pJson
+   ,  const grplot_json_schema_diagram_inscription_style_t *pDefault
+   ,  grplot_json_schema_diagram_inscription_style_t *pOut ) {
+   assert(pJson);
+   assert(pDefault);
+   assert(pOut);
+
+   int retval =  0;
+
+   grplot_json_init_diagram_inscription_style_elem(pOut);
+
+   grplot_json_schema_location_t location;
+   location.locationType =  grplot_json_schema_diagram_base;
+
+   json_t *pInnerJson =  json_object_get(pJson, "default");
+   if (pInnerJson) {
+      retval =  grplot_json_diagram_inscription_style_elem(
+            &location
+         ,  pInnerJson
+         ,  pDefault
+         ,  pOut );
+   }
+
+   return retval;
+}
+
+int
 grplot_json_matrix_init_axis(
       grplot_matrix_t *pMatrix
    ,  grplot_json_schema_axis_inscription_style_t *pAxisInscriptionStyle
