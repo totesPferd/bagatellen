@@ -1115,7 +1115,7 @@ grplot_json_axis_default(
 }
 
 int
-grplot_json_diagram_base(
+grplot_json_diagram_default(
       json_t *pJson
    ,  const grplot_json_schema_diagram_inscription_style_t *pDefault
    ,  grplot_json_schema_diagram_inscription_style_t *pOut ) {
@@ -1128,11 +1128,43 @@ grplot_json_diagram_base(
    grplot_json_init_diagram_inscription_style_elem(pOut);
 
    grplot_json_schema_location_t location;
-   location.locationType =  grplot_json_schema_diagram_base;
+   location.locationType =  grplot_json_schema_diagram_default;
 
    json_t *pInnerJson =  json_object_get(pJson, "default");
    if (pInnerJson) {
       retval =  grplot_json_diagram_inscription_style_elem(
+            &location
+         ,  pInnerJson
+         ,  pDefault
+         ,  pOut );
+   }
+
+   return retval;
+}
+
+int
+grplot_json_diagram_base(
+      json_t *pJson
+   ,  const grplot_json_schema_location_t *pLocation
+   ,  const grplot_json_schema_diagram_item_inscription_style_t *pDefault
+   ,  grplot_json_schema_diagram_item_inscription_style_t *pOut ) {
+   assert(pJson);
+   assert(pLocation);
+   assert(pDefault);
+   assert(pOut);
+
+   int retval =  0;
+
+   grplot_json_init_diagram_item_inscription_style_elem(pOut);
+
+   grplot_json_schema_location_t location;
+   location.locationType =  grplot_json_schema_diagram_default;
+   location.variant.diagramBase.x =  (pLocation->variant).diagram.base.x;
+   location.variant.diagramBase.y =  (pLocation->variant).diagram.base.y;
+
+   json_t *pInnerJson =  json_object_get(pJson, "default");
+   if (pInnerJson) {
+      retval =  grplot_json_diagram_item_inscription_style_elem(
             &location
          ,  pInnerJson
          ,  pDefault
