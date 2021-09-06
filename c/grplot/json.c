@@ -1180,7 +1180,39 @@ grplot_json_matrix_init_axis(
 }
 
 int
-grplot_json_diagram_init_item(
+grplot_json_matrix_init_diagram(
+      grplot_matrix_t *pMatrix
+   ,  grplot_json_schema_diagram_inscription_style_t *pDiagramInscriptionStyle
+   ,  unsigned nrItem
+   ,  grplot_json_schema_location_t *pLocation ) {
+   assert(pMatrix);
+   assert(pDiagramInscriptionStyle);
+   assert(pLocation);
+
+   int retval =  grplot_json_printMissingItemsInDiagramInstructionStyle(
+         pLocation
+      ,  pDiagramInscriptionStyle );
+
+   if (!retval) {
+      grplot_diagram_status_t statusCode =  grplot_matrix_diagram_init(
+            pMatrix
+         ,  pDiagramInscriptionStyle->color
+         ,  pDiagramInscriptionStyle->font
+         ,  nrItem
+         ,  (pLocation->variant).diagramBase.x
+         ,  (pLocation->variant).diagramBase.y );
+      if (statusCode != grplot_diagram_ok) {
+         grplot_json_printDiagramErrMsg(pLocation, statusCode);
+         retval =  1;
+      }
+   }
+
+   return retval;
+}
+
+
+int
+grplot_json_diagram_init_diagram_item(
       grplot_diagram_t *pDiagram
    ,  grplot_json_schema_diagram_item_inscription_style_t *pDiagramItemInscriptionStyle
    ,  grplot_json_schema_location_t *pLocation ) {
@@ -1197,7 +1229,6 @@ grplot_json_diagram_init_item(
          ,  pDiagramItemInscriptionStyle->color
          ,  pDiagramItemInscriptionStyle->text
          ,  (pLocation->variant).diagram.nr );
-
       if (statusCode != grplot_diagram_ok) {
          grplot_json_printDiagramErrMsg(pLocation, statusCode);
          retval =  1;

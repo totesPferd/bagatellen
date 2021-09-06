@@ -277,7 +277,14 @@ grplot_json_matrix_init_axis(
    ,  grplot_json_schema_location_t * );
 
 int
-grplot_json_diagram_init_item(
+grplot_json_matrix_init_diagram(
+      grplot_matrix_t *
+   ,  grplot_json_schema_diagram_inscription_style_t *
+   ,  unsigned
+   ,  grplot_json_schema_location_t * );
+
+int
+grplot_json_diagram_init_diagram_item(
       grplot_diagram_t *
    ,  grplot_json_schema_diagram_item_inscription_style_t *
    ,  grplot_json_schema_location_t * );
