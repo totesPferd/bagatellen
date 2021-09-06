@@ -140,25 +140,25 @@ const int grplot_json_error_blue_range =  64;
 const int grplot_json_error_alpha_range =  128;
 const int grplot_json_error_color_object =  256;
 int
-grplot_json_color(json_t *, DATA32 *);
+grplot_json_color(const json_t *, DATA32 *);
 
 const int grplot_json_error_font_string =  256;
 int
-grplot_json_font(json_t *, const char **);
+grplot_json_font(const json_t *, const char **);
 
 const int grplot_json_error_nr_gt_zero =  1;
 const int grplot_json_error_nr_int =  128;
 int
-grplot_json_nr(json_t *, unsigned *);
+grplot_json_nr(const json_t *, unsigned *);
 
 const int grplot_json_error_scale_range =  16;
 const int grplot_json_error_scale_string =  256;
 int
-grplot_json_scale(json_t *, grplot_axis_scale_type_t *);
+grplot_json_scale(const json_t *, grplot_axis_scale_type_t *);
 
 const int grplot_json_error_text_string =  256;
 int
-grplot_json_text(json_t *, const char **);
+grplot_json_text(const json_t *, const char **);
 
 const int grplot_json_error_val_gt_zero =  1;
 const int grplot_json_error_val_timespec =  2;
@@ -166,12 +166,12 @@ const int grplot_json_error_val_junk =  4;
 const int grplot_json_error_val_string =  256;
 const int grplot_json_error_val_double =  512;
 int
-grplot_json_val(json_t *, grplot_axis_scale_type_t, grplot_axis_val_t *);
+grplot_json_val(const json_t *, grplot_axis_scale_type_t, grplot_axis_val_t *);
 
 int
 grplot_json_color_elem(
       const grplot_json_schema_location_t *
-   ,  json_t *
+   ,  const json_t *
    ,  const char *
    ,  const DATA32 *
    ,  DATA32 * );
@@ -179,7 +179,7 @@ grplot_json_color_elem(
 int
 grplot_json_font_elem(
       const grplot_json_schema_location_t *
-   ,  json_t *
+   ,  const json_t *
    ,  const char *
    ,  const Imlib_Font *
    ,  Imlib_Font * );
@@ -187,28 +187,28 @@ grplot_json_font_elem(
 int
 grplot_json_nr_elem(
       const grplot_json_schema_location_t *
-   ,  json_t *
+   ,  const json_t *
    ,  const unsigned *
    ,  unsigned * );
 
 int
 grplot_json_scale_elem(
       const grplot_json_schema_location_t *
-   ,  json_t *
+   ,  const json_t *
    ,  const grplot_axis_scale_type_t *
    ,  grplot_axis_scale_type_t * );
 
 int
 grplot_json_text_elem(
       const grplot_json_schema_location_t *
-   ,  json_t *
+   ,  const json_t *
    ,  const char *
    ,  const char ** );
 
 int
 grplot_json_val_elem(
       const grplot_json_schema_location_t *
-   ,  json_t *
+   ,  const json_t *
    ,  grplot_axis_scale_type_t
    ,  const char *
    ,  const grplot_axis_val_t *
@@ -217,7 +217,7 @@ grplot_json_val_elem(
 int
 grplot_json_inscription_style_elem(
       const grplot_json_schema_location_t *
-   ,  json_t *
+   ,  const json_t *
    ,  const char *
    ,  const grplot_json_schema_inscription_style_t *
    ,  grplot_json_schema_inscription_style_t * );
@@ -225,21 +225,21 @@ grplot_json_inscription_style_elem(
 int
 grplot_json_axis_inscription_style_elem(
       const grplot_json_schema_location_t *
-   ,  json_t *
+   ,  const json_t *
    ,  const grplot_json_schema_axis_inscription_style_t *
    ,  grplot_json_schema_axis_inscription_style_t * );
 
 int
 grplot_json_diagram_inscription_style_elem(
       const grplot_json_schema_location_t *
-   ,  json_t *
+   ,  const json_t *
    ,  const grplot_json_schema_diagram_inscription_style_t *
    ,  grplot_json_schema_diagram_inscription_style_t * );
 
 int
 grplot_json_diagram_item_inscription_style_elem(
       const grplot_json_schema_location_t *
-   ,  json_t *
+   ,  const json_t *
    ,  const grplot_json_schema_diagram_item_inscription_style_t *
    ,  grplot_json_schema_diagram_item_inscription_style_t * );
 
@@ -261,24 +261,24 @@ grplot_json_init_diagram_item_inscription_style_elem(
 
 int
 grplot_json_axis_default_general(
-      json_t *
+      const json_t *
    ,  grplot_json_schema_axis_inscription_style_t * );
 
 int
 grplot_json_axis_default(
-      json_t *
+      const json_t *
    ,  const grplot_json_schema_axis_inscription_style_t *
    ,  grplot_json_schema_axis_inscription_style_t * );
 
 int
 grplot_json_diagram_default(
-      json_t *
+      const json_t *
    ,  const grplot_json_schema_diagram_inscription_style_t *
    ,  grplot_json_schema_diagram_inscription_style_t * );
 
 int
 grplot_json_diagram_base(
-      json_t *
+      const json_t *
    ,  const grplot_json_schema_location_t *
    ,  const grplot_json_schema_diagram_item_inscription_style_t *
    ,  grplot_json_schema_diagram_item_inscription_style_t * );
@@ -286,20 +286,20 @@ grplot_json_diagram_base(
 int
 grplot_json_matrix_init_axis(
       grplot_matrix_t *
-   ,  grplot_json_schema_axis_inscription_style_t *
-   ,  grplot_json_schema_location_t * );
+   ,  const grplot_json_schema_axis_inscription_style_t *
+   ,  const grplot_json_schema_location_t * );
 
 int
 grplot_json_matrix_init_diagram(
       grplot_matrix_t *
-   ,  grplot_json_schema_diagram_inscription_style_t *
+   ,  const grplot_json_schema_diagram_inscription_style_t *
    ,  unsigned
-   ,  grplot_json_schema_location_t * );
+   ,  const grplot_json_schema_location_t * );
 
 int
 grplot_json_diagram_init_diagram_item(
       grplot_diagram_t *
-   ,  grplot_json_schema_diagram_item_inscription_style_t *
-   ,  grplot_json_schema_location_t * );
+   ,  const grplot_json_schema_diagram_item_inscription_style_t *
+   ,  const grplot_json_schema_location_t * );
 
 #endif

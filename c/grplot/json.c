@@ -323,7 +323,7 @@ grplot_json_printMissingItemsInDiagramItemInstructionStyle(
 }
 
 int
-grplot_json_color(json_t *pJson, DATA32 *pResult) {
+grplot_json_color(const json_t *pJson, DATA32 *pResult) {
    assert(pJson);
    assert(pResult);
 
@@ -392,7 +392,7 @@ grplot_json_color(json_t *pJson, DATA32 *pResult) {
 }
 
 int
-grplot_json_font(json_t *pJson, const char **pResult) {
+grplot_json_font(const json_t *pJson, const char **pResult) {
    assert(pJson);
    assert(pResult);
 
@@ -408,7 +408,7 @@ grplot_json_font(json_t *pJson, const char **pResult) {
 }
 
 int
-grplot_json_nr(json_t *pJson, unsigned *pResult) {
+grplot_json_nr(const json_t *pJson, unsigned *pResult) {
    assert(pJson);
    assert(pResult);
 
@@ -429,7 +429,7 @@ grplot_json_nr(json_t *pJson, unsigned *pResult) {
 }
 
 int
-grplot_json_scale(json_t *pJson, grplot_axis_scale_type_t *pResult) {
+grplot_json_scale(const json_t *pJson, grplot_axis_scale_type_t *pResult) {
    assert(pJson);
    assert(pResult);
 
@@ -454,7 +454,7 @@ grplot_json_scale(json_t *pJson, grplot_axis_scale_type_t *pResult) {
 }
 
 int
-grplot_json_text(json_t *pJson, const char **pResult) {
+grplot_json_text(const json_t *pJson, const char **pResult) {
    assert(pJson);
    assert(pResult);
 
@@ -471,7 +471,7 @@ grplot_json_text(json_t *pJson, const char **pResult) {
 
 int
 grplot_json_val(
-      json_t *pJson
+      const json_t *pJson
    ,  grplot_axis_scale_type_t scaleType
    ,  grplot_axis_val_t *pResult ) {
    assert(pJson);
@@ -539,7 +539,7 @@ grplot_json_val(
 int
 grplot_json_color_elem(
       const grplot_json_schema_location_t *pLocation
-   ,  json_t *pJson
+   ,  const json_t *pJson
    ,  const char *dest
    ,  const DATA32 *pDefault
    ,  DATA32 *pOut ) {
@@ -570,7 +570,7 @@ grplot_json_color_elem(
 int
 grplot_json_font_elem(
       const grplot_json_schema_location_t *pLocation
-   ,  json_t *pJson
+   ,  const json_t *pJson
    ,  const char *dest
    ,  const Imlib_Font *pDefault
    ,  Imlib_Font *pOut ) {
@@ -610,7 +610,7 @@ grplot_json_font_elem(
 int
 grplot_json_nr_elem(
       const grplot_json_schema_location_t *pLocation
-   ,  json_t *pJson
+   ,  const json_t *pJson
    ,  const unsigned *pDefault
    ,  unsigned *pOut ) {
    assert(pLocation);
@@ -637,7 +637,7 @@ grplot_json_nr_elem(
 int
 grplot_json_scale_elem(
       const grplot_json_schema_location_t *pLocation
-   ,  json_t *pJson
+   ,  const json_t *pJson
    ,  const grplot_axis_scale_type_t *pDefault
    ,  grplot_axis_scale_type_t *pOut ) {
    assert(pLocation);
@@ -664,7 +664,7 @@ grplot_json_scale_elem(
 int
 grplot_json_text_elem(
       const grplot_json_schema_location_t *pLocation
-   ,  json_t *pJson
+   ,  const json_t *pJson
    ,  const char *sDefault
    ,  const char **pOut ) {
    assert(pLocation);
@@ -693,7 +693,7 @@ grplot_json_text_elem(
 int
 grplot_json_val_elem(
       const grplot_json_schema_location_t *pLocation
-   ,  json_t *pJson
+   ,  const json_t *pJson
    ,  grplot_axis_scale_type_t scaleType
    ,  const char *key
    ,  const grplot_axis_val_t *pDefault
@@ -722,7 +722,7 @@ grplot_json_val_elem(
 int
 grplot_json_inscription_style_elem(
       const grplot_json_schema_location_t *pLocation
-   ,  json_t *pJson
+   ,  const json_t *pJson
    ,  const char *dest
    ,  const grplot_json_schema_inscription_style_t *pDefault
    ,  grplot_json_schema_inscription_style_t *pOut ) {
@@ -780,7 +780,7 @@ grplot_json_inscription_style_elem(
 int
 grplot_json_axis_inscription_style_elem(
       const grplot_json_schema_location_t *pLocation
-   ,  json_t *pJson
+   ,  const json_t *pJson
    ,  const grplot_json_schema_axis_inscription_style_t *pDefault
    ,  grplot_json_schema_axis_inscription_style_t *pOut ) {
    assert(pLocation);
@@ -920,7 +920,7 @@ grplot_json_axis_inscription_style_elem(
 int
 grplot_json_diagram_inscription_style_elem(
       const grplot_json_schema_location_t *pLocation
-   ,  json_t *pJson
+   ,  const json_t *pJson
    ,  const grplot_json_schema_diagram_inscription_style_t *pDefault
    ,  grplot_json_schema_diagram_inscription_style_t *pOut ) {
    assert(pLocation);
@@ -971,7 +971,7 @@ grplot_json_diagram_inscription_style_elem(
 int
 grplot_json_diagram_item_inscription_style_elem(
       const grplot_json_schema_location_t *pLocation
-   ,  json_t *pJson
+   ,  const json_t *pJson
    ,  const grplot_json_schema_diagram_item_inscription_style_t *pDefault
    ,  grplot_json_schema_diagram_item_inscription_style_t *pOut ) {
    assert(pLocation);
@@ -1062,7 +1062,7 @@ grplot_json_init_diagram_item_inscription_style_elem(
 
 int
 grplot_json_axis_default_general(
-      json_t *pJson
+      const json_t *pJson
    ,  grplot_json_schema_axis_inscription_style_t *pOut ) {
    assert(pJson);
    assert(pOut);
@@ -1088,7 +1088,7 @@ grplot_json_axis_default_general(
 
 int
 grplot_json_axis_default(
-      json_t *pJson
+      const json_t *pJson
    ,  const grplot_json_schema_axis_inscription_style_t *pDefault
    ,  grplot_json_schema_axis_inscription_style_t *pOut ) {
    assert(pJson);
@@ -1116,7 +1116,7 @@ grplot_json_axis_default(
 
 int
 grplot_json_diagram_default(
-      json_t *pJson
+      const json_t *pJson
    ,  const grplot_json_schema_diagram_inscription_style_t *pDefault
    ,  grplot_json_schema_diagram_inscription_style_t *pOut ) {
    assert(pJson);
@@ -1144,7 +1144,7 @@ grplot_json_diagram_default(
 
 int
 grplot_json_diagram_base(
-      json_t *pJson
+      const json_t *pJson
    ,  const grplot_json_schema_location_t *pLocation
    ,  const grplot_json_schema_diagram_item_inscription_style_t *pDefault
    ,  grplot_json_schema_diagram_item_inscription_style_t *pOut ) {
@@ -1177,8 +1177,8 @@ grplot_json_diagram_base(
 int
 grplot_json_matrix_init_axis(
       grplot_matrix_t *pMatrix
-   ,  grplot_json_schema_axis_inscription_style_t *pAxisInscriptionStyle
-   ,  grplot_json_schema_location_t *pLocation ) {
+   ,  const grplot_json_schema_axis_inscription_style_t *pAxisInscriptionStyle
+   ,  const grplot_json_schema_location_t *pLocation ) {
    assert(pMatrix);
    assert(pAxisInscriptionStyle);
    assert(pLocation);
@@ -1242,9 +1242,9 @@ grplot_json_matrix_init_axis(
 int
 grplot_json_matrix_init_diagram(
       grplot_matrix_t *pMatrix
-   ,  grplot_json_schema_diagram_inscription_style_t *pDiagramInscriptionStyle
+   ,  const grplot_json_schema_diagram_inscription_style_t *pDiagramInscriptionStyle
    ,  unsigned nrItem
-   ,  grplot_json_schema_location_t *pLocation ) {
+   ,  const grplot_json_schema_location_t *pLocation ) {
    assert(pMatrix);
    assert(pDiagramInscriptionStyle);
    assert(pLocation);
@@ -1274,8 +1274,8 @@ grplot_json_matrix_init_diagram(
 int
 grplot_json_diagram_init_diagram_item(
       grplot_diagram_t *pDiagram
-   ,  grplot_json_schema_diagram_item_inscription_style_t *pDiagramItemInscriptionStyle
-   ,  grplot_json_schema_location_t *pLocation ) {
+   ,  const grplot_json_schema_diagram_item_inscription_style_t *pDiagramItemInscriptionStyle
+   ,  const grplot_json_schema_location_t *pLocation ) {
    assert(pDiagram);
    assert(pDiagramItemInscriptionStyle);
    assert(pLocation);
