@@ -611,6 +611,7 @@ int
 grplot_json_nr_elem(
       const grplot_json_schema_location_t *pLocation
    ,  const json_t *pJson
+   ,  const char *key
    ,  const unsigned *pDefault
    ,  unsigned *pOut ) {
    assert(pLocation);
@@ -622,7 +623,7 @@ grplot_json_nr_elem(
       *pOut =  *pDefault;
    }
 
-   json_t *pElem =  json_object_get(pJson, "nr");
+   json_t *pElem =  json_object_get(pJson, key);
    if (pElem) {
       int errCode =  grplot_json_nr(pJson, pOut);
       grplot_json_printNrErrMsg(pLocation, errCode);
@@ -843,6 +844,7 @@ grplot_json_axis_inscription_style_elem(
          int errMode =  grplot_json_nr_elem(
                pLocation
             ,  pJson
+            ,  "nr"
             ,  pNrPixels
             ,  &(pOut->nrPixels) );
          if (errMode) {

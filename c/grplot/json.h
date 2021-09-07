@@ -188,6 +188,7 @@ int
 grplot_json_nr_elem(
       const grplot_json_schema_location_t *
    ,  const json_t *
+   ,  const char *
    ,  const unsigned *
    ,  unsigned * );
 
