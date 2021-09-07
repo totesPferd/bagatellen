@@ -32,14 +32,9 @@ grplot_matrix_init(
    ,  unsigned );
 
 int
-grplot_matrix_get_positional_x_axis(
+grplot_matrix_get_positional_axis(
       const grplot_matrix_t *
-   ,  grplot_matrix_positional_axis_t **
-   ,  unsigned );
-
-int
-grplot_matrix_get_positional_y_axis(
-      const grplot_matrix_t *
+   ,  grplot_axis_type_t
    ,  grplot_matrix_positional_axis_t **
    ,  unsigned );
 

@@ -86,31 +86,18 @@ grplot_matrix_init(
 }
 
 int
-grplot_matrix_get_positional_x_axis(
+grplot_matrix_get_positional_axis(
       const grplot_matrix_t *pMatrix
+   ,  grplot_axis_type_t axisType
    ,  grplot_matrix_positional_axis_t **ppAxis
-   ,  unsigned x ) {
+   ,  unsigned nr ) {
    assert(pMatrix);
-   assert(x < pMatrix->nrX);
+   assert(axisType != grplot_axis_x_axis || nr < pMatrix->nrX);
+   assert(axisType != grplot_axis_y_axis || nr < pMatrix->nrY);
 
    int retval =  0;
 
-   getPositionalAxis(pMatrix, grplot_axis_x_axis, ppAxis, x);
-
-   return retval;
-}
-
-int 
-grplot_matrix_get_positional_y_axis(
-      const grplot_matrix_t *pMatrix
-   ,  grplot_matrix_positional_axis_t **ppAxis
-   ,  unsigned y ) {
-   assert(pMatrix);
-   assert(y < pMatrix->nrY);
-
-   int retval =  0;
-
-   getPositionalAxis(pMatrix, grplot_axis_y_axis, ppAxis, y);
+   getPositionalAxis(pMatrix, axisType, ppAxis, nr);
 
    return retval;
 }
@@ -213,10 +200,10 @@ grplot_matrix_diagram_init(
    assert(pMatrix);
 
    grplot_matrix_positional_axis_t *pPositionalXAxis;
-   grplot_matrix_get_positional_x_axis(pMatrix, &pPositionalXAxis, x);
+   grplot_matrix_get_positional_axis(pMatrix, grplot_axis_x_axis, &pPositionalXAxis, x);
 
    grplot_matrix_positional_axis_t *pPositionalYAxis;
-   grplot_matrix_get_positional_y_axis(pMatrix, &pPositionalYAxis, y);
+   grplot_matrix_get_positional_axis(pMatrix, grplot_axis_y_axis, &pPositionalYAxis, y);
 
    grplot_diagram_t *pDiagram;
    getDiagram(pMatrix, &pDiagram, x, y);
@@ -281,10 +268,10 @@ grplot_matrix_draw(
    for (unsigned x =  0; x < pMatrix->nrX; x++)
    for (unsigned y =  0; y < pMatrix->nrY; y++) {
       grplot_matrix_positional_axis_t *pPositionalXAxis;
-      grplot_matrix_get_positional_x_axis(pMatrix, &pPositionalXAxis, x);
+      grplot_matrix_get_positional_axis(pMatrix, grplot_axis_x_axis, &pPositionalXAxis, x);
    
       grplot_matrix_positional_axis_t *pPositionalYAxis;
-      grplot_matrix_get_positional_y_axis(pMatrix, &pPositionalYAxis, y);
+      grplot_matrix_get_positional_axis(pMatrix, grplot_axis_y_axis, &pPositionalYAxis, y);
    
       grplot_diagram_t *pDiagram;
       grplot_matrix_get_diagram(pMatrix, &pDiagram, x, y);
@@ -299,7 +286,7 @@ grplot_matrix_draw(
 
    for (unsigned x =  0; x < pMatrix->nrX; x++) {
       grplot_matrix_positional_axis_t *pPositionalXAxis;
-      grplot_matrix_get_positional_x_axis(pMatrix, &pPositionalXAxis, x);
+      grplot_matrix_get_positional_axis(pMatrix, grplot_axis_x_axis, &pPositionalXAxis, x);
    
       grplot_axis_output_draw(
             &(pPositionalXAxis->axis)
@@ -311,7 +298,7 @@ grplot_matrix_draw(
 
    for (unsigned y =  0; y < pMatrix->nrY; y++) {
       grplot_matrix_positional_axis_t *pPositionalYAxis;
-      grplot_matrix_get_positional_y_axis(pMatrix, &pPositionalYAxis, y);
+      grplot_matrix_get_positional_axis(pMatrix, grplot_axis_y_axis, &pPositionalYAxis, y);
    
       grplot_axis_output_draw(
             &(pPositionalYAxis->axis)
@@ -348,7 +335,7 @@ updateXLength(
    int retval =  0;
 
    grplot_matrix_positional_axis_t *pPositionalXAxis;
-   grplot_matrix_get_positional_x_axis(pMatrix, &pPositionalXAxis, x);
+   grplot_matrix_get_positional_axis(pMatrix, grplot_axis_x_axis, &pPositionalXAxis, x);
 
    for (int y =  0; y < pMatrix->nrY; y++) {
       grplot_diagram_t *pDiagram;
@@ -374,7 +361,7 @@ updateYLength(
    int retval =  0;
 
    grplot_matrix_positional_axis_t *pPositionalYAxis;
-   grplot_matrix_get_positional_y_axis(pMatrix, &pPositionalYAxis, y);
+   grplot_matrix_get_positional_axis(pMatrix, grplot_axis_y_axis, &pPositionalYAxis, y);
 
    for (int x =  0; x < pMatrix->nrX; x++) {
       grplot_diagram_t *pDiagram;
@@ -427,7 +414,7 @@ updateXWidth(
 
    for (unsigned x =  0; x < pMatrix->nrX; x++) {
       grplot_matrix_positional_axis_t *pPositionalXAxis;
-      grplot_matrix_get_positional_x_axis(pMatrix, &pPositionalXAxis, x);
+      grplot_matrix_get_positional_axis(pMatrix, grplot_axis_x_axis, &pPositionalXAxis, x);
 
       if (*pResult < (pPositionalXAxis->axis).width) {
          *pResult =  (pPositionalXAxis->axis).width;
@@ -446,7 +433,7 @@ updateYWidth(
 
    for (unsigned y =  0; y < pMatrix->nrY; y++) {
       grplot_matrix_positional_axis_t *pPositionalYAxis;
-      grplot_matrix_get_positional_y_axis(pMatrix, &pPositionalYAxis, y);
+      grplot_matrix_get_positional_axis(pMatrix, grplot_axis_y_axis, &pPositionalYAxis, y);
 
       if (*pResult < (pPositionalYAxis->axis).width) {
          *pResult =  (pPositionalYAxis->axis).width;
@@ -465,7 +452,7 @@ getXAxisTotal(
 
    for (unsigned x =  0; x < pMatrix->nrX; x++) {
       grplot_matrix_positional_axis_t *pPositionalXAxis;
-      grplot_matrix_get_positional_x_axis(pMatrix, &pPositionalXAxis, x);
+      grplot_matrix_get_positional_axis(pMatrix, grplot_axis_x_axis, &pPositionalXAxis, x);
 
       *pTotal +=  (pPositionalXAxis->axis).length;
    }
@@ -481,7 +468,7 @@ getYAxisTotal(
 
    for (unsigned y =  0; y < pMatrix->nrY; y++) {
       grplot_matrix_positional_axis_t *pPositionalYAxis;
-      grplot_matrix_get_positional_y_axis(pMatrix, &pPositionalYAxis, y);
+      grplot_matrix_get_positional_axis(pMatrix, grplot_axis_y_axis, &pPositionalYAxis, y);
 
       *pTotal +=  (pPositionalYAxis->axis).length;
    }
@@ -498,7 +485,7 @@ updateXPositions(
    unsigned accu =  pMatrix->originX;
    for (unsigned x =  0; x < pMatrix->nrX; x++) {
       grplot_matrix_positional_axis_t *pPositionalXAxis;
-      grplot_matrix_get_positional_x_axis(pMatrix, &pPositionalXAxis, x);
+      grplot_matrix_get_positional_axis(pMatrix, grplot_axis_x_axis, &pPositionalXAxis, x);
 
       pPositionalXAxis->positionPerPixel =  accu;
       accu +=  (pPositionalXAxis->axis).length;
@@ -516,7 +503,7 @@ updateYPositions(
    unsigned accu =  pMatrix->originY;
    for (unsigned y =  0; y < pMatrix->nrY; y++) {
       grplot_matrix_positional_axis_t *pPositionalYAxis;
-      grplot_matrix_get_positional_y_axis(pMatrix, &pPositionalYAxis, y);
+      grplot_matrix_get_positional_axis(pMatrix, grplot_axis_y_axis, &pPositionalYAxis, y);
 
       pPositionalYAxis->positionPerPixel =  accu;
       accu -=  (pPositionalYAxis->axis).length;
@@ -535,7 +522,7 @@ updateMaxX(
       pMatrix->maxX =  pMatrix->originX;
    } else {
       grplot_matrix_positional_axis_t *pPositionalXAxis;
-      grplot_matrix_get_positional_x_axis(pMatrix, &pPositionalXAxis, pMatrix->nrX - 1);
+      grplot_matrix_get_positional_axis(pMatrix, grplot_axis_x_axis, &pPositionalXAxis, pMatrix->nrX - 1);
 
       pMatrix->maxX =  pPositionalXAxis->positionPerPixel + (pPositionalXAxis->axis).axisSpec.nrPixels;
    }
@@ -553,7 +540,7 @@ updateMaxY(
       pMatrix->maxY =  pMatrix->originY;
    } else {
       grplot_matrix_positional_axis_t *pPositionalYAxis;
-      grplot_matrix_get_positional_y_axis(pMatrix, &pPositionalYAxis, pMatrix->nrY - 1);
+      grplot_matrix_get_positional_axis(pMatrix, grplot_axis_y_axis, &pPositionalYAxis, pMatrix->nrY - 1);
 
       pMatrix->maxY =  pPositionalYAxis->positionPerPixel - (pPositionalYAxis->axis).axisSpec.nrPixels;
    }
