@@ -59,7 +59,7 @@ grplot_axis_output_init(
    ,  DATA32 lineColor
    ,  grplot_axis_val_t min
    ,  grplot_axis_val_t max
-   ,  char *label ) {
+   ,  const char *label ) {
    assert(pAxisOutput);
    assert(nrPixels > 0);
    assert(

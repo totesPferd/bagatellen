@@ -50,7 +50,7 @@ grplot_axis_output_init(
    ,  DATA32
    ,  grplot_axis_val_t
    ,  grplot_axis_val_t
-   ,  char * );
+   ,  const char * );
 
 void
 grplot_axis_output_destroy(grplot_axis_output_t *);

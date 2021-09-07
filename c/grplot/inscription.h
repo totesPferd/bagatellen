@@ -15,7 +15,7 @@ typedef struct {
    unsigned positionPerPixel; } grplot_inscription_positional_inscription_t;
 
 grplot_inscription_status_t
-grplot_inscription_init(grplot_inscription_t *, Imlib_Font, char *);
+grplot_inscription_init(grplot_inscription_t *, Imlib_Font, const char *);
 
 grplot_inscription_status_t
 grplot_inscription_set_color(DATA32);

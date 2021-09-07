@@ -6,7 +6,7 @@ grplot_inscription_status_t
 grplot_inscription_init(
       grplot_inscription_t *pInscription
    ,  Imlib_Font font
-   ,  char *text) {
+   ,  const char *text) {
    assert(pInscription);
    assert(text);
 

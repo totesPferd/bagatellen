@@ -48,14 +48,9 @@ updateMaxY(
       grplot_matrix_t * );
 
 static void
-getPositionalXAxis(
+getPositionalAxis(
       const grplot_matrix_t *
-   ,  grplot_matrix_positional_axis_t **
-   ,  unsigned );
-
-static void
-getPositionalYAxis(
-      const grplot_matrix_t *
+   ,  grplot_axis_type_t
    ,  grplot_matrix_positional_axis_t **
    ,  unsigned );
 
@@ -100,7 +95,7 @@ grplot_matrix_get_positional_x_axis(
 
    int retval =  0;
 
-   getPositionalXAxis(pMatrix, ppAxis, x);
+   getPositionalAxis(pMatrix, grplot_axis_x_axis, ppAxis, x);
 
    return retval;
 }
@@ -115,7 +110,7 @@ grplot_matrix_get_positional_y_axis(
 
    int retval =  0;
 
-   getPositionalYAxis(pMatrix, ppAxis, y);
+   getPositionalAxis(pMatrix, grplot_axis_y_axis, ppAxis, y);
 
    return retval;
 }
@@ -155,7 +150,7 @@ grplot_matrix_x_axis_init(
    assert(x < pMatrix->nrX);
 
    grplot_matrix_positional_axis_t *pPositionalAxis;
-   getPositionalXAxis(pMatrix, &pPositionalAxis, x);
+   getPositionalAxis(pMatrix, grplot_axis_x_axis, &pPositionalAxis, x);
 
    return grplot_axis_output_init(
          &(pPositionalAxis->axis)
@@ -190,7 +185,7 @@ grplot_matrix_y_axis_init(
    assert(y < pMatrix->nrY);
 
    grplot_matrix_positional_axis_t *pPositionalAxis;
-   getPositionalYAxis(pMatrix, &pPositionalAxis, y);
+   getPositionalAxis(pMatrix, grplot_axis_y_axis,&pPositionalAxis, y);
 
    return grplot_axis_output_init(
          &(pPositionalAxis->axis)
@@ -567,19 +562,31 @@ updateMaxY(
 }
 
 static void
-getPositionalXAxis(
+getPositionalAxis(
       const grplot_matrix_t *pMatrix
+   ,  grplot_axis_type_t axisType
    ,  grplot_matrix_positional_axis_t **ppResult
-   ,  unsigned x ) {
-   *ppResult =  &((pMatrix->pAxisBuf)[x]);
-}
+   ,  unsigned nr ) {
+   assert(pMatrix);
+   assert(ppResult);
 
-static void
-getPositionalYAxis(
-      const grplot_matrix_t *pMatrix
-   ,  grplot_matrix_positional_axis_t **ppResult
-   ,  unsigned y ) {
-   *ppResult =  &((pMatrix->pAxisBuf)[y + (pMatrix->nrX)]);
+   switch (axisType) {
+
+      case (grplot_axis_x_axis): {
+         *ppResult =  &((pMatrix->pAxisBuf)[nr]);
+      }
+      break;
+
+      case (grplot_axis_y_axis): {
+         *ppResult =  &((pMatrix->pAxisBuf)[nr + (pMatrix->nrX)]);
+      }
+      break;
+
+      default: {
+         assert(0);
+      }
+
+   }
 }
 
 static void
@@ -588,5 +595,8 @@ getDiagram(
    ,  grplot_diagram_t **ppResult
    ,  unsigned x
    ,  unsigned y ) {
+   assert(pMatrix);
+   assert(ppResult);
+
    *ppResult =  &((pMatrix->pDiagramBuf)[x + y * (pMatrix->nrX)]);
 }
