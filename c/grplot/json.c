@@ -1372,7 +1372,7 @@ grplot_json_axis_data_item(
 }
 
 int
-grplot_json_diagram_data_item(
+grplot_json_diagram_item_data_item(
       grplot_diagram_t *pDiagram
    ,  const json_t *pJson
    ,  const grplot_json_schema_location_t *pLocation

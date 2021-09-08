@@ -315,7 +315,7 @@ grplot_json_axis_data_item(
    ,  const grplot_json_schema_axis_inscription_style_t * );
 
 int
-grplot_json_diagram_data_item(
+grplot_json_diagram_item_data_item(
       grplot_diagram_t *
    ,  const json_t *
    ,  const grplot_json_schema_location_t *
