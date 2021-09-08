@@ -1272,7 +1272,6 @@ grplot_json_matrix_init_diagram(
    return retval;
 }
 
-
 int
 grplot_json_diagram_init_diagram_item(
       grplot_diagram_t *pDiagram
@@ -1297,6 +1296,66 @@ grplot_json_diagram_init_diagram_item(
       }
    }
    
+   return retval;
+}
+
+int
+grplot_json_axis_data_item(
+      grplot_matrix_t *pMatrix
+   ,  const json_t *pJson
+   ,  const grplot_json_schema_location_t *pLocation
+   ,  const grplot_json_schema_axis_inscription_style_t *pDefault ) {
+   assert(pMatrix);
+   assert(pJson);
+   assert(pLocation);
+   assert(pDefault);
+
+   grplot_json_schema_axis_inscription_style_t out;
+   grplot_json_init_axis_inscription_style_elem(&out);
+
+   int retval =  grplot_json_axis_inscription_style_elem(
+         pLocation
+      ,  pJson
+      ,  pDefault
+      ,  &out );
+
+   if (!retval) {
+      retval =  grplot_json_matrix_init_axis(
+            pMatrix
+         ,  &out
+         ,  pLocation );
+   }
+
+   return retval;
+}
+
+int
+grplot_json_diagram_data_item(
+      grplot_diagram_t *pDiagram
+   ,  const json_t *pJson
+   ,  const grplot_json_schema_location_t *pLocation
+   ,  const grplot_json_schema_diagram_item_inscription_style_t *pDefault ) {
+   assert(pDiagram);
+   assert(pJson);
+   assert(pLocation);
+   assert(pDefault);
+
+   grplot_json_schema_diagram_item_inscription_style_t out;
+   grplot_json_init_diagram_item_inscription_style_elem(&out);
+
+   int retval =  grplot_json_diagram_item_inscription_style_elem(
+         pLocation
+      ,  pJson
+      ,  pDefault
+      ,  &out );
+
+   if (!retval) {
+      retval =  grplot_json_diagram_init_diagram_item(
+            pDiagram
+         ,  &out
+         ,  pLocation );
+   }
+
    return retval;
 }
 
