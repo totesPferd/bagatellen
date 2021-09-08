@@ -1372,6 +1372,83 @@ grplot_json_axis_data_item(
 }
 
 int
+grplot_json_diagram_data_item(
+      grplot_matrix_t *pMatrix
+   ,  const json_t *pJson
+   ,  const grplot_json_schema_location_t *pLocation
+   ,  const grplot_json_schema_diagram_item_inscription_style_t *pDefaultItem
+   ,  const grplot_json_schema_diagram_inscription_style_t *pDefault ) {
+   assert(pMatrix);
+   assert(pJson);
+   assert(pLocation);
+   assert(pDefaultItem);
+   assert(pDefault);
+
+   grplot_json_schema_diagram_inscription_style_t out;
+   grplot_json_init_diagram_inscription_style_elem(pDefault, &out);
+
+   int retval =  json_is_object(pJson);
+
+   if (!retval) {
+     unsigned nrInpBuf =  0;
+
+     json_t *pInnerJson =  json_object_get(pJson, "items");
+     if (pInnerJson) {
+        if (json_is_array(pInnerJson)) {
+           nrInpBuf =  json_array_size(pInnerJson);
+        } else {
+           retval =  1;
+           grplot_json_printErrMsg(pLocation, "items in diagram must be array");
+        }
+     }
+
+     if (!retval) {
+        retval =  grplot_json_matrix_init_diagram(
+               pMatrix
+            ,  &out
+            ,  nrInpBuf
+            ,  pLocation );
+        grplot_json_schema_diagram_item_inscription_style_t innerOut;
+        grplot_json_diagram_base(
+              pInnerJson
+           ,  pLocation
+           ,  pDefaultItem
+           ,  &innerOut );
+        {
+           size_t nr;
+           json_t *pDiagramItemJson;
+
+           json_array_foreach(pInnerJson, nr, pDiagramItemJson) {
+              if (!retval) {
+                 grplot_json_schema_location_t location;
+                 location.locationType =  grplot_json_schema_diagram;
+                 location.variant.diagram.base.x =  (pLocation->variant).diagramBase.x;
+                 location.variant.diagram.base.y =  (pLocation->variant).diagramBase.y;
+                 location.variant.diagram.nr =  nr;
+      
+                 grplot_diagram_t *pDiagramItem;
+                 grplot_matrix_get_diagram(
+                       pMatrix
+                    ,  &pDiagramItem
+                    ,  location.variant.diagram.base.x
+                    ,  location.variant.diagram.base.y );
+                 retval =  grplot_json_diagram_item_data_item(
+                       pDiagramItem
+                    ,  pDiagramItemJson
+                    ,  &location
+                    ,  pDefaultItem );
+              }
+           }
+        }
+     }
+   } else {
+      grplot_json_printErrMsg(pLocation, "diagram must be json object");
+   }
+
+   return retval;
+}
+
+int
 grplot_json_diagram_item_data_item(
       grplot_diagram_t *pDiagram
    ,  const json_t *pJson
