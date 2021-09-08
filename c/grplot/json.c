@@ -733,7 +733,7 @@ grplot_json_inscription_style_elem(
 
    int retval =  0;
 
-   grplot_json_init_inscription_style_elem(pOut);
+   grplot_json_init_inscription_style_elem(pDefault, pOut);
 
    json_t *pElem =  json_object_get(pJson, dest);
    if (pElem) {
@@ -790,7 +790,7 @@ grplot_json_axis_inscription_style_elem(
    int retval =  json_is_object(pJson);
 
    if (!retval) {
-      grplot_json_init_axis_inscription_style_elem(pOut);
+      grplot_json_init_axis_inscription_style_elem(pDefault, pOut);
    
       {
          const grplot_json_schema_inscription_style_t *pInscriptionStyle =
@@ -931,7 +931,7 @@ grplot_json_diagram_inscription_style_elem(
    int retval =  json_is_object(pJson);
 
    if (!retval) {
-      grplot_json_init_diagram_inscription_style_elem(pOut);
+      grplot_json_init_diagram_inscription_style_elem(pDefault, pOut);
    
       {
          const DATA32 *pElem =
@@ -982,7 +982,7 @@ grplot_json_diagram_item_inscription_style_elem(
    int retval =  json_is_object(pJson);
 
    if (!retval) {
-      grplot_json_init_diagram_item_inscription_style_elem(pOut);
+      grplot_json_init_diagram_item_inscription_style_elem(pDefault, pOut);
 
       {
          const DATA32 *pVal =  
@@ -1023,43 +1023,85 @@ grplot_json_diagram_item_inscription_style_elem(
 
 void
 grplot_json_init_inscription_style_elem(
-      grplot_json_schema_inscription_style_t *pOut ) {
+      const grplot_json_schema_inscription_style_t *pDefault
+   ,  grplot_json_schema_inscription_style_t *pOut ) {
    assert(pOut);
 
-   pOut->color =  0;
-   pOut->font =  NULL;
+   if (pDefault) {
+      pOut->color =  pDefault->color;
+      pOut->font =  pDefault->font;
+   } else {
+      pOut->color =  0;
+      pOut->font =  NULL;
+   }
 }
 
 void
 grplot_json_init_axis_inscription_style_elem(
-      grplot_json_schema_axis_inscription_style_t *pOut ) {
+      const grplot_json_schema_axis_inscription_style_t *pDefault
+   ,  grplot_json_schema_axis_inscription_style_t *pOut ) {
    assert(pOut);
 
-   grplot_json_init_inscription_style_elem(&(pOut->inscription));
-   grplot_json_init_inscription_style_elem(&(pOut->label));
-   pOut->scaleType =  grplot_axis_linear;
-   pOut->color =  0;
-   pOut->nrPixels =  1024;
-   (pOut->min).numeric =  0.0;
-   (pOut->max).numeric =  1.0;
-   pOut->text =  NULL;
+   if (pDefault) {
+      grplot_json_init_inscription_style_elem(
+            NULL
+         ,  &(pOut->inscription) );
+      grplot_json_init_inscription_style_elem(
+            NULL
+         ,  &(pOut->label) );
+      pOut->scaleType =  pDefault->scaleType;
+      pOut->color =  pDefault->color;
+      pOut->nrPixels =  pDefault->nrPixels;
+      pOut->min =  pDefault->min;
+      pOut->max =  pDefault->max;
+      pOut->text =  pDefault->text;
+   } else {
+      grplot_json_init_inscription_style_elem(
+            &(pDefault->inscription)
+         ,  &(pOut->inscription) );
+      grplot_json_init_inscription_style_elem(
+            &(pDefault->label)
+         ,  &(pOut->label) );
+      pOut->scaleType =  grplot_axis_linear;
+      pOut->color =  0;
+      pOut->nrPixels =  1024;
+      (pOut->min).numeric =  0.0;
+      (pOut->max).numeric =  1.0;
+      pOut->text =  NULL;
+   }
+
 }
 
 void
 grplot_json_init_diagram_inscription_style_elem(
-      grplot_json_schema_diagram_inscription_style_t *pOut ) {
+      const grplot_json_schema_diagram_inscription_style_t *pDefault
+   ,  grplot_json_schema_diagram_inscription_style_t *pOut ) {
    assert(pOut);
 
-   pOut->color =  0;
-   pOut->font =  NULL;
+   if (pDefault) {
+      pOut->color =  pDefault->color;
+      pOut->font =  pDefault->font;
+   } else {
+      pOut->color =  0;
+      pOut->font =  NULL;
+   }
+
 }
 
 void
 grplot_json_init_diagram_item_inscription_style_elem(
-      grplot_json_schema_diagram_item_inscription_style_t *pOut ) {
+      const grplot_json_schema_diagram_item_inscription_style_t *pDefault
+   ,  grplot_json_schema_diagram_item_inscription_style_t *pOut ) {
    assert(pOut);
 
-   pOut->text =  NULL;
+   if (pDefault) {
+      pOut->color =  pDefault->color;
+      pOut->text =  pDefault->text;
+   } else {
+      pOut->color =  0;
+      pOut->text =  NULL;
+   }
+
 }
 
 int
@@ -1071,7 +1113,7 @@ grplot_json_axis_default_general(
 
    int retval =  0;
 
-   grplot_json_init_axis_inscription_style_elem(pOut);
+   grplot_json_init_axis_inscription_style_elem(NULL, pOut);
 
    grplot_json_schema_location_t location;
    location.locationType =  grplot_json_schema_axis_default_general;
@@ -1099,7 +1141,7 @@ grplot_json_axis_default(
 
    int retval =  0;
 
-   grplot_json_init_axis_inscription_style_elem(pOut);
+   grplot_json_init_axis_inscription_style_elem(pDefault, pOut);
 
    grplot_json_schema_location_t location;
    location.locationType =  grplot_json_schema_axis_default;
@@ -1127,7 +1169,7 @@ grplot_json_diagram_default(
 
    int retval =  0;
 
-   grplot_json_init_diagram_inscription_style_elem(pOut);
+   grplot_json_init_diagram_inscription_style_elem(pDefault, pOut);
 
    grplot_json_schema_location_t location;
    location.locationType =  grplot_json_schema_diagram_default;
@@ -1157,7 +1199,7 @@ grplot_json_diagram_base(
 
    int retval =  0;
 
-   grplot_json_init_diagram_item_inscription_style_elem(pOut);
+   grplot_json_init_diagram_item_inscription_style_elem(pDefault, pOut);
 
    grplot_json_schema_location_t location;
    location.locationType =  grplot_json_schema_diagram_default;
@@ -1311,7 +1353,7 @@ grplot_json_axis_data_item(
    assert(pDefault);
 
    grplot_json_schema_axis_inscription_style_t out;
-   grplot_json_init_axis_inscription_style_elem(&out);
+   grplot_json_init_axis_inscription_style_elem(pDefault, &out);
 
    int retval =  grplot_json_axis_inscription_style_elem(
          pLocation
@@ -1341,7 +1383,7 @@ grplot_json_diagram_data_item(
    assert(pDefault);
 
    grplot_json_schema_diagram_item_inscription_style_t out;
-   grplot_json_init_diagram_item_inscription_style_elem(&out);
+   grplot_json_init_diagram_item_inscription_style_elem(pDefault, &out);
 
    int retval =  grplot_json_diagram_item_inscription_style_elem(
          pLocation
