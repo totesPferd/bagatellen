@@ -1436,7 +1436,7 @@ grplot_json_diagram_data_item(
                        pDiagramItem
                     ,  pDiagramItemJson
                     ,  &location
-                    ,  pDefaultItem );
+                    ,  &innerOut );
               }
            }
         }
