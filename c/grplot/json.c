@@ -1535,13 +1535,18 @@ grplot_json_diagram_data(
                        innerLocation.variant.diagramBase.y++;
                        if (innerLocation.variant.diagramBase.y >= pMatrix->nrY) {
                           retval =  1;
-                          grplot_json_printErrMsg(&innerLocation, "too many diagrams");
                        }
                     }
                  }
               }
+              if (nr > pMatrix->nrDiagram) {
+                 retval =  1;
+                 grplot_json_printErrMsg(&innerLocation, "too many diagrams");
+              } else if (nr < pMatrix->nrDiagram) {
+                 retval =  1;
+                 grplot_json_printErrMsg(&innerLocation, "too few diagrams");
+              }
            }
-
         } else {
            retval =  1;
            grplot_json_printErrMsg(&outerLocation, "items in diagram component must be array");
