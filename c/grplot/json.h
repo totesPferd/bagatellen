@@ -315,6 +315,13 @@ grplot_json_axis_data_item(
    ,  const grplot_json_schema_axis_inscription_style_t * );
 
 int
+grplot_json_diagram_data(
+      grplot_matrix_t *
+   ,  const json_t *
+   ,  const grplot_json_schema_diagram_item_inscription_style_t *
+   ,  const grplot_json_schema_diagram_inscription_style_t * );
+
+int
 grplot_json_diagram_data_item(
       grplot_matrix_t *
    ,  const json_t *

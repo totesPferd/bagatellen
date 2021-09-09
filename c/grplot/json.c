@@ -1478,6 +1478,85 @@ grplot_json_diagram_item_data_item(
    return retval;
 }
 
+int
+grplot_json_diagram_data(
+      grplot_matrix_t *pMatrix
+   ,  const json_t *pJson
+   ,  const grplot_json_schema_diagram_item_inscription_style_t *pDefaultItem
+   ,  const grplot_json_schema_diagram_inscription_style_t *pDefault ) {
+   assert(pMatrix);
+   assert(pJson);
+   assert(pDefaultItem);
+   assert(pDefault);
+
+   grplot_json_schema_diagram_inscription_style_t out;
+   grplot_json_init_diagram_inscription_style_elem(pDefault, &out);
+
+   grplot_json_schema_diagram_item_inscription_style_t defaultItemOut;
+   grplot_json_init_diagram_item_inscription_style_elem(pDefaultItem, &defaultItemOut);
+
+   grplot_json_schema_location_t outerLocation;
+   outerLocation.locationType =  grplot_json_schema_diagram_default;
+
+   int retval =  json_is_object(pJson);
+
+   if (!retval) {
+     json_t *pInnerJson =  json_object_get(pJson, "items");
+     if (pInnerJson) {
+        if (json_is_array(pInnerJson)) {
+           grplot_json_diagram_default(
+                 pInnerJson
+              ,  pDefault
+              ,  &out );
+           grplot_json_diagram_base(
+                 pInnerJson
+              ,  &outerLocation
+              ,  pDefaultItem
+              ,  &defaultItemOut );
+           grplot_json_schema_location_t innerLocation;
+           innerLocation.locationType =  grplot_json_schema_diagram_base;
+           innerLocation.variant.diagramBase.x =  0;
+           innerLocation.variant.diagramBase.y =  0;
+           {
+              size_t nr;
+              json_t *pDiagramJson;
+
+              json_array_foreach(pInnerJson, nr, pDiagramJson) {
+                 if (!retval) {
+                    retval =  grplot_json_diagram_data_item(
+                          pMatrix
+                       ,  pDiagramJson
+                       ,  &innerLocation
+                       ,  &defaultItemOut
+                       ,  &out );
+                    innerLocation.variant.diagramBase.x++;
+                    if (innerLocation.variant.diagramBase.x >= pMatrix->nrX) {
+                       innerLocation.variant.diagramBase.x =  0;
+                       innerLocation.variant.diagramBase.y++;
+                       if (innerLocation.variant.diagramBase.y >= pMatrix->nrY) {
+                          retval =  1;
+                          grplot_json_printErrMsg(&innerLocation, "too many diagrams");
+                       }
+                    }
+                 }
+              }
+           }
+
+        } else {
+           retval =  1;
+           grplot_json_printErrMsg(&outerLocation, "items in diagram component must be array");
+        }
+     } else {
+        grplot_json_printErrMsg(&outerLocation, "mandatory diagram component");
+     }
+   } else {
+      grplot_json_printErrMsg(&outerLocation, "diagram component must be json object");
+   }
+
+   return retval;
+}
+
+
 static void
 printErrMsgIntro(
       const grplot_json_schema_location_t *pLocation ) {
