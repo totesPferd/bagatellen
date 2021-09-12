@@ -1640,11 +1640,6 @@ grplot_json_root_elem(
                   pXAxisJson =  json_object_get(pAxisJson, "x");
                   if (pXAxisJson) {
                      if (json_is_object(pXAxisJson)) {
-                        grplot_json_schema_axis_inscription_style_t istAxis;
-                        grplot_json_axis_default(
-                              pXAxisJson
-                           ,  &istAxisGeneral
-                           ,  &istAxis );
                         pXAxisArrayJson =  json_object_get(pXAxisJson, "items");
                         if (pXAxisArrayJson) {
                            if (json_is_array(pXAxisArrayJson)) {
@@ -1667,11 +1662,6 @@ grplot_json_root_elem(
                   pYAxisJson =  json_object_get(pAxisJson, "y");
                   if (pYAxisJson) {
                      if (json_is_object(pYAxisJson)) {
-                        grplot_json_schema_axis_inscription_style_t istAxis;
-                        grplot_json_axis_default(
-                              pXAxisJson
-                           ,  &istAxisGeneral
-                           ,  &istAxis );
                         pYAxisArrayJson =  json_object_get(pYAxisJson, "items");
                         if (pYAxisArrayJson) {
                            if (json_is_array(pYAxisArrayJson)) {
@@ -1707,12 +1697,38 @@ grplot_json_root_elem(
       }
    }
 
-   grplot_matrix_init(
-         pMatrix
-      ,  nrX
-      ,  nrY
-      ,  distanceX
-      ,  distanceY );
+   if (!retval) {
+      retval =  grplot_matrix_init(
+            pMatrix
+         ,  nrX
+         ,  nrY
+         ,  distanceX
+         ,  distanceY );
+   }
+
+   if (!retval) {
+      grplot_json_schema_axis_inscription_style_t istAxis;
+      grplot_json_axis_default(
+            pXAxisJson
+         ,  &istAxisGeneral
+         ,  &istAxis );
+   }
+
+   if (!retval) {
+      grplot_json_schema_axis_inscription_style_t istAxis;
+      grplot_json_axis_default(
+            pXAxisJson
+         ,  &istAxisGeneral
+         ,  &istAxis );
+   }
+
+   if (!retval) {
+      retval =  grplot_json_diagram_data(
+            pMatrix
+         ,  pDiagramJson
+         ,  NULL
+         ,  NULL );
+   }
 
    return retval;
 }
