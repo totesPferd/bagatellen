@@ -1561,6 +1561,161 @@ grplot_json_diagram_data(
    return retval;
 }
 
+int
+grplot_json_root_elem(
+      grplot_matrix_t *pMatrix
+   ,  json_t *pJson ) {
+   assert(pMatrix);
+   assert(pJson);
+
+   int retval =  0;
+
+   unsigned nrX =  0;
+   unsigned nrY =  0;
+   unsigned distanceX =  0;
+   unsigned distanceY =  0;
+
+   json_t *pAxisJson =  NULL;
+   json_t *pXAxisJson =  NULL;
+   json_t *pXAxisArrayJson =  NULL;
+   json_t *pYAxisJson =  NULL;
+   json_t *pYAxisArrayJson =  NULL;
+   json_t *pDiagramJson =  NULL;
+
+   grplot_json_schema_location_t baseLocation;
+   baseLocation.locationType =  grplot_json_schema_base;
+
+   grplot_json_schema_location_t axisLocation;
+   baseLocation.locationType =  grplot_json_schema_axis_default_general;
+
+   grplot_json_schema_location_t xAxisLocation;
+   xAxisLocation.locationType =  grplot_json_schema_axis_default;
+   xAxisLocation.variant.axisDefault =  grplot_axis_x_axis;
+
+   grplot_json_schema_location_t yAxisLocation;
+   yAxisLocation.locationType =  grplot_json_schema_axis_default;
+   yAxisLocation.variant.axisDefault =  grplot_axis_y_axis;
+
+   grplot_json_schema_location_t diagramLocation;
+   diagramLocation.locationType =  grplot_json_schema_diagram_default;
+
+   grplot_json_schema_axis_inscription_style_t istAxisGeneral;
+
+   if (!json_is_object(pJson)) {
+      retval =  1;
+      grplot_json_printErrMsg(&baseLocation, "must be object");
+   }
+
+   if (!retval) {
+      {
+         json_t *pData =  json_object_get(pJson, "distanceX");
+         if (pData) {
+            if (json_is_integer(pData)) {
+               distanceX =  json_integer_value(pData);
+            } else {
+               retval =  1;
+               grplot_json_printErrMsg(&baseLocation, "distanceX must be integer");
+            }
+         }
+      }
+      {
+         json_t *pData =  json_object_get(pJson, "distanceY");
+         if (pData) {
+            if (json_is_integer(pData)) {
+               distanceY =  json_integer_value(pData);
+            } else {
+               retval =  1;
+               grplot_json_printErrMsg(&baseLocation, "distanceY must be integer");
+            }
+         }
+      }
+      {
+         pAxisJson =  json_object_get(pJson, "axis");
+         if (pAxisJson) {
+            if (json_is_object(pAxisJson)) {
+               grplot_json_axis_default_general(
+                     pAxisJson
+                  ,  &istAxisGeneral );
+               {
+                  pXAxisJson =  json_object_get(pAxisJson, "x");
+                  if (pXAxisJson) {
+                     if (json_is_object(pXAxisJson)) {
+                        grplot_json_schema_axis_inscription_style_t istAxis;
+                        grplot_json_axis_default(
+                              pXAxisJson
+                           ,  &istAxisGeneral
+                           ,  &istAxis );
+                        pXAxisArrayJson =  json_object_get(pXAxisJson, "items");
+                        if (pXAxisArrayJson) {
+                           if (json_is_array(pXAxisArrayJson)) {
+                              nrX =  json_array_size(pXAxisArrayJson);
+                           } else {
+                              retval =  1;
+                              grplot_json_printErrMsg(&xAxisLocation, "axis.x.items must be array");
+                           }
+                        } else {
+                           retval =  1;
+                           grplot_json_printErrMsg(&xAxisLocation, "axix.x.items must be present");
+                        }
+                     } else {
+                        retval =  1;
+                        grplot_json_printErrMsg(&xAxisLocation, "axis.x must be object");
+                     }
+                  }
+               }
+               {
+                  pYAxisJson =  json_object_get(pAxisJson, "y");
+                  if (pYAxisJson) {
+                     if (json_is_object(pYAxisJson)) {
+                        grplot_json_schema_axis_inscription_style_t istAxis;
+                        grplot_json_axis_default(
+                              pXAxisJson
+                           ,  &istAxisGeneral
+                           ,  &istAxis );
+                        pYAxisArrayJson =  json_object_get(pYAxisJson, "items");
+                        if (pYAxisArrayJson) {
+                           if (json_is_array(pYAxisArrayJson)) {
+                              nrY =  json_array_size(pYAxisArrayJson);
+                           } else {
+                              retval =  1;
+                              grplot_json_printErrMsg(&yAxisLocation, "axis.y.items must be array");
+                           }
+                        } else {
+                           retval =  1;
+                           grplot_json_printErrMsg(&yAxisLocation, "axix.y.items must be present");
+                        }
+                     } else {
+                        retval =  1;
+                        grplot_json_printErrMsg(&yAxisLocation, "axis.y must be object");
+                     }
+                  }
+               }
+            } else {
+               retval =  1;
+               grplot_json_printErrMsg(&baseLocation, "axis must be object");
+            }
+         }
+      }
+      {
+         pDiagramJson =  json_object_get(pJson, "diagram");
+         if (pDiagramJson) {
+            if (!json_is_object(pDiagramJson)) {
+               retval =  1;
+               grplot_json_printErrMsg(&baseLocation, "diagram must be object");
+            }
+         }
+      }
+   }
+
+   grplot_matrix_init(
+         pMatrix
+      ,  nrX
+      ,  nrY
+      ,  distanceX
+      ,  distanceY );
+
+   return retval;
+}
 
 static void
 printErrMsgIntro(

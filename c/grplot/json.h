@@ -336,4 +336,9 @@ grplot_json_diagram_item_data_item(
    ,  const grplot_json_schema_location_t *
    ,  const grplot_json_schema_diagram_item_inscription_style_t * );
 
+int
+grplot_json_root_elem(
+      grplot_matrix_t *
+   ,  json_t * );
+
 #endif
