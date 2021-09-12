@@ -512,7 +512,7 @@ grplot_json_val(
             time.tm_hour =  0;
             time.tm_min =  0;
             time.tm_sec =  0;
-            const char *t =  strptime(timeStr, "%Y-%m-%d%n%H:%M:%S", &time);
+            const char *t =  strptime(timeStr, "%Y-%m-%dT%H:%M:%S", &time);
             if (t) {
               if (*t) {
                  retval |= grplot_json_error_val_junk;
