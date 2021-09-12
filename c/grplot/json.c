@@ -1372,6 +1372,37 @@ grplot_json_axis_data_item(
 }
 
 int
+grplot_json_axis_data(
+      grplot_matrix_t *pMatrix
+   ,  const json_t *pJson
+   ,  const grplot_axis_type_t axisType
+   ,  const grplot_json_schema_axis_inscription_style_t *pDefault ) {
+   assert(pMatrix);
+   assert(pJson);
+   assert(json_is_array(pJson));
+   assert(pDefault);
+
+   int retval =  0;
+
+   {
+      json_t *pItem;
+      grplot_json_schema_location_t location;
+      location.locationType =  grplot_json_schema_axis;
+      location.variant.axis.axisType =  axisType;
+      json_array_foreach(pJson, location.variant.axis.nr, pItem) {
+         unsigned status =  grplot_json_axis_data_item(
+               pMatrix
+            ,  pItem
+            ,  &location
+            ,  pDefault );
+         if (status) retval =  1;
+      }
+   }
+
+   return retval;
+}
+
+int
 grplot_json_diagram_data_item(
       grplot_matrix_t *pMatrix
    ,  const json_t *pJson
@@ -1712,6 +1743,13 @@ grplot_json_root_elem(
             pXAxisJson
          ,  &istAxisGeneral
          ,  &istAxis );
+      if (!retval) {
+         retval =  grplot_json_axis_data(
+               pMatrix
+            ,  pXAxisArrayJson
+            ,  grplot_axis_x_axis
+            ,  &istAxis );
+      }
    }
 
    if (!retval) {
@@ -1720,6 +1758,13 @@ grplot_json_root_elem(
             pXAxisJson
          ,  &istAxisGeneral
          ,  &istAxis );
+      if (!retval) {
+         retval =  grplot_json_axis_data(
+               pMatrix
+            ,  pYAxisArrayJson
+            ,  grplot_axis_y_axis
+            ,  &istAxis );
+      }
    }
 
    if (!retval) {
