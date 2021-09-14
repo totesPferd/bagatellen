@@ -1778,6 +1778,37 @@ grplot_json_root_elem(
    return retval;
 }
 
+int
+grplot_json_load(
+      grplot_matrix_t *pMatrix
+   ,  const char *filename ) {
+   assert(pMatrix);
+   assert(filename);
+
+   int retval =  0;
+
+   json_error_t jsonError;
+   json_t *jsonData;
+
+   jsonData =  json_load_file(
+         filename
+      ,  JSON_REJECT_DUPLICATES
+      ,  &jsonError );
+
+   if (jsonData) {
+      retval =  grplot_json_root_elem(pMatrix, jsonData);
+   } else {
+      retval =  1;
+      fprintf(stderr, "in %s(%d:%d): %s\n", 
+            jsonError.source
+         ,  jsonError.line
+         ,  jsonError.column
+         ,  jsonError.text );
+   }
+
+   return retval;
+}
+
 static void
 printErrMsgIntro(
       const grplot_json_schema_location_t *pLocation ) {
