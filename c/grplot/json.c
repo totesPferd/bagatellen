@@ -18,6 +18,27 @@ printFontErrMsgIntro(const grplot_json_schema_location_t *, const char *);
 static void
 printInscriptionStyleErrMsgIntro(const grplot_json_schema_location_t *, const char *);
 
+static const int error_red_integer =  1;
+static const int error_green_integer =  2;
+static const int error_blue_integer =  4;
+static const int error_alpha_integer =  8;
+static const int error_red_range =  16;
+static const int error_green_range =  32;
+static const int error_blue_range =  64;
+static const int error_alpha_range =  128;
+static const int error_color_object =  256;
+static const int error_font_string =  256;
+static const int error_nr_gt_zero =  1;
+static const int error_nr_int =  128;
+static const int error_scale_range =  16;
+static const int error_scale_string =  256;
+static const int error_text_string =  256;
+static const int error_val_gt_zero =  1;
+static const int error_val_timespec =  2;
+static const int error_val_junk =  4;
+static const int error_val_string =  256;
+static const int error_val_double =  512;
+
 void
 grplot_json_printErrMsg(
       const grplot_json_schema_location_t *pLocation
@@ -37,47 +58,47 @@ grplot_json_printColorErrMsg(
    assert(pLocation);
    assert(colorDest);
 
-   if (errCode & grplot_json_error_red_integer) {
+   if (errCode & error_red_integer) {
       printColorErrMsgIntro(pLocation, colorDest);
       fprintf(stderr, "red component must be integer\n");
    }
 
-   if (errCode & grplot_json_error_green_integer) {
+   if (errCode & error_green_integer) {
       printColorErrMsgIntro(pLocation, colorDest);
       fprintf(stderr, "green component must be integer\n");
    }
 
-   if (errCode & grplot_json_error_blue_integer) {
+   if (errCode & error_blue_integer) {
       printColorErrMsgIntro(pLocation, colorDest);
       fprintf(stderr, "blue component must be integer\n");
    }
 
-   if (errCode & grplot_json_error_alpha_integer) {
+   if (errCode & error_alpha_integer) {
       printColorErrMsgIntro(pLocation, colorDest);
       fprintf(stderr, "alpha component must be integer\n");
    }
 
-   if (errCode & grplot_json_error_red_range) {
+   if (errCode & error_red_range) {
       printColorErrMsgIntro(pLocation, colorDest);
       fprintf(stderr, "red component: permitted range 0..255\n");
    }
 
-   if (errCode & grplot_json_error_green_range) {
+   if (errCode & error_green_range) {
       printColorErrMsgIntro(pLocation, colorDest);
       fprintf(stderr, "green component: permitted range 0..255\n");
    }
 
-   if (errCode & grplot_json_error_blue_range) {
+   if (errCode & error_blue_range) {
       printColorErrMsgIntro(pLocation, colorDest);
       fprintf(stderr, "blue component: permitted range 0.255\n");
    }
 
-   if (errCode & grplot_json_error_alpha_range) {
+   if (errCode & error_alpha_range) {
       printColorErrMsgIntro(pLocation, colorDest);
       fprintf(stderr, "alpha component: permitted range 0.255\n");
    }
 
-   if (errCode & grplot_json_error_color_object) {
+   if (errCode & error_color_object) {
       printColorErrMsgIntro(pLocation, colorDest);
       fprintf(stderr, "must be json object\n");
    }
@@ -91,7 +112,7 @@ grplot_json_printFontErrMsg(
    assert(pLocation);
    assert(fontDest);
 
-   if (errCode & grplot_json_error_font_string) {
+   if (errCode & error_font_string) {
       printColorErrMsgIntro(pLocation, fontDest);
       fprintf(stderr, "must be json string\n");
    }
@@ -103,11 +124,11 @@ grplot_json_printNrErrMsg(
    ,  int errCode ) {
    assert(pLocation);
 
-   if (errCode & grplot_json_error_nr_gt_zero) {
+   if (errCode & error_nr_gt_zero) {
       grplot_json_printErrMsg(pLocation, "nr must be greater than zero");
    }
 
-   if (errCode & grplot_json_error_nr_int) {
+   if (errCode & error_nr_int) {
       grplot_json_printErrMsg(pLocation, "nr must be integer");
    }
 }
@@ -118,11 +139,11 @@ grplot_json_printScaleErrMsg(
    ,  int errCode ) {
    assert(pLocation);
 
-   if (errCode & grplot_json_error_scale_range) {
+   if (errCode & error_scale_range) {
       grplot_json_printErrMsg(pLocation, "scale must be one of linear, logarithm, time");
    }
 
-   if (errCode & grplot_json_error_scale_string) {
+   if (errCode & error_scale_string) {
       grplot_json_printErrMsg(pLocation, "scale must be json string");
    }
 }
@@ -133,7 +154,7 @@ grplot_json_printTextErrMsg(
    ,  int errCode ) {
    assert(pLocation);
 
-   if (errCode & grplot_json_error_text_string) {
+   if (errCode & error_text_string) {
       grplot_json_printErrMsg(pLocation, "label text must be json string");
    }
 }
@@ -144,23 +165,23 @@ grplot_json_printValErrMsg(
    ,  int errCode ) {
    assert(pLocation);
 
-   if (errCode & grplot_json_error_val_gt_zero) {
+   if (errCode & error_val_gt_zero) {
       grplot_json_printErrMsg(pLocation, "val must be greater than 0.0 if using logarithmic scales");
    }
 
-   if (errCode & grplot_json_error_val_timespec) {
+   if (errCode & error_val_timespec) {
       grplot_json_printErrMsg(pLocation, "val could not be parsed as time data");
    }
 
-   if (errCode & grplot_json_error_val_junk) {
+   if (errCode & error_val_junk) {
       grplot_json_printErrMsg(pLocation, "val contains junk after time data");
    }
 
-   if (errCode & grplot_json_error_val_string) {
+   if (errCode & error_val_string) {
       grplot_json_printErrMsg(pLocation, "val must be string containing time data");
    }
 
-   if (errCode & grplot_json_error_val_double) {
+   if (errCode & error_val_double) {
       grplot_json_printErrMsg(pLocation, "val must be floating point number");
    }
 }
@@ -339,10 +360,10 @@ grplot_json_color(const json_t *pJson, DATA32 *pResult) {
             if (red >= 0 && red < 256) {
                ((unsigned char *) pResult)[2] =  red;
             } else {
-               retval |=   grplot_json_error_red_range;
+               retval |=   error_red_range;
             }
          } else {
-            retval |=   grplot_json_error_red_integer;
+            retval |=   error_red_integer;
          }
       }
       {
@@ -352,10 +373,10 @@ grplot_json_color(const json_t *pJson, DATA32 *pResult) {
             if (green >= 0 && green < 256) {
                ((unsigned char *) pResult)[1] =  green;
             } else {
-               retval |=   grplot_json_error_green_range;;
+               retval |=   error_green_range;;
             }
          } else {
-            retval |=   grplot_json_error_green_integer;
+            retval |=   error_green_integer;
          }
       }
       {
@@ -365,10 +386,10 @@ grplot_json_color(const json_t *pJson, DATA32 *pResult) {
             if (blue >= 0 && blue < 256) {
                ((unsigned char *) pResult)[0] =  blue;
             } else {
-               retval |=   grplot_json_error_blue_range;
+               retval |=   error_blue_range;
             }
          } else {
-            retval |=   grplot_json_error_blue_integer;
+            retval |=   error_blue_integer;
          }
       }
       {
@@ -378,14 +399,14 @@ grplot_json_color(const json_t *pJson, DATA32 *pResult) {
             if (alpha >= 0 && alpha < 256) {
                ((unsigned char *) pResult)[3] =  alpha;
             } else {
-               retval |=   grplot_json_error_alpha_range;
+               retval |=   error_alpha_range;
             }
          } else {
-            retval |=   grplot_json_error_alpha_integer;
+            retval |=   error_alpha_integer;
          }
       }
    } else {
-      retval |=  grplot_json_error_color_object;
+      retval |=  error_color_object;
    }
 
    return retval;
@@ -401,7 +422,7 @@ grplot_json_font(const json_t *pJson, const char **pResult) {
    if (json_is_string(pJson)) {
       *pResult =  json_string_value(pJson);
    } else {
-      retval |=  grplot_json_error_font_string;
+      retval |=  error_font_string;
    }
 
    return retval;
@@ -419,10 +440,10 @@ grplot_json_nr(const json_t *pJson, unsigned *pResult) {
       if (val >= 0) {
          *pResult =  val;
       } else {
-         retval |= grplot_json_error_nr_gt_zero;
+         retval |= error_nr_gt_zero;
       }
    } else {
-      retval |= grplot_json_error_nr_int;
+      retval |= error_nr_int;
    }
 
    return retval;
@@ -444,10 +465,10 @@ grplot_json_scale(const json_t *pJson, grplot_axis_scale_type_t *pResult) {
       } else if (!strcmp(item, "time")) {
          *pResult =  grplot_axis_time;
       } else {
-         retval =  grplot_json_error_scale_range;
+         retval =  error_scale_range;
       }
    } else {
-      retval |= grplot_json_error_scale_string;
+      retval |= error_scale_string;
    }
 
    return retval;
@@ -463,7 +484,7 @@ grplot_json_text(const json_t *pJson, const char **pResult) {
    if (json_is_string(pJson)) {
       *pResult =  json_string_value(pJson);
    } else {
-      retval |= grplot_json_error_text_string;
+      retval |= error_text_string;
    }
 
    return retval;
@@ -485,7 +506,7 @@ grplot_json_val(
          if (json_is_real(pJson)) {
             pResult->numeric =  json_real_value(pJson);
          } else {
-            retval |= grplot_json_error_val_double;
+            retval |= error_val_double;
          }
       }
       break;
@@ -494,10 +515,10 @@ grplot_json_val(
          if (json_is_real(pJson)) {
             pResult->numeric =  json_real_value(pJson);
             if (pResult->numeric <= 0.0) {
-               retval |= grplot_json_error_val_gt_zero;
+               retval |= error_val_gt_zero;
             }
          } else {
-            retval |= grplot_json_error_val_double;
+            retval |= error_val_double;
          }
       }
       break;
@@ -515,15 +536,15 @@ grplot_json_val(
             const char *t =  strptime(timeStr, "%Y-%m-%dT%H:%M:%S", &time);
             if (t) {
               if (*t) {
-                 retval |= grplot_json_error_val_junk;
+                 retval |= error_val_junk;
               } else {
                  pResult->time =  mktime(&time);
               }
             } else {
-               retval |= grplot_json_error_val_timespec;
+               retval |= error_val_timespec;
             }
          } else {
-            retval |= grplot_json_error_val_string;
+            retval |= error_val_string;
          }
       }
       break;
