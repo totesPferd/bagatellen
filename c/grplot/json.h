@@ -348,4 +348,9 @@ grplot_json_root_elem(
       grplot_matrix_t *
    ,  json_t * );
 
+int
+grplot_json_load(
+      grplot_matrix_t *
+   ,  const char * );
+
 #endif
