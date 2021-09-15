@@ -949,7 +949,7 @@ grplot_json_diagram_inscription_style_elem(
    assert(pLocation);
    assert(pOut);
 
-   int retval =  json_is_object(pJson);
+   int retval =  ! json_is_object(pJson);
 
    if (!retval) {
       grplot_json_init_diagram_inscription_style_elem(pDefault, pOut);
@@ -1000,7 +1000,7 @@ grplot_json_diagram_item_inscription_style_elem(
    assert(pLocation);
    assert(pOut);
 
-   int retval =  json_is_object(pJson);
+   int retval =  ! json_is_object(pJson);
 
    if (!retval) {
       grplot_json_init_diagram_item_inscription_style_elem(pDefault, pOut);
@@ -1439,7 +1439,7 @@ grplot_json_diagram_data_item(
    grplot_json_schema_diagram_inscription_style_t out;
    grplot_json_init_diagram_inscription_style_elem(pDefault, &out);
 
-   int retval =  json_is_object(pJson);
+   int retval =  ! json_is_object(pJson);
 
    if (!retval) {
      unsigned nrInpBuf =  0;
@@ -1550,7 +1550,7 @@ grplot_json_diagram_data(
    grplot_json_schema_location_t outerLocation;
    outerLocation.locationType =  grplot_json_schema_diagram_default;
 
-   int retval =  json_is_object(pJson);
+   int retval =  ! json_is_object(pJson);
 
    if (!retval) {
      json_t *pInnerJson =  json_object_get(pJson, "items");
