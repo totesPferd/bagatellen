@@ -1065,10 +1065,10 @@ grplot_json_init_axis_inscription_style_elem(
 
    if (pDefault) {
       grplot_json_init_inscription_style_elem(
-            NULL
+            &(pDefault->inscription)
          ,  &(pOut->inscription) );
       grplot_json_init_inscription_style_elem(
-            NULL
+            &(pDefault->label)
          ,  &(pOut->label) );
       pOut->scaleType =  pDefault->scaleType;
       pOut->color =  pDefault->color;
@@ -1078,10 +1078,10 @@ grplot_json_init_axis_inscription_style_elem(
       pOut->text =  pDefault->text;
    } else {
       grplot_json_init_inscription_style_elem(
-            &(pDefault->inscription)
+            NULL
          ,  &(pOut->inscription) );
       grplot_json_init_inscription_style_elem(
-            &(pDefault->label)
+            NULL
          ,  &(pOut->label) );
       pOut->scaleType =  grplot_axis_linear;
       pOut->color =  0;
