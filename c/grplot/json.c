@@ -577,7 +577,7 @@ grplot_json_color_elem(
    json_t *pElem =  json_object_get(pJson, "color");
    if (pElem) {
       int errCode =  grplot_json_color(
-            pJson
+            pElem
          ,  pOut );
       grplot_json_printColorErrMsg(pLocation, dest, errCode);
       if (errCode) {
@@ -609,7 +609,7 @@ grplot_json_font_elem(
    if (pElem) {
       const char *fontName;
       int errCode =  grplot_json_font(
-            pJson
+            pElem
          ,  &fontName );
       grplot_json_printFontErrMsg(pLocation, dest, errCode);
    
@@ -691,7 +691,6 @@ grplot_json_text_elem(
    ,  const char **pOut ) {
    assert(pLocation);
    assert(pJson);
-   assert(sDefault);
    assert(pOut);
 
    if (sDefault) {
