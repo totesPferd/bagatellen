@@ -701,7 +701,7 @@ grplot_json_text_elem(
 
    json_t *pElem =  json_object_get(pJson, "text");
    if (pElem) {
-      int errCode =  grplot_json_text(pJson, pOut);
+      int errCode =  grplot_json_text(pElem, pOut);
       grplot_json_printTextErrMsg(pLocation, errCode);
       if (errCode) {
          retval =  1;
