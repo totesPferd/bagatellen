@@ -60,22 +60,22 @@ grplot_json_printColorErrMsg(
 
    if (errCode & error_red_integer) {
       printColorErrMsgIntro(pLocation, colorDest);
-      fprintf(stderr, "red component must be integer\n");
+      fprintf(stderr, "red component must be present and integer\n");
    }
 
    if (errCode & error_green_integer) {
       printColorErrMsgIntro(pLocation, colorDest);
-      fprintf(stderr, "green component must be integer\n");
+      fprintf(stderr, "green component must be present and integer\n");
    }
 
    if (errCode & error_blue_integer) {
       printColorErrMsgIntro(pLocation, colorDest);
-      fprintf(stderr, "blue component must be integer\n");
+      fprintf(stderr, "blue component must be present and integer\n");
    }
 
    if (errCode & error_alpha_integer) {
       printColorErrMsgIntro(pLocation, colorDest);
-      fprintf(stderr, "alpha component must be integer\n");
+      fprintf(stderr, "alpha component must be present and integer\n");
    }
 
    if (errCode & error_red_range) {
@@ -90,12 +90,12 @@ grplot_json_printColorErrMsg(
 
    if (errCode & error_blue_range) {
       printColorErrMsgIntro(pLocation, colorDest);
-      fprintf(stderr, "blue component: permitted range 0.255\n");
+      fprintf(stderr, "blue component: permitted range 0..255\n");
    }
 
    if (errCode & error_alpha_range) {
       printColorErrMsgIntro(pLocation, colorDest);
-      fprintf(stderr, "alpha component: permitted range 0.255\n");
+      fprintf(stderr, "alpha component: permitted range 0..255\n");
    }
 
    if (errCode & error_color_object) {
@@ -355,7 +355,7 @@ grplot_json_color(const json_t *pJson, DATA32 *pResult) {
    if (json_is_object(pJson)) {
       {
          json_t *pRed =  json_object_get(pJson, "r");
-         if (json_is_integer(pRed)) {
+         if (pRed && json_is_integer(pRed)) {
             int red =  json_integer_value(pRed);
             if (red >= 0 && red < 256) {
                ((unsigned char *) pResult)[2] =  red;
@@ -368,7 +368,7 @@ grplot_json_color(const json_t *pJson, DATA32 *pResult) {
       }
       {
          json_t *pGreen =  json_object_get(pJson, "g");
-         if (json_is_integer(pGreen)) {
+         if (pGreen && json_is_integer(pGreen)) {
             int green =  json_integer_value(pGreen);
             if (green >= 0 && green < 256) {
                ((unsigned char *) pResult)[1] =  green;
@@ -381,7 +381,7 @@ grplot_json_color(const json_t *pJson, DATA32 *pResult) {
       }
       {
          json_t *pBlue =  json_object_get(pJson, "b");
-         if (json_is_integer(pBlue)) {
+         if (pBlue && json_is_integer(pBlue)) {
             int blue =  json_integer_value(pBlue);
             if (blue >= 0 && blue < 256) {
                ((unsigned char *) pResult)[0] =  blue;
@@ -394,7 +394,7 @@ grplot_json_color(const json_t *pJson, DATA32 *pResult) {
       }
       {
          json_t *pAlpha =  json_object_get(pJson, "a");
-         if (json_is_integer(pAlpha)) {
+         if (pAlpha && json_is_integer(pAlpha)) {
             int alpha =  json_integer_value(pAlpha);
             if (alpha >= 0 && alpha < 256) {
                ((unsigned char *) pResult)[3] =  alpha;
