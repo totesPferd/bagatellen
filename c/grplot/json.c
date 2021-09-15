@@ -808,7 +808,7 @@ grplot_json_axis_inscription_style_elem(
    assert(pLocation);
    assert(pOut);
 
-   int retval =  json_is_object(pJson);
+   int retval =  ! json_is_object(pJson);
 
    if (!retval) {
       grplot_json_init_axis_inscription_style_elem(pDefault, pOut);
