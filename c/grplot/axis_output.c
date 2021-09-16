@@ -139,7 +139,7 @@ grplot_axis_output_destroy(grplot_axis_output_t *pAxisOutput) {
 
    free(pAxisOutput->upperInscription.text);
    for (unsigned i =  0; i < pAxisOutput->nrInscriptions; i++) {
-      free((pAxisOutput->inscriptions)[i].inscription.text);
+      grplot_axis_output_positional_inscription_destroy(pAxisOutput->inscriptions + i);
    }
 }
 
