@@ -1629,6 +1629,8 @@ grplot_json_root_elem(
    json_t *pYAxisArrayJson =  NULL;
    json_t *pDiagramJson =  NULL;
 
+   int isMatrixInitialized =  0;
+
    grplot_json_schema_location_t baseLocation;
    baseLocation.locationType =  grplot_json_schema_base;
 
@@ -1754,6 +1756,10 @@ grplot_json_root_elem(
    }
 
    if (!retval) {
+      isMatrixInitialized =  1;
+   }
+
+   if (!retval) {
       grplot_json_schema_axis_inscription_style_t istAxis;
       grplot_json_axis_default(
             pXAxisJson
@@ -1791,6 +1797,10 @@ grplot_json_root_elem(
          ,  NULL );
    }
 
+   if (retval && isMatrixInitialized) {
+      grplot_matrix_destroy(pMatrix);
+   }
+
    return retval;
 }
 
@@ -1813,6 +1823,7 @@ grplot_json_load(
 
    if (jsonData) {
       retval =  grplot_json_root_elem(pMatrix, jsonData);
+      json_decref(jsonData);
    } else {
       retval =  1;
       fprintf(stderr, "in %s(%d:%d): %s\n", 
