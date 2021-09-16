@@ -37,6 +37,10 @@ grplot_axis_output_positional_inscription_init(
    ,  Imlib_Font
    ,  grplot_axis_val_t );
 
+void
+grplot_axis_output_positional_inscription_destroy(
+      grplot_inscription_positional_inscription_t * );
+
 grplot_axis_output_status_t
 grplot_axis_output_init(
       grplot_axis_output_t *

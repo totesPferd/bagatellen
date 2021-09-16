@@ -25,7 +25,7 @@ grplot_legend_init(
 grplot_legend_status_t
 grplot_legend_inscription_init(
       grplot_legend_t *
-   ,  char *
+   ,  const char *
    ,  DATA32
    ,  unsigned );
 

@@ -46,6 +46,14 @@ grplot_axis_output_positional_inscription_init(
    return retval;
 }
 
+void
+grplot_axis_output_positional_inscription_destroy(
+      grplot_inscription_positional_inscription_t *pPositionalInscription ) {
+   assert(pPositionalInscription);
+
+   free((pPositionalInscription->inscription).text);
+}
+
 grplot_axis_output_status_t
 grplot_axis_output_init(
       grplot_axis_output_t *pAxisOutput

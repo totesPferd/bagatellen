@@ -26,7 +26,7 @@ grplot_legend_init(
 grplot_legend_status_t
 grplot_legend_inscription_init(
       grplot_legend_t *pLegend
-   ,  char *text
+   ,  const char *text
    ,  DATA32 color
    ,  unsigned index ) {
    assert(pLegend);
