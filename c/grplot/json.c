@@ -1449,6 +1449,9 @@ grplot_json_diagram_data_item(
            retval =  1;
            grplot_json_printErrMsg(pLocation, "items in diagram must be array");
         }
+     } else {
+        retval =  1;
+        grplot_json_printErrMsg(pLocation, "items in diagram must be present");
      }
 
      if (!retval) {
