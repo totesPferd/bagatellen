@@ -1184,7 +1184,6 @@ grplot_json_diagram_default(
    ,  const grplot_json_schema_diagram_inscription_style_t *pDefault
    ,  grplot_json_schema_diagram_inscription_style_t *pOut ) {
    assert(pJson);
-   assert(pDefault);
    assert(pOut);
 
    int retval =  0;
@@ -1214,7 +1213,6 @@ grplot_json_diagram_base(
    ,  grplot_json_schema_diagram_item_inscription_style_t *pOut ) {
    assert(pJson);
    assert(pLocation);
-   assert(pDefault);
    assert(pOut);
 
    int retval =  0;
@@ -1537,8 +1535,6 @@ grplot_json_diagram_data(
    ,  const grplot_json_schema_diagram_inscription_style_t *pDefault ) {
    assert(pMatrix);
    assert(pJson);
-   assert(pDefaultItem);
-   assert(pDefault);
 
    grplot_json_schema_diagram_inscription_style_t out;
    grplot_json_init_diagram_inscription_style_elem(pDefault, &out);
