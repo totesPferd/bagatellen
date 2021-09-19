@@ -7,7 +7,7 @@ typedef enum {
       grplot_inscription_ok =  0 } grplot_inscription_status_t;
 
 typedef struct {
-   char *text;
+   const char *text;
    int width, height; } grplot_inscription_t;
 
 typedef struct {
