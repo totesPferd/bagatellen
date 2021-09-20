@@ -1554,8 +1554,9 @@ grplot_json_diagram_data(
      json_t *pInnerJson =  json_object_get(pJson, "items");
      if (pInnerJson) {
         if (json_is_array(pInnerJson)) {
-           grplot_json_diagram_default(
-                 pInnerJson
+           grplot_json_diagram_inscription_style_elem(
+                 &outerLocation
+              ,  pJson
               ,  pDefault
               ,  &out );
            grplot_json_diagram_base(
@@ -1793,11 +1794,18 @@ grplot_json_root_elem(
    }
 
    if (!retval) {
-      retval =  grplot_json_diagram_data(
-            pMatrix
-         ,  pDiagramJson
+      grplot_json_schema_diagram_inscription_style_t dis;
+      retval =  grplot_json_diagram_default(
+            pDiagramJson
          ,  NULL
-         ,  NULL );
+         ,  &dis );
+      if (!retval) {
+         retval =  grplot_json_diagram_data(
+               pMatrix
+            ,  pDiagramJson
+            ,  NULL
+            ,  &dis );
+      }
    }
 
    if (retval && isMatrixInitialized) {
