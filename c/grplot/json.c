@@ -605,7 +605,7 @@ grplot_json_font_elem(
 
    int retval =  0;
 
-   json_t *pElem =  json_object_get(pJson, "font");
+   json_t *pElem =  json_object_get(pJson, dest);
    if (pElem) {
       const char *fontName;
       int errCode =  grplot_json_font(
