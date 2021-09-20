@@ -1455,6 +1455,14 @@ grplot_json_diagram_data_item(
      }
 
      if (!retval) {
+        retval =  grplot_json_diagram_inscription_style_elem(
+              pLocation
+           ,  pJson
+           ,  pDefault
+           ,  &out );
+     }
+
+     if (!retval) {
         retval =  grplot_json_matrix_init_diagram(
                pMatrix
             ,  &out
