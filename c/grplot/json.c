@@ -766,7 +766,7 @@ grplot_json_inscription_style_elem(
             int errMode =  grplot_json_color_elem(
                   pLocation
                ,  pElem
-               ,  dest
+               ,  "color"
                ,  pItem
                ,  &(pOut->color) );
             if (errMode) {
@@ -781,7 +781,7 @@ grplot_json_inscription_style_elem(
             int errMode =  grplot_json_font_elem(
                   pLocation
                ,  pElem
-               ,  dest
+               ,  "font"
                ,  pItem
                ,  &(pOut->font) );
             if (errMode) {
