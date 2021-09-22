@@ -331,6 +331,7 @@ grplot_json_root_elem(
 int
 grplot_json_load(
       grplot_matrix_t *
+   ,  json_t **
    ,  const char * );
 
 #endif
