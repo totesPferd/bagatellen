@@ -1604,6 +1604,8 @@ grplot_json_diagram_data(
               } else if (nr < pMatrix->nrDiagram) {
                  retval =  1;
                  grplot_json_printErrMsg(&innerLocation, "too few diagrams");
+              } else {
+                 retval =  0;
               }
            }
         } else {
