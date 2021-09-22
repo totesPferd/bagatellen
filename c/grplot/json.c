@@ -646,7 +646,7 @@ grplot_json_nr_elem(
 
    json_t *pElem =  json_object_get(pJson, key);
    if (pElem) {
-      int errCode =  grplot_json_nr(pJson, pOut);
+      int errCode =  grplot_json_nr(pElem, pOut);
       grplot_json_printNrErrMsg(pLocation, errCode);
       if (errCode) {
          retval =  1;
