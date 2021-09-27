@@ -1719,6 +1719,9 @@ grplot_json_root_elem(
                         retval =  1;
                         grplot_json_printErrMsg(&xAxisLocation, "axis.x must be object");
                      }
+                  } else {
+                     retval =  1;
+                     grplot_json_printErrMsg(&xAxisLocation, "axis.x part must be present");
                   }
                }
                {
@@ -1741,12 +1744,18 @@ grplot_json_root_elem(
                         retval =  1;
                         grplot_json_printErrMsg(&yAxisLocation, "axis.y must be object");
                      }
+                  } else {
+                     retval =  1;
+                     grplot_json_printErrMsg(&yAxisLocation, "axis.y part must be present");
                   }
                }
             } else {
                retval =  1;
                grplot_json_printErrMsg(&baseLocation, "axis must be object");
             }
+         } else {
+            retval =  1;
+            grplot_json_printErrMsg(&baseLocation, "axis part must be present");
          }
       }
       {
@@ -1756,6 +1765,9 @@ grplot_json_root_elem(
                retval =  1;
                grplot_json_printErrMsg(&baseLocation, "diagram must be object");
             }
+         } else {
+            retval =  1;
+            grplot_json_printErrMsg(&baseLocation, "diagram part must be present");
          }
       }
    }
