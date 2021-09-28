@@ -139,6 +139,8 @@ grplot_axis_output_init(
 void
 grplot_axis_output_init_as_invalid(
       grplot_axis_output_t *pAxisOutput ) {
+   assert(pAxisOutput);
+
    pAxisOutput->isValid =  0;
 }
 

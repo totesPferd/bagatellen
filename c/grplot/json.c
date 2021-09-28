@@ -1256,12 +1256,14 @@ grplot_json_matrix_init_axis(
                   pMatrix
                ,  (pLocation->variant).axis.nr );
          }
+         break;
 
          case (grplot_axis_y_axis): {
             grplot_matrix_y_axis_init_as_invalid(
                   pMatrix
                ,  (pLocation->variant).axis.nr );
          }
+         break;
 
          default: {
             assert(0);
