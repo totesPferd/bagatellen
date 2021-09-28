@@ -1824,7 +1824,7 @@ grplot_json_root_elem(
    if (!retval) {
       grplot_json_schema_axis_inscription_style_t istAxis;
       grplot_json_axis_default(
-            pXAxisJson
+            pYAxisJson
          ,  &istAxisGeneral
          ,  &istAxis );
       if (!retval) {
