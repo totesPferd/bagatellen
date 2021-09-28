@@ -16,6 +16,7 @@ typedef enum {
 
 typedef struct {
    grplot_axis_t axisSpec;
+   int isValid;
    Imlib_Font inscriptionFont;
    DATA32 inscriptionColor;
    Imlib_Font labelFont;
@@ -57,7 +58,14 @@ grplot_axis_output_init(
    ,  const char * );
 
 void
+grplot_axis_output_init_as_invalid(
+      grplot_axis_output_t * );
+
+void
 grplot_axis_output_destroy(grplot_axis_output_t *);
+
+int
+grplot_axis_output_is_Valid(const grplot_axis_output_t *);
 
 grplot_axis_output_status_t
 grplot_axis_output_draw(

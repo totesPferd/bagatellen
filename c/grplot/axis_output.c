@@ -82,6 +82,7 @@ grplot_axis_output_init(
       || min.numeric > 0.0 );
 
    grplot_axis_output_status_t retval =  grplot_axis_output_ok;
+   pAxisOutput->isValid =  1;
 
    {
       grplot_axis_status_t errorMode =  grplot_axis_init(
@@ -136,15 +137,30 @@ grplot_axis_output_init(
 }
 
 void
+grplot_axis_output_init_as_invalid(
+      grplot_axis_output_t *pAxisOutput ) {
+   pAxisOutput->isValid =  0;
+}
+
+void
 grplot_axis_output_destroy(grplot_axis_output_t *pAxisOutput) {
    assert(pAxisOutput);
 
-   if (pAxisOutput->upperInscription.text) {
-      free((void *) (pAxisOutput->upperInscription.text));
+   if (pAxisOutput->isValid) {
+      if (pAxisOutput->upperInscription.text) {
+         free((void *) (pAxisOutput->upperInscription.text));
+      }
+      for (unsigned i =  0; i < pAxisOutput->nrInscriptions; i++) {
+         grplot_axis_output_positional_inscription_destroy(pAxisOutput->inscriptions + i);
+      }
    }
-   for (unsigned i =  0; i < pAxisOutput->nrInscriptions; i++) {
-      grplot_axis_output_positional_inscription_destroy(pAxisOutput->inscriptions + i);
-   }
+}
+
+int
+grplot_axis_output_is_valid(const grplot_axis_output_t *pAxisOutput) {
+   assert(pAxisOutput);
+
+   return pAxisOutput->isValid;
 }
 
 grplot_axis_output_status_t

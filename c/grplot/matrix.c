@@ -189,6 +189,32 @@ grplot_matrix_y_axis_init(
       ,  label );
 }
 
+void
+grplot_matrix_x_axis_init_as_invalid(
+      grplot_matrix_t *pMatrix
+   ,  unsigned x ) {
+   assert(pMatrix);
+   assert(x < pMatrix->nrX);
+
+   grplot_matrix_positional_axis_t *pPositionalAxis;
+   getPositionalAxis(pMatrix, grplot_axis_x_axis,&pPositionalAxis, x);
+
+   grplot_axis_output_init_as_invalid(&(pPositionalAxis->axis));
+}
+
+void
+grplot_matrix_y_axis_init_as_invalid(
+      grplot_matrix_t *pMatrix
+   ,  unsigned y ) {
+   assert(pMatrix);
+   assert(y < pMatrix->nrY);
+
+   grplot_matrix_positional_axis_t *pPositionalAxis;
+   getPositionalAxis(pMatrix, grplot_axis_y_axis,&pPositionalAxis, y);
+
+   grplot_axis_output_init_as_invalid(&(pPositionalAxis->axis));
+}
+
 grplot_diagram_status_t
 grplot_matrix_diagram_init(
       grplot_matrix_t *pMatrix

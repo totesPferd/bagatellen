@@ -1248,7 +1248,26 @@ grplot_json_matrix_init_axis(
    int retval =  grplot_json_printMissingItemsInAxisInstructionStyle(
          pLocation
       ,  pAxisInscriptionStyle );
-   if (!retval) {
+   if (retval) {
+      switch ((pLocation->variant).axis.axisType) {
+
+         case (grplot_axis_x_axis): {
+            grplot_matrix_x_axis_init_as_invalid(
+                  pMatrix
+               ,  (pLocation->variant).axis.nr );
+         }
+
+         case (grplot_axis_y_axis): {
+            grplot_matrix_y_axis_init_as_invalid(
+                  pMatrix
+               ,  (pLocation->variant).axis.nr );
+         }
+
+         default: {
+            assert(0);
+         }
+      }
+   } else {
       grplot_axis_output_status_t statusCode =  grplot_axis_output_ok;
    
       switch ((pLocation->variant).axis.axisType) {

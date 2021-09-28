@@ -75,6 +75,16 @@ grplot_matrix_y_axis_init(
    ,  grplot_axis_val_t
    ,  const char * );
 
+void
+grplot_matrix_x_axis_init_as_invalid(
+      grplot_matrix_t *
+   ,  unsigned );
+
+void
+grplot_matrix_y_axis_init_as_invalid(
+      grplot_matrix_t *
+   ,  unsigned );
+
 grplot_diagram_status_t
 grplot_matrix_diagram_init(
       grplot_matrix_t *
