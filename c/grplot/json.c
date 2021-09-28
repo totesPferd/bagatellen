@@ -1664,8 +1664,6 @@ grplot_json_root_elem(
    json_t *pYAxisArrayJson =  NULL;
    json_t *pDiagramJson =  NULL;
 
-   int isMatrixInitialized =  0;
-
    grplot_json_schema_location_t baseLocation;
    baseLocation.locationType =  grplot_json_schema_base;
 
@@ -1803,56 +1801,57 @@ grplot_json_root_elem(
    }
 
    if (!retval) {
-      isMatrixInitialized =  1;
-   }
 
-   if (!retval) {
-      grplot_json_schema_axis_inscription_style_t istAxis;
-      grplot_json_axis_default(
-            pXAxisJson
-         ,  &istAxisGeneral
-         ,  &istAxis );
-      if (!retval) {
-         retval =  grplot_json_axis_data(
-               pMatrix
-            ,  pXAxisArrayJson
-            ,  grplot_axis_x_axis
-            ,  &istAxis );
+      int xRetval =  0;
+      int yRetval =  0;
+
+
+      {
+         {
+            grplot_json_schema_axis_inscription_style_t istXAxis;
+            grplot_json_axis_default(
+                  pXAxisJson
+               ,  &istAxisGeneral
+               ,  &istXAxis );
+            xRetval =  grplot_json_axis_data(
+                  pMatrix
+               ,  pXAxisArrayJson
+               ,  grplot_axis_x_axis
+               ,  &istXAxis );
+         }
+   
+         {
+            grplot_json_schema_axis_inscription_style_t istYAxis;
+            grplot_json_axis_default(
+                  pYAxisJson
+               ,  &istAxisGeneral
+               ,  &istYAxis );
+            yRetval =  grplot_json_axis_data(
+                  pMatrix
+               ,  pYAxisArrayJson
+               ,  grplot_axis_y_axis
+               ,  &istYAxis );
+         }
+
+         retval =  xRetval || yRetval;
       }
-   }
 
-   if (!retval) {
-      grplot_json_schema_axis_inscription_style_t istAxis;
-      grplot_json_axis_default(
-            pYAxisJson
-         ,  &istAxisGeneral
-         ,  &istAxis );
       if (!retval) {
-         retval =  grplot_json_axis_data(
-               pMatrix
-            ,  pYAxisArrayJson
-            ,  grplot_axis_y_axis
-            ,  &istAxis );
-      }
-   }
-
-   if (!retval) {
-      grplot_json_schema_diagram_inscription_style_t dis;
-      retval =  grplot_json_diagram_default(
-            pDiagramJson
-         ,  NULL
-         ,  &dis );
-      if (!retval) {
+         grplot_json_schema_diagram_inscription_style_t dis;
+         retval =  grplot_json_diagram_default(
+               pDiagramJson
+            ,  NULL
+            ,  &dis );
          retval =  grplot_json_diagram_data(
                pMatrix
             ,  pDiagramJson
             ,  NULL
             ,  &dis );
       }
-   }
 
-   if (retval && isMatrixInitialized) {
-      grplot_matrix_destroy(pMatrix);
+      if (retval) {
+         grplot_matrix_destroy(pMatrix);
+      }
    }
 
    return retval;
