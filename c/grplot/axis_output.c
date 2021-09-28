@@ -51,7 +51,9 @@ grplot_axis_output_positional_inscription_destroy(
       grplot_inscription_positional_inscription_t *pPositionalInscription ) {
    assert(pPositionalInscription);
 
-   free((void *) (pPositionalInscription->inscription).text);
+   if ((pPositionalInscription->inscription).text) {
+      free((void *) (pPositionalInscription->inscription).text);
+   }
 }
 
 grplot_axis_output_status_t
@@ -137,7 +139,9 @@ void
 grplot_axis_output_destroy(grplot_axis_output_t *pAxisOutput) {
    assert(pAxisOutput);
 
-   free((void *) (pAxisOutput->upperInscription.text));
+   if (pAxisOutput->upperInscription.text) {
+      free((void *) (pAxisOutput->upperInscription.text));
+   }
    for (unsigned i =  0; i < pAxisOutput->nrInscriptions; i++) {
       grplot_axis_output_positional_inscription_destroy(pAxisOutput->inscriptions + i);
    }
