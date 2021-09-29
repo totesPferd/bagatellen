@@ -7,9 +7,17 @@
 #include "axis_output.h"
 #include "diagram.h"
 
+typedef enum {
+   grplot_matrix_diagram_ok =  0,
+   grplot_matrix_diagram_invalid } grplot_matrix_diagram_status_t;
+
 typedef struct {
    grplot_axis_output_t axis;
    unsigned positionPerPixel; } grplot_matrix_positional_axis_t;
+
+typedef struct {
+   int isValid;
+   grplot_diagram_t diagram; } grplot_matrix_diagram_t;
 
 typedef struct {
    unsigned nrX, nrY;
@@ -19,7 +27,7 @@ typedef struct {
    unsigned originX, originY;
    unsigned xTotal, yTotal;
    grplot_matrix_positional_axis_t *pAxisBuf;
-   grplot_diagram_t *pDiagramBuf;
+   grplot_matrix_diagram_t *pDiagramBuf;
    DATA32 baseColor;
    unsigned nrOutPixel; } grplot_matrix_t;
 
@@ -38,12 +46,24 @@ grplot_matrix_get_positional_axis(
    ,  grplot_matrix_positional_axis_t **
    ,  unsigned );
 
-int
+grplot_matrix_diagram_status_t
 grplot_matrix_get_diagram(
       const grplot_matrix_t *
    ,  grplot_diagram_t **
    ,  unsigned
    ,  unsigned );
+
+void
+grplot_matrix_get_diagram_set_valid(
+      const grplot_matrix_t *pMatrix
+   ,  grplot_diagram_t **ppDiagram
+   ,  unsigned x
+   ,  unsigned y );
+
+void grplot_matrix_set_diagram_invalid(
+      const grplot_matrix_t *pMatrix
+   ,  unsigned x
+   ,  unsigned y );
 
 grplot_axis_output_status_t
 grplot_matrix_x_axis_init(

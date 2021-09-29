@@ -1348,6 +1348,11 @@ grplot_json_matrix_init_diagram(
          grplot_json_printDiagramErrMsg(pLocation, statusCode);
          retval =  1;
       }
+   } else {
+      grplot_matrix_set_diagram_invalid(
+            pMatrix
+         ,  (pLocation->variant).diagramBase.x
+         ,  (pLocation->variant).diagramBase.y );
    }
 
    return retval;

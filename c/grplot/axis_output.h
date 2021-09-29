@@ -15,8 +15,8 @@ typedef enum {
    ,  grplot_axis_output_inscription_buf_exceeded } grplot_axis_output_status_t;
 
 typedef struct {
-   grplot_axis_t axisSpec;
    int isValid;
+   grplot_axis_t axisSpec;
    Imlib_Font inscriptionFont;
    DATA32 inscriptionColor;
    Imlib_Font labelFont;

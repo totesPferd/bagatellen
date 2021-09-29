@@ -54,13 +54,6 @@ getPositionalAxis(
    ,  grplot_matrix_positional_axis_t **
    ,  unsigned );
 
-static void
-getDiagram(
-      const grplot_matrix_t *
-   ,  grplot_diagram_t **
-   ,  unsigned
-   ,  unsigned );
-
 int
 grplot_matrix_init(
       grplot_matrix_t *pMatrix
@@ -80,7 +73,7 @@ grplot_matrix_init(
    pMatrix->nrDiagram =  nrX * nrY;
 
    pMatrix->pAxisBuf =  malloc(sizeof(grplot_matrix_positional_axis_t) * (pMatrix->nrAxis));
-   pMatrix->pDiagramBuf =  malloc(sizeof(grplot_diagram_t) * (pMatrix->nrDiagram));
+   pMatrix->pDiagramBuf =  malloc(sizeof(grplot_matrix_diagram_t) * (pMatrix->nrDiagram));
 
    return retval;
 }
@@ -102,7 +95,7 @@ grplot_matrix_get_positional_axis(
    return retval;
 }
 
-int
+grplot_matrix_diagram_status_t
 grplot_matrix_get_diagram(
       const grplot_matrix_t *pMatrix
    ,  grplot_diagram_t **ppDiagram
@@ -112,11 +105,43 @@ grplot_matrix_get_diagram(
    assert(x < pMatrix->nrX);
    assert(y < pMatrix->nrY);
 
-   int retval =  0;
+   grplot_matrix_diagram_t *pMatrixDiagram =  &((pMatrix->pDiagramBuf)[x + y * (pMatrix->nrX)]);
+   *ppDiagram =  
+         pMatrixDiagram->isValid
+      ?  &(pMatrixDiagram->diagram)
+      :  NULL;
 
-   getDiagram(pMatrix, ppDiagram, x, y);
+   return 
+         pMatrixDiagram->isValid
+      ?  grplot_matrix_diagram_ok
+      :  grplot_matrix_diagram_invalid;
+}
 
-   return retval;
+void
+grplot_matrix_get_diagram_set_valid(
+      const grplot_matrix_t *pMatrix
+   ,  grplot_diagram_t **ppDiagram
+   ,  unsigned x
+   ,  unsigned y ) {
+   assert(pMatrix);
+   assert(x < pMatrix->nrX);
+   assert(y < pMatrix->nrY);
+
+   grplot_matrix_diagram_t *pMatrixDiagram =  &((pMatrix->pDiagramBuf)[x + y * (pMatrix->nrX)]);
+   pMatrixDiagram->isValid =  1;
+   *ppDiagram =  &(pMatrixDiagram->diagram);
+}
+
+void grplot_matrix_set_diagram_invalid(
+      const grplot_matrix_t *pMatrix
+   ,  unsigned x
+   ,  unsigned y ) {
+   assert(pMatrix);
+   assert(x < pMatrix->nrX);
+   assert(y < pMatrix->nrY);
+
+   grplot_matrix_diagram_t *pMatrixDiagram =  &((pMatrix->pDiagramBuf)[x + y * (pMatrix->nrX)]);
+   pMatrixDiagram->isValid =  0;
 }
 
 grplot_axis_output_status_t
@@ -232,7 +257,7 @@ grplot_matrix_diagram_init(
    grplot_matrix_get_positional_axis(pMatrix, grplot_axis_y_axis, &pPositionalYAxis, y);
 
    grplot_diagram_t *pDiagram;
-   getDiagram(pMatrix, &pDiagram, x, y);
+   grplot_matrix_get_diagram_set_valid(pMatrix, &pDiagram, x, y);
 
    return grplot_diagram_init(
          pDiagram
@@ -251,7 +276,7 @@ grplot_matrix_prepare(
    int retval =  0;
 
    for (unsigned i =  0; i < pMatrix->nrDiagram; i++) {
-      grplot_diagram_prepare(&((pMatrix->pDiagramBuf)[i]));
+      grplot_diagram_prepare(&((pMatrix->pDiagramBuf)[i].diagram));
    }
 
    updateAllXLength(pMatrix);
@@ -346,7 +371,10 @@ grplot_matrix_destroy(
       grplot_axis_output_destroy(&((pMatrix->pAxisBuf)[i].axis));
    }
    for (unsigned i =  0; i < pMatrix->nrDiagram; i++) {
-      grplot_diagram_destroy(&((pMatrix->pDiagramBuf)[i]));
+      grplot_matrix_diagram_t *pMatrixDiagram =  &((pMatrix->pDiagramBuf)[i]);
+      if (pMatrixDiagram->isValid) {
+         grplot_diagram_destroy(&(pMatrixDiagram->diagram));
+      }
    }
 
    free(pMatrix->pAxisBuf);
@@ -600,16 +628,4 @@ getPositionalAxis(
       }
 
    }
-}
-
-static void
-getDiagram(
-      const grplot_matrix_t *pMatrix
-   ,  grplot_diagram_t **ppResult
-   ,  unsigned x
-   ,  unsigned y ) {
-   assert(pMatrix);
-   assert(ppResult);
-
-   *ppResult =  &((pMatrix->pDiagramBuf)[x + y * (pMatrix->nrX)]);
 }
