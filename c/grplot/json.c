@@ -1,4 +1,5 @@
 #define _XOPEN_SOURCE
+#include <stdio.h>
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
@@ -1601,20 +1602,23 @@ grplot_json_diagram_data(
               size_t nr;
               json_t *pDiagramJson;
 
+              int isLooping =  1;
               json_array_foreach(pInnerJson, nr, pDiagramJson) {
-                 if (!retval) {
-                    retval =  grplot_json_diagram_data_item(
+                 if (isLooping) {
+                    if (grplot_json_diagram_data_item(
                           pMatrix
                        ,  pDiagramJson
                        ,  &innerLocation
                        ,  &defaultItemOut
-                       ,  &out );
+                       ,  &out )) {
+                       retval =  1;
+                    }
                     innerLocation.variant.diagramBase.x++;
                     if (innerLocation.variant.diagramBase.x >= pMatrix->nrX) {
                        innerLocation.variant.diagramBase.x =  0;
                        innerLocation.variant.diagramBase.y++;
                        if (innerLocation.variant.diagramBase.y >= pMatrix->nrY) {
-                          retval =  1;
+                          isLooping =  0;
                        }
                     }
                  }
@@ -1625,8 +1629,6 @@ grplot_json_diagram_data(
               } else if (nr < pMatrix->nrDiagram) {
                  retval =  1;
                  grplot_json_printErrMsg(&innerLocation, "too few diagrams");
-              } else {
-                 retval =  0;
               }
            }
         } else {
@@ -1634,9 +1636,11 @@ grplot_json_diagram_data(
            grplot_json_printErrMsg(&outerLocation, "items in diagram component must be array");
         }
      } else {
+        retval =  1;
         grplot_json_printErrMsg(&outerLocation, "mandatory diagram component");
      }
    } else {
+      retval =  1;
       grplot_json_printErrMsg(&outerLocation, "diagram component must be json object");
    }
 
