@@ -8,6 +8,16 @@
 
 #include "input.h"
 
+
+static int
+getVal(
+      grplot_axis_val_t *
+   ,  const grplot_axis_t *
+   ,  const char *
+   ,  char **
+   ,  unsigned
+   ,  unsigned );
+
 void
 grplot_input_interpret_line(
       grplot_matrix_t *pMatrix
@@ -62,11 +72,11 @@ grplot_input_interpret_line(
    if (!sptr) {
       isTooFewRecords =  1;
    }
+   if (isTooFewRecords) {
+      errorMode =  1;
+   }
    {
-      grplot_matrix_positional_axis_t *pXAxis, *pYAxis;
       grplot_diagram_t *pDiagram;
-
-      int innerErrorMode =  errorMode;
 
       if (!errorMode) {
          grplot_matrix_diagram_status_t statusCode =  grplot_matrix_get_diagram(
@@ -76,37 +86,33 @@ grplot_input_interpret_line(
             ,  nrYAxis );
          if (statusCode != grplot_matrix_diagram_ok) {
             fprintf(stderr, "#%7l: diagram base invalid.\n", pLineBuf->nr);
-            innerErrorMode =  1;
+            errorMode =  1;
          }
       }
 
-      if (!errorMode) {
-         int statusCode =  grplot_matrix_get_positional_axis(
-               pMatrix
-            ,  grplot_axis_x_axis
-            ,  &pXAxis
-            ,  nrXAxis );
-         if (statusCode) {
-            fprintf(stderr, "#%7l: x axis invalid.\n", pLineBuf->nr);
-            innerErrorMode =  1;
+      unsigned nrD;
+
+      if (!isTooFewRecords) {
+         nrD =  strtol(sptr, &tptr, 10);
+   
+         if (errno) {
+            fprintf(stderr, "#%7l (record #3): %s\n", pLineBuf->nr, strerror(errno));
+            errorMode =  1;
          }
-      }
-
-      if (!errorMode) {
-         int statusCode =  grplot_matrix_get_positional_axis(
-               pMatrix
-            ,  grplot_axis_y_axis
-            ,  &pYAxis
-            ,  nrYAxis );
-         if (statusCode) {
-            fprintf(stderr, "#%7l: y axis invalid.\n", pLineBuf->nr);
-            innerErrorMode =  1;
+   
+         if (!errorMode) {
+            if (nrD > (pDiagram->inputBufMgmt).nrInpBufs) {
+               fprintf(stderr, "#%7l (record #3): larger than max # diagrams defined to %d. \n", pLineBuf->nr, nrXAxis, (pDiagram->inputBufMgmt).nrInpBufs);
+               errorMode =  1;
+            }
          }
+   
+         sptr =  tptr;
       }
-
-      errorMode =  innerErrorMode;
-
-      {
+      if (!sptr) {
+         isTooFewRecords =  1;
+      }
+      if (!isTooFewRecords) {
          double radius;
 
          if (!isTooFewRecords) {
@@ -156,5 +162,55 @@ grplot_input_interpret(
             pMatrix
          ,  &lineBuf );
    }
+
+}
+
+static int
+getVal(
+      grplot_axis_val_t *pVal
+   ,  const grplot_axis_t *pAxis
+   ,  const char *sptr
+   ,  char **pTptr
+   ,  unsigned nr
+   ,  unsigned rec ) {
+   assert(pAxis);
+   assert(pVal);
+   assert(sptr);
+   assert(pTptr);
+
+   int retval =  0;
+
+   switch (pAxis->scaleType) {
+
+      case (grplot_axis_linear):
+      case (grplot_axis_logarithm): {
+         pVal->numeric =  strtol(sptr, pTptr, 10);
+   
+         if (errno) {
+            fprintf(stderr, "#%7l (record #%d): %s\n", nr, rec, strerror(errno));
+            retval =  1;
+         }
+      }
+      break;
+
+      case (grplot_axis_time): {
+         struct tm time;
+         *pTptr =  strptime(sptr, "%Y-%m-%dT%H:%M:%S", &time);
+         if (*pTptr) {
+            pVal->time =  mktime(&time);
+         } else {
+            fprintf(stderr, "#%7l (record #%d): time does not suit spec %%Y-%%m-%%dT%%H:%%M:%%S\n", nr, rec);
+            retval =  1;
+         }
+      }
+      break;
+
+      default: {
+         assert(0);
+      }
+
+   }
+
+   return retval;
 
 }
