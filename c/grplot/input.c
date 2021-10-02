@@ -91,6 +91,8 @@ grplot_input_interpret_line(
       }
 
       unsigned nrD;
+      grplot_axis_val_t valX, valY;
+      double weight, radius;
 
       if (!isTooFewRecords) {
          nrD =  strtol(sptr, &tptr, 10);
@@ -113,20 +115,64 @@ grplot_input_interpret_line(
          isTooFewRecords =  1;
       }
       if (!isTooFewRecords) {
-         double radius;
-
-         if (!isTooFewRecords) {
-            radius =  strtod(sptr, &tptr);
-      
-            if (errno) {
-               fprintf(stderr, "#%7l (record #3): %s\n", pLineBuf->nr, strerror(errno));
-               errorMode =  1;
-            }
-         }
-         if (sptr) {
-            fprintf(stderr, "#%7l: too many records\n", pLineBuf->nr);
+         errorMode =  getVal(
+               &valX
+            ,  &(pDiagram->pXAxis->axisSpec)
+            ,  sptr
+            ,  &tptr
+            ,  pLineBuf->nr
+            ,  4 );
+      }
+      if (!sptr) {
+         isTooFewRecords =  1;
+      }
+      if (!isTooFewRecords) {
+         errorMode =  getVal(
+               &valY
+            ,  &(pDiagram->pYAxis->axisSpec)
+            ,  sptr
+            ,  &tptr
+            ,  pLineBuf->nr
+            ,  5 );
+      }
+      if (!sptr) {
+         isTooFewRecords =  1;
+      }
+      if (!isTooFewRecords) {
+         weight =  strtod(sptr, &tptr);
+   
+         if (errno) {
+            fprintf(stderr, "#%7l (record #6): %s\n", pLineBuf->nr, strerror(errno));
             errorMode =  1;
          }
+   
+         sptr =  tptr;
+      }
+      if (!sptr) {
+         isTooFewRecords =  1;
+      }
+      if (!isTooFewRecords) {
+         radius =  strtod(sptr, &tptr);
+   
+         if (errno) {
+            fprintf(stderr, "#%7l (record #7): %s\n", pLineBuf->nr, strerror(errno));
+            errorMode =  1;
+         }
+      }
+      if (tptr) {
+         fprintf(stderr, "#%7l: too many records\n", pLineBuf->nr);
+         errorMode =  1;
+      }
+      if (isTooFewRecords) {
+         fprintf(stderr, "#%7l: too few records\n", pLineBuf->nr);
+      } else if (!errorMode) {
+         grplot_diagram_plot_point(
+               pDiagram
+            ,  valX
+            ,  valY
+            ,  weight
+            ,  nrD
+            ,  radius );
       }
    }
 }
