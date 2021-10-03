@@ -123,6 +123,8 @@ grplot_input_interpret_line(
             ,  &tptr
             ,  pLineBuf->nr
             ,  4 );
+
+         sptr =  tptr;
       }
       if (!sptr) {
          isTooFewRecords =  1;
@@ -135,6 +137,8 @@ grplot_input_interpret_line(
             ,  &tptr
             ,  pLineBuf->nr
             ,  5 );
+
+         sptr =  tptr;
       }
       if (!sptr) {
          isTooFewRecords =  1;
@@ -227,7 +231,7 @@ getVal(
 
       case (grplot_axis_linear):
       case (grplot_axis_logarithm): {
-         pVal->numeric =  strtol(sptr, pTptr, 10);
+         pVal->numeric =  strtod(sptr, pTptr);
    
          if (errno) {
             fprintf(stderr, "#%7ld (record #%d): %s\n", nr, rec, strerror(errno));
