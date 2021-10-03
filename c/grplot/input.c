@@ -32,17 +32,18 @@ grplot_input_interpret_line(
    int isTooFewRecords =  0;
    unsigned nrXAxis, nrYAxis;
 
+   errno =  0;
    {
       nrXAxis =  strtol(sptr, &tptr, 10);
 
       if (errno) {
-         fprintf(stderr, "#%7l (record #1): %s\n", pLineBuf->nr, strerror(errno));
+         fprintf(stderr, "#%7ld (record #1): %s\n", pLineBuf->nr, strerror(errno));
          errorMode =  1;
       }
 
       if (!errorMode) {
          if (nrXAxis > pMatrix->nrX) {
-            fprintf(stderr, "#%7l (record #1): larger than max # x axis defined to %d. \n", pLineBuf->nr, nrXAxis, pMatrix->nrX);
+            fprintf(stderr, "#%7ld (record #1): larger than max # x axis defined to %d. \n", pLineBuf->nr, nrXAxis, pMatrix->nrX);
             errorMode =  1;
          }
       }
@@ -56,13 +57,13 @@ grplot_input_interpret_line(
       nrYAxis =  strtol(sptr, &tptr, 10);
 
       if (errno) {
-         fprintf(stderr, "#%7l (record #2): %s\n", pLineBuf->nr, strerror(errno));
+         fprintf(stderr, "#%7ld (record #2): %s\n", pLineBuf->nr, strerror(errno));
          errorMode =  1;
       }
 
       if (!errorMode) {
          if (nrYAxis > pMatrix->nrY) {
-            fprintf(stderr, "#%7l (record #2): larger than max # y axis defined to %d. \n", pLineBuf->nr, nrYAxis, pMatrix->nrY);
+            fprintf(stderr, "#%7ld (record #2): larger than max # y axis defined to %d. \n", pLineBuf->nr, nrYAxis, pMatrix->nrY);
             errorMode =  1;
          }
       }
@@ -85,7 +86,7 @@ grplot_input_interpret_line(
             ,  nrXAxis
             ,  nrYAxis );
          if (statusCode != grplot_matrix_diagram_ok) {
-            fprintf(stderr, "#%7l: diagram base invalid.\n", pLineBuf->nr);
+            fprintf(stderr, "#%7ld: diagram base invalid.\n", pLineBuf->nr);
             errorMode =  1;
          }
       }
@@ -98,13 +99,13 @@ grplot_input_interpret_line(
          nrD =  strtol(sptr, &tptr, 10);
    
          if (errno) {
-            fprintf(stderr, "#%7l (record #3): %s\n", pLineBuf->nr, strerror(errno));
+            fprintf(stderr, "#%7ld (record #3): %s\n", pLineBuf->nr, strerror(errno));
             errorMode =  1;
          }
    
          if (!errorMode) {
             if (nrD > (pDiagram->inputBufMgmt).nrInpBufs) {
-               fprintf(stderr, "#%7l (record #3): larger than max # diagrams defined to %d. \n", pLineBuf->nr, nrXAxis, (pDiagram->inputBufMgmt).nrInpBufs);
+               fprintf(stderr, "#%7ld (record #3): larger than max # diagrams defined to %d. \n", pLineBuf->nr, nrXAxis, (pDiagram->inputBufMgmt).nrInpBufs);
                errorMode =  1;
             }
          }
@@ -142,7 +143,7 @@ grplot_input_interpret_line(
          weight =  strtod(sptr, &tptr);
    
          if (errno) {
-            fprintf(stderr, "#%7l (record #6): %s\n", pLineBuf->nr, strerror(errno));
+            fprintf(stderr, "#%7ld (record #6): %s\n", pLineBuf->nr, strerror(errno));
             errorMode =  1;
          }
    
@@ -155,16 +156,12 @@ grplot_input_interpret_line(
          radius =  strtod(sptr, &tptr);
    
          if (errno) {
-            fprintf(stderr, "#%7l (record #7): %s\n", pLineBuf->nr, strerror(errno));
+            fprintf(stderr, "#%7ld (record #7): %s\n", pLineBuf->nr, strerror(errno));
             errorMode =  1;
          }
       }
-      if (tptr) {
-         fprintf(stderr, "#%7l: too many records\n", pLineBuf->nr);
-         errorMode =  1;
-      }
       if (isTooFewRecords) {
-         fprintf(stderr, "#%7l: too few records\n", pLineBuf->nr);
+         fprintf(stderr, "#%7ld: too few records\n", pLineBuf->nr);
       } else if (!errorMode) {
          grplot_diagram_plot_point(
                pDiagram
@@ -233,7 +230,7 @@ getVal(
          pVal->numeric =  strtol(sptr, pTptr, 10);
    
          if (errno) {
-            fprintf(stderr, "#%7l (record #%d): %s\n", nr, rec, strerror(errno));
+            fprintf(stderr, "#%7ld (record #%d): %s\n", nr, rec, strerror(errno));
             retval =  1;
          }
       }
@@ -245,7 +242,7 @@ getVal(
          if (*pTptr) {
             pVal->time =  mktime(&time);
          } else {
-            fprintf(stderr, "#%7l (record #%d): time does not suit spec %%Y-%%m-%%dT%%H:%%M:%%S\n", nr, rec);
+            fprintf(stderr, "#%7ld (record #%d): time does not suit spec %%Y-%%m-%%dT%%H:%%M:%%S\n", nr, rec);
             retval =  1;
          }
       }
