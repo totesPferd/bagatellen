@@ -64,8 +64,9 @@ grplot_input_buf_get_max(const grplot_input_buf_t *p_input_buf, double *p_result
    double *p_buf_ptr =  p_input_buf->buf;
 
    for (unsigned long i =  0; i < p_input_buf->bufLen; i++) {
-      if (isnan(*p_buf_ptr)) {
-      } else if (retval) {
+      assert(!isnan(*p_buf_ptr));
+
+      if (retval) {
          *p_result =  *p_buf_ptr;
          retval =  grplot_input_buf_ok;
       } else if (*p_result < *p_buf_ptr) {
@@ -87,8 +88,9 @@ grplot_input_buf_get_min(const grplot_input_buf_t *p_input_buf, double *p_result
    double *p_buf_ptr =  p_input_buf->buf;
 
    for (unsigned long i =  0; i < p_input_buf->bufLen; i++) {
-      if (isnan(*p_buf_ptr)) {
-      } else if (retval) {
+      assert(!isnan(*p_buf_ptr));
+
+      if (retval) {
          *p_result =  *p_buf_ptr;
          retval =  grplot_input_buf_ok;
       } else if (*p_result > *p_buf_ptr) {
@@ -110,6 +112,7 @@ grplot_input_buf_normalize(grplot_input_buf_t *p_input_buf, double minVal, doubl
 
    if (diffVal > 0.0) {
       for (unsigned long i =  0; i < p_input_buf->bufLen; i++) {
+         assert(!isnan(p_input_buf->buf[i]));
          assert(p_input_buf->buf[i] >= minVal - 1.0E-12);
          assert(p_input_buf->buf[i] <= maxVal + 1.0E-12);
    
