@@ -1,0 +1,110 @@
+{
+    "axis": {
+        "x": {
+            "items": [
+                {
+                    "color": {
+                        "r": 232,
+                        "g": 216,
+                        "b": 200,
+                        "a": 255
+                    },
+                    "inscription": {
+                        "color": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0,
+                            "a": 255
+                        },
+                        "font": "LiberationMono-Regular/7"
+                    },
+                    "label": {
+                        "color": {
+                            "r": 255,
+                            "g": 0,
+                            "b": 0,
+                            "a": 255
+                        },
+                        "font": "LiberationMono-Regular/17"
+                    },
+                    "text": "x",
+                    "nr": 512
+                }
+            ]
+        },
+        "y": {
+            "items": [
+                {
+                    "color": {
+                        "r": 232,
+                        "g": 216,
+                        "b": 200,
+                        "a": 255
+                    },
+                    "inscription": {
+                        "color": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0,
+                            "a": 255
+                        },
+                        "font": "LiberationMono-Regular/7"
+                    },
+                    "label": {
+                        "color": {
+                            "r": 255,
+                            "g": 0,
+                            "b": 0,
+                            "a": 255
+                        },
+                        "font": "LiberationMono-Regular/17"
+                    },
+                    "text": "y",
+                    "nr": 512
+                }
+            ]
+        }
+    },
+    "diagram": {
+        "items": [
+            {
+                "diagramColor": {
+                    "r": 255,
+                    "g": 18,
+                    "b": 255,
+                    "a": 255
+                },
+                "legendFont": "LiberationMono-Regular/23",
+                "items": [
+                    {
+                        "color": {
+                            "r": 48,
+                            "g": 48,
+                            "b": 255,
+                            "a": 255
+                        },
+                        "text": "lineA"
+                    },
+                    {
+                        "color": {
+                            "r": 48,
+                            "g": 48,
+                            "b": 255,
+                            "a": 255
+                        },
+                        "text": "lineB"
+                    },
+                    {
+                        "color": {
+                            "r": 255,
+                            "g": 0,
+                            "b": 18,
+                            "a": 238
+                        },
+                        "text": "lineC"
+                    }
+                ]
+            }
+        ]
+    }
+}
