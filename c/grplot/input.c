@@ -163,6 +163,11 @@ grplot_input_interpret_line(
             fprintf(stderr, "#%7ld (record #7): %s\n", pLineBuf->nr, strerror(errno));
             errorMode =  1;
          }
+
+         if (!errorMode && !(radius > 0.0)) {
+            fprintf(stderr, "#%7ld (record #7): radius must be greater than 0.0\n", pLineBuf->nr);
+            errorMode =  1;
+         }
       }
       if (isTooFewRecords) {
          fprintf(stderr, "#%7ld: too few records\n", pLineBuf->nr);
