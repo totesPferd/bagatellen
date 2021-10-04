@@ -210,9 +210,11 @@ grplot_input_interpret(
          }
       }
       lineBuf.nr++;
-      grplot_input_interpret_line(
-            pMatrix
-         ,  &lineBuf );
+      if (strlen(lineBuf.buf)) {
+         grplot_input_interpret_line(
+               pMatrix
+            ,  &lineBuf );
+      }
    }
 
 }
