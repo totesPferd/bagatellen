@@ -210,7 +210,7 @@ grplot_input_interpret(
          }
       }
       lineBuf.nr++;
-      if (strlen(lineBuf.buf)) {
+      if (*(lineBuf.buf)) {
          grplot_input_interpret_line(
                pMatrix
             ,  &lineBuf );
