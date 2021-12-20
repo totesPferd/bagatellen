@@ -68,7 +68,7 @@ class FeedChannel:
       fp =  feedparser.parse(self.url)
       ids =  set()
       for entry in fp["entries"]:
-         if self.decide_according_to_authors(entry):
+         if "summary" in entry and self.decide_according_to_authors(entry):
             id_key =  dctbnbc.get_authors.get_id_key(entry)
             id_val =  entry[id_key]
             if id_val not in self.ids:
