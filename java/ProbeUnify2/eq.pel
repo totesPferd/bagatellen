@@ -1,0 +1,20 @@
+[modules]
+
+[sorts]
+   S.
+
+[predicates]
+   eq: S S.
+
+[operations]
+
+[variables]
+
+[terms]
+
+[literals]
+
+[axioms]
+   refl:   ==> eq(?x, ?x).
+   symm:   eq(?y, ?x) ==> eq(?x, ?y).
+   trans:  eq(?x, ?y); eq(?y, ?z) ==> eq(?x, ?z).
