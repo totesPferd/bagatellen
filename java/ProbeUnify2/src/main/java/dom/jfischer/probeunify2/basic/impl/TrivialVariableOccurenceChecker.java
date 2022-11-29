@@ -20,5 +20,5 @@ public class TrivialVariableOccurenceChecker<NonVariableExtension extends IExten
     public boolean containsVariable(NonVariableExtension object, IVariable<NonVariableExtension> variable) {
         return false;
     }
-    
+
 }

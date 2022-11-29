@@ -28,19 +28,16 @@ public class BaseUnification<
 
         if (!retval) {
             {
-                Optional<INonVariable<NonVariableExtension>> optNonVariable = arg1.nonVariable();
+                Optional<INonVariable<NonVariableExtension>> optNonVariable = dereferencedArg1.nonVariable();
                 if (optNonVariable.isPresent()) {
-                    retval = arg2.equateNonVariable(optNonVariable.get());
+                    retval = dereferencedArg2.equateNonVariable(optNonVariable.get());
                 }
             }
             {
-                Optional<IVariable<NonVariableExtension>> optVariable1 = arg1.variable();
+                Optional<IVariable<NonVariableExtension>> optVariable1 = dereferencedArg1.variable();
                 if (optVariable1.isPresent()) {
                     IVariable<NonVariableExtension> variable1 = optVariable1.get();
-                    Optional<IBaseExpression<NonVariableExtension>> optValue1 = variable1.value();
-                    if (optValue1.isPresent()) {
-                        retval = this.unify(optValue1.get(), arg2);
-                    } else if (dereferencedArg2.containsVariable(variable1)) {
+                    if (dereferencedArg2.containsVariable(variable1)) {
                         retval = false;
                     } else {
                         retval = true;
@@ -50,8 +47,8 @@ public class BaseUnification<
             }
 
             if (!retval) {
-                arg2.reset();
-                arg1.reset();
+                dereferencedArg2.reset();
+                dereferencedArg1.reset();
             }
         }
 

@@ -4,17 +4,22 @@
  */
 package dom.jfischer.probeunify2;
 
+import dom.jfischer.probeunify2.basic.IBaseExpression;
 import dom.jfischer.probeunify2.basic.ICopy;
+import dom.jfischer.probeunify2.basic.IExpression;
 import dom.jfischer.probeunify2.module.IModule;
-import dom.jfischer.probeunify2.module.INamedClause;
+import dom.jfischer.probeunify2.pel.INamedClause;
 import dom.jfischer.probeunify2.module.impl.Module;
 import dom.jfischer.probeunify2.module.impl.ModuleHelper;
-import dom.jfischer.probeunify2.module.impl.NamedClauseCopy;
+import dom.jfischer.probeunify2.pel.impl.NamedClauseCopy;
+import dom.jfischer.probeunify2.pel.ILiteralNonVariableExtension;
 import dom.jfischer.probeunify2.pel.IPELLeafCollector;
+import dom.jfischer.probeunify2.pel.impl.LiteralCopy;
 import dom.jfischer.probeunify2.pel.impl.PELLeafCollector;
 import dom.jfischer.probeunify2.pprint.IBackReference;
 import dom.jfischer.probeunify2.pprint.impl.BackReference;
-import dom.jfischer.probeunify2.proof.IGoalExpression;
+import dom.jfischer.probeunify2.proof.IGoalExtension;
+import dom.jfischer.probeunify2.proof.IGoalNonVariableExtension;
 import dom.jfischer.probeunify2.proof.impl.ProofHelper;
 
 /**
@@ -24,12 +29,17 @@ import dom.jfischer.probeunify2.proof.impl.ProofHelper;
 public class Cmdline implements ICmdline {
 
     private final IModule module = new Module();
-    private final ICopy<INamedClause> namedClauseCopier
-            = new NamedClauseCopy();
+    private final ICopy<INamedClause> namedClauseCopier;
 
     private INamedClause conjecture;
     private String moduleName;
     private IState state = null;
+
+    public Cmdline() {
+        ICopy<IBaseExpression<ILiteralNonVariableExtension>> goalCopier
+                = new LiteralCopy();
+        this.namedClauseCopier = new NamedClauseCopy(goalCopier);
+    }
 
     @Override
     public IModule getModule() {
@@ -41,7 +51,7 @@ public class Cmdline implements ICmdline {
         if (this.state == null) {
             IBackReference backReference = new BackReference();
             ModuleHelper.getBackReference(this.module, backReference, null);
-            IGoalExpression goal
+            IExpression<IGoalExtension, IGoalNonVariableExtension> goal
                     = ProofHelper.createGoal(this.conjecture.getClause().getConclusion());
             IPELLeafCollector leafCollector = new PELLeafCollector();
             this.namedClauseCopier.collectLeafs(leafCollector, this.conjecture);

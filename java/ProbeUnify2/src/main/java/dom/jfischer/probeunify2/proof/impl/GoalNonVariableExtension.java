@@ -5,7 +5,6 @@
 package dom.jfischer.probeunify2.proof.impl;
 
 import dom.jfischer.probeunify2.basic.IExpression;
-import dom.jfischer.probeunify2.proof.IGoalExpression;
 import dom.jfischer.probeunify2.proof.IGoalExtension;
 import dom.jfischer.probeunify2.proof.IGoalNonVariableExtension;
 import java.util.List;
@@ -17,14 +16,14 @@ import java.util.List;
 public class GoalNonVariableExtension implements
         IGoalNonVariableExtension {
 
-    private final List<IGoalExpression> subGoals;
+    private final List<IExpression<IGoalExtension, IGoalNonVariableExtension>> subGoals;
 
-    public GoalNonVariableExtension(List<IGoalExpression> subGoals) {
+    public GoalNonVariableExtension(List<IExpression<IGoalExtension, IGoalNonVariableExtension>> subGoals) {
         this.subGoals = subGoals;
     }
 
     @Override
-    public List<IGoalExpression> getSubGoals() {
+    public List<IExpression<IGoalExtension, IGoalNonVariableExtension>> getSubGoals() {
         return this.subGoals;
     }
 
@@ -40,11 +39,6 @@ public class GoalNonVariableExtension implements
         this.subGoals
                 .stream()
                 .forEach(IExpression<IGoalExtension, IGoalNonVariableExtension>::reset);
-    }
-
-    @Override
-    public String toString() {
-        return "GoalNonVariableExtension{" + "subGoals=" + subGoals + '}';
     }
 
 }

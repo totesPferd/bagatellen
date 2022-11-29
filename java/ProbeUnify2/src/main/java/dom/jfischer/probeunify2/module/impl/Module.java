@@ -10,9 +10,9 @@ import dom.jfischer.probeunify2.exception.QualificatorException;
 import java.util.Map;
 import java.util.Map.Entry;
 import dom.jfischer.probeunify2.module.IModule;
-import dom.jfischer.probeunify2.module.INamedClause;
-import dom.jfischer.probeunify2.module.INamedLiteral;
-import dom.jfischer.probeunify2.module.INamedTerm;
+import dom.jfischer.probeunify2.pel.INamedClause;
+import dom.jfischer.probeunify2.pel.INamedLiteral;
+import dom.jfischer.probeunify2.pel.INamedTerm;
 import dom.jfischer.probeunify2.pel.IOperationExpression;
 import dom.jfischer.probeunify2.pel.IPredicateExpression;
 import java.util.List;
@@ -25,7 +25,8 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class Module implements IModule {
 
-    private final Map<String, INamedClause> axioms = new ConcurrentHashMap<>();
+    private final Map<String, INamedClause> axioms
+            = new ConcurrentHashMap<>();
     private final Map<String, IModule> imps = new ConcurrentHashMap<>();
     private final Map<String, INamedLiteral> literals = new ConcurrentHashMap<>();
     private final Map<String, IOperationExpression> operations = new ConcurrentHashMap<>();
@@ -118,5 +119,5 @@ public class Module implements IModule {
     public String toString() {
         return "Module{" + "axioms=" + axioms + ", imps=" + imps + ", literals=" + literals + ", operations=" + operations + ", predicates=" + predicates + ", sorts=" + sorts + ", terms=" + terms + '}';
     }
-    
+
 }

@@ -6,7 +6,6 @@ package dom.jfischer.probeunify2.proof.impl;
 
 import dom.jfischer.probeunify2.basic.IBaseExpression;
 import dom.jfischer.probeunify2.basic.IUnification;
-import dom.jfischer.probeunify2.basic.impl.BaseUnification;
 import dom.jfischer.probeunify2.pel.ILiteralNonVariableExtension;
 import dom.jfischer.probeunify2.proof.IGoalExtension;
 
@@ -19,8 +18,8 @@ public class GoalExtensionUnification implements
 
     private final IUnification<IBaseExpression<ILiteralNonVariableExtension>> unification;
 
-    public GoalExtensionUnification() {
-        this.unification = new BaseUnification<>();
+    public GoalExtensionUnification(IUnification<IBaseExpression<ILiteralNonVariableExtension>> unification) {
+        this.unification = unification;
     }
 
     @Override

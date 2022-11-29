@@ -9,7 +9,6 @@ import dom.jfischer.probeunify2.basic.impl.LeafCollector;
 import dom.jfischer.probeunify2.pel.ILiteralNonVariableExtension;
 import dom.jfischer.probeunify2.pel.IPELLeafCollector;
 import dom.jfischer.probeunify2.pel.ITermNonVariableExtension;
-import dom.jfischer.probeunify2.proof.IGoalNonVariableExtension;
 
 /**
  *
@@ -20,8 +19,6 @@ public class PELLeafCollector implements IPELLeafCollector {
     private final ILeafCollector<ITermNonVariableExtension> termLeafCollector
             = new LeafCollector<>(this);
     private final ILeafCollector<ILiteralNonVariableExtension> literalLeafCollector
-            = new LeafCollector<>(this);
-    private final ILeafCollector<IGoalNonVariableExtension> goalLeafCollector
             = new LeafCollector<>(this);
 
     @Override
@@ -35,15 +32,9 @@ public class PELLeafCollector implements IPELLeafCollector {
     }
 
     @Override
-    public ILeafCollector<IGoalNonVariableExtension> getGoalLeafCollector() {
-        return this.goalLeafCollector;
-    }
-
-    @Override
     public void undo() {
         this.termLeafCollector.undo();
         this.literalLeafCollector.undo();
-        this.goalLeafCollector.undo();
     }
 
 }

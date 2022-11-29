@@ -5,14 +5,14 @@
 package dom.jfischer.probeunify2.pprint.impl;
 
 import dom.jfischer.probeunify2.basic.IBaseExpression;
-import dom.jfischer.probeunify2.module.INamedClause;
-import dom.jfischer.probeunify2.module.INamedLiteral;
-import dom.jfischer.probeunify2.module.impl.NamedLiteral;
+import dom.jfischer.probeunify2.pel.INamedClause;
+import dom.jfischer.probeunify2.pel.INamedLiteral;
+import dom.jfischer.probeunify2.pel.impl.NamedLiteral;
 import dom.jfischer.probeunify2.pel.ILiteralNonVariableExtension;
+import dom.jfischer.probeunify2.pel.IPELVariableContext;
 import dom.jfischer.probeunify2.pprint.IBackReference;
 import dom.jfischer.probeunify2.pprint.IConstructionPPrint;
 import dom.jfischer.probeunify2.pprint.IPPrintBase;
-import dom.jfischer.probeunify2.pprint.ITermVariableContext;
 import dom.jfischer.probeunify2.proof.IClause;
 import java.util.Collections;
 import java.util.List;
@@ -35,16 +35,17 @@ public class ClauseConstructionPPrint implements IConstructionPPrint {
     @Override
     public String getSingleLine() {
         IClause clause = this.namedClause.getClause();
-        ITermVariableContext termVariableContext = this.namedClause.getTermVariableContext();
+        IPELVariableContext pelVariableContext
+                = this.namedClause.getPelVariableContext();
         IBaseExpression<ILiteralNonVariableExtension> conclusion = clause.getConclusion();
         List<IBaseExpression<ILiteralNonVariableExtension>> premises = clause.getPremises();
-        INamedLiteral namedConclusion = new NamedLiteral(conclusion, termVariableContext);
+        INamedLiteral namedConclusion = new NamedLiteral(conclusion, pelVariableContext);
         IConstructionPPrint conclusionConstructionPPrint
                 = new LiteralConstructionPPrint(this.backRef, namedConclusion);
         List<String> premiseStringList
                 = Collections.synchronizedList(premises
                         .parallelStream()
-                        .map(premise -> new NamedLiteral(premise, termVariableContext))
+                        .map(premise -> new NamedLiteral(premise, pelVariableContext))
                         .map(npremise -> new LiteralConstructionPPrint(this.backRef, npremise))
                         .map(pc -> pc.getSingleLine())
                         .collect(Collectors.toList()));
@@ -55,16 +56,17 @@ public class ClauseConstructionPPrint implements IConstructionPPrint {
     @Override
     public void pprintMultiLine(IPPrintBase pprintBase) {
         IClause clause = this.namedClause.getClause();
-        ITermVariableContext termVariableContext = this.namedClause.getTermVariableContext();
+        IPELVariableContext pelVariableContext
+                = this.namedClause.getPelVariableContext();
         IBaseExpression<ILiteralNonVariableExtension> conclusion = clause.getConclusion();
         List<IBaseExpression<ILiteralNonVariableExtension>> premises = clause.getPremises();
-        INamedLiteral namedConclusion = new NamedLiteral(conclusion, termVariableContext);
+        INamedLiteral namedConclusion = new NamedLiteral(conclusion, pelVariableContext);
         IConstructionPPrint conclusionConstructionPPrint
                 = new LiteralConstructionPPrint(this.backRef, namedConclusion);
         List<IConstructionPPrint> premiseConstructionPPrintList
                 = Collections.synchronizedList(premises
                         .parallelStream()
-                        .map(premise -> new NamedLiteral(premise, termVariableContext))
+                        .map(premise -> new NamedLiteral(premise, pelVariableContext))
                         .map(npremise -> new LiteralConstructionPPrint(this.backRef, npremise))
                         .collect(Collectors.toList()));
         ListConstructionPPrint premisesConstructionPPrint

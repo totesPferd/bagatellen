@@ -49,5 +49,5 @@ public class OperationExpression implements IOperationExpression {
     public String toString() {
         return "OperationExpression{" + "extension=" + extension + '}';
     }
-    
+
 }

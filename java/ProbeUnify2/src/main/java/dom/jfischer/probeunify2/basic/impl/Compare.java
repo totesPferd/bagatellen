@@ -7,8 +7,7 @@ package dom.jfischer.probeunify2.basic.impl;
 import dom.jfischer.probeunify2.basic.CompareResult;
 import dom.jfischer.probeunify2.basic.IBaseExpression;
 import dom.jfischer.probeunify2.basic.ICompare;
-import dom.jfischer.probeunify2.basic.ILeafCollector;
-import dom.jfischer.probeunify2.basic.ITracker;
+import dom.jfischer.probeunify2.basic.ICopy;
 import dom.jfischer.probeunify2.basic.IUnification;
 import dom.jfischer.probeunify2.pel.ILiteralNonVariableExtension;
 import dom.jfischer.probeunify2.pel.IPELLeafCollector;
@@ -27,8 +26,13 @@ import java.util.function.Function;
  */
 public class Compare<U> implements ICompare<U> {
 
-    private final IUnification<IBaseExpression<ILiteralNonVariableExtension>> unification
-            = new BaseUnification<>();
+    private final ICopy<IBaseExpression<ILiteralNonVariableExtension>> copier;
+    private final IUnification<IBaseExpression<ILiteralNonVariableExtension>> unification;
+
+    public Compare(ICopy<IBaseExpression<ILiteralNonVariableExtension>> copier, IUnification<IBaseExpression<ILiteralNonVariableExtension>> unification) {
+        this.copier = copier;
+        this.unification = unification;
+    }
 
     @Override
     public CompareResult compare(
@@ -40,24 +44,18 @@ public class Compare<U> implements ICompare<U> {
         boolean unifyResult1 = this.unification.unify(arg1, cmp);
         if (unifyResult1) {
             IPELTracker pelTracker1 = new PELTracker();
-            ITracker<ILiteralNonVariableExtension> literalTracker1 = pelTracker1.getLiteralTracker();
-            IBaseExpression<ILiteralNonVariableExtension> cmpCopy1 = cmp.copy(literalTracker1);
+            IBaseExpression<ILiteralNonVariableExtension> cmpCopy1 = this.copier.copy(pelTracker1, cmp);
             cmp.reset();
             IPELLeafCollector leafCollector1 = new PELLeafCollector();
-            ILeafCollector<ILiteralNonVariableExtension> literalLeafCollector1
-                    = leafCollector1.getLiteralLeafCollector();
-            cmpCopy1.collectLeafs(literalLeafCollector1);
+            this.copier.collectLeafs(leafCollector1, cmpCopy1);
 
             boolean unifyResult2 = this.unification.unify(arg2, cmp);
             if (unifyResult2) {
                 IPELTracker pelTracker2 = new PELTracker();
-                ITracker<ILiteralNonVariableExtension> literalTracker2 = pelTracker2.getLiteralTracker();
-                IBaseExpression<ILiteralNonVariableExtension> cmpCopy2 = cmp.copy(literalTracker2);
+                IBaseExpression<ILiteralNonVariableExtension> cmpCopy2 = this.copier.copy(pelTracker2, cmp);
                 cmp.reset();
                 IPELLeafCollector leafCollector2 = new PELLeafCollector();
-                ILeafCollector<ILiteralNonVariableExtension> literalLeafCollector2
-                        = leafCollector2.getLiteralLeafCollector();
-                cmpCopy2.collectLeafs(literalLeafCollector2);
+                this.copier.collectLeafs(leafCollector2, cmpCopy2);
 
                 boolean unifyResult = this.unification.unify(cmpCopy1, cmpCopy2);
                 if (unifyResult) {

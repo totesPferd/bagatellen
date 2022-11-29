@@ -4,6 +4,9 @@
  */
 package dom.jfischer.probeunify2.module;
 
+import dom.jfischer.probeunify2.pel.INamedTerm;
+import dom.jfischer.probeunify2.pel.INamedLiteral;
+import dom.jfischer.probeunify2.pel.INamedClause;
 import dom.jfischer.probeunify2.basic.IBaseExpression;
 import dom.jfischer.probeunify2.basic.IExtension;
 import dom.jfischer.probeunify2.basic.ITrivialExtension;

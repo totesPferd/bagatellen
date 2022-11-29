@@ -19,6 +19,10 @@ public interface IVariable<
 
     Optional<IBaseExpression<NonVariableExtension>> value();
 
+    /*
+     * this.value() should be Optional.empty();
+     * value should be value.isDereferenced();
+     */
     void setValue(IBaseExpression<NonVariableExtension> value);
 
 }

@@ -6,20 +6,23 @@ package dom.jfischer.probeunify2.pprint.impl;
 
 import dom.jfischer.probeunify2.basic.IBaseExpression;
 import dom.jfischer.probeunify2.basic.INonVariable;
-import dom.jfischer.probeunify2.module.INamedLiteral;
-import dom.jfischer.probeunify2.module.impl.NamedTerm;
+import dom.jfischer.probeunify2.basic.IVariable;
+import dom.jfischer.probeunify2.pel.INamedLiteral;
+import dom.jfischer.probeunify2.pel.impl.NamedTerm;
 import dom.jfischer.probeunify2.pel.ILiteralNonVariableExtension;
+import dom.jfischer.probeunify2.pel.IPELVariableContext;
 import dom.jfischer.probeunify2.pel.IPredicateExpression;
+import dom.jfischer.probeunify2.pel.ITermExtension;
 import dom.jfischer.probeunify2.pel.ITermNonVariableExtension;
 import dom.jfischer.probeunify2.pprint.IBackReference;
 import dom.jfischer.probeunify2.pprint.IConstructionPPrint;
 import dom.jfischer.probeunify2.pprint.IPPrintBase;
-import dom.jfischer.probeunify2.pprint.ITermVariableContext;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import dom.jfischer.probeunify2.basic.IVariableContext;
 
 /**
  *
@@ -49,7 +52,7 @@ public class LiteralConstructionPPrint implements IConstructionPPrint {
         IConstructionPPrint retval = null;
 
         IBaseExpression<ILiteralNonVariableExtension> literalBaseExpression
-                = this.literal.getLiteral();
+                = this.literal.getLiteral().dereference();
         {
             Map<IBaseExpression<ILiteralNonVariableExtension>, String> literalRef = this.backRef.getLiteralRef();
             if (literalRef.containsKey(literalBaseExpression)) {
@@ -58,8 +61,10 @@ public class LiteralConstructionPPrint implements IConstructionPPrint {
         }
 
         if (retval == null) {
-            ITermVariableContext termVariableContext
-                    = this.literal.getTermVariableContext();
+            IPELVariableContext pelVariableContext
+                    = this.literal.getPelVariableContext();
+            IVariableContext<ITermExtension, ITermNonVariableExtension> termVariableContext
+                    = pelVariableContext.getTermVariableContext();
             {
                 Optional<INonVariable<ILiteralNonVariableExtension>> optLiteralNonVariable
                         = literalBaseExpression.nonVariable();
@@ -82,6 +87,18 @@ public class LiteralConstructionPPrint implements IConstructionPPrint {
                     ListConstructionPPrint argumentsConstructionPPrint
                             = new ListConstructionPPrint(",", argumentConstructionPPrintList);
                     retval = new ApplicationConstructionPPrint(predicateString, argumentsConstructionPPrint);
+                }
+            }
+            {
+                Optional<IVariable<ILiteralNonVariableExtension>> optLiteralVariable
+                        = literalBaseExpression.variable();
+                if (optLiteralVariable.isPresent()) {
+                    IVariable<ILiteralNonVariableExtension> literalVariable
+                            = optLiteralVariable.get();
+                    retval
+                            = new VariableConstructionPPrint<>(
+                                    pelVariableContext.getLiteralVariableContext(),
+                                    literalVariable);
                 }
             }
         }

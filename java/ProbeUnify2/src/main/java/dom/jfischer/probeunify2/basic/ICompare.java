@@ -14,15 +14,15 @@ import java.util.function.Function;
  * @param <U>
  */
 public interface ICompare<U> {
-    
+
     CompareResult compare(
             IBaseExpression<ILiteralNonVariableExtension> arg1,
             IBaseExpression<ILiteralNonVariableExtension> arg2,
             IBaseExpression<ILiteralNonVariableExtension> cmp);
-    
+
     Set<U> getMaximalSet(
             Function<U, IBaseExpression<ILiteralNonVariableExtension>> f,
             Set<U> candidates,
             IBaseExpression<ILiteralNonVariableExtension> cmp);
-    
+
 }

@@ -4,6 +4,9 @@
  */
 package dom.jfischer.probeunify2.module.impl;
 
+import dom.jfischer.probeunify2.pel.impl.NamedTermUnification;
+import dom.jfischer.probeunify2.pel.impl.NamedLiteralUnification;
+import dom.jfischer.probeunify2.pel.impl.NamedClauseUnification;
 import dom.jfischer.probeunify2.basic.IBaseExpression;
 import dom.jfischer.probeunify2.basic.ITrivialExtension;
 import dom.jfischer.probeunify2.basic.IUnification;
@@ -11,9 +14,10 @@ import dom.jfischer.probeunify2.basic.impl.BaseUnification;
 import dom.jfischer.probeunify2.basic.impl.DictUnification;
 import java.util.Map;
 import dom.jfischer.probeunify2.module.IModule;
-import dom.jfischer.probeunify2.module.INamedClause;
-import dom.jfischer.probeunify2.module.INamedLiteral;
-import dom.jfischer.probeunify2.module.INamedTerm;
+import dom.jfischer.probeunify2.pel.INamedClause;
+import dom.jfischer.probeunify2.pel.INamedLiteral;
+import dom.jfischer.probeunify2.pel.INamedTerm;
+import dom.jfischer.probeunify2.pel.ILiteralNonVariableExtension;
 import dom.jfischer.probeunify2.pel.IOperationExpression;
 import dom.jfischer.probeunify2.pel.IPredicateExpression;
 import dom.jfischer.probeunify2.pel.impl.OperationExpressionUnification;
@@ -35,7 +39,10 @@ public class ModuleUnification implements IUnification<IModule> {
 
     public ModuleUnification() {
         {
-            IUnification<INamedClause> axiomUnification = new NamedClauseUnification();
+            IUnification<IBaseExpression<ILiteralNonVariableExtension>> goalUnification
+                    = new BaseUnification<>();
+            IUnification<INamedClause> axiomUnification
+                    = new NamedClauseUnification(goalUnification);
             this.axiomsUnification = new DictUnification<>(axiomUnification);
         }
         this.importsUnification = new DictUnification<>(this);

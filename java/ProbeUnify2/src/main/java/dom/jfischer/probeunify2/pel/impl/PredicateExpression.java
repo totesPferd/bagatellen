@@ -5,9 +5,6 @@
 package dom.jfischer.probeunify2.pel.impl;
 
 import dom.jfischer.probeunify2.basic.IBaseExpression;
-import dom.jfischer.probeunify2.basic.ITracker;
-import dom.jfischer.probeunify2.pel.IPELLeafCollector;
-import dom.jfischer.probeunify2.pel.IPELTracker;
 import dom.jfischer.probeunify2.pel.IPredicate;
 import dom.jfischer.probeunify2.pel.IPredicateExpression;
 import dom.jfischer.probeunify2.basic.ITrivialExtension;

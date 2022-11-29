@@ -9,7 +9,7 @@ package dom.jfischer.probeunify2.basic;
  * @author jfischer
  */
 public enum CompareResult {
-    
+
     LESS_THAN, EQUAL, GREATER_THAN, NEITHER_NOR;
-    
+
 }

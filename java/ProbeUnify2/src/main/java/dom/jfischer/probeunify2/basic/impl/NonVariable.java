@@ -4,17 +4,15 @@
  */
 package dom.jfischer.probeunify2.basic.impl;
 
+import dom.jfischer.probeunify2.basic.IBaseCopy;
 import dom.jfischer.probeunify2.basic.IBaseExpression;
 import dom.jfischer.probeunify2.basic.ICheckVariableOccurence;
-import dom.jfischer.probeunify2.basic.ICopy;
 import dom.jfischer.probeunify2.basic.IExtension;
 import dom.jfischer.probeunify2.basic.ILeafCollector;
 import dom.jfischer.probeunify2.basic.INonVariable;
 import dom.jfischer.probeunify2.basic.ITracker;
 import dom.jfischer.probeunify2.basic.IUnification;
 import dom.jfischer.probeunify2.basic.IVariable;
-import dom.jfischer.probeunify2.pel.IPELLeafCollector;
-import dom.jfischer.probeunify2.pel.IPELTracker;
 import java.util.Optional;
 
 /**
@@ -28,10 +26,10 @@ public class NonVariable<
 
     private final NonVariableExtension nonVariableExtension;
     private final ICheckVariableOccurence<NonVariableExtension> variableOccurenceChecker;
-    private final ICopy<NonVariableExtension> nonVariableCopy;
+    private final IBaseCopy<NonVariableExtension, NonVariableExtension> nonVariableCopy;
     private final IUnification<NonVariableExtension> nonVariableUnification;
 
-    public NonVariable(NonVariableExtension nonVariableExtension, ICheckVariableOccurence<NonVariableExtension> variableOccurenceChecker, ICopy<NonVariableExtension> nonVariableCopy, IUnification<NonVariableExtension> nonVariableUnification) {
+    public NonVariable(NonVariableExtension nonVariableExtension, ICheckVariableOccurence<NonVariableExtension> variableOccurenceChecker, IBaseCopy<NonVariableExtension, NonVariableExtension> nonVariableCopy, IUnification<NonVariableExtension> nonVariableUnification) {
         this.nonVariableExtension = nonVariableExtension;
         this.variableOccurenceChecker = variableOccurenceChecker;
         this.nonVariableCopy = nonVariableCopy;
@@ -81,9 +79,8 @@ public class NonVariable<
         if (optCopy.isPresent()) {
             retval = optCopy.get();
         } else {
-            IPELTracker allTrackers = tracker.getAllTrackers();
             NonVariableExtension nonVariableExtensionCopy
-                    = this.nonVariableCopy.copy(allTrackers, this.nonVariableExtension);
+                    = this.nonVariableCopy.copy(tracker, this.nonVariableExtension);
             retval = new NonVariable<>(
                     nonVariableExtensionCopy,
                     this.variableOccurenceChecker,
@@ -98,8 +95,7 @@ public class NonVariable<
 
     @Override
     public void collectLeafs(ILeafCollector<NonVariableExtension> leafCollector) {
-        IPELLeafCollector allLeafCollectors = leafCollector.getAllLeafCollectors();
-        this.nonVariableCopy.collectLeafs(allLeafCollectors, this.nonVariableExtension);
+        this.nonVariableCopy.collectLeafs(leafCollector, this.nonVariableExtension);
     }
 
     @Override
@@ -108,5 +104,15 @@ public class NonVariable<
                 this.getNonVariableExtension(),
                 variable);
     }
-    
+
+    @Override
+    public boolean isLeaf() {
+        return false;
+    }
+
+    @Override
+    public boolean isDereferenced() {
+        return true;
+    }
+
 }

@@ -2,16 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package dom.jfischer.probeunify2.module.impl;
+package dom.jfischer.probeunify2.pel.impl;
 
 import dom.jfischer.probeunify2.basic.IBaseExpression;
 import dom.jfischer.probeunify2.basic.INonVariable;
 import dom.jfischer.probeunify2.basic.ITrivialExtension;
 import dom.jfischer.probeunify2.basic.IVariable;
-import dom.jfischer.probeunify2.module.INamedTerm;
+import dom.jfischer.probeunify2.pel.INamedTerm;
+import dom.jfischer.probeunify2.pel.ITermExtension;
 import dom.jfischer.probeunify2.pel.ITermNonVariableExtension;
-import dom.jfischer.probeunify2.pprint.ITermVariableContext;
 import java.util.Optional;
+import dom.jfischer.probeunify2.basic.IVariableContext;
 
 /**
  *
@@ -20,9 +21,9 @@ import java.util.Optional;
 public class NamedTerm implements INamedTerm {
 
     private final IBaseExpression<ITermNonVariableExtension> term;
-    private final ITermVariableContext termVariableContext;
+    private final IVariableContext<ITermExtension, ITermNonVariableExtension> termVariableContext;
 
-    public NamedTerm(IBaseExpression<ITermNonVariableExtension> term, ITermVariableContext termVariableContext) {
+    public NamedTerm(IBaseExpression<ITermNonVariableExtension> term, IVariableContext<ITermExtension, ITermNonVariableExtension> termVariableContext) {
         this.term = term;
         this.termVariableContext = termVariableContext;
     }
@@ -33,7 +34,7 @@ public class NamedTerm implements INamedTerm {
     }
 
     @Override
-    public ITermVariableContext getTermVariableContext() {
+    public IVariableContext<ITermExtension, ITermNonVariableExtension> getTermVariableContext() {
         return this.termVariableContext;
     }
 
@@ -50,8 +51,8 @@ public class NamedTerm implements INamedTerm {
     }
 
     @Override
-    public IBaseExpression<ITrivialExtension> getSort() {
-        IBaseExpression<ITrivialExtension> retval = null;
+    public ITermExtension getExtension() {
+        ITermExtension retval = null;
 
         {
             Optional<INonVariable<ITermNonVariableExtension>> optNonVariable
@@ -59,11 +60,12 @@ public class NamedTerm implements INamedTerm {
             if (optNonVariable.isPresent()) {
                 INonVariable<ITermNonVariableExtension> nonVariable
                         = optNonVariable.get();
-                retval = nonVariable
+                IBaseExpression<ITrivialExtension> sort = nonVariable
                         .getNonVariableExtension()
                         .getOperation()
                         .getExtension()
                         .getRange();
+                retval = new TermExtension(sort);
             }
         }
         {
@@ -72,11 +74,16 @@ public class NamedTerm implements INamedTerm {
             if (optVariable.isPresent()) {
                 IVariable<ITermNonVariableExtension> variable
                         = optVariable.get();
-                retval = this.termVariableContext.getSortMap().get(variable);
+                retval = this.termVariableContext.getExtensionMap().get(variable);
             }
         }
 
         return retval;
+    }
+
+    @Override
+    public IBaseExpression<ITermNonVariableExtension> getBaseExpression() {
+        return this.term;
     }
 
 }

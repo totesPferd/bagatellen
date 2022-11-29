@@ -18,7 +18,7 @@
 
 [axioms]
    congi:  base.eq(?x, ?y) ==> base.eq(i(?x), i(?y)) .
-   congo:  base.eq(?x, ?y) ==> base.eq(o(?x), o(?y)) .
+   congo:  base.eq(?x_1, ?x_2); base.eq(?y_1, ?y_2) ==> base.eq(o(?x_1, ?y_1), o(?x_2, ?y_2)) .
    leftu:  ==> base.eq(o(e(), ?y), ?y) .
    rightu: ==> base.eq(o(?x, e()), ?x) .
    assoco: ==> base.eq(o(o(?x, ?y), ?z), o(?x, o(?y, ?z))) .

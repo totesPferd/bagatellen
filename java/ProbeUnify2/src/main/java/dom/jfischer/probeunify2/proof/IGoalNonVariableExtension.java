@@ -4,6 +4,7 @@
  */
 package dom.jfischer.probeunify2.proof;
 
+import dom.jfischer.probeunify2.basic.IExpression;
 import dom.jfischer.probeunify2.basic.IExtension;
 import java.util.List;
 
@@ -14,6 +15,6 @@ import java.util.List;
 public interface IGoalNonVariableExtension extends
         IExtension {
 
-    List<IGoalExpression> getSubGoals();
+    List<IExpression<IGoalExtension, IGoalNonVariableExtension>> getSubGoals();
 
 }

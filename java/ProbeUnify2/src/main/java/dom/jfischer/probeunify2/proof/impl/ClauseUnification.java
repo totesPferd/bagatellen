@@ -6,7 +6,6 @@ package dom.jfischer.probeunify2.proof.impl;
 
 import dom.jfischer.probeunify2.basic.IBaseExpression;
 import dom.jfischer.probeunify2.basic.IUnification;
-import dom.jfischer.probeunify2.basic.impl.BaseUnification;
 import dom.jfischer.probeunify2.basic.impl.MultiUnification;
 import dom.jfischer.probeunify2.pel.ILiteralNonVariableExtension;
 import dom.jfischer.probeunify2.proof.IClause;
@@ -21,8 +20,8 @@ public class ClauseUnification implements IUnification<IClause> {
     private final IUnification<IBaseExpression<ILiteralNonVariableExtension>> unification;
     private final IUnification<List<IBaseExpression<ILiteralNonVariableExtension>>> multiUnification;
 
-    public ClauseUnification() {
-        this.unification = new BaseUnification<>();
+    public ClauseUnification(IUnification<IBaseExpression<ILiteralNonVariableExtension>> unification) {
+        this.unification = unification;
         this.multiUnification = new MultiUnification<>(this.unification);
     }
 

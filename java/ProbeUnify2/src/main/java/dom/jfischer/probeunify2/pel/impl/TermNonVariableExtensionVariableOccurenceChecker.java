@@ -17,10 +17,9 @@ public class TermNonVariableExtensionVariableOccurenceChecker implements
 
     @Override
     public boolean containsVariable(ITermNonVariableExtension object, IVariable<ITermNonVariableExtension> variable) {
-        return
-                object.getArguments()
+        return object.getArguments()
                 .parallelStream()
                 .anyMatch(term -> term.containsVariable(variable));
     }
-    
+
 }

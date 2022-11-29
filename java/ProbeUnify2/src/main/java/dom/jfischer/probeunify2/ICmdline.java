@@ -5,7 +5,7 @@
 package dom.jfischer.probeunify2;
 
 import dom.jfischer.probeunify2.module.IModule;
-import dom.jfischer.probeunify2.module.INamedClause;
+import dom.jfischer.probeunify2.pel.INamedClause;
 
 /**
  *
@@ -18,9 +18,9 @@ public interface ICmdline {
     void setConjecture(INamedClause conjecture);
 
     void setModuleName(String moduleName);
-    
+
     void setState(IState state);
-    
+
     IState getState();
 
 }

@@ -6,7 +6,7 @@ package dom.jfischer.probeunify2.jline.impl;
 
 import dom.jfischer.probeunify2.IState;
 import dom.jfischer.probeunify2.exception.QualificatorException;
-import dom.jfischer.probeunify2.module.INamedClause;
+import dom.jfischer.probeunify2.pel.INamedClause;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -159,7 +159,8 @@ public class PelCommands extends JlineCommandRegistry implements CommandRegistry
                     Optional<INamedClause> optNamedClause
                             = this.proofState.parseClauseSelector(args.get(1));
                     if (optNamedClause.isPresent()) {
-                        INamedClause namedClause = optNamedClause.get();
+                        INamedClause namedClause
+                                = optNamedClause.get();
                         if (!errorMode && !this.proofState.resolve(goalNr - 1, namedClause)) {
                             System.err.println("could not be unified.");
                         }
@@ -257,7 +258,7 @@ public class PelCommands extends JlineCommandRegistry implements CommandRegistry
             if (!args.isEmpty()) {
                 System.err.println("do not call vars command with args!");
             } else {
-                this.proofState.printTermVariables();
+                this.proofState.printVariables();
             }
         } catch (Options.HelpException ex) {
             System.err.println("help exception: " + ex.getMessage());

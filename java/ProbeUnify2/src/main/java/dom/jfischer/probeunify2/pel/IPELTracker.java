@@ -5,7 +5,6 @@
 package dom.jfischer.probeunify2.pel;
 
 import dom.jfischer.probeunify2.basic.ITracker;
-import dom.jfischer.probeunify2.proof.IGoalNonVariableExtension;
 import dom.jfischer.probeunify2.basic.ITrivialExtension;
 
 /**
@@ -15,8 +14,6 @@ import dom.jfischer.probeunify2.basic.ITrivialExtension;
 public interface IPELTracker {
 
     ITracker<ITermNonVariableExtension> getTermTracker();
-
-    ITracker<IGoalNonVariableExtension> getGoalTracker();
 
     ITracker<ILiteralNonVariableExtension> getLiteralTracker();
 

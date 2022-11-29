@@ -6,8 +6,6 @@ package dom.jfischer.probeunify2.proof.impl;
 
 import dom.jfischer.probeunify2.basic.IBaseExpression;
 import dom.jfischer.probeunify2.basic.ICopy;
-import dom.jfischer.probeunify2.basic.ILeafCollector;
-import dom.jfischer.probeunify2.basic.ITracker;
 import dom.jfischer.probeunify2.pel.ILiteralNonVariableExtension;
 import dom.jfischer.probeunify2.pel.IPELLeafCollector;
 import dom.jfischer.probeunify2.pel.IPELTracker;
@@ -22,28 +20,30 @@ import java.util.stream.Collectors;
  */
 public class ClauseCopy implements ICopy<IClause> {
 
+    private final ICopy<IBaseExpression<ILiteralNonVariableExtension>> copier;
+
+    public ClauseCopy(ICopy<IBaseExpression<ILiteralNonVariableExtension>> copier) {
+        this.copier = copier;
+    }
+
     @Override
     public IClause copy(IPELTracker tracker, IClause object) {
-        ITracker<ILiteralNonVariableExtension> literalTracker
-                = tracker.getLiteralTracker();
         IBaseExpression<ILiteralNonVariableExtension> conclusionCopy
-                = object.getConclusion().copy(literalTracker);
+                = this.copier.copy(tracker, object.getConclusion());
         List<IBaseExpression<ILiteralNonVariableExtension>> premisesCopy
                 = Collections.synchronizedList(object.getPremises()
                         .stream()
-                        .map(literal -> literal.copy(literalTracker))
+                        .map(back -> this.copier.copy(tracker, back))
                         .collect(Collectors.toList()));
         return new Clause(conclusionCopy, premisesCopy);
     }
 
     @Override
     public void collectLeafs(IPELLeafCollector leafCollector, IClause object) {
-        ILeafCollector<ILiteralNonVariableExtension> literalLeafCollector
-                = leafCollector.getLiteralLeafCollector();
-        object.getConclusion().collectLeafs(literalLeafCollector);
+        this.copier.collectLeafs(leafCollector, object.getConclusion());
         object.getPremises()
                 .parallelStream()
-                .forEach(literal -> literal.collectLeafs(literalLeafCollector));
+                .forEach(back -> this.copier.collectLeafs(leafCollector, back));
     }
 
 }

@@ -17,10 +17,9 @@ public class GoalNonVariableExtensionVariableOccurenceChecker implements
 
     @Override
     public boolean containsVariable(IGoalNonVariableExtension object, IVariable<IGoalNonVariableExtension> variable) {
-        return
-                object.getSubGoals()
+        return object.getSubGoals()
                 .parallelStream()
                 .anyMatch(goalExpr -> goalExpr.getBaseExpression().containsVariable(variable));
     }
-    
+
 }

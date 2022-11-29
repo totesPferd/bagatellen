@@ -5,40 +5,47 @@
 package dom.jfischer.probeunify2;
 
 import dom.jfischer.probeunify2.antlr.impl.AntlrHelper;
-import dom.jfischer.probeunify2.antlr.impl.PelThisListener;
+import dom.jfischer.probeunify2.antlr.impl.PelThisVisitor;
+import dom.jfischer.probeunify2.basic.IBaseCopy;
 import dom.jfischer.probeunify2.basic.IBaseExpression;
 import dom.jfischer.probeunify2.basic.ICompare;
 import dom.jfischer.probeunify2.basic.ICopy;
+import dom.jfischer.probeunify2.basic.IExpression;
+import dom.jfischer.probeunify2.basic.ILeafCollector;
 import dom.jfischer.probeunify2.basic.IUnification;
 import dom.jfischer.probeunify2.basic.IVariable;
 import dom.jfischer.probeunify2.basic.impl.BaseUnification;
 import dom.jfischer.probeunify2.basic.impl.Compare;
+import dom.jfischer.probeunify2.basic.impl.CopyBaseCopy;
+import dom.jfischer.probeunify2.basic.impl.LeafCollector;
 import dom.jfischer.probeunify2.exception.QualificatorException;
 import dom.jfischer.probeunify2.module.IModule;
-import dom.jfischer.probeunify2.module.INamedClause;
-import dom.jfischer.probeunify2.module.INamedLiteral;
-import dom.jfischer.probeunify2.module.impl.NamedClause;
-import dom.jfischer.probeunify2.module.impl.NamedClauseCopy;
-import dom.jfischer.probeunify2.module.impl.NamedLiteral;
+import dom.jfischer.probeunify2.pel.INamedClause;
+import dom.jfischer.probeunify2.pel.INamedLiteral;
+import dom.jfischer.probeunify2.pel.impl.NamedClause;
+import dom.jfischer.probeunify2.pel.impl.NamedClauseCopy;
+import dom.jfischer.probeunify2.pel.impl.NamedLiteral;
 import dom.jfischer.probeunify2.pel.ILiteralNonVariableExtension;
 import dom.jfischer.probeunify2.pel.IPELLeafCollector;
 import dom.jfischer.probeunify2.pel.IPELTracker;
+import dom.jfischer.probeunify2.pel.IPELVariableContext;
+import dom.jfischer.probeunify2.pel.ITermExtension;
 import dom.jfischer.probeunify2.pel.ITermNonVariableExtension;
+import dom.jfischer.probeunify2.pel.impl.LiteralCopy;
 import dom.jfischer.probeunify2.pel.impl.PELLeafCollector;
 import dom.jfischer.probeunify2.pel.impl.PELTracker;
 import dom.jfischer.probeunify2.pprint.IBackReference;
 import dom.jfischer.probeunify2.pprint.IConstructionPPrint;
 import dom.jfischer.probeunify2.pprint.IPPrintBase;
-import dom.jfischer.probeunify2.pprint.ITermVariableContext;
 import dom.jfischer.probeunify2.pprint.impl.ClauseConstructionPPrint;
 import dom.jfischer.probeunify2.pprint.impl.LiteralConstructionPPrint;
 import dom.jfischer.probeunify2.pprint.impl.PPrintBase;
 import dom.jfischer.probeunify2.pprint.impl.PPrintConfig;
 import dom.jfischer.probeunify2.pprint.impl.TermLeafConstructionPPrint;
+import dom.jfischer.probeunify2.basic.impl.VariableContextUnification;
 import dom.jfischer.probeunify2.proof.IClause;
-import dom.jfischer.probeunify2.proof.IGoalExpression;
 import dom.jfischer.probeunify2.proof.IGoalExtension;
-import dom.jfischer.probeunify2.proof.impl.GoalExpressionCopy;
+import dom.jfischer.probeunify2.proof.impl.GoalExpressionBaseCopy;
 import dom.jfischer.probeunify2.proof.impl.ProofHelper;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -52,6 +59,10 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.antlr.v4.runtime.CharStream;
+import dom.jfischer.probeunify2.basic.IVariableContext;
+import dom.jfischer.probeunify2.pprint.impl.LiteralLeafConstructionPPrint;
+import dom.jfischer.probeunify2.proof.IGoalNonVariableExtension;
+import dom.jfischer.probeunify2.proof.impl.GoalExtensionBaseCopy;
 
 /**
  *
@@ -62,25 +73,28 @@ public class State implements IState {
     private final IModule module;
     private final IBackReference backReference;
     private final INamedClause conjecture;
-    private final IGoalExpression goal;
+    private final IExpression<IGoalExtension, IGoalNonVariableExtension> goal;
     private final String moduleName;
 
     private final PPrintConfig pprintConfig;
 
+    private final IBaseCopy<IGoalNonVariableExtension, IExpression<IGoalExtension, IGoalNonVariableExtension>> goalExpressionBaseCopier;
+    private final ICopy<INamedClause> namedClauseCopier;
+
     private final IPELLeafCollector leafCollector;
 
-    private final ICopy<INamedClause> namedClauseCopier
-            = new NamedClauseCopy();
-    private final ICopy<IGoalExpression> goalCopier
-            = new GoalExpressionCopy();
+    private final ICopy<IBaseExpression<ILiteralNonVariableExtension>> literalCopy
+            = new LiteralCopy();
     private final IUnification<IBaseExpression<ILiteralNonVariableExtension>> literalUnification
             = new BaseUnification<>();
+    private final IUnification<IVariableContext<ITermExtension, ITermNonVariableExtension>> termVariableContextUnification
+            = new VariableContextUnification<>();
     private final List<IProofStep> proofSteps = Collections.synchronizedList(new ArrayList<>());
 
     private final IStatePersistence statePersistence = new StatePersistence();
 
     private transient PPrintBase pprintBase = null;
-    private List<IGoalExpression> openGoals = null;
+    private List<IExpression<IGoalExtension, IGoalNonVariableExtension>> openGoals = null;
 
     public State(
             IModule module,
@@ -88,7 +102,7 @@ public class State implements IState {
             IPELLeafCollector leafCollector,
             String moduleName,
             INamedClause conjecture,
-            IGoalExpression goal) {
+            IExpression<IGoalExtension, IGoalNonVariableExtension> goal) {
         this.module = module;
         this.backReference = backReference;
         this.leafCollector = leafCollector;
@@ -97,6 +111,14 @@ public class State implements IState {
         this.moduleName = moduleName;
 
         this.pprintConfig = new PPrintConfig();
+
+        IBaseCopy<IGoalNonVariableExtension, IBaseExpression<ILiteralNonVariableExtension>> literalBaseCopy
+                = new CopyBaseCopy<>(literalCopy);
+        IBaseCopy<IGoalNonVariableExtension, IGoalExtension> goalExtensionBaseCopy
+                = new GoalExtensionBaseCopy(literalBaseCopy);
+        this.goalExpressionBaseCopier
+                = new GoalExpressionBaseCopy(goalExtensionBaseCopy);
+        this.namedClauseCopier = new NamedClauseCopy(this.literalCopy);
     }
 
     @Override
@@ -115,13 +137,14 @@ public class State implements IState {
     }
 
     @Override
-    public IGoalExpression getGoal() {
+    public IExpression<IGoalExtension, IGoalNonVariableExtension> getGoal() {
         return this.goal;
     }
 
     @Override
     public void printProofState() {
-        ITermVariableContext termVariableContext = this.conjecture.getTermVariableContext();
+        IPELVariableContext pelVariableContext
+                = this.conjecture.getPelVariableContext();
 
         this.updPPrintBase();
         this.pprintBase.printToken("step");
@@ -131,7 +154,7 @@ public class State implements IState {
             List<IBaseExpression<ILiteralNonVariableExtension>> premises
                     = this.conjecture.getClause().getPremises();
             for (int i = 0; i < premises.size(); i++) {
-                INamedLiteral namedLiteral = new NamedLiteral(premises.get(i), termVariableContext);
+                INamedLiteral namedLiteral = new NamedLiteral(premises.get(i), pelVariableContext);
                 IConstructionPPrint literalConstructionPPrint
                         = new LiteralConstructionPPrint(this.backReference, namedLiteral);
                 this.pprintBase.printToken(Integer.toString(i + 1));
@@ -150,7 +173,7 @@ public class State implements IState {
             for (int i = 0; i < this.openGoals.size(); i++) {
                 INamedLiteral namedLiteral = new NamedLiteral(
                         this.openGoals.get(i).getExtension().getGoal(),
-                        termVariableContext);
+                        pelVariableContext);
                 IConstructionPPrint literalConstructionPPrint
                         = new LiteralConstructionPPrint(this.backReference, namedLiteral);
                 pprintBase.printToken(Integer.toString(i + 1));
@@ -164,40 +187,68 @@ public class State implements IState {
     }
 
     @Override
-    public List<IGoalExpression> getOpenGoals() {
+    public List<IExpression<IGoalExtension, IGoalNonVariableExtension>> getOpenGoals() {
         return this.openGoals;
     }
 
     @Override
-    public void printTermVariables() {
-        ITermVariableContext termVariableContext = this.conjecture.getTermVariableContext();
-        IConstructionPPrint constructionPPrint
+    public void printVariables() {
+        IPELVariableContext pelVariableContext
+                = this.conjecture.getPelVariableContext();
+        IConstructionPPrint literalConstructionPPrint
+                = new LiteralLeafConstructionPPrint(
+                        this.backReference,
+                        pelVariableContext,
+                        this.leafCollector
+                );
+        IVariableContext<ITermExtension, ITermNonVariableExtension> termVariableContext
+                = pelVariableContext.getTermVariableContext();
+        IConstructionPPrint termConstructionPPrint
                 = new TermLeafConstructionPPrint(
                         this.backReference,
                         termVariableContext,
                         this.leafCollector
                 );
         this.updPPrintBase();
-        constructionPPrint.pprint(this.pprintBase);
+        pprintBase.printToken("literal variables:");
+        pprintBase.setDeeperIndent();
+        pprintBase.printNewLine();
+        literalConstructionPPrint.pprint(this.pprintBase);
+        pprintBase.restoreIndent();
+        pprintBase.printNewLine();
+        pprintBase.printNewLine();
+        pprintBase.printToken("term variables:");
+        pprintBase.setDeeperIndent();
+        pprintBase.printNewLine();
+        termConstructionPPrint.pprint(this.pprintBase);
+        pprintBase.restoreIndent();
+        pprintBase.printNewLine();
         pprintBase.printNewLine();
     }
 
     @Override
     public void apply(int goalNr, String proofName) throws IOException {
         CharStream proofCharStream = AntlrHelper.getProofCharStream(proofName);
-        PelThisListener pelThisListener = new PelThisListener(this.module, this.moduleName);
-        pelThisListener.resetTermVariableContext();
-        AntlrHelper.parseProof(pelThisListener, proofCharStream);
-        IGoalExpression selectedGoal = this.openGoals.get(goalNr);
-        ProofHelper.applyProof(selectedGoal, pelThisListener.getProof());
+        PelThisVisitor pelThisVisitor = new PelThisVisitor(this.module, this.moduleName);
+        Set<IClause> recentProof
+                = AntlrHelper.parseProof(pelThisVisitor, proofCharStream);
+        IExpression<IGoalExtension, IGoalNonVariableExtension> selectedGoal
+                = this.openGoals.get(goalNr);
+        ProofHelper.applyProof(this.literalCopy,
+                this.literalUnification,
+                selectedGoal,
+                recentProof);
         {
-            IPELLeafCollector localLeafCollector = new PELLeafCollector();
-            this.goalCopier.collectLeafs(localLeafCollector, selectedGoal);
+            IPELLeafCollector localPelLeafCollector
+                    = new PELLeafCollector();
+            ILeafCollector<IGoalNonVariableExtension> localLeafCollector
+                    = new LeafCollector<>(localPelLeafCollector);
+            this.goalExpressionBaseCopier.collectLeafs(localLeafCollector, selectedGoal);
             Set<IVariable<ITermNonVariableExtension>> leafs
-                    = localLeafCollector.getTermLeafCollector().getLeafs();
+                    = localPelLeafCollector.getTermLeafCollector().getLeafs();
             leafs
                     .parallelStream()
-                    .forEach(var -> this.conjecture.getTermVariableContext().addUnsortedVariable(var));
+                    .forEach(var -> this.conjecture.getPelVariableContext().getTermVariableContext().addUnsortedVariable(var));
         }
         this.printProofState();
     }
@@ -206,7 +257,8 @@ public class State implements IState {
     public boolean assume(int goalNr, int premiseNr) {
         IBaseExpression<ILiteralNonVariableExtension> premise
                 = this.conjecture.getClause().getPremises().get(premiseNr);
-        IGoalExtension goalExtension = this.openGoals.get(goalNr).getExtension();
+        IGoalExtension goalExtension
+                = this.openGoals.get(goalNr).getExtension();
         IBaseExpression<ILiteralNonVariableExtension> goalLiteral
                 = goalExtension.getGoal();
         boolean retval = this.literalUnification.unify(goalLiteral, premise);
@@ -228,8 +280,8 @@ public class State implements IState {
                         .parallelStream()
                         .collect(Collectors.toSet()));
         ICompare<IBaseExpression<ILiteralNonVariableExtension>> literalComparer
-                = new Compare<>();
-        for (IGoalExpression openGoal : this.openGoals) {
+                = new Compare<>(this.literalCopy, this.literalUnification);
+        for (IExpression<IGoalExtension, IGoalNonVariableExtension> openGoal : this.openGoals) {
             IGoalExtension goalExtension = openGoal.getExtension();
             IBaseExpression<ILiteralNonVariableExtension> goalLiteral
                     = goalExtension.getGoal();
@@ -259,10 +311,12 @@ public class State implements IState {
     public void addProofStep() {
         this.openGoals = Collections.synchronizedList(new ArrayList<>());
         ProofHelper.listOpenGoals(this.goal, this.openGoals);
-        IPELLeafCollector pelLeafCollector = new PELLeafCollector();
-        this.goalCopier.collectLeafs(pelLeafCollector, this.goal);
+        IPELLeafCollector localPelLeafCollector = new PELLeafCollector();
+        ILeafCollector<IGoalNonVariableExtension> localLeafCollector
+                = new LeafCollector<>(localPelLeafCollector);
+        this.goalExpressionBaseCopier.collectLeafs(localLeafCollector, this.goal);
         Set<IVariable<ITermNonVariableExtension>> vars
-                = pelLeafCollector.getTermLeafCollector().getLeafs();
+                = localPelLeafCollector.getTermLeafCollector().getLeafs();
         IProofStep proofStep = new ProofStep(vars, this.openGoals);
         this.proofSteps.add(proofStep);
     }
@@ -311,7 +365,8 @@ public class State implements IState {
     public void save(String proofName) throws FileNotFoundException {
         String realProofFileName = AntlrHelper.getRealProofFileName(proofName);
         try ( PrintStream outStream = new PrintStream(realProofFileName)) {
-            Set<IClause> proof = Collections.synchronizedSet(new HashSet<>());
+            Set<IClause> proof
+                    = Collections.synchronizedSet(new HashSet<>());
             ProofHelper.createProof(this.goal, proof);
             IPPrintBase proofOutPprintBase
                     = new PPrintBase(outStream, this.pprintConfig, 0);
@@ -319,7 +374,7 @@ public class State implements IState {
             proofOutPprintBase.printNewLine();
             for (IClause clause : proof) {
                 INamedClause namedClause
-                        = new NamedClause(clause, this.conjecture.getTermVariableContext());
+                        = new NamedClause(clause, this.conjecture.getPelVariableContext());
                 IConstructionPPrint namedClauseConstructionPPrint
                         = new ClauseConstructionPPrint(this.backReference, namedClause);
                 namedClauseConstructionPPrint.pprint(proofOutPprintBase);
@@ -351,7 +406,7 @@ public class State implements IState {
 
     private boolean resolveWoPrinting(int goalNr, INamedClause namedClause) {
 
-        IGoalExpression selectedGoal = this.openGoals.get(goalNr);
+        IExpression<IGoalExtension, IGoalNonVariableExtension> selectedGoal = this.openGoals.get(goalNr);
 
         IPELTracker pelTracker = new PELTracker();
 
@@ -359,11 +414,16 @@ public class State implements IState {
 
         IClause clauseInstance = namedClauseInstance.getClause();
 
-        boolean retval = ProofHelper.resolve(selectedGoal, clauseInstance);
+        boolean retval = ProofHelper.resolve(
+                this.literalCopy,
+                this.literalUnification,
+                selectedGoal,
+                clauseInstance);
 
         if (retval) {
-            ITermVariableContext termVariableContext = this.conjecture.getTermVariableContext();
-            termVariableContext.unify(namedClauseInstance.getTermVariableContext());
+            this.termVariableContextUnification.unify(
+                    this.conjecture.getPelVariableContext().getTermVariableContext(),
+                    namedClauseInstance.getPelVariableContext().getTermVariableContext());
             this.addProofStep();
         }
 
@@ -372,7 +432,7 @@ public class State implements IState {
 
     private void resetProofStep(IProofStep proofStep) {
         proofStep.reset();
-        this.conjecture.getTermVariableContext().retainAll(proofStep.getTermVariables());
+        this.conjecture.getPelVariableContext().getTermVariableContext().retainAll(proofStep.getTermVariables());
         this.openGoals = Collections.synchronizedList(new ArrayList<>());
         ProofHelper.listOpenGoals(this.goal, this.openGoals);
     }

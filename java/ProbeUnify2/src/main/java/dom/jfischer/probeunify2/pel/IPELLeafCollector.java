@@ -5,7 +5,6 @@
 package dom.jfischer.probeunify2.pel;
 
 import dom.jfischer.probeunify2.basic.ILeafCollector;
-import dom.jfischer.probeunify2.proof.IGoalNonVariableExtension;
 import java.io.Serializable;
 
 /**
@@ -17,8 +16,6 @@ public interface IPELLeafCollector extends Serializable {
     ILeafCollector<ITermNonVariableExtension> getTermLeafCollector();
 
     ILeafCollector<ILiteralNonVariableExtension> getLiteralLeafCollector();
-
-    ILeafCollector<IGoalNonVariableExtension> getGoalLeafCollector();
 
     void undo();
 

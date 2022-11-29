@@ -4,11 +4,13 @@
  */
 package dom.jfischer.probeunify2;
 
+import dom.jfischer.probeunify2.basic.IExpression;
 import dom.jfischer.probeunify2.exception.QualificatorException;
 import dom.jfischer.probeunify2.module.IModule;
-import dom.jfischer.probeunify2.module.INamedClause;
+import dom.jfischer.probeunify2.pel.INamedClause;
 import dom.jfischer.probeunify2.pprint.IBackReference;
-import dom.jfischer.probeunify2.proof.IGoalExpression;
+import dom.jfischer.probeunify2.proof.IGoalExtension;
+import dom.jfischer.probeunify2.proof.IGoalNonVariableExtension;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
@@ -27,11 +29,11 @@ public interface IState extends Serializable {
 
     INamedClause getConjecture();
 
-    IGoalExpression getGoal();
+    IExpression<IGoalExtension, IGoalNonVariableExtension> getGoal();
 
     void printProofState();
 
-    void printTermVariables();
+    void printVariables();
 
     boolean checkGoalNr(Integer goalNr);
 
@@ -42,22 +44,22 @@ public interface IState extends Serializable {
     Optional<INamedClause> parseClauseSelector(String selector)
             throws QualificatorException;
 
-    List<IGoalExpression> getOpenGoals();
+    List<IExpression<IGoalExtension, IGoalNonVariableExtension>> getOpenGoals();
 
     void addProofStep();
 
     void apply(int goalNr, String proofName) throws IOException;
-    
+
     boolean assume(int goalNr, int premiseNr);
 
     void assumeAll();
-    
+
     boolean resolve(int goalNr, INamedClause clause);
 
     void save(String proofName) throws FileNotFoundException;
-    
+
     void saveState();
-    
+
     void undo(int proofStepNr);
 
 }

@@ -5,10 +5,10 @@
 package dom.jfischer.probeunify2;
 
 import dom.jfischer.probeunify2.antlr.impl.AntlrHelper;
-import dom.jfischer.probeunify2.antlr.impl.PelThisListener;
+import dom.jfischer.probeunify2.antlr.impl.PelThisVisitor;
 import dom.jfischer.probeunify2.jline.impl.PelCommands;
 import dom.jfischer.probeunify2.module.IModule;
-import dom.jfischer.probeunify2.module.INamedClause;
+import dom.jfischer.probeunify2.pel.INamedClause;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -54,10 +54,10 @@ public class ProbeUnify2 {
     private static void parseModulefile(String moduleName) {
         IModule module = CMDLINE.getModule();
         CMDLINE.setModuleName(moduleName);
-        PelThisListener pelThisListener = new PelThisListener(module, moduleName);
+        PelThisVisitor pelThisVisitor = new PelThisVisitor(module, moduleName);
         try {
             CharStream charStream = AntlrHelper.getLogicCharStream(moduleName);
-            AntlrHelper.parseLogic(pelThisListener, charStream);
+            AntlrHelper.parseLogics(pelThisVisitor, charStream);
         } catch (IOException ex) {
             System.err.println("module " + moduleName + " could not be read: " + ex.getMessage());
             System.exit(2);
@@ -66,10 +66,14 @@ public class ProbeUnify2 {
 
     private static void parseConjecture(String conjectureString) {
         IModule module = CMDLINE.getModule();
-        PelThisListener pelThisListener = new PelThisListener(module, "<cmdline>");
-        pelThisListener.resetTermVariableContext();
-        INamedClause conjecture = AntlrHelper.getClause(pelThisListener, conjectureString);
-        CMDLINE.setConjecture(conjecture);
+        PelThisVisitor pelThisVisitor = new PelThisVisitor(module, "<cmdline>");
+        INamedClause conjecture = AntlrHelper.getClause(pelThisVisitor, conjectureString);
+        if (conjecture == null) {
+            System.err.println("abort because of errors in conjecture");
+            System.exit(2);
+        } else {
+            CMDLINE.setConjecture(conjecture);
+        }
     }
 
     private static void parseCmdline(String[] args) {
@@ -111,7 +115,7 @@ public class ProbeUnify2 {
         try {
             cmdlineArgs = argumentParser.parseArgs(args);
             String subcommandStr = cmdlineArgs.getString("subcommand");
-            IState state =  null;
+            IState state = null;
             switch (subcommandStr) {
                 case "continue":
                     state = STATE_PERSISTENCE.restore();
@@ -124,7 +128,7 @@ public class ProbeUnify2 {
                 case "proof":
                     parseModulefile(cmdlineArgs.getString("m"));
                     parseConjecture(cmdlineArgs.getString("c"));
-                    state =  CMDLINE.getState();
+                    state = CMDLINE.getState();
                     state.addProofStep();
                     break;
                 default:
@@ -161,7 +165,7 @@ public class ProbeUnify2 {
                             configPath,
                             (String fun) -> new ConsoleEngine.WidgetCreator(consoleEngine, fun));
 
-            SignalHandler sigHandler =  new SigHandler(state);
+            SignalHandler sigHandler = new SigHandler(state);
             Terminal terminal = TerminalBuilder.builder()
                     .system(true)
                     .signalHandler(sigHandler)

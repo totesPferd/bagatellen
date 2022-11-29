@@ -2,18 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package dom.jfischer.probeunify2.module.impl;
+package dom.jfischer.probeunify2.pel.impl;
 
 import dom.jfischer.probeunify2.basic.IBaseExpression;
 import dom.jfischer.probeunify2.basic.ICopy;
 import dom.jfischer.probeunify2.basic.ILeafCollector;
 import dom.jfischer.probeunify2.basic.ITracker;
-import dom.jfischer.probeunify2.module.INamedLiteral;
+import dom.jfischer.probeunify2.pel.INamedLiteral;
 import dom.jfischer.probeunify2.pel.ILiteralNonVariableExtension;
 import dom.jfischer.probeunify2.pel.IPELLeafCollector;
 import dom.jfischer.probeunify2.pel.IPELTracker;
-import dom.jfischer.probeunify2.pprint.ITermVariableContext;
-import dom.jfischer.probeunify2.pprint.impl.TermVariableContextCopy;
+import dom.jfischer.probeunify2.pel.IPELVariableContext;
 
 /**
  *
@@ -21,17 +20,17 @@ import dom.jfischer.probeunify2.pprint.impl.TermVariableContextCopy;
  */
 public class NamedLiteralCopy implements ICopy<INamedLiteral> {
 
-    private final ICopy<ITermVariableContext> termVariableContextCopier
-            = new TermVariableContextCopy();
+    private final ICopy<IPELVariableContext> pelVariableContextCopier
+            = new PELVariableContextCopy();
 
     @Override
     public INamedLiteral copy(IPELTracker tracker, INamedLiteral object) {
         ITracker<ILiteralNonVariableExtension> literalTracker
                 = tracker.getLiteralTracker();
         IBaseExpression<ILiteralNonVariableExtension> literalCopy = object.getLiteral().copy(literalTracker);
-        ITermVariableContext termVariableContextCopy
-                = this.termVariableContextCopier.copy(tracker, object.getTermVariableContext());
-        return new NamedLiteral(literalCopy, termVariableContextCopy);
+        IPELVariableContext pelVariableContextCopy
+                = this.pelVariableContextCopier.copy(tracker, object.getPelVariableContext());
+        return new NamedLiteral(literalCopy, pelVariableContextCopy);
     }
 
     @Override
@@ -39,7 +38,7 @@ public class NamedLiteralCopy implements ICopy<INamedLiteral> {
         ILeafCollector<ILiteralNonVariableExtension> literalLeafCollector
                 = leafCollector.getLiteralLeafCollector();
         object.getLiteral().collectLeafs(literalLeafCollector);
-        this.termVariableContextCopier.collectLeafs(leafCollector, object.getTermVariableContext());
+        this.pelVariableContextCopier.collectLeafs(leafCollector, object.getPelVariableContext());
     }
 
 }

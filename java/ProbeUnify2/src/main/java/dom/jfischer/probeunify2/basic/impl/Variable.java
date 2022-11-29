@@ -10,7 +10,6 @@ import dom.jfischer.probeunify2.basic.ILeafCollector;
 import dom.jfischer.probeunify2.basic.INonVariable;
 import dom.jfischer.probeunify2.basic.ITracker;
 import dom.jfischer.probeunify2.basic.IVariable;
-import dom.jfischer.probeunify2.exception.VariableSetException;
 import java.util.Optional;
 import java.util.Set;
 
@@ -25,7 +24,6 @@ public class Variable<
 
     private IBaseExpression<NonVariableExtension> variable = null;
     private boolean isOpen = false;
-    private boolean isOpenRecurse = false;
 
     @Override
     public void clear() {
@@ -39,16 +37,10 @@ public class Variable<
 
     @Override
     public void setValue(IBaseExpression<NonVariableExtension> value) {
-        if (this.variable == null) {
-            IBaseExpression<NonVariableExtension> actualValue
-                    = value.dereference();
-            if (this != actualValue) {
-                this.variable = actualValue;
-            }
-            this.isOpen = true;
-        } else {
-            throw new VariableSetException();
+        if (this != value) {
+            this.variable = value;
         }
+        this.isOpen = true;
     }
 
     @Override
@@ -63,17 +55,10 @@ public class Variable<
 
     @Override
     public boolean equateNonVariable(INonVariable<NonVariableExtension> other) {
-        boolean retval = true;
+        boolean retval = !other.containsVariable(this);
 
-        if (this.variable == null) {
-            if (other.containsVariable(this)) {
-                retval = false;
-            } else {
-                this.setValue(other);
-            }
-        } else {
-            retval = this.variable.equateNonVariable(other);
-            this.isOpenRecurse = true;
+        if (retval) {
+            this.setValue(other);
         }
 
         return retval;
@@ -86,20 +71,18 @@ public class Variable<
 
     @Override
     public void commit() {
-        if (this.isOpenRecurse && this.variable != null) {
+        if (this.variable != null && !this.isOpen) {
             this.variable.commit();
-            this.isOpenRecurse = false;
+        } else if (this.isOpen) {
+            this.isOpen = false;
         }
-        this.isOpen = false;
     }
 
     @Override
     public void reset() {
-        if (this.isOpenRecurse && this.variable != null) {
+        if (this.variable != null && !this.isOpen) {
             this.variable.reset();
-            this.isOpenRecurse = false;
-        }
-        if (this.isOpen) {
+        } else if (this.isOpen) {
             this.variable = null;
             this.isOpen = false;
         }
@@ -138,6 +121,16 @@ public class Variable<
     @Override
     public boolean containsVariable(IVariable<NonVariableExtension> variable) {
         return this.dereference() == variable;
+    }
+
+    @Override
+    public boolean isLeaf() {
+        return this.variable == null;
+    }
+
+    @Override
+    public boolean isDereferenced() {
+        return this.variable == null;
     }
 
 }

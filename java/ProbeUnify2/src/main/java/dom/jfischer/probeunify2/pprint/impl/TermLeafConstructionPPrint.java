@@ -8,27 +8,29 @@ import dom.jfischer.probeunify2.basic.IBaseExpression;
 import dom.jfischer.probeunify2.basic.ITrivialExtension;
 import dom.jfischer.probeunify2.basic.IVariable;
 import dom.jfischer.probeunify2.pel.IPELLeafCollector;
+import dom.jfischer.probeunify2.pel.ITermExtension;
 import dom.jfischer.probeunify2.pel.ITermNonVariableExtension;
 import dom.jfischer.probeunify2.pprint.IBackReference;
 import dom.jfischer.probeunify2.pprint.IConstructionPPrint;
 import dom.jfischer.probeunify2.pprint.IPPrintBase;
-import dom.jfischer.probeunify2.pprint.ITermVariableContext;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import dom.jfischer.probeunify2.basic.IVariableContext;
 
 /**
  *
  * @author jfischer
  */
-public class TermLeafConstructionPPrint implements IConstructionPPrint {
+public class TermLeafConstructionPPrint implements
+        IConstructionPPrint {
 
     private final IBackReference backRef;
-    private final ITermVariableContext termVariableContext;
+    private final IVariableContext<ITermExtension, ITermNonVariableExtension> termVariableContext;
     private final IPELLeafCollector leafCollector;
 
-    public TermLeafConstructionPPrint(IBackReference backRef, ITermVariableContext termVariableContext, IPELLeafCollector leafCollector) {
+    public TermLeafConstructionPPrint(IBackReference backRef, IVariableContext<ITermExtension, ITermNonVariableExtension> termVariableContext, IPELLeafCollector leafCollector) {
         this.backRef = backRef;
         this.termVariableContext = termVariableContext;
         this.leafCollector = leafCollector;
@@ -89,8 +91,9 @@ public class TermLeafConstructionPPrint implements IConstructionPPrint {
     }
 
     private String getVariableString(IVariable<ITermNonVariableExtension> variable) {
-        String name = this.termVariableContext.getName(variable);
-        IBaseExpression<ITrivialExtension> sort = this.termVariableContext.getSortMap().get(variable);
+        String name = "?" + this.termVariableContext.getName(variable);
+        IBaseExpression<ITrivialExtension> sort
+                = this.termVariableContext.getExtensionMap().get(variable).getSort();
         String sortName = this.backRef.getSortRef().get(sort);
         return name + ":" + sortName;
     }

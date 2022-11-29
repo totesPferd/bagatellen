@@ -21,11 +21,19 @@ public interface IBaseExpression<
 
     IBaseExpression<NonVariableExtension> dereference();
 
+    boolean isDereferenced();
+
+    boolean isLeaf();
+
     /*
      * variable should be open, i.e. variable.value() == Optioanl.empty()
      */
     boolean containsVariable(IVariable<NonVariableExtension> variable);
-    
+
+    /*
+     * this should be this.isDereferenced();
+     * other should be other.isDereferenced();
+     */
     boolean equateNonVariable(INonVariable<NonVariableExtension> other);
 
     IBaseExpression<NonVariableExtension> copy(ITracker<NonVariableExtension> tracker);
@@ -35,5 +43,5 @@ public interface IBaseExpression<
     default boolean eq(IBaseExpression<NonVariableExtension> other) {
         return this.dereference() == other.dereference();
     }
-    
+
 }

@@ -7,7 +7,6 @@ package dom.jfischer.probeunify2.proof.impl;
 import dom.jfischer.probeunify2.basic.IBaseExpression;
 import dom.jfischer.probeunify2.basic.IExpression;
 import dom.jfischer.probeunify2.basic.IUnification;
-import dom.jfischer.probeunify2.basic.impl.BaseUnification;
 import dom.jfischer.probeunify2.basic.impl.MultiUnification;
 import dom.jfischer.probeunify2.pel.ILiteralNonVariableExtension;
 import dom.jfischer.probeunify2.proof.IGoalExtension;
@@ -20,13 +19,12 @@ import java.util.stream.Collectors;
  *
  * @author jfischer
  */
-public class GoalNonVariableExtensionUnification implements IUnification<IGoalNonVariableExtension> {
+public class GoalNonVariableExtensionUnification implements
+        IUnification<IGoalNonVariableExtension> {
 
     private final IUnification<List<IBaseExpression<ILiteralNonVariableExtension>>> unification;
 
-    public GoalNonVariableExtensionUnification() {
-        IUnification<IBaseExpression<ILiteralNonVariableExtension>> goalUnification
-                = new BaseUnification<>();
+    public GoalNonVariableExtensionUnification(IUnification<IBaseExpression<ILiteralNonVariableExtension>> goalUnification) {
         this.unification = new MultiUnification<>(goalUnification);
     }
 

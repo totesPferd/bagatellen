@@ -4,12 +4,15 @@
  */
 package dom.jfischer.probeunify2.basic;
 
+import java.io.Serializable;
+
 /**
  *
  * @author jfischer
  * @param <NonVariableExtension>
  */
-public interface ICheckVariableOccurence<NonVariableExtension extends IExtension> {
+public interface ICheckVariableOccurence<NonVariableExtension extends IExtension> extends
+        Serializable {
 
     /*
      * variable should be open, i.e. variable.value() == Optioanl.empty()

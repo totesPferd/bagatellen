@@ -22,16 +22,14 @@ public class PredicateUnification implements IUnification<IPredicate> {
 
     public PredicateUnification() {
         IUnification<IBaseExpression<ITrivialExtension>> sortUnification
-                =  new BaseUnification<>();
-        this.domainUnification 
-                =  new MultiUnification<>(sortUnification);
+                = new BaseUnification<>();
+        this.domainUnification
+                = new MultiUnification<>(sortUnification);
     }
-    
-    
-    
+
     @Override
     public boolean unify(IPredicate arg1, IPredicate arg2) {
         return this.domainUnification.unify(arg1.getDomain(), arg2.getDomain());
     }
-    
+
 }

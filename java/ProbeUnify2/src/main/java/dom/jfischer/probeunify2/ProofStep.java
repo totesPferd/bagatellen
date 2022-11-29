@@ -4,9 +4,11 @@
  */
 package dom.jfischer.probeunify2;
 
+import dom.jfischer.probeunify2.basic.IExpression;
 import dom.jfischer.probeunify2.basic.IVariable;
 import dom.jfischer.probeunify2.pel.ITermNonVariableExtension;
-import dom.jfischer.probeunify2.proof.IGoalExpression;
+import dom.jfischer.probeunify2.proof.IGoalExtension;
+import dom.jfischer.probeunify2.proof.IGoalNonVariableExtension;
 import java.util.List;
 import java.util.Set;
 
@@ -17,9 +19,9 @@ import java.util.Set;
 public class ProofStep implements IProofStep {
 
     private final Set<IVariable<ITermNonVariableExtension>> termVariables;
-    private final List<IGoalExpression> goals;
+    private final List<IExpression<IGoalExtension, IGoalNonVariableExtension>> goals;
 
-    public ProofStep(Set<IVariable<ITermNonVariableExtension>> termVariables, List<IGoalExpression> goals) {
+    public ProofStep(Set<IVariable<ITermNonVariableExtension>> termVariables, List<IExpression<IGoalExtension, IGoalNonVariableExtension>> goals) {
         this.termVariables = termVariables;
         this.goals = goals;
     }
@@ -30,7 +32,7 @@ public class ProofStep implements IProofStep {
     }
 
     @Override
-    public List<IGoalExpression> getGoals() {
+    public List<IExpression<IGoalExtension, IGoalNonVariableExtension>> getGoals() {
         return this.goals;
     }
 
@@ -50,9 +52,4 @@ public class ProofStep implements IProofStep {
                 .forEach(var -> var.clear());
     }
 
-    @Override
-    public String toString() {
-        return "ProofStep{" + "termVariables=" + termVariables + ", goals=" + goals + '}';
-    }
-    
 }

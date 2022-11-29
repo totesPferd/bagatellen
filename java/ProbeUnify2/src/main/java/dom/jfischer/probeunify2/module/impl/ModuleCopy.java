@@ -4,17 +4,22 @@
  */
 package dom.jfischer.probeunify2.module.impl;
 
+import dom.jfischer.probeunify2.pel.impl.NamedTermCopy;
+import dom.jfischer.probeunify2.pel.impl.NamedLiteralCopy;
+import dom.jfischer.probeunify2.pel.impl.NamedClauseCopy;
 import dom.jfischer.probeunify2.basic.IBaseExpression;
 import dom.jfischer.probeunify2.basic.ICopy;
 import dom.jfischer.probeunify2.basic.ITrivialExtension;
 import dom.jfischer.probeunify2.module.IModule;
-import dom.jfischer.probeunify2.module.INamedClause;
-import dom.jfischer.probeunify2.module.INamedLiteral;
-import dom.jfischer.probeunify2.module.INamedTerm;
+import dom.jfischer.probeunify2.pel.INamedClause;
+import dom.jfischer.probeunify2.pel.INamedLiteral;
+import dom.jfischer.probeunify2.pel.INamedTerm;
+import dom.jfischer.probeunify2.pel.ILiteralNonVariableExtension;
 import dom.jfischer.probeunify2.pel.IOperationExpression;
 import dom.jfischer.probeunify2.pel.IPELLeafCollector;
 import dom.jfischer.probeunify2.pel.IPELTracker;
 import dom.jfischer.probeunify2.pel.IPredicateExpression;
+import dom.jfischer.probeunify2.pel.impl.LiteralCopy;
 import java.util.Map;
 
 /**
@@ -23,16 +28,24 @@ import java.util.Map;
  */
 public class ModuleCopy implements ICopy<IModule> {
 
-    private final ICopy<INamedClause> namedClauseCopier = new NamedClauseCopy();
+    private final ICopy<INamedClause> namedClauseCopier;
     private final ICopy<INamedLiteral> namedLiteralCopier = new NamedLiteralCopy();
     private final ICopy<INamedTerm> namedTermCopier = new NamedTermCopy();
+
+    public ModuleCopy() {
+        ICopy<IBaseExpression<ILiteralNonVariableExtension>> goalCopier
+                = new LiteralCopy();
+        this.namedClauseCopier
+                = new NamedClauseCopy(goalCopier);
+    }
 
     @Override
     public IModule copy(IPELTracker tracker, IModule object) {
         IModule retval = new Module();
 
         {
-            Map<String, INamedClause> retAxioms = retval.getAxioms();
+            Map<String, INamedClause> retAxioms
+                    = retval.getAxioms();
             for (Map.Entry<String, INamedClause> axiom : object.getAxioms().entrySet()) {
                 retAxioms.put(axiom.getKey(), this.namedClauseCopier.copy(tracker, axiom.getValue()));
             }

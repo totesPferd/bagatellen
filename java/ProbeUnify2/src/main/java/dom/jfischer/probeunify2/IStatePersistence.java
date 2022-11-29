@@ -11,9 +11,9 @@ import java.io.Serializable;
  * @author jfischer
  */
 public interface IStatePersistence extends Serializable {
-    
+
     IState restore();
-    
+
     boolean backup(IState state);
-    
+
 }

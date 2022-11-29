@@ -9,7 +9,6 @@ import dom.jfischer.probeunify2.basic.impl.Tracker;
 import dom.jfischer.probeunify2.pel.ILiteralNonVariableExtension;
 import dom.jfischer.probeunify2.pel.IPELTracker;
 import dom.jfischer.probeunify2.pel.ITermNonVariableExtension;
-import dom.jfischer.probeunify2.proof.IGoalNonVariableExtension;
 import dom.jfischer.probeunify2.basic.ITrivialExtension;
 
 /**
@@ -19,8 +18,6 @@ import dom.jfischer.probeunify2.basic.ITrivialExtension;
 public class PELTracker implements IPELTracker {
 
     private final ITracker<ITermNonVariableExtension> termTracker
-            = new Tracker<>(this);
-    private final ITracker<IGoalNonVariableExtension> goalTracker
             = new Tracker<>(this);
     private final ITracker<ILiteralNonVariableExtension> literalTracker
             = new Tracker<>(this);
@@ -34,11 +31,6 @@ public class PELTracker implements IPELTracker {
     @Override
     public ITracker<ITermNonVariableExtension> getTermTracker() {
         return this.termTracker;
-    }
-
-    @Override
-    public ITracker<IGoalNonVariableExtension> getGoalTracker() {
-        return this.goalTracker;
     }
 
     @Override

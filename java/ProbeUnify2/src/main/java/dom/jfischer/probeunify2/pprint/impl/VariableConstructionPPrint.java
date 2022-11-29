@@ -4,29 +4,32 @@
  */
 package dom.jfischer.probeunify2.pprint.impl;
 
+import dom.jfischer.probeunify2.basic.IExtension;
 import dom.jfischer.probeunify2.basic.IVariable;
-import dom.jfischer.probeunify2.pel.ITermNonVariableExtension;
 import dom.jfischer.probeunify2.pprint.IConstructionPPrint;
 import dom.jfischer.probeunify2.pprint.IPPrintBase;
-import dom.jfischer.probeunify2.pprint.ITermVariableContext;
+import dom.jfischer.probeunify2.basic.IVariableContext;
 
 /**
  *
  * @author jfischer
+ * @param <Extension>
+ * @param <NonVariableExtension>
  */
-public class TermVariableConstructionPPrint implements IConstructionPPrint {
+public class VariableConstructionPPrint<Extension extends IExtension, NonVariableExtension extends IExtension> implements
+        IConstructionPPrint {
 
-    private final ITermVariableContext termVariableContext;
-    private final IVariable<ITermNonVariableExtension> variable;
+    private final IVariableContext<Extension, NonVariableExtension> variableContext;
+    private final IVariable<NonVariableExtension> variable;
 
-    public TermVariableConstructionPPrint(ITermVariableContext termVariableContext, IVariable<ITermNonVariableExtension> variable) {
-        this.termVariableContext = termVariableContext;
+    public VariableConstructionPPrint(IVariableContext<Extension, NonVariableExtension> variableContext, IVariable<NonVariableExtension> variable) {
+        this.variableContext = variableContext;
         this.variable = variable;
     }
 
     @Override
     public String getSingleLine() {
-        String name = termVariableContext.getName(this.variable);
+        String name = "?" + variableContext.getName(this.variable);
         IConstructionPPrint stringConstructionPPrint
                 = new StringConstructionPPrint(name);
         return stringConstructionPPrint.getSingleLine();
@@ -34,7 +37,7 @@ public class TermVariableConstructionPPrint implements IConstructionPPrint {
 
     @Override
     public void pprintMultiLine(IPPrintBase pprintBase) {
-        String name = termVariableContext.getName(this.variable);
+        String name = "?" + variableContext.getName(this.variable);
         IConstructionPPrint stringConstructionPPrint
                 = new StringConstructionPPrint(name);
         stringConstructionPPrint.pprint(pprintBase);

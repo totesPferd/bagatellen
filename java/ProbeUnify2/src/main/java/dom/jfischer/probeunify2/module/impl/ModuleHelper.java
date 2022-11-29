@@ -10,9 +10,9 @@ import dom.jfischer.probeunify2.pprint.IBackReference;
 import java.util.Map;
 import java.util.Map.Entry;
 import dom.jfischer.probeunify2.module.IModule;
-import dom.jfischer.probeunify2.module.INamedClause;
-import dom.jfischer.probeunify2.module.INamedLiteral;
-import dom.jfischer.probeunify2.module.INamedTerm;
+import dom.jfischer.probeunify2.pel.INamedClause;
+import dom.jfischer.probeunify2.pel.INamedLiteral;
+import dom.jfischer.probeunify2.pel.INamedTerm;
 import dom.jfischer.probeunify2.pel.ILiteralNonVariableExtension;
 import dom.jfischer.probeunify2.pel.IOperationExpression;
 import dom.jfischer.probeunify2.pel.IPredicateExpression;
@@ -26,10 +26,10 @@ import dom.jfischer.probeunify2.proof.IClause;
 public class ModuleHelper {
 
     public static void getBackReference(IModule in, IBackReference out, String prefix) {
-        String realPrefix =
-                prefix == null
-                ? ""
-                : prefix + ".";
+        String realPrefix
+                = prefix == null
+                        ? ""
+                        : prefix + ".";
         {
             Map<String, IModule> imports = in.getImports();
             for (Entry<String, IModule> entry : imports.entrySet()) {

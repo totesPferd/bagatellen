@@ -4,7 +4,7 @@
  */
 package dom.jfischer.probeunify2.pprint.impl;
 
-import dom.jfischer.probeunify2.module.INamedTerm;
+import dom.jfischer.probeunify2.pel.INamedTerm;
 import dom.jfischer.probeunify2.pprint.IBackReference;
 
 /**
