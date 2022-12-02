@@ -20,6 +20,7 @@ import dom.jfischer.probeunify2.basic.impl.NonVariable;
 import dom.jfischer.probeunify2.basic.impl.Unification;
 import dom.jfischer.probeunify2.basic.impl.Variable;
 import dom.jfischer.probeunify2.pel.ILiteralNonVariableExtension;
+import dom.jfischer.probeunify2.pel.INamedClause;
 import dom.jfischer.probeunify2.proof.IClause;
 import dom.jfischer.probeunify2.proof.IGoalExtension;
 import dom.jfischer.probeunify2.proof.IGoalNonVariableExtension;
@@ -36,14 +37,14 @@ import java.util.stream.Collectors;
  */
 public class ProofHelper {
 
-    public static  IExpression<IGoalExtension, IGoalNonVariableExtension> createGoal(IBaseExpression<ILiteralNonVariableExtension> arg) {
+    public static IExpression<IGoalExtension, IGoalNonVariableExtension> createGoal(IBaseExpression<ILiteralNonVariableExtension> arg) {
         IGoalExtension extension = new GoalExtension(arg);
         IVariable<IGoalNonVariableExtension> baseExpression
                 = new Variable<>();
         return new Expression<>(extension, baseExpression);
     }
 
-    public static  boolean resolve(
+    public static boolean resolve(
             ICopy<IBaseExpression<ILiteralNonVariableExtension>> copier,
             IUnification<IBaseExpression<ILiteralNonVariableExtension>> goalUnification,
             IExpression<IGoalExtension, IGoalNonVariableExtension> accu,
@@ -93,27 +94,27 @@ public class ProofHelper {
         return retval;
     }
 
-    public static  void applyProof(
+    public static void applyProof(
             ICopy<IBaseExpression<ILiteralNonVariableExtension>> copier,
             IUnification<IBaseExpression<ILiteralNonVariableExtension>> unification,
             IExpression<IGoalExtension, IGoalNonVariableExtension> accu,
-            Set<IClause> proof) {
+            Set<INamedClause> proof) {
         if (!proof.isEmpty()) {
-            ICompare<IClause> clauseComparer
+            ICompare<INamedClause> clauseComparer
                     = new Compare<>(copier, unification);
             List<IExpression<IGoalExtension, IGoalNonVariableExtension>> openGoals
                     = Collections.synchronizedList(new ArrayList<>());
             listOpenGoals(accu, openGoals);
             for (IExpression<IGoalExtension, IGoalNonVariableExtension> openGoal : openGoals) {
-                Set<IClause> candidates = clauseComparer.getMaximalSet(
-                        u -> u.getConclusion(),
+                Set<INamedClause> candidates = clauseComparer.getMaximalSet(
+                        u -> u.getClause().getConclusion(),
                         proof,
                         openGoal.getExtension().getGoal());
                 if (candidates.size() == 1) {
-                    for (IClause candidate : candidates) {
-                        if (resolve(copier, unification, openGoal, candidate)) {
+                    for (INamedClause candidate : candidates) {
+                        if (resolve(copier, unification, openGoal, candidate.getClause())) {
                             openGoal.commit();
-                            Set<IClause> proofCopy = Collections.synchronizedSet(
+                            Set<INamedClause> proofCopy = Collections.synchronizedSet(
                                     proof
                                             .parallelStream()
                                             .filter(c -> c != candidate)
@@ -126,7 +127,7 @@ public class ProofHelper {
         }
     }
 
-    public static  void createProof(IExpression<IGoalExtension, IGoalNonVariableExtension> accu, Set<IClause> proof) {
+    public static void createProof(IExpression<IGoalExtension, IGoalNonVariableExtension> accu, Set<IClause> proof) {
         IBaseExpression<IGoalNonVariableExtension> nextGoal = accu.getBaseExpression().dereference();
         {
             Optional<INonVariable<IGoalNonVariableExtension>> optNonVariableAccu
@@ -149,7 +150,7 @@ public class ProofHelper {
         }
     }
 
-    public static  void listOpenGoals(IExpression<IGoalExtension, IGoalNonVariableExtension> accu, List<IExpression<IGoalExtension, IGoalNonVariableExtension>> openGoals) {
+    public static void listOpenGoals(IExpression<IGoalExtension, IGoalNonVariableExtension> accu, List<IExpression<IGoalExtension, IGoalNonVariableExtension>> openGoals) {
         IGoalExtension extension = accu.getExtension();
         if (!extension.isClosed()) {
             IBaseExpression<IGoalNonVariableExtension> accuDereferencedBaseExpression
@@ -174,7 +175,7 @@ public class ProofHelper {
         }
     }
 
-    public  void undo(IExpression<IGoalExtension, IGoalNonVariableExtension> goal) {
+    public void undo(IExpression<IGoalExtension, IGoalNonVariableExtension> goal) {
         goal.getExtension().undo();
         goal.getBaseExpression().variable().get().clear();
     }

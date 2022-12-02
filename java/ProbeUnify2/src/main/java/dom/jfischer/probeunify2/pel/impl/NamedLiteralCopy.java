@@ -25,12 +25,16 @@ public class NamedLiteralCopy implements ICopy<INamedLiteral> {
 
     @Override
     public INamedLiteral copy(IPELTracker tracker, INamedLiteral object) {
-        ITracker<ILiteralNonVariableExtension> literalTracker
-                = tracker.getLiteralTracker();
-        IBaseExpression<ILiteralNonVariableExtension> literalCopy = object.getLiteral().copy(literalTracker);
-        IPELVariableContext pelVariableContextCopy
-                = this.pelVariableContextCopier.copy(tracker, object.getPelVariableContext());
-        return new NamedLiteral(literalCopy, pelVariableContextCopy);
+        INamedLiteral retval = object;
+        if (!retval.isFree()) {
+            ITracker<ILiteralNonVariableExtension> literalTracker
+                    = tracker.getLiteralTracker();
+            IBaseExpression<ILiteralNonVariableExtension> literalCopy = object.getLiteral().copy(literalTracker);
+            IPELVariableContext pelVariableContextCopy
+                    = this.pelVariableContextCopier.copy(tracker, object.getPelVariableContext());
+            retval = new NamedLiteral(literalCopy, pelVariableContextCopy);
+        }
+        return retval;
     }
 
     @Override

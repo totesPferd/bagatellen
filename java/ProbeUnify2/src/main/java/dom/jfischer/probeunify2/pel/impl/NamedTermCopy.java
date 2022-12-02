@@ -8,10 +8,10 @@ import dom.jfischer.probeunify2.basic.IBaseExpression;
 import dom.jfischer.probeunify2.basic.ICopy;
 import dom.jfischer.probeunify2.basic.ILeafCollector;
 import dom.jfischer.probeunify2.basic.ITracker;
+import dom.jfischer.probeunify2.basic.ITrivialExtension;
 import dom.jfischer.probeunify2.pel.INamedTerm;
 import dom.jfischer.probeunify2.pel.IPELLeafCollector;
 import dom.jfischer.probeunify2.pel.IPELTracker;
-import dom.jfischer.probeunify2.pel.ITermExtension;
 import dom.jfischer.probeunify2.pel.ITermNonVariableExtension;
 import dom.jfischer.probeunify2.basic.IVariableContext;
 
@@ -23,13 +23,17 @@ public class NamedTermCopy implements ICopy<INamedTerm> {
 
     @Override
     public INamedTerm copy(IPELTracker tracker, INamedTerm object) {
-        ITracker<ITermNonVariableExtension> termTracker
-                = tracker.getTermTracker();
-        IBaseExpression<ITermNonVariableExtension> termCopy
-                = object.getTerm().copy(termTracker);
-        IVariableContext<ITermExtension, ITermNonVariableExtension> termVariableContextCopy
-                = object.getTermVariableContext().copy(termTracker);
-        return new NamedTerm(termCopy, termVariableContextCopy);
+        INamedTerm retval = object;
+        if (!object.isFree()) {
+            ITracker<ITermNonVariableExtension> termTracker
+                    = tracker.getTermTracker();
+            IBaseExpression<ITermNonVariableExtension> termCopy
+                    = object.getTerm().copy(termTracker);
+            IVariableContext<IBaseExpression<ITrivialExtension>, ITermNonVariableExtension> termVariableContextCopy
+                    = object.getTermVariableContext().copy(termTracker);
+            retval = new NamedTerm(termCopy, termVariableContextCopy);
+        }
+        return retval;
     }
 
     @Override

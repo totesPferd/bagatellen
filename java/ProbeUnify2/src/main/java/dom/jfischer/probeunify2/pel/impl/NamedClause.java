@@ -5,6 +5,7 @@
 package dom.jfischer.probeunify2.pel.impl;
 
 import dom.jfischer.probeunify2.pel.INamedClause;
+import dom.jfischer.probeunify2.pel.INamedLiteral;
 import dom.jfischer.probeunify2.pel.IPELVariableContext;
 import dom.jfischer.probeunify2.proof.IClause;
 
@@ -42,6 +43,22 @@ public class NamedClause implements INamedClause {
     @Override
     public IPELVariableContext getPelVariableContext() {
         return this.pelVariableContext;
+    }
+
+    @Override
+    public boolean isFree() {
+        INamedLiteral namedConclusion
+                = new NamedLiteral(this.clause.getConclusion(), this.pelVariableContext);
+        boolean retval = namedConclusion.isFree();
+
+        if (retval) {
+            retval = this.clause.getPremises()
+                    .parallelStream()
+                    .map(premis -> new NamedLiteral(premis, this.pelVariableContext))
+                    .allMatch(namedPremis -> namedPremis.isFree());
+        }
+
+        return retval;
     }
 
 }

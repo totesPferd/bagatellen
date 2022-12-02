@@ -30,11 +30,15 @@ public class NamedClauseCopy implements ICopy<INamedClause> {
 
     @Override
     public INamedClause copy(IPELTracker tracker, INamedClause object) {
-        IClause clauseCopy
-                = this.clauseCopier.copy(tracker, object.getClause());
-        IPELVariableContext pelVariableContextCopy
-                = this.pelVariableContextCopier.copy(tracker, object.getPelVariableContext());
-        return new NamedClause(clauseCopy, pelVariableContextCopy);
+        INamedClause retval = object;
+        if (!object.isFree()) {
+            IClause clauseCopy
+                    = this.clauseCopier.copy(tracker, object.getClause());
+            IPELVariableContext pelVariableContextCopy
+                    = this.pelVariableContextCopier.copy(tracker, object.getPelVariableContext());
+            retval = new NamedClause(clauseCopy, pelVariableContextCopy);
+        }
+        return retval;
     }
 
     @Override

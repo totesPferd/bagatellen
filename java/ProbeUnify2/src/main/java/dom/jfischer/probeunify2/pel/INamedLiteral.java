@@ -5,6 +5,7 @@
 package dom.jfischer.probeunify2.pel;
 
 import dom.jfischer.probeunify2.basic.IBaseExpression;
+import dom.jfischer.probeunify2.basic.ICheckFreeness;
 import dom.jfischer.probeunify2.basic.IExpression;
 import dom.jfischer.probeunify2.basic.ITrivialExtension;
 
@@ -13,6 +14,7 @@ import dom.jfischer.probeunify2.basic.ITrivialExtension;
  * @author jfischer
  */
 public interface INamedLiteral extends
+        ICheckFreeness,
         IExpression<ITrivialExtension, ILiteralNonVariableExtension> {
 
     IBaseExpression<ILiteralNonVariableExtension> getLiteral();

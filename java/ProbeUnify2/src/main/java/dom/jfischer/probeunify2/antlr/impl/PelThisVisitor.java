@@ -4,7 +4,7 @@
  */
 package dom.jfischer.probeunify2.antlr.impl;
 
-import dom.jfischer.probeunify2.antlr.ExpressionSystem;
+import dom.jfischer.probeunify2.antlr.IPelThisVisitor;
 import dom.jfischer.probeunify2.basic.IBaseCopy;
 import dom.jfischer.probeunify2.basic.IBaseExpression;
 import dom.jfischer.probeunify2.basic.ICheckVariableOccurence;
@@ -13,9 +13,9 @@ import dom.jfischer.probeunify2.basic.INonVariable;
 import dom.jfischer.probeunify2.basic.ITrivialExtension;
 import dom.jfischer.probeunify2.basic.IUnification;
 import dom.jfischer.probeunify2.basic.IVariable;
+import dom.jfischer.probeunify2.basic.IVariableContext;
 import dom.jfischer.probeunify2.basic.impl.CopyBaseCopy;
 import dom.jfischer.probeunify2.basic.impl.NonVariable;
-import dom.jfischer.probeunify2.basic.impl.TrivialExtension;
 import dom.jfischer.probeunify2.basic.impl.TrivialVariableOccurenceChecker;
 import dom.jfischer.probeunify2.basic.impl.Variable;
 import dom.jfischer.probeunify2.exception.QualificatorException;
@@ -27,7 +27,6 @@ import dom.jfischer.probeunify2.module.impl.Module;
 import dom.jfischer.probeunify2.module.impl.ModuleHelper;
 import dom.jfischer.probeunify2.module.impl.ModuleUnification;
 import dom.jfischer.probeunify2.pel.impl.NamedClause;
-import dom.jfischer.probeunify2.pel.impl.NamedLiteral;
 import dom.jfischer.probeunify2.pel.impl.NamedTerm;
 import dom.jfischer.probeunify2.pel.ILiteralNonVariableExtension;
 import dom.jfischer.probeunify2.pel.IOperation;
@@ -35,17 +34,16 @@ import dom.jfischer.probeunify2.pel.IOperationExpression;
 import dom.jfischer.probeunify2.pel.IPELVariableContext;
 import dom.jfischer.probeunify2.pel.IPredicate;
 import dom.jfischer.probeunify2.pel.IPredicateExpression;
-import dom.jfischer.probeunify2.pel.ITermExtension;
 import dom.jfischer.probeunify2.pel.ITermNonVariableExtension;
 import dom.jfischer.probeunify2.pel.impl.LiteralNonVariableExtension;
 import dom.jfischer.probeunify2.pel.impl.LiteralNonVariableExtensionCopy;
 import dom.jfischer.probeunify2.pel.impl.LiteralNonVariableExtensionUnification;
+import dom.jfischer.probeunify2.pel.impl.NamedLiteral;
 import dom.jfischer.probeunify2.pel.impl.Operation;
 import dom.jfischer.probeunify2.pel.impl.OperationExpression;
 import dom.jfischer.probeunify2.pel.impl.PELVariableContext;
 import dom.jfischer.probeunify2.pel.impl.Predicate;
 import dom.jfischer.probeunify2.pel.impl.PredicateExpression;
-import dom.jfischer.probeunify2.pel.impl.TermExtension;
 import dom.jfischer.probeunify2.pel.impl.TermNonVariableExtension;
 import dom.jfischer.probeunify2.pel.impl.TermNonVariableExtensionCopy;
 import dom.jfischer.probeunify2.pel.impl.TermNonVariableExtensionUnification;
@@ -77,7 +75,7 @@ import org.antlr.v4.runtime.Token;
  * @author jfischer
  */
 @SuppressWarnings("unchecked")
-public class PelThisVisitor extends PelBaseVisitor<Object> {
+public class PelThisVisitor extends PelBaseVisitor<Object> implements IPelThisVisitor {
 
     private final IUnification<IModule> moduleUnification
             = new ModuleUnification();
@@ -95,8 +93,10 @@ public class PelThisVisitor extends PelBaseVisitor<Object> {
 
     private final IModule module;
     private final String moduleName;
-    private final Pattern baseVarPattern;
-    private final Pattern indexedVarPattern;
+    private final Pattern literalBaseVarPattern;
+    private final Pattern literalIndexedVarPattern;
+    private final Pattern termBaseVarPattern;
+    private final Pattern termIndexedVarPattern;
 
     private final IPPrintBase pprintBase;
 
@@ -104,8 +104,10 @@ public class PelThisVisitor extends PelBaseVisitor<Object> {
         this.moduleName = moduleName;
         this.module = module;
 
-        this.baseVarPattern = Pattern.compile("^\\?(__|[A-Za-z_][A-Za-z0-9]*)$");
-        this.indexedVarPattern = Pattern.compile("^\\?(__|[A-Za-z_][A-Za-z0-9]*)_([0-9]+)$");
+        this.literalBaseVarPattern = Pattern.compile("^\\?\\?(__|[A-Za-z_][A-Za-z0-9]*)$");
+        this.literalIndexedVarPattern = Pattern.compile("^\\?\\?(__|[A-Za-z_][A-Za-z0-9]*)_([0-9]+)$");
+        this.termBaseVarPattern = Pattern.compile("^\\?(__|[A-Za-z_][A-Za-z0-9]*)$");
+        this.termIndexedVarPattern = Pattern.compile("^\\?(__|[A-Za-z_][A-Za-z0-9]*)_([0-9]+)$");
 
         IPPrintConfig pprintConfig = new PPrintConfig();
         this.pprintBase = new PPrintBase(System.err, pprintConfig, 0);
@@ -125,37 +127,23 @@ public class PelThisVisitor extends PelBaseVisitor<Object> {
     }
 
     @Override
-    public Object visitProof(PelParser.ProofContext ctx) {
-        IPELVariableContext pelVariableContext = new PELVariableContext();
-        Map<String, IVariable<ILiteralNonVariableExtension>> literalBaseVars
-                = new ConcurrentHashMap<>();
-        Map<String, Map<Integer, IVariable<ILiteralNonVariableExtension>>> literalIndexedVars
-                = new ConcurrentHashMap<>();
-        Map<String, IVariable<ITermNonVariableExtension>> termBaseVars
-                = new ConcurrentHashMap<>();
-        Map<String, Map<Integer, IVariable<ITermNonVariableExtension>>> termIndexedVars
-                = new ConcurrentHashMap<>();
+    public IModule getModule() {
+        return this.module;
+    }
 
+    @Override
+    public Object visitProof(PelParser.ProofContext ctx) {
         List<PelParser.ClauseContext> clausesContext = ctx.clauses;
         clausesContext
                 .parallelStream()
-                .forEach(clause -> clause.literalBaseVars = literalBaseVars);
+                .forEach(clause -> clause.pelVariableContext = this.module.getInitialCtxBean().getPelVariableContext());
         clausesContext
                 .parallelStream()
-                .forEach(clause -> clause.literalIndexedVars = literalIndexedVars);
-        clausesContext
-                .parallelStream()
-                .forEach(clause -> clause.termBaseVars = termBaseVars);
-        clausesContext
-                .parallelStream()
-                .forEach(clause -> clause.termIndexedVars = termIndexedVars);
-        clausesContext
-                .parallelStream()
-                .forEach(clause -> clause.pelVariableContext = pelVariableContext);
-        Set<IClause> proof = clausesContext
+                .forEach(clause -> clause.literalVariableInfo = this.module.getInitialCtxBean().getLiteralVariableInfo());
+        Set<INamedClause> proof = clausesContext
                 .stream()
                 .map(clause -> this.visit(clause))
-                .map(obj -> (IClause) obj)
+                .map(obj -> (INamedClause) obj)
                 .collect(Collectors.toSet());
         return (Object) proof;
     }
@@ -166,7 +154,8 @@ public class PelThisVisitor extends PelBaseVisitor<Object> {
         Token baseModuleSymbol = ctx.SymbolToken(1).getSymbol();
         String symbolText = symbol.getText();
         String baseModuleSymbolText = baseModuleSymbol.getText();
-        IModule baseModule = new Module();
+        ITrivialExtension trivialExtension = this.module.getTrivialExtension();
+        IModule baseModule = new Module(trivialExtension);
         try {
             CharStream baseModuleCharStream
                     = AntlrHelper.getLogicCharStream(baseModuleSymbolText);
@@ -267,194 +256,38 @@ public class PelThisVisitor extends PelBaseVisitor<Object> {
     }
 
     @Override
-    public Object visitLiteral_variable_decl(PelParser.Literal_variable_declContext ctx) {
-        IPELVariableContext pelVariableContext
-                = new PELVariableContext();
-        Token variableToken = ctx.SymbolToken().getSymbol();
-        String variableText = variableToken.getText();
-        Map<String, INamedLiteral> literalsMap = this.module.getLiterals();
-        boolean errorMode = false;
-        if (literalsMap.containsKey(variableText)) {
-            printErr_LeadingLine_SingleToken(variableToken, "variable " + variableText + " already declared as literal.");
-            errorMode = true;
-        }
-        if (!errorMode) {
-            ITrivialExtension literalExtension = new TrivialExtension();
-            IVariable<ILiteralNonVariableExtension> variable
-                    = pelVariableContext.getLiteralVariableContext().createVariable(literalExtension, variableText);
-            INamedLiteral namedLiteral = new NamedLiteral(variable, pelVariableContext);
-            literalsMap.put(variableText, namedLiteral);
-        }
-        return null;
-    }
-
-    @Override
-    public Object visitTerm_variable_decl(PelParser.Term_variable_declContext ctx) {
-        IPELVariableContext pelVariableContext
-                = new PELVariableContext();
-        Token variableToken = ctx.SymbolToken().getSymbol();
-        String variableText = variableToken.getText();
-        Map<String, INamedTerm> termsMap = this.module.getTerms();
-        boolean errorMode = false;
-        if (termsMap.containsKey(variableText)) {
-            printErr_LeadingLine_SingleToken(variableToken, "variable " + variableText + " already declared as term.");
-            errorMode = true;
-        }
-        if (!errorMode) {
-            PelParser.SymbolContext symbolContext = ctx.symbol();
-            IBaseExpression<ITrivialExtension> sort = this.derefSort(symbolContext);
-            ITermExtension termExtension = new TermExtension(sort);
-            IVariable<ITermNonVariableExtension> variable
-                    = pelVariableContext.getTermVariableContext().createVariable(termExtension, variableText);
-            INamedTerm namedTerm = new NamedTerm(variable, pelVariableContext.getTermVariableContext());
-            termsMap.put(variableText, namedTerm);
-        }
-        return null;
-    }
-
-    @Override
-    public Object visitTerm_decl(PelParser.Term_declContext ctx) {
-        IPELVariableContext pelVariableContext
-                = new PELVariableContext();
-        Map<String, IVariable<ITermNonVariableExtension>> termBaseVars
-                = new ConcurrentHashMap<>();
-        Map<String, Map<Integer, IVariable<ITermNonVariableExtension>>> termIndexedVars
-                = new ConcurrentHashMap<>();
-        Token termToken = ctx.SymbolToken().getSymbol();
-        String termText = termToken.getText();
-        Map<String, INamedTerm> termsMap = this.module.getTerms();
-        PelParser.TermContext termContext = ctx.term();
-        termContext.pelVariableContext = pelVariableContext;
-        termContext.termBaseVars = termBaseVars;
-        termContext.termIndexedVars = termIndexedVars;
-        termContext.expectedSort = null;
-        IBaseExpression<ITermNonVariableExtension> term
-                = (IBaseExpression<ITermNonVariableExtension>) this.visit(termContext);
-        if (termsMap.containsKey(termText)) {
-            printErr_LeadingLine_SingleToken(termToken, "term " + termText + " already declared.");
-        } else if (term != null) {
-            INamedTerm namedTerm
-                    = new NamedTerm(term, pelVariableContext.getTermVariableContext());
-            termsMap.put(termText, namedTerm);
-        }
-        return null;
-    }
-
-    @Override
-    public Object visitLiteral_decl(PelParser.Literal_declContext ctx) {
-        IPELVariableContext pelVariableContext
-                = new PELVariableContext();
-        Map<String, IVariable<ILiteralNonVariableExtension>> literalBaseVars
-                = new ConcurrentHashMap<>();
-        Map<String, Map<Integer, IVariable<ILiteralNonVariableExtension>>> literalIndexedVars
-                = new ConcurrentHashMap<>();
-        Map<String, IVariable<ITermNonVariableExtension>> termBaseVars
-                = new ConcurrentHashMap<>();
-        Map<String, Map<Integer, IVariable<ITermNonVariableExtension>>> termIndexedVars
-                = new ConcurrentHashMap<>();
-        Token literalToken = ctx.SymbolToken().getSymbol();
-        String literalText = literalToken.getText();
-        Map<String, INamedLiteral> literalsMap = this.module.getLiterals();
-        PelParser.LiteralContext literalContext = ctx.literal();
-        literalContext.pelVariableContext = pelVariableContext;
-        literalContext.literalBaseVars = literalBaseVars;
-        literalContext.literalIndexedVars = literalIndexedVars;
-        literalContext.termBaseVars = termBaseVars;
-        literalContext.termIndexedVars = termIndexedVars;
-        IBaseExpression<ILiteralNonVariableExtension> literal
-                = (IBaseExpression<ILiteralNonVariableExtension>) this.visit(literalContext);
-        if (literalsMap.containsKey(literalText)) {
-            printErr_LeadingLine_SingleToken(literalToken, "literal " + literalText + " already declared.");
-        } else if (literal != null) {
-            INamedLiteral namedLiteral = new NamedLiteral(literal, pelVariableContext);
-            literalsMap.put(literalText, namedLiteral);
-        }
-        return null;
-    }
-
-    @Override
     public Object visitAxiom_decl(PelParser.Axiom_declContext ctx) {
-        IPELVariableContext pelVariableContext
-                = new PELVariableContext();
-        Map<String, IVariable<ILiteralNonVariableExtension>> literalBaseVars
-                = new ConcurrentHashMap<>();
-        Map<String, Map<Integer, IVariable<ILiteralNonVariableExtension>>> literalIndexedVars
-                = new ConcurrentHashMap<>();
-        Map<String, IVariable<ITermNonVariableExtension>> termBaseVars
-                = new ConcurrentHashMap<>();
-        Map<String, Map<Integer, IVariable<ITermNonVariableExtension>>> termIndexedVars
-                = new ConcurrentHashMap<>();
         Token axiomToken = ctx.SymbolToken().getSymbol();
         String axiomText = axiomToken.getText();
         Map<String, INamedClause> axiomsMap
                 = this.module.getAxioms();
         PelParser.ClauseContext clauseContext = ctx.clause();
-        clauseContext.pelVariableContext = pelVariableContext;
-        clauseContext.literalBaseVars = literalBaseVars;
-        clauseContext.literalIndexedVars = literalIndexedVars;
-        clauseContext.termBaseVars = termBaseVars;
-        clauseContext.termIndexedVars = termIndexedVars;
-        IClause clause
-                = (IClause) this.visit(clauseContext);
+        clauseContext.pelVariableContext = this.module.getInitialCtxBean().getPelVariableContext();
+        clauseContext.literalVariableInfo = this.module.getInitialCtxBean().getLiteralVariableInfo();
+        INamedClause namedClause
+                = (INamedClause) this.visit(clauseContext);
         if (axiomsMap.containsKey(axiomText)) {
             printErr_LeadingLine_SingleToken(axiomToken, "axiom " + axiomText + " already declared.");
-        } else if (clause != null) {
-            INamedClause namedClause
-                    = new NamedClause(clause, pelVariableContext);
+        } else if (namedClause != null) {
             axiomsMap.put(axiomText, namedClause);
         }
         return null;
     }
 
     @Override
-    public Object visitTermConstant(PelParser.TermConstantContext ctx) {
-        PelParser.SymbolContext symbol = ctx.symbol();
-        INamedTerm namedTerm = this.derefTerm(symbol);
-        IBaseExpression<ITermNonVariableExtension> term = null;
-        if (namedTerm == null) {
-            this.printErr_LeadingLine_Region(ctx.start, ctx.stop, "term symbol " + symbol.getText() + " not declared.");
-        } else {
-            term = namedTerm.getTerm();
-            if (ctx.expectedSort != null) {
-                IBaseExpression<ITrivialExtension> realSort
-                        = namedTerm.getExtension().getSort();
-                if (!ctx.expectedSort.eq(realSort)) {
-                    IBackReference bref = new BackReference();
-                    ModuleHelper.getBackReference(this.module, bref, null);
-                    Map<IBaseExpression<ITrivialExtension>, String> sortRef = bref.getSortRef();
-                    String realSortRef = sortRef.get(realSort);
-                    String expectedSortRef = sortRef.get(ctx.expectedSort);
-                    this.printErr_LeadingLine_SingleToken(symbol.SymbolToken, symbol.getText() + " has wrong type (" + realSortRef + "); expected: (" + expectedSortRef + ")");
-                }
-            }
-        }
-
-        return (Object) term;
-    }
-
-    @Override
     public Object visitLiteralVariable(PelParser.LiteralVariableContext ctx) {
-        PelParser.VariableContext variableContext = ctx.variable();
-        variableContext.expressionSystem = ExpressionSystem.LITERALS;
-        variableContext.expectedSort = null;
-        variableContext.literalBaseVars = ctx.literalBaseVars;
-        variableContext.literalIndexedVars = ctx.literalIndexedVars;
-        variableContext.termBaseVars = ctx.termBaseVars;
-        variableContext.termIndexedVars = ctx.termIndexedVars;
+        PelParser.Literal_variableContext variableContext = ctx.literal_variable();
         variableContext.pelVariableContext = ctx.pelVariableContext;
+        variableContext.literalVariableInfo = ctx.literalVariableInfo;
         return visitChildren(ctx);
     }
 
     @Override
     public Object visitTermVariable(PelParser.TermVariableContext ctx) {
-        PelParser.VariableContext variableContext = ctx.variable();
-        variableContext.expressionSystem = ExpressionSystem.TERMS;
+        PelParser.Term_variableContext variableContext = ctx.term_variable();
         variableContext.expectedSort = ctx.expectedSort;
-        variableContext.literalBaseVars = null;
-        variableContext.literalIndexedVars = null;
-        variableContext.termBaseVars = ctx.termBaseVars;
-        variableContext.termIndexedVars = ctx.termIndexedVars;
-        variableContext.pelVariableContext = ctx.pelVariableContext;
+        variableContext.termVariableContext = ctx.termVariableContext;
+        variableContext.termVariableInfo = ctx.termVariableInfo;
         return visitChildren(ctx);
     }
 
@@ -472,13 +305,10 @@ public class PelThisVisitor extends PelBaseVisitor<Object> {
             if (domain.size() == ctx.args.size()) {
                 ctx.args
                         .parallelStream()
-                        .forEach(arg -> arg.pelVariableContext = ctx.pelVariableContext);
+                        .forEach(arg -> arg.termVariableContext = ctx.termVariableContext);
                 ctx.args
                         .parallelStream()
-                        .forEach(arg -> arg.termBaseVars = ctx.termBaseVars);
-                ctx.args
-                        .parallelStream()
-                        .forEach(arg -> arg.termIndexedVars = ctx.termIndexedVars);
+                        .forEach(arg -> arg.termVariableInfo = ctx.termVariableInfo);
                 for (int i = 0; i < domain.size(); i++) {
                     ctx.args.get(i).expectedSort = domain.get(i);
                 }
@@ -486,7 +316,8 @@ public class PelThisVisitor extends PelBaseVisitor<Object> {
                         = ctx.args
                                 .stream()
                                 .map(arg -> this.visit(arg))
-                                .map(obj -> (IBaseExpression<ITermNonVariableExtension>) obj)
+                                .map(obj -> (INamedTerm) obj)
+                                .map(namedTerm -> namedTerm.getTerm())
                                 .collect(Collectors.toList());
                 boolean argumentsOK = arguments
                         .parallelStream()
@@ -520,28 +351,18 @@ public class PelThisVisitor extends PelBaseVisitor<Object> {
                     String realSortRef = sortRef.get(realSort);
                     String expectedSortRef = sortRef.get(ctx.expectedSort);
                     this.printErr_LeadingLine_Region(ctx.start, ctx.stop, "following has wrong type (" + realSortRef + "); expected: (" + expectedSortRef + ")");
-                    INamedTerm namedTerm = new NamedTerm(nonVariableTerm, ctx.pelVariableContext.getTermVariableContext());
+                    INamedTerm namedTerm = new NamedTerm(nonVariableTerm, ctx.termVariableContext);
                     IConstructionPPrint termConstructionPPrint = new TermConstructionPPrint(bref, namedTerm);
                     termConstructionPPrint.pprint(this.pprintBase);
                     this.pprintBase.printNewLine();
                 }
             }
         }
-        return (Object) nonVariableTerm;
-    }
-
-    @Override
-    public Object visitLiteralConstant(PelParser.LiteralConstantContext ctx) {
-        PelParser.SymbolContext symbol = ctx.symbol();
-        INamedLiteral namedLiteral = this.derefLiteral(symbol);
-        IBaseExpression<ILiteralNonVariableExtension> literal = null;
-        if (namedLiteral == null) {
-            this.printErr_LeadingLine_Region(ctx.start, ctx.stop, "literal symbol " + symbol.getText() + " not declared.");
-        } else {
-            literal = namedLiteral.getLiteral();
-        }
-
-        return (Object) literal;
+        INamedTerm namedTerm
+                = nonVariableTerm == null
+                        ? null
+                        : new NamedTerm(nonVariableTerm, ctx.termVariableContext);
+        return (Object) namedTerm;
     }
 
     @Override
@@ -558,13 +379,10 @@ public class PelThisVisitor extends PelBaseVisitor<Object> {
             if (domain.size() == ctx.args.size()) {
                 ctx.args
                         .parallelStream()
-                        .forEach(arg -> arg.pelVariableContext = ctx.pelVariableContext);
+                        .forEach(arg -> arg.termVariableContext = ctx.pelVariableContext.getTermVariableContext());
                 ctx.args
                         .parallelStream()
-                        .forEach(arg -> arg.termBaseVars = ctx.termBaseVars);
-                ctx.args
-                        .parallelStream()
-                        .forEach(arg -> arg.termIndexedVars = ctx.termIndexedVars);
+                        .forEach(arg -> arg.termVariableInfo = ctx.literalVariableInfo.getTermVariableInfo());
                 for (int i = 0; i < domain.size(); i++) {
                     ctx.args.get(i).expectedSort = domain.get(i);
                 }
@@ -572,7 +390,8 @@ public class PelThisVisitor extends PelBaseVisitor<Object> {
                         = ctx.args
                                 .stream()
                                 .map(arg -> this.visit(arg))
-                                .map(obj -> (IBaseExpression<ITermNonVariableExtension>) obj)
+                                .map(obj -> (INamedTerm) obj)
+                                .map(namedTerm -> namedTerm.getTerm())
                                 .collect(Collectors.toList());
                 boolean argumentsOK = arguments
                         .parallelStream()
@@ -596,7 +415,11 @@ public class PelThisVisitor extends PelBaseVisitor<Object> {
                 this.printErr_LeadingLine_Region(ctx.start, ctx.stop, "" + domain.size() + "args expected for " + predicateName + ".  " + ctx.args.size() + " found.");
             }
         }
-        return (Object) nonVariableLiteral;
+        INamedLiteral namedLiteral
+                = nonVariableLiteral == null
+                        ? null
+                        : new NamedLiteral(nonVariableLiteral, ctx.pelVariableContext);
+        return (Object) namedLiteral;
     }
 
     @Override
@@ -604,58 +427,55 @@ public class PelThisVisitor extends PelBaseVisitor<Object> {
         PelParser.SymbolContext symbol = ctx.symbol();
         INamedClause namedClause
                 = this.derefClause(symbol);
-        IClause clause = null;
         if (namedClause == null) {
             this.printErr_LeadingLine_Region(ctx.start, ctx.stop, "clause symbol " + symbol.getText() + " not declared.");
-        } else {
-            clause = namedClause.getClause();
         }
 
-        return (Object) clause;
+        return (Object) namedClause;
     }
 
     @Override
     public Object visitAxiomExpression(PelParser.AxiomExpressionContext ctx) {
+        PelParser.Variable_ctxContext variable_ctx
+                = ctx.variable_ctx();
+        CtxBean ctxBean = new CtxBean();
+        variable_ctx.ctxBean = ctxBean;
+        variable_ctx.pelVariableContext = this.module.getInitialCtxBean().getPelVariableContext();
+        variable_ctx.literalVariableInfo = this.module.getInitialCtxBean().getLiteralVariableInfo();
+        this.visit(variable_ctx);
+
         PelParser.LiteralContext conclusionContext = ctx.conclusion;
-        conclusionContext.pelVariableContext = ctx.pelVariableContext;
-        conclusionContext.literalBaseVars = ctx.literalBaseVars;
-        conclusionContext.literalIndexedVars = ctx.literalIndexedVars;
-        conclusionContext.termBaseVars = ctx.termBaseVars;
-        conclusionContext.termIndexedVars = ctx.termIndexedVars;
+        conclusionContext.pelVariableContext = ctxBean.getPelVariableContext();
+        conclusionContext.literalVariableInfo = ctxBean.getLiteralVariableInfo();
+        INamedLiteral namedConclusion
+                = (INamedLiteral) this.visit(conclusionContext);
         IBaseExpression<ILiteralNonVariableExtension> conclusion
-                = (IBaseExpression<ILiteralNonVariableExtension>) this.visit(conclusionContext);
-        IClause clause = null;
+                = namedConclusion.getLiteral();
+        INamedClause namedClause = null;
         if (conclusion != null) {
             ctx.premises
                     .parallelStream()
-                    .forEach(premis -> premis.pelVariableContext = ctx.pelVariableContext);
+                    .forEach(premis -> premis.pelVariableContext = ctxBean.getPelVariableContext());
             ctx.premises
                     .parallelStream()
-                    .forEach(premis -> premis.literalBaseVars = ctx.literalBaseVars);
-            ctx.premises
-                    .parallelStream()
-                    .forEach(premis -> premis.literalIndexedVars = ctx.literalIndexedVars);
-            ctx.premises
-                    .parallelStream()
-                    .forEach(premis -> premis.termBaseVars = ctx.termBaseVars);
-            ctx.premises
-                    .parallelStream()
-                    .forEach(premis -> premis.termIndexedVars = ctx.termIndexedVars);
+                    .forEach(premis -> premis.literalVariableInfo = ctxBean.getLiteralVariableInfo());
             List<IBaseExpression<ILiteralNonVariableExtension>> premises
                     = ctx.premises
                             .stream()
                             .map(premis -> this.visit(premis))
-                            .map(obj -> (IBaseExpression<ILiteralNonVariableExtension>) obj)
+                            .map(obj -> (INamedLiteral) obj)
+                            .map(namedLiteral -> namedLiteral.getLiteral())
                             .collect(Collectors.toList());
 
             boolean premisesOK = premises
                     .parallelStream()
                     .allMatch(argument -> argument != null);
             if (premisesOK) {
-                clause = new Clause(conclusion, premises);
+                IClause clause = new Clause(conclusion, premises);
+                namedClause = new NamedClause(clause, ctxBean.getPelVariableContext());
             }
         }
-        return (Object) clause;
+        return (Object) namedClause;
     }
 
     @Override
@@ -682,110 +502,323 @@ public class PelThisVisitor extends PelBaseVisitor<Object> {
     }
 
     @Override
-    public Object visitIndexedVariable(PelParser.IndexedVariableContext ctx) {
-        Object retval = null;
-        String rawText = ctx.getText();
-        Matcher m = this.indexedVarPattern.matcher(rawText);
-        if (m.matches()) {
-            String baseVariableText = m.group(1);
-            if (baseVariableText.equals("__")) {
-                baseVariableText = "_";
+    public Object visitLiteralBasicVariable(PelParser.LiteralBasicVariableContext ctx) {
+        IVariable<ILiteralNonVariableExtension> literal = null;
+        SymbolBean symbolBean = new SymbolBean();
+        if (this.parseLiteralBaseVariable(symbolBean, ctx.getText())) {
+            String baseVariableText = symbolBean.getSymbol();
+            Map<String, IVariable<ILiteralNonVariableExtension>> literalBaseVars
+                    = ctx.literalVariableInfo.getLiteralBaseVars();
+            if (literalBaseVars.containsKey(baseVariableText)) {
+                literal = literalBaseVars.get(baseVariableText);
+            } else {
+                ITrivialExtension extension = this.module.getTrivialExtension();
+                IVariableContext<ITrivialExtension, ILiteralNonVariableExtension> literalVariableContext
+                        = this.lookupVariableContextForBaseLiterals(ctx.literalVariableInfo, symbolBean);
+                literal = literalVariableContext.createVariable(extension, baseVariableText);
+                literalBaseVars.put(baseVariableText, literal);
             }
-            String indexText = m.group(2);
-            Integer index = Integer.parseInt(indexText);
-            switch (ctx.expressionSystem) {
-                case LITERALS: {
-                    IVariable<ILiteralNonVariableExtension> literal = null;
+        }
+        INamedLiteral namedLiteral
+                = literal == null
+                        ? null
+                        : new NamedLiteral(literal, ctx.pelVariableContext);
+        return (Object) namedLiteral;
+    }
 
-                    Map<Integer, IVariable<ILiteralNonVariableExtension>> varIndex
-                            = null;
-                    if (ctx.literalIndexedVars.containsKey(baseVariableText)) {
-                        varIndex = ctx.literalIndexedVars.get(baseVariableText);
-                    } else {
-                        varIndex = new ConcurrentHashMap<>();
-                        ctx.literalIndexedVars.put(baseVariableText, varIndex);
-                    }
-                    if (varIndex.containsKey(index)) {
-                        literal = varIndex.get(index);
-                    } else {
-                        ITrivialExtension literalExtension = new TrivialExtension();
-                        literal = ctx.pelVariableContext.getLiteralVariableContext().createVariable(literalExtension, baseVariableText);
-                        varIndex.put(index, literal);
-                    }
+    @Override
+    public Object visitLiteralIndexedVariable(PelParser.LiteralIndexedVariableContext ctx) {
+        IVariable<ILiteralNonVariableExtension> literal = null;
+        IndexedSymbolBean indexedSymbolBean = new IndexedSymbolBean();
+        if (this.parseLiteralIndexedVariable(indexedSymbolBean, ctx.getText())) {
+            String baseVariableText = indexedSymbolBean.getSymbol();
+            Integer index = indexedSymbolBean.getIndex();
 
-                    retval = (Object) literal;
-                }
-                break;
-                case TERMS: {
-                    IVariable<ITermNonVariableExtension> term = null;
-
-                    if (ctx.expectedSort == null) {
-                        this.printErr_LeadingLine_SingleToken(ctx.start, "no sort derivable from variable " + baseVariableText + ".");
-                    } else {
-                        Map<Integer, IVariable<ITermNonVariableExtension>> varIndex
-                                = null;
-                        if (ctx.termIndexedVars.containsKey(baseVariableText)) {
-                            varIndex = ctx.termIndexedVars.get(baseVariableText);
-                        } else {
-                            varIndex = new ConcurrentHashMap<>();
-                            ctx.termIndexedVars.put(baseVariableText, varIndex);
-                        }
-                        if (varIndex.containsKey(index)) {
-                            term = varIndex.get(index);
-                        } else {
-                            ITermExtension termExtension = new TermExtension(ctx.expectedSort);
-                            term = ctx.pelVariableContext.getTermVariableContext().createVariable(termExtension, baseVariableText);
-                            varIndex.put(index, term);
-                        }
-                    }
-
-                    retval = (Object) term;
-                }
-                break;
+            Map<Integer, IVariable<ILiteralNonVariableExtension>> varIndex
+                    = null;
+            Map<String, Map<Integer, IVariable<ILiteralNonVariableExtension>>> literalIndexedVars
+                    = ctx.literalVariableInfo.getLiteralIndexedVars();
+            if (literalIndexedVars.containsKey(baseVariableText)) {
+                varIndex = literalIndexedVars.get(baseVariableText);
+            } else {
+                varIndex = new ConcurrentHashMap<>();
+                literalIndexedVars.put(baseVariableText, varIndex);
             }
+            if (varIndex.containsKey(index)) {
+                literal = varIndex.get(index);
+            } else {
+                ITrivialExtension literalExtension = this.module.getTrivialExtension();
+                IVariableContext<ITrivialExtension, ILiteralNonVariableExtension> literalVariableContext
+                        = this.lookupVariableContextForIndexedLiterals(ctx.literalVariableInfo, indexedSymbolBean);
+                literal = literalVariableContext.createVariable(literalExtension, baseVariableText);
+                varIndex.put(index, literal);
+            }
+
+        }
+        INamedLiteral namedLiteral
+                = literal == null
+                        ? null
+                        : new NamedLiteral(literal, ctx.pelVariableContext);
+        return (Object) namedLiteral;
+    }
+
+    @Override
+    public Object visitTermBasicVariable(PelParser.TermBasicVariableContext ctx) {
+        IVariable<ITermNonVariableExtension> term = null;
+        SymbolBean symbolBean = new SymbolBean();
+        if (this.parseTermBaseVariable(symbolBean, ctx.getText())) {
+            String baseVariableText = symbolBean.getSymbol();
+            Map<String, IVariable<ITermNonVariableExtension>> termBaseVars
+                    = ctx.termVariableInfo.getTermBaseVars();
+            if (ctx.expectedSort == null) {
+                this.printErr_LeadingLine_SingleToken(ctx.start, "no sort derivable from variable " + baseVariableText + ".");
+            } else if (termBaseVars.containsKey(baseVariableText)) {
+                term = termBaseVars.get(baseVariableText);
+            } else {
+                IVariableContext<IBaseExpression<ITrivialExtension>, ITermNonVariableExtension> termVariableContext
+                        = this.lookupVariableContextForBaseTerms(ctx.termVariableInfo, symbolBean);
+                term = termVariableContext.createVariable(ctx.expectedSort, baseVariableText);
+                termBaseVars.put(baseVariableText, term);
+            }
+        }
+        INamedTerm namedTerm
+                = term == null
+                        ? null
+                        : new NamedTerm(term, ctx.termVariableContext);
+        return (Object) namedTerm;
+    }
+
+    @Override
+    public Object visitTermIndexedVariable(PelParser.TermIndexedVariableContext ctx) {
+        IVariable<ITermNonVariableExtension> term = null;
+        IndexedSymbolBean indexedSymbolBean = new IndexedSymbolBean();
+        if (this.parseTermIndexedVariable(indexedSymbolBean, ctx.getText())) {
+            String baseVariableText = indexedSymbolBean.getSymbol();
+            Integer index = indexedSymbolBean.getIndex();
+            if (ctx.expectedSort == null) {
+                this.printErr_LeadingLine_SingleToken(ctx.start, "no sort derivable from variable " + baseVariableText + ".");
+            } else {
+                Map<Integer, IVariable<ITermNonVariableExtension>> varIndex
+                        = null;
+                Map<String, Map<Integer, IVariable<ITermNonVariableExtension>>> termIndexedVars
+                        = ctx.termVariableInfo.getTermIndexedVars();
+                if (termIndexedVars.containsKey(baseVariableText)) {
+                    varIndex = termIndexedVars.get(baseVariableText);
+                } else {
+                    varIndex = new ConcurrentHashMap<>();
+                    termIndexedVars.put(baseVariableText, varIndex);
+                }
+                if (varIndex.containsKey(index)) {
+                    term = varIndex.get(index);
+                } else {
+                    IVariableContext<IBaseExpression<ITrivialExtension>, ITermNonVariableExtension> termVariableContext
+                            = this.lookupVariableContextForIndexedTerms(ctx.termVariableInfo, indexedSymbolBean);
+                    term = termVariableContext.createVariable(ctx.expectedSort, baseVariableText);
+                    varIndex.put(index, term);
+                }
+            }
+        }
+        INamedTerm namedTerm
+                = term == null
+                        ? null
+                        : new NamedTerm(term, ctx.termVariableContext);
+        return (Object) namedTerm;
+    }
+
+    @Override
+    public Object visitVariable_ctx(PelParser.Variable_ctxContext ctx) {
+        IPELVariableContext newPelVariableContext
+                = new PELVariableContext(
+                        ctx.pelVariableContext
+                );
+        ctx.ctxBean.setPelVariableContext(newPelVariableContext);
+        LiteralVariableInfo newLiteralVariableInfo
+                = new LiteralVariableInfo(ctx.literalVariableInfo);
+        ctx.ctxBean.setLiteralVariableInfo(newLiteralVariableInfo);
+        ctx.args
+                .parallelStream()
+                .forEach(c -> c.pelVariableContext = newPelVariableContext);
+        ctx.args
+                .parallelStream()
+                .forEach(c -> c.literalVariableInfo = newLiteralVariableInfo);
+        this.visitChildren(ctx);
+        return null;
+    }
+
+    @Override
+    public Object visitLiteralIndexedCtx(PelParser.LiteralIndexedCtxContext ctx) {
+        IndexedSymbolBean indexedSymbolBean = new IndexedSymbolBean();
+        if (this.parseLiteralIndexedVariable(indexedSymbolBean, ctx.getText())) {
+            String baseVariableText = indexedSymbolBean.getSymbol();
+            Integer index = indexedSymbolBean.getIndex();
+            Map<String, Map<Integer, IVariableContext<ITrivialExtension, ILiteralNonVariableExtension>>> literalIndexedCtxMap
+                    = ctx.literalVariableInfo.getLiteralIndexedCtx();
+            Map<Integer, IVariableContext<ITrivialExtension, ILiteralNonVariableExtension>> excerpt
+                    = null;
+            if (literalIndexedCtxMap.containsKey(baseVariableText)) {
+                excerpt = literalIndexedCtxMap.get(baseVariableText);
+            } else {
+                excerpt = new ConcurrentHashMap<>();
+                literalIndexedCtxMap.put(baseVariableText, excerpt);
+            }
+            excerpt.put(index, ctx.pelVariableContext.getLiteralVariableContext());
+        }
+        return null;
+    }
+
+    @Override
+    public Object visitLiteralBaseCtx(PelParser.LiteralBaseCtxContext ctx) {
+        SymbolBean symbolBean = new SymbolBean();
+        if (this.parseLiteralBaseVariable(symbolBean, ctx.getText())) {
+            String baseVariableText = symbolBean.getSymbol();
+            Map<String, IVariableContext<ITrivialExtension, ILiteralNonVariableExtension>> literalBaseCtxMap
+                    = ctx.literalVariableInfo.getLiteralBaseCtx();
+            literalBaseCtxMap.put(baseVariableText, ctx.pelVariableContext.getLiteralVariableContext());
+        }
+        return null;
+    }
+
+    @Override
+    public Object visitTermIndexedCtx(PelParser.TermIndexedCtxContext ctx) {
+        IndexedSymbolBean indexedSymbolBean = new IndexedSymbolBean();
+        if (this.parseTermIndexedVariable(indexedSymbolBean, ctx.getText())) {
+            String baseVariableText = indexedSymbolBean.getSymbol();
+            Integer index = indexedSymbolBean.getIndex();
+
+            Map<String, Map<Integer, IVariableContext<IBaseExpression<ITrivialExtension>, ITermNonVariableExtension>>> termIndexedCtxMap
+                    = ctx.literalVariableInfo.getTermIndexedCtx();
+            Map<Integer, IVariableContext<IBaseExpression<ITrivialExtension>, ITermNonVariableExtension>> excerpt
+                    = null;
+            if (termIndexedCtxMap.containsKey(baseVariableText)) {
+                excerpt = termIndexedCtxMap.get(baseVariableText);
+            } else {
+                excerpt = new ConcurrentHashMap<>();
+                termIndexedCtxMap.put(baseVariableText, excerpt);
+            }
+            excerpt.put(index, ctx.pelVariableContext.getTermVariableContext());
+        }
+
+        return null;
+    }
+
+    @Override
+    public Object visitTermBaseCtx(PelParser.TermBaseCtxContext ctx) {
+        SymbolBean symbolBean = new SymbolBean();
+        if (this.parseTermBaseVariable(symbolBean, ctx.getText())) {
+            String baseVariableText = symbolBean.getSymbol();
+            Map<String, IVariableContext<IBaseExpression<ITrivialExtension>, ITermNonVariableExtension>> termBaseCtxMap
+                    = ctx.literalVariableInfo.getTermBaseCtx();
+            termBaseCtxMap.put(baseVariableText, ctx.pelVariableContext.getTermVariableContext());
+        }
+        return null;
+    }
+
+    private IVariableContext<ITrivialExtension, ILiteralNonVariableExtension> lookupVariableContextForBaseLiterals(
+            LiteralVariableInfo literalVariableInfo,
+            SymbolBean symbolBean
+    ) {
+        IVariableContext<ITrivialExtension, ILiteralNonVariableExtension> retval
+                = literalVariableInfo.lookupVariableContextForBaseLiterals(symbolBean);
+        if (retval == null) {
+            retval = this.module.getInitialCtxBean().getPelVariableContext().getLiteralVariableContext();
         }
 
         return retval;
     }
 
-    @Override
-    public Object visitBasicVariable(PelParser.BasicVariableContext ctx) {
-        Object retval = null;
-        String rawText = ctx.getText();
-        Matcher m = this.baseVarPattern.matcher(rawText);
-        if (m.matches()) {
-            String baseVariableText = m.group(1);
-            if (baseVariableText.equals("__")) {
-                baseVariableText = "_";
+    private IVariableContext<ITrivialExtension, ILiteralNonVariableExtension> lookupVariableContextForIndexedLiterals(
+            LiteralVariableInfo literalVariableInfo,
+            IndexedSymbolBean indexedSymbolBean
+    ) {
+        IVariableContext<ITrivialExtension, ILiteralNonVariableExtension> retval
+                = literalVariableInfo.lookupVariableContextForIndexedLiterals(indexedSymbolBean);
+        if (retval == null) {
+            retval = this.module.getInitialCtxBean().getPelVariableContext().getLiteralVariableContext();
+        }
+
+        return retval;
+    }
+
+    private IVariableContext<IBaseExpression<ITrivialExtension>, ITermNonVariableExtension> lookupVariableContextForBaseTerms(
+            TermVariableInfo termVariableInfo,
+            SymbolBean symbolBean
+    ) {
+        IVariableContext<IBaseExpression<ITrivialExtension>, ITermNonVariableExtension> retval
+                = termVariableInfo.lookupVariableContextForBaseTerms(symbolBean);
+        if (retval == null) {
+            retval = this.module.getInitialCtxBean().getPelVariableContext().getTermVariableContext();
+        }
+
+        return retval;
+    }
+
+    private IVariableContext<IBaseExpression<ITrivialExtension>, ITermNonVariableExtension> lookupVariableContextForIndexedTerms(
+            TermVariableInfo termVariableInfo,
+            IndexedSymbolBean indexedSymbolBean
+    ) {
+        IVariableContext<IBaseExpression<ITrivialExtension>, ITermNonVariableExtension> retval
+                = termVariableInfo.lookupVariableContextForIndexedTerms(indexedSymbolBean);
+        if (retval == null) {
+            retval = this.module.getInitialCtxBean().getPelVariableContext().getTermVariableContext();
+        }
+
+        return retval;
+    }
+
+    private boolean parseLiteralBaseVariable(SymbolBean symbolBean, String symbol) {
+        Matcher m = this.literalBaseVarPattern.matcher(symbol);
+        boolean retval = m.matches();
+        if (retval) {
+            String symbolText = m.group(1);
+            if (symbolText.equals("__")) {
+                symbolText = "_";
             }
-            switch (ctx.expressionSystem) {
-                case LITERALS: {
-                    IVariable<ILiteralNonVariableExtension> literal = null;
-                    if (ctx.literalBaseVars.containsKey(baseVariableText)) {
-                        literal = ctx.literalBaseVars.get(baseVariableText);
-                    } else {
-                        ITrivialExtension extension = new TrivialExtension();
-                        literal = ctx.pelVariableContext.getLiteralVariableContext().createVariable(extension, baseVariableText);
-                        ctx.literalBaseVars.put(baseVariableText, literal);
-                    }
-                    retval = (Object) literal;
-                }
-                break;
-                case TERMS: {
-                    IVariable<ITermNonVariableExtension> term = null;
-                    if (ctx.expectedSort == null) {
-                        this.printErr_LeadingLine_SingleToken(ctx.start, "no sort derivable from variable " + baseVariableText + ".");
-                    } else if (ctx.termBaseVars.containsKey(baseVariableText)) {
-                        term = ctx.termBaseVars.get(baseVariableText);
-                    } else {
-                        ITermExtension extension = new TermExtension(ctx.expectedSort);
-                        term = ctx.pelVariableContext.getTermVariableContext().createVariable(extension, baseVariableText);
-                        ctx.termBaseVars.put(baseVariableText, term);
-                    }
-                    retval = (Object) term;
-                }
-                break;
+            symbolBean.setSymbol(symbolText);
+        }
+        return retval;
+    }
+
+    private boolean parseLiteralIndexedVariable(IndexedSymbolBean indexedSymbolBean, String indexedSymbol) {
+        Matcher m = this.literalIndexedVarPattern.matcher(indexedSymbol);
+        boolean retval = m.matches();
+        if (retval) {
+            String indexedSymbolText = m.group(1);
+            if (indexedSymbolText.equals("__")) {
+                indexedSymbolText = "_";
             }
+            String indexText = m.group(2);
+            Integer index = Integer.parseInt(indexText);
+            indexedSymbolBean.setIndex(index);
+            indexedSymbolBean.setSymbol(indexedSymbolText);
+        }
+        return retval;
+    }
+
+    private boolean parseTermBaseVariable(SymbolBean symbolBean, String symbol) {
+        Matcher m = this.termBaseVarPattern.matcher(symbol);
+        boolean retval = m.matches();
+        if (retval) {
+            String symbolText = m.group(1);
+            if (symbolText.equals("__")) {
+                symbolText = "_";
+            }
+            symbolBean.setSymbol(symbolText);
+        }
+        return retval;
+    }
+
+    private boolean parseTermIndexedVariable(IndexedSymbolBean indexedSymbolBean, String indexedSymbol) {
+        Matcher m = this.termIndexedVarPattern.matcher(indexedSymbol);
+        boolean retval = m.matches();
+        if (retval) {
+            String indexedSymbolText = m.group(1);
+            if (indexedSymbolText.equals("__")) {
+                indexedSymbolText = "_";
+            }
+            String indexText = m.group(2);
+            Integer index = Integer.parseInt(indexText);
+            indexedSymbolBean.setIndex(index);
+            indexedSymbolBean.setSymbol(indexedSymbolText);
         }
         return retval;
     }
@@ -801,22 +834,6 @@ public class PelThisVisitor extends PelBaseVisitor<Object> {
                 = baseModule.getAxioms();
         if (axiomsMap.containsKey(baseText)) {
             retval = axiomsMap.get(baseText);
-        } else {
-            this.printErr_LeadingLine_SingleToken(base, "base " + baseText + " not found");
-        }
-        return retval;
-    }
-
-    private INamedLiteral derefLiteral(PelParser.SymbolContext ctx) {
-        Object[] visit = (Object[]) this.visit(ctx);
-        IModule baseModule = (IModule) visit[0];
-        Token base = (Token) visit[1];
-        String baseText = base.getText();
-
-        INamedLiteral retval = null;
-        Map<String, INamedLiteral> literalsMap = baseModule.getLiterals();
-        if (literalsMap.containsKey(baseText)) {
-            retval = literalsMap.get(baseText);
         } else {
             this.printErr_LeadingLine_SingleToken(base, "base " + baseText + " not found");
         }
@@ -865,22 +882,6 @@ public class PelThisVisitor extends PelBaseVisitor<Object> {
         Map<String, IBaseExpression<ITrivialExtension>> sortsMap = baseModule.getSorts();
         if (sortsMap.containsKey(baseText)) {
             retval = sortsMap.get(baseText);
-        } else {
-            this.printErr_LeadingLine_SingleToken(base, "base " + baseText + " not found");
-        }
-        return retval;
-    }
-
-    private INamedTerm derefTerm(PelParser.SymbolContext ctx) {
-        Object[] visit = (Object[]) this.visit(ctx);
-        IModule baseModule = (IModule) visit[0];
-        Token base = (Token) visit[1];
-        String baseText = base.getText();
-
-        INamedTerm retval = null;
-        Map<String, INamedTerm> termsMap = baseModule.getTerms();
-        if (termsMap.containsKey(baseText)) {
-            retval = termsMap.get(baseText);
         } else {
             this.printErr_LeadingLine_SingleToken(base, "base " + baseText + " not found");
         }

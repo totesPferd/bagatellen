@@ -4,11 +4,11 @@
  */
 package dom.jfischer.probeunify2.pel.impl;
 
+import dom.jfischer.probeunify2.basic.IBaseExpression;
 import dom.jfischer.probeunify2.basic.ITrivialExtension;
 import dom.jfischer.probeunify2.basic.IUnification;
 import dom.jfischer.probeunify2.pel.ILiteralNonVariableExtension;
 import dom.jfischer.probeunify2.pel.IPELVariableContext;
-import dom.jfischer.probeunify2.pel.ITermExtension;
 import dom.jfischer.probeunify2.pel.ITermNonVariableExtension;
 import dom.jfischer.probeunify2.basic.IVariableContext;
 import dom.jfischer.probeunify2.basic.impl.VariableContextUnification;
@@ -21,7 +21,7 @@ public class PELVariableContextUnification implements IUnification<IPELVariableC
 
     private final IUnification<IVariableContext<ITrivialExtension, ILiteralNonVariableExtension>> literalVariableContextUnification
             = new VariableContextUnification<>();
-    private final IUnification<IVariableContext<ITermExtension, ITermNonVariableExtension>> termVariableContextUnification
+    private final IUnification<IVariableContext<IBaseExpression<ITrivialExtension>, ITermNonVariableExtension>> termVariableContextUnification
             = new VariableContextUnification<>();
 
     @Override

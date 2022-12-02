@@ -6,6 +6,7 @@ package dom.jfischer.probeunify2;
 
 import dom.jfischer.probeunify2.basic.IExpression;
 import dom.jfischer.probeunify2.basic.IVariable;
+import dom.jfischer.probeunify2.pel.ILiteralNonVariableExtension;
 import dom.jfischer.probeunify2.pel.ITermNonVariableExtension;
 import dom.jfischer.probeunify2.proof.IGoalExtension;
 import dom.jfischer.probeunify2.proof.IGoalNonVariableExtension;
@@ -18,12 +19,19 @@ import java.util.Set;
  */
 public class ProofStep implements IProofStep {
 
+    private final Set<IVariable<ILiteralNonVariableExtension>> literalVariables;
     private final Set<IVariable<ITermNonVariableExtension>> termVariables;
     private final List<IExpression<IGoalExtension, IGoalNonVariableExtension>> goals;
 
-    public ProofStep(Set<IVariable<ITermNonVariableExtension>> termVariables, List<IExpression<IGoalExtension, IGoalNonVariableExtension>> goals) {
+    public ProofStep(Set<IVariable<ILiteralNonVariableExtension>> literalVariables, Set<IVariable<ITermNonVariableExtension>> termVariables, List<IExpression<IGoalExtension, IGoalNonVariableExtension>> goals) {
+        this.literalVariables = literalVariables;
         this.termVariables = termVariables;
         this.goals = goals;
+    }
+
+    @Override
+    public Set<IVariable<ILiteralNonVariableExtension>> getLiteralVariables() {
+        return this.literalVariables;
     }
 
     @Override
@@ -38,6 +46,9 @@ public class ProofStep implements IProofStep {
 
     @Override
     public void reset() {
+        this.literalVariables
+                .parallelStream()
+                .forEach(var -> var.clear());
         this.termVariables
                 .parallelStream()
                 .forEach(var -> var.clear());

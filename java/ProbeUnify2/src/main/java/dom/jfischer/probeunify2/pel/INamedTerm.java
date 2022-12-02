@@ -5,7 +5,9 @@
 package dom.jfischer.probeunify2.pel;
 
 import dom.jfischer.probeunify2.basic.IBaseExpression;
+import dom.jfischer.probeunify2.basic.ICheckFreeness;
 import dom.jfischer.probeunify2.basic.IExpression;
+import dom.jfischer.probeunify2.basic.ITrivialExtension;
 import dom.jfischer.probeunify2.basic.IVariableContext;
 
 /**
@@ -13,10 +15,11 @@ import dom.jfischer.probeunify2.basic.IVariableContext;
  * @author jfischer
  */
 public interface INamedTerm extends
-        IExpression<ITermExtension, ITermNonVariableExtension> {
+        ICheckFreeness,
+        IExpression<IBaseExpression<ITrivialExtension>, ITermNonVariableExtension> {
 
     IBaseExpression<ITermNonVariableExtension> getTerm();
 
-    IVariableContext<ITermExtension, ITermNonVariableExtension> getTermVariableContext();
+    IVariableContext<IBaseExpression<ITrivialExtension>, ITermNonVariableExtension> getTermVariableContext();
 
 }

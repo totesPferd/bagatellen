@@ -5,10 +5,10 @@
 package dom.jfischer.probeunify2.pel.impl;
 
 import dom.jfischer.probeunify2.basic.IBaseExpression;
+import dom.jfischer.probeunify2.basic.ITrivialExtension;
 import dom.jfischer.probeunify2.basic.IUnification;
 import dom.jfischer.probeunify2.basic.impl.BaseUnification;
 import dom.jfischer.probeunify2.pel.INamedTerm;
-import dom.jfischer.probeunify2.pel.ITermExtension;
 import dom.jfischer.probeunify2.pel.ITermNonVariableExtension;
 import dom.jfischer.probeunify2.basic.impl.VariableContextUnification;
 import dom.jfischer.probeunify2.basic.IVariableContext;
@@ -21,7 +21,7 @@ public class NamedTermUnification implements IUnification<INamedTerm> {
 
     private final IUnification<IBaseExpression<ITermNonVariableExtension>> termExpressionUnification
             = new BaseUnification<>();
-    private final IUnification<IVariableContext<ITermExtension, ITermNonVariableExtension>> termVariableContextUnification
+    private final IUnification<IVariableContext<IBaseExpression<ITrivialExtension>, ITermNonVariableExtension>> termVariableContextUnification
             = new VariableContextUnification<>();
 
     @Override

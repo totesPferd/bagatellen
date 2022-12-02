@@ -4,6 +4,7 @@
  */
 package dom.jfischer.probeunify2.pel.impl;
 
+import dom.jfischer.probeunify2.basic.IBaseExpression;
 import dom.jfischer.probeunify2.basic.ICopy;
 import dom.jfischer.probeunify2.basic.ILeafCollector;
 import dom.jfischer.probeunify2.basic.ITracker;
@@ -12,7 +13,6 @@ import dom.jfischer.probeunify2.pel.ILiteralNonVariableExtension;
 import dom.jfischer.probeunify2.pel.IPELLeafCollector;
 import dom.jfischer.probeunify2.pel.IPELTracker;
 import dom.jfischer.probeunify2.pel.IPELVariableContext;
-import dom.jfischer.probeunify2.pel.ITermExtension;
 import dom.jfischer.probeunify2.pel.ITermNonVariableExtension;
 import dom.jfischer.probeunify2.basic.IVariableContext;
 
@@ -29,7 +29,7 @@ public class PELVariableContextCopy implements ICopy<IPELVariableContext> {
                 = object.getLiteralVariableContext().copy(literalTracker);
         ITracker<ITermNonVariableExtension> termTracker
                 = tracker.getTermTracker();
-        IVariableContext<ITermExtension, ITermNonVariableExtension> termVariableContextCopy
+        IVariableContext<IBaseExpression<ITrivialExtension>, ITermNonVariableExtension> termVariableContextCopy
                 = object.getTermVariableContext().copy(termTracker);
 
         return new PELVariableContext(literalVariableContextCopy, termVariableContextCopy);

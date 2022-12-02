@@ -8,7 +8,6 @@ import dom.jfischer.probeunify2.basic.IBaseExpression;
 import dom.jfischer.probeunify2.basic.ITrivialExtension;
 import dom.jfischer.probeunify2.basic.IVariable;
 import dom.jfischer.probeunify2.pel.IPELLeafCollector;
-import dom.jfischer.probeunify2.pel.ITermExtension;
 import dom.jfischer.probeunify2.pel.ITermNonVariableExtension;
 import dom.jfischer.probeunify2.pprint.IBackReference;
 import dom.jfischer.probeunify2.pprint.IConstructionPPrint;
@@ -27,10 +26,10 @@ public class TermLeafConstructionPPrint implements
         IConstructionPPrint {
 
     private final IBackReference backRef;
-    private final IVariableContext<ITermExtension, ITermNonVariableExtension> termVariableContext;
+    private final IVariableContext<IBaseExpression<ITrivialExtension>, ITermNonVariableExtension> termVariableContext;
     private final IPELLeafCollector leafCollector;
 
-    public TermLeafConstructionPPrint(IBackReference backRef, IVariableContext<ITermExtension, ITermNonVariableExtension> termVariableContext, IPELLeafCollector leafCollector) {
+    public TermLeafConstructionPPrint(IBackReference backRef, IVariableContext<IBaseExpression<ITrivialExtension>, ITermNonVariableExtension> termVariableContext, IPELLeafCollector leafCollector) {
         this.backRef = backRef;
         this.termVariableContext = termVariableContext;
         this.leafCollector = leafCollector;
@@ -93,7 +92,7 @@ public class TermLeafConstructionPPrint implements
     private String getVariableString(IVariable<ITermNonVariableExtension> variable) {
         String name = "?" + this.termVariableContext.getName(variable);
         IBaseExpression<ITrivialExtension> sort
-                = this.termVariableContext.getExtensionMap().get(variable).getSort();
+                = this.termVariableContext.getSort(variable);
         String sortName = this.backRef.getSortRef().get(sort);
         return name + ":" + sortName;
     }

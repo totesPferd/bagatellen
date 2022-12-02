@@ -6,9 +6,9 @@ package dom.jfischer.probeunify2.pprint.impl;
 
 import dom.jfischer.probeunify2.basic.IBaseExpression;
 import dom.jfischer.probeunify2.basic.INonVariable;
+import dom.jfischer.probeunify2.basic.ITrivialExtension;
 import dom.jfischer.probeunify2.basic.IVariable;
 import dom.jfischer.probeunify2.pel.IOperationExpression;
-import dom.jfischer.probeunify2.pel.ITermExtension;
 import dom.jfischer.probeunify2.pel.ITermNonVariableExtension;
 import dom.jfischer.probeunify2.pprint.IBackReference;
 import dom.jfischer.probeunify2.pprint.IConstructionPPrint;
@@ -27,12 +27,12 @@ import dom.jfischer.probeunify2.basic.IVariableContext;
 public class TermBaseConstructionPPrint implements IConstructionPPrint {
 
     private final IBackReference backRef;
-    private final IVariableContext<ITermExtension, ITermNonVariableExtension> termVariableContext;
+    private final IVariableContext<IBaseExpression<ITrivialExtension>, ITermNonVariableExtension> termVariableContext;
     private final IBaseExpression<ITermNonVariableExtension> termBase;
 
     public TermBaseConstructionPPrint(
             IBackReference backRef,
-            IVariableContext<ITermExtension, ITermNonVariableExtension> termVariableContext,
+            IVariableContext<IBaseExpression<ITrivialExtension>, ITermNonVariableExtension> termVariableContext,
             IBaseExpression<ITermNonVariableExtension> termBase) {
         this.backRef = backRef;
         this.termVariableContext = termVariableContext;
@@ -94,7 +94,7 @@ public class TermBaseConstructionPPrint implements IConstructionPPrint {
                 if (optTermVariable.isPresent()) {
                     IVariable<ITermNonVariableExtension> termVariable
                             = optTermVariable.get();
-                    retval = new VariableConstructionPPrint<>(termVariableContext, termVariable);
+                    retval = new VariableConstructionPPrint<>("?", termVariableContext, termVariable);
                 }
             }
         }

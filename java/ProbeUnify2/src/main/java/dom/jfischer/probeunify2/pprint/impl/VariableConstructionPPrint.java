@@ -19,17 +19,19 @@ import dom.jfischer.probeunify2.basic.IVariableContext;
 public class VariableConstructionPPrint<Extension extends IExtension, NonVariableExtension extends IExtension> implements
         IConstructionPPrint {
 
+    private final String prefix;
     private final IVariableContext<Extension, NonVariableExtension> variableContext;
     private final IVariable<NonVariableExtension> variable;
 
-    public VariableConstructionPPrint(IVariableContext<Extension, NonVariableExtension> variableContext, IVariable<NonVariableExtension> variable) {
+    public VariableConstructionPPrint(String prefix, IVariableContext<Extension, NonVariableExtension> variableContext, IVariable<NonVariableExtension> variable) {
+        this.prefix = prefix;
         this.variableContext = variableContext;
         this.variable = variable;
     }
 
     @Override
     public String getSingleLine() {
-        String name = "?" + variableContext.getName(this.variable);
+        String name = this.prefix + variableContext.getName(this.variable);
         IConstructionPPrint stringConstructionPPrint
                 = new StringConstructionPPrint(name);
         return stringConstructionPPrint.getSingleLine();
@@ -37,7 +39,7 @@ public class VariableConstructionPPrint<Extension extends IExtension, NonVariabl
 
     @Override
     public void pprintMultiLine(IPPrintBase pprintBase) {
-        String name = "?" + variableContext.getName(this.variable);
+        String name = this.prefix + variableContext.getName(this.variable);
         IConstructionPPrint stringConstructionPPrint
                 = new StringConstructionPPrint(name);
         stringConstructionPPrint.pprint(pprintBase);

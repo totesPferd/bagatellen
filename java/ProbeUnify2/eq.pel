@@ -8,13 +8,7 @@
 
 [operations]
 
-[variables]
-
-[terms]
-
-[literals]
-
 [axioms]
-   refl:   ==> eq(?x, ?x).
-   symm:   eq(?y, ?x) ==> eq(?x, ?y).
-   trans:  eq(?x, ?y); eq(?y, ?z) ==> eq(?x, ?z).
+   refl:   { ?x } ==> eq(?x, ?x).
+   symm:   { ?x ?y } eq(?y, ?x) ==> eq(?x, ?y).
+   trans:  { ?x ?y ?z } eq(?x, ?y); eq(?y, ?z) ==> eq(?x, ?z).

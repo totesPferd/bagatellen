@@ -4,6 +4,7 @@
  */
 package dom.jfischer.probeunify2.pel;
 
+import dom.jfischer.probeunify2.basic.ICheckFreeness;
 import dom.jfischer.probeunify2.basic.IExtension;
 import dom.jfischer.probeunify2.proof.IClause;
 
@@ -11,7 +12,9 @@ import dom.jfischer.probeunify2.proof.IClause;
  *
  * @author jfischer
  */
-public interface INamedClause extends IExtension {
+public interface INamedClause extends
+        ICheckFreeness,
+        IExtension {
 
     IClause getClause();
 

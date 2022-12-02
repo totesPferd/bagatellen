@@ -12,6 +12,7 @@ import dom.jfischer.probeunify2.basic.ICompare;
 import dom.jfischer.probeunify2.basic.ICopy;
 import dom.jfischer.probeunify2.basic.IExpression;
 import dom.jfischer.probeunify2.basic.ILeafCollector;
+import dom.jfischer.probeunify2.basic.ITrivialExtension;
 import dom.jfischer.probeunify2.basic.IUnification;
 import dom.jfischer.probeunify2.basic.IVariable;
 import dom.jfischer.probeunify2.basic.impl.BaseUnification;
@@ -29,7 +30,6 @@ import dom.jfischer.probeunify2.pel.ILiteralNonVariableExtension;
 import dom.jfischer.probeunify2.pel.IPELLeafCollector;
 import dom.jfischer.probeunify2.pel.IPELTracker;
 import dom.jfischer.probeunify2.pel.IPELVariableContext;
-import dom.jfischer.probeunify2.pel.ITermExtension;
 import dom.jfischer.probeunify2.pel.ITermNonVariableExtension;
 import dom.jfischer.probeunify2.pel.impl.LiteralCopy;
 import dom.jfischer.probeunify2.pel.impl.PELLeafCollector;
@@ -60,6 +60,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import org.antlr.v4.runtime.CharStream;
 import dom.jfischer.probeunify2.basic.IVariableContext;
+import dom.jfischer.probeunify2.pprint.impl.CtxConstructionPPrint;
 import dom.jfischer.probeunify2.pprint.impl.LiteralLeafConstructionPPrint;
 import dom.jfischer.probeunify2.proof.IGoalNonVariableExtension;
 import dom.jfischer.probeunify2.proof.impl.GoalExtensionBaseCopy;
@@ -87,7 +88,7 @@ public class State implements IState {
             = new LiteralCopy();
     private final IUnification<IBaseExpression<ILiteralNonVariableExtension>> literalUnification
             = new BaseUnification<>();
-    private final IUnification<IVariableContext<ITermExtension, ITermNonVariableExtension>> termVariableContextUnification
+    private final IUnification<IVariableContext<IBaseExpression<ITrivialExtension>, ITermNonVariableExtension>> termVariableContextUnification
             = new VariableContextUnification<>();
     private final List<IProofStep> proofSteps = Collections.synchronizedList(new ArrayList<>());
 
@@ -150,6 +151,9 @@ public class State implements IState {
         this.pprintBase.printToken("step");
         this.pprintBase.printToken("#" + this.proofSteps.size());
         this.pprintBase.printNewLine();
+        IConstructionPPrint ctxConstructionPPrint
+                        = new CtxConstructionPPrint(pelVariableContext);
+        ctxConstructionPPrint.pprint(pprintBase);
         {
             List<IBaseExpression<ILiteralNonVariableExtension>> premises
                     = this.conjecture.getClause().getPremises();
@@ -157,6 +161,7 @@ public class State implements IState {
                 INamedLiteral namedLiteral = new NamedLiteral(premises.get(i), pelVariableContext);
                 IConstructionPPrint literalConstructionPPrint
                         = new LiteralConstructionPPrint(this.backReference, namedLiteral);
+                this.pprintBase.printNewLine();
                 this.pprintBase.printToken(Integer.toString(i + 1));
                 this.pprintBase.printPeriod(".");
                 this.pprintBase.setDeeperIndent();
@@ -201,7 +206,7 @@ public class State implements IState {
                         pelVariableContext,
                         this.leafCollector
                 );
-        IVariableContext<ITermExtension, ITermNonVariableExtension> termVariableContext
+        IVariableContext<IBaseExpression<ITrivialExtension>, ITermNonVariableExtension> termVariableContext
                 = pelVariableContext.getTermVariableContext();
         IConstructionPPrint termConstructionPPrint
                 = new TermLeafConstructionPPrint(
@@ -230,7 +235,7 @@ public class State implements IState {
     public void apply(int goalNr, String proofName) throws IOException {
         CharStream proofCharStream = AntlrHelper.getProofCharStream(proofName);
         PelThisVisitor pelThisVisitor = new PelThisVisitor(this.module, this.moduleName);
-        Set<IClause> recentProof
+        Set<INamedClause> recentProof
                 = AntlrHelper.parseProof(pelThisVisitor, proofCharStream);
         IExpression<IGoalExtension, IGoalNonVariableExtension> selectedGoal
                 = this.openGoals.get(goalNr);
@@ -250,6 +255,7 @@ public class State implements IState {
                     .parallelStream()
                     .forEach(var -> this.conjecture.getPelVariableContext().getTermVariableContext().addUnsortedVariable(var));
         }
+        this.addProofStep();
         this.printProofState();
     }
 
@@ -315,9 +321,11 @@ public class State implements IState {
         ILeafCollector<IGoalNonVariableExtension> localLeafCollector
                 = new LeafCollector<>(localPelLeafCollector);
         this.goalExpressionBaseCopier.collectLeafs(localLeafCollector, this.goal);
-        Set<IVariable<ITermNonVariableExtension>> vars
+        Set<IVariable<ILiteralNonVariableExtension>> literalVars
+                = localPelLeafCollector.getLiteralLeafCollector().getLeafs();
+        Set<IVariable<ITermNonVariableExtension>> termVars
                 = localPelLeafCollector.getTermLeafCollector().getLeafs();
-        IProofStep proofStep = new ProofStep(vars, this.openGoals);
+        IProofStep proofStep = new ProofStep(literalVars, termVars, this.openGoals);
         this.proofSteps.add(proofStep);
     }
 
@@ -395,6 +403,7 @@ public class State implements IState {
         for (int i = this.proofSteps.size() - 1; i > proofStepNr; i--) {
             this.proofSteps.remove(i);
         }
+        this.killVariables();
         IProofStep currentProofStep = this.proofSteps.get(proofStepNr);
         this.resetProofStep(currentProofStep);
         this.printProofState();
@@ -430,9 +439,21 @@ public class State implements IState {
         return retval;
     }
 
+    private void killVariables() {
+        Set<IVariable<ILiteralNonVariableExtension>> literalVariables
+                = Collections.synchronizedSet(new HashSet<>());
+        Set<IVariable<ITermNonVariableExtension>> termVariables
+                = Collections.synchronizedSet(new HashSet<>());
+        for (IProofStep proofStep : this.proofSteps) {
+            literalVariables.addAll(proofStep.getLiteralVariables());
+            termVariables.addAll(proofStep.getTermVariables());
+        }
+        this.conjecture.getPelVariableContext().getLiteralVariableContext().retainAll(literalVariables);
+        this.conjecture.getPelVariableContext().getTermVariableContext().retainAll(termVariables);
+    }
+
     private void resetProofStep(IProofStep proofStep) {
         proofStep.reset();
-        this.conjecture.getPelVariableContext().getTermVariableContext().retainAll(proofStep.getTermVariables());
         this.openGoals = Collections.synchronizedList(new ArrayList<>());
         ProofHelper.listOpenGoals(this.goal, this.openGoals);
     }

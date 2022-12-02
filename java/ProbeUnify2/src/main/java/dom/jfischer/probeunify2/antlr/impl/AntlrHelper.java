@@ -4,23 +4,12 @@
  */
 package dom.jfischer.probeunify2.antlr.impl;
 
-import dom.jfischer.probeunify2.basic.IBaseExpression;
-import dom.jfischer.probeunify2.basic.IVariable;
 import dom.jfischer.probeunify2.pel.INamedClause;
 import dom.jfischer.probeunify2.pel.INamedLiteral;
 import dom.jfischer.probeunify2.pel.INamedTerm;
-import dom.jfischer.probeunify2.pel.impl.NamedClause;
-import dom.jfischer.probeunify2.pel.impl.NamedLiteral;
-import dom.jfischer.probeunify2.pel.impl.NamedTerm;
-import dom.jfischer.probeunify2.pel.ILiteralNonVariableExtension;
-import dom.jfischer.probeunify2.pel.IPELVariableContext;
-import dom.jfischer.probeunify2.pel.ITermNonVariableExtension;
-import dom.jfischer.probeunify2.pel.impl.PELVariableContext;
 import dom.jfischer.probeunify2.proof.IClause;
 import java.io.IOException;
-import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -53,14 +42,14 @@ public class AntlrHelper {
         pelThisVisitor.visit(logicContext);
     }
 
-    public static Set<IClause> parseProof(
+    public static Set<INamedClause> parseProof(
             PelThisVisitor pelThisVisitor,
             CharStream charStream) {
         PelLexer pelLexer = new PelLexer(charStream);
         CommonTokenStream commonTokenStream = new CommonTokenStream(pelLexer);
         PelParser pelParser = new PelParser(commonTokenStream);
         PelParser.ProofContext proofContext = pelParser.proof();
-        return (Set<IClause>) pelThisVisitor.visit(proofContext);
+        return (Set<INamedClause>) pelThisVisitor.visit(proofContext);
     }
 
     public static INamedClause getClause(
@@ -71,24 +60,9 @@ public class AntlrHelper {
         CommonTokenStream commonTokenStream = new CommonTokenStream(pelLexer);
         PelParser pelParser = new PelParser(commonTokenStream);
         PelParser.ClauseContext clauseContext = pelParser.clause();
-
-        Map<String, IVariable<ILiteralNonVariableExtension>> literalBaseVars
-                = new ConcurrentHashMap<>();
-        Map<String, Map<Integer, IVariable<ILiteralNonVariableExtension>>> literalIndexedVars
-                = new ConcurrentHashMap<>();
-        Map<String, IVariable<ITermNonVariableExtension>> termBaseVars
-                = new ConcurrentHashMap<>();
-        Map<String, Map<Integer, IVariable<ITermNonVariableExtension>>> termIndexedVars
-                = new ConcurrentHashMap<>();
-        IPELVariableContext pelVariableContext = new PELVariableContext();
-        clauseContext.pelVariableContext = pelVariableContext;
-        clauseContext.literalBaseVars = literalBaseVars;
-        clauseContext.literalIndexedVars = literalIndexedVars;
-        clauseContext.termBaseVars = termBaseVars;
-        clauseContext.termIndexedVars = termIndexedVars;
-        IClause clause
-                = (IClause) pelThisVisitor.visit(clauseContext);
-        return clause == null ? null : new NamedClause(clause, pelVariableContext);
+        clauseContext.pelVariableContext = pelThisVisitor.getModule().getInitialCtxBean().getPelVariableContext();
+        clauseContext.literalVariableInfo = pelThisVisitor.getModule().getInitialCtxBean().getLiteralVariableInfo();
+        return (INamedClause) pelThisVisitor.visit(clauseContext);
     }
 
     public static INamedLiteral getLiteral(PelThisVisitor pelThisVisitor, String literalString) {
@@ -97,23 +71,9 @@ public class AntlrHelper {
         CommonTokenStream commonTokenStream = new CommonTokenStream(pelLexer);
         PelParser pelParser = new PelParser(commonTokenStream);
         PelParser.LiteralContext literalContext = pelParser.literal();
-        Map<String, IVariable<ILiteralNonVariableExtension>> literalBaseVars
-                = new ConcurrentHashMap<>();
-        Map<String, Map<Integer, IVariable<ILiteralNonVariableExtension>>> literalIndexedVars
-                = new ConcurrentHashMap<>();
-        Map<String, IVariable<ITermNonVariableExtension>> termBaseVars
-                = new ConcurrentHashMap<>();
-        Map<String, Map<Integer, IVariable<ITermNonVariableExtension>>> termIndexedVars
-                = new ConcurrentHashMap<>();
-        IPELVariableContext pelVariableContext = new PELVariableContext();
-        literalContext.pelVariableContext = pelVariableContext;
-        literalContext.literalBaseVars = literalBaseVars;
-        literalContext.literalIndexedVars = literalIndexedVars;
-        literalContext.termBaseVars = termBaseVars;
-        literalContext.termIndexedVars = termIndexedVars;
-        IBaseExpression<ILiteralNonVariableExtension> literal
-                = (IBaseExpression<ILiteralNonVariableExtension>) pelThisVisitor.visit(literalContext);
-        return literal == null ? null : new NamedLiteral(literal, pelVariableContext);
+        literalContext.pelVariableContext = pelThisVisitor.getModule().getInitialCtxBean().getPelVariableContext();
+        literalContext.literalVariableInfo = pelThisVisitor.getModule().getInitialCtxBean().getLiteralVariableInfo();
+        return (INamedLiteral) pelThisVisitor.visit(literalContext);
     }
 
     public static INamedTerm getTerm(PelThisVisitor pelThisVisitor, String termString) {
@@ -122,18 +82,9 @@ public class AntlrHelper {
         CommonTokenStream commonTokenStream = new CommonTokenStream(pelLexer);
         PelParser pelParser = new PelParser(commonTokenStream);
         PelParser.TermContext termContext = pelParser.term();
-        Map<String, IVariable<ITermNonVariableExtension>> termBaseVars
-                = new ConcurrentHashMap<>();
-        Map<String, Map<Integer, IVariable<ITermNonVariableExtension>>> termIndexedVars
-                = new ConcurrentHashMap<>();
-        IPELVariableContext pelVariableContext = new PELVariableContext();
-        termContext.pelVariableContext = pelVariableContext;
-
-        termContext.termBaseVars = termBaseVars;
-        termContext.termIndexedVars = termIndexedVars;
-        IBaseExpression<ITermNonVariableExtension> term
-                = (IBaseExpression<ITermNonVariableExtension>) pelThisVisitor.visit(termContext);
-        return term == null ? null : new NamedTerm(term, pelVariableContext.getTermVariableContext());
+        termContext.termVariableContext = pelThisVisitor.getModule().getInitialCtxBean().getPelVariableContext().getTermVariableContext();
+        termContext.termVariableInfo = pelThisVisitor.getModule().getInitialCtxBean().getLiteralVariableInfo().getTermVariableInfo();
+        return (INamedTerm) pelThisVisitor.visit(termContext);
     }
 
 }

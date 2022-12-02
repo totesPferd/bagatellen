@@ -4,8 +4,11 @@
  */
 package dom.jfischer.probeunify2.module.impl;
 
+import dom.jfischer.probeunify2.antlr.impl.CtxBean;
+import dom.jfischer.probeunify2.antlr.impl.LiteralVariableInfo;
 import dom.jfischer.probeunify2.basic.IBaseExpression;
 import dom.jfischer.probeunify2.basic.ITrivialExtension;
+import dom.jfischer.probeunify2.basic.impl.TrivialExtension;
 import dom.jfischer.probeunify2.exception.QualificatorException;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -15,6 +18,7 @@ import dom.jfischer.probeunify2.pel.INamedLiteral;
 import dom.jfischer.probeunify2.pel.INamedTerm;
 import dom.jfischer.probeunify2.pel.IOperationExpression;
 import dom.jfischer.probeunify2.pel.IPredicateExpression;
+import dom.jfischer.probeunify2.pel.impl.PELVariableContext;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
@@ -34,6 +38,23 @@ public class Module implements IModule {
     private final Map<String, IBaseExpression<ITrivialExtension>> sorts = new ConcurrentHashMap<>();
     private final Map<String, INamedTerm> terms = new ConcurrentHashMap<>();
 
+    private final ITrivialExtension trivialExtension;
+    private final CtxBean ctxBean;
+
+    public Module(ITrivialExtension trivialExtension) {
+        this.trivialExtension = trivialExtension;
+        this.ctxBean = new CtxBean();
+        this.ctxBean.setLiteralVariableInfo(new LiteralVariableInfo());
+        this.ctxBean.setPelVariableContext(new PELVariableContext());
+    }
+
+    public Module() {
+        this.trivialExtension = new TrivialExtension();
+        this.ctxBean = new CtxBean();
+        this.ctxBean.setLiteralVariableInfo(new LiteralVariableInfo());
+        this.ctxBean.setPelVariableContext(new PELVariableContext());
+    }
+
     @Override
     public Map<String, INamedClause> getAxioms() {
         return this.axioms;
@@ -42,11 +63,6 @@ public class Module implements IModule {
     @Override
     public Map<String, IModule> getImports() {
         return this.imps;
-    }
-
-    @Override
-    public Map<String, INamedLiteral> getLiterals() {
-        return this.literals;
     }
 
     @Override
@@ -62,11 +78,6 @@ public class Module implements IModule {
     @Override
     public Map<String, IBaseExpression<ITrivialExtension>> getSorts() {
         return this.sorts;
-    }
-
-    @Override
-    public Map<String, INamedTerm> getTerms() {
-        return this.terms;
     }
 
     @Override
@@ -116,8 +127,13 @@ public class Module implements IModule {
     }
 
     @Override
-    public String toString() {
-        return "Module{" + "axioms=" + axioms + ", imps=" + imps + ", literals=" + literals + ", operations=" + operations + ", predicates=" + predicates + ", sorts=" + sorts + ", terms=" + terms + '}';
+    public ITrivialExtension getTrivialExtension() {
+        return this.trivialExtension;
+    }
+
+    @Override
+    public CtxBean getInitialCtxBean() {
+        return this.ctxBean;
     }
 
 }

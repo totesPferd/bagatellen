@@ -79,8 +79,6 @@ public class ModuleUnification implements IUnification<IModule> {
                 && this.sortsUnification.unify(arg1.getSorts(), arg2.getSorts())
                 && this.predicatesUnification.unify(arg1.getPredicates(), arg2.getPredicates())
                 && this.operationsUnification.unify(arg1.getOperations(), arg2.getOperations())
-                && this.termsUnification.unify(arg1.getTerms(), arg2.getTerms())
-                && this.literalsUnification.unify(arg1.getLiterals(), arg2.getLiterals())
                 && this.axiomsUnification.unify(arg1.getAxioms(), arg2.getAxioms());
     }
 

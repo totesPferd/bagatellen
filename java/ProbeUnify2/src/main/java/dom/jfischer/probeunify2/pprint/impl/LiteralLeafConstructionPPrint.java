@@ -93,7 +93,7 @@ public class LiteralLeafConstructionPPrint implements
     }
 
     private String getVariableString(IVariable<ILiteralNonVariableExtension> variable) {
-        return "?" + this.pelVariableContext.getLiteralVariableContext().getName(variable);
+        return "??" + this.pelVariableContext.getLiteralVariableContext().getName(variable);
     }
 
 }

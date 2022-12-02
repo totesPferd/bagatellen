@@ -4,6 +4,7 @@
  */
 package dom.jfischer.probeunify2.pel;
 
+import dom.jfischer.probeunify2.basic.IBaseExpression;
 import dom.jfischer.probeunify2.basic.IExtension;
 import dom.jfischer.probeunify2.basic.ITrivialExtension;
 import dom.jfischer.probeunify2.basic.IVariableContext;
@@ -16,6 +17,6 @@ public interface IPELVariableContext extends IExtension {
 
     IVariableContext<ITrivialExtension, ILiteralNonVariableExtension> getLiteralVariableContext();
 
-    IVariableContext<ITermExtension, ITermNonVariableExtension> getTermVariableContext();
+    IVariableContext<IBaseExpression<ITrivialExtension>, ITermNonVariableExtension> getTermVariableContext();
 
 }

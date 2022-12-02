@@ -26,14 +26,18 @@ public class ClauseConstructionPPrint implements IConstructionPPrint {
 
     private final IBackReference backRef;
     private final INamedClause namedClause;
+    private final IConstructionPPrint ctxPPrint;
 
     public ClauseConstructionPPrint(IBackReference backRef, INamedClause clause) {
         this.backRef = backRef;
         this.namedClause = clause;
+        this.ctxPPrint = new CtxConstructionPPrint(clause.getPelVariableContext());
     }
 
     @Override
     public String getSingleLine() {
+        String ctxString = this.ctxPPrint.getSingleLine();
+
         IClause clause = this.namedClause.getClause();
         IPELVariableContext pelVariableContext
                 = this.namedClause.getPelVariableContext();
@@ -50,7 +54,7 @@ public class ClauseConstructionPPrint implements IConstructionPPrint {
                         .map(pc -> pc.getSingleLine())
                         .collect(Collectors.toList()));
 
-        return String.join("; ", premiseStringList) + " ==> " + conclusionConstructionPPrint.getSingleLine();
+        return ctxString + " " + String.join("; ", premiseStringList) + " ==> " + conclusionConstructionPPrint.getSingleLine();
     }
 
     @Override
@@ -71,9 +75,14 @@ public class ClauseConstructionPPrint implements IConstructionPPrint {
                         .collect(Collectors.toList()));
         ListConstructionPPrint premisesConstructionPPrint
                 = new ListConstructionPPrint(";", premiseConstructionPPrintList);
+        this.ctxPPrint.pprint(pprintBase);
         premisesConstructionPPrint.pprintMultiLine(pprintBase);
+        pprintBase.printNewLine();
         pprintBase.printToken(" ==> ");
+        pprintBase.setDeeperIndent();
+        pprintBase.printNewLine();
         conclusionConstructionPPrint.pprintMultiLine(pprintBase);
+        pprintBase.restoreIndent();
     }
 
 }

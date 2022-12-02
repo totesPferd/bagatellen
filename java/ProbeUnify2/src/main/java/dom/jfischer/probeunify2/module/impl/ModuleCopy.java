@@ -57,12 +57,6 @@ public class ModuleCopy implements ICopy<IModule> {
             }
         }
         {
-            Map<String, INamedLiteral> retLiterals = retval.getLiterals();
-            for (Map.Entry<String, INamedLiteral> literal : object.getLiterals().entrySet()) {
-                retLiterals.put(literal.getKey(), this.namedLiteralCopier.copy(tracker, literal.getValue()));
-            }
-        }
-        {
             Map<String, IOperationExpression> retOperations = retval.getOperations();
             for (Map.Entry<String, IOperationExpression> operation : object.getOperations().entrySet()) {
                 retOperations.put(operation.getKey(), operation.getValue());
@@ -80,12 +74,6 @@ public class ModuleCopy implements ICopy<IModule> {
                 retSorts.put(sort.getKey(), sort.getValue());
             }
         }
-        {
-            Map<String, INamedTerm> retTerms = retval.getTerms();
-            for (Map.Entry<String, INamedTerm> term : object.getTerms().entrySet()) {
-                retTerms.put(term.getKey(), this.namedTermCopier.copy(tracker, term.getValue()));
-            }
-        }
 
         return retval;
     }
@@ -99,12 +87,6 @@ public class ModuleCopy implements ICopy<IModule> {
         }
         for (Map.Entry<String, IModule> imp : object.getImports().entrySet()) {
             this.collectLeafs(leafCollector, imp.getValue());
-        }
-        for (Map.Entry<String, INamedLiteral> literal : object.getLiterals().entrySet()) {
-            this.namedLiteralCopier.collectLeafs(leafCollector, literal.getValue());
-        }
-        for (Map.Entry<String, INamedTerm> term : object.getTerms().entrySet()) {
-            this.namedTermCopier.collectLeafs(leafCollector, term.getValue());
         }
     }
 

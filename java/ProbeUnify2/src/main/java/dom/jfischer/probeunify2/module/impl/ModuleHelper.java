@@ -11,12 +11,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import dom.jfischer.probeunify2.module.IModule;
 import dom.jfischer.probeunify2.pel.INamedClause;
-import dom.jfischer.probeunify2.pel.INamedLiteral;
-import dom.jfischer.probeunify2.pel.INamedTerm;
-import dom.jfischer.probeunify2.pel.ILiteralNonVariableExtension;
 import dom.jfischer.probeunify2.pel.IOperationExpression;
 import dom.jfischer.probeunify2.pel.IPredicateExpression;
-import dom.jfischer.probeunify2.pel.ITermNonVariableExtension;
 import dom.jfischer.probeunify2.proof.IClause;
 
 /**
@@ -44,13 +40,6 @@ public class ModuleHelper {
             }
         }
         {
-            Map<String, INamedLiteral> literalsIn = in.getLiterals();
-            Map<IBaseExpression<ILiteralNonVariableExtension>, String> literalsOut = out.getLiteralRef();
-            for (Entry<String, INamedLiteral> entry : literalsIn.entrySet()) {
-                literalsOut.put(entry.getValue().getLiteral(), realPrefix + entry.getKey());
-            }
-        }
-        {
             Map<String, IOperationExpression> operationsIn = in.getOperations();
             Map<IOperationExpression, String> operationsOut = out.getOperationRef();
             for (Entry<String, IOperationExpression> entry : operationsIn.entrySet()) {
@@ -69,13 +58,6 @@ public class ModuleHelper {
             Map<IBaseExpression<ITrivialExtension>, String> sortsOut = out.getSortRef();
             for (Entry<String, IBaseExpression<ITrivialExtension>> entry : sortsIn.entrySet()) {
                 sortsOut.put(entry.getValue(), realPrefix + entry.getKey());
-            }
-        }
-        {
-            Map<String, INamedTerm> termsIn = in.getTerms();
-            Map<IBaseExpression<ITermNonVariableExtension>, String> termsOut = out.getTermRef();
-            for (Entry<String, INamedTerm> entry : termsIn.entrySet()) {
-                termsOut.put(entry.getValue().getTerm(), realPrefix + entry.getKey());
             }
         }
     }

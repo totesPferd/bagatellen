@@ -4,8 +4,7 @@
  */
 package dom.jfischer.probeunify2.module;
 
-import dom.jfischer.probeunify2.pel.INamedTerm;
-import dom.jfischer.probeunify2.pel.INamedLiteral;
+import dom.jfischer.probeunify2.antlr.impl.CtxBean;
 import dom.jfischer.probeunify2.pel.INamedClause;
 import dom.jfischer.probeunify2.basic.IBaseExpression;
 import dom.jfischer.probeunify2.basic.IExtension;
@@ -23,11 +22,11 @@ import java.util.Optional;
  */
 public interface IModule extends IExtension {
 
+    CtxBean getInitialCtxBean();
+
     Map<String, INamedClause> getAxioms();
 
     Map<String, IModule> getImports();
-
-    Map<String, INamedLiteral> getLiterals();
 
     Map<String, IOperationExpression> getOperations();
 
@@ -35,8 +34,8 @@ public interface IModule extends IExtension {
 
     Map<String, IBaseExpression<ITrivialExtension>> getSorts();
 
-    Map<String, INamedTerm> getTerms();
-
     Optional<IModule> derefModule(List<String> qualificator) throws QualificatorException;
+
+    ITrivialExtension getTrivialExtension();
 
 }

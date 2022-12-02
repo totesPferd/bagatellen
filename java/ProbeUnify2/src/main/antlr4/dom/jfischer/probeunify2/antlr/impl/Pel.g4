@@ -1,10 +1,10 @@
 grammar Pel;
 
 @header {
-import dom.jfischer.probeunify2.antlr.ExpressionSystem;
 import dom.jfischer.probeunify2.basic.IBaseExpression;
 import dom.jfischer.probeunify2.basic.ITrivialExtension;
 import dom.jfischer.probeunify2.basic.IVariable;
+import dom.jfischer.probeunify2.basic.IVariableContext;
 import dom.jfischer.probeunify2.module.IModule;
 import dom.jfischer.probeunify2.pel.ILiteralNonVariableExtension;
 import dom.jfischer.probeunify2.pel.INamedClause;
@@ -22,9 +22,6 @@ locals  [ IModule module ]
   sort_decls
   predicate_decls
   operation_decls
-  variable_decls
-  term_decls
-  literal_decls
   axiom_decls ;
 
 proof
@@ -46,18 +43,6 @@ predicate_decls
 operation_decls
 :
   '[' 'operations' ']' ( decls+=operation_decl )* ;
-
-variable_decls
-:
-  '[' 'variables' ']' ( decls+=variable_decl )* ;
-
-term_decls
-:
-  '[' 'terms' ']' ( decls+=term_decl )* ;
-
-literal_decls
-:
-  '[' 'literals' ']' (decls+=literal_decl )* ;
 
 axiom_decls
 :
@@ -83,64 +68,33 @@ operation_decl
 :
   SymbolToken ':' ( lhs+=symbol )* '->' rhs=symbol '.' ;
 
-variable_decl
-:
-  literal_variable_decl
-| term_variable_decl
-;
-
-literal_variable_decl
-:
-  SymbolToken '.' ;
-
-term_variable_decl
-:
-  SymbolToken ':' symbol '.' ;
-
-term_decl
-:
-  SymbolToken ':' term '.' ;
-
-literal_decl
-:
-  SymbolToken ':' literal '.' ;
-
 axiom_decl
 :
   SymbolToken ':' clause '.' ;
 
 term
 locals  [ IBaseExpression<ITrivialExtension> expectedSort;
-          Map<String, IVariable<ITermNonVariableExtension>> termBaseVars;
-          Map<String, Map<Integer, IVariable<ITermNonVariableExtension>>> termIndexedVars;
-          IPELVariableContext pelVariableContext ]
+          IVariableContext<IBaseExpression<ITrivialExtension>, ITermNonVariableExtension> termVariableContext;
+          TermVariableInfo termVariableInfo ]
 :
-  symbol                                            # termConstant
-| variable                                          # termVariable
+  term_variable                                     # termVariable
 | symbol '(' ( args+=term (',' args+=term)* )? ')'  # termExpression
 ;
 
 literal
-locals  [ Map<String, IVariable<ILiteralNonVariableExtension>> literalBaseVars;
-          Map<String, Map<Integer, IVariable<ILiteralNonVariableExtension>>> literalIndexedVars;
-          Map<String, IVariable<ITermNonVariableExtension>> termBaseVars;
-          Map<String, Map<Integer, IVariable<ITermNonVariableExtension>>> termIndexedVars;
-          IPELVariableContext pelVariableContext ]
+locals  [ IPELVariableContext pelVariableContext;
+          LiteralVariableInfo literalVariableInfo ]
 :
-  symbol                                            # literalConstant
-| variable                                          # literalVariable
+  literal_variable                                  # literalVariable
 | symbol '(' ( args+=term (',' args+=term)* )? ')'  # literalExpression
 ;
 
 clause
-locals  [ Map<String, IVariable<ILiteralNonVariableExtension>> literalBaseVars;
-          Map<String, Map<Integer, IVariable<ILiteralNonVariableExtension>>> literalIndexedVars;
-          Map<String, IVariable<ITermNonVariableExtension>> termBaseVars;
-          Map<String, Map<Integer, IVariable<ITermNonVariableExtension>>> termIndexedVars;
-          IPELVariableContext pelVariableContext ]
+locals  [ IPELVariableContext pelVariableContext;
+          LiteralVariableInfo literalVariableInfo ]
 :
   symbol                                            # axiomConstant
-| ( premises+=literal (';' premises+=literal)* )? '==>' conclusion=literal
+| variable_ctx ( premises+=literal (';' premises+=literal)* )? '==>' conclusion=literal
                                                     # axiomExpression
 ;
 
@@ -148,24 +102,49 @@ symbol
 :
   ( quals+=SymbolToken '.' )* base=SymbolToken ;
 
-variable
+term_variable
 locals  [ IBaseExpression<ITrivialExtension> expectedSort;
-          Map<String, IVariable<ILiteralNonVariableExtension>> literalBaseVars;
-          Map<String, Map<Integer, IVariable<ILiteralNonVariableExtension>>> literalIndexedVars;
-          Map<String, IVariable<ITermNonVariableExtension>> termBaseVars;
-          Map<String, Map<Integer, IVariable<ITermNonVariableExtension>>> termIndexedVars;
-          IPELVariableContext pelVariableContext;
-          ExpressionSystem expressionSystem ]
+          IVariableContext<IBaseExpression<ITrivialExtension>, ITermNonVariableExtension> termVariableContext;
+          TermVariableInfo termVariableInfo ]
 :
-  IndexedVariableToken                              # IndexedVariable
-| VariableToken                                     # BasicVariable
+  TermIndexedVariableToken                          # TermIndexedVariable
+| TermVariableToken                                 # TermBasicVariable
+;
+
+literal_variable
+locals  [ IPELVariableContext pelVariableContext;
+          LiteralVariableInfo literalVariableInfo ]
+:
+  LiteralIndexedVariableToken                       # LiteralIndexedVariable
+| LiteralVariableToken                              # LiteralBasicVariable
+;
+
+variable_ctx
+locals  [ CtxBean ctxBean;
+          IPELVariableContext pelVariableContext;
+          LiteralVariableInfo literalVariableInfo ]
+:
+  '{' ( args+=ctx_variable )* '}' ;
+
+
+ctx_variable
+locals  [ IPELVariableContext pelVariableContext;
+          LiteralVariableInfo literalVariableInfo ]
+:
+  LiteralIndexedVariableToken                       # LiteralIndexedCtx
+| LiteralVariableToken                              # LiteralBaseCtx
+| TermIndexedVariableToken                          # TermIndexedCtx
+| TermVariableToken                                 # TermBaseCtx
 ;
 
 SymbolToken: [A-Za-z_][A-Za-z0-9]* ;
 
-VariableToken: '?'('__'|SymbolToken) ;
+TermVariableToken: '?' VariableToken ;
+LiteralVariableToken: '??' VariableToken ;
+VariableToken: ('__'|SymbolToken) ;
 Number: [0-9]+ ;
-IndexedVariableToken: VariableToken'_'Number ;
+TermIndexedVariableToken: TermVariableToken'_'Number ;
+LiteralIndexedVariableToken: LiteralVariableToken'_'Number ;
 
 NEWLINE: [\r\n]+       ->skip;
 COMMENT: '#'.*?NEWLINE ->skip;

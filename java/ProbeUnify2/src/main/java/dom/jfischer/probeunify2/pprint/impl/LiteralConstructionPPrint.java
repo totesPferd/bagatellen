@@ -6,13 +6,13 @@ package dom.jfischer.probeunify2.pprint.impl;
 
 import dom.jfischer.probeunify2.basic.IBaseExpression;
 import dom.jfischer.probeunify2.basic.INonVariable;
+import dom.jfischer.probeunify2.basic.ITrivialExtension;
 import dom.jfischer.probeunify2.basic.IVariable;
 import dom.jfischer.probeunify2.pel.INamedLiteral;
 import dom.jfischer.probeunify2.pel.impl.NamedTerm;
 import dom.jfischer.probeunify2.pel.ILiteralNonVariableExtension;
 import dom.jfischer.probeunify2.pel.IPELVariableContext;
 import dom.jfischer.probeunify2.pel.IPredicateExpression;
-import dom.jfischer.probeunify2.pel.ITermExtension;
 import dom.jfischer.probeunify2.pel.ITermNonVariableExtension;
 import dom.jfischer.probeunify2.pprint.IBackReference;
 import dom.jfischer.probeunify2.pprint.IConstructionPPrint;
@@ -63,7 +63,7 @@ public class LiteralConstructionPPrint implements IConstructionPPrint {
         if (retval == null) {
             IPELVariableContext pelVariableContext
                     = this.literal.getPelVariableContext();
-            IVariableContext<ITermExtension, ITermNonVariableExtension> termVariableContext
+            IVariableContext<IBaseExpression<ITrivialExtension>, ITermNonVariableExtension> termVariableContext
                     = pelVariableContext.getTermVariableContext();
             {
                 Optional<INonVariable<ILiteralNonVariableExtension>> optLiteralNonVariable
@@ -97,6 +97,7 @@ public class LiteralConstructionPPrint implements IConstructionPPrint {
                             = optLiteralVariable.get();
                     retval
                             = new VariableConstructionPPrint<>(
+                                    "??",
                                     pelVariableContext.getLiteralVariableContext(),
                                     literalVariable);
                 }

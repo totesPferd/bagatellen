@@ -6,6 +6,7 @@ package dom.jfischer.probeunify2.basic;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -17,11 +18,15 @@ import java.util.Set;
 public interface IVariableContext<Extension extends IExtension, NonVariableExtension extends IExtension> extends
         IExtension {
 
+    Optional<IVariableContext<Extension, NonVariableExtension>> getParent();
+
     IVariable<NonVariableExtension> createVariable(Extension extension, String name);
 
     void addUnsortedVariable(IVariable<NonVariableExtension> variable);
 
     String getName(IVariable<NonVariableExtension> variable);
+    
+    Extension getSort(IVariable<NonVariableExtension> variable);
 
     Map<IVariable<NonVariableExtension>, String> getBackRef();
 
@@ -37,4 +42,16 @@ public interface IVariableContext<Extension extends IExtension, NonVariableExten
 
     void collectLeafs(ILeafCollector<NonVariableExtension> leafCollector);
 
+    boolean isFree(IVariable<NonVariableExtension> variable);
+
+    IVariableContext<Extension, NonVariableExtension> getVariableContext(IVariable<NonVariableExtension> variable);
+
+    boolean unite();
+
+    boolean separate(Set<IVariable<NonVariableExtension>> variableSet);
+
+    int getCard(String name, Extension sort);
+
+    int getCardUnsorted();
+    
 }

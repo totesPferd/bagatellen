@@ -6,6 +6,7 @@ package dom.jfischer.probeunify2;
 
 import dom.jfischer.probeunify2.basic.IExpression;
 import dom.jfischer.probeunify2.basic.IVariable;
+import dom.jfischer.probeunify2.pel.ILiteralNonVariableExtension;
 import dom.jfischer.probeunify2.pel.ITermNonVariableExtension;
 import dom.jfischer.probeunify2.proof.IGoalExtension;
 import dom.jfischer.probeunify2.proof.IGoalNonVariableExtension;
@@ -18,6 +19,8 @@ import java.util.Set;
  * @author jfischer
  */
 public interface IProofStep extends Serializable {
+
+    Set<IVariable<ILiteralNonVariableExtension>> getLiteralVariables();
 
     Set<IVariable<ITermNonVariableExtension>> getTermVariables();
 
