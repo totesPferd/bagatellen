@@ -1,0 +1,14 @@
+[modules]
+
+[sorts]
+   S .
+
+[predicates]
+   eq: S S .
+
+[operations]
+
+[axioms]
+   refl:   { ?x } ==> eq(?x, ?x) .
+   symm:   { ?x ?y } {} ==> eq(?y, ?x) ==> eq(?x, ?y) .
+   trans:  { ?x ?y ?z } {} ==> eq(?x, ?y) {} ==> eq(?y, ?z) ==> eq(?x, ?z) .

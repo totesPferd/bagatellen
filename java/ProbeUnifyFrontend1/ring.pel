@@ -1,0 +1,18 @@
+[modules]
+   add:  group .
+   mult: group .
+
+   add.base
+=  mult.base .
+
+[sorts]
+
+[predicates]
+
+[operations]
+
+[axioms]
+   lz:    { ?y } ==> add.base.eq(mult.o(add.e(), ?y), add.e()) .
+   rz:    { ?x } ==> add.base.eq(mult.o(?x, add.e()), add.e()) .
+   ldist: { ?x ?y ?z } ==> add.base.eq(mult.o(?x, add.o(?y, ?z)), add.o(mult.o(?x, ?y), mult.o(?x, ?z))) .
+   rdist: { ?x ?y ?z } ==> add.base.eq(mult.o(add.o(?x, ?y), ?z), add.o(mult.o(?x, ?z), mult.o(?y, ?z))) .

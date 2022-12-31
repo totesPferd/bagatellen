@@ -1,0 +1,18 @@
+[modules]
+   base: eq .
+
+[sorts]
+
+[predicates]
+
+[operations]
+   e: -> base.S .
+   i: base.S -> base.S .
+   o: base.S base.S -> base.S .
+
+[axioms]
+   congi:  { ?x ?y } {} ==> base.eq(?x, ?y) ==> base.eq(i(?x), i(?y)) .
+   congo:  { ?x_1 ?x_2 ?y_1 ?y_2 } {} ==> base.eq(?x_1, ?x_2) {} ==> base.eq(?y_1, ?y_2) ==> base.eq(o(?x_1, ?y_1), o(?x_2, ?y_2)) .
+   leftu:  { ?y } ==> base.eq(o(e(), ?y), ?y) .
+   rightu: { ?x } ==> base.eq(o(?x, e()), ?x) .
+   assoco: { ?x ?y ?z } ==> base.eq(o(o(?x, ?y), ?z), o(?x, o(?y, ?z))) .

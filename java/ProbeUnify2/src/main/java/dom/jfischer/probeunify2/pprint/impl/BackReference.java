@@ -24,11 +24,9 @@ public class BackReference implements IBackReference {
 
     private final Map<IModule, String> moduleRef = new ConcurrentHashMap<>();
     private final Map<IClause, String> clauseRef = new ConcurrentHashMap<>();
-    private final Map<IBaseExpression<ILiteralNonVariableExtension>, String> literalRef = new ConcurrentHashMap<>();
     private final Map<IOperationExpression, String> operationRef = new ConcurrentHashMap<>();
     private final Map<IPredicateExpression, String> predicateRef = new ConcurrentHashMap<>();
     private final Map<IBaseExpression<ITrivialExtension>, String> sortRef = new ConcurrentHashMap<>();
-    private final Map<IBaseExpression<ITermNonVariableExtension>, String> termRef = new ConcurrentHashMap<>();
 
     @Override
     public Map<IModule, String> getModuleRef() {
@@ -38,11 +36,6 @@ public class BackReference implements IBackReference {
     @Override
     public Map<IClause, String> getAxiomRef() {
         return this.clauseRef;
-    }
-
-    @Override
-    public Map<IBaseExpression<ILiteralNonVariableExtension>, String> getLiteralRef() {
-        return this.literalRef;
     }
 
     @Override
@@ -58,11 +51,6 @@ public class BackReference implements IBackReference {
     @Override
     public Map<IBaseExpression<ITrivialExtension>, String> getSortRef() {
         return this.sortRef;
-    }
-
-    @Override
-    public Map<IBaseExpression<ITermNonVariableExtension>, String> getTermRef() {
-        return this.termRef;
     }
 
 }

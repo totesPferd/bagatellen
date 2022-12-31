@@ -15,7 +15,6 @@ import dom.jfischer.probeunify2.pprint.IConstructionPPrint;
 import dom.jfischer.probeunify2.pprint.IPPrintBase;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import dom.jfischer.probeunify2.basic.IVariableContext;
@@ -53,13 +52,6 @@ public class TermBaseConstructionPPrint implements IConstructionPPrint {
         IConstructionPPrint retval = null;
         IBaseExpression<ITermNonVariableExtension> actualTermBase
                 = this.termBase.dereference();
-
-        {
-            Map<IBaseExpression<ITermNonVariableExtension>, String> termRef = this.backRef.getTermRef();
-            if (termRef.containsKey(actualTermBase)) {
-                retval = new StringConstructionPPrint(termRef.get(actualTermBase));
-            }
-        }
 
         if (retval == null) {
             {

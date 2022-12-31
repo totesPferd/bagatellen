@@ -4,8 +4,6 @@
  */
 package dom.jfischer.probeunify2.module.impl;
 
-import dom.jfischer.probeunify2.pel.impl.NamedTermUnification;
-import dom.jfischer.probeunify2.pel.impl.NamedLiteralUnification;
 import dom.jfischer.probeunify2.pel.impl.NamedClauseUnification;
 import dom.jfischer.probeunify2.basic.IBaseExpression;
 import dom.jfischer.probeunify2.basic.ITrivialExtension;
@@ -15,8 +13,6 @@ import dom.jfischer.probeunify2.basic.impl.DictUnification;
 import java.util.Map;
 import dom.jfischer.probeunify2.module.IModule;
 import dom.jfischer.probeunify2.pel.INamedClause;
-import dom.jfischer.probeunify2.pel.INamedLiteral;
-import dom.jfischer.probeunify2.pel.INamedTerm;
 import dom.jfischer.probeunify2.pel.ILiteralNonVariableExtension;
 import dom.jfischer.probeunify2.pel.IOperationExpression;
 import dom.jfischer.probeunify2.pel.IPredicateExpression;
@@ -31,11 +27,9 @@ public class ModuleUnification implements IUnification<IModule> {
 
     private final IUnification<Map<String, INamedClause>> axiomsUnification;
     private final IUnification<Map<String, IModule>> importsUnification;
-    private final IUnification<Map<String, INamedLiteral>> literalsUnification;
     private final IUnification<Map<String, IOperationExpression>> operationsUnification;
     private final IUnification<Map<String, IPredicateExpression>> predicatesUnification;
     private final IUnification<Map<String, IBaseExpression<ITrivialExtension>>> sortsUnification;
-    private final IUnification<Map<String, INamedTerm>> termsUnification;
 
     public ModuleUnification() {
         {
@@ -46,11 +40,6 @@ public class ModuleUnification implements IUnification<IModule> {
             this.axiomsUnification = new DictUnification<>(axiomUnification);
         }
         this.importsUnification = new DictUnification<>(this);
-        {
-            IUnification<INamedLiteral> literalUnification
-                    = new NamedLiteralUnification();
-            this.literalsUnification = new DictUnification<>(literalUnification);
-        }
         {
             IUnification<IOperationExpression> operationUnification
                     = new OperationExpressionUnification();
@@ -65,11 +54,6 @@ public class ModuleUnification implements IUnification<IModule> {
             IUnification<IBaseExpression<ITrivialExtension>> sortUnification
                     = new BaseUnification<>();
             this.sortsUnification = new DictUnification<>(sortUnification);
-        }
-        {
-            IUnification<INamedTerm> termUnification
-                    = new NamedTermUnification();
-            this.termsUnification = new DictUnification<>(termUnification);
         }
     }
 

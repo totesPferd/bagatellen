@@ -19,7 +19,6 @@ import dom.jfischer.probeunify2.pprint.IConstructionPPrint;
 import dom.jfischer.probeunify2.pprint.IPPrintBase;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import dom.jfischer.probeunify2.basic.IVariableContext;
@@ -53,13 +52,6 @@ public class LiteralConstructionPPrint implements IConstructionPPrint {
 
         IBaseExpression<ILiteralNonVariableExtension> literalBaseExpression
                 = this.literal.getLiteral().dereference();
-        {
-            Map<IBaseExpression<ILiteralNonVariableExtension>, String> literalRef = this.backRef.getLiteralRef();
-            if (literalRef.containsKey(literalBaseExpression)) {
-                retval = new StringConstructionPPrint(literalRef.get(literalBaseExpression));
-            }
-        }
-
         if (retval == null) {
             IPELVariableContext pelVariableContext
                     = this.literal.getPelVariableContext();

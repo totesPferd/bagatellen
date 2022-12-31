@@ -65,7 +65,6 @@ public class VariableContext<Extension extends IExtension, NonVariableExtension 
     public IVariable<NonVariableExtension> createVariable(Extension extension, String name) {
 
         IVariable<NonVariableExtension> retval = new Variable<>();
-        retval = new Variable<>();
         this.backRef.put(retval, name);
         this.extensionMap.put(retval, extension);
 

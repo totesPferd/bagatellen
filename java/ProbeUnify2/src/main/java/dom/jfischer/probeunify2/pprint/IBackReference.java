@@ -24,15 +24,11 @@ public interface IBackReference extends Serializable {
     Map<IModule, String> getModuleRef();
 
     Map<IClause, String> getAxiomRef();
-
-    Map<IBaseExpression<ILiteralNonVariableExtension>, String> getLiteralRef();
-
+    
     Map<IOperationExpression, String> getOperationRef();
 
     Map<IPredicateExpression, String> getPredicateRef();
 
     Map<IBaseExpression<ITrivialExtension>, String> getSortRef();
-
-    Map<IBaseExpression<ITermNonVariableExtension>, String> getTermRef();
 
 }
