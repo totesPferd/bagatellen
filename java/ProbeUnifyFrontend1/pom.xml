@@ -163,7 +163,7 @@
         <antlr.version>4.11.1</antlr.version>
         <argparse.version>0.9.0</argparse.version>
         <betachecker.version>1.0</betachecker.version>
-        <guava.version>31.1-jre</guava.version>
+        <guava.version>32.0.0-jre</guava.version>
         <jline.version>3.21.0</jline.version>
         <mojo.version>3.3.0</mojo.version>
         <exec.mainClass>dom.jfischer.probeunifyfrontend1.ProbeUnifyFrontend1</exec.mainClass>
